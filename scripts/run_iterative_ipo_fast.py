@@ -51,7 +51,6 @@ def total_variation(p: np.ndarray, q: np.ndarray) -> float:
 
 
 def safe_softmax_np(z: np.ndarray) -> np.ndarray:
-    z = np.asarray(z, dtype=np.float64)
     z = z - np.max(z)
     p = np.exp(z)
     s = np.sum(p)
@@ -115,8 +114,6 @@ def collate(batch):
     }
     if 'pair_weight' in batch[0]:
         out['pair_weight'] = torch.tensor([b['pair_weight'] for b in batch], dtype=torch.float32)
-    if 'train_prompt_local_id' in batch[0]:
-        out['train_prompt_local_id'] = torch.tensor([b['train_prompt_local_id'] for b in batch], dtype=torch.int64)
     return out
 
 
@@ -182,7 +179,7 @@ def sum_logprob_and_count_from_outputs(logits, labels):
 
 
 @torch.no_grad()
-def batch_sum_and_avg_logprob(model, tok, prompts, responses, max_length, device):
+def batch_avg_logprob(model, tok, prompts, responses, max_length, device):
     batch = build_batch(tok, prompts, responses, max_length, device)
     out = model(
         input_ids=batch['input_ids'],
@@ -190,65 +187,7 @@ def batch_sum_and_avg_logprob(model, tok, prompts, responses, max_length, device
         labels=batch['labels'],
     )
     s, c = sum_logprob_and_count_from_outputs(out.logits, batch['labels'])
-    avg = s / c
-    return s.float().cpu(), avg.float().cpu(), c.int().cpu()
-
-
-@torch.no_grad()
-def batch_avg_logprob(model, tok, prompts, responses, max_length, device):
-    _, avg, _ = batch_sum_and_avg_logprob(model, tok, prompts, responses, max_length, device)
-    return avg
-
-
-@torch.no_grad()
-def token_level_logprobs(model, tok, prompt, response, max_length, device):
-    batch = build_batch(tok, [prompt], [response], max_length, device)
-    out = model(
-        input_ids=batch['input_ids'],
-        attention_mask=batch['attention_mask'],
-        labels=batch['labels'],
-    )
-
-    labels = batch['labels']
-    logits = out.logits
-
-    labels_s = labels[:, 1:].contiguous()
-    logits_s = logits[:, :-1, :].contiguous()
-    mask = labels_s != -100
-
-    logp = torch.log_softmax(logits_s, dim=-1)
-    tgt = labels_s.clamp(min=0)
-    gathered = logp.gather(-1, tgt.unsqueeze(-1)).squeeze(-1)
-
-    tok_lp = gathered[0][mask[0]].detach().cpu().numpy().astype(np.float64)
-    full_ids = batch['input_ids'][0].detach().cpu().tolist()
-    full_labels = batch['labels'][0].detach().cpu().tolist()
-    response_token_ids = [tid for tid, lab in zip(full_ids, full_labels) if lab != -100]
-    response_tokens = tok.convert_ids_to_tokens(response_token_ids)
-
-    prefix_sum = np.cumsum(tok_lp).tolist()
-    prefix_avg = (np.cumsum(tok_lp) / np.arange(1, len(tok_lp) + 1)).tolist() if len(tok_lp) > 0 else []
-
-    eos_token_id = tok.eos_token_id
-    eos_token_index = -1
-    eos_logprob = float('nan')
-    if eos_token_id is not None and len(response_token_ids) > 0 and response_token_ids[-1] == eos_token_id and len(tok_lp) > 0:
-        eos_token_index = len(response_token_ids) - 1
-        eos_logprob = float(tok_lp[-1])
-
-    return {
-        'token_logprobs': tok_lp.tolist(),
-        'token_ids': response_token_ids,
-        'tokens': response_tokens,
-        'prefix_sum_logprobs': prefix_sum,
-        'prefix_avg_logprobs': prefix_avg,
-        'sum_logprob': float(np.sum(tok_lp)) if len(tok_lp) > 0 else float('nan'),
-        'avg_logprob': float(np.mean(tok_lp)) if len(tok_lp) > 0 else float('nan'),
-        'num_tokens': int(len(tok_lp)),
-        'eos_token_index': int(eos_token_index),
-        'eos_logprob': eos_logprob,
-        'truncated_by_max_length': int(max_length > 0 and len(full_ids) >= max_length),
-    }
+    return (s / c).float().cpu()
 
 
 def ipo_loss_from_delta(delta, beta):
@@ -355,7 +294,6 @@ def build_prompt_aware_training_subset(
     train_prompt_size,
     pairs_per_prompt,
     tau,
-    lambda_on,
     mix_eps,
     max_length,
     device,
@@ -381,9 +319,7 @@ def build_prompt_aware_training_subset(
 
         induced = safe_softmax_np(float(tau) * margins)
         uniform = np.ones_like(induced) / len(induced)
-        base_mix = (1.0 - float(lambda_on)) * uniform + float(lambda_on) * induced
-        mixed = (1.0 - float(mix_eps)) * base_mix + float(mix_eps) * uniform
-        mixed = mixed / np.sum(mixed)
+        mixed = (1.0 - mix_eps) * induced + mix_eps * uniform
 
         take = min(max(1, pairs_per_prompt), len(pair_indices))
         sampled_local = rng.choices(range(len(pair_indices)), weights=mixed.tolist(), k=take)
@@ -394,21 +330,16 @@ def build_prompt_aware_training_subset(
             chosen_weights.append(float(mixed[j]))
             chosen_prompt_ids.append(local_pid)
 
-        for j, gi, mg, ug, bg, mixg in zip(range(len(pair_indices)), pair_indices, margins, induced, base_mix, mixed):
+        for j, gi, mg, ug, mixg in zip(range(len(pair_indices)), pair_indices, margins, induced, mixed):
             diag_rows.append({
                 'train_prompt_local_id': local_pid,
                 'prompt': prompt,
                 'pair_global_idx': gi,
                 'margin_avglogprob': float(mg),
                 'induced_pair_prob': float(ug),
-                'base_mix_prob': float(bg),
                 'mixed_pair_prob': float(mixg),
                 'num_pairs_for_prompt': int(len(pair_indices)),
                 'pairs_sampled_for_prompt': int(take),
-                'tau': float(tau),
-                'lambda_on': float(lambda_on),
-                'mix_eps': float(mix_eps),
-                'effective_lambda_to_induced': float((1.0 - float(mix_eps)) * float(lambda_on)),
             })
 
     w = np.array(chosen_weights, dtype=np.float64)
@@ -420,200 +351,6 @@ def build_prompt_aware_training_subset(
         pd.DataFrame(diag_rows),
         sampled_prompts,
         sampled_pairs_per_prompt,
-    )
-
-
-def maybe_save_adapter(model, tok, out_dir):
-    ensure_dir(out_dir)
-    model.save_pretrained(out_dir)
-    tok.save_pretrained(out_dir)
-
-
-def validate_eval_data(prompts_uniq, responses_by_prompt):
-    if len(prompts_uniq) == 0:
-        raise ValueError('No eval prompts found in eval_prompts_path.')
-    empty_prompt_ids = [i for i, rs in enumerate(responses_by_prompt) if len(rs) == 0]
-    if empty_prompt_ids:
-        raise ValueError(f'Found eval prompts with zero responses. First few indices: {empty_prompt_ids[:10]}')
-
-
-def dump_snapshot(
-    dump_dir,
-    t,
-    snapshot_stage,
-    prompt_ids_raw,
-    prompts_uniq,
-    responses_by_prompt,
-    u_by_prompt,
-    group_offsets,
-    max_k,
-    flat_sum_scores,
-    flat_avg_scores,
-    flat_num_tokens,
-    q_prompt_matrix_avg,
-    q_prompt_matrix_sum,
-    prompt_entropies_avg,
-    prompt_entropies_sum,
-    prompt_tvs_avg,
-    prompt_tvs_sum,
-    prompt_kls_avg,
-    prompt_kls_sum,
-    prompt_top1_avg,
-    prompt_top1_sum,
-    prompt_converged_mask,
-    prompt_oscillatory_mask,
-    prompt_resolved_mask,
-    prompt_stable_counts,
-    prompt_first_converged_iter,
-    prompt_first_oscillatory_iter,
-    prompt_cum_exposure,
-    prompt_recent_exposure,
-    iter_exposure_vec,
-):
-    num_prompts_eval = len(prompts_uniq)
-    np.savez_compressed(
-        os.path.join(dump_dir, f'iter_{t:04d}.npz'),
-        iter=np.int32(t),
-        snapshot_stage=np.array(snapshot_stage),
-        q_prompt_matrix_avg=q_prompt_matrix_avg.astype(np.float32),
-        q_prompt_matrix_sum=q_prompt_matrix_sum.astype(np.float32),
-        prompt_entropies_avg=prompt_entropies_avg.astype(np.float32),
-        prompt_entropies_sum=prompt_entropies_sum.astype(np.float32),
-        prompt_tvs_avg=prompt_tvs_avg.astype(np.float32),
-        prompt_tvs_sum=prompt_tvs_sum.astype(np.float32),
-        prompt_kls_avg=prompt_kls_avg.astype(np.float32),
-        prompt_kls_sum=prompt_kls_sum.astype(np.float32),
-        prompt_top1_avg=prompt_top1_avg.astype(np.int32),
-        prompt_top1_sum=prompt_top1_sum.astype(np.int32),
-        flat_sum_scores=flat_sum_scores.astype(np.float32),
-        flat_avg_scores=flat_avg_scores.astype(np.float32),
-        flat_num_tokens=flat_num_tokens.astype(np.int32),
-        prompt_converged_mask=prompt_converged_mask.astype(np.int8),
-        prompt_oscillatory_mask=prompt_oscillatory_mask.astype(np.int8),
-        prompt_resolved_mask=prompt_resolved_mask.astype(np.int8),
-        prompt_stable_counts=prompt_stable_counts.astype(np.int32),
-        prompt_first_converged_iter=prompt_first_converged_iter.astype(np.int32),
-        prompt_first_oscillatory_iter=prompt_first_oscillatory_iter.astype(np.int32),
-        prompt_cum_exposure=prompt_cum_exposure.astype(np.int32),
-        prompt_recent_exposure=prompt_recent_exposure.astype(np.int32),
-        iter_exposure_vec=iter_exposure_vec.astype(np.int32),
-    )
-
-    rows_csv = []
-    for pid in range(num_prompts_eval):
-        s0, e0 = group_offsets[pid]
-        k = e0 - s0
-        row = {
-            'iter': int(t),
-            'snapshot_stage': snapshot_stage,
-            'prompt_id': prompt_ids_raw[pid],
-            'prompt_index': pid,
-            'prompt': prompts_uniq[pid],
-            'K': len(responses_by_prompt[pid]),
-            'entropy': prompt_entropies_avg[pid],
-            'tv_delta': prompt_tvs_avg[pid],
-            'kl_delta': prompt_kls_avg[pid],
-            'top1_idx': int(prompt_top1_avg[pid]),
-            'entropy_avg': prompt_entropies_avg[pid],
-            'entropy_sum': prompt_entropies_sum[pid],
-            'tv_delta_avg': prompt_tvs_avg[pid],
-            'tv_delta_sum': prompt_tvs_sum[pid],
-            'kl_delta_avg': prompt_kls_avg[pid],
-            'kl_delta_sum': prompt_kls_sum[pid],
-            'top1_idx_avg': int(prompt_top1_avg[pid]),
-            'top1_idx_sum': int(prompt_top1_sum[pid]),
-            'converged': int(prompt_converged_mask[pid]),
-            'oscillatory': int(prompt_oscillatory_mask[pid]),
-            'resolved': int(prompt_resolved_mask[pid]),
-            'stable_count': int(prompt_stable_counts[pid]),
-            'first_converged_iter': int(prompt_first_converged_iter[pid]),
-            'first_oscillatory_iter': int(prompt_first_oscillatory_iter[pid]),
-            'exposure_iter': int(iter_exposure_vec[pid]),
-            'cum_exposure': int(prompt_cum_exposure[pid]),
-            'recent_exposure': int(prompt_recent_exposure[pid]),
-            'exposure_eligible': int(
-                (prompt_cum_exposure[pid] >= 0) and (prompt_recent_exposure[pid] >= 0)
-            ),
-        }
-        for j in range(max_k):
-            if j < k:
-                flat_idx = s0 + j
-                row[f'sum_logprob_{j}'] = float(flat_sum_scores[flat_idx])
-                row[f'avg_logprob_{j}'] = float(flat_avg_scores[flat_idx])
-                row[f'num_tokens_{j}'] = int(flat_num_tokens[flat_idx])
-                row[f'prob_sum_{j}'] = float(q_prompt_matrix_sum[pid, j])
-                row[f'prob_avg_{j}'] = float(q_prompt_matrix_avg[pid, j])
-                row[f'prob_{j}'] = float(q_prompt_matrix_avg[pid, j])
-                row[f'response_{j}'] = responses_by_prompt[pid][j]
-                row[f'u_{j}'] = u_by_prompt[pid][j] if j < len(u_by_prompt[pid]) else np.nan
-            else:
-                row[f'sum_logprob_{j}'] = np.nan
-                row[f'avg_logprob_{j}'] = np.nan
-                row[f'num_tokens_{j}'] = np.nan
-                row[f'prob_sum_{j}'] = np.nan
-                row[f'prob_avg_{j}'] = np.nan
-                row[f'prob_{j}'] = np.nan
-                row[f'response_{j}'] = ''
-                row[f'u_{j}'] = np.nan
-        rows_csv.append(row)
-
-    pd.DataFrame(rows_csv).to_csv(
-        os.path.join(dump_dir, f'iter_{t:04d}_prompt_metrics.csv'),
-        index=False,
-    )
-
-
-def dump_token_diagnostics(
-    dump_dir,
-    t,
-    snapshot_stage,
-    token_diag_prompt_indices,
-    token_diag_num_responses,
-    prompts_uniq,
-    responses_by_prompt,
-    prompt_ids_raw,
-    model,
-    tok,
-    device,
-    token_diag_max_length,
-):
-    token_diag_rows = []
-    for pid in token_diag_prompt_indices:
-        prompt_text = prompts_uniq[pid]
-        kdiag = min(token_diag_num_responses, len(responses_by_prompt[pid]))
-        for j in range(kdiag):
-            response_text = responses_by_prompt[pid][j]
-            diag = token_level_logprobs(
-                model=model,
-                tok=tok,
-                prompt=prompt_text,
-                response=response_text,
-                max_length=token_diag_max_length,
-                device=device,
-            )
-            token_diag_rows.append({
-                'iter': t,
-                'snapshot_stage': snapshot_stage,
-                'prompt_index': pid,
-                'prompt_id': prompt_ids_raw[pid],
-                'response_index': j,
-                'prompt': prompt_text,
-                'response': response_text,
-                'num_tokens': diag['num_tokens'],
-                'sum_logprob': diag['sum_logprob'],
-                'avg_logprob': diag['avg_logprob'],
-                'eos_token_index': diag['eos_token_index'],
-                'eos_logprob': diag['eos_logprob'],
-                'truncated_by_max_length': diag['truncated_by_max_length'],
-                'token_ids_json': json.dumps(diag['token_ids']),
-                'tokens_json': json.dumps(diag['tokens'], ensure_ascii=False),
-                'token_logprobs_json': json.dumps(diag['token_logprobs']),
-                'prefix_sum_logprobs_json': json.dumps(diag['prefix_sum_logprobs']),
-                'prefix_avg_logprobs_json': json.dumps(diag['prefix_avg_logprobs']),
-            })
-    pd.DataFrame(token_diag_rows).to_csv(
-        os.path.join(dump_dir, f'iter_{t:04d}_token_diagnostics.csv'),
-        index=False,
     )
 
 
@@ -669,31 +406,11 @@ def main():
     ap.add_argument('--lora_dropout', type=float, default=0.05)
 
     ap.add_argument('--dump_each_iter', type=int, default=1)
-    ap.add_argument('--save_iter_adapters', type=int, default=1)
-    ap.add_argument('--save_initial_adapter', type=int, default=1)
-    ap.add_argument('--save_final_adapter', type=int, default=1)
-
-    ap.add_argument('--dump_token_diagnostics', type=int, default=1)
-    ap.add_argument('--token_diag_num_prompts', type=int, default=10)
-    ap.add_argument('--token_diag_num_responses', type=int, default=1)
-    ap.add_argument('--token_diag_seed', type=int, default=123)
-    ap.add_argument('--token_diag_max_length', type=int, default=2048)
     args = ap.parse_args()
 
     args.alpha = float(max(0.0, min(1.0, args.alpha)))
     args.lambda_on = float(max(0.0, min(1.0, args.lambda_on)))
     args.mix_eps = float(max(0.0, min(1.0, args.mix_eps)))
-
-    if args.train_prompt_size < 0:
-        raise ValueError('--train_prompt_size must be >= 0')
-    if args.pairs_per_prompt < 1:
-        raise ValueError('--pairs_per_prompt must be >= 1')
-    if args.batch_size < 1 or args.grad_accum < 1 or args.score_batch_size < 1:
-        raise ValueError('batch_size, grad_accum, score_batch_size must all be >= 1')
-    if args.max_length < 1:
-        raise ValueError('--max_length must be >= 1')
-    if args.token_diag_max_length < args.max_length:
-        print(f'[WARN] token_diag_max_length={args.token_diag_max_length} < max_length={args.max_length}. Token diagnostics may be more truncated than training/eval.')
 
     random.seed(args.seed)
     np.random.seed(args.seed)
@@ -708,15 +425,11 @@ def main():
     ensure_dir(args.log_dir)
 
     ds = PairDataset(read_jsonl(args.pairs_path))
-    if len(ds) == 0:
-        raise ValueError('No valid training pairs found in pairs_path.')
     prompt_to_pair_indices = build_prompt_to_pair_indices(ds)
 
     prompts_uniq, responses_by_prompt, u_by_prompt, prompt_ids_raw = load_eval_prompt_responses(
         args.eval_prompts_path
     )
-    validate_eval_data(prompts_uniq, responses_by_prompt)
-
     num_prompts_eval = len(prompts_uniq)
     max_k = max(len(x) for x in responses_by_prompt)
 
@@ -762,19 +475,9 @@ def main():
     for p in ref0.parameters():
         p.requires_grad_(False)
 
-    adapters_dir = os.path.join(
-        args.out_dir,
-        f'adapters_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}',
-    )
-    ensure_dir(adapters_dir)
-    if args.save_initial_adapter == 1:
-        maybe_save_adapter(model, tok, os.path.join(adapters_dir, 'iter_init'))
-
     metrics = []
-    prev_q_prompt_matrix_avg = None
-    prev_q_prompt_matrix_sum = None
-    prev_prompt_entropies_avg = None
-    prev_prompt_entropies_sum = None
+    prev_q_prompt_matrix = None
+    prev_prompt_entropies = None
 
     prompt_stable_counts = np.zeros(num_prompts_eval, dtype=np.int64)
     prompt_converged_mask = np.zeros(num_prompts_eval, dtype=bool)
@@ -796,42 +499,8 @@ def main():
     if args.dump_each_iter == 1:
         ensure_dir(dump_dir)
 
-    token_diag_prompt_indices = []
-    if args.dump_each_iter == 1 and args.dump_token_diagnostics == 1:
-        rng_diag = random.Random(args.token_diag_seed)
-        token_diag_prompt_indices = sorted(
-            rng_diag.sample(range(num_prompts_eval), k=min(args.token_diag_num_prompts, num_prompts_eval))
-        )
-        write_json(
-            os.path.join(dump_dir, 'token_diag_prompt_indices.json'),
-            {
-                'prompt_indices': token_diag_prompt_indices,
-                'num_prompts': len(token_diag_prompt_indices),
-                'num_responses_per_prompt': int(args.token_diag_num_responses),
-                'token_diag_max_length': int(args.token_diag_max_length),
-                'snapshot_stage': 'pre_update',
-            },
-        )
-
-    eval_metadata_rows = []
-    for pid in range(num_prompts_eval):
-        for j, resp in enumerate(responses_by_prompt[pid]):
-            eval_metadata_rows.append({
-                'prompt_index': pid,
-                'prompt_id': prompt_ids_raw[pid],
-                'response_index': j,
-                'prompt': prompts_uniq[pid],
-                'response': resp,
-                'u': u_by_prompt[pid][j] if j < len(u_by_prompt[pid]) else np.nan,
-            })
-    pd.DataFrame(eval_metadata_rows).to_csv(
-        os.path.join(dump_dir, 'eval_prompt_response_metadata.csv') if args.dump_each_iter == 1 else os.path.join(args.log_dir, 'eval_prompt_response_metadata.csv'),
-        index=False,
-    )
-
     T = args.max_iters if args.auto_stop == 1 else args.iters
     pct_eps = 1e-12
-    last_iter_ran = -1
 
     for t in range(T):
         print(
@@ -839,97 +508,53 @@ def main():
             f'tau={args.tau} beta={args.beta} mix_eps={args.mix_eps} ====='
         )
 
-        # Save the exact adapter that matches all iter_t dumps in this loop.
-        if args.save_iter_adapters == 1:
-            maybe_save_adapter(model, tok, os.path.join(adapters_dir, f'iter_{t:04d}_preupdate'))
-
         model.eval()
         ref0.eval()
 
-        flat_sum_scores = np.zeros(len(flat_prompts), dtype=np.float32)
-        flat_avg_scores = np.zeros(len(flat_prompts), dtype=np.float32)
-        flat_num_tokens = np.zeros(len(flat_prompts), dtype=np.int32)
-
+        flat_scores = np.zeros(len(flat_prompts), dtype=np.float32)
         bs = max(1, int(args.score_batch_size))
         for s in tqdm(range(0, len(flat_prompts), bs), desc=f'scoring@eval_prompts iter {t}', ncols=100):
             e = min(len(flat_prompts), s + bs)
-            sum_lp, avg_lp, tok_cnt = batch_sum_and_avg_logprob(
+            flat_scores[s:e] = batch_avg_logprob(
                 model, tok, flat_prompts[s:e], flat_resps[s:e], args.max_length, device
-            )
-            flat_sum_scores[s:e] = sum_lp.numpy()
-            flat_avg_scores[s:e] = avg_lp.numpy()
-            flat_num_tokens[s:e] = tok_cnt.numpy()
+            ).numpy()
 
-        q_prompt_matrix_avg = np.full((num_prompts_eval, max_k), np.nan, dtype=np.float64)
-        q_prompt_matrix_sum = np.full((num_prompts_eval, max_k), np.nan, dtype=np.float64)
-
-        prompt_entropies_avg = np.zeros(num_prompts_eval, dtype=np.float64)
-        prompt_entropies_sum = np.zeros(num_prompts_eval, dtype=np.float64)
-
-        prompt_tvs_avg = np.full(num_prompts_eval, np.nan, dtype=np.float64)
-        prompt_tvs_sum = np.full(num_prompts_eval, np.nan, dtype=np.float64)
-        prompt_kls_avg = np.full(num_prompts_eval, np.nan, dtype=np.float64)
-        prompt_kls_sum = np.full(num_prompts_eval, np.nan, dtype=np.float64)
-        prompt_top1_avg = np.full(num_prompts_eval, -1, dtype=np.int64)
-        prompt_top1_sum = np.full(num_prompts_eval, -1, dtype=np.int64)
+        q_prompt_matrix = np.full((num_prompts_eval, max_k), np.nan, dtype=np.float64)
+        prompt_entropies = np.zeros(num_prompts_eval, dtype=np.float64)
+        prompt_tvs = np.full(num_prompts_eval, np.nan, dtype=np.float64)
+        prompt_kls = np.full(num_prompts_eval, np.nan, dtype=np.float64)
+        prompt_top1 = np.full(num_prompts_eval, -1, dtype=np.int64)
 
         for pid, (s, e) in enumerate(group_offsets):
-            scores_sum = flat_sum_scores[s:e].astype(np.float64)
-            scores_avg = flat_avg_scores[s:e].astype(np.float64)
-
-            p_sum = safe_softmax_np(scores_sum * float(args.tau))
-            p_avg = safe_softmax_np(scores_avg * float(args.tau))
-
+            scores = flat_scores[s:e].astype(np.float64)
+            p = safe_softmax_np(scores * float(args.tau))
             k = e - s
-            q_prompt_matrix_sum[pid, :k] = p_sum
-            q_prompt_matrix_avg[pid, :k] = p_avg
+            q_prompt_matrix[pid, :k] = p
+            prompt_entropies[pid] = entropy_from_probs(p)
+            prompt_top1[pid] = int(np.argmax(p))
+            if prev_q_prompt_matrix is not None:
+                prev_p = prev_q_prompt_matrix[pid, :k].astype(np.float64)
+                prev_p = prev_p / np.sum(prev_p)
+                prompt_tvs[pid] = total_variation(p, prev_p)
+                prompt_kls[pid] = kl_div(p, prev_p)
 
-            prompt_entropies_sum[pid] = entropy_from_probs(p_sum)
-            prompt_entropies_avg[pid] = entropy_from_probs(p_avg)
-            prompt_top1_sum[pid] = int(np.argmax(p_sum))
-            prompt_top1_avg[pid] = int(np.argmax(p_avg))
+        prompt_entropy_mean = float(np.mean(prompt_entropies))
+        prompt_tv_mean = float(np.nanmean(prompt_tvs)) if np.any(~np.isnan(prompt_tvs)) else float('nan')
+        prompt_tv_max = float(np.nanmax(prompt_tvs)) if np.any(~np.isnan(prompt_tvs)) else float('nan')
+        prompt_kl_mean = float(np.nanmean(prompt_kls)) if np.any(~np.isnan(prompt_kls)) else float('nan')
 
-            if prev_q_prompt_matrix_avg is not None:
-                prev_avg = prev_q_prompt_matrix_avg[pid, :k].astype(np.float64)
-                prev_avg = prev_avg / np.sum(prev_avg)
-                prompt_tvs_avg[pid] = total_variation(p_avg, prev_avg)
-                prompt_kls_avg[pid] = kl_div(p_avg, prev_avg)
-            if prev_q_prompt_matrix_sum is not None:
-                prev_sum = prev_q_prompt_matrix_sum[pid, :k].astype(np.float64)
-                prev_sum = prev_sum / np.sum(prev_sum)
-                prompt_tvs_sum[pid] = total_variation(p_sum, prev_sum)
-                prompt_kls_sum[pid] = kl_div(p_sum, prev_sum)
-
-        # Keep the original experiment logic on avg-normalized conditional probabilities.
-        q_prompt_matrix = q_prompt_matrix_avg
-        prompt_entropies = prompt_entropies_avg
-        prompt_tvs = prompt_tvs_avg
-        prompt_kls = prompt_kls_avg
-        prompt_top1 = prompt_top1_avg
-
-        prompt_entropy_mean = float(np.mean(prompt_entropies_avg))
-        prompt_tv_mean = float(np.nanmean(prompt_tvs_avg)) if np.any(~np.isnan(prompt_tvs_avg)) else float('nan')
-        prompt_tv_max = float(np.nanmax(prompt_tvs_avg)) if np.any(~np.isnan(prompt_tvs_avg)) else float('nan')
-        prompt_kl_mean = float(np.nanmean(prompt_kls_avg)) if np.any(~np.isnan(prompt_kls_avg)) else float('nan')
-        prompt_tv_mean_sum = float(np.nanmean(prompt_tvs_sum)) if np.any(~np.isnan(prompt_tvs_sum)) else float('nan')
-        prompt_tv_max_sum = float(np.nanmax(prompt_tvs_sum)) if np.any(~np.isnan(prompt_tvs_sum)) else float('nan')
-        prompt_kl_mean_sum = float(np.nanmean(prompt_kls_sum)) if np.any(~np.isnan(prompt_kls_sum)) else float('nan')
-
-        if prev_prompt_entropies_avg is None:
+        if prev_prompt_entropies is None:
             prompt_entropy_abs_delta_mean = float('nan')
             prompt_entropy_abs_delta_max = float('nan')
             prompt_entropy_pct_change_mean = float('nan')
-            prompt_entropy_abs_delta_mean_sum = float('nan')
         else:
-            d = np.abs(prompt_entropies_avg - prev_prompt_entropies_avg)
+            d = np.abs(prompt_entropies - prev_prompt_entropies)
             prompt_entropy_abs_delta_mean = float(np.mean(d))
             prompt_entropy_abs_delta_max = float(np.max(d))
-            pct = 100.0 * (prompt_entropies_avg - prev_prompt_entropies_avg) / np.maximum(
-                np.abs(prev_prompt_entropies_avg), pct_eps
+            pct = 100.0 * (prompt_entropies - prev_prompt_entropies) / np.maximum(
+                np.abs(prev_prompt_entropies), pct_eps
             )
             prompt_entropy_pct_change_mean = float(np.mean(pct))
-            dsum = np.abs(prompt_entropies_sum - prev_prompt_entropies_sum)
-            prompt_entropy_abs_delta_mean_sum = float(np.mean(dsum))
 
         target_prompt_count = (
             args.train_prompt_size
@@ -948,7 +573,6 @@ def main():
                 target_prompt_count,
                 args.pairs_per_prompt,
                 args.tau,
-                args.lambda_on,
                 args.mix_eps,
                 args.max_length,
                 device,
@@ -972,7 +596,7 @@ def main():
 
         prev_converged_mask = prompt_converged_mask.copy()
         prompt_stable_counts, prompt_converged_mask = update_prompt_convergence_with_exposure(
-            None if prev_q_prompt_matrix_avg is None else prompt_tvs_avg,
+            None if prev_q_prompt_matrix is None else prompt_tvs,
             prompt_stable_counts,
             prompt_converged_mask,
             prompt_cum_exposure,
@@ -987,8 +611,8 @@ def main():
         newly = prompt_converged_mask & (~prev_converged_mask)
         prompt_first_converged_iter[newly] = t
 
-        top1_history.append(prompt_top1_avg.copy())
-        tv_history.append(np.where(np.isnan(prompt_tvs_avg), -1.0, prompt_tvs_avg).copy())
+        top1_history.append(prompt_top1.copy())
+        tv_history.append(np.where(np.isnan(prompt_tvs), -1.0, prompt_tvs).copy())
         top1_hist_np = np.stack(top1_history, axis=0)
         tv_hist_np = np.stack(tv_history, axis=0)
 
@@ -1015,88 +639,30 @@ def main():
         num_unresolved = int(num_prompts_eval - num_resolved)
 
         unresolved_entropy_mean = (
-            float(np.mean(prompt_entropies_avg[~prompt_resolved_mask]))
+            float(np.mean(prompt_entropies[~prompt_resolved_mask]))
             if np.any(~prompt_resolved_mask)
             else float('nan')
         )
         unresolved_tv_mean = (
-            float(np.nanmean(prompt_tvs_avg[~prompt_resolved_mask]))
-            if np.any(~prompt_resolved_mask) and np.any(~np.isnan(prompt_tvs_avg[~prompt_resolved_mask]))
+            float(np.nanmean(prompt_tvs[~prompt_resolved_mask]))
+            if np.any(~prompt_resolved_mask) and np.any(~np.isnan(prompt_tvs[~prompt_resolved_mask]))
             else float('nan')
         )
         unresolved_tv_max = (
-            float(np.nanmax(prompt_tvs_avg[~prompt_resolved_mask]))
-            if np.any(~prompt_resolved_mask) and np.any(~np.isnan(prompt_tvs_avg[~prompt_resolved_mask]))
+            float(np.nanmax(prompt_tvs[~prompt_resolved_mask]))
+            if np.any(~prompt_resolved_mask) and np.any(~np.isnan(prompt_tvs[~prompt_resolved_mask]))
             else float('nan')
         )
 
-        prev_q_prompt_matrix_avg = q_prompt_matrix_avg.copy()
-        prev_q_prompt_matrix_sum = q_prompt_matrix_sum.copy()
-        prev_prompt_entropies_avg = prompt_entropies_avg.copy()
-        prev_prompt_entropies_sum = prompt_entropies_sum.copy()
-
-        if args.dump_each_iter == 1:
-            dump_snapshot(
-                dump_dir=dump_dir,
-                t=t,
-                snapshot_stage='pre_update',
-                prompt_ids_raw=prompt_ids_raw,
-                prompts_uniq=prompts_uniq,
-                responses_by_prompt=responses_by_prompt,
-                u_by_prompt=u_by_prompt,
-                group_offsets=group_offsets,
-                max_k=max_k,
-                flat_sum_scores=flat_sum_scores,
-                flat_avg_scores=flat_avg_scores,
-                flat_num_tokens=flat_num_tokens,
-                q_prompt_matrix_avg=q_prompt_matrix_avg,
-                q_prompt_matrix_sum=q_prompt_matrix_sum,
-                prompt_entropies_avg=prompt_entropies_avg,
-                prompt_entropies_sum=prompt_entropies_sum,
-                prompt_tvs_avg=prompt_tvs_avg,
-                prompt_tvs_sum=prompt_tvs_sum,
-                prompt_kls_avg=prompt_kls_avg,
-                prompt_kls_sum=prompt_kls_sum,
-                prompt_top1_avg=prompt_top1_avg,
-                prompt_top1_sum=prompt_top1_sum,
-                prompt_converged_mask=prompt_converged_mask,
-                prompt_oscillatory_mask=prompt_oscillatory_mask,
-                prompt_resolved_mask=prompt_resolved_mask,
-                prompt_stable_counts=prompt_stable_counts,
-                prompt_first_converged_iter=prompt_first_converged_iter,
-                prompt_first_oscillatory_iter=prompt_first_oscillatory_iter,
-                prompt_cum_exposure=prompt_cum_exposure,
-                prompt_recent_exposure=prompt_recent_exposure,
-                iter_exposure_vec=iter_exposure_vec,
-            )
-            train_diag_df.to_csv(
-                os.path.join(dump_dir, f'iter_{t:04d}_train_pair_support.csv'),
-                index=False,
-            )
-            if args.dump_token_diagnostics == 1 and len(token_diag_prompt_indices) > 0:
-                dump_token_diagnostics(
-                    dump_dir=dump_dir,
-                    t=t,
-                    snapshot_stage='pre_update',
-                    token_diag_prompt_indices=token_diag_prompt_indices,
-                    token_diag_num_responses=args.token_diag_num_responses,
-                    prompts_uniq=prompts_uniq,
-                    responses_by_prompt=responses_by_prompt,
-                    prompt_ids_raw=prompt_ids_raw,
-                    model=model,
-                    tok=tok,
-                    device=device,
-                    token_diag_max_length=args.token_diag_max_length,
-                )
+        prev_q_prompt_matrix = q_prompt_matrix.copy()
+        prev_prompt_entropies = prompt_entropies.copy()
 
         print(
-            f'[Metrics@t={t}] H_avg_mean={prompt_entropy_mean:.6g} | '
-            f'H_sum_mean={float(np.mean(prompt_entropies_sum)):.6g} | '
+            f'[Metrics@t={t}] H_mean={prompt_entropy_mean:.6g} | '
             f'converged={num_converged}/{num_prompts_eval} | '
             f'oscillatory={num_osc}/{num_prompts_eval} | '
             f'resolved={num_resolved}/{num_prompts_eval} ({frac_resolved:.1%}) | '
-            f'TV_avg_mean={prompt_tv_mean:.6g} TV_avg_max={prompt_tv_max:.6g} | '
-            f'TV_sum_mean={prompt_tv_mean_sum:.6g} TV_sum_max={prompt_tv_max_sum:.6g} | '
+            f'TV_mean={prompt_tv_mean:.6g} TV_max={prompt_tv_max:.6g} | '
             f'cum_exp_mean={float(np.mean(prompt_cum_exposure)):.3f} '
             f'recent_exp_mean={float(np.mean(prompt_recent_exposure)):.3f} | '
             f'train_pairs={len(train_ds_weighted)} train_prompts={target_prompt_count}'
@@ -1104,7 +670,6 @@ def main():
 
         metrics.append({
             'iter': t,
-            'snapshot_stage': 'pre_update',
             'alpha': args.alpha,
             'lambda': args.lambda_on,
             'tau': args.tau,
@@ -1114,18 +679,12 @@ def main():
             'target_train_prompt_count': target_prompt_count,
             'actual_train_pairs': len(train_ds_weighted),
             'prompt_entropy_mean': prompt_entropy_mean,
-            'prompt_entropy_mean_avg': float(np.mean(prompt_entropies_avg)),
-            'prompt_entropy_mean_sum': float(np.mean(prompt_entropies_sum)),
             'prompt_tv_mean': prompt_tv_mean,
             'prompt_tv_max': prompt_tv_max,
             'prompt_kl_mean': prompt_kl_mean,
-            'prompt_tv_mean_sum': prompt_tv_mean_sum,
-            'prompt_tv_max_sum': prompt_tv_max_sum,
-            'prompt_kl_mean_sum': prompt_kl_mean_sum,
             'prompt_entropy_abs_delta_mean': prompt_entropy_abs_delta_mean,
             'prompt_entropy_abs_delta_max': prompt_entropy_abs_delta_max,
             'prompt_entropy_pct_change_mean': prompt_entropy_pct_change_mean,
-            'prompt_entropy_abs_delta_mean_sum': prompt_entropy_abs_delta_mean_sum,
             'num_prompts_eval': num_prompts_eval,
             'num_prompts_converged': num_converged,
             'num_prompts_oscillatory': num_osc,
@@ -1148,11 +707,67 @@ def main():
             )),
         })
 
+        if args.dump_each_iter == 1:
+            np.savez_compressed(
+                os.path.join(dump_dir, f'iter_{t:04d}.npz'),
+                iter=np.int32(t),
+                q_prompt_matrix=q_prompt_matrix.astype(np.float32),
+                prompt_entropies=prompt_entropies.astype(np.float32),
+                prompt_tvs=prompt_tvs.astype(np.float32),
+                prompt_kls=prompt_kls.astype(np.float32),
+                prompt_top1=prompt_top1.astype(np.int32),
+                prompt_converged_mask=prompt_converged_mask.astype(np.int8),
+                prompt_oscillatory_mask=prompt_oscillatory_mask.astype(np.int8),
+                prompt_resolved_mask=prompt_resolved_mask.astype(np.int8),
+                prompt_stable_counts=prompt_stable_counts.astype(np.int32),
+                prompt_first_converged_iter=prompt_first_converged_iter.astype(np.int32),
+                prompt_first_oscillatory_iter=prompt_first_oscillatory_iter.astype(np.int32),
+                prompt_cum_exposure=prompt_cum_exposure.astype(np.int32),
+                prompt_recent_exposure=prompt_recent_exposure.astype(np.int32),
+                iter_exposure_vec=iter_exposure_vec.astype(np.int32),
+            )
+
+            rows_csv = []
+            for pid in range(num_prompts_eval):
+                row = {
+                    'prompt_id': prompt_ids_raw[pid],
+                    'prompt_index': pid,
+                    'prompt': prompts_uniq[pid],
+                    'K': len(responses_by_prompt[pid]),
+                    'entropy': prompt_entropies[pid],
+                    'tv_delta': prompt_tvs[pid],
+                    'kl_delta': prompt_kls[pid],
+                    'top1_idx': int(prompt_top1[pid]),
+                    'converged': int(prompt_converged_mask[pid]),
+                    'oscillatory': int(prompt_oscillatory_mask[pid]),
+                    'resolved': int(prompt_resolved_mask[pid]),
+                    'stable_count': int(prompt_stable_counts[pid]),
+                    'first_converged_iter': int(prompt_first_converged_iter[pid]),
+                    'first_oscillatory_iter': int(prompt_first_oscillatory_iter[pid]),
+                    'exposure_iter': int(iter_exposure_vec[pid]),
+                    'cum_exposure': int(prompt_cum_exposure[pid]),
+                    'recent_exposure': int(prompt_recent_exposure[pid]),
+                    'exposure_eligible': int(
+                        (prompt_cum_exposure[pid] >= args.min_total_exposure)
+                        and (prompt_recent_exposure[pid] >= args.min_recent_exposure)
+                    ),
+                }
+                for j in range(max_k):
+                    row[f'prob_{j}'] = q_prompt_matrix[pid, j]
+                    row[f'response_{j}'] = responses_by_prompt[pid][j] if j < len(responses_by_prompt[pid]) else ''
+                rows_csv.append(row)
+
+            pd.DataFrame(rows_csv).to_csv(
+                os.path.join(dump_dir, f'iter_{t:04d}_prompt_metrics.csv'),
+                index=False,
+            )
+            train_diag_df.to_csv(
+                os.path.join(dump_dir, f'iter_{t:04d}_train_pair_support.csv'),
+                index=False,
+            )
+
         if args.auto_stop == 1 and num_resolved == num_prompts_eval and num_prompts_eval > 0:
             print(f'[STOP] All prompts resolved at iter={t}.')
-            last_iter_ran = t
-            if args.save_iter_adapters == 1:
-                maybe_save_adapter(model, tok, os.path.join(adapters_dir, f'iter_{t:04d}_postupdate'))
             break
 
         model.train()
@@ -1214,13 +829,6 @@ def main():
             sched.step()
             opt.zero_grad(set_to_none=True)
 
-        if args.save_iter_adapters == 1:
-            maybe_save_adapter(model, tok, os.path.join(adapters_dir, f'iter_{t:04d}_postupdate'))
-        last_iter_ran = t
-
-    if args.save_final_adapter == 1:
-        maybe_save_adapter(model, tok, os.path.join(adapters_dir, 'final'))
-
     summary_json = os.path.join(
         args.log_dir,
         f'convergence_summary_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}.json',
@@ -1239,35 +847,17 @@ def main():
         'num_prompts_converged': int(prompt_converged_mask.sum()),
         'num_prompts_oscillatory': int(prompt_oscillatory_mask.sum()),
         'num_prompts_resolved': int((prompt_converged_mask | prompt_oscillatory_mask).sum()),
-        'last_iter_ran': int(last_iter_ran),
+        'last_iter_ran': int(metrics[-1]['iter']) if metrics else -1,
         'training_rule': {
-            'type': 'prompt_aware_pair_sampling_with_lambda_and_mixeps',
-            'lambda_on': args.lambda_on,
+            'type': 'prompt_aware_pair_sampling_with_mixing',
             'mix_eps': args.mix_eps,
             'pairs_per_prompt': args.pairs_per_prompt,
             'score_mode': 'avg_logprob',
-        },
-        'sampling_rule': {
-            'induced_distribution': 'softmax(tau * avg_margin)',
-            'base_mix': '(1-lambda_on) * uniform + lambda_on * induced',
-            'final_mix': '(1-mix_eps) * base_mix + mix_eps * uniform',
-            'effective_lambda_to_induced': '(1-mix_eps) * lambda_on',
         },
         'exposure_rule': {
             'window': args.exposure_window,
             'min_total_exposure': args.min_total_exposure,
             'min_recent_exposure': args.min_recent_exposure,
-        },
-        'artifacts': {
-            'adapter_dir': adapters_dir,
-            'dump_dir': dump_dir if args.dump_each_iter == 1 else None,
-            'iter_dump_snapshot_stage': 'pre_update',
-            'adapter_names': {
-                'matching_iter_dump_adapter': 'iter_XXXX_preupdate',
-                'after_training_adapter': 'iter_XXXX_postupdate',
-                'initial_adapter': 'iter_init',
-                'final_adapter': 'final',
-            },
         },
     })
 
@@ -1279,7 +869,6 @@ def main():
 
     print('[DONE] wrote:', out_csv)
     print('[DONE] wrote:', summary_json)
-    print('[DONE] adapters in:', adapters_dir)
     if args.dump_each_iter == 1:
         print('[DONE] per-iter dumps in:', dump_dir)
 

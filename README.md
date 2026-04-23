@@ -1,81 +1,66 @@
+
+
 # LLM Sampling with IPO
 
 This repository implements **Identity Preference Optimization (IPO)** for fine-tuning large language models using pairwise preference data from the HelpSteer dataset.
+
+The current training script supports:
+
+- prompt-aware pair sampling
+- sampling mixture controlled by `lambda_on` and `mix_eps`
+- evaluation on fixed candidate responses
+- optional **augmented evaluation**, where additional model-generated responses are added to selected prompts
+- full **token-level probability diagnostics**
+- saving **pre-update / post-update adapters** for each iteration
 
 ---
 
 ## Requirements
 
 - Python 3.8+
-- PyTorch (install separately below)
+- PyTorch
+- transformers
+- peft
+- tqdm
+- numpy
+- pandas
 
-Install PyTorch first (visit [pytorch.org](https://pytorch.org) to get the right command for your CUDA version):
-
-```bash
-# Example for CUDA 12.1
-pip install torch --index-url https://download.pytorch.org/whl/cu121
-```
-
-Then install all other dependencies:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+------
 
-## Step 1: Download the Model
+## Step 1: Download Model
 
-Download the Qwen2.5 model from HuggingFace. Choose one of the following:
+Example:
 
 ```bash
-# 1.5B version
 huggingface-cli download Qwen/Qwen2.5-1.5B --local-dir model/Qwen2.5-1.5B
-
-# or 3B version
-huggingface-cli download Qwen/Qwen2.5-3B --local-dir model/Qwen2.5-3B
 ```
 
-> If `huggingface-cli` is not available, install it with `pip install huggingface_hub`.
+You may also use a different compatible causal language model if the architecture matches the LoRA target modules in the training script.
 
-Place the downloaded model under the `model/` directory:
+------
 
-```
-model/
-└── Qwen2.5-1.5B/   (or Qwen2.5-3B/)
-    ├── config.json
-    ├── tokenizer.json
-    └── model.safetensors
-    ...
-```
+## Step 2: Prepare Dataset
 
----
-
-## Step 2: Download & Prepare the Dataset
-
-### 2a. Download HelpSteer from HuggingFace
+Download and export HelpSteer:
 
 ```bash
 python download.py
-```
-
-This will download the [nvidia/HelpSteer](https://huggingface.co/datasets/nvidia/HelpSteer) dataset and save it to `data/raw/HelpSteer/`.
-
-### 2b. Export to JSONL format
-
-```bash
 python export_helpsteer_jsonl.py
 ```
 
-This converts the dataset to `data/raw/helpsteer.jsonl`.
-
-### 2c. Build training pairs
+Build pairwise training data and the evaluation set:
 
 ```bash
 python build_pairs.py \
   --input data/raw/helpsteer.jsonl \
   --out_pairs data/processed/pairs_train.jsonl \
-  --out_eval_prompts data/processed/eval_prompt_responses.jsonl \
+  --out_eval_prompts data/processed/eval_prompt_responses_1000.jsonl \
   --input_format response \
   --dedup_responses \
   --keep_exact_k 4 \
@@ -84,29 +69,27 @@ python build_pairs.py \
   --seed 0
 ```
 
-This builds pairwise preference data (chosen/rejected) and saves it to `data/processed/`:
+This produces:
 
-- `pairs_train.jsonl` — training pairs `(prompt, chosen, rejected, delta)`
-- `eval_prompt_responses.jsonl` — evaluation set of 1000 randomly sampled prompts, each with their 4 candidate responses sorted by score
+- `pairs_train.jsonl`: pairwise training data `(prompt, chosen, rejected, ...)`
+- `eval_prompt_responses_1000.jsonl`: evaluation set with 1000 prompts, each with 4 candidate responses from the dataset
 
-> **Note:** The size of the evaluation set is fixed at this step by `--eval_prompts 1000`. The training script (`run_iterative_ipo_fast.py`) simply reads this file as-is — there is no way to change the eval set size at training time. If you want a different eval set size, re-run `build_pairs.py` with a different `--eval_prompts` value before training.
+------
 
----
+## Step 3: Run Training
 
-## Step 3: Run IPO Training
-
-Run the following command, replacing the paths with your own:
+Example command:
 
 ```bash
 python scripts/run_iterative_ipo_fast.py \
-  --model_path /your/path/to/model/model_type \
-  --pairs_path /your/path/to/data/processed/pairs_train.jsonl \
-  --eval_prompts_path /your/path/to/data/processed/eval_prompt_responses.jsonl \
-  --out_dir /your/path/to/checkpoints_model_type \
-  --log_dir /your/path/to/logs_model_type \
+  --model_path /path/to/model \
+  --pairs_path /path/to/pairs_train.jsonl \
+  --eval_prompts_path /path/to/eval_prompt_responses_1000.jsonl \
+  --out_dir /path/to/checkpoints \
+  --log_dir /path/to/logs \
   --seed 0 \
   --auto_stop 1 \
-  --max_iters 150 \
+  --max_iters 200 \
   --stop_min_iters 15 \
   --stop_patience 5 \
   --stop_tv_abs 0.005 \
@@ -117,169 +100,435 @@ python scripts/run_iterative_ipo_fast.py \
   --osc_window 8 \
   --osc_min_switches 4 \
   --osc_tv_floor 0.01 \
-  --alpha 0.7 \
-  --lambda_on 0.8 \
-  --tau 8 \
+  --alpha 0.3 \
+  --lambda_on 0.3 \
+  --tau 1.0 \
   --beta 10 \
   --mix_eps 0.05 \
   --w_clip_min 0.1 \
   --w_clip_max 10.0 \
-  --train_sample_size 1000 \
+  --train_sample_size 500 \
   --pairs_per_prompt 2 \
-  --batch_size 1 \
+  --batch_size 2 \
   --grad_accum 8 \
   --lr 5e-5 \
   --warmup_ratio 0.03 \
-  --score_batch_size 1 \
+  --score_batch_size 2 \
   --epochs_per_iter 1 \
   --max_length 1537 \
-  --dump_each_iter 1
+  --dump_each_iter 1 \
+  --save_iter_adapters 1 \
+  --save_initial_adapter 1 \
+  --save_final_adapter 1 \
+  --dump_token_diagnostics 1 \
+  --token_diag_max_length 2048 \
+  --augment_eval_num_prompts 100 \
+  --augment_eval_extra_responses 2 \
+  --augment_eval_num_generate_candidates 20 \
+  --augment_eval_generate_max_new_tokens 256 \
+  --augment_eval_do_sample 1 \
+  --augment_eval_temperature 0.8 \
+  --augment_eval_top_p 0.95 \
+  --augment_eval_select_by avg \
+  --augment_eval_seed 123
 ```
 
-> **The 4 paths you must change:** `--model_path`, `--pairs_path`, `--eval_prompts_path`, `--out_dir`, `--log_dir`
+------
 
----
+# What the Current Script Does
 
-### Key Parameters to Tune
+At a high level, each outer iteration does the following:
 
-If you want to reproduce or extend experiments, these are the most important parameters to adjust:
+1. Evaluate the current model on the eval candidate responses
+2. Compute prompt-level response distributions
+3. Compute entropy / TV / KL / top-1 response statistics
+4. Build a prompt-aware training subset using a sampling distribution controlled by:
+   - `tau`
+   - `lambda_on`
+   - `mix_eps`
+5. Train for one or more epochs on that subset
+6. Save metrics, dumps, and adapters
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `--model_path` | — | Path to your local Qwen2.5 model directory |
-| `--seed` | `0` | Random seed. Change to run different seeds for variance/error bars |
-| `--alpha` | `0.7` | Reference policy mixing coefficient |
-| `--tau` | `8` | Softmax temperature scale — higher = sharper induced distribution |
-| `--beta` | `10` | IPO loss parameter controlling target margin scale |
-| `--lambda_on` | `0.8` | Experimental config parameter for theoretical correspondence |
-| `--train_sample_size` | `1000` | Number of pairs used per training iteration |
+If augmented evaluation is enabled, some prompts first receive extra model-generated responses before the iterative training loop begins.
 
----
+------
 
-### Full Parameter Reference
+# Parameter Reference
 
-**Data & Paths**
+## 1. Data and Paths
 
-| Parameter | Description |
-|-----------|-------------|
-| `--model_path` | Local HuggingFace model directory |
-| `--pairs_path` | Pairwise training data `(prompt, chosen, rejected)` |
-| `--eval_prompts_path` | Eval set with all responses per prompt (4 responses each) |
-| `--out_dir` | Output directory for model checkpoints |
-| `--log_dir` | Output directory for logs, metrics, and per-iteration dumps |
+### `--model_path`
 
-**Training Loop**
+Path to the local base model directory.
 
-| Parameter | Description |
-|-----------|-------------|
-| `--seed` | Random seed |
-| `--auto_stop` | `1` = auto stop when converged, `0` = fixed number of iterations |
-| `--max_iters` | Max outer iterations (used when `auto_stop=1`) |
-| `--iters` | Fixed iterations to run (used when `auto_stop=0`) |
+### `--pairs_path`
 
-**Convergence**
+Path to the pairwise training data JSONL file.
 
-| Parameter | Description |
-|-----------|-------------|
-| `--stop_min_iters` | Minimum iterations before convergence check begins |
-| `--stop_patience` | Consecutive rounds a prompt must satisfy TV threshold to be marked converged |
-| `--stop_tv_abs` | TV convergence threshold per prompt |
+### `--eval_prompts_path`
 
-**Exposure-Aware Stop Rule**
+Path to the evaluation prompts file. This file contains the base evaluation candidate responses (typically 1000 prompts × 4 responses each).
 
-| Parameter | Description |
-|-----------|-------------|
-| `--exposure_window` | Sliding window length for recent exposure stats |
-| `--min_total_exposure` | Min cumulative exposure for a prompt to be eligible for stop rule |
-| `--min_recent_exposure` | Min exposure within the window for a prompt to be eligible |
+### `--out_dir`
 
-**Oscillation Detection**
+Directory where model adapters/checkpoints are saved.
 
-| Parameter | Description |
-|-----------|-------------|
-| `--osc_detect` | `1` = enable oscillation detection, `0` = disable |
-| `--osc_window` | Number of recent rounds used to detect oscillation |
-| `--osc_min_switches` | Min top-1 response switches in the window to flag oscillation |
-| `--osc_tv_floor` | Min average TV required to flag as true oscillation (not just noise) |
+### `--log_dir`
 
-**Theory / Dynamics**
+Directory where logs, metrics CSVs, summaries, and per-iteration dump files are saved.
 
-| Parameter | Description |
-|-----------|-------------|
-| `--alpha` | Reference policy mixing coefficient |
-| `--lambda_on` | Experimental config for theoretical parameter correspondence |
-| `--tau` | Softmax temperature scale for induced distribution sharpness |
-| `--beta` | IPO loss margin scale |
+------
 
-**Resampling**
+## 2. Randomness and Run Control
 
-| Parameter | Description |
-|-----------|-------------|
-| `--train_sample_size` | Total pairs per iteration |
-| `--pairs_per_prompt` | Pairs sampled per selected prompt per iteration |
-| `--train_prompt_size` | Explicit prompt count per iteration (inferred if not set) |
-| `--mix_eps` | Mix induced distribution with uniform to avoid degenerate sampling (e.g. `0.05` = 95% induced + 5% uniform) |
-| `--w_clip_min` | Lower clip bound for pair weights |
-| `--w_clip_max` | Upper clip bound for pair weights |
+### `--seed`
 
-**Training Hyperparameters**
+Global random seed for Python, NumPy, and PyTorch.
 
-| Parameter | Description |
-|-----------|-------------|
-| `--batch_size` | Per-GPU batch size |
-| `--grad_accum` | Gradient accumulation steps (effective batch = `batch_size × grad_accum`) |
-| `--lr` | Learning rate |
-| `--warmup_ratio` | Fraction of optimizer steps used for warmup |
-| `--epochs_per_iter` | Passes over the training subset per outer iteration |
-| `--max_length` | Max tokenized sequence length |
-| `--score_batch_size` | Batch size for scoring/eval (set small if GPU memory is tight) |
+### `--auto_stop`
 
-**Output**
+- `1`: use the automatic stopping rule
+- `0`: ignore the stopping rule and run a fixed number of outer iterations
 
-| Parameter | Description |
-|-----------|-------------|
-| `--dump_each_iter` | `1` = save per-iteration prompt metrics, distributions, and pair support files (needed for trajectory plots) |
+### `--max_iters`
 
----
+Maximum number of outer iterations when `auto_stop=1`.
 
-## Project Structure
+### `--iters`
 
+Number of outer iterations when `auto_stop=0`.
+
+------
+
+## 3. Convergence and Exposure
+
+These parameters control when a prompt is considered “resolved” or converged.
+
+### `--stop_min_iters`
+
+Minimum number of outer iterations before convergence checking starts.
+
+### `--stop_patience`
+
+A prompt must satisfy the TV threshold for this many eligible rounds in a row before being marked converged.
+
+### `--stop_tv_abs`
+
+Per-prompt TV threshold for convergence.
+
+### `--exposure_window`
+
+Window size for recent exposure counting.
+
+### `--min_total_exposure`
+
+Minimum cumulative exposure required before a prompt is eligible for convergence checking.
+
+### `--min_recent_exposure`
+
+Minimum recent exposure required before a prompt is eligible for convergence checking.
+
+------
+
+## 4. Oscillation Detection
+
+These parameters control whether a prompt is flagged as oscillatory instead of converged.
+
+### `--osc_detect`
+
+- `1`: enable oscillation detection
+- `0`: disable oscillation detection
+
+### `--osc_window`
+
+How many recent iterations are used to check oscillation behavior.
+
+### `--osc_min_switches`
+
+Minimum number of top-1 response switches in the window before a prompt can be flagged as oscillatory.
+
+### `--osc_tv_floor`
+
+Minimum mean TV over the oscillation window required to classify switching as real oscillation instead of noise.
+
+------
+
+## 5. Core Dynamics Parameters
+
+These are the most important theoretical / experimental parameters.
+
+### `--alpha`
+
+Reference-policy mixing coefficient used in the training objective.
+
+The script computes a mixed reference score:
+
+- part from the initial reference model
+- part from the current model
+
+Larger `alpha` means the current model contributes more to the reference term.
+
+### `--beta`
+
+IPO loss scale parameter.
+
+The loss uses a target margin of:
+
+```text
+1 / (2 * beta)
 ```
-.
-├── model/                        # Downloaded model weights (not tracked by git)
-├── data/                         # Datasets (not tracked by git)
-│   ├── raw/
-│   │   ├── HelpSteer/            # Raw HuggingFace dataset
-│   │   └── helpsteer.jsonl       # Exported JSONL
-│   └── processed/
-│       ├── pairs_train.jsonl     # Training pairs
-│       └── eval_prompt_responses.jsonl
-├── download.py                   # Step 2a: Download dataset
-├── export_helpsteer_jsonl.py     # Step 2b: Export to JSONL
-├── build_pairs.py                # Step 2c: Build preference pairs
-└── run_iterative_ipo_fast.py               # Step 3: IPO training
+
+So `beta` changes the loss landscape and the desired training margin.
+
+### `--tau`
+
+Softmax sharpness parameter.
+
+It is used in two places:
+
+1. **Training subset construction**
+   - sharper `tau` makes the induced pair distribution more concentrated
+2. **Evaluation response probabilities**
+   - larger `tau` makes prompt-level conditional distributions sharper
+
+### `--lambda_on`
+
+Controls the strength of preference-based sampling during training subset construction.
+
+The script first builds an induced distribution from pair margins, then mixes it with uniform:
+
+```text
+base_mix = (1 - lambda_on) * uniform + lambda_on * induced
 ```
 
----
+Interpretation:
 
-## Notes
+- `lambda_on = 0`: pure uniform
+- `lambda_on = 1`: pure induced distribution
+- intermediate values interpolate between them
 
-- The `model/` and `data/` directories are excluded from git due to file size. You must download them manually following the steps above.
-- Windows users: the default paths in `download.py` and `export_helpsteer_jsonl.py` use Windows-style paths. Update them to match your system if you are on Linux/Mac, for example:
-  ```python
-  # Change this:
-  cache_dir = r"C:\yuhe32\dpo\ipo\data\hf_cache"
-  # To this:
-  cache_dir = "data/hf_cache"
-  ```
+### `--mix_eps`
 
-## Step 4: What gets saved after training
+Anti-extreme smoothing parameter.
 
-After running `run_iterative_ipo_fast.py`, the script writes several outputs to `--log_dir` (and optionally per-iteration dumps if `--dump_each_iter 1`).
+After `base_mix` is built, the script further smooths it:
 
-### 1. Main metrics CSV
+```text
+mixed = (1 - mix_eps) * base_mix + mix_eps * uniform
+```
 
-A file of the form
+Interpretation:
+
+- prevents the distribution from becoming too concentrated
+- helps avoid near-degenerate sampling such as almost one-hot behavior
+
+### Important distinction: `lambda_on` vs `mix_eps`
+
+- `lambda_on` controls **how strongly the induced distribution matters**
+- `mix_eps` controls **how much extra uniform smoothing is injected**
+
+These two parameters are not redundant.
+
+------
+
+## 6. Training Subset Construction
+
+### `--train_sample_size`
+
+Approximate total number of training pairs used in each outer iteration.
+
+### `--pairs_per_prompt`
+
+How many pairs are sampled per selected training prompt in each outer iteration.
+
+### `--train_prompt_size`
+
+If set to a positive value, this directly specifies how many training prompts are sampled each iteration.
+
+If `0`, the script infers it from:
+
+```text
+ceil(train_sample_size / pairs_per_prompt)
+```
+
+### `--w_clip_min`
+
+Lower clipping bound for pair weights after normalization.
+
+### `--w_clip_max`
+
+Upper clipping bound for pair weights after normalization.
+
+------
+
+## 7. Optimization Hyperparameters
+
+### `--batch_size`
+
+Mini-batch size per forward/backward pass.
+
+### `--grad_accum`
+
+Gradient accumulation steps.
+
+Effective batch size is approximately:
+
+```text
+batch_size × grad_accum
+```
+
+### `--lr`
+
+Learning rate.
+
+### `--warmup_ratio`
+
+Warmup ratio for the linear learning-rate schedule.
+
+### `--score_batch_size`
+
+Batch size used for scoring responses / pairs during evaluation and subset construction.
+
+If GPU memory is tight, reduce this.
+
+### `--epochs_per_iter`
+
+Number of training epochs over the sampled subset in each outer iteration.
+
+### `--max_length`
+
+Maximum sequence length used for training/eval scoring.
+
+If prompt + response exceed this length, the sequence is truncated from the left.
+
+------
+
+## 8. LoRA Parameters
+
+### `--lora_r`
+
+LoRA rank.
+
+### `--lora_alpha`
+
+LoRA scaling factor.
+
+### `--lora_dropout`
+
+LoRA dropout.
+
+------
+
+## 9. Iteration Dumps and Checkpoint Saving
+
+### `--dump_each_iter`
+
+- `1`: save per-iteration dumps
+- `0`: do not save them
+
+Per-iteration dumps include prompt-level metrics and optional token-level diagnostics.
+
+### `--save_iter_adapters`
+
+- `1`: save adapters at each iteration
+- `0`: do not save them
+
+### `--save_initial_adapter`
+
+- `1`: save the initial adapter state before training
+- `0`: do not save it
+
+### `--save_final_adapter`
+
+- `1`: save the final adapter after training
+- `0`: do not save it
+
+------
+
+## 10. Token-Level Diagnostics
+
+These parameters control token-probability saving.
+
+### `--dump_token_diagnostics`
+
+- `1`: save token-level diagnostics
+- `0`: disable them
+
+When enabled, the script saves token-level conditional probabilities for **all eval prompts and all responses**.
+
+### `--token_diag_max_length`
+
+Maximum length used specifically for token-level diagnostics.
+
+This can be larger than `--max_length` to reduce truncation in token-level analysis.
+
+------
+
+## 11. Augmented Evaluation Parameters
+
+These parameters control the “4 original responses + generated responses” evaluation augmentation.
+
+### `--augment_eval_num_prompts`
+
+How many eval prompts should be augmented with extra generated responses.
+
+If `0`, no augmentation is performed.
+
+Example:
+
+- `100` means 100 prompts are expanded beyond the original 4 responses.
+
+### `--augment_eval_extra_responses`
+
+How many generated responses to add per selected prompt.
+
+Example:
+
+- `2` means 4 original + 2 generated = 6 responses for augmented prompts
+
+### `--augment_eval_num_generate_candidates`
+
+How many candidate generations to sample initially for each selected prompt before filtering and selecting the final added responses.
+
+Larger values improve coverage but cost more time.
+
+### `--augment_eval_generate_max_new_tokens`
+
+Maximum number of new tokens for each generated candidate response.
+
+### `--augment_eval_do_sample`
+
+- `1`: use stochastic sampling for generation
+- `0`: use deterministic generation
+
+### `--augment_eval_temperature`
+
+Temperature used in generation when sampling is enabled.
+
+### `--augment_eval_top_p`
+
+Top-p parameter used in generation when sampling is enabled.
+
+### `--augment_eval_select_by`
+
+Selection rule used to choose the final generated responses from the candidate pool.
+
+Choices:
+
+- `avg`: select by average logprob
+- `sum`: select by sum logprob
+
+### `--augment_eval_seed`
+
+Random seed used specifically for selecting augmented prompts and generation-related randomness.
+
+------
+
+# What Gets Saved
+
+## 1. Main Metrics CSV
+
+A file like:
 
 ```text
 metrics_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}_FAST.csv
@@ -287,435 +536,206 @@ metrics_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}_FAST.csv
 
 is written to `--log_dir`.
 
-This is the main per-iteration summary table. Each row corresponds to one outer iteration and records quantities such as:
+It stores one row per outer iteration, including:
 
-- `prompt_entropy_mean` — mean entropy over eval prompts
-- `prompt_tv_mean`, `prompt_tv_max` — mean / max TV distance between consecutive iterations at the prompt level
-- `prompt_kl_mean` — mean prompt-level KL change
-- `num_prompts_converged` — number of prompts marked as converged
-- `num_prompts_oscillatory` — number of prompts diagnosed as oscillatory
-- `num_prompts_resolved` — number of prompts either converged or oscillatory
-- `cum_exposure_mean`, `recent_exposure_mean` — exposure statistics used in the stop rule
-
-This CSV is the first file to inspect if you want to track global training dynamics.
+- mean entropy
+- mean/max TV
+- mean KL
+- convergence counts
+- oscillation counts
+- exposure statistics
+- avg-based and sum-based aggregate quantities
 
 ------
 
-### 2. Convergence summary JSON
+## 2. Run Summary JSON
 
-A file of the form
+A file like:
 
 ```text
 convergence_summary_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}.json
 ```
 
-is also written to `--log_dir`.
+is written to `--log_dir`.
 
-This contains a compact summary of the run, including:
+It stores:
 
-- the experiment configuration (`alpha`, `lambda_on`, `tau`, `beta`, `seed`, etc.)
-- the total number of eval prompts
-- how many prompts were ultimately classified as converged / oscillatory / resolved
-- the stopping rule configuration
-- the training rule configuration
-
-This file is useful for quickly checking the final status of a run without opening the full metrics CSV.
+- run configuration
+- stopping rule settings
+- sampling rule description
+- artifact locations
+- final resolved / converged / oscillatory counts
 
 ------
 
-### 3. Per-iteration dump directory
+## 3. Per-Iteration Prompt Metrics
 
-If `--dump_each_iter 1`, the script creates a directory of the form
-
-```text
-iter_dumps_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}/
-```
-
-inside `--log_dir`.
-
-This directory contains detailed files for every iteration.
-
-#### (a) Prompt distribution dump: `iter_XXXX.npz`
-
-For each iteration `t`, the file
-
-```text
-iter_XXXX.npz
-```
-
-stores numpy arrays such as:
-
-- `q_prompt_matrix` — the prompt-level induced distribution over the full response set for each eval prompt
-- `prompt_entropies` — prompt-level entropy values
-- `prompt_tvs` — prompt-level TV change relative to the previous iteration
-- `prompt_kls` — prompt-level KL change
-- `prompt_top1` — index of the highest-probability response
-- `prompt_converged_mask` — whether each prompt is currently marked converged
-- `prompt_oscillatory_mask` — whether each prompt is flagged as oscillatory
-- `prompt_cum_exposure`, `prompt_recent_exposure` — exposure counts used by the stop rule
-
-This `.npz` file is the most convenient source if you want to load arrays directly in Python and make custom plots.
-
-#### (b) Prompt metrics CSV: `iter_XXXX_prompt_metrics.csv`
-
-For each iteration `t`, the file
+If `--dump_each_iter 1`, the script writes:
 
 ```text
 iter_XXXX_prompt_metrics.csv
 ```
 
-contains one row per eval prompt.
+Each row is one prompt and includes:
 
-It includes:
+- `entropy_avg`, `entropy_sum`
+- `tv_delta_avg`, `tv_delta_sum`
+- `kl_delta_avg`, `kl_delta_sum`
+- `top1_idx_avg`, `top1_idx_sum`
+- `prob_avg_j`, `prob_sum_j`
+- `avg_logprob_j`, `sum_logprob_j`
+- `response_j`
+- `response_source_j`
+- exposure / convergence / oscillation fields
 
-- prompt text / prompt id
-- number of candidate responses for that prompt
-- entropy
-- TV / KL change from the previous iteration
-- top-1 response index
-- convergence / oscillation / resolved flags
-- exposure statistics
-- the full per-response probabilities: `prob_0`, `prob_1`, ...
+This file supports plotting:
 
-This is the easiest file to use if you want to inspect or plot trajectories for individual prompts across iterations.
+- per-prompt entropy over steps
+- per-prompt TV over steps
+- per-response conditional probability over steps
+- comparison between length-normalized and unnormalized response probabilities
 
-#### (c) Training support CSV: `iter_XXXX_train_pair_support.csv`
+------
 
-For each iteration `t`, the file
+## 4. Per-Iteration Token Diagnostics
+
+If `--dump_token_diagnostics 1`, the script writes:
 
 ```text
-iter_XXXX_train_pair_support.csv
+iter_XXXX_token_diagnostics.csv
 ```
 
-records the prompt-aware pair sampling distribution used to build that iteration’s training subset.
+Each row is one `(prompt, response)` pair and includes:
 
-It includes columns such as:
+- `token_logprobs_json`
+- `token_probs_json`
+- `prefix_sum_logprobs_json`
+- `prefix_avg_logprobs_json`
+- `sum_logprob`
+- `avg_logprob`
+- `eos_logprob`
+- `eos_prob`
+- `truncated_by_max_length`
 
-- `prompt`
-- `pair_global_idx`
-- `margin_avglogprob`
-- `induced_pair_prob`
-- `mixed_pair_prob`
-- `num_pairs_for_prompt`
-- `pairs_sampled_for_prompt`
+This file supports:
 
-This file is useful for diagnosing how the reweighting / resampling dynamics are behaving during training.
+- token-level probability plots
+- EOS analysis
+- response normalization analysis (`sum` vs `avg`)
 
 ------
 
-## Step 5: Typical post-run analyses
+## 5. Per-Iteration NPZ Dumps
 
-With the saved outputs above, you can do several downstream analyses:
-
-1. **Global convergence curves**
-   - Plot `prompt_entropy_mean`, `prompt_tv_mean`, `num_prompts_converged`, etc. from the main metrics CSV.
-2. **Single-prompt trajectory plots**
-   - Use `iter_XXXX_prompt_metrics.csv` or `iter_XXXX.npz` to visualize, for one prompt, how the response probabilities
-     $\pi_t(y \mid x)$
-     evolve across iterations.
-3. **Oscillation diagnosis**
-   - Inspect prompts whose `oscillatory` flag turns on, and plot their top-1 response switches and TV changes across time.
-4. **Exposure diagnostics**
-   - Use `cum_exposure` and `recent_exposure` to verify that prompts declared converged were sufficiently updated.
-5. **Sampling / support diagnostics**
-   - Use `iter_XXXX_train_pair_support.csv` to understand which pairs were emphasized at each iteration and how the induced pair distribution changes over time.
-
-------
-
-## Practical note
-
-If you plan to make prompt-level trajectory plots later, make sure to set
-
-```bash
---dump_each_iter 1
-```
-
-
-
-## Step 6: How to visualize the saved outputs
-
-The most useful files for plotting are the per-iteration `.npz` dumps inside
-
-```text id="um9y7a"
-iter_dumps_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}/
-```
-
-Each file
+If `--dump_each_iter 1`, the script also writes:
 
 ```text
 iter_XXXX.npz
 ```
 
-contains the prompt-level arrays for iteration `t`, including:
+This stores array versions of the main prompt-level quantities, including:
 
-- `q_prompt_matrix`: normalized prompt-level response probabilities
-- `prompt_entropies`: entropy for each eval prompt
-- `prompt_tvs`: total variation (TV) distance from the previous iteration
-- `prompt_kls`: KL divergence from the previous iteration
-- `prompt_top1`: index of the highest-probability response
-- convergence / oscillation / exposure-related arrays
-
-In particular, `q_prompt_matrix` is already the **normalized conditional distribution**
-$\pi_t(y \mid x)$
-over the candidate responses for each prompt, so this is the object you should use for plotting response-probability trajectories.
-
-------
-
-### What to use for different types of plots
-
-#### 1. Plotting the conditional probability of each response across iterations
-
-Use `q_prompt_matrix` from each `iter_XXXX.npz`.
-
-For a fixed prompt `x` with 4 candidate responses, read its row from `q_prompt_matrix` at every iteration, and plot
-
-$\pi_t(y_1 \mid x),\ \pi_t(y_2 \mid x),\ \pi_t(y_3 \mid x),\ \pi_t(y_4 \mid x)$
-
-against iteration `t`.
-
-This is the main plot for visualizing whether the prompt-level distribution collapses, remains diffuse, or oscillates.
+- `q_prompt_matrix_avg`
+- `q_prompt_matrix_sum`
+- `prompt_entropies_avg`
+- `prompt_entropies_sum`
+- `prompt_tvs_avg`
+- `prompt_tvs_sum`
+- `prompt_kls_avg`
+- `prompt_kls_sum`
+- `prompt_top1_avg`
+- `prompt_top1_sum`
 
 ------
 
-#### 2. Plotting entropy over iterations for a single prompt
+## 6. Adapter Checkpoints
 
-Use `prompt_entropies` from each `iter_XXXX.npz`.
-
-For a fixed prompt index `p`, plot
-
-$H_t(x_p)$
-
-against iteration `t`.
-
-This shows whether the prompt-level distribution is becoming sharper or flatter over time.
-
-------
-
-#### 3. Plotting TV change over iterations for a single prompt
-
-Use `prompt_tvs` from each `iter_XXXX.npz`.
-
-For a fixed prompt index `p`, plot the TV distance between consecutive iterations:
-
-$\mathrm{TV}!\left(\pi_t(\cdot \mid x_p), \pi_{t-1}(\cdot \mid x_p)\right)$
-
-against iteration `t`.
-
-This is the main quantity used in the prompt-level convergence rule.
-
-------
-
-#### 4. Plotting global averages across prompts
-
-Use the main run-level CSV
+If saving is enabled, adapters are written under a directory like:
 
 ```text
-metrics_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}_FAST.csv
+adapters_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}/
 ```
 
-to plot aggregate quantities such as:
+including:
 
-- `prompt_entropy_mean`
-- `prompt_tv_mean`
-- `prompt_tv_max`
-- `num_prompts_converged`
-- `num_prompts_oscillatory`
-- `num_prompts_resolved`
+- `iter_init`
+- `iter_XXXX_preupdate`
+- `iter_XXXX_postupdate`
+- `final`
 
-These figures summarize the global dynamics of the run.
+### Important note
 
-------
+The per-iteration dumps correspond to:
 
-#### 5. Diagnosing oscillation
-
-To inspect potentially oscillatory prompts, use:
-
-- `q_prompt_matrix` for the response-probability trajectories
-- `prompt_top1` for top-response switching
-- `prompt_tvs` for whether the changes are substantial
-- `prompt_oscillatory_mask` for the final diagnostic flag
-
-A typical oscillation diagnosis plot combines:
-
-- response probabilities across iterations
-- top-1 response index across iterations
-- prompt-level TV across iterations
-
-------
-
-### Which file should I use: `.npz` or `.csv`?
-
-Use `.npz` if you want to:
-
-- make plots
-- load arrays efficiently in Python
-- inspect full prompt-level probability trajectories
-- compute new statistics after training
-
-Use `.csv` if you want to:
-
-- manually inspect prompts in spreadsheet form
-- search for particular prompt ids or prompt texts
-- quickly filter prompts by entropy / TV / exposure / convergence flags
-
-In practice, the recommended workflow is:
-
-1. Use the `.csv` files to find prompts of interest.
-2. Use the `.npz` files to make the actual plots.
-
-------
-
-### Important note on probabilities
-
-When plotting response trajectories, always use the normalized probabilities from `q_prompt_matrix`.
-
-Do **not** plot raw log-likelihoods directly if your goal is to visualize the prompt-level conditional distribution. The normalization has already been performed when constructing `q_prompt_matrix`, so those values already represent the response probabilities within each prompt.
-
-------
-
-### Example plotting tasks
-
-Typical useful figures include:
-
-1. **Single-prompt probability trajectory**
-   - x-axis: iteration
-   - y-axis: probability
-   - one line per response
-2. **Single-prompt entropy trajectory**
-   - x-axis: iteration
-   - y-axis: entropy
-3. **Single-prompt TV trajectory**
-   - x-axis: iteration
-   - y-axis: TV from previous iteration
-4. **Global mean entropy / TV curves**
-   - x-axis: iteration
-   - y-axis: aggregate metric from the main CSV
-5. **Selected oscillatory prompt diagnostics**
-   - response-probability lines + TV curve + top-1 switching pattern
-
-------
-
-### Existing plotting scripts
-
-If you use the provided plotting utilities, they should read from the per-iteration dump directory under `--log_dir`.
-
-For example, a prompt-trajectory plotting script typically takes:
-
-- the dump directory containing `iter_XXXX.npz`
-- an output directory for figures
-- optionally a prompt id / prompt index / prompt text filter
-
-and then plots the response-probability trajectories from `q_prompt_matrix`.
-
-### Plotting a single prompt trace
-
-To visualize the dynamics of a single eval prompt across iterations, use:
-
-```bash id="j8xgch"
-python plot_single_prompt_trace.py \
-  --dump_dir /path/to/iter_dumps_alpha0.7_lambda0.8_tau8_seed0 \
-  --out_dir /path/to/single_prompt_plots \
-  --prompt_index 15
+```text
+iter_XXXX_preupdate
 ```
 
-You may also select a prompt by `--prompt_id` or by substring matching with `--prompt_contains`.
+That is the matching adapter for the saved metrics at iteration `t`.
 
-This script reads the per-iteration files
+------
 
-- `iter_XXXX_prompt_metrics.csv`
+## 7. Augmented Eval Metadata
 
-and produces the following outputs in `--out_dir`:
+When augmented evaluation is enabled, the script also saves metadata describing the final evaluation candidate set.
 
-- `conditional_prob.png`
-   normalized prompt-level conditional probability of each response across iterations
-- `entropy.png`
-   prompt entropy across iterations
-- `tv_from_prev.png`
-   prompt-level TV distance from the previous iteration
-- `kl_from_prev.png`
-   prompt-level KL divergence from the previous iteration
-- `top1_idx.png`
-   index of the highest-probability response over time
-- `exposure.png`
-   prompt exposure statistics over time
-- `flags.png`
-   convergence / oscillation / exposure-eligibility flags
-- `overview_panel.png`
-   a compact multi-panel summary figure for the selected prompt
+This allows you to identify:
 
-It also saves:
+- which responses are original
+- which responses are generated
+- which prompts were augmented
 
-- `response_mapping.csv` — mapping from response index to response text
-- `response_prob_trace.csv` — long-format probability trajectory table
-- `prompt_metrics_trace.csv` — per-iteration metrics for the selected prompt
-- `meta.json` — metadata of the selected prompt
+------
 
-The main object plotted in `conditional_prob.png` is the normalized prompt-level distribution
-$$
-\pi_t(y \mid x)
-$$
-so this figure directly shows whether a prompt collapses, stays diffuse, or oscillates over time.
+# What You Can Analyze From Saved Outputs
 
+Using the saved prompt-level and token-level files, you can recover:
 
+1. **Per-prompt entropy over steps**
+2. **Per-prompt TV over steps**
+3. **Per-response conditional probability over steps**
+   - both `prob_avg`
+   - and `prob_sum`
+4. **Token-level probability trajectories**
+5. **Prefix-sum vs prefix-average behavior**
+6. **EOS probability behavior**
+7. **Whether generated responses steal probability mass from original responses**
 
-### Plotting trajectories for all prompts
+So the current code supports analyzing both:
 
-To generate prompt-level trajectory plots for all eval prompts, use:
+- prompt-level response distribution dynamics
+- token-level response construction dynamics
 
-```bash id="j8b8fjlwm"
-python plot_all_prompt_trajectories.py \
-  --dump_dir /path/to/iter_dumps_alpha0.7_lambda0.8_tau8_seed0 \
-  --out_dir /path/to/all_prompt_plots
+------
+
+# Practical Notes
+
+- Token diagnostics can be large, because they are saved for **all eval prompts × all responses**
+- Augmented eval changes the candidate set for selected prompts, so some prompts may have more than 4 responses
+- The augmented candidate set is built **once at initialization** and remains fixed during training
+
+------
+
+# Project Structure
+
+```text
+scripts/
+  run_iterative_ipo_fast.py
+
+data/
+  processed/
+    pairs_train.jsonl
+    eval_prompt_responses_1000.jsonl
 ```
 
-Optional filters:
+------
 
-- `--max_prompts N` limits plotting to the first `N` prompts
-- `--prompt_contains "keyword"` only plots prompts whose text contains the keyword
-- `--only_oscillatory 1` only plots prompts whose final oscillatory flag is on
+# Summary
 
-This script reads the per-iteration files
+This implementation supports:
 
-- `iter_XXXX_prompt_metrics.csv`
-
-and creates one subdirectory per prompt inside `--out_dir`.
-
-Each prompt subdirectory contains:
-
-- `conditional_prob.png`
-   normalized prompt-level conditional probability of each response across iterations
-- `entropy.png`
-   prompt entropy across iterations
-- `tv_from_prev.png`
-   prompt-level TV distance from the previous iteration
-- `kl_from_prev.png`
-   prompt-level KL divergence from the previous iteration
-- `top1_idx.png`
-   top-1 response index across iterations
-- `overview_panel.png`
-   a compact multi-panel summary figure
-
-and also:
-
-- `response_mapping.csv`
-   mapping from response index to response text
-- `response_prob_trace.csv`
-   long-format table of response probabilities across iterations
-- `prompt_metrics_trace.csv`
-   full per-iteration metrics for the selected prompt
-- `meta.json`
-   metadata for the prompt
-
-In addition, the script writes
-
-- `selected_prompts_summary.csv`
-
-to the top-level `--out_dir`, summarizing the final state of every plotted prompt.
-
-This script is useful for:
-
-- visualizing collapse vs. non-collapse at the prompt level
-- inspecting whether individual prompts remain diffuse
-- identifying top-response switching patterns
-- diagnosing oscillatory prompts
-- checking how entropy and TV evolve over time for each prompt
+- IPO training with prompt-aware pair sampling
+- meaningful control via `alpha`, `beta`, `lambda_on`, `tau`, and `mix_eps`
+- augmented evaluation with additional generated responses
+- full token-level probability diagnostics
+- comparison of length-normalized and unnormalized response probabilities

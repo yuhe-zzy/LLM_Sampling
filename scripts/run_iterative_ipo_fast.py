@@ -279,6 +279,83 @@ def ipo_loss_from_delta(delta, beta):
     return (delta - target) ** 2
 
 
+@torch.no_grad()
+def evaluate_fixed_pair_loss(
+    model,
+    ref0,
+    tok,
+    val_ds,
+    batch_size,
+    max_length,
+    device,
+    alpha,
+    beta,
+):
+    if len(val_ds) == 0:
+        return {
+            'val_loss_mean': float('nan'),
+            'val_loss_std': float('nan'),
+            'val_loss_min': float('nan'),
+            'val_loss_max': float('nan'),
+            'val_num_pairs': 0,
+        }
+
+    loader = DataLoader(
+        val_ds,
+        batch_size=batch_size,
+        shuffle=False,
+        collate_fn=collate,
+        drop_last=False,
+    )
+
+    loss_vals = []
+
+    model.eval()
+    ref0.eval()
+
+    for batch in loader:
+        lp_c_pi = batch_avg_logprob(model, tok, batch['prompt'], batch['chosen'], max_length, device).to(device)
+        lp_r_pi = batch_avg_logprob(model, tok, batch['prompt'], batch['rejected'], max_length, device).to(device)
+
+        lp_c_ref0 = batch_avg_logprob(ref0, tok, batch['prompt'], batch['chosen'], max_length, device).to(device)
+        lp_r_ref0 = batch_avg_logprob(ref0, tok, batch['prompt'], batch['rejected'], max_length, device).to(device)
+
+        lp_c_ref_t = (1.0 - alpha) * lp_c_ref0 + alpha * lp_c_pi
+        lp_r_ref_t = (1.0 - alpha) * lp_r_ref0 + alpha * lp_r_pi
+
+        bc = build_batch(tok, batch['prompt'], batch['chosen'], max_length, device)
+        out_c = model(
+            input_ids=bc['input_ids'],
+            attention_mask=bc['attention_mask'],
+            labels=bc['labels'],
+        )
+        s_c, c_c = sum_logprob_and_count_from_outputs(out_c.logits, bc['labels'])
+        avg_c = s_c / c_c
+
+        br = build_batch(tok, batch['prompt'], batch['rejected'], max_length, device)
+        out_r = model(
+            input_ids=br['input_ids'],
+            attention_mask=br['attention_mask'],
+            labels=br['labels'],
+        )
+        s_r, c_r = sum_logprob_and_count_from_outputs(out_r.logits, br['labels'])
+        avg_r = s_r / c_r
+
+        delta = (avg_c - lp_c_ref_t) - (avg_r - lp_r_ref_t)
+        loss_vec = ipo_loss_from_delta(delta, beta)
+
+        loss_vals.extend(loss_vec.detach().float().cpu().numpy().tolist())
+
+    arr = np.asarray(loss_vals, dtype=np.float64)
+    return {
+        'val_loss_mean': float(np.mean(arr)),
+        'val_loss_std': float(np.std(arr)),
+        'val_loss_min': float(np.min(arr)),
+        'val_loss_max': float(np.max(arr)),
+        'val_num_pairs': int(len(arr)),
+    }
+
+
 def update_prompt_convergence_with_exposure(
     prompt_tvs,
     stable_counts,
@@ -842,6 +919,7 @@ def main():
     ap.add_argument('--model_path', type=str, required=True)
     ap.add_argument('--pairs_path', type=str, required=True)
     ap.add_argument('--eval_prompts_path', type=str, required=True)
+    ap.add_argument('--val_pairs_path', type=str, default='', help='Optional fixed validation pair set for diagnostic loss')
     ap.add_argument('--out_dir', type=str, default='checkpoints_fast')
     ap.add_argument('--log_dir', type=str, default='logs')
     ap.add_argument('--seed', type=int, default=0)
@@ -944,6 +1022,14 @@ def main():
     ds = PairDataset(read_jsonl(args.pairs_path))
     if len(ds) == 0:
         raise ValueError('No valid training pairs found in pairs_path.')
+
+    val_ds = None
+    if str(args.val_pairs_path).strip() != '':
+        val_ds = PairDataset(read_jsonl(args.val_pairs_path))
+        if len(val_ds) == 0:
+            raise ValueError('val_pairs_path was provided but no valid validation pairs were found.')
+        print(f'[INFO] loaded fixed validation set with {len(val_ds)} pairs from {args.val_pairs_path}')
+
     prompt_to_pair_indices = build_prompt_to_pair_indices(ds)
 
     prompts_uniq, responses_by_prompt, u_by_prompt, prompt_ids_raw = load_eval_prompt_responses(
@@ -1026,6 +1112,8 @@ def main():
         maybe_save_adapter(model, tok, os.path.join(adapters_dir, 'iter_init'))
 
     metrics = []
+    loss_step_rows = []
+    global_train_batch_step = 0
     prev_q_prompt_matrix_avg = None
     prev_q_prompt_matrix_sum = None
     prev_prompt_entropies_avg = None
@@ -1178,6 +1266,27 @@ def main():
             prompt_entropy_pct_change_mean = float(np.mean(pct))
             dsum = np.abs(prompt_entropies_sum - prev_prompt_entropies_sum)
             prompt_entropy_abs_delta_mean_sum = float(np.mean(dsum))
+
+        if val_ds is not None:
+            val_stats = evaluate_fixed_pair_loss(
+                model=model,
+                ref0=ref0,
+                tok=tok,
+                val_ds=val_ds,
+                batch_size=args.score_batch_size,
+                max_length=args.max_length,
+                device=device,
+                alpha=args.alpha,
+                beta=args.beta,
+            )
+        else:
+            val_stats = {
+                'val_loss_mean': float('nan'),
+                'val_loss_std': float('nan'),
+                'val_loss_min': float('nan'),
+                'val_loss_max': float('nan'),
+                'val_num_pairs': 0,
+            }
 
         target_prompt_count = (
             args.train_prompt_size
@@ -1351,6 +1460,14 @@ def main():
             f'recent_exp_mean={float(np.mean(prompt_recent_exposure)):.3f} | '
             f'train_pairs={len(train_ds_weighted)} train_prompts={target_prompt_count}'
         )
+        if val_ds is not None:
+            print(
+                f'[ValLoss@t={t}] mean={val_stats["val_loss_mean"]:.6g} '
+                f'std={val_stats["val_loss_std"]:.6g} '
+                f'min={val_stats["val_loss_min"]:.6g} '
+                f'max={val_stats["val_loss_max"]:.6g} '
+                f'n={val_stats["val_num_pairs"]}'
+            )
 
         metrics.append({
             'iter': t,
@@ -1363,6 +1480,17 @@ def main():
             'pairs_per_prompt': args.pairs_per_prompt,
             'target_train_prompt_count': target_prompt_count,
             'actual_train_pairs': len(train_ds_weighted),
+            'train_loss_mean': float('nan'),
+            'train_loss_std': float('nan'),
+            'train_loss_min': float('nan'),
+            'train_loss_max': float('nan'),
+            'train_loss_last': float('nan'),
+            'train_num_batches': 0,
+            'val_loss_mean': val_stats['val_loss_mean'],
+            'val_loss_std': val_stats['val_loss_std'],
+            'val_loss_min': val_stats['val_loss_min'],
+            'val_loss_max': val_stats['val_loss_max'],
+            'val_num_pairs': val_stats['val_num_pairs'],
             'prompt_entropy_mean': prompt_entropy_mean,
             'prompt_entropy_mean_avg': float(np.mean(prompt_entropies_avg)),
             'prompt_entropy_mean_sum': float(np.mean(prompt_entropies_sum)),
@@ -1404,6 +1532,8 @@ def main():
             if args.save_iter_adapters == 1:
                 maybe_save_adapter(model, tok, os.path.join(adapters_dir, f'iter_{t:04d}_postupdate'))
             break
+
+        iter_loss_values = []
 
         model.train()
         train_loader = DataLoader(
@@ -1447,6 +1577,17 @@ def main():
                 loss_vec = ipo_loss_from_delta(delta, args.beta)
                 wt = batch['pair_weight'].to(device)
                 loss = (wt * loss_vec).mean()
+                loss_value = float(loss.item())
+                iter_loss_values.append(loss_value)
+                loss_step_rows.append({
+                    'iter': int(t),
+                    'epoch': int(ep),
+                    'batch_in_epoch': int(step),
+                    'global_train_batch_step': int(global_train_batch_step),
+                    'loss': loss_value,
+                })
+                global_train_batch_step += 1
+
                 loss.backward()
                 step += 1
 
@@ -1463,6 +1604,37 @@ def main():
             opt.step()
             sched.step()
             opt.zero_grad(set_to_none=True)
+
+        if len(iter_loss_values) > 0:
+            train_loss_mean = float(np.mean(iter_loss_values))
+            train_loss_std = float(np.std(iter_loss_values))
+            train_loss_min = float(np.min(iter_loss_values))
+            train_loss_max = float(np.max(iter_loss_values))
+            train_loss_last = float(iter_loss_values[-1])
+            train_num_batches = int(len(iter_loss_values))
+        else:
+            train_loss_mean = float('nan')
+            train_loss_std = float('nan')
+            train_loss_min = float('nan')
+            train_loss_max = float('nan')
+            train_loss_last = float('nan')
+            train_num_batches = 0
+
+        metrics[-1].update({
+            'train_loss_mean': train_loss_mean,
+            'train_loss_std': train_loss_std,
+            'train_loss_min': train_loss_min,
+            'train_loss_max': train_loss_max,
+            'train_loss_last': train_loss_last,
+            'train_num_batches': train_num_batches,
+        })
+
+        print(
+            f'[TrainLoss@t={t}] mean={train_loss_mean:.6g} '
+            f'std={train_loss_std:.6g} min={train_loss_min:.6g} '
+            f'max={train_loss_max:.6g} last={train_loss_last:.6g} '
+            f'batches={train_num_batches}'
+        )
 
         if args.save_iter_adapters == 1:
             maybe_save_adapter(model, tok, os.path.join(adapters_dir, f'iter_{t:04d}_postupdate'))
@@ -1483,6 +1655,7 @@ def main():
         'mix_eps': args.mix_eps,
         'seed': args.seed,
         'train_sample_size': args.train_sample_size,
+        'val_pairs_path': args.val_pairs_path if str(args.val_pairs_path).strip() != '' else None,
         'pairs_per_prompt': args.pairs_per_prompt,
         'train_prompt_size': args.train_prompt_size,
         'num_prompts_eval': num_prompts_eval,
@@ -1541,7 +1714,14 @@ def main():
     )
     pd.DataFrame(metrics).to_csv(out_csv, index=False)
 
+    loss_csv = os.path.join(
+        args.log_dir,
+        f'train_loss_steps_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}.csv',
+    )
+    pd.DataFrame(loss_step_rows).to_csv(loss_csv, index=False)
+
     print('[DONE] wrote:', out_csv)
+    print('[DONE] wrote:', loss_csv)
     print('[DONE] wrote:', summary_json)
     print('[DONE] adapters in:', adapters_dir)
     if args.dump_each_iter == 1:

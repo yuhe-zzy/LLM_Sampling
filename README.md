@@ -1,17 +1,27 @@
-
-
 # LLM Sampling with IPO
 
 This repository implements **Identity Preference Optimization (IPO)** for fine-tuning large language models using pairwise preference data from the HelpSteer dataset.
 
-The current training script supports:
+The current codebase supports:
 
 - prompt-aware pair sampling
 - sampling mixture controlled by `lambda_on` and `mix_eps`
 - evaluation on fixed candidate responses
-- optional **augmented evaluation**, where additional model-generated responses are added to selected prompts
+- optional **augmented evaluation**, where extra model-generated responses are added to selected prompts
 - full **token-level probability diagnostics**
 - saving **pre-update / post-update adapters** for each iteration
+- **training-loss logging**
+- optional **fixed validation-pair loss logging** via `--val_pairs_path`
+
+The main training script is:
+
+```bash
+run_iterative_ipo_fast.py
+```
+
+This is the current recommended version when you want both:
+- the usual prompt-level dynamics outputs
+- a fixed validation loss curve for convergence diagnostics
 
 ---
 
@@ -31,9 +41,9 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-------
+---
 
-## Step 1: Download Model
+## Step 1: Download a Base Model
 
 Example:
 
@@ -41,11 +51,11 @@ Example:
 huggingface-cli download Qwen/Qwen2.5-1.5B --local-dir model/Qwen2.5-1.5B
 ```
 
-You may also use a different compatible causal language model if the architecture matches the LoRA target modules in the training script.
+You may also use another compatible causal language model, as long as its architecture matches the LoRA target modules used in the training script.
 
-------
+---
 
-## Step 2: Prepare Dataset
+## Step 2: Prepare the Data
 
 Download and export HelpSteer:
 
@@ -54,7 +64,7 @@ python download.py
 python export_helpsteer_jsonl.py
 ```
 
-Build pairwise training data and the evaluation set:
+Build pairwise training data and a base evaluation set:
 
 ```bash
 python build_pairs.py \
@@ -74,16 +84,108 @@ This produces:
 - `pairs_train.jsonl`: pairwise training data `(prompt, chosen, rejected, ...)`
 - `eval_prompt_responses_1000.jsonl`: evaluation set with 1000 prompts, each with 4 candidate responses from the dataset
 
-------
+---
 
-## Step 3: Run Training
+## Step 3: Prepare a Small Eval Set and a Fixed Validation Set
 
-Example command:
+For quick debugging or small-scale runs, it is useful to:
+- keep the full training pair file
+- use a **smaller eval prompt file**
+- use a **fixed validation pair set** for loss tracking
+
+### Small eval set
+
+Example: sample 100 eval prompts from an existing eval file
 
 ```bash
-python scripts/run_iterative_ipo_fast.py \
+python -c "import json,random; random.seed(0); p='data/processed/eval_prompt_responses_1000.jsonl'; rows=[json.loads(x) for x in open(p,'r',encoding='utf-8') if x.strip()]; rows=random.sample(rows,100); out='data/processed/eval_prompt_responses_100.jsonl'; open(out,'w',encoding='utf-8').write(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows)); print(f'wrote {len(rows)} rows to {out}')"
+```
+
+### Fixed validation pair set
+
+Example: sample 200 validation pairs from the training-pair file
+
+```bash
+python -c "import json,random; random.seed(0); p='data/processed/pairs_train.jsonl'; rows=[json.loads(x) for x in open(p,'r',encoding='utf-8') if x.strip()]; rows=random.sample(rows,200); out='data/processed/pairs_val_200.jsonl'; open(out,'w',encoding='utf-8').write(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows)); print(f'wrote {len(rows)} rows to {out}')"
+```
+
+### Optional helper script
+
+If you prefer one script that creates both files:
+
+```python
+import os
+import json
+import random
+import argparse
+
+def read_jsonl(path):
+    rows = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                rows.append(json.loads(line))
+    return rows
+
+def write_jsonl(path, rows):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+def sample_rows(rows, k, seed):
+    rng = random.Random(seed)
+    return rng.sample(rows, k)
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--eval_in", type=str, required=True)
+    ap.add_argument("--eval_out", type=str, required=True)
+    ap.add_argument("--eval_k", type=int, default=100)
+    ap.add_argument("--pairs_in", type=str, required=True)
+    ap.add_argument("--val_out", type=str, required=True)
+    ap.add_argument("--val_k", type=int, default=200)
+    ap.add_argument("--seed", type=int, default=0)
+    args = ap.parse_args()
+
+    eval_rows = read_jsonl(args.eval_in)
+    write_jsonl(args.eval_out, sample_rows(eval_rows, args.eval_k, args.seed))
+
+    pair_rows = read_jsonl(args.pairs_in)
+    write_jsonl(args.val_out, sample_rows(pair_rows, args.val_k, args.seed))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Step 4: Run Training
+
+## Recommended script
+
+Use:
+
+```bash
+python run_iterative_ipo_fast.py ...
+```
+
+This version logs:
+
+- prompt-level dynamics
+- training loss
+- fixed validation loss, if `--val_pairs_path` is provided
+
+---
+
+## Example: full run
+
+```bash
+python run_iterative_ipo_fast.py \
   --model_path /path/to/model \
   --pairs_path /path/to/pairs_train.jsonl \
+  --val_pairs_path /path/to/pairs_val_200.jsonl \
   --eval_prompts_path /path/to/eval_prompt_responses_1000.jsonl \
   --out_dir /path/to/checkpoints \
   --log_dir /path/to/logs \
@@ -133,218 +235,208 @@ python scripts/run_iterative_ipo_fast.py \
   --augment_eval_seed 123
 ```
 
-------
+---
 
-# What the Current Script Does
+## Example: small validation-focused run
+
+This is a good smoke test when you want to inspect training loss and validation loss quickly:
+
+```bash
+python run_iterative_ipo_fast.py \
+  --model_path /path/to/model \
+  --pairs_path /path/to/pairs_train.jsonl \
+  --val_pairs_path /path/to/pairs_val_200.jsonl \
+  --eval_prompts_path /path/to/eval_prompt_responses_100.jsonl \
+  --out_dir /path/to/checkpoints_test_small_val \
+  --log_dir /path/to/logs_test_small_val \
+  --seed 0 \
+  --auto_stop 0 \
+  --iters 5 \
+  --stop_min_iters 15 \
+  --stop_patience 5 \
+  --stop_tv_abs 0.005 \
+  --exposure_window 10 \
+  --min_total_exposure 8 \
+  --min_recent_exposure 4 \
+  --osc_detect 1 \
+  --osc_window 8 \
+  --osc_min_switches 4 \
+  --osc_tv_floor 0.01 \
+  --alpha 0.3 \
+  --lambda_on 0.3 \
+  --tau 1 \
+  --beta 10 \
+  --mix_eps 0.05 \
+  --w_clip_min 0.1 \
+  --w_clip_max 10.0 \
+  --train_sample_size 100 \
+  --pairs_per_prompt 2 \
+  --batch_size 1 \
+  --grad_accum 4 \
+  --lr 5e-5 \
+  --warmup_ratio 0.03 \
+  --score_batch_size 1 \
+  --epochs_per_iter 1 \
+  --max_length 1537 \
+  --dump_each_iter 1 \
+  --save_iter_adapters 0 \
+  --save_initial_adapter 0 \
+  --save_final_adapter 0 \
+  --augment_eval_num_prompts 0 \
+  --augment_eval_extra_responses 0 \
+  --dump_token_diagnostics 0
+```
+
+---
+
+## What the Current Script Does
 
 At a high level, each outer iteration does the following:
 
 1. Evaluate the current model on the eval candidate responses
 2. Compute prompt-level response distributions
 3. Compute entropy / TV / KL / top-1 response statistics
-4. Build a prompt-aware training subset using a sampling distribution controlled by:
+4. Optionally evaluate a **fixed validation loss** on `--val_pairs_path`
+5. Build a prompt-aware training subset using a sampling distribution controlled by:
    - `tau`
    - `lambda_on`
    - `mix_eps`
-5. Train for one or more epochs on that subset
-6. Save metrics, dumps, and adapters
+6. Train for one or more epochs on that subset
+7. Save metrics, dumps, and adapters
 
-If augmented evaluation is enabled, some prompts first receive extra model-generated responses before the iterative training loop begins.
+If augmented evaluation is enabled, selected prompts first receive additional model-generated responses before the iterative loop begins.
 
-------
+---
 
 # Parameter Reference
 
 ## 1. Data and Paths
 
 ### `--model_path`
-
 Path to the local base model directory.
 
 ### `--pairs_path`
-
 Path to the pairwise training data JSONL file.
 
-### `--eval_prompts_path`
+### `--val_pairs_path`
+Optional path to a **fixed validation pair set**.
 
-Path to the evaluation prompts file. This file contains the base evaluation candidate responses (typically 1000 prompts × 4 responses each).
+If provided, the script evaluates a fixed IPO loss on this set at every outer iteration and stores the resulting validation-loss statistics in the main metrics CSV.
+
+### `--eval_prompts_path`
+Path to the evaluation prompts file. This file contains the base evaluation candidate responses.
 
 ### `--out_dir`
-
 Directory where model adapters/checkpoints are saved.
 
 ### `--log_dir`
-
 Directory where logs, metrics CSVs, summaries, and per-iteration dump files are saved.
 
-------
+---
 
 ## 2. Randomness and Run Control
 
 ### `--seed`
-
 Global random seed for Python, NumPy, and PyTorch.
 
 ### `--auto_stop`
-
 - `1`: use the automatic stopping rule
 - `0`: ignore the stopping rule and run a fixed number of outer iterations
 
 ### `--max_iters`
-
 Maximum number of outer iterations when `auto_stop=1`.
 
 ### `--iters`
-
 Number of outer iterations when `auto_stop=0`.
 
-------
+---
 
 ## 3. Convergence and Exposure
 
-These parameters control when a prompt is considered “resolved” or converged.
-
 ### `--stop_min_iters`
-
 Minimum number of outer iterations before convergence checking starts.
 
 ### `--stop_patience`
-
 A prompt must satisfy the TV threshold for this many eligible rounds in a row before being marked converged.
 
 ### `--stop_tv_abs`
-
 Per-prompt TV threshold for convergence.
 
 ### `--exposure_window`
-
 Window size for recent exposure counting.
 
 ### `--min_total_exposure`
-
 Minimum cumulative exposure required before a prompt is eligible for convergence checking.
 
 ### `--min_recent_exposure`
-
 Minimum recent exposure required before a prompt is eligible for convergence checking.
 
-------
+---
 
 ## 4. Oscillation Detection
 
-These parameters control whether a prompt is flagged as oscillatory instead of converged.
-
 ### `--osc_detect`
-
 - `1`: enable oscillation detection
 - `0`: disable oscillation detection
 
 ### `--osc_window`
-
 How many recent iterations are used to check oscillation behavior.
 
 ### `--osc_min_switches`
-
 Minimum number of top-1 response switches in the window before a prompt can be flagged as oscillatory.
 
 ### `--osc_tv_floor`
-
 Minimum mean TV over the oscillation window required to classify switching as real oscillation instead of noise.
 
-------
+---
 
 ## 5. Core Dynamics Parameters
 
-These are the most important theoretical / experimental parameters.
-
 ### `--alpha`
-
 Reference-policy mixing coefficient used in the training objective.
 
-The script computes a mixed reference score:
-
-- part from the initial reference model
-- part from the current model
-
-Larger `alpha` means the current model contributes more to the reference term.
-
 ### `--beta`
-
-IPO loss scale parameter.
-
-The loss uses a target margin of:
+IPO loss scale parameter. The target margin is:
 
 ```text
 1 / (2 * beta)
 ```
 
-So `beta` changes the loss landscape and the desired training margin.
-
 ### `--tau`
-
-Softmax sharpness parameter.
-
-It is used in two places:
-
-1. **Training subset construction**
-   - sharper `tau` makes the induced pair distribution more concentrated
-2. **Evaluation response probabilities**
-   - larger `tau` makes prompt-level conditional distributions sharper
+Softmax sharpness parameter used in:
+1. training subset construction
+2. evaluation response probabilities
 
 ### `--lambda_on`
-
-Controls the strength of preference-based sampling during training subset construction.
-
-The script first builds an induced distribution from pair margins, then mixes it with uniform:
+Strength of preference-based sampling during training subset construction:
 
 ```text
 base_mix = (1 - lambda_on) * uniform + lambda_on * induced
 ```
 
-Interpretation:
-
-- `lambda_on = 0`: pure uniform
-- `lambda_on = 1`: pure induced distribution
-- intermediate values interpolate between them
-
 ### `--mix_eps`
-
-Anti-extreme smoothing parameter.
-
-After `base_mix` is built, the script further smooths it:
+Additional smoothing parameter:
 
 ```text
 mixed = (1 - mix_eps) * base_mix + mix_eps * uniform
 ```
 
 Interpretation:
+- `lambda_on` controls how strongly the induced distribution matters
+- `mix_eps` controls extra anti-collapse smoothing
 
-- prevents the distribution from becoming too concentrated
-- helps avoid near-degenerate sampling such as almost one-hot behavior
-
-### Important distinction: `lambda_on` vs `mix_eps`
-
-- `lambda_on` controls **how strongly the induced distribution matters**
-- `mix_eps` controls **how much extra uniform smoothing is injected**
-
-These two parameters are not redundant.
-
-------
+---
 
 ## 6. Training Subset Construction
 
 ### `--train_sample_size`
-
 Approximate total number of training pairs used in each outer iteration.
 
 ### `--pairs_per_prompt`
-
-How many pairs are sampled per selected training prompt in each outer iteration.
+How many pairs are sampled per selected prompt in each outer iteration.
 
 ### `--train_prompt_size`
-
-If set to a positive value, this directly specifies how many training prompts are sampled each iteration.
-
+If positive, directly specifies how many training prompts are sampled.
 If `0`, the script infers it from:
 
 ```text
@@ -352,177 +444,121 @@ ceil(train_sample_size / pairs_per_prompt)
 ```
 
 ### `--w_clip_min`
-
-Lower clipping bound for pair weights after normalization.
+Lower clipping bound for normalized pair weights.
 
 ### `--w_clip_max`
+Upper clipping bound for normalized pair weights.
 
-Upper clipping bound for pair weights after normalization.
-
-------
+---
 
 ## 7. Optimization Hyperparameters
 
 ### `--batch_size`
-
 Mini-batch size per forward/backward pass.
 
 ### `--grad_accum`
-
 Gradient accumulation steps.
 
-Effective batch size is approximately:
+Effective batch size is roughly:
 
 ```text
 batch_size × grad_accum
 ```
 
 ### `--lr`
-
 Learning rate.
 
 ### `--warmup_ratio`
-
 Warmup ratio for the linear learning-rate schedule.
 
 ### `--score_batch_size`
-
-Batch size used for scoring responses / pairs during evaluation and subset construction.
-
-If GPU memory is tight, reduce this.
+Batch size used for scoring pairs/responses and for fixed validation evaluation.
 
 ### `--epochs_per_iter`
-
 Number of training epochs over the sampled subset in each outer iteration.
 
 ### `--max_length`
-
 Maximum sequence length used for training/eval scoring.
 
-If prompt + response exceed this length, the sequence is truncated from the left.
-
-------
+---
 
 ## 8. LoRA Parameters
 
 ### `--lora_r`
-
 LoRA rank.
 
 ### `--lora_alpha`
-
 LoRA scaling factor.
 
 ### `--lora_dropout`
-
 LoRA dropout.
 
-------
+---
 
 ## 9. Iteration Dumps and Checkpoint Saving
 
 ### `--dump_each_iter`
-
 - `1`: save per-iteration dumps
 - `0`: do not save them
 
-Per-iteration dumps include prompt-level metrics and optional token-level diagnostics.
-
 ### `--save_iter_adapters`
-
 - `1`: save adapters at each iteration
 - `0`: do not save them
 
 ### `--save_initial_adapter`
-
 - `1`: save the initial adapter state before training
 - `0`: do not save it
 
 ### `--save_final_adapter`
-
 - `1`: save the final adapter after training
 - `0`: do not save it
 
-------
+---
 
 ## 10. Token-Level Diagnostics
 
-These parameters control token-probability saving.
-
 ### `--dump_token_diagnostics`
-
 - `1`: save token-level diagnostics
 - `0`: disable them
 
-When enabled, the script saves token-level conditional probabilities for **all eval prompts and all responses**.
-
 ### `--token_diag_max_length`
-
 Maximum length used specifically for token-level diagnostics.
 
-This can be larger than `--max_length` to reduce truncation in token-level analysis.
-
-------
+---
 
 ## 11. Augmented Evaluation Parameters
 
-These parameters control the “4 original responses + generated responses” evaluation augmentation.
-
 ### `--augment_eval_num_prompts`
-
-How many eval prompts should be augmented with extra generated responses.
-
-If `0`, no augmentation is performed.
-
-Example:
-
-- `100` means 100 prompts are expanded beyond the original 4 responses.
+How many eval prompts are augmented with generated responses.
 
 ### `--augment_eval_extra_responses`
-
 How many generated responses to add per selected prompt.
 
-Example:
-
-- `2` means 4 original + 2 generated = 6 responses for augmented prompts
-
 ### `--augment_eval_num_generate_candidates`
-
-How many candidate generations to sample initially for each selected prompt before filtering and selecting the final added responses.
-
-Larger values improve coverage but cost more time.
+How many generation candidates are sampled before selecting the final added responses.
 
 ### `--augment_eval_generate_max_new_tokens`
-
 Maximum number of new tokens for each generated candidate response.
 
 ### `--augment_eval_do_sample`
-
-- `1`: use stochastic sampling for generation
-- `0`: use deterministic generation
+- `1`: stochastic generation
+- `0`: deterministic generation
 
 ### `--augment_eval_temperature`
-
-Temperature used in generation when sampling is enabled.
+Sampling temperature.
 
 ### `--augment_eval_top_p`
-
-Top-p parameter used in generation when sampling is enabled.
+Top-p used in generation.
 
 ### `--augment_eval_select_by`
-
-Selection rule used to choose the final generated responses from the candidate pool.
-
-Choices:
-
-- `avg`: select by average logprob
-- `sum`: select by sum logprob
+Selection rule for generated candidates:
+- `avg`
+- `sum`
 
 ### `--augment_eval_seed`
+Random seed used for augmentation selection/generation randomness.
 
-Random seed used specifically for selecting augmented prompts and generation-related randomness.
-
-------
+---
 
 # What Gets Saved
 
@@ -538,17 +574,48 @@ is written to `--log_dir`.
 
 It stores one row per outer iteration, including:
 
-- mean entropy
-- mean/max TV
-- mean KL
-- convergence counts
-- oscillation counts
+- prompt entropy / TV / KL summaries
+- convergence and oscillation counts
 - exposure statistics
-- avg-based and sum-based aggregate quantities
+- **training loss summaries**
+  - `train_loss_mean`
+  - `train_loss_std`
+  - `train_loss_min`
+  - `train_loss_max`
+  - `train_loss_last`
+  - `train_num_batches`
+- **fixed validation loss summaries**, if `--val_pairs_path` is provided
+  - `val_loss_mean`
+  - `val_loss_std`
+  - `val_loss_min`
+  - `val_loss_max`
+  - `val_num_pairs`
 
-------
+---
 
-## 2. Run Summary JSON
+## 2. Batch-Level Training Loss CSV
+
+A file like:
+
+```text
+train_loss_steps_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}.csv
+```
+
+is written to `--log_dir`.
+
+It stores step-level training-loss records, including:
+
+- `iter`
+- `epoch`
+- `batch_in_epoch`
+- `global_train_batch_step`
+- `loss`
+
+This file is useful for plotting raw and smoothed training-loss curves.
+
+---
+
+## 3. Run Summary JSON
 
 A file like:
 
@@ -559,16 +626,15 @@ convergence_summary_alpha{alpha}_lambda{lambda}_tau{tau}_seed{seed}.json
 is written to `--log_dir`.
 
 It stores:
-
 - run configuration
-- stopping rule settings
-- sampling rule description
+- stopping-rule settings
+- sampling-rule description
 - artifact locations
 - final resolved / converged / oscillatory counts
 
-------
+---
 
-## 3. Per-Iteration Prompt Metrics
+## 4. Per-Iteration Prompt Metrics
 
 If `--dump_each_iter 1`, the script writes:
 
@@ -588,16 +654,9 @@ Each row is one prompt and includes:
 - `response_source_j`
 - exposure / convergence / oscillation fields
 
-This file supports plotting:
+---
 
-- per-prompt entropy over steps
-- per-prompt TV over steps
-- per-response conditional probability over steps
-- comparison between length-normalized and unnormalized response probabilities
-
-------
-
-## 4. Per-Iteration Token Diagnostics
+## 5. Per-Iteration Token Diagnostics
 
 If `--dump_token_diagnostics 1`, the script writes:
 
@@ -617,15 +676,9 @@ Each row is one `(prompt, response)` pair and includes:
 - `eos_prob`
 - `truncated_by_max_length`
 
-This file supports:
+---
 
-- token-level probability plots
-- EOS analysis
-- response normalization analysis (`sum` vs `avg`)
-
-------
-
-## 5. Per-Iteration NPZ Dumps
+## 6. Per-Iteration NPZ Dumps
 
 If `--dump_each_iter 1`, the script also writes:
 
@@ -646,9 +699,9 @@ This stores array versions of the main prompt-level quantities, including:
 - `prompt_top1_avg`
 - `prompt_top1_sum`
 
-------
+---
 
-## 6. Adapter Checkpoints
+## 7. Adapter Checkpoints
 
 If saving is enabled, adapters are written under a directory like:
 
@@ -673,48 +726,71 @@ iter_XXXX_preupdate
 
 That is the matching adapter for the saved metrics at iteration `t`.
 
-------
+---
 
-## 7. Augmented Eval Metadata
+## 8. Augmented Eval Metadata
 
-When augmented evaluation is enabled, the script also saves metadata describing the final evaluation candidate set.
+When augmented evaluation is enabled, the script also saves metadata describing the final evaluation candidate set, including which responses are original vs generated.
 
-This allows you to identify:
+---
 
-- which responses are original
-- which responses are generated
-- which prompts were augmented
+# Plotting and Analysis
 
-------
+## A. Prompt-level and token-level trajectory plots
 
-# What You Can Analyze From Saved Outputs
+Use `plot_dynamics_diagnostics.py` to generate:
+- per-prompt conditional probability trajectories
+- entropy / TV / KL / top-1 plots
+- token-level probability panels
+- prompt subsets with or without augmented responses
 
-Using the saved prompt-level and token-level files, you can recover:
+Typical usage:
 
-1. **Per-prompt entropy over steps**
-2. **Per-prompt TV over steps**
-3. **Per-response conditional probability over steps**
-   - both `prob_avg`
-   - and `prob_sum`
-4. **Token-level probability trajectories**
-5. **Prefix-sum vs prefix-average behavior**
-6. **EOS probability behavior**
-7. **Whether generated responses steal probability mass from original responses**
+```bash
+python plot_dynamics_diagnostics.py \
+  --dump_dir /path/to/iter_dumps_alpha0.3_lambda0.3_tau1.0_seed0 \
+  --out_dir /path/to/diagnostic_plots \
+  --n_regular 4 \
+  --n_augmented 4 \
+  --seed 0 \
+  --max_token_iters 3
+```
 
-So the current code supports analyzing both:
+## B. Training loss plots from metrics
 
-- prompt-level response distribution dynamics
-- token-level response construction dynamics
+If your metrics CSV already contains:
+- `train_loss_mean`
+- `train_loss_std`
+- `train_loss_min`
+- `train_loss_max`
+- `train_loss_last`
 
-------
+you can use a simple plotting script to visualize:
+- mean training loss by outer iteration
+- mean ± std
+- mean with min-max envelope
+
+## C. Validation loss plots
+
+If you run with `--val_pairs_path`, the metrics CSV also contains:
+- `val_loss_mean`
+- `val_loss_std`
+- `val_loss_min`
+- `val_loss_max`
+
+These are the recommended quantities to inspect if you want a fixed-support loss curve that is easier to interpret than dynamic training loss.
+
+---
 
 # Practical Notes
 
-- Token diagnostics can be large, because they are saved for **all eval prompts × all responses**
+- Token diagnostics can be large, because they are saved for all eval prompts × all responses
 - Augmented eval changes the candidate set for selected prompts, so some prompts may have more than 4 responses
-- The augmented candidate set is built **once at initialization** and remains fixed during training
+- The augmented candidate set is built once at initialization and remains fixed during training
+- `train_loss_mean` is measured on the dynamically sampled and dynamically weighted training support for that iteration
+- `val_loss_mean` is usually easier to interpret as a convergence diagnostic, because it is computed on a fixed validation pair set
 
-------
+---
 
 # Project Structure
 
@@ -725,10 +801,12 @@ scripts/
 data/
   processed/
     pairs_train.jsonl
+    pairs_val_200.jsonl
     eval_prompt_responses_1000.jsonl
+    eval_prompt_responses_100.jsonl
 ```
 
-------
+---
 
 # Summary
 
@@ -739,3 +817,5 @@ This implementation supports:
 - augmented evaluation with additional generated responses
 - full token-level probability diagnostics
 - comparison of length-normalized and unnormalized response probabilities
+- batch-level training-loss logging
+- fixed validation-loss logging on a held-out pair set

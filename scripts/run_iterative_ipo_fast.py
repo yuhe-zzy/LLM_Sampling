@@ -356,6 +356,100 @@ def evaluate_fixed_pair_loss(
     }
 
 
+@torch.no_grad()
+def evaluate_fixed_pair_loss_static_ref0(
+    model,
+    ref0,
+    tok,
+    val_ds,
+    batch_size,
+    max_length,
+    device,
+    beta,
+):
+    if len(val_ds) == 0:
+        return {
+            'val_loss_static_mean': float('nan'),
+            'val_loss_static_std': float('nan'),
+            'val_loss_static_min': float('nan'),
+            'val_loss_static_max': float('nan'),
+            'val_static_num_pairs': 0,
+        }
+
+    loader = DataLoader(
+        val_ds,
+        batch_size=batch_size,
+        shuffle=False,
+        collate_fn=collate,
+        drop_last=False,
+    )
+
+    loss_vals = []
+
+    model.eval()
+    ref0.eval()
+
+    for batch in loader:
+        lp_c_ref0 = batch_avg_logprob(ref0, tok, batch['prompt'], batch['chosen'], max_length, device).to(device)
+        lp_r_ref0 = batch_avg_logprob(ref0, tok, batch['prompt'], batch['rejected'], max_length, device).to(device)
+
+        bc = build_batch(tok, batch['prompt'], batch['chosen'], max_length, device)
+        out_c = model(
+            input_ids=bc['input_ids'],
+            attention_mask=bc['attention_mask'],
+            labels=bc['labels'],
+        )
+        s_c, c_c = sum_logprob_and_count_from_outputs(out_c.logits, bc['labels'])
+        avg_c = s_c / c_c
+
+        br = build_batch(tok, batch['prompt'], batch['rejected'], max_length, device)
+        out_r = model(
+            input_ids=br['input_ids'],
+            attention_mask=br['attention_mask'],
+            labels=br['labels'],
+        )
+        s_r, c_r = sum_logprob_and_count_from_outputs(out_r.logits, br['labels'])
+        avg_r = s_r / c_r
+
+        delta_static = (avg_c - lp_c_ref0) - (avg_r - lp_r_ref0)
+        loss_vec = ipo_loss_from_delta(delta_static, beta)
+        loss_vals.extend(loss_vec.detach().float().cpu().numpy().tolist())
+
+    arr = np.asarray(loss_vals, dtype=np.float64)
+    return {
+        'val_loss_static_mean': float(np.mean(arr)),
+        'val_loss_static_std': float(np.std(arr)),
+        'val_loss_static_min': float(np.min(arr)),
+        'val_loss_static_max': float(np.max(arr)),
+        'val_static_num_pairs': int(len(arr)),
+    }
+
+
+def append_inner_val_static_trace(
+    rows,
+    outer_iter,
+    phase,
+    global_train_batch_step,
+    optimizer_step_in_iter,
+    epoch,
+    batch_in_epoch,
+    stats,
+):
+    rows.append({
+        'iter': int(outer_iter),
+        'phase': str(phase),
+        'global_train_batch_step': int(global_train_batch_step),
+        'optimizer_step_in_iter': int(optimizer_step_in_iter),
+        'epoch': int(epoch),
+        'batch_in_epoch': int(batch_in_epoch),
+        'val_loss_static_mean': float(stats['val_loss_static_mean']),
+        'val_loss_static_std': float(stats['val_loss_static_std']),
+        'val_loss_static_min': float(stats['val_loss_static_min']),
+        'val_loss_static_max': float(stats['val_loss_static_max']),
+        'val_static_num_pairs': int(stats['val_static_num_pairs']),
+    })
+
+
 def update_prompt_convergence_with_exposure(
     prompt_tvs,
     stable_counts,
@@ -984,6 +1078,9 @@ def main():
 
     ap.add_argument('--dump_token_diagnostics', type=int, default=1)
     ap.add_argument('--token_diag_max_length', type=int, default=2048)
+
+    ap.add_argument('--track_inner_val_static', type=int, default=0)
+    ap.add_argument('--inner_val_static_every', type=int, default=1)
     args = ap.parse_args()
 
     args.alpha = float(max(0.0, min(1.0, args.alpha)))
@@ -1113,6 +1210,7 @@ def main():
 
     metrics = []
     loss_step_rows = []
+    inner_val_static_rows = []
     global_train_batch_step = 0
     prev_q_prompt_matrix_avg = None
     prev_q_prompt_matrix_sum = None
@@ -1287,6 +1385,38 @@ def main():
                 'val_loss_max': float('nan'),
                 'val_num_pairs': 0,
             }
+
+        if val_ds is not None:
+            val_static_stats = evaluate_fixed_pair_loss_static_ref0(
+                model=model,
+                ref0=ref0,
+                tok=tok,
+                val_ds=val_ds,
+                batch_size=args.score_batch_size,
+                max_length=args.max_length,
+                device=device,
+                beta=args.beta,
+            )
+        else:
+            val_static_stats = {
+                'val_loss_static_mean': float('nan'),
+                'val_loss_static_std': float('nan'),
+                'val_loss_static_min': float('nan'),
+                'val_loss_static_max': float('nan'),
+                'val_static_num_pairs': 0,
+            }
+
+        if args.track_inner_val_static == 1 and val_ds is not None:
+            append_inner_val_static_trace(
+                inner_val_static_rows,
+                outer_iter=t,
+                phase='pre_update',
+                global_train_batch_step=global_train_batch_step,
+                optimizer_step_in_iter=0,
+                epoch=-1,
+                batch_in_epoch=-1,
+                stats=val_static_stats,
+            )
 
         target_prompt_count = (
             args.train_prompt_size
@@ -1468,6 +1598,13 @@ def main():
                 f'max={val_stats["val_loss_max"]:.6g} '
                 f'n={val_stats["val_num_pairs"]}'
             )
+            print(
+                f'[ValLossStatic@t={t}] mean={val_static_stats["val_loss_static_mean"]:.6g} '
+                f'std={val_static_stats["val_loss_static_std"]:.6g} '
+                f'min={val_static_stats["val_loss_static_min"]:.6g} '
+                f'max={val_static_stats["val_loss_static_max"]:.6g} '
+                f'n={val_static_stats["val_static_num_pairs"]}'
+            )
 
         metrics.append({
             'iter': t,
@@ -1491,6 +1628,11 @@ def main():
             'val_loss_min': val_stats['val_loss_min'],
             'val_loss_max': val_stats['val_loss_max'],
             'val_num_pairs': val_stats['val_num_pairs'],
+            'val_loss_static_mean': val_static_stats['val_loss_static_mean'],
+            'val_loss_static_std': val_static_stats['val_loss_static_std'],
+            'val_loss_static_min': val_static_stats['val_loss_static_min'],
+            'val_loss_static_max': val_static_stats['val_loss_static_max'],
+            'val_static_num_pairs': val_static_stats['val_static_num_pairs'],
             'prompt_entropy_mean': prompt_entropy_mean,
             'prompt_entropy_mean_avg': float(np.mean(prompt_entropies_avg)),
             'prompt_entropy_mean_sum': float(np.mean(prompt_entropies_sum)),
@@ -1551,6 +1693,7 @@ def main():
 
         opt.zero_grad(set_to_none=True)
         step = 0
+        optimizer_step_in_iter = 0
         for ep in range(args.epochs_per_iter):
             pbar = tqdm(train_loader, desc=f'train@promptaware iter {t} ep {ep}', ncols=100)
             for batch in pbar:
@@ -1596,6 +1739,34 @@ def main():
                     opt.step()
                     sched.step()
                     opt.zero_grad(set_to_none=True)
+                    optimizer_step_in_iter += 1
+
+                    if (
+                        args.track_inner_val_static == 1
+                        and val_ds is not None
+                        and optimizer_step_in_iter % max(1, int(args.inner_val_static_every)) == 0
+                    ):
+                        cur_static = evaluate_fixed_pair_loss_static_ref0(
+                            model=model,
+                            ref0=ref0,
+                            tok=tok,
+                            val_ds=val_ds,
+                            batch_size=args.score_batch_size,
+                            max_length=args.max_length,
+                            device=device,
+                            beta=args.beta,
+                        )
+                        append_inner_val_static_trace(
+                            inner_val_static_rows,
+                            outer_iter=t,
+                            phase='post_optimizer_step',
+                            global_train_batch_step=global_train_batch_step,
+                            optimizer_step_in_iter=optimizer_step_in_iter,
+                            epoch=ep,
+                            batch_in_epoch=step,
+                            stats=cur_static,
+                        )
+                        model.train()
 
                 pbar.set_postfix({'loss': float(loss.item())})
 
@@ -1604,6 +1775,57 @@ def main():
             opt.step()
             sched.step()
             opt.zero_grad(set_to_none=True)
+            optimizer_step_in_iter += 1
+
+            if (
+                args.track_inner_val_static == 1
+                and val_ds is not None
+                and optimizer_step_in_iter % max(1, int(args.inner_val_static_every)) == 0
+            ):
+                cur_static = evaluate_fixed_pair_loss_static_ref0(
+                    model=model,
+                    ref0=ref0,
+                    tok=tok,
+                    val_ds=val_ds,
+                    batch_size=args.score_batch_size,
+                    max_length=args.max_length,
+                    device=device,
+                    beta=args.beta,
+                )
+                append_inner_val_static_trace(
+                    inner_val_static_rows,
+                    outer_iter=t,
+                    phase='post_optimizer_step_remainder',
+                    global_train_batch_step=global_train_batch_step,
+                    optimizer_step_in_iter=optimizer_step_in_iter,
+                    epoch=args.epochs_per_iter - 1,
+                    batch_in_epoch=step,
+                    stats=cur_static,
+                )
+                model.train()
+
+        if args.track_inner_val_static == 1 and val_ds is not None:
+            final_static = evaluate_fixed_pair_loss_static_ref0(
+                model=model,
+                ref0=ref0,
+                tok=tok,
+                val_ds=val_ds,
+                batch_size=args.score_batch_size,
+                max_length=args.max_length,
+                device=device,
+                beta=args.beta,
+            )
+            append_inner_val_static_trace(
+                inner_val_static_rows,
+                outer_iter=t,
+                phase='post_update_end',
+                global_train_batch_step=global_train_batch_step,
+                optimizer_step_in_iter=optimizer_step_in_iter,
+                epoch=args.epochs_per_iter - 1,
+                batch_in_epoch=step,
+                stats=final_static,
+            )
+            model.train()
 
         if len(iter_loss_values) > 0:
             train_loss_mean = float(np.mean(iter_loss_values))
@@ -1656,6 +1878,12 @@ def main():
         'seed': args.seed,
         'train_sample_size': args.train_sample_size,
         'val_pairs_path': args.val_pairs_path if str(args.val_pairs_path).strip() != '' else None,
+        'validation_metrics': {
+            'dynamic_metric': 'mixed-reference IPO loss using current alpha',
+            'static_metric': 'frozen-ref0 IPO loss',
+            'inner_static_trace_enabled': bool(args.track_inner_val_static),
+            'inner_static_trace_every_optimizer_steps': int(args.inner_val_static_every),
+        },
         'pairs_per_prompt': args.pairs_per_prompt,
         'train_prompt_size': args.train_prompt_size,
         'num_prompts_eval': num_prompts_eval,
@@ -1720,8 +1948,15 @@ def main():
     )
     pd.DataFrame(loss_step_rows).to_csv(loss_csv, index=False)
 
+    inner_val_static_csv = os.path.join(
+        args.log_dir,
+        f'inner_val_static_trace_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}.csv',
+    )
+    pd.DataFrame(inner_val_static_rows).to_csv(inner_val_static_csv, index=False)
+
     print('[DONE] wrote:', out_csv)
     print('[DONE] wrote:', loss_csv)
+    print('[DONE] wrote:', inner_val_static_csv)
     print('[DONE] wrote:', summary_json)
     print('[DONE] adapters in:', adapters_dir)
     if args.dump_each_iter == 1:

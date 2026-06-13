@@ -132,24 +132,26 @@ Reference: [nvidia/HelpSteer](https://huggingface.co/datasets/nvidia/HelpSteer).
 
 ## 4. Download the Base Model
 
-The current Slurm script defaults to Qwen2.5-3B:
+The current Slurm script defaults to Qwen2.5-1.5B, matching the original
+`run_grid.sh` scale:
 
 ```bash
 mkdir -p model
-huggingface-cli download Qwen/Qwen2.5-3B \
-  --local-dir model/Qwen2.5-3B \
-  --local-dir-use-symlinks False
-```
-
-To reproduce smaller 1.5B runs:
-
-```bash
 huggingface-cli download Qwen/Qwen2.5-1.5B \
   --local-dir model/Qwen2.5-1.5B \
   --local-dir-use-symlinks False
 ```
 
-Reference: [Qwen/Qwen2.5-3B](https://huggingface.co/Qwen/Qwen2.5-3B).
+To reproduce larger 3B runs:
+
+```bash
+huggingface-cli download Qwen/Qwen2.5-3B \
+  --local-dir model/Qwen2.5-3B \
+  --local-dir-use-symlinks False
+```
+
+References: [Qwen/Qwen2.5-1.5B](https://huggingface.co/Qwen/Qwen2.5-1.5B),
+[Qwen/Qwen2.5-3B](https://huggingface.co/Qwen/Qwen2.5-3B).
 
 ## 5. Download or Cache the Helpfulness Oracle
 
@@ -307,13 +309,13 @@ Optional token-length audit:
 
 ```bash
 python scripts/analyze_lengths.py \
-  --model_path model/Qwen2.5-3B \
+  --model_path model/Qwen2.5-1.5B \
   --input data/processed/pairs_train.jsonl \
   --mode pair \
   --sample 5000
 
 python scripts/analyze_lengths.py \
-  --model_path model/Qwen2.5-3B \
+  --model_path model/Qwen2.5-1.5B \
   --input data/processed/pairs_train_cyclic.jsonl \
   --mode pair \
   --sample 5000
@@ -363,12 +365,21 @@ The Qwen LoRA training model is loaded on `cuda:0`. The 70B reward oracle uses:
 --oracle_device_map auto
 ```
 
-so the reward model can be sharded across the visible H100 GPUs.
+so the reward model can be sharded across the visible H100 GPUs. In other
+words, the script is multi-GPU for the 70B oracle through model parallelism.
+The Qwen LoRA update itself is not DDP/FSDP data-parallel.
 
-To use a different base model:
+To use Qwen2.5-3B or another base model:
 
 ```bash
-MODEL_PATH=/nas/longleaf/home/fanyao/ipo/model/Qwen2.5-1.5B \
+MODEL_PATH=/nas/longleaf/home/fanyao/ipo/model/Qwen2.5-3B \
+  sbatch run_oracle_experiment.sh ipo transitive 0.8 0.8 10
+```
+
+Useful environment overrides:
+
+```bash
+ITERS=50 ORACLE_EVAL_EVERY=5 ORACLE_NUM_PROMPTS=100 \
   sbatch run_oracle_experiment.sh ipo transitive 0.8 0.8 10
 ```
 
@@ -379,7 +390,7 @@ pipeline without the 70B oracle:
 
 ```bash
 python scripts/run_ipo_oracle.py \
-  --model_path /nas/longleaf/home/fanyao/ipo/model/Qwen2.5-3B \
+  --model_path /nas/longleaf/home/fanyao/ipo/model/Qwen2.5-1.5B \
   --pairs_path data/processed/pairs_train.jsonl \
   --eval_prompts_path data/processed/eval_prompt_responses_1000.jsonl \
   --preference_case transitive \
@@ -685,7 +696,7 @@ fixed entropy support.
 The default Slurm script uses:
 
 ```bash
-/nas/longleaf/home/fanyao/ipo/model/Qwen2.5-3B
+/nas/longleaf/home/fanyao/ipo/model/Qwen2.5-1.5B
 ```
 
 Override it with:

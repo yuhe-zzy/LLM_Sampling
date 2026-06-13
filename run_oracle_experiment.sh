@@ -32,18 +32,32 @@ else
 fi
 
 source ~/h100env/bin/activate
-cd /nas/longleaf/home/fanyao/ipo
+
+PROJECT_ROOT="${PROJECT_ROOT:-/nas/longleaf/home/fanyao/ipo}"
+cd "${PROJECT_ROOT}"
 
 WORKROOT=/work/users/f/a/fanyao/ipo
-MODEL_PATH="${MODEL_PATH:-/nas/longleaf/home/fanyao/ipo/model/Qwen2.5-3B}"
+WORKROOT="${WORKROOT_OVERRIDE:-${WORKROOT}}"
+MODEL_PATH="${MODEL_PATH:-${PROJECT_ROOT}/model/Qwen2.5-1.5B}"
+ORACLE_MODEL_PATH="${ORACLE_MODEL_PATH:-nvidia/Llama-3.1-Nemotron-70B-Reward-HF}"
+ITERS="${ITERS:-100}"
+TRAIN_SAMPLE_SIZE="${TRAIN_SAMPLE_SIZE:-1000}"
+EVAL_NUM_PROMPTS="${EVAL_NUM_PROMPTS:-500}"
+ORACLE_NUM_PROMPTS="${ORACLE_NUM_PROMPTS:-500}"
+ORACLE_NUM_RESPONSES="${ORACLE_NUM_RESPONSES:-4}"
+ORACLE_EVAL_EVERY="${ORACLE_EVAL_EVERY:-1}"
+MAX_LENGTH="${MAX_LENGTH:-1537}"
+SCORE_BATCH_SIZE="${SCORE_BATCH_SIZE:-4}"
+ORACLE_BATCH_SIZE="${ORACLE_BATCH_SIZE:-4}"
+ORACLE_GENERATION_BATCH_SIZE="${ORACLE_GENERATION_BATCH_SIZE:-8}"
 OUT_TAG="${LOSS}_${CASE}_a${ALPHA}_l${LAMBDA}_b${BETA}"
 
 if [ "${CASE}" = "transitive" ]; then
-  PAIRS_PATH=/nas/longleaf/home/fanyao/ipo/data/processed/pairs_train.jsonl
-  EVAL_PATH=/nas/longleaf/home/fanyao/ipo/data/processed/eval_prompt_responses_1000.jsonl
+  PAIRS_PATH="${TRANSITIVE_PAIRS_PATH:-${PROJECT_ROOT}/data/processed/pairs_train.jsonl}"
+  EVAL_PATH="${TRANSITIVE_EVAL_PATH:-${PROJECT_ROOT}/data/processed/eval_prompt_responses_1000.jsonl}"
 elif [ "${CASE}" = "cyclic" ]; then
-  PAIRS_PATH=/nas/longleaf/home/fanyao/ipo/data/processed/pairs_train_cyclic.jsonl
-  EVAL_PATH=/nas/longleaf/home/fanyao/ipo/data/processed/eval_prompt_responses_cyclic_1000.jsonl
+  PAIRS_PATH="${CYCLIC_PAIRS_PATH:-${PROJECT_ROOT}/data/processed/pairs_train_cyclic.jsonl}"
+  EVAL_PATH="${CYCLIC_EVAL_PATH:-${PROJECT_ROOT}/data/processed/eval_prompt_responses_cyclic_1000.jsonl}"
 else
   echo "CASE must be transitive or cyclic, got: ${CASE}"
   exit 1
@@ -62,9 +76,12 @@ date
 hostname
 echo "loss=${LOSS}, case=${CASE}, alpha=${ALPHA}, lambda_on=${LAMBDA}, beta=${BETA}"
 echo "model=${MODEL_PATH}"
+echo "oracle_model=${ORACLE_MODEL_PATH}"
 echo "pairs=${PAIRS_PATH}"
 echo "eval=${EVAL_PATH}"
 echo "oracle_cache=${ORACLE_BASELINE_CACHE}"
+echo "iters=${ITERS}, train_sample_size=${TRAIN_SAMPLE_SIZE}, eval_prompts=${EVAL_NUM_PROMPTS}"
+echo "oracle_prompts=${ORACLE_NUM_PROMPTS}, oracle_M=${ORACLE_NUM_RESPONSES}, oracle_eval_every=${ORACLE_EVAL_EVERY}"
 nvidia-smi
 
 python "${RUN_SCRIPT}" \
@@ -76,7 +93,7 @@ python "${RUN_SCRIPT}" \
   --log_dir "${WORKROOT}/logs_oracle/${OUT_TAG}" \
   --seed 0 \
   --auto_stop 0 \
-  --iters 100 \
+  --iters "${ITERS}" \
   --alpha "${ALPHA}" \
   --lambda_on "${LAMBDA}" \
   --tau 1 \
@@ -84,20 +101,20 @@ python "${RUN_SCRIPT}" \
   --mix_eps 0.05 \
   --w_clip_min 0.1 \
   --w_clip_max 10.0 \
-  --train_sample_size 1000 \
+  --train_sample_size "${TRAIN_SAMPLE_SIZE}" \
   --pairs_per_prompt 2 \
   --batch_size 1 \
   --grad_accum 4 \
   --lr 1e-5 \
   --warmup_ratio 0.03 \
-  --score_batch_size 4 \
+  --score_batch_size "${SCORE_BATCH_SIZE}" \
   --epochs_per_iter 1 \
-  --max_length 1537 \
+  --max_length "${MAX_LENGTH}" \
   --dump_each_iter 1 \
   --save_iter_adapters 0 \
   --save_initial_adapter 0 \
   --save_final_adapter 0 \
-  --generated_eval_num_prompts 500 \
+  --generated_eval_num_prompts "${EVAL_NUM_PROMPTS}" \
   --generated_eval_num_candidates 10 \
   --generated_eval_keep_top_k 5 \
   --generated_eval_max_new_tokens 256 \
@@ -107,15 +124,15 @@ python "${RUN_SCRIPT}" \
   --generated_eval_seed 123 \
   --cycle_burn_in 10 \
   --enable_oracle 1 \
-  --oracle_model_path nvidia/Llama-3.1-Nemotron-70B-Reward-HF \
+  --oracle_model_path "${ORACLE_MODEL_PATH}" \
   --oracle_torch_dtype bfloat16 \
   --oracle_device_map auto \
   --oracle_max_length 4096 \
-  --oracle_batch_size 4 \
-  --oracle_eval_every 1 \
-  --oracle_num_prompts 500 \
-  --oracle_num_responses 4 \
-  --oracle_generation_batch_size 8 \
+  --oracle_batch_size "${ORACLE_BATCH_SIZE}" \
+  --oracle_eval_every "${ORACLE_EVAL_EVERY}" \
+  --oracle_num_prompts "${ORACLE_NUM_PROMPTS}" \
+  --oracle_num_responses "${ORACLE_NUM_RESPONSES}" \
+  --oracle_generation_batch_size "${ORACLE_GENERATION_BATCH_SIZE}" \
   --oracle_max_new_tokens 256 \
   --oracle_do_sample 1 \
   --oracle_temperature 0.8 \
@@ -126,4 +143,3 @@ python "${RUN_SCRIPT}" \
 
 echo "===== JOB END ====="
 date
-

@@ -47,6 +47,9 @@ ipo/
     Qwen2.5-3B/
     Qwen2.5-1.5B/
   scripts/
+    download.py
+    export_helpsteer_jsonl.py
+    analyze_lengths.py
     build_pairs.py
     build_cyclic_pairs.py
     run_preference_oracle_core.py
@@ -105,33 +108,25 @@ and five human-scored attributes:
 helpfulness, correctness, coherence, complexity, verbosity
 ```
 
-Download and export the train split to JSONL:
+Download and export the train split to JSONL with the included helper scripts:
 
 ```bash
 cd /nas/longleaf/home/fanyao/ipo
 mkdir -p data/raw data/hf_cache
 
-python - <<'PY'
-import json
-import os
-from datasets import load_dataset
+python scripts/download.py \
+  --dataset nvidia/HelpSteer \
+  --cache_dir data/hf_cache \
+  --save_dir data/raw/HelpSteer
 
-cache_dir = "data/hf_cache"
-save_dir = "data/raw/HelpSteer"
-out_jsonl = "data/raw/helpsteer.jsonl"
-
-ds = load_dataset("nvidia/HelpSteer", cache_dir=cache_dir)
-ds.save_to_disk(save_dir)
-
-os.makedirs(os.path.dirname(out_jsonl), exist_ok=True)
-with open(out_jsonl, "w", encoding="utf-8") as f:
-    for ex in ds["train"]:
-        f.write(json.dumps(ex, ensure_ascii=False) + "\n")
-
-print(ds)
-print("wrote", out_jsonl, "rows=", len(ds["train"]))
-PY
+python scripts/export_helpsteer_jsonl.py \
+  --input_dir data/raw/HelpSteer \
+  --split train \
+  --output data/raw/helpsteer.jsonl
 ```
+
+The scripts are parameterized, so coauthors can use different cache/output
+directories without editing Python source files.
 
 Reference: [nvidia/HelpSteer](https://huggingface.co/datasets/nvidia/HelpSteer).
 
@@ -307,6 +302,25 @@ PY
 
 For the main K=4/full-tournament construction, pair counts should usually be
 six pairs per prompt.
+
+Optional token-length audit:
+
+```bash
+python scripts/analyze_lengths.py \
+  --model_path model/Qwen2.5-3B \
+  --input data/processed/pairs_train.jsonl \
+  --mode pair \
+  --sample 5000
+
+python scripts/analyze_lengths.py \
+  --model_path model/Qwen2.5-3B \
+  --input data/processed/pairs_train_cyclic.jsonl \
+  --mode pair \
+  --sample 5000
+```
+
+Use this to confirm that `--max_length 1537` covers the intended fraction of
+prompt-response examples.
 
 ## 9. Main Experiment Script
 
@@ -691,4 +705,3 @@ MODEL_PATH=/path/to/model sbatch run_oracle_experiment.sh ipo transitive 0.8 0.8
 - Transitive dynamics and cyclic dynamics use different fixed supports by
   design.
 - Inner validation loss is not part of the new main experiment.
-

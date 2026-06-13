@@ -1,0 +1,1499 @@
+from __future__ import annotations
+import argparse
+import json
+import math
+import os
+import random
+from collections import deque
+from dataclasses import dataclass
+
+import numpy as np
+import pandas as pd
+import torch
+from torch.utils.data import Dataset, DataLoader
+from tqdm import tqdm
+from transformers import AutoTokenizer, AutoModelForCausalLM, get_linear_schedule_with_warmup
+from peft import LoraConfig, get_peft_model
+
+
+def ensure_dir(p: str):
+    os.makedirs(p, exist_ok=True)
+
+
+def read_jsonl(path: str):
+    rows = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                rows.append(json.loads(line))
+    return rows
+
+
+def write_json(path: str, obj):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
+
+
+def write_jsonl(path: str, rows):
+    with open(path, "w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+
+def entropy_from_probs(p: np.ndarray) -> float:
+    p = np.clip(p, 1e-18, 1.0)
+    return float(-(p * np.log(p)).sum())
+
+
+def total_variation(p: np.ndarray, q: np.ndarray) -> float:
+    return float(0.5 * np.abs(p - q).sum())
+
+
+def safe_softmax_np(z: np.ndarray) -> np.ndarray:
+    z = np.asarray(z, dtype=np.float64)
+    z = z - np.max(z)
+    p = np.exp(z)
+    s = np.sum(p)
+    if (not np.isfinite(s)) or s <= 0:
+        return np.ones_like(z) / len(z)
+    return p / s
+
+
+def parse_step_set(spec: str) -> set[int]:
+    """Parse a comma-separated list of nonnegative optimizer-step indices."""
+    out: set[int] = set()
+    for x in str(spec).split(','):
+        x = x.strip()
+        if not x:
+            continue
+        v = int(x)
+        if v < 0:
+            raise ValueError("inner validation step indices must be nonnegative")
+        out.add(v)
+    return out
+
+
+@dataclass
+class PairEx:
+    prompt: str
+    chosen: str
+    rejected: str
+
+
+class PairDataset(Dataset):
+    def __init__(self, rows):
+        self.data = []
+        for r in rows:
+            p, c, rj = r.get("prompt"), r.get("chosen"), r.get("rejected")
+            if isinstance(p, str) and isinstance(c, str) and isinstance(rj, str):
+                self.data.append(PairEx(p, c, rj))
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        ex = self.data[idx]
+        return {"idx": idx, "prompt": ex.prompt, "chosen": ex.chosen, "rejected": ex.rejected}
+
+
+class WeightedPairDataset(Dataset):
+    def __init__(self, base_ds, indices, weights, prompt_ids):
+        self.base_ds = base_ds
+        self.indices = indices
+        self.weights = weights
+        self.prompt_ids = prompt_ids
+
+    def __len__(self):
+        return len(self.indices)
+
+    def __getitem__(self, j):
+        idx = self.indices[j]
+        ex = self.base_ds[idx]
+        return {
+            "idx": idx,
+            "prompt": ex["prompt"],
+            "chosen": ex["chosen"],
+            "rejected": ex["rejected"],
+            "pair_weight": float(self.weights[j]),
+            "train_prompt_local_id": int(self.prompt_ids[j]),
+        }
+
+
+def collate(batch):
+    out = {
+        "idx": [b["idx"] for b in batch],
+        "prompt": [b["prompt"] for b in batch],
+        "chosen": [b["chosen"] for b in batch],
+        "rejected": [b["rejected"] for b in batch],
+    }
+    if "pair_weight" in batch[0]:
+        out["pair_weight"] = torch.tensor([b["pair_weight"] for b in batch], dtype=torch.float32)
+    if "train_prompt_local_id" in batch[0]:
+        out["train_prompt_local_id"] = torch.tensor(
+            [b["train_prompt_local_id"] for b in batch], dtype=torch.int64
+        )
+    return out
+
+
+def load_prompt_pool(path):
+    rows = read_jsonl(path)
+    prompts, prompt_ids = [], []
+    for i, r in enumerate(rows):
+        p = r.get("prompt")
+        if isinstance(p, str):
+            prompts.append(p)
+            prompt_ids.append(int(r.get("prompt_id", i)))
+    if len(prompts) == 0:
+        raise ValueError("No prompts found in eval_prompts_path.")
+    return prompts, prompt_ids
+
+
+def build_batch(tok, prompts, responses, max_length, device):
+    ids_list, attn_list, labels_list = [], [], []
+    eos = tok.eos_token_id
+    for p, y in zip(prompts, responses):
+        p_ids = tok(p, add_special_tokens=False).input_ids
+        y_ids = tok(y, add_special_tokens=False).input_ids
+        if eos is not None:
+            y_ids = y_ids + [eos]
+        ids = p_ids + y_ids
+        if max_length and max_length > 0 and len(ids) > max_length:
+            ids = ids[-max_length:]
+        resp_len = min(len(y_ids), len(ids))
+        prompt_len = len(ids) - resp_len
+        labels = [-100] * prompt_len + ids[prompt_len:]
+        attn = [1] * len(ids)
+        ids_list.append(torch.tensor(ids, dtype=torch.long))
+        labels_list.append(torch.tensor(labels, dtype=torch.long))
+        attn_list.append(torch.tensor(attn, dtype=torch.long))
+
+    pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
+    input_ids = torch.nn.utils.rnn.pad_sequence(ids_list, batch_first=True, padding_value=pad_id)
+    labels = torch.nn.utils.rnn.pad_sequence(labels_list, batch_first=True, padding_value=-100)
+    attn = torch.nn.utils.rnn.pad_sequence(attn_list, batch_first=True, padding_value=0)
+    return {
+        "input_ids": input_ids.to(device),
+        "attention_mask": attn.to(device),
+        "labels": labels.to(device),
+    }
+
+
+def sum_logprob_and_count_from_outputs(logits, labels):
+    labels_s = labels[:, 1:].contiguous()
+    logits_s = logits[:, :-1, :].contiguous()
+    mask = labels_s != -100
+    logp = torch.log_softmax(logits_s, dim=-1)
+    tgt = labels_s.clamp(min=0)
+    gathered = logp.gather(-1, tgt.unsqueeze(-1)).squeeze(-1) * mask
+    s = gathered.sum(dim=1)
+    c = mask.sum(dim=1).clamp(min=1)
+    return s, c
+
+
+@torch.no_grad()
+def batch_sum_and_avg_logprob(model, tok, prompts, responses, max_length, device):
+    batch = build_batch(tok, prompts, responses, max_length, device)
+    out = model(
+        input_ids=batch["input_ids"],
+        attention_mask=batch["attention_mask"],
+        labels=batch["labels"],
+    )
+    s, c = sum_logprob_and_count_from_outputs(out.logits, batch["labels"])
+    avg = s / c
+    return s.float().cpu(), avg.float().cpu(), c.int().cpu()
+
+
+@torch.no_grad()
+def batch_avg_logprob(model, tok, prompts, responses, max_length, device):
+    _, avg, _ = batch_sum_and_avg_logprob(model, tok, prompts, responses, max_length, device)
+    return avg
+
+
+def dpo_loss_from_delta(delta, beta):
+    beta = max(beta, 1e-6)
+    return -torch.nn.functional.logsigmoid(beta * delta)
+
+
+@torch.no_grad()
+def evaluate_fixed_pair_loss(model, ref0, tok, val_ds, batch_size, max_length, device, alpha, beta):
+    if len(val_ds) == 0:
+        return {
+            "val_loss_mean": float("nan"),
+            "val_loss_std": float("nan"),
+            "val_loss_min": float("nan"),
+            "val_loss_max": float("nan"),
+            "val_num_pairs": 0,
+        }
+    loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, collate_fn=collate, drop_last=False)
+    loss_vals = []
+    model.eval()
+    ref0.eval()
+    for batch in loader:
+        lp_c_pi = batch_avg_logprob(model, tok, batch["prompt"], batch["chosen"], max_length, device).to(device)
+        lp_r_pi = batch_avg_logprob(model, tok, batch["prompt"], batch["rejected"], max_length, device).to(device)
+        lp_c_ref0 = batch_avg_logprob(ref0, tok, batch["prompt"], batch["chosen"], max_length, device).to(device)
+        lp_r_ref0 = batch_avg_logprob(ref0, tok, batch["prompt"], batch["rejected"], max_length, device).to(device)
+        lp_c_ref_t = (1.0 - alpha) * lp_c_ref0 + alpha * lp_c_pi
+        lp_r_ref_t = (1.0 - alpha) * lp_r_ref0 + alpha * lp_r_pi
+
+        bc = build_batch(tok, batch["prompt"], batch["chosen"], max_length, device)
+        out_c = model(input_ids=bc["input_ids"], attention_mask=bc["attention_mask"], labels=bc["labels"])
+        s_c, c_c = sum_logprob_and_count_from_outputs(out_c.logits, bc["labels"])
+        avg_c = s_c / c_c
+
+        br = build_batch(tok, batch["prompt"], batch["rejected"], max_length, device)
+        out_r = model(input_ids=br["input_ids"], attention_mask=br["attention_mask"], labels=br["labels"])
+        s_r, c_r = sum_logprob_and_count_from_outputs(out_r.logits, br["labels"])
+        avg_r = s_r / c_r
+
+        delta = (avg_c - lp_c_ref_t) - (avg_r - lp_r_ref_t)
+        loss_vec = dpo_loss_from_delta(delta, beta)
+        loss_vals.extend(loss_vec.detach().float().cpu().numpy().tolist())
+
+    arr = np.asarray(loss_vals, dtype=np.float64)
+    return {
+        "val_loss_mean": float(np.mean(arr)),
+        "val_loss_std": float(np.std(arr)),
+        "val_loss_min": float(np.min(arr)),
+        "val_loss_max": float(np.max(arr)),
+        "val_num_pairs": int(len(arr)),
+    }
+
+
+@torch.no_grad()
+def evaluate_fixed_pair_loss_static_ref0(model, ref0, tok, val_ds, batch_size, max_length, device, beta):
+    if len(val_ds) == 0:
+        return {
+            "val_loss_static_mean": float("nan"),
+            "val_loss_static_std": float("nan"),
+            "val_loss_static_min": float("nan"),
+            "val_loss_static_max": float("nan"),
+            "val_static_num_pairs": 0,
+        }
+    loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False, collate_fn=collate, drop_last=False)
+    loss_vals = []
+    model.eval()
+    ref0.eval()
+    for batch in loader:
+        lp_c_ref0 = batch_avg_logprob(ref0, tok, batch["prompt"], batch["chosen"], max_length, device).to(device)
+        lp_r_ref0 = batch_avg_logprob(ref0, tok, batch["prompt"], batch["rejected"], max_length, device).to(device)
+
+        bc = build_batch(tok, batch["prompt"], batch["chosen"], max_length, device)
+        out_c = model(input_ids=bc["input_ids"], attention_mask=bc["attention_mask"], labels=bc["labels"])
+        s_c, c_c = sum_logprob_and_count_from_outputs(out_c.logits, bc["labels"])
+        avg_c = s_c / c_c
+
+        br = build_batch(tok, batch["prompt"], batch["rejected"], max_length, device)
+        out_r = model(input_ids=br["input_ids"], attention_mask=br["attention_mask"], labels=br["labels"])
+        s_r, c_r = sum_logprob_and_count_from_outputs(out_r.logits, br["labels"])
+        avg_r = s_r / c_r
+
+        delta_static = (avg_c - lp_c_ref0) - (avg_r - lp_r_ref0)
+        loss_vec = dpo_loss_from_delta(delta_static, beta)
+        loss_vals.extend(loss_vec.detach().float().cpu().numpy().tolist())
+
+    arr = np.asarray(loss_vals, dtype=np.float64)
+    return {
+        "val_loss_static_mean": float(np.mean(arr)),
+        "val_loss_static_std": float(np.std(arr)),
+        "val_loss_static_min": float(np.min(arr)),
+        "val_loss_static_max": float(np.max(arr)),
+        "val_static_num_pairs": int(len(arr)),
+    }
+
+
+def build_prompt_to_pair_indices(ds):
+    mp = {}
+    for idx, ex in enumerate(ds.data):
+        mp.setdefault(ex.prompt, []).append(idx)
+    return mp
+
+
+def score_pair_indices_avg_margin(model, tok, ds, pair_indices, max_length, device, score_batch_size):
+    margins = np.zeros(len(pair_indices), dtype=np.float64)
+    bs = max(1, int(score_batch_size))
+    for s in range(0, len(pair_indices), bs):
+        e = min(len(pair_indices), s + bs)
+        chunk = pair_indices[s:e]
+        prompts = [ds.data[i].prompt for i in chunk]
+        chosens = [ds.data[i].chosen for i in chunk]
+        rejects = [ds.data[i].rejected for i in chunk]
+        lp_c = batch_avg_logprob(model, tok, prompts, chosens, max_length, device).numpy()
+        lp_r = batch_avg_logprob(model, tok, prompts, rejects, max_length, device).numpy()
+        margins[s:e] = (lp_c - lp_r).astype(np.float64)
+    return margins
+
+
+def build_prompt_aware_training_subset(
+    model,
+    tok,
+    ds,
+    prompt_to_pair_indices,
+    rng,
+    train_prompt_size,
+    pairs_per_prompt,
+    tau,
+    lambda_on,
+    mix_eps,
+    max_length,
+    device,
+    score_batch_size,
+    weight_floor,
+    weight_cap,
+):
+    prompts_all = list(prompt_to_pair_indices.keys())
+    num_prompts = min(train_prompt_size, len(prompts_all))
+    sampled_prompts = rng.sample(prompts_all, k=num_prompts)
+
+    chosen_indices, chosen_weights, chosen_prompt_ids = [], [], []
+    diag_rows, sampled_pairs_per_prompt = [], {}
+
+    for local_pid, prompt in enumerate(sampled_prompts):
+        pair_indices = prompt_to_pair_indices[prompt]
+        margins = score_pair_indices_avg_margin(model, tok, ds, pair_indices, max_length, device, score_batch_size)
+        induced = safe_softmax_np(float(tau) * margins)
+        uniform = np.ones_like(induced) / len(induced)
+        base_mix = (1.0 - float(lambda_on)) * uniform + float(lambda_on) * induced
+        mixed = (1.0 - float(mix_eps)) * base_mix + float(mix_eps) * uniform
+        mixed = mixed / np.sum(mixed)
+
+        take = min(max(1, pairs_per_prompt), len(pair_indices))
+        sampled_local = rng.choices(range(len(pair_indices)), k=take)
+        sampled_pairs_per_prompt[prompt] = take
+
+        for j in sampled_local:
+            chosen_indices.append(pair_indices[j])
+            chosen_weights.append(float(mixed[j]))
+            chosen_prompt_ids.append(local_pid)
+
+        for j, gi, mg, ug, bg, mixg in zip(range(len(pair_indices)), pair_indices, margins, induced, base_mix, mixed):
+            diag_rows.append({
+                "train_prompt_local_id": local_pid,
+                "prompt": prompt,
+                "pair_global_idx": gi,
+                "margin_avglogprob": float(mg),
+                "induced_pair_prob": float(ug),
+                "base_mix_prob": float(bg),
+                "mixed_pair_prob": float(mixg),
+                "num_pairs_for_prompt": int(len(pair_indices)),
+                "pairs_sampled_for_prompt": int(take),
+                "tau": float(tau),
+                "lambda_on": float(lambda_on),
+                "mix_eps": float(mix_eps),
+                "effective_lambda_to_induced": float((1.0 - float(mix_eps)) * float(lambda_on)),
+            })
+
+    w = np.array(chosen_weights, dtype=np.float64)
+    w = w / max(w.mean(), 1e-12)
+    w = np.clip(w, weight_floor, weight_cap)
+
+    return (
+        WeightedPairDataset(ds, chosen_indices, w.tolist(), chosen_prompt_ids),
+        pd.DataFrame(diag_rows),
+        sampled_prompts,
+        sampled_pairs_per_prompt,
+    )
+
+
+def normalize_text_key(s: str) -> str:
+    return " ".join(str(s).strip().split()).lower()
+
+
+@torch.no_grad()
+def generate_candidate_responses(model, tok, prompt, num_return_sequences, max_new_tokens, do_sample, temperature, top_p, device):
+    enc = tok(prompt, return_tensors="pt", add_special_tokens=False)
+    input_ids = enc["input_ids"].to(device)
+    attention_mask = enc["attention_mask"].to(device)
+
+    gen_kwargs = {
+        "input_ids": input_ids,
+        "attention_mask": attention_mask,
+        "max_new_tokens": int(max_new_tokens),
+        "num_return_sequences": int(num_return_sequences),
+        "pad_token_id": tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id,
+        "eos_token_id": tok.eos_token_id,
+    }
+    if do_sample:
+        gen_kwargs.update({
+            "do_sample": True,
+            "temperature": float(max(temperature, 1e-5)),
+            "top_p": float(top_p),
+        })
+    else:
+        beams = max(1, int(num_return_sequences))
+        gen_kwargs.update({
+            "do_sample": False,
+            "num_beams": beams,
+            "early_stopping": True,
+        })
+
+    outputs = model.generate(**gen_kwargs)
+    prompt_len = input_ids.shape[1]
+    texts = []
+    for seq in outputs:
+        gen_ids = seq[prompt_len:]
+        txt = tok.decode(gen_ids, skip_special_tokens=True).strip()
+        texts.append(txt)
+    return texts
+
+
+@torch.no_grad()
+def build_generated_eval_set(
+    model,
+    tok,
+    prompt_pool,
+    prompt_id_pool,
+    num_eval_prompts,
+    num_candidates_per_prompt,
+    keep_top_k,
+    max_new_tokens,
+    do_sample,
+    temperature,
+    top_p,
+    score_batch_size,
+    score_max_length,
+    seed,
+    device,
+):
+    rng = random.Random(seed)
+    num_eval_prompts = min(int(num_eval_prompts), len(prompt_pool))
+    chosen_indices = sorted(rng.sample(range(len(prompt_pool)), k=num_eval_prompts))
+    prompts = [prompt_pool[i] for i in chosen_indices]
+    prompt_ids = [prompt_id_pool[i] for i in chosen_indices]
+
+    responses_by_prompt = []
+    response_sources_by_prompt = []
+    generation_rows = []
+
+    model.eval()
+
+    for pid, prompt in enumerate(tqdm(prompts, desc="build_generated_eval_set", ncols=100)):
+        raw_texts = generate_candidate_responses(
+            model=model,
+            tok=tok,
+            prompt=prompt,
+            num_return_sequences=max(1, int(num_candidates_per_prompt)),
+            max_new_tokens=int(max_new_tokens),
+            do_sample=bool(do_sample),
+            temperature=float(temperature),
+            top_p=float(top_p),
+            device=device,
+        )
+
+        uniq_texts = []
+        seen = set()
+        for txt in raw_texts:
+            key = normalize_text_key(txt)
+            if key == "" or key in seen:
+                continue
+            seen.add(key)
+            uniq_texts.append(txt)
+
+        if len(uniq_texts) == 0:
+            uniq_texts = [""]
+
+        sum_scores = []
+        avg_scores = []
+        bs = max(1, int(score_batch_size))
+        for s in range(0, len(uniq_texts), bs):
+            e = min(len(uniq_texts), s + bs)
+            ss, aa, _ = batch_sum_and_avg_logprob(
+                model, tok, [prompt] * (e - s), uniq_texts[s:e], score_max_length, device
+            )
+            sum_scores.extend(ss.numpy().tolist())
+            avg_scores.extend(aa.numpy().tolist())
+
+        cand_rows = []
+        for txt, ss, aa in zip(uniq_texts, sum_scores, avg_scores):
+            cand_rows.append({
+                "text": txt,
+                "sum_logprob": float(ss),
+                "avg_logprob": float(aa),
+            })
+
+        cand_rows = sorted(cand_rows, key=lambda r: r["avg_logprob"], reverse=True)
+        kept = cand_rows[: min(int(keep_top_k), len(cand_rows))]
+
+        responses_by_prompt.append([x["text"] for x in kept])
+        response_sources_by_prompt.append(["generated_init"] * len(kept))
+
+        for rank, row in enumerate(kept, start=1):
+            generation_rows.append({
+                "prompt_index": int(pid),
+                "prompt_id": int(prompt_ids[pid]),
+                "prompt": prompt,
+                "response_rank": int(rank),
+                "response_text": row["text"],
+                "avg_logprob": float(row["avg_logprob"]),
+                "sum_logprob": float(row["sum_logprob"]),
+                "num_unique_candidates": int(len(cand_rows)),
+                "num_requested_candidates": int(num_candidates_per_prompt),
+                "num_kept": int(len(kept)),
+            })
+
+    return prompts, prompt_ids, responses_by_prompt, response_sources_by_prompt, generation_rows
+
+
+def update_prompt_convergence_with_exposure(
+    prompt_tvs,
+    stable_counts,
+    converged_mask,
+    cum_exposure_counts,
+    recent_exposure_counts,
+    current_iter,
+    min_iters,
+    patience,
+    tv_abs_tol,
+    min_total_exposure,
+    min_recent_exposure,
+):
+    if prompt_tvs is None or current_iter < min_iters:
+        return stable_counts, converged_mask
+
+    active = ~converged_mask
+    eligible = (
+        active
+        & (cum_exposure_counts >= min_total_exposure)
+        & (recent_exposure_counts >= min_recent_exposure)
+    )
+
+    stable_counts[eligible] = np.where(
+        prompt_tvs[eligible] <= tv_abs_tol,
+        stable_counts[eligible] + 1,
+        0,
+    )
+    stable_counts[active & (~eligible)] = 0
+
+    newly = active & (stable_counts >= max(1, int(patience)))
+    converged_mask[newly] = True
+    return stable_counts, converged_mask
+
+
+def detect_oscillation_from_history(
+    top1_history,
+    tv_history,
+    converged_mask,
+    min_iters,
+    current_iter,
+    osc_window,
+    osc_min_switches,
+    osc_tv_floor,
+):
+    P = top1_history.shape[1]
+    out = np.zeros(P, dtype=bool)
+    if current_iter < max(min_iters, osc_window):
+        return out
+
+    window = min(osc_window, top1_history.shape[0])
+    top_hist = top1_history[-window:, :]
+    tv_hist = tv_history[-window:, :]
+
+    for p in range(P):
+        if converged_mask[p]:
+            continue
+        top_seq = top_hist[:, p]
+        if np.any(top_seq < 0):
+            continue
+        switches = int(np.sum(top_seq[1:] != top_seq[:-1]))
+        mean_tv = float(np.nanmean(tv_hist[:, p]))
+        if switches >= osc_min_switches and mean_tv >= osc_tv_floor:
+            out[p] = True
+    return out
+
+
+def maybe_save_adapter(model, tok, out_dir):
+    ensure_dir(out_dir)
+    model.save_pretrained(out_dir)
+    tok.save_pretrained(out_dir)
+
+
+def dump_prompt_metrics(
+    dump_dir,
+    t,
+    prompt_ids_raw,
+    prompts_uniq,
+    responses_by_prompt,
+    response_sources_by_prompt,
+    group_offsets,
+    max_k,
+    flat_avg_scores,
+    q_prompt_matrix_avg,
+    prompt_entropies_avg,
+    prompt_tvs_avg,
+    prompt_top1_avg,
+    prompt_converged_mask,
+    prompt_oscillatory_mask,
+    prompt_resolved_mask,
+    prompt_stable_counts,
+    prompt_first_converged_iter,
+    prompt_first_oscillatory_iter,
+    prompt_cum_exposure,
+    prompt_recent_exposure,
+    iter_exposure_vec,
+    min_total_exposure,
+    min_recent_exposure,
+):
+    rows_csv = []
+    num_prompts_eval = len(prompts_uniq)
+    for pid in range(num_prompts_eval):
+        s0, e0 = group_offsets[pid]
+        k = e0 - s0
+        row = {
+            "iter": int(t),
+            "snapshot_stage": "pre_update",
+            "prompt_id": prompt_ids_raw[pid],
+            "prompt_index": pid,
+            "prompt": prompts_uniq[pid],
+            "K": len(responses_by_prompt[pid]),
+            "entropy_avg": prompt_entropies_avg[pid],
+            "tv_delta_avg": prompt_tvs_avg[pid],
+            "top1_idx_avg": int(prompt_top1_avg[pid]),
+            "converged": int(prompt_converged_mask[pid]),
+            "oscillatory": int(prompt_oscillatory_mask[pid]),
+            "resolved": int(prompt_resolved_mask[pid]),
+            "stable_count": int(prompt_stable_counts[pid]),
+            "first_converged_iter": int(prompt_first_converged_iter[pid]),
+            "first_oscillatory_iter": int(prompt_first_oscillatory_iter[pid]),
+            "exposure_iter": int(iter_exposure_vec[pid]),
+            "cum_exposure": int(prompt_cum_exposure[pid]),
+            "recent_exposure": int(prompt_recent_exposure[pid]),
+            "exposure_eligible": int(
+                (prompt_cum_exposure[pid] >= min_total_exposure)
+                and (prompt_recent_exposure[pid] >= min_recent_exposure)
+            ),
+        }
+        for j in range(max_k):
+            if j < k:
+                flat_idx = s0 + j
+                row[f"avg_logprob_{j}"] = float(flat_avg_scores[flat_idx])
+                row[f"prob_avg_{j}"] = float(q_prompt_matrix_avg[pid, j])
+                row[f"prob_{j}"] = float(q_prompt_matrix_avg[pid, j])
+                row[f"response_{j}"] = responses_by_prompt[pid][j]
+                row[f"response_source_{j}"] = response_sources_by_prompt[pid][j]
+            else:
+                row[f"avg_logprob_{j}"] = np.nan
+                row[f"prob_avg_{j}"] = np.nan
+                row[f"prob_{j}"] = np.nan
+                row[f"response_{j}"] = ""
+                row[f"response_source_{j}"] = ""
+        rows_csv.append(row)
+
+    pd.DataFrame(rows_csv).to_csv(
+        os.path.join(dump_dir, f"iter_{t:04d}_prompt_metrics.csv"),
+        index=False,
+    )
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--model_path", type=str, required=True)
+    ap.add_argument("--pairs_path", type=str, required=True)
+    ap.add_argument("--eval_prompts_path", type=str, required=True)
+    ap.add_argument("--val_pairs_path", type=str, default="")
+    ap.add_argument("--out_dir", type=str, default="checkpoints_dpo")
+    ap.add_argument("--log_dir", type=str, default="logs")
+    ap.add_argument("--seed", type=int, default=0)
+
+    ap.add_argument("--iters", type=int, default=10)
+    ap.add_argument("--auto_stop", type=int, default=1)
+    ap.add_argument("--max_iters", type=int, default=50)
+
+    ap.add_argument("--stop_min_iters", type=int, default=15)
+    ap.add_argument("--stop_patience", type=int, default=5)
+    ap.add_argument("--stop_tv_abs", type=float, default=0.005)
+
+    ap.add_argument("--exposure_window", type=int, default=10)
+    ap.add_argument("--min_total_exposure", type=int, default=8)
+    ap.add_argument("--min_recent_exposure", type=int, default=4)
+
+    ap.add_argument("--compute_oscillation", type=int, default=0)
+    ap.add_argument("--osc_window", type=int, default=8)
+    ap.add_argument("--osc_min_switches", type=int, default=4)
+    ap.add_argument("--osc_tv_floor", type=float, default=0.01)
+
+    ap.add_argument("--compute_loss_diagnostics", type=int, default=0)
+    ap.add_argument("--track_inner_val_loss", type=int, default=0)
+    ap.add_argument(
+        "--inner_val_iters",
+        "--inner_val_iters",
+        dest="inner_val_iters",
+        type=str,
+        default="0,20,40,60,80,100,120,140",
+        help=(
+            "Comma-separated OUTER iteration indices at which to record the within-iteration "
+            "validation-loss trace. The alias --inner_val_iters is kept for backward compatibility."
+        ),
+    )
+    ap.add_argument("--inner_val_batch_size", type=int, default=0)
+
+    ap.add_argument("--epochs_per_iter", type=int, default=1)
+    ap.add_argument("--alpha", type=float, default=0.0)
+    ap.add_argument("--lambda_on", type=float, default=0.0)
+    ap.add_argument("--tau", type=float, default=1.0)
+    ap.add_argument("--beta", type=float, default=0.1)
+
+    ap.add_argument("--mix_eps", type=float, default=0.05)
+    ap.add_argument("--w_clip_min", type=float, default=0.1)
+    ap.add_argument("--w_clip_max", type=float, default=10.0)
+
+    ap.add_argument("--max_length", type=int, default=256)
+    ap.add_argument("--train_sample_size", type=int, default=64)
+    ap.add_argument("--pairs_per_prompt", type=int, default=2)
+    ap.add_argument("--train_prompt_size", type=int, default=0)
+
+    ap.add_argument("--batch_size", type=int, default=2)
+    ap.add_argument("--grad_accum", type=int, default=8)
+    ap.add_argument("--lr", type=float, default=2e-4)
+    ap.add_argument("--warmup_ratio", type=float, default=0.03)
+    ap.add_argument("--score_batch_size", type=int, default=8)
+
+    ap.add_argument("--lora_r", type=int, default=16)
+    ap.add_argument("--lora_alpha", type=int, default=32)
+    ap.add_argument("--lora_dropout", type=float, default=0.05)
+
+    ap.add_argument("--dump_each_iter", type=int, default=1)
+    ap.add_argument("--save_iter_adapters", type=int, default=0)
+    ap.add_argument("--save_initial_adapter", type=int, default=0)
+    ap.add_argument("--save_final_adapter", type=int, default=0)
+
+    ap.add_argument("--generated_eval_num_prompts", type=int, default=500)
+    ap.add_argument("--generated_eval_num_candidates", type=int, default=20)
+    ap.add_argument("--generated_eval_keep_top_k", type=int, default=10)
+    ap.add_argument("--generated_eval_max_new_tokens", type=int, default=256)
+    ap.add_argument("--generated_eval_do_sample", type=int, default=1)
+    ap.add_argument("--generated_eval_temperature", type=float, default=0.8)
+    ap.add_argument("--generated_eval_top_p", type=float, default=0.95)
+    ap.add_argument("--generated_eval_seed", type=int, default=123)
+    args = ap.parse_args()
+
+    args.alpha = float(max(0.0, min(1.0, args.alpha)))
+    args.lambda_on = float(max(0.0, min(1.0, args.lambda_on)))
+    args.mix_eps = float(max(0.0, min(1.0, args.mix_eps)))
+    inner_val_iters = parse_step_set(args.inner_val_iters)
+    inner_val_batch_size = args.score_batch_size if args.inner_val_batch_size <= 0 else args.inner_val_batch_size
+
+    if args.train_prompt_size < 0:
+        raise ValueError("--train_prompt_size must be >= 0")
+    if args.pairs_per_prompt < 1:
+        raise ValueError("--pairs_per_prompt must be >= 1")
+    if args.batch_size < 1 or args.grad_accum < 1 or args.score_batch_size < 1:
+        raise ValueError("batch_size, grad_accum, score_batch_size must all be >= 1")
+    if inner_val_batch_size < 1:
+        raise ValueError("inner_val_batch_size must be >= 1 when set, or 0 to reuse score_batch_size")
+    if args.max_length < 1:
+        raise ValueError("--max_length must be >= 1")
+    if args.generated_eval_num_prompts < 1:
+        raise ValueError("--generated_eval_num_prompts must be >= 1")
+    if args.generated_eval_num_candidates < 1:
+        raise ValueError("--generated_eval_num_candidates must be >= 1")
+    if args.generated_eval_keep_top_k < 1:
+        raise ValueError("--generated_eval_keep_top_k must be >= 1")
+    if args.generated_eval_max_new_tokens < 1:
+        raise ValueError("--generated_eval_max_new_tokens must be >= 1")
+    if args.track_inner_val_loss == 1 and str(args.val_pairs_path).strip() == "":
+        raise ValueError("--track_inner_val_loss requires --val_pairs_path")
+
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if device.type != "cuda":
+        raise RuntimeError("CUDA not available.")
+
+    ensure_dir(args.out_dir)
+    ensure_dir(args.log_dir)
+
+    ds = PairDataset(read_jsonl(args.pairs_path))
+    if len(ds) == 0:
+        raise ValueError("No valid training pairs found in pairs_path.")
+    prompt_to_pair_indices = build_prompt_to_pair_indices(ds)
+
+    val_ds = None
+    if (args.compute_loss_diagnostics == 1 or args.track_inner_val_loss == 1) and str(args.val_pairs_path).strip() != "":
+        val_ds = PairDataset(read_jsonl(args.val_pairs_path))
+        if len(val_ds) == 0:
+            raise ValueError("val_pairs_path was provided but no valid validation pairs were found.")
+
+    prompt_pool, prompt_id_pool = load_prompt_pool(args.eval_prompts_path)
+
+    tok = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+    if tok.pad_token is None:
+        tok.pad_token = tok.eos_token
+
+    base = AutoModelForCausalLM.from_pretrained(
+        args.model_path,
+        trust_remote_code=True,
+        torch_dtype=torch.float16,
+        device_map=None,
+    ).to(device)
+
+    lora_cfg = LoraConfig(
+        r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        lora_dropout=args.lora_dropout,
+        bias="none",
+        task_type="CAUSAL_LM",
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+    )
+    model = get_peft_model(base, lora_cfg)
+    model.print_trainable_parameters()
+
+    ref0 = AutoModelForCausalLM.from_pretrained(
+        args.model_path,
+        trust_remote_code=True,
+        torch_dtype=torch.float16,
+        device_map=None,
+    ).to(device)
+    ref0.eval()
+    for p in ref0.parameters():
+        p.requires_grad_(False)
+
+    prompts_uniq, prompt_ids_raw, responses_by_prompt, response_sources_by_prompt, generation_rows = build_generated_eval_set(
+        model=model,
+        tok=tok,
+        prompt_pool=prompt_pool,
+        prompt_id_pool=prompt_id_pool,
+        num_eval_prompts=args.generated_eval_num_prompts,
+        num_candidates_per_prompt=args.generated_eval_num_candidates,
+        keep_top_k=args.generated_eval_keep_top_k,
+        max_new_tokens=args.generated_eval_max_new_tokens,
+        do_sample=bool(args.generated_eval_do_sample),
+        temperature=args.generated_eval_temperature,
+        top_p=args.generated_eval_top_p,
+        score_batch_size=args.score_batch_size,
+        score_max_length=args.max_length,
+        seed=args.generated_eval_seed,
+        device=device,
+    )
+
+    num_prompts_eval = len(prompts_uniq)
+    max_k = max(len(x) for x in responses_by_prompt)
+    flat_prompts, flat_resps, group_offsets = [], [], []
+    cur = 0
+    for x, ys in zip(prompts_uniq, responses_by_prompt):
+        s = cur
+        for y in ys:
+            flat_prompts.append(x)
+            flat_resps.append(y)
+            cur += 1
+        group_offsets.append((s, cur))
+
+    adapters_dir = os.path.join(
+        args.out_dir,
+        f"dpo_adapters_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}",
+    )
+    ensure_dir(adapters_dir)
+    if args.save_initial_adapter == 1:
+        maybe_save_adapter(model, tok, os.path.join(adapters_dir, "iter_init"))
+
+    dump_dir = os.path.join(
+        args.log_dir,
+        f"dpo_iter_dumps_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}",
+    )
+    if args.dump_each_iter == 1:
+        ensure_dir(dump_dir)
+
+    eval_metadata_rows = []
+    for pid in range(num_prompts_eval):
+        for j, resp in enumerate(responses_by_prompt[pid]):
+            eval_metadata_rows.append({
+                "prompt_index": pid,
+                "prompt_id": prompt_ids_raw[pid],
+                "response_index": j,
+                "prompt": prompts_uniq[pid],
+                "response": resp,
+                "response_source": response_sources_by_prompt[pid][j],
+            })
+    meta_path = (
+        os.path.join(dump_dir, "eval_prompt_response_metadata.csv")
+        if args.dump_each_iter == 1
+        else os.path.join(args.log_dir, "eval_prompt_response_metadata.csv")
+    )
+    pd.DataFrame(eval_metadata_rows).to_csv(meta_path, index=False)
+
+    gen_jsonl_path = (
+        os.path.join(dump_dir, "generated_eval_set.jsonl")
+        if args.dump_each_iter == 1
+        else os.path.join(args.log_dir, "generated_eval_set.jsonl")
+    )
+    write_jsonl(
+        gen_jsonl_path,
+        [
+            {
+                "prompt_id": int(prompt_ids_raw[i]),
+                "prompt": prompts_uniq[i],
+                "responses": [
+                    {"text": y, "source": response_sources_by_prompt[i][j]}
+                    for j, y in enumerate(responses_by_prompt[i])
+                ],
+            }
+            for i in range(num_prompts_eval)
+        ],
+    )
+    generation_csv = (
+        os.path.join(dump_dir, "generated_eval_generation_scores.csv")
+        if args.dump_each_iter == 1
+        else os.path.join(args.log_dir, "generated_eval_generation_scores.csv")
+    )
+    pd.DataFrame(generation_rows).to_csv(generation_csv, index=False)
+
+    metrics = []
+    loss_step_rows = []
+    inner_val_loss_rows = []
+    prev_q_prompt_matrix_avg = None
+    prev_prompt_entropies_avg = None
+
+    prompt_stable_counts = np.zeros(num_prompts_eval, dtype=np.int64)
+    prompt_converged_mask = np.zeros(num_prompts_eval, dtype=bool)
+    prompt_oscillatory_mask = np.zeros(num_prompts_eval, dtype=bool)
+    prompt_first_converged_iter = np.full(num_prompts_eval, -1, dtype=np.int64)
+    prompt_first_oscillatory_iter = np.full(num_prompts_eval, -1, dtype=np.int64)
+
+    eval_prompt_to_idx = {p: i for i, p in enumerate(prompts_uniq)}
+    prompt_cum_exposure = np.zeros(num_prompts_eval, dtype=np.int64)
+    prompt_recent_exposure = np.zeros(num_prompts_eval, dtype=np.int64)
+    prompt_exposure_history = deque(maxlen=args.exposure_window)
+
+    top1_history = []
+    tv_history = []
+    global_train_batch_step = 0
+
+    T = args.max_iters if args.auto_stop == 1 else args.iters
+    pct_eps = 1e-12
+    last_iter_ran = -1
+
+    for t in range(T):
+        print(
+            f"\n===== DPO OUTER ITER {t} | alpha={args.alpha} lambda={args.lambda_on} "
+            f"tau={args.tau} beta={args.beta} mix_eps={args.mix_eps} ====="
+        )
+
+        if args.save_iter_adapters == 1:
+            maybe_save_adapter(model, tok, os.path.join(adapters_dir, f"iter_{t:04d}_preupdate"))
+
+        model.eval()
+        ref0.eval()
+
+        flat_avg_scores = np.zeros(len(flat_prompts), dtype=np.float32)
+        bs = max(1, int(args.score_batch_size))
+        for s in tqdm(range(0, len(flat_prompts), bs), desc=f"scoring@eval_prompts iter {t}", ncols=100):
+            e = min(len(flat_prompts), s + bs)
+            _, avg_lp, _ = batch_sum_and_avg_logprob(model, tok, flat_prompts[s:e], flat_resps[s:e], args.max_length, device)
+            flat_avg_scores[s:e] = avg_lp.numpy()
+
+        q_prompt_matrix_avg = np.full((num_prompts_eval, max_k), np.nan, dtype=np.float64)
+        prompt_entropies_avg = np.zeros(num_prompts_eval, dtype=np.float64)
+        prompt_tvs_avg = np.full(num_prompts_eval, np.nan, dtype=np.float64)
+        prompt_top1_avg = np.full(num_prompts_eval, -1, dtype=np.int64)
+
+        for pid, (s, e) in enumerate(group_offsets):
+            scores_avg = flat_avg_scores[s:e].astype(np.float64)
+            p_avg = safe_softmax_np(scores_avg * float(args.tau))
+            k = e - s
+            q_prompt_matrix_avg[pid, :k] = p_avg
+            prompt_entropies_avg[pid] = entropy_from_probs(p_avg)
+            prompt_top1_avg[pid] = int(np.argmax(p_avg))
+
+            if prev_q_prompt_matrix_avg is not None:
+                prev_avg = prev_q_prompt_matrix_avg[pid, :k].astype(np.float64)
+                prev_avg = prev_avg / np.sum(prev_avg)
+                prompt_tvs_avg[pid] = total_variation(p_avg, prev_avg)
+
+        prompt_entropy_mean = float(np.mean(prompt_entropies_avg))
+        prompt_tv_mean = float(np.nanmean(prompt_tvs_avg)) if np.any(~np.isnan(prompt_tvs_avg)) else float("nan")
+        prompt_tv_max = float(np.nanmax(prompt_tvs_avg)) if np.any(~np.isnan(prompt_tvs_avg)) else float("nan")
+
+        if prev_prompt_entropies_avg is None:
+            prompt_entropy_abs_delta_mean = float("nan")
+            prompt_entropy_abs_delta_max = float("nan")
+            prompt_entropy_pct_change_mean = float("nan")
+        else:
+            d = np.abs(prompt_entropies_avg - prev_prompt_entropies_avg)
+            prompt_entropy_abs_delta_mean = float(np.mean(d))
+            prompt_entropy_abs_delta_max = float(np.max(d))
+            pct = 100.0 * (prompt_entropies_avg - prev_prompt_entropies_avg) / np.maximum(np.abs(prev_prompt_entropies_avg), pct_eps)
+            prompt_entropy_pct_change_mean = float(np.mean(pct))
+
+        val_stats = {
+            "val_loss_mean": float("nan"),
+            "val_loss_std": float("nan"),
+            "val_loss_min": float("nan"),
+            "val_loss_max": float("nan"),
+            "val_num_pairs": 0,
+        }
+        val_static_stats = {
+            "val_loss_static_mean": float("nan"),
+            "val_loss_static_std": float("nan"),
+            "val_loss_static_min": float("nan"),
+            "val_loss_static_max": float("nan"),
+            "val_static_num_pairs": 0,
+        }
+        if args.compute_loss_diagnostics == 1 and val_ds is not None:
+            val_stats = evaluate_fixed_pair_loss(
+                model=model,
+                ref0=ref0,
+                tok=tok,
+                val_ds=val_ds,
+                batch_size=args.score_batch_size,
+                max_length=args.max_length,
+                device=device,
+                alpha=args.alpha,
+                beta=args.beta,
+            )
+            val_static_stats = evaluate_fixed_pair_loss_static_ref0(
+                model=model,
+                ref0=ref0,
+                tok=tok,
+                val_ds=val_ds,
+                batch_size=args.score_batch_size,
+                max_length=args.max_length,
+                device=device,
+                beta=args.beta,
+            )
+
+        target_prompt_count = (
+            args.train_prompt_size
+            if args.train_prompt_size > 0
+            else int(math.ceil(args.train_sample_size / max(1, args.pairs_per_prompt)))
+        )
+        rng_train = random.Random(args.seed + 999 * (t + 1))
+        train_ds_weighted, train_diag_df, _sampled_prompts_this_iter, sampled_pairs_per_prompt = build_prompt_aware_training_subset(
+            model,
+            tok,
+            ds,
+            prompt_to_pair_indices,
+            rng_train,
+            target_prompt_count,
+            args.pairs_per_prompt,
+            args.tau,
+            args.lambda_on,
+            args.mix_eps,
+            args.max_length,
+            device,
+            args.score_batch_size,
+            args.w_clip_min,
+            args.w_clip_max,
+        )
+
+        iter_exposure_vec = np.zeros(num_prompts_eval, dtype=np.int64)
+        for prompt, cnt in sampled_pairs_per_prompt.items():
+            if prompt in eval_prompt_to_idx:
+                pid = eval_prompt_to_idx[prompt]
+                iter_exposure_vec[pid] += int(cnt)
+
+        prompt_cum_exposure += iter_exposure_vec
+        prompt_exposure_history.append(iter_exposure_vec.copy())
+        prompt_recent_exposure[:] = 0
+        for arr in prompt_exposure_history:
+            prompt_recent_exposure += arr
+
+        prev_converged_mask = prompt_converged_mask.copy()
+        prompt_stable_counts, prompt_converged_mask = update_prompt_convergence_with_exposure(
+            None if prev_q_prompt_matrix_avg is None else prompt_tvs_avg,
+            prompt_stable_counts,
+            prompt_converged_mask,
+            prompt_cum_exposure,
+            prompt_recent_exposure,
+            t,
+            args.stop_min_iters,
+            args.stop_patience,
+            args.stop_tv_abs,
+            args.min_total_exposure,
+            args.min_recent_exposure,
+        )
+        newly = prompt_converged_mask & (~prev_converged_mask)
+        prompt_first_converged_iter[newly] = t
+
+        if args.compute_oscillation == 1:
+            top1_history.append(prompt_top1_avg.copy())
+            tv_history.append(np.where(np.isnan(prompt_tvs_avg), -1.0, prompt_tvs_avg).copy())
+            top1_hist_np = np.stack(top1_history, axis=0)
+            tv_hist_np = np.stack(tv_history, axis=0)
+            newly_osc = detect_oscillation_from_history(
+                top1_hist_np,
+                tv_hist_np,
+                prompt_converged_mask,
+                args.stop_min_iters,
+                t,
+                args.osc_window,
+                args.osc_min_switches,
+                args.osc_tv_floor,
+            )
+            new_mask = newly_osc & (~prompt_oscillatory_mask)
+            prompt_oscillatory_mask[new_mask] = True
+            prompt_first_oscillatory_iter[new_mask] = t
+
+        prompt_resolved_mask = prompt_converged_mask | prompt_oscillatory_mask
+        num_converged = int(prompt_converged_mask.sum())
+        num_osc = int(prompt_oscillatory_mask.sum())
+        num_resolved = int(prompt_resolved_mask.sum())
+        frac_resolved = float(num_resolved / max(num_prompts_eval, 1))
+        num_unresolved = int(num_prompts_eval - num_resolved)
+
+        unresolved_entropy_mean = (
+            float(np.mean(prompt_entropies_avg[~prompt_resolved_mask]))
+            if np.any(~prompt_resolved_mask)
+            else float("nan")
+        )
+        unresolved_tv_mean = (
+            float(np.nanmean(prompt_tvs_avg[~prompt_resolved_mask]))
+            if np.any(~prompt_resolved_mask) and np.any(~np.isnan(prompt_tvs_avg[~prompt_resolved_mask]))
+            else float("nan")
+        )
+        unresolved_tv_max = (
+            float(np.nanmax(prompt_tvs_avg[~prompt_resolved_mask]))
+            if np.any(~prompt_resolved_mask) and np.any(~np.isnan(prompt_tvs_avg[~prompt_resolved_mask]))
+            else float("nan")
+        )
+
+        prev_q_prompt_matrix_avg = q_prompt_matrix_avg.copy()
+        prev_prompt_entropies_avg = prompt_entropies_avg.copy()
+
+        if args.dump_each_iter == 1:
+            dump_prompt_metrics(
+                dump_dir,
+                t,
+                prompt_ids_raw,
+                prompts_uniq,
+                responses_by_prompt,
+                response_sources_by_prompt,
+                group_offsets,
+                max_k,
+                flat_avg_scores,
+                q_prompt_matrix_avg,
+                prompt_entropies_avg,
+                prompt_tvs_avg,
+                prompt_top1_avg,
+                prompt_converged_mask,
+                prompt_oscillatory_mask,
+                prompt_resolved_mask,
+                prompt_stable_counts,
+                prompt_first_converged_iter,
+                prompt_first_oscillatory_iter,
+                prompt_cum_exposure,
+                prompt_recent_exposure,
+                iter_exposure_vec,
+                args.min_total_exposure,
+                args.min_recent_exposure,
+            )
+            train_diag_df.to_csv(
+                os.path.join(dump_dir, f"iter_{t:04d}_train_pair_support.csv"),
+                index=False,
+            )
+
+        print(
+            f"[Metrics@t={t}] H_avg_mean={prompt_entropy_mean:.6g} | "
+            f"TV_avg_mean={prompt_tv_mean:.6g} TV_avg_max={prompt_tv_max:.6g} | "
+            f"resolved={num_resolved}/{num_prompts_eval} ({frac_resolved:.1%}) | "
+            f"train_pairs={len(train_ds_weighted)} train_prompts={target_prompt_count}"
+        )
+        if args.compute_loss_diagnostics == 1 and val_ds is not None:
+            print(
+                f"[ValLoss@t={t}] mean={val_stats['val_loss_mean']:.6g} | "
+                f"[ValLossStatic@t={t}] mean={val_static_stats['val_loss_static_mean']:.6g}"
+            )
+
+        metrics.append({
+            "iter": t,
+            "snapshot_stage": "pre_update",
+            "objective": "dpo",
+            "alpha": args.alpha,
+            "lambda": args.lambda_on,
+            "tau": args.tau,
+            "beta": args.beta,
+            "mix_eps": args.mix_eps,
+            "pairs_per_prompt": args.pairs_per_prompt,
+            "target_train_prompt_count": target_prompt_count,
+            "actual_train_pairs": len(train_ds_weighted),
+            "train_loss_mean": float("nan"),
+            "train_loss_std": float("nan"),
+            "train_loss_min": float("nan"),
+            "train_loss_max": float("nan"),
+            "train_loss_last": float("nan"),
+            "train_num_batches": 0,
+            "val_loss_mean": val_stats["val_loss_mean"],
+            "val_loss_std": val_stats["val_loss_std"],
+            "val_loss_min": val_stats["val_loss_min"],
+            "val_loss_max": val_stats["val_loss_max"],
+            "val_num_pairs": val_stats["val_num_pairs"],
+            "val_loss_static_mean": val_static_stats["val_loss_static_mean"],
+            "val_loss_static_std": val_static_stats["val_loss_static_std"],
+            "val_loss_static_min": val_static_stats["val_loss_static_min"],
+            "val_loss_static_max": val_static_stats["val_loss_static_max"],
+            "val_static_num_pairs": val_static_stats["val_static_num_pairs"],
+            "prompt_entropy_mean": prompt_entropy_mean,
+            "prompt_entropy_mean_avg": float(np.mean(prompt_entropies_avg)),
+            "prompt_tv_mean": prompt_tv_mean,
+            "prompt_tv_max": prompt_tv_max,
+            "prompt_entropy_abs_delta_mean": prompt_entropy_abs_delta_mean,
+            "prompt_entropy_abs_delta_max": prompt_entropy_abs_delta_max,
+            "prompt_entropy_pct_change_mean": prompt_entropy_pct_change_mean,
+            "num_prompts_eval": num_prompts_eval,
+            "num_prompts_converged": num_converged,
+            "num_prompts_oscillatory": num_osc,
+            "num_prompts_resolved": num_resolved,
+            "num_prompts_unresolved": num_unresolved,
+            "frac_prompts_resolved": frac_resolved,
+            "unresolved_entropy_mean": unresolved_entropy_mean,
+            "unresolved_prompt_tv_mean": unresolved_tv_mean,
+            "unresolved_prompt_tv_max": unresolved_tv_max,
+            "train_sample_size": args.train_sample_size,
+            "cum_exposure_mean": float(np.mean(prompt_cum_exposure)),
+            "cum_exposure_min": int(np.min(prompt_cum_exposure)),
+            "cum_exposure_max": int(np.max(prompt_cum_exposure)),
+            "recent_exposure_mean": float(np.mean(prompt_recent_exposure)),
+            "recent_exposure_min": int(np.min(prompt_recent_exposure)),
+            "recent_exposure_max": int(np.max(prompt_recent_exposure)),
+            "num_prompts_exposure_eligible": int(
+                np.sum(
+                    (prompt_cum_exposure >= args.min_total_exposure)
+                    & (prompt_recent_exposure >= args.min_recent_exposure)
+                )
+            ),
+        })
+
+        if args.auto_stop == 1 and num_resolved == num_prompts_eval and num_prompts_eval > 0:
+            print(f"[STOP] All prompts resolved at iter={t}.")
+            last_iter_ran = t
+            if args.save_iter_adapters == 1:
+                maybe_save_adapter(model, tok, os.path.join(adapters_dir, f"iter_{t:04d}_postupdate"))
+            break
+
+        iter_loss_values = []
+        model.train()
+        train_loader = DataLoader(
+            train_ds_weighted,
+            batch_size=args.batch_size,
+            shuffle=True,
+            collate_fn=collate,
+            drop_last=False,
+        )
+        opt = torch.optim.AdamW(model.parameters(), lr=args.lr)
+        num_batches = len(train_loader) * args.epochs_per_iter
+        total_steps = max(1, math.ceil(num_batches / args.grad_accum))
+        warmup_steps = int(args.warmup_ratio * total_steps)
+        sched = get_linear_schedule_with_warmup(opt, warmup_steps, total_steps)
+
+        opt.zero_grad(set_to_none=True)
+        step = 0
+        optimizer_step_in_iter = 0
+
+        def maybe_record_inner_val_loss(phase: str, ep_for_log: int = -1, batch_for_log: int = -1):
+            if args.track_inner_val_loss != 1 or val_ds is None:
+                return
+            # Inner validation traces are recorded only for selected OUTER iterations.
+            # Within those selected outer iterations, every call to this function is recorded
+            # (pre-update at optimizer_step_in_iter=0 and after optimizer steps).
+            if t not in inner_val_iters:
+                return
+            cur_val = evaluate_fixed_pair_loss(
+                model=model,
+                ref0=ref0,
+                tok=tok,
+                val_ds=val_ds,
+                batch_size=inner_val_batch_size,
+                max_length=args.max_length,
+                device=device,
+                alpha=args.alpha,
+                beta=args.beta,
+            )
+            inner_val_loss_rows.append({
+                "iter": int(t),
+                "phase": phase,
+                "optimizer_step_in_iter": int(optimizer_step_in_iter),
+                "global_train_batch_step": int(global_train_batch_step),
+                "epoch": int(ep_for_log),
+                "batch_in_epoch": int(batch_for_log),
+                **cur_val,
+            })
+            print(
+                f"[InnerValLoss@t={t}, opt_step={optimizer_step_in_iter}] "
+                f"mean={cur_val['val_loss_mean']:.6g}",
+                flush=True,
+            )
+            model.train()
+
+        maybe_record_inner_val_loss("inner_step_0_pre_update")
+        for ep in range(args.epochs_per_iter):
+            pbar = tqdm(train_loader, desc=f"train@dpo_promptaware iter {t} ep {ep}", ncols=100)
+            for batch in pbar:
+                with torch.no_grad():
+                    lp_c_pi = batch_avg_logprob(model, tok, batch["prompt"], batch["chosen"], args.max_length, device).to(device)
+                    lp_r_pi = batch_avg_logprob(model, tok, batch["prompt"], batch["rejected"], args.max_length, device).to(device)
+                    lp_c_ref0 = batch_avg_logprob(ref0, tok, batch["prompt"], batch["chosen"], args.max_length, device).to(device)
+                    lp_r_ref0 = batch_avg_logprob(ref0, tok, batch["prompt"], batch["rejected"], args.max_length, device).to(device)
+
+                    lp_c_ref_t = (1.0 - args.alpha) * lp_c_ref0 + args.alpha * lp_c_pi
+                    lp_r_ref_t = (1.0 - args.alpha) * lp_r_ref0 + args.alpha * lp_r_pi
+
+                bc = build_batch(tok, batch["prompt"], batch["chosen"], args.max_length, device)
+                out_c = model(input_ids=bc["input_ids"], attention_mask=bc["attention_mask"], labels=bc["labels"])
+                s_c, c_c = sum_logprob_and_count_from_outputs(out_c.logits, bc["labels"])
+                avg_c = s_c / c_c
+
+                br = build_batch(tok, batch["prompt"], batch["rejected"], args.max_length, device)
+                out_r = model(input_ids=br["input_ids"], attention_mask=br["attention_mask"], labels=br["labels"])
+                s_r, c_r = sum_logprob_and_count_from_outputs(out_r.logits, br["labels"])
+                avg_r = s_r / c_r
+
+                delta = (avg_c - lp_c_ref_t) - (avg_r - lp_r_ref_t)
+                loss_vec = dpo_loss_from_delta(delta, args.beta)
+                wt = batch["pair_weight"].to(device)
+                loss = (wt * loss_vec).mean()
+                loss_value = float(loss.item())
+                if args.compute_loss_diagnostics == 1:
+                    iter_loss_values.append(loss_value)
+                    loss_step_rows.append({
+                        "iter": int(t),
+                        "epoch": int(ep),
+                        "batch_in_epoch": int(step),
+                        "global_train_batch_step": int(global_train_batch_step),
+                        "loss": loss_value,
+                    })
+                global_train_batch_step += 1
+
+                loss.backward()
+                step += 1
+
+                if step % args.grad_accum == 0:
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                    opt.step()
+                    sched.step()
+                    opt.zero_grad(set_to_none=True)
+                    optimizer_step_in_iter += 1
+                    maybe_record_inner_val_loss("post_optimizer_step", ep, step)
+
+                pbar.set_postfix({"loss": float(loss.item())})
+
+        if step % args.grad_accum != 0:
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            opt.step()
+            sched.step()
+            opt.zero_grad(set_to_none=True)
+            optimizer_step_in_iter += 1
+            maybe_record_inner_val_loss("post_optimizer_step_remainder", args.epochs_per_iter - 1, step)
+
+        if len(iter_loss_values) > 0:
+            train_loss_mean = float(np.mean(iter_loss_values))
+            train_loss_std = float(np.std(iter_loss_values))
+            train_loss_min = float(np.min(iter_loss_values))
+            train_loss_max = float(np.max(iter_loss_values))
+            train_loss_last = float(iter_loss_values[-1])
+            train_num_batches = int(len(iter_loss_values))
+        else:
+            train_loss_mean = float("nan")
+            train_loss_std = float("nan")
+            train_loss_min = float("nan")
+            train_loss_max = float("nan")
+            train_loss_last = float("nan")
+            train_num_batches = 0
+
+        metrics[-1].update({
+            "optimizer_steps_in_iter": int(optimizer_step_in_iter),
+            "train_loss_mean": train_loss_mean,
+            "train_loss_std": train_loss_std,
+            "train_loss_min": train_loss_min,
+            "train_loss_max": train_loss_max,
+            "train_loss_last": train_loss_last,
+            "train_num_batches": train_num_batches,
+        })
+
+        if args.compute_loss_diagnostics == 1:
+            print(
+                f"[TrainLoss@t={t}] mean={train_loss_mean:.6g} "
+                f"std={train_loss_std:.6g} min={train_loss_min:.6g} "
+                f"max={train_loss_max:.6g} last={train_loss_last:.6g} "
+                f"batches={train_num_batches}"
+            )
+
+        if args.save_iter_adapters == 1:
+            maybe_save_adapter(model, tok, os.path.join(adapters_dir, f"iter_{t:04d}_postupdate"))
+        last_iter_ran = t
+
+    if args.save_final_adapter == 1:
+        maybe_save_adapter(model, tok, os.path.join(adapters_dir, "final"))
+
+    summary_json = os.path.join(
+        args.log_dir,
+        f"dpo_convergence_summary_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}.json",
+    )
+    write_json(summary_json, {
+        "alpha": args.alpha,
+        "lambda_on": args.lambda_on,
+        "tau": args.tau,
+        "beta": args.beta,
+        "mix_eps": args.mix_eps,
+        "seed": args.seed,
+        "train_sample_size": args.train_sample_size,
+        "pairs_per_prompt": args.pairs_per_prompt,
+        "train_prompt_size": args.train_prompt_size,
+        "num_prompts_eval": num_prompts_eval,
+        "generated_eval_num_candidates": args.generated_eval_num_candidates,
+        "generated_eval_keep_top_k": args.generated_eval_keep_top_k,
+        "compute_loss_diagnostics": bool(args.compute_loss_diagnostics),
+        "track_inner_val_loss": bool(args.track_inner_val_loss),
+        "inner_val_iters": sorted(int(x) for x in inner_val_iters),
+        "inner_val_batch_size": int(inner_val_batch_size),
+        "val_pairs_path": args.val_pairs_path if str(args.val_pairs_path).strip() != "" else None,
+        "num_prompts_converged": int(prompt_converged_mask.sum()),
+        "num_prompts_oscillatory": int(prompt_oscillatory_mask.sum()),
+        "num_prompts_resolved": int((prompt_converged_mask | prompt_oscillatory_mask).sum()),
+        "last_iter_ran": int(last_iter_ran),
+        "training_rule": {
+            "objective": "dpo",
+            "type": "prompt_aware_uniform_pair_sampling_with_dynamic_loss_reweighting",
+            "lambda_on": args.lambda_on,
+            "mix_eps": args.mix_eps,
+            "pairs_per_prompt": args.pairs_per_prompt,
+            "score_mode": "avg_logprob",
+        },
+        "evaluation_rule": {
+            "source": "generated_init_only",
+            "selection": "deduplicate then keep top-k by avg_logprob",
+            "tau_for_prompt_distribution": args.tau,
+        },
+        "artifacts": {
+            "adapter_dir": adapters_dir,
+            "dump_dir": dump_dir if args.dump_each_iter == 1 else None,
+            "generated_eval_set_jsonl": gen_jsonl_path,
+            "generated_eval_generation_scores_csv": generation_csv,
+        },
+    })
+
+    out_csv = os.path.join(
+        args.log_dir,
+        f"dpo_metrics_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}.csv",
+    )
+    pd.DataFrame(metrics).to_csv(out_csv, index=False)
+
+    print("[DONE] wrote:", out_csv)
+    if args.compute_loss_diagnostics == 1:
+        loss_csv = os.path.join(
+            args.log_dir,
+            f"dpo_train_loss_steps_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_seed{args.seed}.csv",
+        )
+        pd.DataFrame(loss_step_rows).to_csv(loss_csv, index=False)
+        print("[DONE] wrote:", loss_csv)
+
+    if args.track_inner_val_loss == 1:
+        inner_val_csv = os.path.join(
+            args.log_dir,
+            f"dpo_inner_val_loss_trace_alpha{args.alpha}_lambda{args.lambda_on}_tau{args.tau}_beta{args.beta}_seed{args.seed}.csv",
+        )
+        pd.DataFrame(inner_val_loss_rows).to_csv(inner_val_csv, index=False)
+        print("[DONE] wrote:", inner_val_csv)
+
+    print("[DONE] wrote:", summary_json)
+    print("[DONE] wrote:", meta_path)
+    print("[DONE] wrote:", gen_jsonl_path)
+    print("[DONE] wrote:", generation_csv)
+    if args.dump_each_iter == 1:
+        print("[DONE] per-iter dumps in:", dump_dir)
+    print("[DONE] adapters in:", adapters_dir)
+
+
+if __name__ == "__main__":
+    main()

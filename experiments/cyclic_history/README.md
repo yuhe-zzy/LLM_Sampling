@@ -17,8 +17,9 @@ so that loss computation, data, optimization, and diagnostics stay matched.
 
 Package location: `experiments/cyclic_history/` in this repository. Publishing
 this code does not modify production scripts, running jobs, or existing results.
-Historical source runners are in `scripts/legacy/`; download/build the dataset
-using the root README. All default paths are relative to the repository root.
+All current runners use sequence-sum scores; historical trainers have been
+removed. Download/build the dataset using the root README. All default paths
+are relative to the repository root.
 
 ## Proposed first six runs
 

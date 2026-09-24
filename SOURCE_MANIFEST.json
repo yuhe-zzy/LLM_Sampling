@@ -1,7 +1,7 @@
 {
   "release_date": "2026-09-24",
   "base_commit": "83b3157",
-  "note": "Hashes cover imported source files; new release-only files are versioned by Git. No experiment was launched for this release.",
+  "note": "Original imported-source hashes are preserved; current hashes describe staged Git blobs. Historical trainers were removed. No experiment was launched.",
   "imported_files": [
     {
       "origin": "production_server_2026-09-24",
@@ -56,8 +56,8 @@
       "source_path": "scripts/reconstruct_oracle_relative_entropy.py",
       "published_path": "scripts/reconstruct_oracle_relative_entropy.py",
       "source_sha256": "4db8b27248ae7466051987a1d8d960594e6d65108609011785bc122d198d1297",
-      "published_sha256": "4db8b27248ae7466051987a1d8d960594e6d65108609011785bc122d198d1297",
-      "byte_identical": true
+      "published_sha256": "268057f2dd9171eccebae9734e4719e1be40dd41d673b867981429b1183b145d",
+      "byte_identical": false
     },
     {
       "origin": "production_server_2026-09-24",
@@ -80,24 +80,17 @@
       "source_path": "scripts/run_preference_oracle_core.py",
       "published_path": "scripts/run_preference_oracle_core.py",
       "source_sha256": "1710f4a59aca8273d6565fe744dc1aef58e94933533ea03b943867682bd95ad8",
-      "published_sha256": "93988c280b8877803ad5a260e9cd2b4df7814a8e3a980fb2abdf879b5760f364",
+      "published_sha256": "e9bc1ed75804fbd3f915e701fc4e4291d2aea877944c93adb3b9f7eef6292b6f",
       "byte_identical": false
     },
     {
       "origin": "production_server_2026-09-24",
       "source_path": "scripts/run_ipo.py",
-      "published_path": "scripts/legacy/run_ipo.py",
+      "published_path": "scripts/sequence_utils.py",
       "source_sha256": "c2c120e275477af128aaa9eef464477a70c3c6f2772e5500b0e9082a62f83ae6",
-      "published_sha256": "c2c120e275477af128aaa9eef464477a70c3c6f2772e5500b0e9082a62f83ae6",
-      "byte_identical": true
-    },
-    {
-      "origin": "production_server_2026-09-24",
-      "source_path": "scripts/run_dpo.py",
-      "published_path": "scripts/legacy/run_dpo.py",
-      "source_sha256": "bcc9710ec41e575f89559c30116e718d8dee8050f46ad8919e8dc6359d5bb26c",
-      "published_sha256": "bcc9710ec41e575f89559c30116e718d8dee8050f46ad8919e8dc6359d5bb26c",
-      "byte_identical": true
+      "published_sha256": "167a0cbd7d01b8801134068406f6a55b2e98c0404437410356b9207500fe4cf8",
+      "byte_identical": false,
+      "modification": "Extracted shared helpers; removed all token-average scoring and training"
     },
     {
       "origin": "prepared_history_pilot_2026-09-23",
@@ -160,8 +153,28 @@
       "source_path": "README.md",
       "published_path": "experiments/cyclic_history/README.md",
       "source_sha256": "def9a0734e6a29ece39c4337d761da414f249ecf306923320ab709ccbed0b569",
-      "published_sha256": "cb3dbe55f2993b148e58700c435cbc61a68b2cb2a3523c377d71c67ab4369278",
+      "published_sha256": "a74182e369a287cd87d4b1de48984fc677b757b7f2fe0207b858b6f8cd380dd7",
       "byte_identical": false
+    }
+  ],
+  "previous_release_commit": "ee21b60",
+  "likelihood_protocol_version": "sequence_sum_only_v3",
+  "retired_sources": [
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_ipo.py",
+      "source_sha256": "c2c120e275477af128aaa9eef464477a70c3c6f2772e5500b0e9082a62f83ae6",
+      "last_published_path": "scripts/legacy/run_ipo.py",
+      "last_published_commit": "ee21b60",
+      "status": "removed_not_runnable"
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_dpo.py",
+      "source_sha256": "bcc9710ec41e575f89559c30116e718d8dee8050f46ad8919e8dc6359d5bb26c",
+      "last_published_path": "scripts/legacy/run_dpo.py",
+      "last_published_commit": "ee21b60",
+      "status": "removed_not_runnable"
     }
   ]
 }

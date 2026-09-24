@@ -5,7 +5,7 @@
 For a prompt x and response y, corrected training uses the response-token sum
 `s_theta(x,y) = sum_k log pi_theta(y_k | x,y_<k)`.
 EOS is included, prompt and padding tokens excluded, and the causal shift is
-applied. Standard/legacy tokenization left-truncates the combined sequence to
+applied. Standard tokenization left-truncates the combined sequence to
 max_length=1537. This can remove response prefixes for extremely long answers;
 audit lengths before interpreting a score as an untruncated response likelihood.
 The new history pipeline instead shares one prompt context across candidates
@@ -48,9 +48,10 @@ and assigns unit pair weights. No BT sampling of labels is used.
 The `lambda_on` command-line name is retained for compatibility, but it means
 `lambda_base` here, not the current-generator weight.
 
-### Fixed static labels, including the legacy cyclic pilot
+### Fixed static labels, transitive or cyclic
 
-At a fixed prompt, compute the average-token chosen/rejected margin m(e).
+At a fixed prompt, compute the sequence-sum chosen/rejected margin
+`m(e) = s_theta(x,chosen) - s_theta(x,rejected)`.
 The within-prompt target is
 
 ```text
@@ -62,9 +63,10 @@ q_pair(e) = (1-mix_eps)*q_pair(e) + mix_eps*Uniform(e)
 Uniform proposals are drawn with replacement. Target weights are applied once,
 normalized by their sampled mean and clipped to the configured range. This is
 the inherited self-normalized estimator, not exact unbiased importance sampling.
-The corrected static branch changes the **training loss reduction and reference
-caching**, not this average-margin sampler. The legacy cyclic recipe uses
-mix_eps=0 and clip range [0,1e6].
+The sequence-sum-only revision uses the same response-score reduction for
+sampling and training. This changes static pair probabilities relative to
+earlier average-margin sampling. The cyclic sweep uses mix_eps=0 and clip
+range [0,1e6]; those estimator choices remain unchanged.
 
 ### New history pilot
 
@@ -120,8 +122,9 @@ fixed-point equations do not guarantee shared neural endpoints.
 ### Relative-sequence entropy (primary oracle quantity)
 
 On each selected prompt, generate ten initial-policy candidates, deduplicate,
-and retain up to five by initial token-average likelihood. Freeze the panel.
-The initial support selection score is not the later entropy score:
+and retain up to five by initial sequence-sum likelihood. Freeze the panel.
+This ranking change means newly generated panels need not equal historical
+panels. The support selection score is not the later relative-entropy score:
 
 ```text
 z_t(i) = s_t(i) - s_initial(i)
@@ -131,9 +134,10 @@ H_relative = mean_prompt[-sum_i q_relative(i)*log q_relative(i)]
 
 Entropy is in nats. Supports may contain fewer than five candidates.
 This normalizes likelihood **ratios** on a finite panel, not the complete
-LLM output distribution. Legacy `prompt_entropy_mean` normalizes averaged
-token scores and is not interchangeable. Raw panel entropy `softmax(s_t)`
-is also a different quantity.
+LLM output distribution. New runs emit raw sequence-panel entropy
+`prompt_sequence_entropy_mean` from `softmax(tau*s_t)` as a separate quantity;
+they no longer compute or emit token-average scores or entropy. The formulas
+above assume tau=1, as in the supplied recipes; otherwise multiply logits by tau.
 
 Older dumps may reconstruct z as
 `token_count*(average_score_t-average_score_at_0)` only with identical support,
@@ -173,7 +177,7 @@ batch=1, accumulation=4, and gradient clipping=1. AdamW defaults are
 betas=(.9,.999), eps=1e-8, weight_decay=.01. Optimizer state and the linear
 schedule reset each outer round; policy/adapter parameters persist.
 
-The legacy and corrected oracle/static core preserve the archived FP16 and
+The oracle/static core preserves the archived FP16 and
 LoRA dropout=.05 conventions. They **sum** four microbatch mean losses before
 an optimizer step (not divide by four). The new history code uses BF16,
 FP32 scoring/loss reductions, zero dropout, and **averages** accumulation
@@ -182,10 +186,10 @@ results as matched history controls. No automatic claim of identical effective
 step size across IPO and DPO is made.
 
 The standard core's `iters` counts evaluated states: 81 yields states 0..80
-and 80 training rounds. The legacy runners train at each of 150 pre-update
-snapshots, 0..149. History `iters=100` means 100 updates plus initial state 0.
+and 80 training rounds. The cyclic sweep's 151 states mean 150 updates.
+History `iters=100` means 100 updates plus initial state 0.
 
 Release safeguards stop the corrected core on nonfinite loss, gradients or
 scored likelihoods rather than accepting a uniform probability fallback.
-Historical sources are unchanged and retain their historical behavior.
+Historical trainers are not included as runnable alternatives.
 These checks do not guarantee semantic quality or absence of token collapse.

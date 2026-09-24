@@ -1,5 +1,5 @@
 {
-  "name": "cyclic_static_sequencesum",
+  "name": "cyclic_static_sequencesum_v3",
   "protocol": "static",
   "preference_case": "cyclic",
   "status": "Standardized ordinary examples; not replacements for historical cyclic results",

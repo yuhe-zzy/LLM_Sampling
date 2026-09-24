@@ -1,5 +1,5 @@
 {
-  "name": "oracle_sequencesum",
+  "name": "oracle_sequencesum_v3",
   "protocol": "oracle",
   "preference_case": "transitive",
   "status": "Corrected experiment target grid; not a completion ledger",

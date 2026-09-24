@@ -18,6 +18,7 @@ FULL = all(importlib.util.find_spec(name) is not None
            for name in ("torch", "transformers", "peft", "pandas"))
 if FULL:
     import torch
+    import sequence_utils as scoring
     import run_preference_oracle_core as core
 
 
@@ -31,7 +32,7 @@ class RecipeTests(unittest.TestCase):
                          "prompt_relative_sequence_entropy_mean"} <= keys)
 
     def test_recipe_sizes_and_no_duplicate_ids(self):
-        sizes = {"oracle": 16, "nonoracle_transitive": 2, "cyclic_sequence_sum": 2, "cyclic_legacy": 10}
+        sizes = {"oracle": 16, "nonoracle_transitive": 2, "cyclic_sequence_sum": 2, "cyclic_sampling_sweep": 10}
         for name, size in sizes.items():
             config = experiment.load_config(ROOT / "configs" / (name + ".json"))
             self.assertEqual(len(experiment.enumerate_runs(config)), size)
@@ -53,15 +54,26 @@ class RecipeTests(unittest.TestCase):
         self.assertNotIn("--oracle_model_path", command)
         self.assertTrue(command[1].endswith("run_ipo.py"))
 
-    def test_legacy_is_separate(self):
-        config = experiment.load_config(ROOT / "configs/cyclic_legacy.json")
+    def test_cyclic_sweep_uses_standard_core(self):
+        config = experiment.load_config(ROOT / "configs/cyclic_sampling_sweep.json")
         runs = experiment.enumerate_runs(config)
         self.assertEqual(runs[0]["parameters"]["beta"], 10)
         self.assertEqual(runs[5]["parameters"]["beta"], 1)
         command, _ = experiment.build_command(config, runs[0], "model", "data", "out", "reward")
-        self.assertIn("legacy", Path(command[1]).parts)
-        self.assertNotIn("--enable_oracle", command)
-        self.assertIn("--eval_support_source", command)
+        self.assertEqual(Path(command[1]), ROOT / "scripts/run_ipo.py")
+        self.assertEqual(command[command.index("--enable_oracle") + 1], "0")
+        self.assertEqual(command[command.index("--iters") + 1], "151")
+
+    def test_no_token_average_training_or_scoring_entry_points(self):
+        self.assertFalse(any((ROOT / "scripts/legacy").glob("*.py")))
+        for folder in (ROOT / "scripts", ROOT / "experiments"):
+            for path in folder.rglob("*.py"):
+                tree = ast.parse(path.read_text(encoding="utf-8"))
+                for node in ast.walk(tree):
+                    if isinstance(node, (ast.FunctionDef, ast.Name)):
+                        name = getattr(node, "name", getattr(node, "id", ""))
+                        self.assertNotIn("avg_logprob", name, str(path))
+                        self.assertNotIn("sum_and_avg", name, str(path))
 
     def test_preview_never_imports_torch_or_creates_output(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -109,7 +121,7 @@ class CoreTests(unittest.TestCase):
         torch.set_num_threads(1)
 
     def test_all_standard_recipe_flags_parse(self):
-        for name in ("oracle", "nonoracle_transitive", "cyclic_sequence_sum"):
+        for name in ("oracle", "nonoracle_transitive", "cyclic_sequence_sum", "cyclic_sampling_sweep"):
             config = experiment.load_config(ROOT / "configs" / (name + ".json"))
             for run in experiment.enumerate_runs(config):
                 command, _ = experiment.build_command(config, run, "model", "data", "out", "reward")
@@ -119,11 +131,13 @@ class CoreTests(unittest.TestCase):
                 core.validate_args(args)
 
     def test_sampling_semantics_distinguish_oracle_and_static(self):
-        dynamic = core.sampling_metadata(argparse.Namespace(enable_oracle=1, oracle_train_pairs=1))
-        static = core.sampling_metadata(argparse.Namespace(enable_oracle=0, oracle_train_pairs=0))
+        dynamic = core.sampling_metadata(argparse.Namespace(enable_oracle=1, oracle_train_pairs=1, preference_case="transitive"))
+        static = core.sampling_metadata(argparse.Namespace(enable_oracle=0, oracle_train_pairs=0, preference_case="cyclic"))
         self.assertEqual(dynamic["lambda_meaning"], "initial_generator_probability")
         self.assertEqual(static["lambda_meaning"], "model_induced_pair_target_weight")
         self.assertEqual(static["training_logprob_reduction"], "sequence_sum")
+        self.assertEqual(static["sampling_protocol"], "static_sequence_margin_pair_weights")
+        self.assertEqual(dynamic["eval_support_ranking"], "sequence_sum")
 
     def test_losses_match_positive_pair_objectives(self):
         delta = torch.tensor([-.2, .3], requires_grad=True)
@@ -150,10 +164,13 @@ class CoreTests(unittest.TestCase):
     def test_nonfinite_scores_fail_instead_of_uniform(self):
         with self.assertRaises(FloatingPointError):
             core.safe_softmax_np([0., float("nan")])
-        with patch.object(core, "legacy_batch_sum_and_avg_logprob",
-                          return_value=(torch.tensor([float("nan")]), torch.zeros(1), torch.ones(1))):
+        with patch.object(scoring, "build_batch", return_value={
+            "input_ids": torch.zeros((1, 2), dtype=torch.long),
+            "attention_mask": torch.ones((1, 2)), "labels": torch.tensor([[-100, 0]])
+        }):
+            model = lambda **kwargs: argparse.Namespace(logits=torch.full((1, 2, 2), float("nan")))
             with self.assertRaises(FloatingPointError):
-                core.batch_sum_and_avg_logprob()
+                core.batch_sequence_logprob(model, None, ["p"], ["y"], 8, "cpu")
 
     def test_reference_uses_sum_and_stays_frozen(self):
         model, initial = torch.nn.Linear(1, 1), torch.nn.Linear(1, 1)
@@ -166,9 +183,9 @@ class CoreTests(unittest.TestCase):
         def scores(net, tok, prompts, responses, max_length, device):
             value = float(net.weight[0, 0].item())
             sums = torch.full((len(prompts),), value)
-            return sums, sums / 10, torch.full((len(prompts),), 10)
+            return sums, torch.full((len(prompts),), 10)
 
-        with patch.object(core, "batch_sum_and_avg_logprob", side_effect=scores):
+        with patch.object(core, "batch_sequence_logprob", side_effect=scores):
             frozen = core.freeze_outer_reference_scores(model, initial, None, dataset, .8, 1, 32, "cpu")
         self.assertAlmostEqual(frozen[0]["chosen_reference_score"], 6.8, places=5)
         with torch.no_grad():

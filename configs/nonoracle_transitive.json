@@ -1,5 +1,5 @@
 {
-  "name": "nonoracle_transitive_sequencesum",
+  "name": "nonoracle_transitive_sequencesum_v3",
   "protocol": "static",
   "preference_case": "transitive",
   "status": "Standardized fixed-pair recipes, not claims of completed new runs",

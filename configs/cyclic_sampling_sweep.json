@@ -1,11 +1,11 @@
 {
-  "name": "cyclic_legacy_sampling",
-  "protocol": "legacy_cyclic",
+  "name": "cyclic_sampling_sequencesum_v3",
+  "protocol": "static",
   "preference_case": "cyclic",
-  "status": "Historical protocol; DPO lambda=1 has known invalid snapshots from 82 onward",
+  "status": "Sequence-sum-only follow-up grid; not a reproduction or completed result",
   "grid": {"method": ["ipo", "dpo"], "alpha": [0.99], "lambda_on": [1, 0.75, 0.5, 0.25, 0]},
   "common": {
-    "iters": 150, "seed": 0, "tau": 1,
+    "iters": 151, "seed": 0, "tau": 1,
     "mix_eps": 0, "w_clip_min": 0, "w_clip_max": 1000000,
     "score_batch_size": 4, "save_final_adapter": 0
   },

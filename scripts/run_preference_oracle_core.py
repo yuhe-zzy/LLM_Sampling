@@ -17,10 +17,10 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer, get_linear_schedule_with_warmup
 
-from legacy.run_ipo import (
+from sequence_utils import (
     PairDataset,
     build_batch as run_build_batch,
-    batch_sum_and_avg_logprob as legacy_batch_sum_and_avg_logprob,
+    batch_sequence_logprob,
     build_generated_eval_set,
     build_prompt_aware_training_subset,
     build_prompt_to_pair_indices,
@@ -28,7 +28,7 @@ from legacy.run_ipo import (
     entropy_from_probs,
     maybe_save_adapter,
     read_jsonl,
-    safe_softmax_np as legacy_safe_softmax_np,
+    safe_softmax_np,
     sum_logprob_and_count_from_outputs,
     total_variation,
     write_json,
@@ -39,25 +39,14 @@ from legacy.run_ipo import (
 DEFAULT_ORACLE_MODEL = "nvidia/Llama-3.1-Nemotron-70B-Reward-HF"
 
 
-def safe_softmax_np(scores):
-    if not np.isfinite(scores).all():
-        raise FloatingPointError("Nonfinite panel scores; refusing a uniform fallback.")
-    return legacy_safe_softmax_np(scores)
-
-
-def batch_sum_and_avg_logprob(*args, **kwargs):
-    result = legacy_batch_sum_and_avg_logprob(*args, **kwargs)
-    if not all(torch.isfinite(value).all() for value in result[:2]):
-        raise FloatingPointError("Nonfinite response likelihoods.")
-    return result
-
-
 def sampling_metadata(args):
     dynamic = args.enable_oracle == 1 and args.oracle_train_pairs == 1
     return {
-        "sampling_protocol": "initial_current_generator_mixture" if dynamic else "static_average_margin_pair_weights",
+        "sampling_protocol": "initial_current_generator_mixture" if dynamic else "static_sequence_margin_pair_weights",
         "lambda_meaning": "initial_generator_probability" if dynamic else "model_induced_pair_target_weight",
         "training_logprob_reduction": "sequence_sum",
+        "likelihood_protocol_version": "sequence_sum_only_v3",
+        "eval_support_ranking": "sequence_sum" if args.preference_case == "transitive" else "dataset_order",
         "gradient_accumulation_reduction": "sum_microbatch_means",
     }
 
@@ -138,21 +127,19 @@ def freeze_outer_reference_scores(
     ref0.eval()
     chosen_reference_scores: List[float] = []
     rejected_reference_scores: List[float] = []
-    # DPO and IPO objectives both use full-sequence log probabilities.
-    score_index = 0
     for batch in tqdm(loader, desc="freeze_outer_reference", ncols=100):
-        lp_c_pi_t = batch_sum_and_avg_logprob(
+        lp_c_pi_t = batch_sequence_logprob(
             model, tok, batch["prompt"], batch["chosen"], max_length, device
-        )[score_index]
-        lp_r_pi_t = batch_sum_and_avg_logprob(
+        )[0]
+        lp_r_pi_t = batch_sequence_logprob(
             model, tok, batch["prompt"], batch["rejected"], max_length, device
-        )[score_index]
-        lp_c_ref0 = batch_sum_and_avg_logprob(
+        )[0]
+        lp_c_ref0 = batch_sequence_logprob(
             ref0, tok, batch["prompt"], batch["chosen"], max_length, device
-        )[score_index]
-        lp_r_ref0 = batch_sum_and_avg_logprob(
+        )[0]
+        lp_r_ref0 = batch_sequence_logprob(
             ref0, tok, batch["prompt"], batch["rejected"], max_length, device
-        )[score_index]
+        )[0]
         lp_c_ref_t = (1.0 - float(alpha)) * lp_c_ref0 + float(alpha) * lp_c_pi_t
         lp_r_ref_t = (1.0 - float(alpha)) * lp_r_ref0 + float(alpha) * lp_r_pi_t
         chosen_reference_scores.extend(lp_c_ref_t.float().cpu().tolist())
@@ -836,7 +823,6 @@ def dump_prompt_metrics(
     group_offsets: List[Tuple[int, int]],
     max_k: int,
     flat_sum_scores: np.ndarray,
-    flat_avg_scores: np.ndarray,
     flat_reference_sum_scores: np.ndarray,
     flat_response_token_counts: np.ndarray,
     q_matrix: np.ndarray,
@@ -860,11 +846,11 @@ def dump_prompt_metrics(
             "prompt_id": int(prompt_ids[pid]),
             "prompt": prompts[pid],
             "K": int(k),
-            "entropy": float(entropies[pid]),
-            "tv_delta": float(tvs[pid]) if np.isfinite(tvs[pid]) else np.nan,
-            "top1_idx": int(top1[pid]),
-            "top1_initial_idx": int(top1_initial[pid]) if top1_initial is not None else -1,
-            "top1_flipped_vs_initial": int(top1_initial is not None and top1[pid] != top1_initial[pid]),
+            "sequence_entropy": float(entropies[pid]),
+            "sequence_tv_delta": float(tvs[pid]) if np.isfinite(tvs[pid]) else np.nan,
+            "sequence_top1_idx": int(top1[pid]),
+            "sequence_top1_initial_idx": int(top1_initial[pid]) if top1_initial is not None else -1,
+            "sequence_top1_flipped_vs_initial": int(top1_initial is not None and top1[pid] != top1_initial[pid]),
             "relative_sequence_entropy": float(relative_entropies[pid]),
             "relative_sequence_tv_delta": (
                 float(relative_tvs[pid]) if np.isfinite(relative_tvs[pid]) else np.nan
@@ -882,8 +868,7 @@ def dump_prompt_metrics(
             if j < k:
                 flat_idx = start + j
                 row[f"sequence_logprob_{j}"] = float(flat_sum_scores[flat_idx])
-                row[f"avg_logprob_{j}"] = float(flat_avg_scores[flat_idx])
-                row[f"prob_{j}"] = float(q_matrix[pid, j])
+                row[f"sequence_prob_{j}"] = float(q_matrix[pid, j])
                 row[f"reference_sequence_logprob_{j}"] = float(
                     flat_reference_sum_scores[flat_idx]
                 )
@@ -896,8 +881,7 @@ def dump_prompt_metrics(
                 row[f"response_source_{j}"] = sources_by_prompt[pid][j]
             else:
                 row[f"sequence_logprob_{j}"] = np.nan
-                row[f"avg_logprob_{j}"] = np.nan
-                row[f"prob_{j}"] = np.nan
+                row[f"sequence_prob_{j}"] = np.nan
                 row[f"reference_sequence_logprob_{j}"] = np.nan
                 row[f"relative_sequence_logit_{j}"] = np.nan
                 row[f"relative_sequence_prob_{j}"] = np.nan
@@ -1130,7 +1114,7 @@ def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
     ref_score_bs = max(1, int(args.score_batch_size))
     for s in tqdm(range(0, len(flat_prompts), ref_score_bs), desc="score_pi0_eval_support", ncols=100):
         e = min(len(flat_prompts), s + ref_score_bs)
-        sum_lp, _, token_count = batch_sum_and_avg_logprob(
+        sum_lp, token_count = batch_sequence_logprob(
             ref0, tok, flat_prompts[s:e], flat_resps[s:e], args.max_length, train_device
         )
         flat_reference_sum_scores[s:e] = sum_lp.numpy()
@@ -1235,15 +1219,13 @@ def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
         model.eval()
         ref0.eval()
         flat_sum_scores = np.zeros(len(flat_prompts), dtype=np.float32)
-        flat_avg_scores = np.zeros(len(flat_prompts), dtype=np.float32)
         bs = max(1, int(args.score_batch_size))
         for s in tqdm(range(0, len(flat_prompts), bs), desc=f"score_eval_support@{t}", ncols=100):
             e = min(len(flat_prompts), s + bs)
-            sum_lp, avg_lp, token_count = batch_sum_and_avg_logprob(
+            sum_lp, token_count = batch_sequence_logprob(
                 model, tok, flat_prompts[s:e], flat_resps[s:e], args.max_length, train_device
             )
             flat_sum_scores[s:e] = sum_lp.numpy()
-            flat_avg_scores[s:e] = avg_lp.numpy()
             if not np.array_equal(flat_response_token_counts[s:e], token_count.numpy()):
                 raise RuntimeError("Eval-support response token counts changed across policy scoring.")
 
@@ -1252,7 +1234,7 @@ def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
         tvs = np.full(num_prompts_eval, np.nan, dtype=np.float64)
         top1 = np.full(num_prompts_eval, -1, dtype=np.int64)
         for pid, (start, end) in enumerate(group_offsets):
-            scores = flat_avg_scores[start:end].astype(np.float64)
+            scores = flat_sum_scores[start:end].astype(np.float64)
             probs = safe_softmax_np(scores * float(args.tau))
             k = end - start
             q_matrix[pid, :k] = probs
@@ -1425,7 +1407,6 @@ def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
                 group_offsets,
                 max_k,
                 flat_sum_scores,
-                flat_avg_scores,
                 flat_reference_sum_scores,
                 flat_response_token_counts,
                 q_matrix,
@@ -1474,15 +1455,15 @@ def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
             "prompt_relative_sequence_entropy_pct_change_mean": relative_entropy_pct_change_mean,
             "eval_response_token_count_mean": float(np.mean(flat_response_token_counts)),
             "eval_response_token_count_median": float(np.median(flat_response_token_counts)),
-            "prompt_entropy_mean": entropy_mean,
-            "prompt_entropy_min": entropy_min,
-            "prompt_entropy_max": entropy_max,
-            "prompt_tv_mean": tv_mean,
-            "prompt_tv_max": tv_max,
-            "top1_flip_rate_vs_initial": top1_flip_rate,
-            "prompt_entropy_abs_delta_mean": entropy_abs_delta_mean,
-            "prompt_entropy_abs_delta_max": entropy_abs_delta_max,
-            "prompt_entropy_pct_change_mean": entropy_pct_change_mean,
+            "prompt_sequence_entropy_mean": entropy_mean,
+            "prompt_sequence_entropy_min": entropy_min,
+            "prompt_sequence_entropy_max": entropy_max,
+            "prompt_sequence_tv_mean": tv_mean,
+            "prompt_sequence_tv_max": tv_max,
+            "sequence_top1_flip_rate_vs_initial": top1_flip_rate,
+            "prompt_sequence_entropy_abs_delta_mean": entropy_abs_delta_mean,
+            "prompt_sequence_entropy_abs_delta_max": entropy_abs_delta_max,
+            "prompt_sequence_entropy_pct_change_mean": entropy_pct_change_mean,
             "cycle_strength_mean": cycle_strength_mean,
             "cycle_strength_max": cycle_strength_max,
             "num_prompts_eval": int(num_prompts_eval),
@@ -1499,7 +1480,7 @@ def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
 
         print(
             f"[Metrics@t={t}] H_rel_seq={relative_entropy_mean:.6g} "
-            f"TV_rel_seq={relative_tv_mean:.6g} H_avg={entropy_mean:.6g} TV_avg={tv_mean:.6g} "
+            f"TV_rel_seq={relative_tv_mean:.6g} H_seq={entropy_mean:.6g} TV_seq={tv_mean:.6g} "
             f"top1_flip={top1_flip_rate:.3f} CS={cycle_strength_mean:.6g} "
             f"train_pairs={len(train_ds_weighted)}"
         )

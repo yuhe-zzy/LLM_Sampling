@@ -14,7 +14,7 @@ import sys
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[1]
-PROTOCOLS = {"oracle", "static", "legacy_cyclic"}
+PROTOCOLS = {"oracle", "static"}
 COMMON = {
     "seed": 0, "auto_stop": 0, "epochs_per_iter": 1,
     "iters": 81, "alpha": 0.8, "lambda_on": 0.5, "beta": 1,
@@ -41,8 +41,6 @@ def load_config(path):
         raise ValueError("preference_case must be transitive or cyclic")
     if config["protocol"] == "oracle" and config["preference_case"] != "transitive":
         raise ValueError("A scalar training oracle does not preserve cyclic labels")
-    if config["protocol"] == "legacy_cyclic" and config["preference_case"] != "cyclic":
-        raise ValueError("The legacy_cyclic recipe requires cyclic data")
     grid = config["grid"]
     if not grid or any(not isinstance(v, list) or not v for v in grid.values()):
         raise ValueError("Every grid axis must be a nonempty list")
@@ -89,27 +87,22 @@ def build_command(config, run, model_path, data_root, output_root, oracle_model)
         eval_prompts_path=str(Path(data_root) / f"eval_prompt_responses{suffix}_1000.jsonl"),
         log_dir=str(run_root / "logs"), out_dir=str(run_root / "checkpoints"),
     )
-    if protocol == "legacy_cyclic":
-        entry = ROOT / "scripts" / "legacy" / f"run_{method}.py"
-        params.update(eval_support_source="data", eval_response_keep_k=4,
-                      compute_oscillation=1, compute_loss_diagnostics=0, track_inner_val_loss=0)
-    else:
-        entry = ROOT / "scripts" / f"run_{method}{'_oracle' if protocol == 'oracle' else ''}.py"
-        params.update(preference_case=case, enable_oracle=int(protocol == "oracle"),
-                      oracle_train_pairs=int(protocol == "oracle"), model_torch_dtype="float16")
-        if protocol == "oracle":
-            params.update(
-                oracle_model_path=str(oracle_model), oracle_torch_dtype="bfloat16",
-                oracle_device_map="auto", oracle_max_length=4096, oracle_batch_size=1,
-                oracle_eval_every=20, oracle_num_prompts=500, oracle_num_responses=4,
-                oracle_generation_batch_size=4, oracle_max_new_tokens=256,
-                oracle_do_sample=1, oracle_temperature=0.8, oracle_top_p=0.95,
-                oracle_seed=777, oracle_train_skip_ties=1, oracle_train_max_new_tokens=256,
-                oracle_train_do_sample=1, oracle_train_temperature=0.8, oracle_train_top_p=0.95,
-                # Per-run caches avoid cross-support and concurrent-writer collisions.
-                oracle_baseline_cache_path=str(run_root / "oracle_baseline.jsonl"),
-                oracle_reuse_baseline_cache=1,
-            )
+    entry = ROOT / "scripts" / f"run_{method}{'_oracle' if protocol == 'oracle' else ''}.py"
+    params.update(preference_case=case, enable_oracle=int(protocol == "oracle"),
+                  oracle_train_pairs=int(protocol == "oracle"), model_torch_dtype="float16")
+    if protocol == "oracle":
+        params.update(
+            oracle_model_path=str(oracle_model), oracle_torch_dtype="bfloat16",
+            oracle_device_map="auto", oracle_max_length=4096, oracle_batch_size=1,
+            oracle_eval_every=20, oracle_num_prompts=500, oracle_num_responses=4,
+            oracle_generation_batch_size=4, oracle_max_new_tokens=256,
+            oracle_do_sample=1, oracle_temperature=0.8, oracle_top_p=0.95,
+            oracle_seed=777, oracle_train_skip_ties=1, oracle_train_max_new_tokens=256,
+            oracle_train_do_sample=1, oracle_train_temperature=0.8, oracle_train_top_p=0.95,
+            # Per-run caches avoid cross-support and concurrent-writer collisions.
+            oracle_baseline_cache_path=str(run_root / "oracle_baseline.jsonl"),
+            oracle_reuse_baseline_cache=1,
+        )
     command = [sys.executable, str(entry)]
     for key, value in params.items():
         command.extend([f"--{key}", str(value)])

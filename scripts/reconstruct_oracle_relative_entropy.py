@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Reconstruct sequence-ratio entropy; old CSV score conversion is read-only."""
 import argparse
 import math
 import re
@@ -19,6 +20,8 @@ def entropy(probs: np.ndarray) -> float:
 
 def softmax(logits: np.ndarray) -> np.ndarray:
     logits = np.asarray(logits, dtype=np.float64)
+    if not np.isfinite(logits).all():
+        raise FloatingPointError("Nonfinite sequence logits")
     logits = logits - np.max(logits)
     weights = np.exp(logits)
     return weights / weights.sum()
@@ -61,11 +64,22 @@ def load_dumps(dump_dir: Path):
     return sorted(dumps)
 
 
+def sequence_scores(row, k, counts):
+    if "sequence_logprob_0" in row.index:
+        scores = np.asarray([row[f"sequence_logprob_{j}"] for j in range(k)], dtype=float)
+    else:
+        # Import-only adapter for archived CSVs; never used by a trainer.
+        scores = np.asarray([row[f"avg_logprob_{j}"] for j in range(k)], dtype=float) * counts[:k]
+    if not np.isfinite(scores).all():
+        raise FloatingPointError("Nonfinite sequence likelihoods in saved data")
+    return scores
+
+
 def build_reference_state(tokenizer, frame: pd.DataFrame, max_length: int):
     frame = frame.sort_values("prompt_index").reset_index(drop=True)
     max_k = int(frame["K"].max())
     counts = np.full((len(frame), max_k), np.nan, dtype=np.float64)
-    reference_avg = np.full((len(frame), max_k), np.nan, dtype=np.float64)
+    reference_sum = np.full((len(frame), max_k), np.nan, dtype=np.float64)
     responses = []
 
     for row_index, row in frame.iterrows():
@@ -76,12 +90,16 @@ def build_reference_state(tokenizer, frame: pd.DataFrame, max_length: int):
             counts[row_index, candidate_index] = response_token_count(
                 tokenizer, row["prompt"], response, max_length
             )
-            reference_avg[row_index, candidate_index] = float(
-                row[f"avg_logprob_{candidate_index}"]
-            )
+            count_key = f"response_token_count_{candidate_index}"
+            if count_key in row.index and int(row[count_key]) != counts[row_index, candidate_index]:
+                raise RuntimeError("Saved token counts disagree with tokenizer/truncation settings")
             row_responses.append(response)
         responses.append(row_responses)
-    return frame, counts, reference_avg, responses
+        if "reference_sequence_logprob_0" in row.index:
+            reference_sum[row_index, :k] = [row[f"reference_sequence_logprob_{j}"] for j in range(k)]
+        else:
+            reference_sum[row_index, :k] = sequence_scores(row, k, counts[row_index])
+    return frame, counts, reference_sum, responses
 
 
 def validate_support(frame: pd.DataFrame, reference: pd.DataFrame, responses) -> pd.DataFrame:
@@ -91,6 +109,8 @@ def validate_support(frame: pd.DataFrame, reference: pd.DataFrame, responses) ->
     if not np.array_equal(frame["prompt_id"].to_numpy(), reference["prompt_id"].to_numpy()):
         raise RuntimeError("Evaluation prompt ordering changed across iteration dumps")
     for row_index, row in frame.iterrows():
+        if row["prompt"] != reference.iloc[row_index]["prompt"]:
+            raise RuntimeError("Evaluation prompt text changed across iteration dumps")
         if int(row["K"]) != len(responses[row_index]):
             raise RuntimeError("Evaluation support size changed across iteration dumps")
         for candidate_index, expected in enumerate(responses[row_index]):
@@ -99,7 +119,7 @@ def validate_support(frame: pd.DataFrame, reference: pd.DataFrame, responses) ->
     return frame
 
 
-def prompt_probabilities(frame, counts, reference_avg, tau: float):
+def prompt_probabilities(frame, counts, reference_sum, tau: float):
     probabilities = []
     direct = "relative_sequence_prob_0" in frame.columns
     for row_index, row in frame.iterrows():
@@ -109,31 +129,32 @@ def prompt_probabilities(frame, counts, reference_avg, tau: float):
                 [float(row[f"relative_sequence_prob_{j}"]) for j in range(k)],
                 dtype=np.float64,
             )
+            if not np.isfinite(probs).all() or np.any(probs < 0) or probs.sum() <= 0:
+                raise FloatingPointError("Invalid saved relative-sequence probabilities")
             probs = probs / probs.sum()
         else:
-            current_avg = np.asarray(
-                [float(row[f"avg_logprob_{j}"]) for j in range(k)],
-                dtype=np.float64,
-            )
-            relative_logits = (
-                (current_avg - reference_avg[row_index, :k])
-                * counts[row_index, :k]
-                * float(tau)
-            )
+            current_sum = sequence_scores(row, k, counts[row_index])
+            relative_logits = (current_sum - reference_sum[row_index, :k]) * float(tau)
             probs = softmax(relative_logits)
         probabilities.append(probs)
-    return probabilities, "direct_pi0_scores" if direct else "reconstructed_from_iter0_avg_and_token_count"
+    if direct:
+        mode = "saved_relative_sequence_probabilities"
+    elif "sequence_logprob_0" in frame.columns:
+        mode = "reconstructed_from_sequence_scores"
+    else:
+        mode = "imported_archived_scores_times_token_count"
+    return probabilities, mode
 
 
 def reconstruct_run(run_dir: Path, tokenizer, max_length: int) -> Path:
     metrics_path = find_metrics_file(run_dir)
-    legacy_metrics = pd.read_csv(metrics_path)
+    metrics = pd.read_csv(metrics_path)
     dump_dir = find_dump_dir(run_dir)
     dumps = load_dumps(dump_dir)
     if not dumps or dumps[0][0] != 0:
         raise RuntimeError(f"Iteration zero dump is required in {dump_dir}")
 
-    reference, counts, reference_avg, responses = build_reference_state(
+    reference, counts, reference_sum, responses = build_reference_state(
         tokenizer, pd.read_csv(dumps[0][1]), max_length
     )
     initial_top1 = None
@@ -143,7 +164,7 @@ def reconstruct_run(run_dir: Path, tokenizer, max_length: int) -> Path:
     for iteration, path in dumps:
         frame = validate_support(pd.read_csv(path), reference, responses)
         probs_by_prompt, reconstruction_mode = prompt_probabilities(
-            frame, counts, reference_avg, tau=float(legacy_metrics["tau"].iloc[0])
+            frame, counts, reference_sum, tau=float(metrics["tau"].iloc[0])
         )
         entropies = np.asarray([entropy(probs) for probs in probs_by_prompt])
         top1 = np.asarray([int(np.argmax(probs)) for probs in probs_by_prompt])
@@ -157,16 +178,16 @@ def reconstruct_run(run_dir: Path, tokenizer, max_length: int) -> Path:
                 [0.5 * np.abs(cur - prev).sum() for cur, prev in zip(probs_by_prompt, previous_probs)]
             )
 
-        legacy_row = legacy_metrics.loc[legacy_metrics["iter"] == iteration]
-        old_entropy = float(legacy_row["prompt_entropy_mean"].iloc[0]) if len(legacy_row) else math.nan
-        oracle_wr = float(legacy_row["oracle_win_rate"].iloc[0]) if len(legacy_row) else math.nan
+        metric_row = metrics.loc[metrics["iter"] == iteration]
+        oracle_wr = float(metric_row["oracle_win_rate"].iloc[0]) if len(metric_row) else math.nan
         rows.append(
             {
                 "iter": iteration,
-                "loss_type": legacy_metrics["loss_type"].iloc[0],
-                "alpha": float(legacy_metrics["alpha"].iloc[0]),
-                "lambda": float(legacy_metrics["lambda"].iloc[0]),
-                "beta": float(legacy_metrics["beta"].iloc[0]),
+                "loss_type": metrics["loss_type"].iloc[0],
+                "alpha": float(metrics["alpha"].iloc[0]),
+                "lambda": float(metrics["lambda"].iloc[0]),
+                "beta": float(metrics["beta"].iloc[0]),
+                **({"seed": int(metrics["seed"].iloc[0])} if "seed" in metrics else {}),
                 "primary_entropy_metric": "prompt_relative_sequence_entropy_mean",
                 "relative_sequence_score_definition": "log_pi_t_minus_log_pi_0",
                 "reconstruction_mode": reconstruction_mode,
@@ -180,7 +201,6 @@ def reconstruct_run(run_dir: Path, tokenizer, max_length: int) -> Path:
                     float(np.nanmax(tvs)) if np.any(np.isfinite(tvs)) else math.nan
                 ),
                 "relative_sequence_top1_flip_rate_vs_initial": float(np.mean(top1 != initial_top1)),
-                "prompt_length_normalized_entropy_mean": old_entropy,
                 "oracle_win_rate": oracle_wr,
                 "eval_response_token_count_mean": float(np.nanmean(counts)),
                 "eval_response_token_count_median": float(np.nanmedian(counts)),

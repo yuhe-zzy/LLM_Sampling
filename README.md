@@ -2,7 +2,7 @@
 
 Neural experiments for sampling/reference feedback in iterative preference
 optimization. This release separates **scalar-oracle transitive training**,
-**fixed-data non-oracle training**, **historical cyclic reproductions**, and
+**fixed-data non-oracle training**, **cyclic sampling sweeps**, and
 the **new cyclic history pilot**.
 
 The code was synchronized with the experiment server on 24 September 2026.
@@ -17,15 +17,15 @@ credentials, and machine-specific job IDs are deliberately not included.
 | Transitive, online scalar oracle | `scripts/run_ipo_oracle.py`, `scripts/run_dpo_oracle.py`; `configs/oracle.json` | Generate new comparisons; one frozen Nemotron model labels them and evaluates WR |
 | Transitive, non-oracle | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/nonoracle_transitive.json` | Fixed HelpSteer scalar-score labels, no reward-model loading |
 | Cyclic, standard sequence-sum | Same non-oracle entry points with `--preference_case cyclic`; `configs/cyclic_sequence_sum.json` | Fixed tournament labels; ordinary cached-reference examples |
-| Cyclic, historical sampling ablation | `scripts/legacy/run_ipo.py`, `scripts/legacy/run_dpo.py`; `configs/cyclic_legacy.json` | Exact historical runner sources, including legacy IPO averaging and known invalid DPO tail |
+| Cyclic, sampling ablation | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/cyclic_sampling_sweep.json` | Ten sequence-sum follow-up configurations; not historical reproductions |
 | Cyclic, new history experiments | `experiments/cyclic_history/` | Matched ordinary / lagged-reference / feedback-extrapolation arms; prepared, not run |
 
-**Standard entry points use sequence-sum training for both IPO and DPO and
-cache the reference for the whole outer round.** The non-oracle standard
-entry points newly expose the fixed-data branch of that corrected core.
-They are not a claim that historical non-oracle results were produced with
-this standardized protocol. The original non-oracle scripts remain under
-`scripts/legacy/` for that purpose.
+**All runnable IPO/DPO code uses sequence sums, with no token-average mode.**
+This covers training, cached reference scores, static pair margins, generated
+candidate ranking, and panel probabilities. Standard entry points cache the
+reference for the whole outer round. The old `scripts/legacy/` trainers have
+been removed, not kept as alternate entry points. Historical results are not
+retroactively relabeled as results of this new protocol.
 
 The additional ordinary cyclic example is not a matched control for the
 history pilot: the history pilot has its own shared ordinary controls and
@@ -38,10 +38,10 @@ pair law. Do not substitute legacy results for either new control.
 | `alpha` | Current-policy weight in the refreshed geometric log-score reference |
 | `beta` / `beta_train` | Training-loss coefficient, not automatically the paper's payoff gain |
 | Oracle `lambda_on` | Probability of choosing the **initial** response generator |
-| Static/legacy `lambda_on` | Weight on the model-induced **pair-margin distribution**, versus uniform pairs |
+| Static `lambda_on` | Weight on the sequence-sum **pair-margin distribution**, versus uniform pairs |
 | History `lambda_current` | Weight on the current **response-panel distribution**, versus uniform responses |
 | `prompt_relative_sequence_entropy_mean` | Entropy of normalized sequence likelihood ratios to the initial model |
-| `prompt_entropy_mean` | Legacy length-normalized panel entropy; not the primary oracle metric |
+| `prompt_sequence_entropy_mean` | Entropy of normalized raw sequence scores on the panel; distinct from relative entropy |
 
 Full formulas and interpretation limits are in [PROTOCOLS.md](docs/PROTOCOLS.md).
 
@@ -157,7 +157,7 @@ does not import Torch, load a model, write results, or submit a scheduler job.
 python scripts/experiment.py --config configs/oracle.json --list
 python scripts/experiment.py --config configs/oracle.json --index 0
 python scripts/experiment.py --config configs/nonoracle_transitive.json --list
-python scripts/experiment.py --config configs/cyclic_legacy.json --list
+python scripts/experiment.py --config configs/cyclic_sampling_sweep.json --list
 ```
 
 Portable overrides: `--model-path`, `--data-root`, `--output-root`, and
@@ -186,7 +186,7 @@ Low-level Python trainers start training directly; prefer the preview launcher.
 
 There are 16 configurations, eight per objective. `--iters 81` in the current
 core means **81 evaluated states and 80 optimizer rounds**: its last iteration
-is evaluation only. The legacy runners have different indexing (Section 7).
+is evaluation only.
 
 Each training round selects 500 prompts and generates four responses per
 prompt, arranged into two pairs. Each response independently chooses the
@@ -214,7 +214,7 @@ Use `--list` to select only approved missing indices and retain `%1`.
 Use `configs/nonoracle_transitive.json` (two illustrative configurations).
 No Nemotron model is loaded and no oracle WR is computed. Labels come from the
 fixed scalar-score pairs built in Section 3. Sampling uses within-prompt
-average-log-probability **pair margins** to mix a model-induced target with
+sequence-sum log-probability **pair margins** to mix a model-induced target with
 uniform pairs, with the inherited self-normalized/clipped weighting.
 Training likelihoods themselves use **sequence sums**, with a cached
 outer-round reference.
@@ -229,8 +229,8 @@ sbatch --array=0-1%2 slurm/nonoracle.sh configs/nonoracle_transitive.json
 The low-level `scripts/run_ipo.py` and `scripts/run_dpo.py` force
 `--enable_oracle 0 --oracle_train_pairs 0`. Other arguments are shared with the
 oracle core; `--preference_case transitive` selects the generated fixed
-entropy support. The standardized IPO recipe is **not** the old token-average
-non-oracle IPO experiment, and its output must be labeled accordingly.
+entropy support. New outputs carry `likelihood_protocol_version=sequence_sum_only_v3`.
+They must not be presented as reproductions of older non-oracle runs.
 
 ## 7. Cyclic ordinary IPO / DPO
 
@@ -246,29 +246,29 @@ without a scalar training oracle. The two recipes fix alpha=0.99,
 lambda_pair=0.5, beta_train=1 and expose 150 updates (`iters=151`).
 They are runnable ordinary examples, not completed experimental claims.
 
-### Reproduce the historical cyclic sampling ablation
+### Sequence-sum cyclic sampling sweep
 
 ```bash
-python scripts/experiment.py --config configs/cyclic_legacy.json --list
-python scripts/experiment.py --config configs/cyclic_legacy.json --index 0
-# Historical reproduction only, after approval and queue preflight:
-sbatch --array=0-9%2 slurm/nonoracle.sh configs/cyclic_legacy.json
+python scripts/experiment.py --config configs/cyclic_sampling_sweep.json --list
+python scripts/experiment.py --config configs/cyclic_sampling_sweep.json --index 0
+# New experiment only, after approval and queue preflight:
+sbatch --array=0-9%2 slurm/nonoracle.sh configs/cyclic_sampling_sweep.json
 ```
 
-Historical settings: alpha=0.99, tau=1, lambda_pair in
+The sweep retains the parameter choices alpha=0.99, tau=1, lambda_pair in
 `[1, 0.75, 0.5, 0.25, 0]`, seed=0; IPO beta=10 / 1,000 pairs per round,
-DPO beta=1 / 500 pairs per round. There are 150 inner-training rounds and
-pre-update snapshots 0 through 149. The original IPO loss uses token averages;
-DPO training uses sequence sums, but both displayed legacy panel curves use
-token-average probabilities. References are recomputed within minibatches.
-The full legacy runners can also consume transitive fixed pairs directly.
+DPO beta=1 / 500 pairs per round. There are 150 outer training rounds and
+states 0 through 150 (`iters=151`), with evaluation only at the endpoint.
+Both objectives now use sequence-sum scores throughout and cached outer-round
+references. This is a **new follow-up grid**, not a bitwise reproduction of
+the historical runs; existing results must retain their original provenance.
 
 **Known invalid data:** the archived DPO lambda_pair=1 run first has nonfinite
 loss at round 81; all 500 prompts have invalid saved scores from snapshot 82
 onward. The old uniform-softmax fallback must not be plotted as convergence.
 Mask those invalid snapshots and inspect raw scores/losses for every other
 run. `COMPLETED` is a scheduler status, not a numerical-validity guarantee.
-See [historical reproduction notes](docs/LEGACY.md).
+See [historical result caveats](docs/LEGACY.md); no old training entry remains.
 
 ## 8. New cyclic history experiments
 
@@ -331,7 +331,9 @@ scores, response token counts, relative logits, and relative probabilities.
 Primary oracle entropy is `prompt_relative_sequence_entropy_mean`:
 `q_rel(i) = softmax_i(log pi_t(y_i|x) - log pi_0(y_i|x))`.
 It is finite-panel relative-likelihood concentration in nats, **not full-model
-generation entropy**. Keep legacy `prompt_entropy_mean` separate.
+generation entropy**. Raw sequence-panel entropy is separately named
+`prompt_sequence_entropy_mean`. New runs do not emit the ambiguous old
+`prompt_entropy_mean` or token-average probabilities.
 
 Oracle WR compares four current responses against four cached initial-model
 responses per prompt, averaging all 16 strict reward comparisons over 500
@@ -341,7 +343,7 @@ is not independent human validation; a WR plateau alone does not prove convergen
 
 ```bash
 python scripts/plot_results.py \
-  --logs-root outputs/oracle_sequencesum --output-dir results/oracle
+  --logs-root outputs/oracle_sequencesum_v3 --output-dir results/oracle
 ```
 
 This creates separate IPO/DPO relative-entropy and WR PNG/PDF plots and a
@@ -356,9 +358,12 @@ python scripts/reconstruct_oracle_relative_entropy.py \
   --model_path model/Qwen2.5-1.5B --run_glob '*sequencesum_v2' --max_length 1537
 ```
 
-This older reconstruction tool expects one metrics file and an iteration-dump
+This read-only reconstruction tool expects one metrics file and an iteration-dump
 directory immediately within each matched run directory. It is not necessary
-for fresh standard runs. Match the exact tokenizer, EOS, response-token count,
+for fresh standard runs. It prefers saved sequence scores; its only archived
+score compatibility path multiplies previously saved averages by exact token
+counts to recover sums. It cannot train or generate token-average metrics.
+Match the exact tokenizer, EOS, response-token count,
 causal shift and truncation convention; never multiply average scores by a
 character count or an arbitrary common length.
 
@@ -419,9 +424,9 @@ invalid baseline.
 
 ```bash
 python -m compileall -q scripts experiments tests
-CUDA_VISIBLE_DEVICES=`` OMP_NUM_THREADS=1 python -m unittest discover -s tests -v
-CUDA_VISIBLE_DEVICES=`` OMP_NUM_THREADS=1 python -m unittest discover \
-  -s experiments/cyclic_history -p `test_*.py` -v
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 python -m unittest discover -s tests -v
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 python -m unittest discover \
+  -s experiments/cyclic_history -p 'test_*.py' -v
 ```
 
 The tests cover recipe expansion/CLI compatibility, synthetic data builders,

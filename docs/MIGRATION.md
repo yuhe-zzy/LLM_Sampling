@@ -1,72 +1,71 @@
-# September 2026 experiment release
+# Sequence-sum-only release, September 2026
 
-## Source selection
+## Scope and provenance
 
-The old default branch ended at commit
-83b3157 (four-H100 oracle launcher update). That history remains available.
-The release is an ordinary descendant commit; it does not rewrite history.
+The first server-source release was commit `ee21b60`, based on `83b3157`.
+The follow-up removes all token-average training/scoring paths from the current
+checkout at the user's request. Git history and existing experiment results
+remain intact. It does not rewrite past results or change running jobs.
 
-Production Python sources were read from the experiment server on 2026-09-24.
-The corrected shared oracle core includes sequence-sum IPO/DPO, outer-round
-reference caching, direct relative-sequence metrics, and a final
-evaluation-only snapshot. The original non-oracle runner hashes match the
-source snapshot used to prepare the history pilot. SOURCE_MANIFEST.json
-records imported source hashes and release hashes for auditing.
+`SOURCE_MANIFEST.json` retains original imported-source hashes and records
+current published hashes. The shared helper module derives from the imported
+IPO source, with the changes below; it is not an untouched server snapshot.
 
-## File changes
+## Current entry points
 
-| Before | Current role |
+| Entry | Role |
 |---|---|
-| scripts/run_ipo.py, scripts/run_dpo.py | Standard sequence-sum, cached-reference non-oracle entry points |
-| Original non-oracle implementations | Preserved in scripts/legacy/ with original source bytes |
-| scripts/run_preference_oracle_core.py | Current production core plus small publication safeguards |
-| scripts/run_ipo_oracle.py, scripts/run_dpo_oracle.py | Current scalar-oracle entry points |
-| run_iterative_ipo_fast.py | Retired duplicate; retrieve from old Git commits if needed |
-| run_oracle_experiment.sh | Replaced by portable slurm/oracle.sh and explicit JSON recipes |
-| README_REPRODUCE_EXPERIMENTS.md | Redirects to the single authoritative root README |
-| Data builders/download helpers | Retained and synchronized, not discarded |
-| experiments/cyclic_history/ | New matched history pilot, portable paths, tests and documentation |
+| scripts/run_ipo.py, scripts/run_dpo.py | Non-oracle transitive or cyclic |
+| scripts/run_ipo_oracle.py, scripts/run_dpo_oracle.py | Scalar-oracle transitive |
+| scripts/run_preference_oracle_core.py | Shared frozen-reference sequence-sum core |
+| scripts/sequence_utils.py | Sequence-only scores, static sampler and panel construction |
+| experiments/cyclic_history/ | Sequence-sum ordinary/reference/sampling history controls |
 
-Do not assume the root non-oracle entry points reproduce the old scripts
-unchanged. Use scripts/legacy/ for historical non-oracle experiments.
-Standardized non-oracle recipes expose the corrected core on static labels;
-their availability is not a completed-result claim.
+The old `scripts/legacy/` trainers and launcher protocol are removed.
+`configs/cyclic_legacy.json` is replaced by `configs/cyclic_sampling_sweep.json`.
+It keeps the ten parameter combinations but now runs the corrected core,
+with 150 updates plus a final evaluation. It is a new experiment, not a
+completed-result claim or an exact reproduction of historical runs.
 
-## Deliberate publication changes
+## Intentional changes from ee21b60
 
-1. Shared helper imports refer to scripts/legacy/run_ipo.py, preserving their
-   behavior without making the public non-oracle entry points ambiguous.
-2. Standard non-oracle wrappers disable both oracle training and evaluation.
-3. Scalar-oracle training is rejected with cyclic preference metadata: a scalar
-   labeler would replace the cyclic environment.
-4. Nonfinite scored likelihoods, loss, or gradient norm stop the corrected
-   core. Invalid scores are not silently represented as a uniform policy.
-5. An unsupported auto_stop flag and nonpositive/nonfinite beta are rejected.
-6. Public recipes preview before execution and refuse existing run directories;
-   history entry points additionally accept portable path overrides.
-7. Cache locations are isolated per oracle run to avoid support/cache collisions.
-8. Metrics include the training seed and explicit sampling/reduction semantics;
-   static runs no longer claim the oracle generator-mixture convention.
+1. All likelihood scoring returns response-token sums and token counts only.
+   Counts are diagnostics, never divisors of training or sampling scores.
+2. Static pair targets use chosen/rejected **sequence-sum** margins, replacing
+   the average-margin sampler. The proposal/weighting and clipping law is unchanged.
+3. Generated initial candidates are ranked by sequence sums. This can change
+   diagnostic panels; archived panels and curves must retain their provenance.
+4. Raw panel probabilities use sequence sums. Their entropy/TV/probability
+   columns are explicitly named `sequence_*` / `prompt_sequence_*` instead of
+   reusing historical average-score column names.
+5. The primary relative-sequence entropy is unchanged in definition:
+   `softmax(tau*(log_pi_t-log_pi_0))`. Old average entropy is never substituted.
+6. New core metrics label the protocol `sequence_sum_only_v3`; config output
+   names end in `_v3`, so old and new runs cannot silently overwrite each other.
+7. Offline CSV reconstruction prefers sequence scores and can import archived
+   average-only CSVs by multiplying by exact response counts. That compatibility
+   adapter never feeds training and produces only sequence-based metrics.
 
-No learning-rate, accumulation-normalization, reference formula or loss reduction
-was silently changed in the imported corrected oracle core. The history pilot
-already had different precision/accumulation choices; those remain explicit.
-Legacy runner files themselves are retained unchanged.
+Reference caching, IPO/DPO sequence-sum loss formulas, optimizer precision,
+learning rate, accumulation normalization and oracle labeling have not been
+changed in this follow-up. The history pilot was already sequence-sum throughout
+and remains a separate matched-control protocol.
 
-Publication did not stop, restart, resubmit or allocate GPUs for any experiment.
-The private working directory, paper drafts, credentials, dataset text, generated
-responses, adapters and weight files are not repository payloads.
+## Existing safeguards
+
+Non-oracle wrappers reject oracle flags, and scalar-oracle training rejects
+cyclic labels. Nonfinite scores/loss/gradients fail loudly. The recipe launcher
+is dry-run by default, requires an approved allocation to execute, and refuses
+existing output directories. Per-run baseline caches avoid concurrent writers.
+
+Only the GitHub source checkout is updated. No production server source,
+checkpoint, running allocation, queue dependency or concurrency limit is changed.
+CPU validation is not evidence of long-run convergence or absence of collapse.
 
 ## Reproducibility limits
 
-Current standard-core state 80 is obtained with iters=81 because the final
-state is evaluation-only. Some historical launchers had different horizons.
-Use recorded source/config versions when reproducing an old result.
-
-Adapter-only loading is not full RNG/support/optimizer restoration. Prepared
-history runs have not supplied empirical stabilization evidence. Neither CPU
-tests nor successful compilation is a substitute for a complete GPU run.
-
-The requirements-server snapshot records relevant package versions observed
-during release validation; it does not assert that all older jobs used exactly
-those versions. Record per-run environments for a final published result.
+Do not combine old average-derived sampling/panel curves with the new protocol
+as if they came from matched runs. Retain original code/config and support hashes
+with archived results. Adapter-only loading does not restore RNG/support/optimizer
+history and is not a lossless continuation. The package snapshot describes the
+validation environment, not necessarily every historical training job.

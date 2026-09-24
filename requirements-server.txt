@@ -1,0 +1,15 @@
+# Observed on the experiment server during CPU validation, 2026-09-24.
+# Python 3.12.13. Not a CUDA driver lock or a claim about all historical runs.
+torch==2.13.0
+transformers==5.13.1
+peft==0.19.1
+accelerate==1.14.0
+datasets==5.0.0
+huggingface_hub==1.23.0
+numpy==2.5.1
+pandas==3.0.3
+matplotlib==3.11.0
+scipy==1.18.0
+tqdm==4.68.4
+sentencepiece==0.2.2
+protobuf==7.35.1

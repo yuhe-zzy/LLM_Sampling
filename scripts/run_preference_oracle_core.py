@@ -12,15 +12,15 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn.functional as F
-from peft import LoraConfig, get_peft_model
+from peft import LoraConfig, PeftModel, get_peft_model
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer, get_linear_schedule_with_warmup
 
-from run_ipo import (
+from legacy.run_ipo import (
     PairDataset,
     build_batch as run_build_batch,
-    batch_sum_and_avg_logprob,
+    batch_sum_and_avg_logprob as legacy_batch_sum_and_avg_logprob,
     build_generated_eval_set,
     build_prompt_aware_training_subset,
     build_prompt_to_pair_indices,
@@ -28,7 +28,7 @@ from run_ipo import (
     entropy_from_probs,
     maybe_save_adapter,
     read_jsonl,
-    safe_softmax_np,
+    safe_softmax_np as legacy_safe_softmax_np,
     sum_logprob_and_count_from_outputs,
     total_variation,
     write_json,
@@ -37,6 +37,132 @@ from run_ipo import (
 
 
 DEFAULT_ORACLE_MODEL = "nvidia/Llama-3.1-Nemotron-70B-Reward-HF"
+
+
+def safe_softmax_np(scores):
+    if not np.isfinite(scores).all():
+        raise FloatingPointError("Nonfinite panel scores; refusing a uniform fallback.")
+    return legacy_safe_softmax_np(scores)
+
+
+def batch_sum_and_avg_logprob(*args, **kwargs):
+    result = legacy_batch_sum_and_avg_logprob(*args, **kwargs)
+    if not all(torch.isfinite(value).all() for value in result[:2]):
+        raise FloatingPointError("Nonfinite response likelihoods.")
+    return result
+
+
+def sampling_metadata(args):
+    dynamic = args.enable_oracle == 1 and args.oracle_train_pairs == 1
+    return {
+        "sampling_protocol": "initial_current_generator_mixture" if dynamic else "static_average_margin_pair_weights",
+        "lambda_meaning": "initial_generator_probability" if dynamic else "model_induced_pair_target_weight",
+        "training_logprob_reduction": "sequence_sum",
+        "gradient_accumulation_reduction": "sum_microbatch_means",
+    }
+
+
+class DynamicOraclePairDataset:
+    def __init__(self, rows: List[Dict[str, Any]]):
+        self.rows = rows
+
+    def __len__(self):
+        return len(self.rows)
+
+    def __getitem__(self, idx):
+        row = self.rows[idx]
+        return {
+            "idx": int(row.get("idx", idx)),
+            "prompt": row["prompt"],
+            "chosen": row["chosen"],
+            "rejected": row["rejected"],
+            "pair_weight": float(row.get("pair_weight", 1.0)),
+            "train_prompt_local_id": int(row.get("train_prompt_local_id", 0)),
+        }
+
+
+class FrozenReferenceDataset:
+    def __init__(
+        self,
+        base_dataset,
+        chosen_reference_scores: List[float],
+        rejected_reference_scores: List[float],
+    ):
+        if len(base_dataset) != len(chosen_reference_scores) or len(base_dataset) != len(rejected_reference_scores):
+            raise ValueError("Frozen reference score count must match the training dataset length.")
+        self.base_dataset = base_dataset
+        self.chosen_reference_scores = chosen_reference_scores
+        self.rejected_reference_scores = rejected_reference_scores
+
+    def __len__(self):
+        return len(self.base_dataset)
+
+    def __getitem__(self, idx):
+        row = dict(self.base_dataset[idx])
+        row["chosen_reference_score"] = float(self.chosen_reference_scores[idx])
+        row["rejected_reference_score"] = float(self.rejected_reference_scores[idx])
+        return row
+
+
+def collate_with_frozen_reference(batch):
+    out = collate(batch)
+    out["chosen_reference_score"] = torch.tensor(
+        [row["chosen_reference_score"] for row in batch], dtype=torch.float32
+    )
+    out["rejected_reference_score"] = torch.tensor(
+        [row["rejected_reference_score"] for row in batch], dtype=torch.float32
+    )
+    return out
+
+
+@torch.no_grad()
+def freeze_outer_reference_scores(
+    model,
+    ref0,
+    tok,
+    dataset,
+    alpha: float,
+    batch_size: int,
+    max_length: int,
+    device: torch.device,
+):
+    loader = DataLoader(
+        dataset,
+        batch_size=max(1, int(batch_size)),
+        shuffle=False,
+        collate_fn=collate,
+        drop_last=False,
+    )
+    model_was_training = model.training
+    model.eval()
+    ref0.eval()
+    chosen_reference_scores: List[float] = []
+    rejected_reference_scores: List[float] = []
+    # DPO and IPO objectives both use full-sequence log probabilities.
+    score_index = 0
+    for batch in tqdm(loader, desc="freeze_outer_reference", ncols=100):
+        lp_c_pi_t = batch_sum_and_avg_logprob(
+            model, tok, batch["prompt"], batch["chosen"], max_length, device
+        )[score_index]
+        lp_r_pi_t = batch_sum_and_avg_logprob(
+            model, tok, batch["prompt"], batch["rejected"], max_length, device
+        )[score_index]
+        lp_c_ref0 = batch_sum_and_avg_logprob(
+            ref0, tok, batch["prompt"], batch["chosen"], max_length, device
+        )[score_index]
+        lp_r_ref0 = batch_sum_and_avg_logprob(
+            ref0, tok, batch["prompt"], batch["rejected"], max_length, device
+        )[score_index]
+        lp_c_ref_t = (1.0 - float(alpha)) * lp_c_ref0 + float(alpha) * lp_c_pi_t
+        lp_r_ref_t = (1.0 - float(alpha)) * lp_r_ref0 + float(alpha) * lp_r_pi_t
+        chosen_reference_scores.extend(lp_c_ref_t.float().cpu().tolist())
+        rejected_reference_scores.extend(lp_r_ref_t.float().cpu().tolist())
+    model.train(model_was_training)
+    return FrozenReferenceDataset(
+        dataset,
+        chosen_reference_scores=chosen_reference_scores,
+        rejected_reference_scores=rejected_reference_scores,
+    )
 
 
 def ensure_dir(path: str) -> None:
@@ -517,6 +643,173 @@ def evaluate_oracle_checkpoint(
     return stats, response_rows
 
 
+def sample_dynamic_oracle_mixture_responses(
+    args,
+    model,
+    ref0,
+    tok,
+    prompts: List[str],
+    responses_per_prompt: int,
+    seed: int,
+) -> Tuple[List[List[str]], List[List[str]]]:
+    """Sample each response from lambda*pi0 + (1-lambda)*pi_t.
+
+    The Bernoulli routing is explicit: with probability lambda_on a response
+    is generated by pi0/ref0, otherwise by the current checkpoint model.
+    """
+    responses_per_prompt = max(1, int(responses_per_prompt))
+    rng = random.Random(seed)
+    slots: List[Tuple[int, int, str, str]] = []
+    by_source: Dict[str, List[Tuple[int, str]]] = {"pi0": [], "pi_t": []}
+    for pid, prompt in enumerate(prompts):
+        for rid in range(responses_per_prompt):
+            source = "pi0" if rng.random() < float(args.lambda_on) else "pi_t"
+            slot_idx = len(slots)
+            slots.append((pid, rid, source, prompt))
+            by_source[source].append((slot_idx, prompt))
+
+    flat_texts = [""] * len(slots)
+    for source, slot_prompts in by_source.items():
+        if not slot_prompts:
+            continue
+        gen_model = ref0 if source == "pi0" else model
+        grouped = generate_responses_for_prompts_batched(
+            model=gen_model,
+            tok=tok,
+            prompts=[p for _, p in slot_prompts],
+            num_return_sequences=1,
+            batch_size=args.oracle_generation_batch_size,
+            max_new_tokens=args.oracle_train_max_new_tokens,
+            do_sample=bool(args.oracle_train_do_sample),
+            temperature=args.oracle_train_temperature,
+            top_p=args.oracle_train_top_p,
+            seed=seed + (17 if source == "pi0" else 1009),
+        )
+        for (slot_idx, _prompt), ys in zip(slot_prompts, grouped):
+            flat_texts[slot_idx] = ys[0] if ys else ""
+
+    responses_by_prompt = [[""] * responses_per_prompt for _ in prompts]
+    sources_by_prompt = [[""] * responses_per_prompt for _ in prompts]
+    for slot_idx, (pid, rid, source, _prompt) in enumerate(slots):
+        responses_by_prompt[pid][rid] = flat_texts[slot_idx]
+        sources_by_prompt[pid][rid] = source
+    return responses_by_prompt, sources_by_prompt
+
+
+def build_dynamic_oracle_training_subset(
+    args,
+    model,
+    ref0,
+    tok,
+    oracle: HelpfulnessRewardOracle,
+    prompt_to_pair_indices: Dict[str, List[int]],
+    rng,
+    train_prompt_size: int,
+    pairs_per_prompt: int,
+    iteration: int,
+) -> Tuple[DynamicOraclePairDataset, pd.DataFrame, List[str], Dict[str, int]]:
+    prompts_all = list(prompt_to_pair_indices.keys())
+    num_prompts = min(int(train_prompt_size), len(prompts_all))
+    sampled_prompts = rng.sample(prompts_all, k=num_prompts)
+    pairs_per_prompt = max(1, int(pairs_per_prompt))
+    responses_per_prompt = 2 * pairs_per_prompt
+    seed = int(args.seed) + 1000003 * (int(iteration) + 1)
+
+    model.eval()
+    ref0.eval()
+    responses_by_prompt, sources_by_prompt = sample_dynamic_oracle_mixture_responses(
+        args=args,
+        model=model,
+        ref0=ref0,
+        tok=tok,
+        prompts=sampled_prompts,
+        responses_per_prompt=responses_per_prompt,
+        seed=seed,
+    )
+
+    flat_prompts, flat_responses = [], []
+    for prompt, ys in zip(sampled_prompts, responses_by_prompt):
+        for y in ys:
+            flat_prompts.append(prompt)
+            flat_responses.append(y)
+    rewards_flat = oracle.score(flat_prompts, flat_responses)
+
+    train_rows: List[Dict[str, Any]] = []
+    diag_rows: List[Dict[str, Any]] = []
+    sampled_pairs_per_prompt: Dict[str, int] = {}
+    cursor = 0
+    skipped_ties = 0
+    skipped_empty = 0
+    for local_pid, (prompt, ys, srcs) in enumerate(zip(sampled_prompts, responses_by_prompt, sources_by_prompt)):
+        rewards = [float(x) for x in rewards_flat[cursor : cursor + len(ys)]]
+        cursor += len(ys)
+        made = 0
+        for pair_local_id in range(pairs_per_prompt):
+            a = 2 * pair_local_id
+            b = a + 1
+            if b >= len(ys):
+                break
+            if normalize_text_key(ys[a]) == "" or normalize_text_key(ys[b]) == "":
+                skipped_empty += 1
+                continue
+            reward_a = rewards[a]
+            reward_b = rewards[b]
+            if reward_a == reward_b and int(args.oracle_train_skip_ties) == 1:
+                skipped_ties += 1
+                continue
+            if reward_a >= reward_b:
+                chosen_idx, rejected_idx = a, b
+            else:
+                chosen_idx, rejected_idx = b, a
+            margin = abs(rewards[chosen_idx] - rewards[rejected_idx])
+            row_idx = len(train_rows)
+            train_rows.append(
+                {
+                    "idx": row_idx,
+                    "prompt": prompt,
+                    "chosen": ys[chosen_idx],
+                    "rejected": ys[rejected_idx],
+                    "pair_weight": 1.0,
+                    "train_prompt_local_id": local_pid,
+                }
+            )
+            made += 1
+            diag_rows.append(
+                {
+                    "train_prompt_local_id": local_pid,
+                    "prompt": prompt,
+                    "dynamic_pair_idx": row_idx,
+                    "pair_local_id": pair_local_id,
+                    "chosen_slot": int(chosen_idx),
+                    "rejected_slot": int(rejected_idx),
+                    "chosen_source": srcs[chosen_idx],
+                    "rejected_source": srcs[rejected_idx],
+                    "chosen_oracle_reward": float(rewards[chosen_idx]),
+                    "rejected_oracle_reward": float(rewards[rejected_idx]),
+                    "oracle_reward_margin": float(margin),
+                    "lambda_pi0_sampling_prob": float(args.lambda_on),
+                    "oracle_train_sampling_mode": "bernoulli_mixture",
+                    "pair_weight": 1.0,
+                    "chosen": ys[chosen_idx],
+                    "rejected": ys[rejected_idx],
+                }
+            )
+        sampled_pairs_per_prompt[prompt] = made
+
+    if not train_rows:
+        raise RuntimeError(
+            "Dynamic oracle training produced zero pairs. "
+            f"skipped_ties={skipped_ties}, skipped_empty={skipped_empty}"
+        )
+    diag_df = pd.DataFrame(diag_rows)
+    if len(diag_df) > 0:
+        diag_df["dynamic_oracle_skipped_ties_total"] = int(skipped_ties)
+        diag_df["dynamic_oracle_skipped_empty_total"] = int(skipped_empty)
+        diag_df["dynamic_oracle_requested_pairs_total"] = int(num_prompts * pairs_per_prompt)
+        diag_df["dynamic_oracle_actual_pairs_total"] = int(len(train_rows))
+    return DynamicOraclePairDataset(train_rows), diag_df, sampled_prompts, sampled_pairs_per_prompt
+
+
 def flatten_eval_support(
     prompts: List[str], responses_by_prompt: List[List[str]]
 ) -> Tuple[List[str], List[str], List[Tuple[int, int]]]:
@@ -542,12 +835,20 @@ def dump_prompt_metrics(
     sources_by_prompt: List[List[str]],
     group_offsets: List[Tuple[int, int]],
     max_k: int,
+    flat_sum_scores: np.ndarray,
     flat_avg_scores: np.ndarray,
+    flat_reference_sum_scores: np.ndarray,
+    flat_response_token_counts: np.ndarray,
     q_matrix: np.ndarray,
     entropies: np.ndarray,
     tvs: np.ndarray,
     top1: np.ndarray,
     top1_initial: Optional[np.ndarray],
+    relative_q_matrix: np.ndarray,
+    relative_entropies: np.ndarray,
+    relative_tvs: np.ndarray,
+    relative_top1: np.ndarray,
+    relative_top1_initial: Optional[np.ndarray],
 ) -> None:
     rows = []
     for pid, (start, end) in enumerate(group_offsets):
@@ -564,17 +865,43 @@ def dump_prompt_metrics(
             "top1_idx": int(top1[pid]),
             "top1_initial_idx": int(top1_initial[pid]) if top1_initial is not None else -1,
             "top1_flipped_vs_initial": int(top1_initial is not None and top1[pid] != top1_initial[pid]),
+            "relative_sequence_entropy": float(relative_entropies[pid]),
+            "relative_sequence_tv_delta": (
+                float(relative_tvs[pid]) if np.isfinite(relative_tvs[pid]) else np.nan
+            ),
+            "relative_sequence_top1_idx": int(relative_top1[pid]),
+            "relative_sequence_top1_initial_idx": (
+                int(relative_top1_initial[pid]) if relative_top1_initial is not None else -1
+            ),
+            "relative_sequence_top1_flipped_vs_initial": int(
+                relative_top1_initial is not None
+                and relative_top1[pid] != relative_top1_initial[pid]
+            ),
         }
         for j in range(max_k):
             if j < k:
                 flat_idx = start + j
+                row[f"sequence_logprob_{j}"] = float(flat_sum_scores[flat_idx])
                 row[f"avg_logprob_{j}"] = float(flat_avg_scores[flat_idx])
                 row[f"prob_{j}"] = float(q_matrix[pid, j])
+                row[f"reference_sequence_logprob_{j}"] = float(
+                    flat_reference_sum_scores[flat_idx]
+                )
+                row[f"relative_sequence_logit_{j}"] = float(
+                    flat_sum_scores[flat_idx] - flat_reference_sum_scores[flat_idx]
+                )
+                row[f"relative_sequence_prob_{j}"] = float(relative_q_matrix[pid, j])
+                row[f"response_token_count_{j}"] = int(flat_response_token_counts[flat_idx])
                 row[f"response_{j}"] = responses_by_prompt[pid][j]
                 row[f"response_source_{j}"] = sources_by_prompt[pid][j]
             else:
+                row[f"sequence_logprob_{j}"] = np.nan
                 row[f"avg_logprob_{j}"] = np.nan
                 row[f"prob_{j}"] = np.nan
+                row[f"reference_sequence_logprob_{j}"] = np.nan
+                row[f"relative_sequence_logit_{j}"] = np.nan
+                row[f"relative_sequence_prob_{j}"] = np.nan
+                row[f"response_token_count_{j}"] = np.nan
                 row[f"response_{j}"] = ""
                 row[f"response_source_{j}"] = ""
         rows.append(row)
@@ -593,6 +920,8 @@ def add_common_args(ap: argparse.ArgumentParser, loss_type: str) -> None:
     ap.add_argument("--iters", type=int, default=10)
     ap.add_argument("--max_iters", type=int, default=100)
     ap.add_argument("--auto_stop", type=int, default=0)
+    ap.add_argument("--start_iter", type=int, default=0)
+    ap.add_argument("--resume_adapter_path", type=str, default="")
 
     ap.add_argument("--epochs_per_iter", type=int, default=1)
     ap.add_argument("--alpha", type=float, default=0.0)
@@ -650,6 +979,12 @@ def add_common_args(ap: argparse.ArgumentParser, loss_type: str) -> None:
     ap.add_argument("--oracle_seed", type=int, default=777)
     ap.add_argument("--oracle_baseline_cache_path", type=str, default="")
     ap.add_argument("--oracle_reuse_baseline_cache", type=int, default=1)
+    ap.add_argument("--oracle_train_pairs", type=int, default=1)
+    ap.add_argument("--oracle_train_skip_ties", type=int, default=1)
+    ap.add_argument("--oracle_train_max_new_tokens", type=int, default=256)
+    ap.add_argument("--oracle_train_do_sample", type=int, default=1)
+    ap.add_argument("--oracle_train_temperature", type=float, default=0.8)
+    ap.add_argument("--oracle_train_top_p", type=float, default=0.95)
 
 
 def validate_args(args) -> None:
@@ -660,6 +995,8 @@ def validate_args(args) -> None:
         raise ValueError("batch_size, grad_accum, and score_batch_size must be >= 1")
     if args.train_prompt_size < 0:
         raise ValueError("--train_prompt_size must be >= 0")
+    if args.start_iter < 0:
+        raise ValueError("--start_iter must be >= 0")
     if args.pairs_per_prompt < 1:
         raise ValueError("--pairs_per_prompt must be >= 1")
     if args.max_length < 1:
@@ -673,12 +1010,28 @@ def validate_args(args) -> None:
             raise ValueError("oracle_num_prompts and oracle_num_responses must be >= 1")
         if args.oracle_eval_every < 1:
             raise ValueError("--oracle_eval_every must be >= 1")
+        if args.oracle_train_pairs not in {0, 1}:
+            raise ValueError("--oracle_train_pairs must be 0 or 1")
+        if args.oracle_train_max_new_tokens < 1:
+            raise ValueError("--oracle_train_max_new_tokens must be >= 1")
 
 
-def run_experiment(loss_type: str) -> None:
+def run_experiment(loss_type: str, *, nonoracle: bool = False) -> None:
     ap = argparse.ArgumentParser()
     add_common_args(ap, loss_type)
+    if nonoracle:
+        ap.set_defaults(enable_oracle=0, oracle_train_pairs=0)
     args = ap.parse_args()
+    if nonoracle and (args.enable_oracle != 0 or args.oracle_train_pairs != 0):
+        ap.error("Non-oracle entry points require --enable_oracle 0 --oracle_train_pairs 0.")
+    if args.enable_oracle == 0 and args.oracle_train_pairs != 0:
+        ap.error("Disable --oracle_train_pairs together with --enable_oracle.")
+    if args.preference_case == "cyclic" and args.oracle_train_pairs == 1:
+        ap.error("Scalar-oracle training replaces cyclic labels; use static cyclic pairs instead.")
+    if not math.isfinite(args.beta) or args.beta <= 0:
+        ap.error("--beta must be finite and positive.")
+    if args.auto_stop != 0:
+        ap.error("This runner has no convergence-based stopping rule; use --auto_stop 0.")
     validate_args(args)
 
     random.seed(args.seed)
@@ -717,7 +1070,14 @@ def run_experiment(loss_type: str) -> None:
         task_type="CAUSAL_LM",
         target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
     )
-    model = get_peft_model(base, lora_cfg)
+    resume_adapter_path = str(args.resume_adapter_path).strip()
+    if resume_adapter_path:
+        if not os.path.isdir(resume_adapter_path):
+            raise ValueError(f"--resume_adapter_path does not exist or is not a directory: {resume_adapter_path}")
+        print(f"[Resume] loading adapter from {resume_adapter_path}")
+        model = PeftModel.from_pretrained(base, resume_adapter_path, is_trainable=True)
+    else:
+        model = get_peft_model(base, lora_cfg)
     model.print_trainable_parameters()
 
     ref0 = AutoModelForCausalLM.from_pretrained(
@@ -761,6 +1121,20 @@ def run_experiment(loss_type: str) -> None:
     num_prompts_eval = len(prompts_eval)
     max_k = max(len(x) for x in responses_by_prompt)
     flat_prompts, flat_resps, group_offsets = flatten_eval_support(prompts_eval, responses_by_prompt)
+
+    # Cache pi_0 sequence scores once. The relative likelihood ratio removes the
+    # pretrained model's strong response-length bias from the concentration metric.
+    print("[Metrics] caching pi_0 sequence log-probabilities on the fixed eval support")
+    flat_reference_sum_scores = np.zeros(len(flat_prompts), dtype=np.float32)
+    flat_response_token_counts = np.zeros(len(flat_prompts), dtype=np.int32)
+    ref_score_bs = max(1, int(args.score_batch_size))
+    for s in tqdm(range(0, len(flat_prompts), ref_score_bs), desc="score_pi0_eval_support", ncols=100):
+        e = min(len(flat_prompts), s + ref_score_bs)
+        sum_lp, _, token_count = batch_sum_and_avg_logprob(
+            ref0, tok, flat_prompts[s:e], flat_resps[s:e], args.max_length, train_device
+        )
+        flat_reference_sum_scores[s:e] = sum_lp.numpy()
+        flat_response_token_counts[s:e] = token_count.numpy()
 
     run_tag = (
         f"{loss_type}_{args.preference_case}_alpha{args.alpha}_lambda{args.lambda_on}"
@@ -834,6 +1208,9 @@ def run_experiment(loss_type: str) -> None:
     prev_q: Optional[np.ndarray] = None
     prev_entropy: Optional[np.ndarray] = None
     initial_top1: Optional[np.ndarray] = None
+    prev_relative_q: Optional[np.ndarray] = None
+    prev_relative_entropy: Optional[np.ndarray] = None
+    initial_relative_top1: Optional[np.ndarray] = None
     q_history: List[np.ndarray] = []
     global_train_batch_step = 0
     T = int(args.max_iters if args.auto_stop == 1 else args.iters)
@@ -842,7 +1219,12 @@ def run_experiment(loss_type: str) -> None:
     metrics_csv = os.path.join(args.log_dir, f"metrics_{run_tag}.csv")
     oracle_resp_csv = os.path.join(args.log_dir, f"oracle_response_scores_{run_tag}.csv")
 
-    for t in range(T):
+    if int(args.start_iter) >= T:
+        raise ValueError(f"--start_iter ({args.start_iter}) must be < total iters ({T})")
+    if int(args.start_iter) > 0:
+        print(f"[Resume] starting outer loop at iter {args.start_iter}; total target iters={T}")
+
+    for t in range(int(args.start_iter), T):
         print(
             f"\n===== {loss_type.upper()} {args.preference_case.upper()} OUTER ITER {t} | "
             f"alpha={args.alpha} lambda={args.lambda_on} tau={args.tau} beta={args.beta} ====="
@@ -852,14 +1234,18 @@ def run_experiment(loss_type: str) -> None:
 
         model.eval()
         ref0.eval()
+        flat_sum_scores = np.zeros(len(flat_prompts), dtype=np.float32)
         flat_avg_scores = np.zeros(len(flat_prompts), dtype=np.float32)
         bs = max(1, int(args.score_batch_size))
         for s in tqdm(range(0, len(flat_prompts), bs), desc=f"score_eval_support@{t}", ncols=100):
             e = min(len(flat_prompts), s + bs)
-            _, avg_lp, _ = batch_sum_and_avg_logprob(
+            sum_lp, avg_lp, token_count = batch_sum_and_avg_logprob(
                 model, tok, flat_prompts[s:e], flat_resps[s:e], args.max_length, train_device
             )
+            flat_sum_scores[s:e] = sum_lp.numpy()
             flat_avg_scores[s:e] = avg_lp.numpy()
+            if not np.array_equal(flat_response_token_counts[s:e], token_count.numpy()):
+                raise RuntimeError("Eval-support response token counts changed across policy scoring.")
 
         q_matrix = np.full((num_prompts_eval, max_k), np.nan, dtype=np.float64)
         entropies = np.zeros(num_prompts_eval, dtype=np.float64)
@@ -895,6 +1281,52 @@ def run_experiment(loss_type: str) -> None:
             entropy_abs_delta_max = float(np.max(np.abs(delta_h)))
             entropy_pct_change_mean = float(np.mean(100.0 * delta_h / np.maximum(np.abs(prev_entropy), pct_eps)))
 
+        relative_q_matrix = np.full((num_prompts_eval, max_k), np.nan, dtype=np.float64)
+        relative_entropies = np.zeros(num_prompts_eval, dtype=np.float64)
+        relative_tvs = np.full(num_prompts_eval, np.nan, dtype=np.float64)
+        relative_top1 = np.full(num_prompts_eval, -1, dtype=np.int64)
+        relative_logits = (
+            flat_sum_scores.astype(np.float64) - flat_reference_sum_scores.astype(np.float64)
+        )
+        for pid, (start, end) in enumerate(group_offsets):
+            probs = safe_softmax_np(relative_logits[start:end] * float(args.tau))
+            k = end - start
+            relative_q_matrix[pid, :k] = probs
+            relative_entropies[pid] = entropy_from_probs(probs)
+            relative_top1[pid] = int(np.argmax(probs))
+            if prev_relative_q is not None:
+                prev_probs = prev_relative_q[pid, :k].astype(np.float64)
+                prev_probs = prev_probs / np.sum(prev_probs)
+                relative_tvs[pid] = total_variation(probs, prev_probs)
+
+        if initial_relative_top1 is None:
+            initial_relative_top1 = relative_top1.copy()
+        relative_top1_flip_rate = float(np.mean(relative_top1 != initial_relative_top1))
+        relative_entropy_mean = float(np.mean(relative_entropies))
+        relative_entropy_min = float(np.min(relative_entropies))
+        relative_entropy_max = float(np.max(relative_entropies))
+        relative_tv_mean = (
+            float(np.nanmean(relative_tvs)) if np.any(~np.isnan(relative_tvs)) else float("nan")
+        )
+        relative_tv_max = (
+            float(np.nanmax(relative_tvs)) if np.any(~np.isnan(relative_tvs)) else float("nan")
+        )
+        if prev_relative_entropy is None:
+            relative_entropy_abs_delta_mean = float("nan")
+            relative_entropy_abs_delta_max = float("nan")
+            relative_entropy_pct_change_mean = float("nan")
+        else:
+            relative_delta_h = relative_entropies - prev_relative_entropy
+            relative_entropy_abs_delta_mean = float(np.mean(np.abs(relative_delta_h)))
+            relative_entropy_abs_delta_max = float(np.max(np.abs(relative_delta_h)))
+            relative_entropy_pct_change_mean = float(
+                np.mean(
+                    100.0
+                    * relative_delta_h
+                    / np.maximum(np.abs(prev_relative_entropy), pct_eps)
+                )
+            )
+
         q_history.append(q_matrix.copy())
         cycle_strength_mean = float("nan")
         cycle_strength_max = float("nan")
@@ -926,29 +1358,60 @@ def run_experiment(loss_type: str) -> None:
                 f"dR={oracle_stats['oracle_reward_delta_mean']:.4f}"
             )
 
-        target_prompt_count = (
-            args.train_prompt_size
-            if args.train_prompt_size > 0
-            else int(math.ceil(args.train_sample_size / max(1, args.pairs_per_prompt)))
-        )
-        rng_train = random.Random(args.seed + 999 * (t + 1))
-        train_ds_weighted, train_diag_df, sampled_prompts, sampled_pairs_per_prompt = build_prompt_aware_training_subset(
-            model,
-            tok,
-            ds,
-            prompt_to_pair_indices,
-            rng_train,
-            target_prompt_count,
-            args.pairs_per_prompt,
-            args.tau,
-            args.lambda_on,
-            args.mix_eps,
-            args.max_length,
-            train_device,
-            args.score_batch_size,
-            args.w_clip_min,
-            args.w_clip_max,
-        )
+        is_final_snapshot = t == int(args.iters) - 1
+        if is_final_snapshot:
+            target_prompt_count = 0
+            train_pair_source = "none_final_snapshot"
+            train_ds_weighted = []
+            train_diag_df = pd.DataFrame()
+            sampled_prompts = []
+            sampled_pairs_per_prompt = {}
+        else:
+            target_prompt_count = (
+                args.train_prompt_size
+                if args.train_prompt_size > 0
+                else int(math.ceil(args.train_sample_size / max(1, args.pairs_per_prompt)))
+            )
+            rng_train = random.Random(args.seed + 999 * (t + 1))
+            train_pair_source = "static_dataset"
+            if args.enable_oracle == 1 and args.oracle_train_pairs == 1:
+                if oracle is None:
+                    raise RuntimeError("--oracle_train_pairs requires --enable_oracle 1")
+                train_pair_source = "dynamic_oracle"
+                train_ds_weighted, train_diag_df, sampled_prompts, sampled_pairs_per_prompt = (
+                    build_dynamic_oracle_training_subset(
+                        args=args,
+                        model=model,
+                        ref0=ref0,
+                        tok=tok,
+                        oracle=oracle,
+                        prompt_to_pair_indices=prompt_to_pair_indices,
+                        rng=rng_train,
+                        train_prompt_size=target_prompt_count,
+                        pairs_per_prompt=args.pairs_per_prompt,
+                        iteration=t,
+                    )
+                )
+            else:
+                train_ds_weighted, train_diag_df, sampled_prompts, sampled_pairs_per_prompt = (
+                    build_prompt_aware_training_subset(
+                        model,
+                        tok,
+                        ds,
+                        prompt_to_pair_indices,
+                        rng_train,
+                        target_prompt_count,
+                        args.pairs_per_prompt,
+                        args.tau,
+                        args.lambda_on,
+                        args.mix_eps,
+                        args.max_length,
+                        train_device,
+                        args.score_batch_size,
+                        args.w_clip_min,
+                        args.w_clip_max,
+                    )
+                )
 
         if args.dump_each_iter == 1:
             dump_prompt_metrics(
@@ -961,18 +1424,28 @@ def run_experiment(loss_type: str) -> None:
                 sources_by_prompt,
                 group_offsets,
                 max_k,
+                flat_sum_scores,
                 flat_avg_scores,
+                flat_reference_sum_scores,
+                flat_response_token_counts,
                 q_matrix,
                 entropies,
                 tvs,
                 top1,
                 initial_top1,
+                relative_q_matrix,
+                relative_entropies,
+                relative_tvs,
+                relative_top1,
+                initial_relative_top1,
             )
             train_diag_df.to_csv(os.path.join(dump_dir, f"iter_{t:04d}_train_pair_support.csv"), index=False)
 
         metric_row: Dict[str, Any] = {
             "iter": int(t),
-            "snapshot_stage": "pre_update",
+            "snapshot_stage": "final_evaluation" if is_final_snapshot else "pre_update",
+            "seed": int(args.seed),
+            **sampling_metadata(args),
             "loss_type": loss_type,
             "preference_case": args.preference_case,
             "alpha": args.alpha,
@@ -985,6 +1458,22 @@ def run_experiment(loss_type: str) -> None:
             "sampled_train_prompts": int(len(sampled_prompts)),
             "train_sample_size": int(args.train_sample_size),
             "pairs_per_prompt": int(args.pairs_per_prompt),
+            "train_pair_source": train_pair_source,
+            "oracle_train_pairs": int(args.oracle_train_pairs),
+            "outer_reference_frozen": True,
+            "primary_entropy_metric": "prompt_relative_sequence_entropy_mean",
+            "relative_sequence_score_definition": "log_pi_t_minus_log_pi_0",
+            "prompt_relative_sequence_entropy_mean": relative_entropy_mean,
+            "prompt_relative_sequence_entropy_min": relative_entropy_min,
+            "prompt_relative_sequence_entropy_max": relative_entropy_max,
+            "prompt_relative_sequence_tv_mean": relative_tv_mean,
+            "prompt_relative_sequence_tv_max": relative_tv_max,
+            "relative_sequence_top1_flip_rate_vs_initial": relative_top1_flip_rate,
+            "prompt_relative_sequence_entropy_abs_delta_mean": relative_entropy_abs_delta_mean,
+            "prompt_relative_sequence_entropy_abs_delta_max": relative_entropy_abs_delta_max,
+            "prompt_relative_sequence_entropy_pct_change_mean": relative_entropy_pct_change_mean,
+            "eval_response_token_count_mean": float(np.mean(flat_response_token_counts)),
+            "eval_response_token_count_median": float(np.median(flat_response_token_counts)),
             "prompt_entropy_mean": entropy_mean,
             "prompt_entropy_min": entropy_min,
             "prompt_entropy_max": entropy_max,
@@ -1009,21 +1498,42 @@ def run_experiment(loss_type: str) -> None:
         }
 
         print(
-            f"[Metrics@t={t}] H={entropy_mean:.6g} TV={tv_mean:.6g} "
+            f"[Metrics@t={t}] H_rel_seq={relative_entropy_mean:.6g} "
+            f"TV_rel_seq={relative_tv_mean:.6g} H_avg={entropy_mean:.6g} TV_avg={tv_mean:.6g} "
             f"top1_flip={top1_flip_rate:.3f} CS={cycle_strength_mean:.6g} "
             f"train_pairs={len(train_ds_weighted)}"
         )
 
         prev_q = q_matrix.copy()
         prev_entropy = entropies.copy()
+        prev_relative_q = relative_q_matrix.copy()
+        prev_relative_entropy = relative_entropies.copy()
+
+        if is_final_snapshot:
+            metrics.append(metric_row)
+            pd.DataFrame(metrics).to_csv(metrics_csv, index=False)
+            print(f"[FinalSnapshot@t={t}] evaluation recorded; no further optimizer update.", flush=True)
+            break
+
+        frozen_train_dataset = freeze_outer_reference_scores(
+            model=model,
+            ref0=ref0,
+            tok=tok,
+            dataset=train_ds_weighted,
+            alpha=args.alpha,
+            batch_size=args.score_batch_size,
+            max_length=args.max_length,
+            device=train_device,
+        )
+        print(f"[OuterRef@t={t}] frozen_scores={len(frozen_train_dataset)}", flush=True)
 
         iter_loss_values: List[float] = []
         model.train()
         train_loader = DataLoader(
-            train_ds_weighted,
+            frozen_train_dataset,
             batch_size=args.batch_size,
             shuffle=True,
-            collate_fn=collate,
+            collate_fn=collate_with_frozen_reference,
             drop_last=False,
         )
         opt = torch.optim.AdamW(model.parameters(), lr=args.lr)
@@ -1038,36 +1548,23 @@ def run_experiment(loss_type: str) -> None:
         for ep in range(int(args.epochs_per_iter)):
             pbar = tqdm(train_loader, desc=f"train_{loss_type}@iter{t}_ep{ep}", ncols=100)
             for batch in pbar:
-                with torch.no_grad():
-                    lp_c_pi = batch_sum_and_avg_logprob(
-                        model, tok, batch["prompt"], batch["chosen"], args.max_length, train_device
-                    )[1].to(train_device)
-                    lp_r_pi = batch_sum_and_avg_logprob(
-                        model, tok, batch["prompt"], batch["rejected"], args.max_length, train_device
-                    )[1].to(train_device)
-                    lp_c_ref0 = batch_sum_and_avg_logprob(
-                        ref0, tok, batch["prompt"], batch["chosen"], args.max_length, train_device
-                    )[1].to(train_device)
-                    lp_r_ref0 = batch_sum_and_avg_logprob(
-                        ref0, tok, batch["prompt"], batch["rejected"], args.max_length, train_device
-                    )[1].to(train_device)
-                    lp_c_ref_t = (1.0 - args.alpha) * lp_c_ref0 + args.alpha * lp_c_pi
-                    lp_r_ref_t = (1.0 - args.alpha) * lp_r_ref0 + args.alpha * lp_r_pi
+                lp_c_ref_t = batch["chosen_reference_score"].to(train_device)
+                lp_r_ref_t = batch["rejected_reference_score"].to(train_device)
 
                 bc = run_build_batch(tok, batch["prompt"], batch["chosen"], args.max_length, train_device)
                 out_c = model(input_ids=bc["input_ids"], attention_mask=bc["attention_mask"], labels=bc["labels"])
-                s_c, c_c = sum_logprob_and_count_from_outputs(out_c.logits, bc["labels"])
-                avg_c = s_c / c_c
+                policy_c, _ = sum_logprob_and_count_from_outputs(out_c.logits, bc["labels"])
 
                 br = run_build_batch(tok, batch["prompt"], batch["rejected"], args.max_length, train_device)
                 out_r = model(input_ids=br["input_ids"], attention_mask=br["attention_mask"], labels=br["labels"])
-                s_r, c_r = sum_logprob_and_count_from_outputs(out_r.logits, br["labels"])
-                avg_r = s_r / c_r
+                policy_r, _ = sum_logprob_and_count_from_outputs(out_r.logits, br["labels"])
 
-                delta = (avg_c - lp_c_ref_t) - (avg_r - lp_r_ref_t)
+                delta = (policy_c - lp_c_ref_t) - (policy_r - lp_r_ref_t)
                 loss_vec = loss_from_delta(delta, args.beta, loss_type)
                 wt = batch["pair_weight"].to(train_device)
                 loss = (wt * loss_vec).mean()
+                if not torch.isfinite(loss):
+                    raise FloatingPointError(f"Nonfinite {loss_type} training loss at iter {t}.")
                 loss_value = float(loss.detach().item())
                 iter_loss_values.append(loss_value)
                 global_train_batch_step += 1
@@ -1075,7 +1572,7 @@ def run_experiment(loss_type: str) -> None:
                 step += 1
 
                 if step % int(args.grad_accum) == 0:
-                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, error_if_nonfinite=True)
                     opt.step()
                     sched.step()
                     opt.zero_grad(set_to_none=True)
@@ -1083,7 +1580,7 @@ def run_experiment(loss_type: str) -> None:
                 pbar.set_postfix({"loss": loss_value})
 
         if step % int(args.grad_accum) != 0:
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, error_if_nonfinite=True)
             opt.step()
             sched.step()
             opt.zero_grad(set_to_none=True)
@@ -1115,12 +1612,16 @@ def run_experiment(loss_type: str) -> None:
         summary_path,
         {
             "loss_type": loss_type,
+            **sampling_metadata(args),
             "preference_case": args.preference_case,
             "alpha": args.alpha,
             "lambda_on": args.lambda_on,
             "tau": args.tau,
             "beta": args.beta,
             "seed": args.seed,
+            "start_iter": int(args.start_iter),
+            "max_outer_iteration": int(args.iters) - 1,
+            "resume_adapter_path": resume_adapter_path or None,
             "pairs_path": args.pairs_path,
             "eval_prompts_path": args.eval_prompts_path,
             "num_prompts_eval": num_prompts_eval,
@@ -1131,6 +1632,17 @@ def run_experiment(loss_type: str) -> None:
             "oracle_num_prompts": args.oracle_num_prompts if args.enable_oracle == 1 else 0,
             "oracle_num_responses": args.oracle_num_responses if args.enable_oracle == 1 else 0,
             "oracle_eval_every": args.oracle_eval_every if args.enable_oracle == 1 else 0,
+            "oracle_train_pairs": int(args.oracle_train_pairs),
+            "oracle_train_pair_source": "dynamic_oracle" if args.oracle_train_pairs == 1 else "static_dataset",
+            "oracle_train_mixture": "lambda*pi0 + (1-lambda)*pi_t" if args.oracle_train_pairs == 1 else None,
+            "oracle_train_lambda_meaning": (
+                "Bernoulli probability of sampling a response from pi0" if args.oracle_train_pairs == 1 else None
+            ),
+            "oracle_train_skip_ties": int(args.oracle_train_skip_ties),
+            "oracle_train_max_new_tokens": int(args.oracle_train_max_new_tokens),
+            "outer_reference_frozen": True,
+            "primary_entropy_metric": "prompt_relative_sequence_entropy_mean",
+            "relative_sequence_score_definition": "log_pi_t_minus_log_pi_0",
             "artifacts": {
                 "metrics_csv": metrics_csv,
                 "oracle_response_scores_csv": oracle_resp_csv if args.enable_oracle == 1 else None,

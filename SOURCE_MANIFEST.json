@@ -1,0 +1,167 @@
+{
+  "release_date": "2026-09-24",
+  "base_commit": "83b3157",
+  "note": "Hashes cover imported source files; new release-only files are versioned by Git. No experiment was launched for this release.",
+  "imported_files": [
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/analyze_lengths.py",
+      "published_path": "scripts/analyze_lengths.py",
+      "source_sha256": "f3cabc9338c18801be7ec9d9a3ae65d92f38bfe14c6ef7fe853df7b047acf83c",
+      "published_sha256": "f3cabc9338c18801be7ec9d9a3ae65d92f38bfe14c6ef7fe853df7b047acf83c",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/build_cyclic_pairs.py",
+      "published_path": "scripts/build_cyclic_pairs.py",
+      "source_sha256": "f2a62b50c618fae172061ef3abc08cd139d41c3f2aecfb79fd1d1e19cebeb641",
+      "published_sha256": "f2a62b50c618fae172061ef3abc08cd139d41c3f2aecfb79fd1d1e19cebeb641",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/build_pairs.py",
+      "published_path": "scripts/build_pairs.py",
+      "source_sha256": "978eaf77727b0194c4cd62326f0635d8ed3117cbf961fcb1e21788026c0b2595",
+      "published_sha256": "978eaf77727b0194c4cd62326f0635d8ed3117cbf961fcb1e21788026c0b2595",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/download.py",
+      "published_path": "scripts/download.py",
+      "source_sha256": "516e6d7254ff54d0a183d113d664aaeb12a5efd3c344c7cbc45dc1d0b095206c",
+      "published_sha256": "516e6d7254ff54d0a183d113d664aaeb12a5efd3c344c7cbc45dc1d0b095206c",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/export_helpsteer_jsonl.py",
+      "published_path": "scripts/export_helpsteer_jsonl.py",
+      "source_sha256": "32d4d781f140275bfa14b5810dff50aaf6c441dd47c89de778fee0036b018c2c",
+      "published_sha256": "32d4d781f140275bfa14b5810dff50aaf6c441dd47c89de778fee0036b018c2c",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/generate_adapter_samples.py",
+      "published_path": "scripts/generate_adapter_samples.py",
+      "source_sha256": "77b30a2b9e2091631b64c0e01ae93e65863366e76654cb92e3f0d4fd3f3c4eed",
+      "published_sha256": "77b30a2b9e2091631b64c0e01ae93e65863366e76654cb92e3f0d4fd3f3c4eed",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/reconstruct_oracle_relative_entropy.py",
+      "published_path": "scripts/reconstruct_oracle_relative_entropy.py",
+      "source_sha256": "4db8b27248ae7466051987a1d8d960594e6d65108609011785bc122d198d1297",
+      "published_sha256": "4db8b27248ae7466051987a1d8d960594e6d65108609011785bc122d198d1297",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_ipo_oracle.py",
+      "published_path": "scripts/run_ipo_oracle.py",
+      "source_sha256": "7eb0ca3802c8e0cec51cfa39c2683a09555616b8ff4c6b9286250eaa0db6f628",
+      "published_sha256": "7eb0ca3802c8e0cec51cfa39c2683a09555616b8ff4c6b9286250eaa0db6f628",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_dpo_oracle.py",
+      "published_path": "scripts/run_dpo_oracle.py",
+      "source_sha256": "a2eed06b0d1b4b089cee5834006f1a681d92e4e14db592b7596e2e683444c86d",
+      "published_sha256": "a2eed06b0d1b4b089cee5834006f1a681d92e4e14db592b7596e2e683444c86d",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_preference_oracle_core.py",
+      "published_path": "scripts/run_preference_oracle_core.py",
+      "source_sha256": "1710f4a59aca8273d6565fe744dc1aef58e94933533ea03b943867682bd95ad8",
+      "published_sha256": "93988c280b8877803ad5a260e9cd2b4df7814a8e3a980fb2abdf879b5760f364",
+      "byte_identical": false
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_ipo.py",
+      "published_path": "scripts/legacy/run_ipo.py",
+      "source_sha256": "c2c120e275477af128aaa9eef464477a70c3c6f2772e5500b0e9082a62f83ae6",
+      "published_sha256": "c2c120e275477af128aaa9eef464477a70c3c6f2772e5500b0e9082a62f83ae6",
+      "byte_identical": true
+    },
+    {
+      "origin": "production_server_2026-09-24",
+      "source_path": "scripts/run_dpo.py",
+      "published_path": "scripts/legacy/run_dpo.py",
+      "source_sha256": "bcc9710ec41e575f89559c30116e718d8dee8050f46ad8919e8dc6359d5bb26c",
+      "published_sha256": "bcc9710ec41e575f89559c30116e718d8dee8050f46ad8919e8dc6359d5bb26c",
+      "byte_identical": true
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "history_math.py",
+      "published_path": "experiments/cyclic_history/history_math.py",
+      "source_sha256": "701f086aea51a40a9c7aa44583515141e11919224fec169b3a706a8ef918dd53",
+      "published_sha256": "701f086aea51a40a9c7aa44583515141e11919224fec169b3a706a8ef918dd53",
+      "byte_identical": true
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "run_cyclic_history.py",
+      "published_path": "experiments/cyclic_history/run_cyclic_history.py",
+      "source_sha256": "29620880917b99b477e50f32608c5214249c5bf07aa36ac6f3502d28eaf3944f",
+      "published_sha256": "3a92b0e9e07352495ce821af76d6275ce3fbd16bab0449f0898ea162c6ec2ee4",
+      "byte_identical": false
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "run_cyclic_lagged_reference.py",
+      "published_path": "experiments/cyclic_history/run_cyclic_lagged_reference.py",
+      "source_sha256": "81c61de227f59129be21eab08157ae4ca9c93230e9b183230b0824fb46632401",
+      "published_sha256": "81c61de227f59129be21eab08157ae4ca9c93230e9b183230b0824fb46632401",
+      "byte_identical": true
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "run_cyclic_lagged_sampling.py",
+      "published_path": "experiments/cyclic_history/run_cyclic_lagged_sampling.py",
+      "source_sha256": "d86ef44a2c84cbdeb68d3581c30aeee5d6a47f6a43746186c009908210675a7f",
+      "published_sha256": "d86ef44a2c84cbdeb68d3581c30aeee5d6a47f6a43746186c009908210675a7f",
+      "byte_identical": true
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "experiment_plan.json",
+      "published_path": "experiments/cyclic_history/experiment_plan.json",
+      "source_sha256": "a39b42a9819d0520b10e3ce7b20869c110cf786b221a78d0c186fcc278c64e44",
+      "published_sha256": "686c34e788c56f60d43868ce1175b6684368606f6395994cde2338084ceee47c",
+      "byte_identical": false
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "test_history_math.py",
+      "published_path": "experiments/cyclic_history/test_history_math.py",
+      "source_sha256": "d887bd844d896b6599bd6a546f1946df4aa79c9cfe94e55826b57a22dee42b40",
+      "published_sha256": "d887bd844d896b6599bd6a546f1946df4aa79c9cfe94e55826b57a22dee42b40",
+      "byte_identical": true
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "test_training_cpu.py",
+      "published_path": "experiments/cyclic_history/test_training_cpu.py",
+      "source_sha256": "0cccdd9686815e01a466408fc77dd33046193340869165bd6e359feee5c77176",
+      "published_sha256": "0cccdd9686815e01a466408fc77dd33046193340869165bd6e359feee5c77176",
+      "byte_identical": true
+    },
+    {
+      "origin": "prepared_history_pilot_2026-09-23",
+      "source_path": "README.md",
+      "published_path": "experiments/cyclic_history/README.md",
+      "source_sha256": "def9a0734e6a29ece39c4337d761da414f249ecf306923320ab709ccbed0b569",
+      "published_sha256": "cb3dbe55f2993b148e58700c435cbc61a68b2cb2a3523c377d71c67ab4369278",
+      "byte_identical": false
+    }
+  ]
+}

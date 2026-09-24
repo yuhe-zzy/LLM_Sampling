@@ -1,0 +1,12 @@
+{
+  "name": "oracle_sequencesum",
+  "protocol": "oracle",
+  "preference_case": "transitive",
+  "status": "Corrected experiment target grid; not a completion ledger",
+  "grid": {
+    "method": ["ipo", "dpo"],
+    "alpha": [0.8, 0.9, 0.95, 0.99],
+    "lambda_on": [0.5, 0.9]
+  },
+  "common": {"iters": 81, "beta": 1, "seed": 0}
+}

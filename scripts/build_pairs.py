@@ -107,28 +107,77 @@ def detect_input_format(example: Dict[str, Any]) -> str:
     return "response"
 
 
-def compute_u_from_flat_scores(row: Dict[str, Any], score_fields: List[str]) -> Optional[float]:
-    vals = []
+def parse_score_weights(raw: str, score_fields: List[str]) -> Dict[str, float]:
+    if not raw.strip():
+        return {}
+
+    parts = [p.strip() for p in raw.split(",") if p.strip()]
+    weights: Dict[str, float] = {}
+
+    if all("=" in p for p in parts):
+        for p in parts:
+            key, val = p.split("=", 1)
+            key = key.strip()
+            if key not in score_fields:
+                raise ValueError(f"Weight supplied for unknown score field: {key}")
+            weights[key] = float(val)
+    else:
+        if len(parts) != len(score_fields):
+            raise ValueError("--score_weights must have one weight per --score_fields entry.")
+        weights = {k: float(v) for k, v in zip(score_fields, parts)}
+
+    if any(w < 0 for w in weights.values()):
+        raise ValueError("--score_weights values must be non-negative.")
+    if sum(weights.values()) <= 0:
+        raise ValueError("--score_weights must contain at least one positive weight.")
+    return weights
+
+
+def weighted_score(vals: List[Tuple[str, float]], score_weights: Dict[str, float]) -> Optional[float]:
+    if not vals:
+        return None
+    if not score_weights:
+        return sum(v for _, v in vals) / len(vals)
+
+    total_weight = 0.0
+    total = 0.0
+    for k, v in vals:
+        w = score_weights.get(k, 0.0)
+        if w <= 0:
+            continue
+        total += w * v
+        total_weight += w
+    if total_weight <= 0:
+        return None
+    return total / total_weight
+
+
+def compute_u_from_flat_scores(
+    row: Dict[str, Any],
+    score_fields: List[str],
+    score_weights: Dict[str, float],
+) -> Optional[float]:
+    vals: List[Tuple[str, float]] = []
     for k in score_fields:
         v = row.get(k, None)
         if is_number(v):
-            vals.append(float(v))
-    if not vals:
-        return None
-    return sum(vals) / len(vals)
+            vals.append((k, float(v)))
+    return weighted_score(vals, score_weights)
 
 
-def compute_u_from_nested_scores(scores_obj: Any, score_fields: List[str]) -> Optional[float]:
+def compute_u_from_nested_scores(
+    scores_obj: Any,
+    score_fields: List[str],
+    score_weights: Dict[str, float],
+) -> Optional[float]:
     if not isinstance(scores_obj, dict):
         return None
-    vals = []
+    vals: List[Tuple[str, float]] = []
     for k in score_fields:
         v = scores_obj.get(k, None)
         if is_number(v):
-            vals.append(float(v))
-    if not vals:
-        return None
-    return sum(vals) / len(vals)
+            vals.append((k, float(v)))
+    return weighted_score(vals, score_weights)
 
 
 # -----------------------------
@@ -210,6 +259,7 @@ def build_from_response_level(
     prompt_key: str,
     response_key: str,
     score_fields: List[str],
+    score_weights: Dict[str, float],
     min_k: int,
 ) -> Dict[str, List[RespItem]]:
     buckets: Dict[str, List[RespItem]] = defaultdict(list)
@@ -218,7 +268,7 @@ def build_from_response_level(
         resp = r.get(response_key, None)
         if not isinstance(prompt, str) or not isinstance(resp, str):
             continue
-        u = compute_u_from_flat_scores(r, score_fields)
+        u = compute_u_from_flat_scores(r, score_fields, score_weights)
         if u is None:
             continue
         buckets[prompt].append(RespItem(response=resp, u=u, raw=r))
@@ -231,6 +281,7 @@ def build_pairs_from_pair_level(
     rows: Iterable[Dict[str, Any]],
     prompt_key: str,
     score_fields: List[str],
+    score_weights: Dict[str, float],
 ) -> List[Dict[str, Any]]:
     """
     Directly build (prompt, chosen, rejected, delta) from pair-level rows.
@@ -264,8 +315,8 @@ def build_pairs_from_pair_level(
         sa = safe_get(r, ["scores_a", "score_a", "rating_a"])
         sb = safe_get(r, ["scores_b", "score_b", "rating_b"])
         if isinstance(sa, dict) and isinstance(sb, dict):
-            ua = compute_u_from_nested_scores(sa, score_fields)
-            ub = compute_u_from_nested_scores(sb, score_fields)
+            ua = compute_u_from_nested_scores(sa, score_fields, score_weights)
+            ub = compute_u_from_nested_scores(sb, score_fields, score_weights)
 
         if ua is None or ub is None:
             vals_a = {}
@@ -277,8 +328,8 @@ def build_pairs_from_pair_level(
                     vals_a[k] = r[ka]
                 if kb in r:
                     vals_b[k] = r[kb]
-            ua = compute_u_from_nested_scores(vals_a, score_fields) if vals_a else ua
-            ub = compute_u_from_nested_scores(vals_b, score_fields) if vals_b else ub
+            ua = compute_u_from_nested_scores(vals_a, score_fields, score_weights) if vals_a else ua
+            ub = compute_u_from_nested_scores(vals_b, score_fields, score_weights) if vals_b else ub
 
         if ua is None or ub is None:
             continue
@@ -295,7 +346,7 @@ def build_pairs_from_pair_level(
             "chosen": chosen,
             "rejected": rejected,
             "delta": delta,
-            "meta": {"source": "pair_scored", "u_a": ua, "u_b": ub}
+            "meta": {"source": "pair_scored", "u_a": ua, "u_b": ub, "score_weights": score_weights}
         })
     return out
 
@@ -457,6 +508,15 @@ def main() -> None:
     ap.add_argument("--prompt_key", type=str, default="prompt")
     ap.add_argument("--response_key", type=str, default="response", help="For response-level input.")
     ap.add_argument("--score_fields", type=str, default="", help="Comma-separated score fields. Empty => infer.")
+    ap.add_argument(
+        "--score_weights",
+        type=str,
+        default="",
+        help=(
+            "Optional score weights. Accepts comma-separated values aligned with --score_fields, "
+            "or field=weight entries such as helpfulness=0.5,correctness=0.125."
+        ),
+    )
 
     # bucket filtering
     ap.add_argument("--min_k", type=int, default=2, help="Minimum #responses per prompt before later filtering.")
@@ -496,6 +556,7 @@ def main() -> None:
         score_fields = infer_score_fields(first)
         if not score_fields:
             raise ValueError("Could not infer score fields. Please pass --score_fields a,b,c")
+    score_weights = parse_score_weights(args.score_weights, score_fields)
 
     # Detect format
     fmt = args.input_format
@@ -515,6 +576,7 @@ def main() -> None:
             rows=rows_iter(),
             prompt_key=args.prompt_key,
             score_fields=score_fields,
+            score_weights=score_weights,
         )
 
         if args.max_prompts and args.max_prompts > 0:
@@ -531,7 +593,7 @@ def main() -> None:
         eval_rows = [{"prompt_id": i, "prompt": p} for i, p in enumerate(eval_prompts)]
         write_jsonl(args.out_eval_prompts, eval_rows)
 
-        print(f"[OK] format=pair | score_fields={score_fields}")
+        print(f"[OK] format=pair | score_fields={score_fields} | score_weights={score_weights or 'uniform'}")
         print(f"[WARN] pair-level input cannot cleanly output fixed per-prompt response sets.")
         print(f"[OK] wrote pairs: {args.out_pairs} (N={len(pairs)})")
         print(f"[OK] wrote eval prompts: {args.out_eval_prompts} (N={len(eval_rows)})")
@@ -545,6 +607,7 @@ def main() -> None:
         prompt_key=args.prompt_key,
         response_key=args.response_key,
         score_fields=score_fields,
+        score_weights=score_weights,
         min_k=args.min_k,
     )
     summarize_k_distribution(buckets, "K distribution after initial min_k filter")
@@ -616,6 +679,7 @@ def main() -> None:
                     "u_rejected": rejected.u,
                     "K_prompt": len(items),
                     "score_fields": score_fields,
+                    "score_weights": score_weights,
                     "source": "response_bucket",
                 }
             })
@@ -626,7 +690,7 @@ def main() -> None:
     # final summary
     k_vals = [len(buckets[p]) for p in prompts]
     print("\n=== Final summary ===")
-    print(f"[OK] format=response | score_fields={score_fields}")
+    print(f"[OK] format=response | score_fields={score_fields} | score_weights={score_weights or 'uniform'}")
     print(f"[OK] prompts kept: {len(prompts)} | minK={min(k_vals) if k_vals else 'NA'} | maxK={max(k_vals) if k_vals else 'NA'}")
     print(f"[OK] wrote pairs: {args.out_pairs} (N={len(out_pairs)})")
     print(f"[OK] wrote eval prompt-response sets: {args.out_eval_prompts} (N={len(eval_rows)})")

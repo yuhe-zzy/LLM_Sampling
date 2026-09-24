@@ -1,0 +1,42 @@
+{
+  "status": "PREPARED_ONLY_NOT_APPROVED_TO_RUN",
+  "protocol": "cyclic_history_frozen_sequence_v1",
+  "common": {
+    "model_path": "model/Qwen2.5-1.5B",
+    "eval_path": "data/processed/eval_prompt_responses_cyclic_1000.jsonl",
+    "output_root": "outputs/cyclic_history",
+    "alpha": 0.9,
+    "lambda_current": 0.8,
+    "beta_train": 1.0,
+    "seed": 0,
+    "support_seed": 123,
+    "num_prompts": 500,
+    "keep_k": 4,
+    "iters": 100,
+    "pairs_per_prompt": 2,
+    "batch_size": 1,
+    "grad_accum": 4,
+    "epochs_per_iter": 1,
+    "lr": 0.00001,
+    "warmup_ratio": 0.03,
+    "max_length": 1537,
+    "score_batch_size": 4,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.0,
+    "checkpoint_every": 10,
+    "dtype": "bfloat16",
+    "coverage": "uniform_fixed_panel",
+    "pair_law": "mu_i_mu_j_conditioned_distinct",
+    "support_probability": "softmax_sequence_sum",
+    "optimizer_reset": "each_outer_iteration"
+  },
+  "runs": [
+    {"run_id": "ipo_baseline_s0", "method": "ipo", "scheme": "ordinary", "nu": 0.0, "kappa": 0.0},
+    {"run_id": "ipo_reference_s0", "method": "ipo", "scheme": "lagged_reference", "nu": 0.45, "kappa": 0.0},
+    {"run_id": "ipo_sampling_s0", "method": "ipo", "scheme": "lagged_sampling", "nu": 0.0, "kappa": 0.25},
+    {"run_id": "dpo_baseline_s0", "method": "dpo", "scheme": "ordinary", "nu": 0.0, "kappa": 0.0},
+    {"run_id": "dpo_reference_s0", "method": "dpo", "scheme": "lagged_reference", "nu": 0.45, "kappa": 0.0},
+    {"run_id": "dpo_sampling_s0", "method": "dpo", "scheme": "lagged_sampling", "nu": 0.0, "kappa": 0.25}
+  ]
+}

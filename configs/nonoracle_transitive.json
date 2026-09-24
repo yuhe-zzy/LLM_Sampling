@@ -1,0 +1,8 @@
+{
+  "name": "nonoracle_transitive_sequencesum",
+  "protocol": "static",
+  "preference_case": "transitive",
+  "status": "Standardized fixed-pair recipes, not claims of completed new runs",
+  "grid": {"method": ["ipo", "dpo"], "alpha": [0.8], "lambda_on": [0.5]},
+  "common": {"iters": 81, "beta": 1, "seed": 0}
+}

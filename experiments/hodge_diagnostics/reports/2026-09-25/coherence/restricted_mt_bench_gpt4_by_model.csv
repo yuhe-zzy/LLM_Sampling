@@ -1,0 +1,7 @@
+alpha,beta_lambda,panels,label,tail_tv_max,tail_tv_min,rate,prompt_entropy_median,top_label,label_shuffled,rate_shuffled
+0.5,1.0,160,converged,0.0,0.0,0.5133366598605135,1.447758057923563,gpt-4,converged,0.5034135484710451
+0.5,10.0,160,converged,0.0,0.0,0.4999780585638509,0.009253212044145738,gpt-4,converged,0.5071597216601478
+0.9,1.0,160,converged,0.0,0.0,0.8999306360608403,0.1580919696693684,gpt-4,converged,0.8987171339194593
+0.9,10.0,160,converged,0.0,0.0,,2.7815381013040727e-09,gpt-4,converged,0.899924414960422
+0.99,1.0,160,converged,0.0,0.0,0.9678901929872844,0.0,gpt-4,slow or intermittent,
+0.99,10.0,160,converged,0.0,0.0,,0.0,gpt-4,converged,0.6060269738330448

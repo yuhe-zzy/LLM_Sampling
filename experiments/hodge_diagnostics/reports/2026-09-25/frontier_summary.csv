@@ -1,0 +1,81 @@
+series,dataset,construction,alpha,beta_lambda,frac_beyond_frontier,gamma_median,entropy_median,panels
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.5,1.0,0.0,0.0335331956433112,0.905651123241536,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.5,2.0,0.0,0.0057099090247816,0.5631209376336835,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.5,5.0,0.0,1.9028100485244584e-05,0.0882457101191195,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.5,10.0,0.0015,4.2609763511712616e-10,0.0027394328050346,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.8,1.0,0.0,0.0010489994008562,0.4234958957076141,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.8,2.0,0.0,7.611240194098074e-06,0.0882457101191195,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.8,5.0,0.0,2.8434424536531718e-11,0.0004410314864817,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.8,10.0,0.001,1.4016670182412962e-18,3.336345370858064e-08,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.9,1.0,0.0,3.805620097049037e-06,0.0882457101191195,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.9,2.0,0.0,8.537983371484533e-11,0.0027394328050346,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.9,5.0,0.0,7.008335091206481e-19,3.336345370858064e-08,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.9,10.0,0.0005,7.969090778178122e-39,9.973040479819248e-17,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.95,1.0,0.0,4.2526971051643526e-11,0.0027394328050273,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.95,2.0,0.0,1.1023310147663027e-16,1.5572113641591427e-06,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.95,5.0,0.0,6.585805001915649e-39,9.973040479819593e-17,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.95,10.0,0.0005,4.2669667206787856e-77,4.906046632529838e-34,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.99,1.0,0.0,1.0954890639850391e-38,9.973040479819662e-17,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.99,2.0,0.0,1.2615987591435204e-77,4.906046632529907e-34,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.99,5.0,0.0,5.443288926903683e-195,1.825130672991359e-86,2000
+"UltraFeedback, aspects as annotators",ultrafeedback,attribute_vote_smoothed,0.99,10.0,0.0005,0.0,3.286203332302782e-174,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.5,1.0,0.0,0.0181882149176817,0.959788112094573,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.5,2.0,0.0,0.0050534697784472,0.6015006339970062,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.5,5.0,0.0,6.259510170504042e-05,0.1466232058832502,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.5,10.0,0.0,1.1410155809037244e-08,0.0092278961406368,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.8,1.0,0.0,0.0011541234839404,0.4591604864684998,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.8,2.0,0.0,2.503804068201626e-05,0.14662320588325,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.8,5.0,0.0,6.469994178698957e-11,0.0020911284125864,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.8,10.0,0.0,1.386899655112177e-19,8.802254286112563e-07,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.9,1.0,0.0,1.251902034100813e-05,0.14662320588325,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.9,2.0,0.0,2.2820309753176073e-09,0.0092278961406367,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.9,5.0,0.0,6.934498275560885e-20,8.802254286112563e-07,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.9,10.0,0.0,8.946560859002737e-34,8.45051652084389e-14,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.95,1.0,0.0,1.1410154874777208e-09,0.0092278961406369,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.95,2.0,0.0,1.4546532702438886e-16,2.0654415605194982e-05,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.95,5.0,0.0,1.0222634691282352e-36,8.450516520844173e-14,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.95,10.0,0.0,7.239132103238975e-61,4.002875614715663e-28,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.99,1.0,0.0,8.920156722196929e-36,8.450516520844218e-14,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.99,2.0,0.0,1.034144306958454e-61,4.0028756147157196e-28,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.99,5.0,0.0,2.95339781287288e-156,1.4517819758654869e-71,2000
+"HelpSteer, attributes as annotators",helpsteer,attribute_vote_smoothed,0.99,10.0,0.0,3.1251307e-317,2.505610479619609e-144,2000
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.5,1.0,0.0,0.2773845193001326,1.4765159778029506,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.5,2.0,0.06875,0.3696879368268857,1.1825712383802665,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.5,5.0,0.2625,0.3132426711190026,0.8466429388398569,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.5,10.0,0.3625,0.1951301248629456,0.7248661652850421,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.8,1.0,0.01875,0.1502814864676043,1.08535247496207,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.8,2.0,0.075,0.1252970684476008,0.8466429388398569,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.8,5.0,0.19375,0.0612412715669003,0.7123469651286323,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.8,10.0,0.275,0.009011851002462,0.7002277379109532,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.9,1.0,0.0625,0.0626485342238004,0.8466429388398569,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.9,2.0,0.075,0.0390260249725893,0.7248661652850414,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.9,5.0,0.1375,0.004505925501231,0.7002277379109532,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.9,10.0,0.25625,2.7220436189359236e-05,0.6947374489636864,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.95,1.0,0.075,0.0195130124862947,0.7248661652850416,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.95,2.0,0.075,0.0049465631916886,0.7029716580132921,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.95,5.0,0.125,1.3610231193861974e-05,0.6947374489636866,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.95,10.0,0.25,3.708632792918892e-08,0.6935628477279623,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.99,1.0,0.075,2.72204317423058e-06,0.6947374489636864,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.99,2.0,0.075,9.56593303625249e-09,0.6935628477279623,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.99,5.0,0.11875,9.058249656424816e-09,0.693240456024263,160
+"MT-Bench, human votes per question",mt_bench_human,votes_smoothed,0.99,10.0,0.24375,2.6760207678434913e-09,0.6931764051346512,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.5,1.0,0.0,0.1533371558332649,1.2265558156134035,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.5,2.0,0.0,0.0715995729246705,0.3153893715038852,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.5,5.0,0.00625,0.0002754694306121,0.001014847870018,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.5,10.0,0.0375,9.331870831387008e-09,3.2941878945317944e-08,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.8,1.0,0.0,0.01288133769574,0.1311145093433965,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.8,2.0,0.0,0.0001101877722448,0.001014847870018,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.8,5.0,0.0,1.920104722578277e-11,1.679786949010568e-10,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.8,10.0,0.0,3.0656643629936997e-23,3.825795264451347e-22,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.9,1.0,0.0,5.509388612243442e-05,0.001014847870018,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.9,2.0,0.0,1.86637416627739e-09,3.294187894531781e-08,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.9,5.0,0.0,1.5328321814968498e-23,3.825795264451347e-22,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.9,10.0,0.0,4.270334247422591e-47,1.065832563970346e-45,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.95,1.0,0.0,9.331870831387143e-10,3.2941878945318566e-08,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.95,2.0,0.0,3.620488299408517e-19,1.80727507656455e-17,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.95,5.0,0.0,2.1351671237115563e-47,1.065832563970466e-45,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.95,10.0,0.0,8.285837227348857e-95,4.1361236029694675e-93,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.99,1.0,0.0,4.270334247423153e-48,1.0658325639704693e-45,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.99,2.0,0.0,1.657167445469758e-95,4.1361236029694675e-93,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.99,5.0,0.0,3.0264254883993327e-238,7.553654236581161e-236,160
+"MT-Bench, GPT-4 votes per question",mt_bench_gpt4,votes_smoothed,0.99,10.0,0.0,0.0,-0.0,160

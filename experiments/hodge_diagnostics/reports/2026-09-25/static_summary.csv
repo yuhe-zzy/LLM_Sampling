@@ -1,0 +1,12 @@
+group,dataset,construction,link,label,panels,K,completeness,share_p25,share_median,share_p90,frac_share_gt_005,condorcet_rate,null_median
+HelpSteer,helpsteer,single_score_hard,identity,"hard labels on mean score (repo IPO), identity",8321,4,1.0,0.1,0.1,0.1666666666666666,0.8166085806994352,0.0,
+HelpSteer,helpsteer,single_score_bt,identity,"one BT annotator, identity (link mismatch)",8321,4,1.0,2.4425800432972796e-05,0.0002700853055489,0.0038501143989752,0.0,0.0,
+HelpSteer,helpsteer,attribute_vote_smoothed,logit,"attributes as annotators, logit",8321,4,1.0,0.0007626329416802,0.0090582062066359,0.0611335055457733,0.14589592597043624,0.0,
+UltraFeedback,ultrafeedback,single_score_hard,identity,"hard labels on mean score, identity",63966,4,1.0,0.1,0.1,0.1666666666666666,0.9033236406841134,0.0,
+UltraFeedback,ultrafeedback,single_score_bt,identity,"one BT annotator, identity (link mismatch)",63966,4,1.0,0.0005907840418166,0.0032738018942058,0.0234015895311994,0.0,0.0,
+UltraFeedback,ultrafeedback,attribute_vote_smoothed,logit,"aspects as annotators, logit",63966,4,1.0,0.0089454849523468,0.03072252479942355,0.1067649926589832,0.32987837288559546,0.0003126661038676797,
+MT-Bench,mt_bench_human,votes_smoothed,logit,"human votes per question, logit",160,6,0.7558333333333334,0.25959965199647833,0.369814501580114,0.5937274352279793,1.0,0.14375,0.3945736609124093
+MT-Bench,mt_bench_gpt4,votes_smoothed,logit,"GPT-4 votes per question, logit",160,6,1.0,0.13888888888888887,0.1538461538461538,0.2222222222222222,0.90625,0.0,0.2222222222222222
+MT-Bench,mt_bench_human_pooled,votes_smoothed,logit,"human votes pooled by model, logit",2,6,1.0,0.021530206377024075,0.02390436056594265,0.02770300726821237,0.0,0.0,0.02062433000994985
+Arena 55k,arena55k,votes_smoothed,logit,"human votes, 34 models, every pair compared, logit",1,34,1.0,0.3792045439805281,0.3792045439805281,0.3792045439805281,1.0,1.0,0.4560402409561911
+Arena 55k,arena55k,votes_smoothed,logit,"human votes, 14 models, >= 20 votes per pair, logit",1,14,1.0,0.1408623440037586,0.1408623440037586,0.1408623440037586,1.0,1.0,0.16327629169666208

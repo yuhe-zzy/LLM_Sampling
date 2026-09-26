@@ -1,0 +1,15 @@
+{
+ "pairs_with_2plus_annotators": 9124,
+ "annotators_per_pair": {
+  "2": 717,
+  "3": 5940,
+  "4": 799,
+  "5": 1647,
+  "6": 21
+ },
+ "frac_opposite_directions": 0.41560718982902234,
+ "frac_not_unanimous_in_direction": 0.41560718982902234,
+ "frac_vote_share_strictly_between_0_and_1": 0.41560718982902234,
+ "median_strength_std": 0.5,
+ "note": "strength > 0 prefers response 2; ties (0) count as half votes in the share"
+}

@@ -10,6 +10,12 @@ See [migration and provenance](docs/MIGRATION.md) before comparing with the
 older version of this repository. Model weights, data, adapters, result dumps,
 credentials, and machine-specific job IDs are deliberately not included.
 
+September 28 update: [calibrated cyclic mechanism protocol](experiments/cyclic_history/CALIBRATED_PROTOCOL.md)
+and [handoff to Fan and Yu He](experiments/hodge_diagnostics/HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md).
+The repository now includes small numeric CPU calibration artifacts (no raw
+dataset text or model weights). New GPU runs remain unapproved; existing runs
+are not changed by this source update.
+
 ## 1. Which experiment should I run?
 
 | Setting | Entry points / recipe | Important distinction |
@@ -18,7 +24,7 @@ credentials, and machine-specific job IDs are deliberately not included.
 | Transitive, non-oracle | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/nonoracle_transitive.json` | Fixed HelpSteer scalar-score labels, no reward-model loading |
 | Cyclic, standard sequence-sum | Same non-oracle entry points with `--preference_case cyclic`; `configs/cyclic_sequence_sum.json` | Fixed tournament labels; ordinary cached-reference examples |
 | Cyclic, sampling ablation | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/cyclic_sampling_sweep.json` | Ten sequence-sum follow-up configurations; not historical reproductions |
-| Cyclic, new history experiments | `experiments/cyclic_history/` | Matched ordinary / lagged-reference / feedback-extrapolation arms; prepared, not run |
+| Cyclic, calibrated history experiments | `experiments/cyclic_history/CALIBRATED_PROTOCOL.md` | Actual IPO/BT calibration, selected mechanism micropilot; new GPU runs not submitted |
 
 **All runnable IPO/DPO code uses sequence sums, with no token-average mode.**
 This covers training, cached reference scores, static pair margins, generated
@@ -270,10 +276,17 @@ Mask those invalid snapshots and inspect raw scores/losses for every other
 run. `COMPLETED` is a scheduler status, not a numerical-validity guarantee.
 See [historical result caveats](docs/LEGACY.md); no old training entry remains.
 
-## 8. New cyclic history experiments
+## 8. Cyclic history experiments
 
-**Prepared only; no new GPU experiment is started by this release.** One seed
-is planned. Six configurations share data, pair proposals, budget and base
+The new [calibrated protocol](experiments/cyclic_history/CALIBRATED_PROTOCOL.md)
+uses ten prepared arms in three conditional stages and six selected prompts.
+Its numeric plan is `experiments/cyclic_history/calibration/2026-09-28/experiment_plan.json`;
+its launcher is `slurm/cyclic_history_calibrated.sh`. No new GPU experiment
+is started by this release, and none is implied by publishing these files.
+
+The following table documents the **uncalibrated v1 pilot**, retained for
+reproduction; do not use it as the new calibrated plan. Six configurations
+share data, pair proposals, budget and base
 parameters: alpha=0.9, lambda_current=0.8, beta_train=1, seed=0.
 
 | Index | Run ID | Objective | Intervention | nu | kappa |
@@ -295,7 +308,7 @@ python experiments/cyclic_history/run_cyclic_history.py --run-id ipo_baseline_s0
 python experiments/cyclic_history/run_cyclic_lagged_reference.py --run-id ipo_reference_s0 --check-data
 python experiments/cyclic_history/run_cyclic_lagged_sampling.py --run-id dpo_sampling_s0 --check-data
 # Only after explicit pilot approval, with no conflicting allocations:
-sbatch --array=0-5%2 slurm/cyclic_history.sh
+APPROVED_LEGACY_HISTORY=1 sbatch --array=0-5%2 slurm/cyclic_history.sh
 ```
 
 This pilot uses 500 fixed four-response panels, 100 outer updates, 1,000 pairs

@@ -26,4 +26,20 @@ for name, logref in (("flat panel reference", np.zeros(4)), ("reference with 5-n
     for bt in (1.0, 0.5, 0.25):
         row = [ordinary_stability(h, a, 1 / bt, LAM, ref=ref)["index"] for a in (0.5, 0.7, 0.8, 0.9, 0.95, 0.99)]
         print(f"{bt:>10} " + " ".join(f"{v:7.3f}{'*' if v > 1 else ' '}" for v in row))
-print("\n* beyond the frontier. The planned pilot point is alpha = 0.9, beta_train = 1.")
+print("\n* beyond the IPO frontier only. The planned pilot point is alpha = 0.9, beta_train = 1.")
+
+# The entrywise-logit diagnostic is not the actual cyclic DPO optimizer.
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "cyclic_history"))
+from population_calibration import analyze
+
+print("\nActual positive-loss operators at alpha=.9, lambda=.8, beta_train=1:")
+print("reference objective ordinary_radius reference_nu_.45 feedback_kappa_.25")
+for name, r in (("flat", np.zeros(4)), ("spread_5_nats", np.array([0., -5., -10., -15.]))):
+    for method in ("ipo", "dpo"):
+        prediction = analyze(method, P, r, .9, .8, 1., .45, .25)
+        radii = prediction["radii"]
+        print(name, method, *(f"{radii[k]:.6f}" for k in
+                              ("ordinary", "lagged_reference", "oracle_feedback_extrapolation")))
+print("Local per-prompt predictions only; general DPO root uniqueness and neural behavior are not established.")

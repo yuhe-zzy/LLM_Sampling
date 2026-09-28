@@ -17,3 +17,8 @@ def test_runner_on_synthetic(tmp_path):
                  & (panels.link == "logit")]
     assert (two.cyclic_share > 1e-6).mean() > 0.9  # mixtures are generically cyclic
     assert (tmp_path / "report.md").exists() and (tmp_path / "population.csv").exists()
+    population = pd.read_csv(tmp_path / "population.csv")
+    hard = population[population.construction == "single_score_hard"]
+    assert not hard.empty
+    assert set(hard.operator) == {"actual_population_ipo"}
+    assert set(population[population.link == "logit"].operator) == {"entrywise_logit_psipo_not_actual_dpo"}

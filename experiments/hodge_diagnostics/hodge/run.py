@@ -72,8 +72,10 @@ def population(panels, bt_scale, pseudo, sample, seed):
     for idx in chosen:
         panel = panels[idx]
         for name, (P, links) in constructions_for(panel, bt_scale, pseudo).items():
-            if name in ("single_score_hard", "attribute_vote", "votes"):
-                continue  # unsmoothed variants duplicate their smoothed or soft counterparts
+            if name in ("attribute_vote", "votes"):
+                continue
+            # Hard scalar-score labels are the historical IPO construction,
+            # not a duplicate of a soft BT or smoothed-vote population map.
             for link in sorted(links):
                 h = hodge(flow(P, link))
                 for alpha in ALPHAS:
@@ -81,10 +83,12 @@ def population(panels, bt_scale, pseudo, sample, seed):
                         for lam in LAMBDAS:
                             s = ordinary_stability(h, alpha, beta, lam)
                             rows.append(dict(construction=name, link=link, panel_id=panel.panel_id,
+                                             operator=("actual_population_ipo" if link == "identity"
+                                                       else "entrywise_logit_psipo_not_actual_dpo"),
                                              alpha=alpha, beta=beta, lam=lam, gamma=s["gamma"],
                                              index=s["index"], entropy=s["entropy"], min_prob=s["min_prob"]))
     df = pd.DataFrame(rows)
-    grouped = df.groupby(["construction", "link", "alpha", "beta", "lam"])
+    grouped = df.groupby(["construction", "link", "operator", "alpha", "beta", "lam"])
     table = grouped.agg(panels=("index", "size"),
                         frac_beyond_frontier=("index", lambda v: float(np.mean(v > 1))),
                         gamma_median=("gamma", "median"), gamma_p90=("gamma", lambda v: v.quantile(0.9)),

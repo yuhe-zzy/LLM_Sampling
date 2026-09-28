@@ -2,6 +2,17 @@
 
 This repository update does not launch or modify any job.
 
+## Calibration release authorization (September 28, 2026)
+
+The newly calibrated protocol is prepared only and needs separate approval.
+Publishing a ten-row plan does not authorize ten tasks or increase the budget.
+The supplied workspace `AGENTS.md` retains the phased rules below. Earlier
+six-GPU approvals for specific runs must not be treated as a blanket budget
+increase for this new protocol. Reconcile the active phase and inspect live
+state before any submission. Preserve existing work; this release neither
+cancels jobs nor changes their dependencies. No account-wide scheduler hard
+cap has been installed.
+
 ## Preflight
 
 Before submitting, releasing, requeuing, or changing concurrency, inspect both
@@ -11,7 +22,7 @@ interactive jobs, and jobs still completing/releasing GPUs.
 On the original host, user-filtered queue queries have sometimes returned an
 empty result despite active jobs. Cross-check the full expanded queue
 (`squeue -a -r`) by displayed owner/UID, then verify selected allocations with
-`scontrol show job`. Count generic AllocTRES `gres/gpu` once; do not add the
+`scontrol -a show job` (GPU partitions can be hidden). Count generic AllocTRES `gres/gpu` once; do not add the
 typed `gres/gpu:h100` breakdown again.
 
 ## Phase order

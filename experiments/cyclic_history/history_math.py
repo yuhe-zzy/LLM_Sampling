@@ -55,7 +55,7 @@ def strongly_connected(p):
     return bool(reach.all())
 
 
-def load_panels(path, count=500, seed=123, keep_k=4):
+def load_panels(path, count=500, seed=123, keep_k=4, prompt_ids=None):
     candidates = []
     with open(path, encoding="utf-8") as handle:
         for row_index, line in enumerate(handle):
@@ -83,6 +83,13 @@ def load_panels(path, count=500, seed=123, keep_k=4):
         raise ValueError("Duplicate prompt IDs")
     if len({p["prompt"] for p in candidates}) != len(candidates):
         raise ValueError("Duplicate prompt texts")
+    if prompt_ids is not None:
+        if len(prompt_ids) != count or len(set(prompt_ids)) != count:
+            raise ValueError("Explicit panel IDs must be distinct and match count")
+        by_id = {row["prompt_id"]: row for row in candidates}
+        if not set(prompt_ids).issubset(by_id):
+            raise ValueError("A calibrated prompt is missing from the source support")
+        return [by_id[i] for i in prompt_ids]
     indices = sorted(random.Random(seed).sample(range(len(candidates)), count))
     return [candidates[i] for i in indices]
 
@@ -214,7 +221,7 @@ def build_outer_state(initial, current, previous, matrices, method, alpha,
                 target_logits=target, solver_residual=np.asarray(residuals))
 
 
-def sample_pairs(mu, pairs_per_prompt, seed, outer_iter):
+def sample_pairs(mu, pairs_per_prompt, seed, outer_iter, mode="sampled"):
     """Uniform pair proposal, exact positive importance weights, common RNG across arms."""
     if pairs_per_prompt < 1:
         raise ValueError("pairs_per_prompt must be positive")
@@ -222,7 +229,15 @@ def sample_pairs(mu, pairs_per_prompt, seed, outer_iter):
     rows = []
     for prompt_index, masses in enumerate(mu):
         i, j, target = pair_distribution(masses)
-        for pair in rng.integers(len(i), size=pairs_per_prompt):
+        if mode == "all_unordered":
+            if pairs_per_prompt != len(i):
+                raise ValueError("Full-pair mode must enumerate every distinct unordered pair")
+            indices = np.arange(len(i))
+        elif mode == "sampled":
+            indices = rng.integers(len(i), size=pairs_per_prompt)
+        else:
+            raise ValueError("Unknown pair proposal mode")
+        for pair in indices:
             rows.append((prompt_index, int(i[pair]), int(j[pair]), float(len(i) * target[pair])))
     rng.shuffle(rows)
     return rows

@@ -4,7 +4,8 @@ Notation follows JMLR-B-v3 (Sections 3-4):
 
     P*   reciprocal preference probabilities, P*_ij + P*_ji = 1, P*_ii = 1/2;
          NaN marks a pair that was never compared
-    Psi  symmetric link, identity (IPO) or logit (DPO); c = Psi(1/2)
+    Psi  symmetric link, identity (IPO) or logit (PsiPO proxy, not general DPO);
+         c = Psi(1/2)
     A    Psi(P*) - c 11^T, the skew-symmetric flow; unobserved pairs are filled
          at indifference (Assumption 1), so A_ij = 0 there
     u    A 1 / K                       (eq. hodge-components)

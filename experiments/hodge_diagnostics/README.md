@@ -9,7 +9,9 @@ Nothing here is a proof, and nothing here is an observed training result. Number
 diagnostics of preference data under stated constructions.
 
 Start with [`HANDOFF.md`](HANDOFF.md) (state, findings, open decisions, next actions), then
-the report in [`reports/2026-09-25/REPORT.md`](reports/2026-09-25/REPORT.md).
+the report in [`reports/2026-09-25/REPORT.md`](reports/2026-09-25/REPORT.md). The proposed
+two-week experiment plan is [`plans/2026-09-29-experiment-plan.html`](plans/2026-09-29-experiment-plan.html)
+(open the file in a browser; the Markdown source sits beside it).
 
 ## What each diagnostic supports
 

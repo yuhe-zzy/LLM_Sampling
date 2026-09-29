@@ -165,8 +165,14 @@ reference has 5-nat steps between responses, which mimics sequence-sum likelihoo
 because the pilot samples from the softmax of raw sequence sums. With a flat reference,
 crossing the frontier needs `alpha >= 0.99` at `beta_train = 1`, or `beta_train <= 0.5` at
 `alpha >= 0.9`. A spread reference pushes the onset to larger `alpha` or smaller
-`beta_train`. As planned, the baseline would converge, so neither stabilizer would have
+`beta_train`. As planned, the IPO baseline would converge, so neither stabilizer would have
 anything to stabilize.
+
+*Correction (2026-09-29).* This section evaluated the IPO (identity-link) operator only.
+The pilot's DPO arm trains the actual pairwise BT optimizer, whose radius at the same point
+is 1.289 with a flat reference and 1.025 with the 5-nat reference. Its ordinary DPO
+baseline is therefore predicted not to converge. See `analysis/pilot_frontier.py` and
+`HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md`.
 
 ### Worked cases (`analysis/worked_cases.py`)
 

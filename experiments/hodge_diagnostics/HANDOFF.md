@@ -74,10 +74,12 @@ CPU, most of it in `hodge.coherence`.
 7. **The current protocol's hard labels** add a structural identity-link residual (share
    0.10), make DPO's logit targets infinite, and create exactly the kind of coherent
    residual that survives sharing.
-8. **The cyclic-history pilot as planned is predicted to converge.** At `alpha = 0.9`,
-   `lambda = 0.8`, `beta_train = 1` the index is 0.863, and sampling from raw sequence-sum
-   softmax concentrates the panel policy further. Neither stabilizer can show an effect at
-   that point. See `analysis/pilot_frontier.py` for the parameter table.
+8. **The cyclic-history pilot as planned splits by objective** (corrected 2026-09-29).
+   At `alpha = 0.9`, `lambda = 0.8`, `beta_train = 1` the IPO arm is predicted to converge
+   (index 0.863, radius 0.929 with a flat reference). The actual DPO operator predicts
+   instability (radius 1.289), which the prepared `nu = 0.45` and `kappa = 0.25` do not
+   remove. The original statement covered IPO only. See `analysis/pilot_frontier.py`,
+   which now prints both operators, and `HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md`.
 
 ## 4. Implications (proposals; framing decisions belong to Fan)
 
@@ -147,6 +149,11 @@ any novelty claim, check it against:
 - lazy-training/NTK results.
 
 ## 6. Open items and next actions
+
+The proposed two-week neural validation plan (2 x H100, 30 Sep -- 13 Oct 2026) is in
+[`plans/2026-09-29-experiment-plan.html`](plans/2026-09-29-experiment-plan.html), with its
+Markdown source next to it. It turns the items below into E1--E6 with preregistered
+predictions, gates, a compute budget, and decisions for Fan and Yu He.
 
 | Item | Owner | Note |
 |---|---|---|

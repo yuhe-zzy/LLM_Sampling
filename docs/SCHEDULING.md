@@ -8,8 +8,9 @@ The owner replaced the earlier phased two-GPU sampling schedule on September
 27: **at most six allocated GPUs total across all owner programs**. Each cyclic
 history task uses one GPU; oracle tasks remain serial and use three GPUs.
 Stage A, fixed-target probes and the six Stage B100 arms have completed. The
-remaining two Stage C100 arms were submitted as 4606367_0..1%2, not a new six-arm
-campaign. Do not duplicate them. See [campaign records](../experiments/cyclic_history/campaigns/README.md).
+remaining two Stage C100 arms 4606367_0..1%2 also completed states 0..100,
+verified September 29 at 13:44 UTC. The full account queue was empty (0 GPUs).
+Do not duplicate them. See [campaign records](../experiments/cyclic_history/campaigns/README.md).
 
 Respect the full live account budget, including unrelated/interactive jobs,
 pending work that can start automatically, and allocations releasing resources.

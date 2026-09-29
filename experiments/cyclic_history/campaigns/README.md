@@ -13,12 +13,12 @@ fixed-point fitting a prerequisite for running B/C.
 | Stage A | 4603433 | IPO ordinary/stable; DPO ordinary/stable | outer 0..30 | All four completed |
 | Fixed-target probes | 4605171 | Same four methods/betas, frozen outer-20 target | 6 blocks, cumulative 10..60 inner epochs; no outer update | All four completed |
 | Stage B100 | 4605560 | IPO/DPO each ordinary, reference, feedback | outer 0..100 | All six completed; 606 finite snapshots |
-| Stage C100 | 4606367 | IPO/DPO mixed orientation, ordinary update | planned outer 0..100 | Submitted; at 05:57:10 UTC IPO running at state 0, DPO pending resources |
+| Stage C100 | 4606367 | IPO/DPO mixed orientation, ordinary update | outer 0..100 | Both completed, exit 0:0; verified September 29 at 13:44 UTC |
 
 These are timestamped records, not a live dashboard. Never duplicate these
 jobs. Current GPU allocations must be rechecked from the full owner/UID queue.
-Stage B ran for 2:17:05--2:19:56 per arm on one H100 each. Stage C has a similar
-budget; its submission is not evidence of completion or an observed result.
+Stage B ran for 2:17:05--2:19:56 per arm on one H100 each. Stage C elapsed
+times were 2:17:06 and 2:17:53. The latest full account check was empty (0 GPUs).
 
 All use alpha=.9, lambda_current=.8, seed0 and the same six selected prompts
 (54, 251, 612, 737, 867, 945), four fixed responses per prompt. Main ordinary
@@ -45,7 +45,10 @@ does not modify running jobs or their deployed copies.
   25.5%/20.0% for IPO and 22.8%/18.9% for DPO. Each comparison improved 5/6
   prompts, with reported exceptions. Ordinary also contracted strongly and
   all arms retained late motion: no clean divergent-versus-converged claim.
-- Stage C outcomes are not inferred before results are downloaded and checked.
+- [Stage C report](cyclic_history_stage_c100_results_20260929/REPORT.md): mixed
+  orientations increased late probability motion, rather than cancelling it.
+  Mean TV rose 20.9% (IPO) / 31.0% (DPO), with increases in 5/6 prompts.
+  One seed does not establish a universal effect or gradient mechanism.
 
 This is a one-seed, selected-six-prompt mechanism study, not a representative
 quality evaluation or significance claim. Feedback uses full-P optimal feedback
@@ -53,6 +56,12 @@ extrapolation, **not** the manuscript's signed two-sampler loss. No winning rate
 or open-generation-collapse measurement was collected here.
 
 ## Figures and quantities
+
+[Stage C complete figure pack](cyclic_history_stage_c100_results_20260929/all_stage_c_figures.pdf)
+includes all-prompt aligned/mixed pi comparisons, common probability-plane
+trajectories, relative entropy, TV, and an eight-arm B/C overview. Mixed
+orientation has its own theoretical origin/mode; common-plane comparisons
+instead use the same fixed probability contrasts. See the report for definitions.
 
 [All six pi plots, one PDF](cyclic_history_stage_b100_results_20260929/pi_curves/stage_b_all_pi_curves.pdf)
 show four response probabilities for each of the six prompts, separately for

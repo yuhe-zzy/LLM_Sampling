@@ -1,5 +1,10 @@
 # Stage C: remaining mixed-orientation controls, states 0..100
 
+Completion verified September 29 at 13:44 UTC: both tasks COMPLETED, exit 0:0,
+all states 0..100. The full account queue was empty, zero allocated GPUs.
+See [results and plots](../cyclic_history_stage_c100_results_20260929/REPORT.md).
+All startup/launch snapshots below are historical. Do not resubmit these runs.
+
 Submitted as **4606367**, tasks **0-1%2**, at
 2026-09-29T05:56:05.170713+00:00. The preflight full account queue was empty.
 The immediate scheduler snapshot had both tasks pending, zero allocated GPUs;

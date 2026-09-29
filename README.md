@@ -15,7 +15,7 @@ September 28 update: [calibrated cyclic mechanism protocol](experiments/cyclic_h
 and [handoff to Fan and Yu He](experiments/hodge_diagnostics/HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md).
 September 29 update: [executed campaigns and results](experiments/cyclic_history/campaigns/README.md).
 Stage A and fixed-target probes completed; Stage B has six complete 0..100
-trajectories; the two remaining Stage C controls were submitted. Portable
+trajectories; the two Stage C controls also completed states 0..100. Portable
 100-round plans, analysis/plot scripts, numeric summaries, PNG/PDF figures and
 cluster launch receipts are included. Raw text/model artifacts are excluded.
 The collaborator's [two-week roadmap](experiments/hodge_diagnostics/plans/2026-09-29-two-week-experiment-plan.md)

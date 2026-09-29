@@ -191,7 +191,7 @@ def population_delta(method, p, mu, beta_train):
 
 def build_outer_state(initial, current, previous, matrices, method, alpha,
                       lambda_current, beta_train, nu=0.0, kappa=0.0):
-    if not 0 <= alpha < 1 or not 0 <= nu <= alpha or not np.isfinite(kappa) or kappa < 0:
+    if not 0 <= alpha <= 1 or not 0 <= nu <= alpha or not np.isfinite(kappa) or kappa < 0:
         raise ValueError("Invalid history coefficients")
     if nu and kappa:
         raise ValueError("Do not combine the two interventions in this ablation")

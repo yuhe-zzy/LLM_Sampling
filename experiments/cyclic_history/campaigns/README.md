@@ -8,6 +8,14 @@ fixed-point fitting a prerequisite for running B/C.
 
 ## Status and scope
 
+September 29 follow-up: the user approved exactly two empirical reference
+arms with `r_t=.1*s_t+.9*s_{t-1}` (alpha=1, nu=.9), 100 updates, IPO beta=.2
+and DPO beta=.8. See [reference90 protocol](cyclic_history_reference90_20260929/README.md)
+and its submission receipt for launch status. This is separate from A/B/C
+and does not authorize the two-week roadmap. The A/B/C source remains f0fe034;
+the new deployment records its own commit and retains support/initialization
+validation without importing the old alpha<1 fixed-point predictions.
+
 | Campaign | Array | Arms | Recorded horizon | Verified status |
 |---|---|---|---|---|
 | Stage A | 4603433 | IPO ordinary/stable; DPO ordinary/stable | outer 0..30 | All four completed |

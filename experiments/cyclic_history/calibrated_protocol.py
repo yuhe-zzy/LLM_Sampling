@@ -11,6 +11,7 @@ from history_math import centered, support_hash
 from population_calibration import analyze, balanced_cycle, basis, local_matrices
 
 PROTOCOL = "cyclic_history_calibrated_sequence_v2"
+EMPIRICAL_PROTOCOL = "cyclic_history_empirical_full_refresh_v1"
 UNSTABLE_MIN = 1.03
 STABLE_MAX = .98
 
@@ -43,7 +44,8 @@ def contract_hash(cfg):
     return hashlib.sha256(raw.encode()).hexdigest()
 
 
-def verify_calibration(panels, cfg, fresh_scores=None, fresh_lengths=None):
+def verify_support_calibration(panels, cfg, fresh_scores=None, fresh_lengths=None):
+    """Check the frozen data and initialization, independently of stability theory."""
     if cfg["calibration_contract_sha256"] != contract_hash(cfg):
         raise ValueError("Parameters changed after calibration; regenerate the plan")
     c = cfg["calibration"]
@@ -59,6 +61,11 @@ def verify_calibration(panels, cfg, fresh_scores=None, fresh_lengths=None):
         scores = fresh_scores
     if support_hash(panels) != cfg["transformed_support_sha256"]:
         raise ValueError("Wrong calibrated training support")
+    return scores
+
+
+def verify_calibration(panels, cfg, fresh_scores=None, fresh_lengths=None):
+    scores = verify_support_calibration(panels, cfg, fresh_scores, fresh_lengths)
     predictions = []
     for panel, reference in zip(panels, scores):
         result = analyze(cfg["method"], panel["preference_matrix"], reference, cfg["alpha"],

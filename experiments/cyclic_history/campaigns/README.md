@@ -22,21 +22,23 @@ validation without importing the old alpha<1 fixed-point predictions.
 | Fixed-target probes | 4605171 | Same four methods/betas, frozen outer-20 target | 6 blocks, cumulative 10..60 inner epochs; no outer update | All four completed |
 | Stage B100 | 4605560 | IPO/DPO each ordinary, reference, feedback | outer 0..100 | All six completed; 606 finite snapshots |
 | Stage C100 | 4606367 | IPO/DPO mixed orientation, ordinary update | outer 0..100 | Both completed, exit 0:0; verified September 29 at 13:44 UTC |
+| Reference90 follow-up | 4608669 | IPO/DPO reference weights (initial,current,previous)=(0,.1,.9) | planned outer 0..100 | Both PENDING(Resources), September 29 at 14:53 UTC |
 
 These are timestamped records, not a live dashboard. Never duplicate these
 jobs. Current GPU allocations must be rechecked from the full owner/UID queue.
 Stage B ran for 2:17:05--2:19:56 per arm on one H100 each. Stage C elapsed
 times were 2:17:06 and 2:17:53. The latest full account check was empty (0 GPUs).
 
-All use alpha=.9, lambda_current=.8, seed0 and the same six selected prompts
+A/B/C and fixed-target probes use alpha=.9, lambda_current=.8, seed0 and the same six selected prompts
 (54, 251, 612, 737, 867, 945), four fixed responses per prompt. Main ordinary
 and history arms use IPO beta_train=.2 and DPO beta_train=.8. A's stable
 controls instead use .4 and 1.6. B's reference has nu=.45, feedback kappa=.5.
 C reverses the cycle for prompts 54/612/867 only (preselected orientation
 [-1,+1,-1,+1,-1,+1]), keeping ordinary updates and all other training settings.
 
-The source used for neural training was frozen at **f0fe034**. Core training
-code has not changed in this publication. The fixed-target runner is now also
+The A/B/C source used for neural training was frozen at **f0fe034**. Reference90
+instead uses **2e73527**, with the explicit alpha=1 empirical protocol.
+The fixed-target runner is now also
 tracked; each probe manifest records its own source hashes. GitHub publication
 does not modify running jobs or their deployed copies.
 

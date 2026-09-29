@@ -1,5 +1,21 @@
 # Empirical 90%-previous reference, September 29, 2026
 
+Submitted at **2026-09-29 14:52:59 UTC**, array **4608669_0..1%2**.
+At 14:53:17 UTC both tasks were PENDING(Resources), full account allocation
+0 GPUs and no other owned work. This is a snapshot, not a completion claim.
+Do not duplicate the submission. Receipts and deployment hashes accompany
+this record. Actual training source is commit
+`2e73527d3508d0da85b90f86654d21d61ea40adc`; later documentation commits do
+not change the frozen source used by the queued jobs.
+
+Server validation: all **70 CPU regression tests passed**, no skips; both
+frozen support/parameter checks passed. Fresh model-score checks occur at
+GPU startup and are not yet verified while the jobs are pending. Initial
+packaging omitted a slurm test fixture, failed validation before any sbatch,
+and was preserved separately. The complete archive includes both
+`experiments/cyclic_history` and `slurm`; SHA256 is
+`0727eb21e0e6ff2e35e7465d379f52f79e1c2332057c8f00163fab2717867ba1`.
+
 User requested `r_t = 0*s_0 + 0.1*s_t + 0.9*s_{t-1}`. In the implemented
 score convention this is **alpha=1, nu=.9, kappa=0**. The scores are cached
 response-token sequence-sum log probabilities including EOS, not model

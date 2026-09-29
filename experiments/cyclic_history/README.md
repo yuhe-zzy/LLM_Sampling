@@ -1,6 +1,15 @@
 # Cyclic LLM history diagnostics
 
-## September 28 calibration update
+## September 29 execution update
+
+See [campaign status, results and reproduction](campaigns/README.md) for the
+completed Stage A, fixed-target and 100-round Stage B experiments, and the
+submitted Stage C controls. All six Stage B arms reached state 100. Public
+numeric results, all-prompt figures and portable plotting tools are included.
+The dated protocol below preserves the original calibration design; its
+"not submitted" statements describe September 28, not current status.
+
+## September 28 calibration update (historical)
 
 Start with [the calibrated protocol](CALIBRATED_PROTOCOL.md) and the
 [follow-up handoff for Fan and Yu He](../hodge_diagnostics/HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md).

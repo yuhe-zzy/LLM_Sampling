@@ -28,3 +28,6 @@ jobs:
           bash -n slurm/oracle.sh
           bash -n slurm/nonoracle.sh
           bash -n slurm/cyclic_history.sh
+          while IFS= read -r -d '' script; do
+            bash -n "$script"
+          done < <(find experiments/cyclic_history/campaigns -name '*.sh' -print0)

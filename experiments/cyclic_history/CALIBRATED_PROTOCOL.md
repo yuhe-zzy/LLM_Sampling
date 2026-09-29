@@ -1,6 +1,11 @@
 # Calibrated cyclic mechanism micropilot (2026-09-28)
 
-Status: **prepared and CPU-calibrated; NOT approved or submitted for GPU training**.
+Original September 28 status: **prepared and CPU-calibrated; not yet submitted**.
+For later approvals and execution, see the [September 29 campaign record](campaigns/README.md).
+Stage A and probes completed; Stage B ran six matched arms to state 100 and
+completed; Stage C's two mixed controls were submitted for the same horizon.
+The original 30-round design and suggested gates below are historical. The
+user later chose empirical relative comparisons without an exact-fit gate.
 The running v1 pilot and its immutable server sources/results are unchanged.
 The source and the dated calibration are on the `hodge-diagnostics` branch.
 

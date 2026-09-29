@@ -8,13 +8,19 @@ the **new cyclic history pilot**.
 The code was synchronized with the experiment server on 24 September 2026.
 See [migration and provenance](docs/MIGRATION.md) before comparing with the
 older version of this repository. Model weights, data, adapters, result dumps,
-credentials, and machine-specific job IDs are deliberately not included.
+credentials, and raw execution logs are deliberately not included. Dated job
+IDs are retained only in the campaign provenance records.
 
 September 28 update: [calibrated cyclic mechanism protocol](experiments/cyclic_history/CALIBRATED_PROTOCOL.md)
 and [handoff to Fan and Yu He](experiments/hodge_diagnostics/HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md).
-The repository now includes small numeric CPU calibration artifacts (no raw
-dataset text or model weights). New GPU runs remain unapproved; existing runs
-are not changed by this source update.
+September 29 update: [executed campaigns and results](experiments/cyclic_history/campaigns/README.md).
+Stage A and fixed-target probes completed; Stage B has six complete 0..100
+trajectories; the two remaining Stage C controls were submitted. Portable
+100-round plans, analysis/plot scripts, numeric summaries, PNG/PDF figures and
+cluster launch receipts are included. Raw text/model artifacts are excluded.
+The collaborator's [two-week roadmap](experiments/hodge_diagnostics/plans/2026-09-29-two-week-experiment-plan.md)
+is preserved as a proposal, not a list of completed or newly approved jobs.
+Publishing this update does not change any running job's frozen source.
 
 ## 1. Which experiment should I run?
 
@@ -24,7 +30,7 @@ are not changed by this source update.
 | Transitive, non-oracle | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/nonoracle_transitive.json` | Fixed HelpSteer scalar-score labels, no reward-model loading |
 | Cyclic, standard sequence-sum | Same non-oracle entry points with `--preference_case cyclic`; `configs/cyclic_sequence_sum.json` | Fixed tournament labels; ordinary cached-reference examples |
 | Cyclic, sampling ablation | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/cyclic_sampling_sweep.json` | Ten sequence-sum follow-up configurations; not historical reproductions |
-| Cyclic, calibrated history experiments | `experiments/cyclic_history/CALIBRATED_PROTOCOL.md` | Actual IPO/BT calibration, selected mechanism micropilot; new GPU runs not submitted |
+| Cyclic, calibrated history experiments | `experiments/cyclic_history/campaigns/README.md` | Actual IPO/BT calibration; completed A/B and fixed-target probes, submitted C; six selected prompts |
 
 **All runnable IPO/DPO code uses sequence sums, with no token-average mode.**
 This covers training, cached reference scores, static pair margins, generated

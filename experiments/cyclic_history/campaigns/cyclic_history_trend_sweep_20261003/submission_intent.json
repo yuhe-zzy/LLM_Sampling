@@ -1,0 +1,14 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--array=0-43%6",
+    "--chdir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh"
+  ],
+  "account_preflight": {
+    "checked_at_utc": "2026-10-03T07:34:15.900319+00:00",
+    "allocated_gpus": 0,
+    "owned_jobs": []
+  }
+}

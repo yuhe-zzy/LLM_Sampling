@@ -1,0 +1,13 @@
+{
+  "checked_download_files": 864,
+  "snapshot_count": 808,
+  "all_finite": true,
+  "complete_states": "0..100",
+  "raw_metrics_reconstructed": true,
+  "source_hashes_match": true,
+  "matched_text_initial_scores_token_lengths": true,
+  "orientation_only_contrast_verified": true,
+  "modes_recomputed_per_orientation": true,
+  "common_probability_projection": true,
+  "exported_private_text": false
+}

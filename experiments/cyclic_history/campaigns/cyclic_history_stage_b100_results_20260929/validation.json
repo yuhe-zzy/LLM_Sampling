@@ -1,0 +1,17 @@
+{
+  "checked_files": 648,
+  "snapshot_count": 606,
+  "all_finite": true,
+  "metric_reconstruction_passed": true,
+  "shared_support_and_initial_scores": true,
+  "common_mode_and_origin_within_method": true,
+  "source_hashes_match": true,
+  "complete_steps": {
+    "ipo_ordinary_b100_s0": 100,
+    "ipo_reference_b100_s0": 100,
+    "ipo_feedback_b100_s0": 100,
+    "dpo_ordinary_b100_s0": 100,
+    "dpo_reference_b100_s0": 100,
+    "dpo_feedback_b100_s0": 100
+  }
+}

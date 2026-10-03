@@ -78,7 +78,16 @@ are included in this preflight. No account-wide hard scheduler cap is claimed.
 
 Remote launch: `/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003`.
 Outputs: `/work/users/y/u/yuhe32/ipo_runs/cyclic_history_trend_sweep_20261003`.
-Source commit and submission receipt are filled only after successful deployment.
+Submitted **4659985_0..43%6** at **2026-10-03T07:34:15Z**, with frozen training
+commit `419565838535a9fa6c5f12af2b919ce8873db4ab`. Deployment passed all 76 CPU
+tests (no skips), all 44 support/config checks and all six completed-run reuse
+audits. The full-account preflight was empty. At **07:34:41Z**, all 44 tasks
+were PENDING(Resources), zero GPUs allocated and no other owned work. This is
+a timestamped snapshot, not completion or a hard account-wide cap. Fresh
+GPU initial-score validation is still pending and will run in every task.
+The intent, receipt, deployment hashes and startup snapshot are saved alongside
+this document. Never duplicate this submission, including while it is pending.
+
 Prior runs suggest roughly 2.3-2.5 GPU-hours each: approximately 100-110 new
 GPU-hours, or 17-20 hours at uninterrupted six-way allocation. Queue delays
 and changed parameter runtimes can increase this; it is not a completion ETA.

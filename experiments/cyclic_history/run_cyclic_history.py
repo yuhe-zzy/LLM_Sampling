@@ -19,7 +19,7 @@ from pathlib import Path
 
 import numpy as np
 
-from calibrated_protocol import EMPIRICAL_PROTOCOL, PROTOCOL
+from calibrated_protocol import EMPIRICAL_PROTOCOL, PROTOCOL, TREND_PROTOCOL
 from history_math import (build_outer_state, centered, describe_distribution, finite,
                           load_panels, sample_pairs, support_hash)
 
@@ -48,12 +48,16 @@ def validate_config(c):
     if c["scheme"] not in ("ordinary", "lagged_reference", "lagged_sampling", "oracle_feedback_extrapolation"):
         raise ValueError("Unknown scheme")
     empirical = c.get("protocol") == EMPIRICAL_PROTOCOL
+    trend = c.get("protocol") == TREND_PROTOCOL
     valid_alpha = c["alpha"] == 1 if empirical else 0 <= c["alpha"] < 1
     if not valid_alpha or not 0 <= c["lambda_current"] < 1:
         raise ValueError("alpha/lambda_current must be in [0,1)")
     if empirical and (c["scheme"] != "lagged_reference" or
                       c.get("prediction_role") != "empirical_unclassified"):
         raise ValueError("Full-refresh empirical protocol requires unclassified lagged reference")
+    if trend and (not 0 < c["alpha"] < 1 or
+                  c.get("prediction_role") != "empirical_unclassified"):
+        raise ValueError("Trend protocol requires partial refresh and an unclassified empirical role")
     if not 0 <= c["nu"] <= c["alpha"] or not np.isfinite(c["kappa"]) or c["kappa"] < 0:
         raise ValueError("Invalid history coefficients")
     if c["scheme"] == "ordinary" and (c["nu"] or c["kappa"]):
@@ -87,10 +91,10 @@ def validate_config(c):
         raise ValueError("Unsupported pair mode")
     if c.get("pair_mode") == "all_unordered" and c["pairs_per_prompt"] != 6:
         raise ValueError("Four-response full-pair mode requires exactly six pairs")
-    if c.get("protocol") in (PROTOCOL, EMPIRICAL_PROTOCOL):
+    if c.get("protocol") in (PROTOCOL, EMPIRICAL_PROTOCOL, TREND_PROTOCOL):
         if c["scheme"] == "lagged_sampling" or c.get("pair_mode") != "all_unordered":
             raise ValueError("Calibrated v2 uses named feedback extrapolation and all pairs")
-        if not empirical and c["prediction_role"] not in ("ordinary_stable", "ordinary_unstable"):
+        if not (empirical or trend) and c["prediction_role"] not in ("ordinary_stable", "ordinary_unstable"):
             raise ValueError("Unknown prediction role")
     if Path(c["run_id"]).name != c["run_id"] or "/" in c["run_id"] or "\\" in c["run_id"]:
         raise ValueError("run_id must be a filename component")
@@ -360,11 +364,12 @@ def train(cfg, panels):
             calibration_state = mode_coordinates(panels, cfg, predictions)
             write_json(root / "verified_population_predictions.json", predictions)
             manifest["calibration_gate"] = "PASSED_FRESH_INITIAL_SCORES"
-        elif cfg["protocol"] == EMPIRICAL_PROTOCOL:
+        elif cfg["protocol"] in (EMPIRICAL_PROTOCOL, TREND_PROTOCOL):
             from calibrated_protocol import verify_support_calibration
             verify_support_calibration(panels, cfg, initial, lengths)
             manifest["calibration_gate"] = "PASSED_FRESH_INITIAL_SCORES"
-            manifest["population_prediction"] = "NOT_COMPUTED_FULL_REFRESH_EMPIRICAL"
+            manifest["population_prediction"] = ("NOT_COMPUTED_FULL_REFRESH_EMPIRICAL"
+                if cfg["protocol"] == EMPIRICAL_PROTOCOL else "NOT_GATED_EMPIRICAL_TREND_SWEEP")
             manifest["reference_coefficients"] = dict(initial=1-cfg["alpha"],
                 current=cfg["alpha"]-cfg["nu"], previous=cfg["nu"])
         current, previous = initial.copy(), initial.copy()
@@ -439,7 +444,7 @@ def main(required_scheme=None):
     if not args.check_data and not args.execute:
         print("PREVIEW ONLY: no model loaded, no output directory created, no experiment started.")
         return
-    calibrated = cfg["protocol"] in (PROTOCOL, EMPIRICAL_PROTOCOL)
+    calibrated = cfg["protocol"] in (PROTOCOL, EMPIRICAL_PROTOCOL, TREND_PROTOCOL)
     if args.execute and ((calibrated and not args.approve_calibrated_micropilot)
                          or (not calibrated and not args.allow_uncalibrated_legacy)):
         parser.error("Training needs explicit calibrated-micropilot approval or a legacy override")
@@ -448,7 +453,7 @@ def main(required_scheme=None):
     if calibrated:
         from calibrated_protocol import transform_panels, verify_calibration, verify_support_calibration
         panels = transform_panels(panels, cfg)
-        if cfg["protocol"] == EMPIRICAL_PROTOCOL:
+        if cfg["protocol"] in (EMPIRICAL_PROTOCOL, TREND_PROTOCOL):
             verify_support_calibration(panels, cfg)
         else:
             verify_calibration(panels, cfg)

@@ -12,6 +12,7 @@ from population_calibration import analyze, balanced_cycle, basis, local_matrice
 
 PROTOCOL = "cyclic_history_calibrated_sequence_v2"
 EMPIRICAL_PROTOCOL = "cyclic_history_empirical_full_refresh_v1"
+TREND_PROTOCOL = "cyclic_history_empirical_partial_refresh_trend_v1"
 UNSTABLE_MIN = 1.03
 STABLE_MAX = .98
 

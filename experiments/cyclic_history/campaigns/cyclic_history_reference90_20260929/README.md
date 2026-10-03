@@ -1,5 +1,11 @@
 # Empirical 90%-previous reference, September 29, 2026
 
+**Completion verified 2026-10-03 UTC:** both tasks completed with exit 0:0,
+all states 0..100, 202 finite snapshots and no logged execution errors.
+See [results and interpretation](RESULTS_2026-10-03.md) and `results/` for the
+all-prompt policy/relative-entropy figures and numeric summaries. No jobs
+were changed. The pending snapshot below is historical.
+
 Submitted at **2026-09-29 14:52:59 UTC**, array **4608669_0..1%2**.
 At 14:53:17 UTC both tasks were PENDING(Resources), full account allocation
 0 GPUs and no other owned work. This is a snapshot, not a completion claim.

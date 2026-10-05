@@ -104,3 +104,70 @@ Report paired differences versus the matching ordinary baseline and retain
 exceptions. No smooth/interpolated observations, fabricated winning rate,
 or inference of repeated-token generation collapse from panel concentration.
 No follow-up runs or automatic resubmission are authorized by this grid.
+
+## Complete results: 2026-10-04 America/Chicago
+
+Read-only inspection at **2026-10-04 20:19 CDT** (2026-10-05T01:19:08Z)
+verified all **44 new tasks COMPLETED, exit 0:0**, each with all states 0..100
+and fresh initial-score calibration passed. The full owner/UID account queue
+was empty, with zero allocated GPUs. No OOM, Traceback or nonfinite failure was
+found. New tasks used 101.416 GPU-hours in total, excluding the reused controls.
+No job was submitted, cancelled, requeued or modified during this inspection.
+
+Including the six reused Stage B runs, all **50 logical runs / 5,050 snapshots**
+are complete. Download hashes, frozen source hashes, unchanged reuse manifests
+and metrics, identical support identities, finite numbers and contiguous steps
+were checked. Every recorded pi, raw entropy, relative entropy and adjacent TV
+was independently reconstructed. Reference weights, feedback offsets and
+sampling mixtures were also checked against all saved update snapshots.
+
+Start at [the complete figure index](results_20261004/index.html). The two
+40-page PDF books contain all arms and all prompts; PNGs allow individual
+inspection. There are 50 individual six-prompt pi figures, 20 same-prompt
+ordinary/history comparisons, ten separately labeled relative-entropy figures
+and one descriptive overview. No private prompt/response text, adapters, weights
+or raw dumps are published. The numeric NPZ contains only measured pi and
+relative entropy. Raw evidence remains in the local results directory.
+
+### Reading the figures
+
+- Each pi curve is `softmax(s_t)` over the same four fixed response sequences;
+  it is not token probability, full response-space mass or the sampling mixture.
+- Four response colors and line styles are fixed across all arms. Comparisons
+  place the same prompt in the same row; all axes span 0..100 and 0..1.
+- Relative entropy is `H(softmax(s_t-s_0))` in nats, not `H(softmax(s_t))`.
+- Temporal SD is the mean of four response-wise standard deviations over time.
+  Adjacent TV is `0.5*sum_i abs(pi_i(t)-pi_i(t-1))`. The first describes spread
+  over a window; the second describes movement at each update. They need not
+  change in the same direction. Neither alone proves convergence.
+- Summary windows were specified before inspection: 1..25, 26..50, 51..75,
+  76..100, and 51..100. TV and winner switches include transitions ending at
+  every t in the window, including its first step.
+
+### Descriptive observations, states 51..100
+
+Across the 40 intervention/base/objective comparisons, mean temporal SD over
+six prompts is lower than the matched ordinary baseline in all 40. This does
+not mean every prompt improves: SD decreases in 53/60 prompt comparisons for
+Reference half, 52/60 for Reference max, 45/60 for Feedback .5, and 54/60 for
+Feedback 1. All individual exceptions are retained in the plots and CSVs.
+
+Maximal lag (nu=alpha) increases mean adjacent TV in all ten base/objective
+comparisons; only 2/60 individual prompt TV comparisons decrease. Thus a
+smaller broad excursion can coexist with stronger short-period jitter.
+At the center, Reference max lowers temporal SD by 28.6% (IPO) / 28.3% (DPO),
+but increases adjacent TV by 34.2% / 46.5%.
+
+The strongest descriptive Feedback contrast is at alpha=.99. With kappa=1,
+mean temporal SD is lower by 73.3% (IPO) / 80.9% (DPO), and adjacent TV is
+lower by 59.3% / 64.8%, relative to each matched ordinary baseline. Other
+base settings have smaller or mixed TV changes. These are single-seed,
+fixed-panel LLM observations, not theoretical trajectories or full-generation
+collapse diagnoses. The full grid, not just this favorable contrast, is shown.
+
+`run_summary.csv` and `paired_summary.csv` contain six-prompt means for every
+window; `prompt_summary.csv` and `paired_prompt_summary.csv` retain each prompt.
+The analysis tests check constant and alternating policies, window boundaries,
+and exact base/method pairing. All four tests pass. Both PDF books were rendered
+for visual inspection. Training sources remain frozen at 4195658 (new) and
+f0fe034 (reused); adding analysis and results does not change those sources.

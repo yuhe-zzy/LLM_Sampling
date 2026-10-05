@@ -1,0 +1,41 @@
+{
+  "runs": 50,
+  "new_runs": 44,
+  "reused_runs": 6,
+  "snapshots": 5050,
+  "measured_probability_values": 121200,
+  "hashes_verified": true,
+  "source_and_reuse_verified": true,
+  "raw_pi_and_relative_entropy_reconstructed": true,
+  "reference_feedback_and_sampler_equations_verified": true,
+  "all_six_supports_aligned": true,
+  "png_figures": 81,
+  "methods": [
+    "ipo",
+    "dpo"
+  ],
+  "windows": [
+    [
+      1,
+      25
+    ],
+    [
+      26,
+      50
+    ],
+    [
+      51,
+      75
+    ],
+    [
+      76,
+      100
+    ],
+    [
+      51,
+      100
+    ]
+  ],
+  "checked_at_utc": "2026-10-05T01:19:08.419723+00:00",
+  "allocated_gpus": 0
+}

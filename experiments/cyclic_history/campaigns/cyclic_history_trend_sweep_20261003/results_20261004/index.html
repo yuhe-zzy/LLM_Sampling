@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Cyclic trend sweep results</title>
+<style>body{font:16px system-ui;max-width:1400px;margin:32px auto;padding:0 20px;color:#222}img{max-width:100%;height:auto}table{border-collapse:collapse;width:100%;margin:20px 0}td,th{border:1px solid #ccc;padding:10px;text-align:left}a{color:#006ca5}summary{cursor:pointer;padding:12px 0;font-weight:600}h2{margin-top:36px}</style>
+<h1>Cyclic history trend sweep</h1><p>50 complete runs: 44 new + 6 reused Stage B. Six fixed prompts, outer states 0-100, seed0.</p>
+<p>Pi = softmax(response sequence-sum scores) over four fixed candidates. It is not token probability or a full response-space distribution. Response colors are fixed within each prompt. No smoothing or interpolation.</p>
+<p><a href="ipo_complete_figures.pdf">IPO complete PDF</a> | <a href="dpo_complete_figures.pdf">DPO complete PDF</a> | <a href="run_summary.csv">Numeric summary</a> | <a href="paired_summary.csv">Paired differences</a></p>
+<img src="paired_fluctuation_overview.png" alt="Paired descriptive fluctuation overview">
+<h2>IPO</h2><table><tr><th>Base</th><th>Reference vs ordinary</th><th>Feedback vs ordinary</th><th>Relative entropy</th></tr>
+<tr><td>alpha=0.9, lambda=0.8, beta=0.2</td><td><a href="ipo_center_reference_comparison.png">All 6 prompts</a></td><td><a href="ipo_center_feedback_comparison.png">All 6 prompts</a></td><td><a href="ipo_center_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.8, lambda=0.8, beta=0.2</td><td><a href="ipo_alpha08_reference_comparison.png">All 6 prompts</a></td><td><a href="ipo_alpha08_feedback_comparison.png">All 6 prompts</a></td><td><a href="ipo_alpha08_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.99, lambda=0.8, beta=0.2</td><td><a href="ipo_alpha099_reference_comparison.png">All 6 prompts</a></td><td><a href="ipo_alpha099_feedback_comparison.png">All 6 prompts</a></td><td><a href="ipo_alpha099_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.9, lambda=0.5, beta=0.2</td><td><a href="ipo_coverage05_reference_comparison.png">All 6 prompts</a></td><td><a href="ipo_coverage05_feedback_comparison.png">All 6 prompts</a></td><td><a href="ipo_coverage05_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.9, lambda=0.8, beta=0.3</td><td><a href="ipo_beta15_reference_comparison.png">All 6 prompts</a></td><td><a href="ipo_beta15_feedback_comparison.png">All 6 prompts</a></td><td><a href="ipo_beta15_relative_entropy.png">All 5 arms</a></td></tr>
+</table>
+<details><summary>IPO / center / each arm separately</summary>
+<h3>ordinary</h3><a href="ipo_center_ordinary_pi.png"><img loading="lazy" src="ipo_center_ordinary_pi.png" alt="ipo_center_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="ipo_center_reference_half_pi.png"><img loading="lazy" src="ipo_center_reference_half_pi.png" alt="ipo_center_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="ipo_center_reference_max_pi.png"><img loading="lazy" src="ipo_center_reference_max_pi.png" alt="ipo_center_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="ipo_center_feedback_half_pi.png"><img loading="lazy" src="ipo_center_feedback_half_pi.png" alt="ipo_center_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="ipo_center_feedback_one_pi.png"><img loading="lazy" src="ipo_center_feedback_one_pi.png" alt="ipo_center_feedback_one_pi.png"></a>
+</details>
+<details><summary>IPO / alpha08 / each arm separately</summary>
+<h3>ordinary</h3><a href="ipo_alpha08_ordinary_pi.png"><img loading="lazy" src="ipo_alpha08_ordinary_pi.png" alt="ipo_alpha08_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="ipo_alpha08_reference_half_pi.png"><img loading="lazy" src="ipo_alpha08_reference_half_pi.png" alt="ipo_alpha08_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="ipo_alpha08_reference_max_pi.png"><img loading="lazy" src="ipo_alpha08_reference_max_pi.png" alt="ipo_alpha08_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="ipo_alpha08_feedback_half_pi.png"><img loading="lazy" src="ipo_alpha08_feedback_half_pi.png" alt="ipo_alpha08_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="ipo_alpha08_feedback_one_pi.png"><img loading="lazy" src="ipo_alpha08_feedback_one_pi.png" alt="ipo_alpha08_feedback_one_pi.png"></a>
+</details>
+<details><summary>IPO / alpha099 / each arm separately</summary>
+<h3>ordinary</h3><a href="ipo_alpha099_ordinary_pi.png"><img loading="lazy" src="ipo_alpha099_ordinary_pi.png" alt="ipo_alpha099_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="ipo_alpha099_reference_half_pi.png"><img loading="lazy" src="ipo_alpha099_reference_half_pi.png" alt="ipo_alpha099_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="ipo_alpha099_reference_max_pi.png"><img loading="lazy" src="ipo_alpha099_reference_max_pi.png" alt="ipo_alpha099_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="ipo_alpha099_feedback_half_pi.png"><img loading="lazy" src="ipo_alpha099_feedback_half_pi.png" alt="ipo_alpha099_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="ipo_alpha099_feedback_one_pi.png"><img loading="lazy" src="ipo_alpha099_feedback_one_pi.png" alt="ipo_alpha099_feedback_one_pi.png"></a>
+</details>
+<details><summary>IPO / coverage05 / each arm separately</summary>
+<h3>ordinary</h3><a href="ipo_coverage05_ordinary_pi.png"><img loading="lazy" src="ipo_coverage05_ordinary_pi.png" alt="ipo_coverage05_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="ipo_coverage05_reference_half_pi.png"><img loading="lazy" src="ipo_coverage05_reference_half_pi.png" alt="ipo_coverage05_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="ipo_coverage05_reference_max_pi.png"><img loading="lazy" src="ipo_coverage05_reference_max_pi.png" alt="ipo_coverage05_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="ipo_coverage05_feedback_half_pi.png"><img loading="lazy" src="ipo_coverage05_feedback_half_pi.png" alt="ipo_coverage05_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="ipo_coverage05_feedback_one_pi.png"><img loading="lazy" src="ipo_coverage05_feedback_one_pi.png" alt="ipo_coverage05_feedback_one_pi.png"></a>
+</details>
+<details><summary>IPO / beta15 / each arm separately</summary>
+<h3>ordinary</h3><a href="ipo_beta15_ordinary_pi.png"><img loading="lazy" src="ipo_beta15_ordinary_pi.png" alt="ipo_beta15_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="ipo_beta15_reference_half_pi.png"><img loading="lazy" src="ipo_beta15_reference_half_pi.png" alt="ipo_beta15_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="ipo_beta15_reference_max_pi.png"><img loading="lazy" src="ipo_beta15_reference_max_pi.png" alt="ipo_beta15_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="ipo_beta15_feedback_half_pi.png"><img loading="lazy" src="ipo_beta15_feedback_half_pi.png" alt="ipo_beta15_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="ipo_beta15_feedback_one_pi.png"><img loading="lazy" src="ipo_beta15_feedback_one_pi.png" alt="ipo_beta15_feedback_one_pi.png"></a>
+</details>
+<h2>DPO</h2><table><tr><th>Base</th><th>Reference vs ordinary</th><th>Feedback vs ordinary</th><th>Relative entropy</th></tr>
+<tr><td>alpha=0.9, lambda=0.8, beta=0.8</td><td><a href="dpo_center_reference_comparison.png">All 6 prompts</a></td><td><a href="dpo_center_feedback_comparison.png">All 6 prompts</a></td><td><a href="dpo_center_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.8, lambda=0.8, beta=0.8</td><td><a href="dpo_alpha08_reference_comparison.png">All 6 prompts</a></td><td><a href="dpo_alpha08_feedback_comparison.png">All 6 prompts</a></td><td><a href="dpo_alpha08_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.99, lambda=0.8, beta=0.8</td><td><a href="dpo_alpha099_reference_comparison.png">All 6 prompts</a></td><td><a href="dpo_alpha099_feedback_comparison.png">All 6 prompts</a></td><td><a href="dpo_alpha099_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.9, lambda=0.5, beta=0.8</td><td><a href="dpo_coverage05_reference_comparison.png">All 6 prompts</a></td><td><a href="dpo_coverage05_feedback_comparison.png">All 6 prompts</a></td><td><a href="dpo_coverage05_relative_entropy.png">All 5 arms</a></td></tr>
+<tr><td>alpha=0.9, lambda=0.8, beta=1.2</td><td><a href="dpo_beta15_reference_comparison.png">All 6 prompts</a></td><td><a href="dpo_beta15_feedback_comparison.png">All 6 prompts</a></td><td><a href="dpo_beta15_relative_entropy.png">All 5 arms</a></td></tr>
+</table>
+<details><summary>DPO / center / each arm separately</summary>
+<h3>ordinary</h3><a href="dpo_center_ordinary_pi.png"><img loading="lazy" src="dpo_center_ordinary_pi.png" alt="dpo_center_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="dpo_center_reference_half_pi.png"><img loading="lazy" src="dpo_center_reference_half_pi.png" alt="dpo_center_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="dpo_center_reference_max_pi.png"><img loading="lazy" src="dpo_center_reference_max_pi.png" alt="dpo_center_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="dpo_center_feedback_half_pi.png"><img loading="lazy" src="dpo_center_feedback_half_pi.png" alt="dpo_center_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="dpo_center_feedback_one_pi.png"><img loading="lazy" src="dpo_center_feedback_one_pi.png" alt="dpo_center_feedback_one_pi.png"></a>
+</details>
+<details><summary>DPO / alpha08 / each arm separately</summary>
+<h3>ordinary</h3><a href="dpo_alpha08_ordinary_pi.png"><img loading="lazy" src="dpo_alpha08_ordinary_pi.png" alt="dpo_alpha08_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="dpo_alpha08_reference_half_pi.png"><img loading="lazy" src="dpo_alpha08_reference_half_pi.png" alt="dpo_alpha08_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="dpo_alpha08_reference_max_pi.png"><img loading="lazy" src="dpo_alpha08_reference_max_pi.png" alt="dpo_alpha08_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="dpo_alpha08_feedback_half_pi.png"><img loading="lazy" src="dpo_alpha08_feedback_half_pi.png" alt="dpo_alpha08_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="dpo_alpha08_feedback_one_pi.png"><img loading="lazy" src="dpo_alpha08_feedback_one_pi.png" alt="dpo_alpha08_feedback_one_pi.png"></a>
+</details>
+<details><summary>DPO / alpha099 / each arm separately</summary>
+<h3>ordinary</h3><a href="dpo_alpha099_ordinary_pi.png"><img loading="lazy" src="dpo_alpha099_ordinary_pi.png" alt="dpo_alpha099_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="dpo_alpha099_reference_half_pi.png"><img loading="lazy" src="dpo_alpha099_reference_half_pi.png" alt="dpo_alpha099_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="dpo_alpha099_reference_max_pi.png"><img loading="lazy" src="dpo_alpha099_reference_max_pi.png" alt="dpo_alpha099_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="dpo_alpha099_feedback_half_pi.png"><img loading="lazy" src="dpo_alpha099_feedback_half_pi.png" alt="dpo_alpha099_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="dpo_alpha099_feedback_one_pi.png"><img loading="lazy" src="dpo_alpha099_feedback_one_pi.png" alt="dpo_alpha099_feedback_one_pi.png"></a>
+</details>
+<details><summary>DPO / coverage05 / each arm separately</summary>
+<h3>ordinary</h3><a href="dpo_coverage05_ordinary_pi.png"><img loading="lazy" src="dpo_coverage05_ordinary_pi.png" alt="dpo_coverage05_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="dpo_coverage05_reference_half_pi.png"><img loading="lazy" src="dpo_coverage05_reference_half_pi.png" alt="dpo_coverage05_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="dpo_coverage05_reference_max_pi.png"><img loading="lazy" src="dpo_coverage05_reference_max_pi.png" alt="dpo_coverage05_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="dpo_coverage05_feedback_half_pi.png"><img loading="lazy" src="dpo_coverage05_feedback_half_pi.png" alt="dpo_coverage05_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="dpo_coverage05_feedback_one_pi.png"><img loading="lazy" src="dpo_coverage05_feedback_one_pi.png" alt="dpo_coverage05_feedback_one_pi.png"></a>
+</details>
+<details><summary>DPO / beta15 / each arm separately</summary>
+<h3>ordinary</h3><a href="dpo_beta15_ordinary_pi.png"><img loading="lazy" src="dpo_beta15_ordinary_pi.png" alt="dpo_beta15_ordinary_pi.png"></a>
+<h3>reference_half</h3><a href="dpo_beta15_reference_half_pi.png"><img loading="lazy" src="dpo_beta15_reference_half_pi.png" alt="dpo_beta15_reference_half_pi.png"></a>
+<h3>reference_max</h3><a href="dpo_beta15_reference_max_pi.png"><img loading="lazy" src="dpo_beta15_reference_max_pi.png" alt="dpo_beta15_reference_max_pi.png"></a>
+<h3>feedback_half</h3><a href="dpo_beta15_feedback_half_pi.png"><img loading="lazy" src="dpo_beta15_feedback_half_pi.png" alt="dpo_beta15_feedback_half_pi.png"></a>
+<h3>feedback_one</h3><a href="dpo_beta15_feedback_one_pi.png"><img loading="lazy" src="dpo_beta15_feedback_one_pi.png" alt="dpo_beta15_feedback_one_pi.png"></a>
+</details>
+</html>

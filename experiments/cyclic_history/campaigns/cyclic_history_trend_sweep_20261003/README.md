@@ -198,3 +198,25 @@ Reproduce from the campaign directory:
 python -m unittest test_analysis test_all_variants
 python plot_all_variants.py --results /path/to/cyclic_history_trend_sweep_results_20261004 --output /path/to/all_variants_20261005
 ```
+
+## Per-prompt, strength-sorted comparisons: 2026-10-06
+
+Following the clarified layout request, `prompt_sorted_20261006/` contains
+exactly 24 horizontal PNG figures and a 24-page vector PDF: six prompts for
+each combination of IPO/DPO and Reference/Feedback. Each figure places five
+equal-size ordinary panels B1-B5 on the left, followed by all ten historical
+configurations. Reference is ordered by increasing nu; Feedback by increasing
+kappa. Ties are ordered by B1-B5. Repeated nu/kappa values represent different
+alpha/lambda/beta settings, not duplicate runs or a one-factor-only sweep.
+
+Every panel, including each ordinary, has identical dimensions and 0..100,
+0..1 limits. The user explicitly chose these five full-size baseline panels
+instead of one mismatched common baseline. Each history panel identifies its
+matching B index and all parameters. B1=center, B2=alpha08, B3=alpha099,
+B4=coverage05, B5=beta15. Existing outputs are retained. The complete raw-data
+audit is rerun before plotting; no training, server or scheduling changes occur.
+
+```sh
+python -m unittest test_analysis test_all_variants test_prompt_sorted
+python plot_prompt_sorted.py --results /path/to/cyclic_history_trend_sweep_results_20261004 --output /path/to/prompt_sorted_20261006
+```

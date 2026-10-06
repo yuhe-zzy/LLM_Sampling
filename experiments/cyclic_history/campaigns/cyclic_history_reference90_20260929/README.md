@@ -76,3 +76,28 @@ Remote launch: `/work/users/y/u/yuhe32/ipo/diagnostics/history_reference90_20260
 Remote results: `/work/users/y/u/yuhe32/ipo_runs/cyclic_history_reference90_20260929`.
 No model weights, adapters, private prompt/response text or credentials belong
 in the public campaign record. Older deployments remain untouched.
+
+## Ordinary comparison figures: 2026-10-06
+
+`ordinary_comparison_20261006/` places the completed Stage B ordinary on the
+left and the requested `r_t=0*s_0+.1*s_t+.9*s_(t-1)` run on the right. There
+are two six-prompt overview PNGs, twelve individual prompt comparisons, and
+a 14-page PDF. All panels use equal sizes within a comparison, shared 0..100
+and 0..1 axes, and fixed response identities/colors. These are measured pi
+over the four fixed candidates, not full-space/token probabilities.
+
+Important: the available ordinary has alpha=.9, nu=0, hence reference weights
+(.1,.9,0). Reference90 has alpha=1, nu=.9, hence weights (0,.1,.9). There is
+no matched alpha=1 ordinary in this campaign. Both alpha and nu change; the
+figures are descriptive comparisons, not a nu-only causal ablation. Lambda=.8,
+beta IPO=.2/DPO=.8, seed0 and other listed training settings are matched.
+
+All four runs, 404 snapshots, receipt hashes, initial scores, support identity
+and actual training reference equations are revalidated. No jobs are started,
+changed or inspected by this plotting-only update. Frozen training sources
+remain 2e73527 (Reference90) and f0fe034 (Stage B). Prior outputs are preserved.
+
+```sh
+python -m unittest test_plot_results test_ordinary_comparison
+python plot_ordinary_comparison.py --reference90 /path/to/cyclic_reference90_results_20261003 --stage-b /path/to/cyclic_history_stage_b100_results_20260929 --output /path/to/ordinary_comparison_20261006
+```

@@ -1,0 +1,25 @@
+{
+  "figures": 4,
+  "pdf_pages": 4,
+  "columns_per_figure": 11,
+  "variants_per_figure": 10,
+  "ordinary_baselines_per_prompt": 5,
+  "prompts": [
+    54,
+    251,
+    612,
+    737,
+    867,
+    945
+  ],
+  "states": [
+    0,
+    100
+  ],
+  "all_50_runs_revalidated": true,
+  "layout": "one ordinary column with B1-B5 small multiples, then v1-v10",
+  "source_training_commits": [
+    "419565838535a9fa6c5f12af2b919ce8873db4ab",
+    "f0fe034cc0d8e3bef35b0f5e02806ee81340da76"
+  ]
+}

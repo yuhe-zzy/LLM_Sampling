@@ -171,3 +171,30 @@ The analysis tests check constant and alternating policies, window boundaries,
 and exact base/method pairing. All four tests pass. Both PDF books were rendered
 for visual inspection. Training sources remain frozen at 4195658 (new) and
 f0fe034 (reused); adding analysis and results does not change those sources.
+
+## Eleven-column complete comparisons: 2026-10-05
+
+The requested horizontal layout is in `all_variants_20261005/`: four PNGs
+(IPO/DPO crossed with Reference/Feedback) and a four-page vector PDF,
+`ordinary_and_all_ten_variants.pdf`. Each sheet has eleven columns: an ordinary
+bank at the far left followed by v1 through v10, with all six prompt rows.
+Because the ten interventions span five different base settings, the ordinary
+column contains five labeled small multiples per prompt, never one falsely
+shared baseline. B1=center, B2=alpha08, B3=alpha099, B4=coverage05, B5=beta15;
+v1/v2 match B1, v3/v4 match B2, and so on. Reference pairs use nu=alpha/2 and
+nu=alpha; Feedback pairs use kappa=.5 and 1. Each variant title gives its actual
+parameters and ordinary ID. `column_mapping.csv` records exact run identities.
+
+All 50 runs are revalidated from raw evidence before plotting. The figures
+show measured fixed-panel pi, not token probabilities, sampling mixtures,
+entropy or theoretical trajectories. All axes remain 0..100 and 0..1, with
+unaltered response identities/colors and no smoothing. Existing figures and
+immutable training sources are preserved; this is a plotting-only update.
+No server/GPU work or monitoring was requested or performed.
+
+Reproduce from the campaign directory:
+
+```sh
+python -m unittest test_analysis test_all_variants
+python plot_all_variants.py --results /path/to/cyclic_history_trend_sweep_results_20261004 --output /path/to/all_variants_20261005
+```

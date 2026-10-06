@@ -8,6 +8,12 @@ fixed-point fitting a prerequisite for running B/C.
 
 ## Status and scope
 
+October 6 follow-up: the user approved exactly two additional ordinary arms,
+IPO beta=.2 and DPO beta=.8, with alpha=.1, nu=kappa=0, lambda_current=.8.
+These use `r_t=.9*s_0+.1*s_t`, the same six calibrated panels and 100 updates.
+See [initial-anchor control](cyclic_history_anchor90_20261006/README.md) and its
+receipt for status. This is not the previous `(0,.1,.9)` reference90 experiment.
+
 September 29 follow-up: the user approved exactly two empirical reference
 arms with `r_t=.1*s_t+.9*s_{t-1}` (alpha=1, nu=.9), 100 updates, IPO beta=.2
 and DPO beta=.8. See [reference90 protocol](cyclic_history_reference90_20260929/README.md)

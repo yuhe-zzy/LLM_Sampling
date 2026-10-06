@@ -25,9 +25,25 @@ for alpha=.1. No training algorithm changes are required.
 
 ## Execution
 
-Status: prepared for the explicitly authorized submission, not yet submitted.
-The receipt, once present, is authoritative. Do not retry after a submission
-intent without reconciling scheduler state. No automatic follow-up is scheduled.
+Submitted as **4728255_0..1%2** on October 6 at 09:52:50 America/Chicago
+(14:52:50 UTC). Task 0 is IPO; task 1 is DPO. At 09:53:25 America/Chicago,
+both tasks were **PENDING(Priority)**, with zero allocated GPUs and no other
+owned running or pending work. This is normal scheduling, not failure.
+No fresh GPU initial-score check has run while pending; it is mandatory at
+each task's startup. These are dated snapshots, not current-state guarantees.
+
+All **82 server CPU tests passed with no skips** (76 existing plus six new),
+both config/support audits passed, and the full account was empty immediately
+before submission. Frozen source commit:
+`6d5510875eee5127b7307fe7a85cab0b6b3dc0f3`. The core training, history math
+and calibration code are unchanged from the trend sweep's 4195658 source.
+The new commit adds this campaign's configuration, launch checks and records.
+
+See `deployment.json`, `submission_intent.json`, `submission_receipt.json`,
+`queue_verified.json` and `startup_check.json`. Never duplicate the submission
+or retry after an intent without reconciling scheduler state. No automatic
+follow-up is scheduled. Later documentation commits do not change this frozen
+training source or the already-submitted jobs.
 
 - Remote launch: `/work/users/y/u/yuhe32/ipo/diagnostics/history_anchor90_20261006`
 - Output: `/work/users/y/u/yuhe32/ipo_runs/cyclic_history_anchor90_20261006`

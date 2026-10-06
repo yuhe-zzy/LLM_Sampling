@@ -13,6 +13,10 @@ IPO beta=.2 and DPO beta=.8, with alpha=.1, nu=kappa=0, lambda_current=.8.
 These use `r_t=.9*s_0+.1*s_t`, the same six calibrated panels and 100 updates.
 See [initial-anchor control](cyclic_history_anchor90_20261006/README.md) and its
 receipt for status. This is not the previous `(0,.1,.9)` reference90 experiment.
+Submitted as **4728255_0..1%2** on October 6 at 14:52:50 UTC, one H100 per
+task. At 14:53:25 UTC both were PENDING(Priority), account allocation zero,
+with no other owned jobs. All 82 CPU tests and both support audits passed;
+fresh GPU initial-score checks remain pending. Frozen source is 6d55108.
 
 September 29 follow-up: the user approved exactly two empirical reference
 arms with `r_t=.1*s_t+.9*s_{t-1}` (alpha=1, nu=.9), 100 updates, IPO beta=.2

@@ -22,6 +22,14 @@ The collaborator's [two-week roadmap](experiments/hodge_diagnostics/plans/2026-0
 is preserved as a proposal, not a list of completed or newly approved jobs.
 Publishing this update does not change any running job's frozen source.
 
+October 6 results publication: start with the [results atlas](docs/RESULTS_INDEX.md)
+for batch-level questions, parameter grids, figures, numeric evidence and
+provenance. It links existing cyclic campaigns without moving their files and
+adds a dated, incomplete [oracle1 snapshot](experiments/oracle1/campaigns/sequencesum_snapshot_20260911/README.md).
+`oracle1` means the original Nemotron scalar judge; `oracle2` means the proposed
+mixed judge, not the second component alone. See the [oracle2 design review](docs/ORACLE2_DESIGN_REVIEW_20261006.md).
+The latter is a proposal, not an implemented or submitted campaign.
+
 ## 1. Which experiment should I run?
 
 | Setting | Entry points / recipe | Important distinction |
@@ -30,7 +38,7 @@ Publishing this update does not change any running job's frozen source.
 | Transitive, non-oracle | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/nonoracle_transitive.json` | Fixed HelpSteer scalar-score labels, no reward-model loading |
 | Cyclic, standard sequence-sum | Same non-oracle entry points with `--preference_case cyclic`; `configs/cyclic_sequence_sum.json` | Fixed tournament labels; ordinary cached-reference examples |
 | Cyclic, sampling ablation | `scripts/run_ipo.py`, `scripts/run_dpo.py`; `configs/cyclic_sampling_sweep.json` | Ten sequence-sum follow-up configurations; not historical reproductions |
-| Cyclic, calibrated history experiments | `experiments/cyclic_history/campaigns/README.md` | Actual IPO/BT calibration; completed A/B and fixed-target probes, submitted C; six selected prompts |
+| Cyclic, calibrated history experiments | `experiments/cyclic_history/campaigns/README.md` | Completed A/B/C, probes and trend sweep; six selected prompts; dated anchor90 launch record |
 
 **All runnable IPO/DPO code uses sequence sums, with no token-average mode.**
 This covers training, cached reference scores, static pair margins, generated

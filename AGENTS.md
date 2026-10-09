@@ -18,13 +18,13 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
-Oracle2 checkpoint milestone 2026-10-09T21:55:27Z: train4773902_0/1 remain
-RUNNING, both complete outer15/100, step-10 adapters saved. All states0..15
-metrics contiguous, 32 finite snapshots total, matching initial scores and
+Oracle2 checkpoint milestone 2026-10-09T23:58:22Z: train4773902_0/1 remain
+RUNNING, ordinary complete outer24/100, reference25/100; step-10/20 adapters
+saved. Metrics contiguous from state0, 51 finite snapshots, matching initial scores and
 unchanged review/source. Baseline800/800 remains hash-valid. _2..5 normal
 PENDING(JobArrayTaskLimit); full account TWO H100s, no unrelated owned work
 or logged OOM/Traceback/nonfinite. No generated-checkpoint WR yet; no tasks
-changed. Existing two-hour monitor continues. See records/attempt4/checkpoint10_status.json.
+changed. Existing two-hour monitor continues. See records/attempt4/checkpoint20_status.json.
 
 Oracle2 milestone 2026-10-09T19:55:56Z: baseline4773899 COMPLETED 0:0,
 800/800 generated responses, count/hash verified. Train4773902_0 IPO ordinary

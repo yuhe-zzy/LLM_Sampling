@@ -27,6 +27,14 @@ WR must use outer states 0,10,...,100. Code and status live in
 read deployment/intent/receipt and live owner/UID queue first. Audit the true
 mixed matrices and judge interfaces before training, report too few cycles
 or saturated scales rather than silently changing temperatures or mixture.
+Oracle2 check at 2026-10-09T17:22:53Z: **4773843** is sole owned RUNNING
+job, total two H100s. Nemotron progress reached 250/3200 with about 11 GiB
+free and 66.3 GiB peak allocated per GPU, no logged errors. This is initial
+inference success, NOT complete candidate/cycle audit; Skywork still pending.
+Keep the 10-minute heartbeat, do not start training or duplicate scoring.
+See campaign records/attempt3/first_scoring_status.json; live line/progress
+reads are not simultaneous. No GPU/scheduling changes were made in this check.
+
 Oracle2 latest submission: **4773843**, two H100s, 2026-10-09T17:17:54Z,
 frozen source `55e835ec5b9015404a7068c7ebf940af1feb020f`, `_v3_2gpu` roots.
 105 server CPU tests passed without skips and data/tokenizer checks passed.

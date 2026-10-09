@@ -1,5 +1,18 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## First actual two-GPU scoring milestone
+
+At 2026-10-09T17:22:53Z, **4773843** remained the sole owned RUNNING job,
+using two H100s. Nemotron progress reached **250/3200**, with approximately
+11 GiB free and 66.3 GiB peak tensor allocation per GPU; no logged OOM,
+Traceback or nonfinite scores. Initial inference now works on two GPUs, but
+this does not establish full-input memory sufficiency or audit completion.
+Skywork and cyclic-group counts are still unavailable. The existing timer
+remains at ten minutes; no task was submitted, cancelled or reconfigured.
+See [numeric milestone](records/attempt3/first_scoring_status.json).
+The raw line count (231) was read before the progress file (250); concurrent
+live-file reads are not an atomic snapshot and are not completion evidence.
+
 ## Two-GPU submission
 
 **4773843** submitted at **2026-10-09T17:17:54Z**, two H100s, frozen source

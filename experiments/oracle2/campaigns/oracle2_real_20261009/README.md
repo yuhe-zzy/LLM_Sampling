@@ -1,8 +1,27 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
-## Compatibility failure and repair preparation
+## Latest: repaired and CPU-validated, no resubmission
 
-**Latest:** audit 4773811 FAILED, exit1:0, at 2026-10-09T16:57:22Z before
+The user explicitly requested **code repair only; do not resubmit for now**.
+No new GPU job, six-arm training or automatic follow-up was submitted/scheduled.
+Future GPU submission requires fresh user authorization.
+
+Corrected source `7d90b1af6532852b5e7535927fc40aa443b490f9` was deployed to
+the separate `_v2` root for CPU checks only. All **101 server CPU tests passed
+without skips** (25 oracle2 + 76 shared), shell syntax passed, and actual locked
+Nemotron/Skywork tokenizers produced valid `[1,61]` / `[1,38]` input tensors
+on the probe. Full corrected token-length and raw-provenance checks passed:
+969 eligible panels, 31 excluded for policy length, unchanged 100/500/200 split.
+This does **not** validate GPU reward inference or establish cyclic-group counts.
+At 2026-10-09T17:07:44Z the full owner/UID queue was empty, zero allocated GPUs;
+the corrected root had no submission receipts or runs. WR remains 0,10,...,100.
+See [CPU-only validation/provenance](records/attempt2/validation_summary.json),
+[data manifest](records/attempt2/data_manifest.json), and
+[read-only account snapshot](records/attempt2/cpu_only_status.json).
+
+## First-attempt compatibility failure
+
+Audit 4773811 FAILED, exit1:0, at 2026-10-09T16:57:22Z before
 writing any reward (0/3200). It loaded Nemotron but failed constructing the
 input tensor. Transformers 5.13.1 returns `BatchEncoding` by default from
 `apply_chat_template`, not a flat token-ID list. Consequently the initial
@@ -18,11 +37,11 @@ conversation). Added regression tests also reject dictionary outputs. The
 strict >.52 cycle boundary is now compared directly to avoid subtraction
 roundoff. Historical sources/results are not overwritten.
 
-Attempt2 is **prepared, not submitted**, with identical scientific parameters
-and separate roots ending in `_v2`, using [plan_attempt2.json](plan_attempt2.json).
-Rerun full length/provenance checks there before any retry. User confirmation
-for resubmitting the failed audit has been requested; there is no automatic
-rerun or training-chain authorization from the failure itself.
+Attempt2 is **CPU-validated, not submitted**, with identical scientific
+parameters and separate roots ending in `_v2`, using
+[plan_attempt2.json](plan_attempt2.json). The completed checks are recorded
+above. The user declined resubmission for now; there is no automatic rerun or
+training-chain authorization from the failure itself.
 
 The inspector also now distinguishes terminal records retained by scontrol
 from live allocations. A terminal job's historical AllocTRES must not be

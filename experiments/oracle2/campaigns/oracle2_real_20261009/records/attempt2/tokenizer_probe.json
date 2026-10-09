@@ -1,0 +1,23 @@
+{
+  "tokenizer_probe": [
+    {
+      "judge": "nemotron",
+      "explicit_type": "list",
+      "tensor_shape": [
+        1,
+        61
+      ],
+      "passed": true
+    },
+    {
+      "judge": "skywork",
+      "explicit_type": "list",
+      "tensor_shape": [
+        1,
+        38
+      ],
+      "passed": true
+    }
+  ],
+  "gpu_inference_tested": false
+}

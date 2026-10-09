@@ -8,8 +8,10 @@ Implementation/authorization is not a submission receipt. See the dated
 
 First GPU audit 4773811 failed before any score due to the Transformers 5
 chat-template return-type default. The explicit-token-list repair is separate
-from its frozen source; attempt2 is prepared pending retry approval. See the
-campaign's latest status before interpreting earlier running/preflight records.
+from its frozen source. The user requested **code repair only, no resubmission**.
+Corrected CPU deployment passed 101 tests and full data/tokenizer checks;
+post-repair GPU inference remains untested. No retry or six-arm training was
+submitted. See the campaign's latest status and validation records.
 
 ## Fixed judges and genuine pairwise mixing
 

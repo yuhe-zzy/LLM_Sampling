@@ -46,8 +46,15 @@ Later 2026-10-09 update supersedes the running snapshot: 4773811 FAILED at
 BatchEncoding instead of token IDs; the original judge-length check also
 counted dict keys and is invalid. The repair explicitly requests/validates flat
 IDs for both preprocessing/scoring. Attempt2 uses separate `_v2` roots and
-unchanged experiment parameters. Retry approval was requested; do not submit
-it without that approval or duplicate the original. No training is submitted.
+unchanged experiment parameters. The user then explicitly requested code
+repair only, NO RESUBMISSION for now. Corrected frozen source
+`7d90b1af6532852b5e7535927fc40aa443b490f9` passed all 101 server CPU tests
+without skips, both real-tokenizer probes and full corrected length/provenance
+checks (969 eligible, 100/500/200 selected). No post-repair GPU inference has
+been tested. No retry or training is submitted, and no follow-up is scheduled.
+Any new GPU submission requires fresh user authorization. Full owner/UID
+queue at 2026-10-09T17:07:44Z was empty, zero allocated GPUs. Preserve the
+failed source and first-attempt records; see the campaign's attempt2 records.
 
 At most six allocated GPUs total across all owner programs, not six per array.
 Before resource actions inspect both running and pending work using the full

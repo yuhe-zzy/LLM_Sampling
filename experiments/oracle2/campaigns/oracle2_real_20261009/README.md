@@ -1,5 +1,18 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## First WR checkpoints saved
+
+At **2026-10-09T21:55:27Z**, IPO ordinary/reference (`4773902_0/1`) both
+reached complete outer **15/100** and saved their **step-10 adapters** for
+later open-generation evaluation. States 0..15 have contiguous metrics and
+**32 finite numeric snapshots** in total; initial scores still match and
+frozen source/review hashes verify. The shared 800-response baseline remains
+complete and hash-valid. Tasks 2..5 remain PENDING(JobArrayTaskLimit), with
+TWO H100s allocated across the full account and no unrelated owned work.
+No logged OOM/Traceback/nonfinite failure was found. No trained-checkpoint
+generation or WR result exists yet; no phase was submitted or changed.
+See [checkpoint milestone](records/attempt4/checkpoint10_status.json).
+
 ## Baseline complete; first two training arms running
 
 Checked **2026-10-09T19:55:56Z**: baseline **4773899 COMPLETED, exit 0:0**,

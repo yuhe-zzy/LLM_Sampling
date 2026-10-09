@@ -18,6 +18,20 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Latest Oracle2 authorization 2026-10-09 supersedes the sparse-cycle HOLD below:
+the owner accepts only one robust cyclic training prompt and approves the same
+six arms to inspect empirical stability trends, not eliminate oscillations or
+prove convergence. Use audit_review_empirical.json with exact audit hash and
+counts; no scientific settings change, no ambiguous-to-non-ST relabeling.
+Create immutable `_v4_empirical` launch using the unchanged plan_two_gpu.json
+and reused v3 data/output paths; never rescore completed audit4773843 or edit
+v3 source. Submit one-GPU baseline then six one-GPU arms 0-5%2 with afterok
+of that baseline. This baseline-only dependency is the empty-queue exception;
+unrelated owned jobs still block submission. No overlapping phases, FOUR-GPU
+full-account maximum. Preserve intent/receipt; never blindly duplicate phases.
+After reviewed successful audit and launch, update existing oracle2 monitor to
+two hours. Missing cyclic eval WR stays missing. See campaign README for scope.
+
 Oracle2 authorization, 2026-10-09: the owner confirmed fixed real-candidate
 training plus open-generation WR, .6 Nemotron/.4 Skywork, six IPO/DPO
 ordinary/reference/feedback arms, seed0, 100 outer updates, and disjoint

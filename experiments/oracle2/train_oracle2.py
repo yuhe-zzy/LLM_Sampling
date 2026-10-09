@@ -21,6 +21,28 @@ def configuration(plan, run_id):
     return cfg
 
 
+def validate_review(audit, review, audit_digest):
+    if review.get('decision') != 'APPROVE_SIX_ARMS' or review.get('audit_sha256') != audit_digest:
+        raise ValueError('A recorded review of this exact audit is required; no automatic temperature tuning')
+    scope = review.get('analysis_scope', 'cyclic_vs_transitive')
+    if scope not in ('cyclic_vs_transitive', 'empirical_stability_trends'):
+        raise ValueError('Unrecognized analysis scope')
+    if scope == 'empirical_stability_trends':
+        observed = {split: {g: audit['splits'][split]['groups'].get(g, 0)
+                           for g in ('cyclic', 'transitive', 'ambiguous')}
+                    for split in ('calibration', 'train', 'evaluation')}
+        if (review.get('user_authorized_sparse_cycles') is not True or
+                review.get('observed_groups') != observed or
+                review.get('interpretation_limits') != 'no_cyclic_subgroup_claim_or_convergence_proof'):
+            raise ValueError('Empirical scope requires explicit user authorization and exact group-count acknowledgement')
+    else:
+        for split in ('train', 'evaluation'):
+            if any(audit['splits'][split]['groups'].get(g, 0) == 0 for g in ('cyclic', 'transitive')):
+                raise ValueError('Missing comparison group; review experimental design before training')
+    if audit['splits']['train']['bt_solver_failures']:
+        raise ValueError('DPO projection failed preflight; do not clip probabilities silently')
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--plan', type=Path, required=True)
@@ -34,15 +56,9 @@ def main():
     scored = Path(plan['data_root']) / 'scored'
     audit = load_json(scored / 'audit.json')
     review = load_json(a.review)
-    if review.get('decision') != 'APPROVE_SIX_ARMS' or review.get('audit_sha256') != sha256(scored / 'audit.json'):
-        raise ValueError('A recorded review of this exact audit is required; no automatic temperature tuning')
+    validate_review(audit, review, sha256(scored / 'audit.json'))
     if audit['plan_sha256'] != sha256(a.plan) or audit['model_lock_sha256'] != sha256(plan['model_lock']):
         raise ValueError('Plan or judge lock changed since audit')
-    for split in ('train', 'evaluation'):
-        if any(audit['splits'][split]['groups'].get(g, 0) == 0 for g in ('cyclic', 'transitive')):
-            raise ValueError('Missing comparison group; review experimental design before training')
-    if audit['splits']['train']['bt_solver_failures']:
-        raise ValueError('DPO projection failed preflight; do not clip probabilities silently')
     if sha256(scored / 'train.jsonl') != audit['files_sha256']['train.jsonl']:
         raise ValueError('Frozen training support changed')
     panels = jsonl(scored / 'train.jsonl')
@@ -56,7 +72,8 @@ def main():
                plan_sha256=sha256(a.plan), audit_sha256=sha256(scored / 'audit.json'),
                model_lock_sha256=sha256(plan['model_lock']),
                initial_score_policy='fresh finite EOS-included sequence sums on verified real candidates; no synthetic target',
-               oracle=plan['oracle'], evaluation=plan['evaluation'])
+               oracle=plan['oracle'], evaluation=plan['evaluation'],
+               audit_review=review, audit_review_sha256=sha256(a.review))
     if not a.execute:
         print('CHECKED ONLY: no model loaded, no training started')
         return

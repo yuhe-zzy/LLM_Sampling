@@ -23,6 +23,7 @@ case "${1:?Missing phase}" in
     [[ "$INDEX" =~ ^[0-5]$ ]] || exit 2
     RUN_ID=$("$PYTHON" -c 'import json,sys; print(json.load(open(sys.argv[1]))["runs"][int(sys.argv[2])]["run_id"])' "$PLAN" "$INDEX")
     if [[ "$1" == train ]]; then
+      "$PYTHON" "$CODE/campaigns/oracle2_real_20261009/queue.py" --root "$ROOT" --check-baseline
       COMMIT=$("$PYTHON" -c 'import json,sys; print(json.load(open(sys.argv[1]))["source_commit"])' "$ROOT/deployment.json")
       "$PYTHON" "$CODE/train_oracle2.py" --plan "$PLAN" --run-id "$RUN_ID" \
         --review "$ROOT/audit_review.json" --source-commit "$COMMIT" --execute

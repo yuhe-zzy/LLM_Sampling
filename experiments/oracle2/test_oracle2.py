@@ -10,7 +10,7 @@ from common import judge_token_ids, load_json, save_jsonl, sha256, write_json
 from oracle_math import classify_panel, generated_wr, preference_matrix, probability, wr_steps
 from prepare_data import prompt_key, split_panels
 from generate_evaluation import generation_seed
-from train_oracle2 import configuration
+from train_oracle2 import configuration, validate_review
 from evaluate_wr import summarize
 from score_records import weight_memory_budget
 from history_math import build_outer_state, pair_distribution
@@ -200,6 +200,37 @@ class DataAndPlanTests(unittest.TestCase):
             self.assertEqual(output[-1]['oracle2_expected_win_rate'], '')
 
 
+class ReviewTests(unittest.TestCase):
+    def setUp(self):
+        self.counts = dict(calibration=dict(cyclic=0, transitive=81, ambiguous=19),
+                           train=dict(cyclic=1, transitive=436, ambiguous=63),
+                           evaluation=dict(cyclic=0, transitive=160, ambiguous=40))
+        self.audit = dict(splits={s: dict(groups=g, bt_solver_failures=[]) for s, g in self.counts.items()})
+        self.review = dict(decision='APPROVE_SIX_ARMS', audit_sha256='digest',
+            analysis_scope='empirical_stability_trends', user_authorized_sparse_cycles=True,
+            observed_groups=self.counts,
+            interpretation_limits='no_cyclic_subgroup_claim_or_convergence_proof')
+
+    def test_explicit_empirical_scope_accepts_one_train_and_zero_eval_cycles(self):
+        validate_review(self.audit, self.review, 'digest')
+
+    def test_default_scope_still_requires_comparison_groups(self):
+        with self.assertRaises(ValueError):
+            validate_review(self.audit, dict(decision='APPROVE_SIX_ARMS', audit_sha256='digest'), 'digest')
+
+    def test_empirical_scope_cannot_bypass_review_binding_or_acknowledgement(self):
+        for field, bad in [('audit_sha256', 'other'), ('user_authorized_sparse_cycles', False),
+                           ('observed_groups', {}), ('interpretation_limits', ''),
+                           ('analysis_scope', 'anything'), ('decision', 'HOLD')]:
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                validate_review(self.audit, dict(self.review, **{field: bad}), 'digest')
+
+    def test_empirical_scope_does_not_allow_numerical_failures(self):
+        self.audit['splits']['train']['bt_solver_failures'] = ['failed']
+        with self.assertRaises(ValueError):
+            validate_review(self.audit, self.review, 'digest')
+
+
 class QueueTests(unittest.TestCase):
     def setUp(self):
         spec = importlib.util.spec_from_file_location('oracle2_queue', HERE/'campaigns/oracle2_real_20261009/queue.py')
@@ -255,6 +286,47 @@ class QueueTests(unittest.TestCase):
             self.queue.save_new(path, dict(job_id='123'))
             with self.assertRaises(FileExistsError):
                 self.queue.save_new(path, dict(job_id='456'))
+
+    def test_afterok_allows_only_recorded_baseline(self):
+        receipt = dict(job_id='123', phase='baseline', resources=dict(gpus=1))
+        snapshot = dict(owned_queue=['123|yuhe32|448057|RUNNING|gpu:1|n1'],
+                        owned_scontrol=['JobId=123 UserId=yuhe32(448057) JobState=RUNNING'])
+        self.assertEqual(self.queue.check_baseline_dependency(snapshot, receipt, '123|RUNNING|0:0'), '123')
+        self.assertEqual(self.queue.check_baseline_dependency(dict(owned_queue=[], owned_scontrol=[]),
+                         receipt, '123|COMPLETED|0:0'), '123')
+        for status in ('FAILED|1:0', 'TIMEOUT|0:0', 'COMPLETED|1:0'):
+            with self.assertRaises(ValueError):
+                self.queue.check_baseline_dependency(snapshot, receipt, '123|'+status)
+        snapshot['owned_queue'].append('124|yuhe32|448057|PENDING|gpu:1|(Resources)')
+        with self.assertRaises(RuntimeError):
+            self.queue.check_baseline_dependency(snapshot, receipt, '123|RUNNING|0:0')
+
+    def test_baseline_dependency_detects_unlisted_owned_allocation(self):
+        receipt = dict(job_id='123', phase='baseline', resources=dict(gpus=1))
+        with self.assertRaises(RuntimeError):
+            self.queue.check_baseline_dependency(dict(owned_queue=[], owned_scontrol=['JobId=124']),
+                                                  receipt, '123|COMPLETED|0:0')
+
+    def test_generation_completion_requires_counts_and_hashes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            save_jsonl(root/'step_0000.jsonl', [dict(example=1)])
+            manifest = dict(state='COMPLETE', files={'step_0000.jsonl': dict(count=1, sha256=sha256(root/'step_0000.jsonl'))})
+            write_json(root/'manifest.json', manifest)
+            self.queue.require_complete_generation(root, {'step_0000.jsonl': 1})
+            with self.assertRaises(ValueError):
+                self.queue.require_complete_generation(root, {'step_0000.jsonl': 800})
+            (root/'step_0000.jsonl').write_text('{}\n')
+            with self.assertRaises(ValueError):
+                self.queue.require_complete_generation(root, {'step_0000.jsonl': 1})
+
+    def test_reused_audit_cannot_be_submitted_again(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_json(root/'plan.json', dict(output_root=str(root/'output'), data_root=str(root/'data')))
+            write_json(root/'reuse_candidate_audit.json', {})
+            with self.assertRaises(ValueError):
+                self.queue.phase_prerequisites(root, 'audit')
 
 
 if __name__ == '__main__':

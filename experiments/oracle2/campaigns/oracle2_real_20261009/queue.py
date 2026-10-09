@@ -1,4 +1,4 @@
-"""Idempotent phase submission. Empty full-account queue required; never auto-chain phases."""
+"""Idempotent phase submission, with an explicit baseline-only afterok exception."""
 import argparse
 from datetime import datetime, timezone
 import hashlib
@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import subprocess
 
-ROOT = Path('/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu')
+ROOT = Path('/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical')
 PYTHON = '/work/users/y/u/yuhe32/h100env312/bin/python'
 ACCOUNT_GPU_LIMIT = 4
 RESOURCES = {
@@ -109,15 +109,78 @@ def check_live_budget(snapshot):
         raise RuntimeError('Cannot verify allocation within four-GPU account budget; do not start GPU work')
 
 
+def require_complete_generation(directory, expected_files):
+    manifest = json.loads((directory / 'manifest.json').read_text())
+    if manifest['state'] != 'COMPLETE' or set(manifest['files']) != set(expected_files):
+        raise ValueError('Required generation bank is incomplete')
+    for name in expected_files:
+        item = manifest['files'][name]
+        if item['count'] != expected_files[name] or hashlib.sha256((directory / name).read_bytes()).hexdigest() != item['sha256']:
+            raise ValueError('Generation bank count/hash mismatch')
+
+
+def phase_prerequisites(root, phase, defer_baseline=False):
+    plan = json.loads((root / 'plan.json').read_text())
+    output = Path(plan['output_root'])
+    if phase == 'audit':
+        if (root / 'reuse_candidate_audit.json').exists() or (Path(plan['data_root']) / 'scored/audit.json').exists():
+            raise ValueError('Candidate audit already exists; never duplicate scoring')
+    if phase == 'baseline' and (output / 'generations/baseline').exists():
+        raise FileExistsError('Baseline output already exists; inspect it rather than overwrite')
+    if phase == 'train':
+        if any((output / arm['run_id']).exists() for arm in plan['runs']):
+            raise FileExistsError('Training output already exists; never duplicate completed/partial arms')
+        if not defer_baseline:
+            require_complete_generation(output / 'generations/baseline',
+                {'step_0000.jsonl': plan['dataset']['evaluation'] * plan['evaluation']['responses_per_prompt']})
+    if phase == 'generate':
+        for arm in plan['runs']:
+            manifest = json.loads((output / arm['run_id'] / 'manifest.json').read_text())
+            if manifest['state'] != 'COMPLETED' or manifest['last_complete_step'] != plan['training']['iters']:
+                raise ValueError('All training arms must finish before generation phase')
+    if phase == 'wrscore':
+        count = plan['dataset']['evaluation'] * plan['evaluation']['responses_per_prompt']
+        require_complete_generation(output / 'generations/baseline', {'step_0000.jsonl': count})
+        for arm in plan['runs']:
+            require_complete_generation(output / 'generations' / arm['run_id'],
+                {f'step_{step:04d}.jsonl': count for step in plan['evaluation']['steps']})
+
+
+def check_baseline_dependency(snapshot, receipt, accounting):
+    job = receipt['job_id'].split(';')[0]
+    if not job.isdigit() or receipt['phase'] != 'baseline' or receipt['resources']['gpus'] != 1:
+        raise ValueError('Only the recorded one-GPU baseline may precede training')
+    rows = [row.split('|') for row in accounting.splitlines() if row.strip()]
+    parent = [row for row in rows if row[0] == job]
+    if len(parent) != 1 or len(parent[0]) != 3:
+        raise ValueError('Cannot verify predecessor accounting')
+    state, exit_code = parent[0][1:]
+    if state not in ('PENDING', 'RUNNING', 'COMPLETING', 'COMPLETED') or (state == 'COMPLETED' and exit_code != '0:0'):
+        raise ValueError('Predecessor failed; never remove dependency or start training')
+    if any(row.split('|')[0] != job for row in snapshot['owned_queue']):
+        raise RuntimeError('Unrelated queued work; cannot guarantee phase budget')
+    if any(job_aliases(row) != {job} for row in snapshot['owned_scontrol']):
+        raise RuntimeError('Unrelated owned allocation; cannot guarantee phase budget')
+    return job
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root', type=Path, default=ROOT)
     p.add_argument('--verify', action='store_true')
     p.add_argument('--check-budget', action='store_true')
+    p.add_argument('--check-baseline', action='store_true')
+    p.add_argument('--after-baseline', action='store_true', help='Train only, afterok of this root\'s recorded baseline')
     p.add_argument('--phase', choices=list(RESOURCES))
     p.add_argument('--submit', action='store_true')
     a = p.parse_args()
     deployment = verify(a.root)
+    if a.check_baseline:
+        plan = json.loads((a.root / 'plan.json').read_text())
+        require_complete_generation(Path(plan['output_root']) / 'generations/baseline',
+            {'step_0000.jsonl': plan['dataset']['evaluation'] * plan['evaluation']['responses_per_prompt']})
+        print('VERIFIED_COMPLETE_BASELINE')
+        return
     if a.check_budget:
         snapshot = owned_snapshot()
         print(json.dumps(snapshot), flush=True)
@@ -128,17 +191,20 @@ def main():
         return
     if a.phase is None:
         p.error('--phase required')
+    if a.after_baseline and a.phase != 'train':
+        p.error('--after-baseline is only valid for train')
     resource = RESOURCES[a.phase]
     maximum = maximum_phase_gpus(resource)
     plan = json.loads((a.root / 'plan.json').read_text())
     if a.phase in ('audit', 'wrscore') and plan['oracle']['scoring_gpus'] != resource['gpus']:
         raise ValueError('Judge GPU request disagrees with frozen plan')
     source = a.root / 'source/experiments/oracle2'
-    if a.phase in ('train', 'generate', 'wrscore'):
+    if a.phase in ('baseline', 'train', 'generate', 'wrscore'):
         for arm in json.loads((a.root / 'plan.json').read_text())['runs']:
             run([PYTHON, str(source / 'train_oracle2.py'), '--plan', str(a.root / 'plan.json'),
                  '--review', str(a.root / 'audit_review.json'), '--run-id', arm['run_id'],
                  '--source-commit', deployment['source_commit']])
+    phase_prerequisites(a.root, a.phase, defer_baseline=a.after_baseline)
     intent = a.root / f'{a.phase}_submission_intent.json'
     receipt = a.root / f'{a.phase}_submission_receipt.json'
     if intent.exists() or receipt.exists():
@@ -146,7 +212,14 @@ def main():
     snapshot = owned_snapshot()
     print(json.dumps(snapshot), flush=True)
     check_live_budget(snapshot)
-    if snapshot['owned_queue'] or snapshot['owned_scontrol']:
+    predecessor = None
+    if a.after_baseline:
+        baseline = json.loads((a.root / 'baseline_submission_receipt.json').read_text())
+        if baseline['source_commit'] != deployment['source_commit']:
+            raise ValueError('Baseline receipt belongs to another frozen source')
+        predecessor = check_baseline_dependency(snapshot, baseline, run(
+            ['sacct', '-j', baseline['job_id'].split(';')[0], '-X', '-n', '-P', '-o', 'JobID,State,ExitCode']))
+    elif snapshot['owned_queue'] or snapshot['owned_scontrol']:
         raise RuntimeError('Account not empty. Leave this phase unsubmitted; review dependencies/budget')
     script = source / 'campaigns/oracle2_real_20261009/run_phase.sh'
     command = ['sbatch', '--parsable', '--partition=h100_all', '--account=rc_fanyao_pi',
@@ -156,6 +229,8 @@ def main():
                f'--output={a.root}/logs/{a.phase}-%A_%a.out', f'--error={a.root}/logs/{a.phase}-%A_%a.err']
     if resource['tasks'] > 1:
         command.append(f'--array=0-{resource["tasks"]-1}%{resource["concurrency"]}')
+    if predecessor:
+        command.append(f'--dependency=afterok:{predecessor}')
     command += [str(script), a.phase]
     if not a.submit:
         print(json.dumps(dict(preview=command)))

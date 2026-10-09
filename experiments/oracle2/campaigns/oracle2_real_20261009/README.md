@@ -1,6 +1,41 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
-## Scoring completed; training held for insufficient cyclic data
+## User-approved empirical stability scope (supersedes the hold)
+
+On 2026-10-09, after seeing the 0/1/0 cyclic counts below, the owner explicitly
+approved continuing the same six arms even with only one cyclic prompt. The
+objective is to inspect relative stabilization trends, not require elimination
+of oscillations or establish a replicated cyclic-vs-transitive effect.
+
+[Exact audit review](audit_review_empirical.json) records this limitation and
+the observed counts. No panel, split, reward, mixture, temperature, threshold,
+seed, arm or training formula changes. Ambiguous panels are not automatically
+non-ST. The single cyclic training panel is descriptive; the empty cyclic
+evaluation subgroup must remain missing in WR summaries, not be filled with zero.
+Retain all prompts and counterexamples. WR trends are not a convergence proof.
+
+New immutable launch root: `ipo/diagnostics/oracle2_real_20261009_v4_empirical`.
+Reuse audited private data and the existing output root from `_v3_2gpu` with
+the byte-identical `plan_two_gpu.json`; do not rescore or modify the v3 source.
+See [reuse/provenance contract](reuse_candidate_audit.json). The new source and
+review are bound in the deployment and each training manifest. Local records
+are under `oracle2_real_launch_20261009/attempt4`.
+
+Launch sequence: shared initial-model baseline (one H100), then the six-arm
+training array `0-5%2` with `afterok` on that recorded baseline job. Queueing
+this dependency is the only empty-account exception; unrelated owned work
+blocks submission. A failed predecessor is not bypassed. Startup also verifies
+the completed 800-response baseline. Generate all saved WR checkpoints only
+after training completes, then score the generated banks with two H100s.
+Phases never overlap; full account limit FOUR, current phase maximum TWO.
+Deployment must pass CPU tests and all six config/data/review checks before
+submission. This section records authorization, not a submission receipt.
+
+The completed scoring/memory audit plus this explicit scope decision permits
+switching the existing `oracle2` heartbeat to every two hours after launch.
+Report failures, meaningful milestones and new jobs; unchanged progress is silent.
+
+## Historical scoring completion and initial hold (superseded above)
 
 Checked **2026-10-09T17:42:45Z**: job **4773843 COMPLETED, exit 0:0**, elapsed
 18m07s. Both Nemotron and Skywork completed **3200/3200** scores without logged

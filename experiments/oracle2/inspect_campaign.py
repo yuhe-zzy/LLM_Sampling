@@ -23,6 +23,19 @@ def inspect(root):
         result['jobs'][data['phase']] = subprocess.check_output(
             ['sacct', '-j', job, '-X', '-n', '-P', '-o', 'JobID,State,ExitCode,AllocTRES,Elapsed'], text=True).strip()
     output = Path(plan['output_root'])
+    reuse = root/'reuse_candidate_audit.json'
+    if reuse.exists():
+        result['reuse_candidate_audit'] = json.loads(reuse.read_text())
+    result['generations'] = {}
+    for name in ['baseline'] + [arm['run_id'] for arm in plan['runs']]:
+        directory = output/'generations'/name
+        if (directory/'manifest.json').exists():
+            status = json.loads((directory/'manifest.json').read_text())
+            status['written_rows'] = {}
+            for path in directory.glob('step_*.jsonl'):
+                with path.open(encoding='utf-8') as handle:
+                    status['written_rows'][path.name] = sum(1 for line in handle if line.endswith('\n'))
+            result['generations'][name] = status
     for name in ('candidate_scores', 'evaluation_scores'):
         directory = output/name
         if (directory/'manifest.json').exists():

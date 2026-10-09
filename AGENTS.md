@@ -18,6 +18,15 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 milestone 2026-10-09T19:55:56Z: baseline4773899 COMPLETED 0:0,
+800/800 generated responses, count/hash verified. Train4773902_0 IPO ordinary
+and _1 IPO reference RUNNING, both complete outer6/100; metrics0..6 and all
+14 finite numeric snapshots validated, identical initial scores. _2..5 remain
+PENDING(JobArrayTaskLimit), normal. Full owner/UID queue: TWO H100s allocated,
+no other owned work, no logged OOM/Traceback/nonfinite. No checkpoint WR yet.
+No resource actions or code changes; timer remains two hours. See campaign
+records/attempt4/training_started_status.json. Do not duplicate baseline/train.
+
 Oracle2 empirical submission confirmed 2026-10-09T17:56Z: baseline4773899
 (one H100) and train4773902_0..5%2 (one H100/task, afterok:4773899), source
 23401de58b27ef2f7b1ea645551f37602a3c1bb8. All 113 server CPU tests passed

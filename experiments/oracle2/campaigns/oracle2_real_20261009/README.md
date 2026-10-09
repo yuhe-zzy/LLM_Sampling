@@ -1,5 +1,26 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Baseline complete; first two training arms running
+
+Checked **2026-10-09T19:55:56Z**: baseline **4773899 COMPLETED, exit 0:0**,
+elapsed 37m33s, with all **800/800 responses** and a verified file hash. Its
+dominant-token >=.95 fraction is zero; this is an initial-model diagnostic,
+not a trained-model generation result.
+
+Training **4773902_0 (IPO ordinary)** and **4773902_1 (IPO reference)** are
+RUNNING, both at complete outer state **6/100**. Metrics cover states 0..6
+without gaps; all **14 numeric snapshots** are finite with shape 500x4, matched
+initial scores, unchanged source/review hashes and no prompt truncation.
+Tasks 2..5 are normally PENDING(JobArrayTaskLimit). The full owner/UID queue
+and scontrol allocation confirm TWO H100s total and no other owned work.
+No logged OOM, Traceback or nonfinite failures. The frozen trainer does not
+record GPU-memory peaks; do not reuse candidate-judge peaks as training telemetry.
+
+No checkpoint-generated WR is available yet. All phases and scientific settings
+are unchanged; no job was submitted/cancelled/reconfigured during this check.
+The existing monitor remains every two hours. See
+[aggregate milestone](records/attempt4/training_started_status.json).
+
 ## Six-arm submission confirmed
 
 At **2026-10-09T17:55:53Z**, shared baseline job **4773899** was submitted on

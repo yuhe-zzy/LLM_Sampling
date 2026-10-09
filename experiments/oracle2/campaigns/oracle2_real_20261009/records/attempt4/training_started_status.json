@@ -8,7 +8,7 @@
     "elapsed": "00:37:33",
     "response_count": 800,
     "expected_count": 800,
-    "step_0000_sha256": "eff09145b4ecf63bfe8d383f0d4f4a099fce9b65748ddf79d1a0d4a241aa55c54",
+    "step_0000_sha256": "eff09145b4ecf63bfe8d383f0d4f4a099fce9b65748ddf79d1a0d4a241a55c54",
     "count_and_hash_verified": true,
     "hit_max_new_tokens_fraction": 0.39875,
     "dominant_token_ge_0_95_fraction": 0.0,

@@ -1,0 +1,33 @@
+{
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--partition=h100_all",
+    "--account=rc_fanyao_pi",
+    "--export=ALL,ORACLE2_LAUNCH_ROOT=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical",
+    "--gres=gpu:1",
+    "--cpus-per-task=8",
+    "--mem=80G",
+    "--time=03:00:00",
+    "--no-requeue",
+    "--job-name=oracle2_baseline",
+    "--output=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/baseline-%A_%a.out",
+    "--error=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/baseline-%A_%a.err",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh",
+    "baseline"
+  ],
+  "preflight": {
+    "checked_at_utc": "2026-10-09T17:55:53.856886+00:00",
+    "full_queue_rows": 37965,
+    "owned_queue": [],
+    "owned_scontrol": [],
+    "recent_terminal_scontrol": [],
+    "allocated_gpus": 0,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "phase": "baseline",
+  "maximum_phase_gpus": 1,
+  "account_gpu_limit": 4
+}

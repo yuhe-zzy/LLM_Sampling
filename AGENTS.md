@@ -18,6 +18,16 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 empirical submission confirmed 2026-10-09T17:56Z: baseline4773899
+(one H100) and train4773902_0..5%2 (one H100/task, afterok:4773899), source
+23401de58b27ef2f7b1ea645551f37602a3c1bb8. All 113 server CPU tests passed
+without skips plus six reviewed config checks and score/support hash reuse.
+At17:56:36Z baseline RUNNING, 7/800 response rows, training PENDING(Dependency),
+full account ONE GPU and no other owned work, no logged errors. No training
+completion claim. Receipts under records/attempt4 and local attempt4; never
+duplicate. Existing oracle2 timer now every TWO HOURS; generate/WR not yet
+submitted and must wait for complete successful prerequisite phases.
+
 Latest Oracle2 authorization 2026-10-09 supersedes the sparse-cycle HOLD below:
 the owner accepts only one robust cyclic training prompt and approves the same
 six arms to inspect empirical stability trends, not eliminate oscillations or

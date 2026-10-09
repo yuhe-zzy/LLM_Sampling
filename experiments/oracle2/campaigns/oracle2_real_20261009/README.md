@@ -1,5 +1,30 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Six-arm submission confirmed
+
+At **2026-10-09T17:55:53Z**, shared baseline job **4773899** was submitted on
+one H100 after an empty full-account preflight. At **17:56:02Z**, training
+array **4773902_0..5%2** was submitted with **afterok:4773899**, one H100 per
+task. Task order: IPO ordinary/reference/feedback, then DPO ordinary/reference/
+feedback. Frozen execution source is `23401de58b27ef2f7b1ea645551f37602a3c1bb8`.
+
+All **113 server CPU tests passed without skips** (37 Oracle2 + 76 shared),
+shell syntax and six config/review checks passed, and completed scores and
+audited panels were hash-verified without rescoring. At **17:56:36Z**, baseline
+was RUNNING with 7 complete generated-response lines out of the intended 800,
+six training tasks were PENDING(Dependency), and the full account allocated
+ONE GPU, with no other owned work. No logged OOM/Traceback/nonfinite error.
+This is startup evidence, not baseline completion or successful training.
+Generation/WR phases remain unsubmitted until their prerequisites succeed.
+
+The existing `oracle2` heartbeat is ACTIVE every TWO hours following the
+completed memory/scoring audit and explicit empirical-scope approval.
+See [baseline receipt](records/attempt4/baseline_submission_receipt.json),
+[training receipt](records/attempt4/train_submission_receipt.json),
+[training dependency and preflight](records/attempt4/train_submission_intent.json),
+[validation](records/attempt4/validation_summary.json), and
+[startup status](records/attempt4/startup_status.json). Never duplicate these jobs.
+
 ## User-approved empirical stability scope (supersedes the hold)
 
 On 2026-10-09, after seeing the 0/1/0 cyclic counts below, the owner explicitly
@@ -29,9 +54,9 @@ the completed 800-response baseline. Generate all saved WR checkpoints only
 after training completes, then score the generated banks with two H100s.
 Phases never overlap; full account limit FOUR, current phase maximum TWO.
 Deployment must pass CPU tests and all six config/data/review checks before
-submission. This section records authorization, not a submission receipt.
+submission. The confirmed submissions above implement this authorization.
 
-The completed scoring/memory audit plus this explicit scope decision permits
+The completed scoring/memory audit plus this explicit scope decision allowed
 switching the existing `oracle2` heartbeat to every two hours after launch.
 Report failures, meaningful milestones and new jobs; unchanged progress is silent.
 

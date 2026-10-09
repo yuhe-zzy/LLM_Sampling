@@ -1,5 +1,10 @@
 # Oracle1 / oracle2 design review, 2026-10-06
 
+Historical design review. The later **2026-10-09** user approval and
+[implementation/campaign record](../experiments/oracle2/campaigns/oracle2_real_20261009/README.md)
+supersede the proposed-only status below. The approved main mixture is .6/.4,
+with WR at outer states 0,10,...,100; no silent temperature changes.
+
 Status: terminology confirmed by the user; implementation choices below are
 recommendations. No new oracle model has been downloaded, deployed or tested
 on the server, and no new oracle experiment is submitted by this document.

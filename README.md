@@ -28,7 +28,11 @@ provenance. It links existing cyclic campaigns without moving their files and
 adds a dated, incomplete [oracle1 snapshot](experiments/oracle1/campaigns/sequencesum_snapshot_20260911/README.md).
 `oracle1` means the original Nemotron scalar judge; `oracle2` means the proposed
 mixed judge, not the second component alone. See the [oracle2 design review](docs/ORACLE2_DESIGN_REVIEW_20261006.md).
-The latter is a proposal, not an implemented or submitted campaign.
+That dated review was a proposal. October 9 update: the user approved the
+[oracle2 real-candidate campaign](experiments/oracle2/README.md), with six arms
+and generated-response WR at outer states 0,10,...,100. Its
+[dated execution record](experiments/oracle2/campaigns/oracle2_real_20261009/README.md)
+distinguishes preparation, audit submission and training; no results are implied.
 
 ## 1. Which experiment should I run?
 

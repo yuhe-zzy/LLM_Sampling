@@ -18,6 +18,20 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 authorization, 2026-10-09: the owner confirmed fixed real-candidate
+training plus open-generation WR, .6 Nemotron/.4 Skywork, six IPO/DPO
+ordinary/reference/feedback arms, seed0, 100 outer updates, and disjoint
+100 calibration/500 train/200 evaluation prompts with four candidates each.
+WR must use outer states 0,10,...,100. Code and status live in
+`experiments/oracle2/campaigns/oracle2_real_20261009`. Do not duplicate phases;
+read deployment/intent/receipt and live owner/UID queue first. Audit the true
+mixed matrices and judge interfaces before training, report too few cycles
+or saturated scales rather than silently changing temperatures or mixture.
+Oracle2 phases are sequential: three-GPU scoring, one-GPU baseline, six
+one-GPU policy tasks, six one-GPU generation tasks, three-GPU WR scoring.
+This newly approved cached-judge design does not authorize six simultaneous
+three-GPU oracle jobs. No extra seed/arm and no cancellation of older jobs.
+
 At most six allocated GPUs total across all owner programs, not six per array.
 Before resource actions inspect both running and pending work using the full
 `squeue -a -r` owner/UID listing and `scontrol -a show job`. On Sycamore the owner

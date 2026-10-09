@@ -19,7 +19,7 @@ become the code used by historical jobs.
 | Initial anchor: reference weights (.9,.1,0) | [Anchor90 launch record](../experiments/cyclic_history/campaigns/cyclic_history_anchor90_20261006/README.md) | Two submitted runs; last recorded check was pending, not completion; no fresh server check in this publication |
 | Oracle1: sequence-sum entropy and generated-response WR | [September 11 snapshot](../experiments/oracle1/campaigns/sequencesum_snapshot_20260911/README.md) | 12 complete, 1 partial, 3 absent grid cells in that snapshot; not a final all-16 result |
 | Collaborator Hodge diagnostics | [Hodge entry point](../experiments/hodge_diagnostics/README.md) | Preserve collaborator definitions and distinction between plans and execution |
-| Oracle2: mixed reward-model judge | [Design review](ORACLE2_DESIGN_REVIEW_20261006.md) | Proposed only; no results, model deployment or training submitted |
+| Oracle2: mixed reward-model judge | [October 9 implementation and status](../experiments/oracle2/campaigns/oracle2_real_20261009/README.md) | Approved six-arm real-candidate campaign; audit precedes training; no training results yet. [Earlier design review](ORACLE2_DESIGN_REVIEW_20261006.md) retained |
 
 ## Useful figure collections
 

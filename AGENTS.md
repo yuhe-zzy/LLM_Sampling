@@ -27,6 +27,14 @@ WR must use outer states 0,10,...,100. Code and status live in
 read deployment/intent/receipt and live owner/UID queue first. Audit the true
 mixed matrices and judge interfaces before training, report too few cycles
 or saturated scales rather than silently changing temperatures or mixture.
+Oracle2 latest submission: **4773843**, two H100s, 2026-10-09T17:17:54Z,
+frozen source `55e835ec5b9015404a7068c7ebf940af1feb020f`, `_v3_2gpu` roots.
+105 server CPU tests passed without skips and data/tokenizer checks passed.
+At 17:18:32Z it was RUNNING, sole owned job, total allocation two GPUs;
+judge scores were initializing with no logged errors. This is not a completed
+GPU memory/cycle audit. Six training arms are unsubmitted. Never duplicate;
+see campaign records/attempt3 receipts and current live state before actions.
+
 Latest user authorization 2026-10-09 supersedes older six-GPU limits and the
 no-retry hold below: FOUR GPUs maximum across the entire account. Try TWO
 H100s for the repaired Oracle2 audit in new immutable `_v3_2gpu` roots using

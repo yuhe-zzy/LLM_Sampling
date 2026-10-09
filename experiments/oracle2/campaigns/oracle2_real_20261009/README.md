@@ -1,5 +1,19 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Two-GPU submission
+
+**4773843** submitted at **2026-10-09T17:17:54Z**, two H100s, frozen source
+`55e835ec5b9015404a7068c7ebf940af1feb020f`. All **105 server CPU tests**
+passed without skips, plus actual tokenizers, shell syntax and full data checks.
+969 panels were eligible; unchanged 100/500/200 split, 3200 real candidates.
+At 17:18:32Z the full owner/UID queue contained only this RUNNING job, total
+allocation two GPUs. Score initialization was in progress with no logged error;
+GPU memory sufficiency and cyclic counts were not yet established. Six training
+arms are still unsubmitted. Never duplicate this audit. See
+[submission receipt](records/attempt3/audit_submission_receipt.json),
+[validation](records/attempt3/validation_summary.json), and
+[post-submit state](records/attempt3/post_submit_status.json).
+
 ## Latest authorization: two-GPU audit, four-GPU account ceiling
 
 The user lifted the temporary no-retry hold and authorized starting the repaired
@@ -7,7 +21,7 @@ code with TWO GPUs. The new total account limit is FOUR, superseding all older
 six-GPU text. New immutable launch/output suffix: `oracle2_real_20261009_v3_2gpu`,
 local records: `oracle2_real_launch_20261009/attempt3`.
 Use [plan_two_gpu.json](plan_two_gpu.json); only allocation and paths change.
-This section records authorization, not submission. Inspect receipts first.
+The submission above is the execution of this authorization. Inspect receipts first.
 
 Candidate scoring and WR scoring load Nemotron then Skywork sequentially on
 two H100s. Training/generation retain six arms at one H100 each, array `0-5%2`.
@@ -114,13 +128,13 @@ At document creation, no oracle2 GPU task has been submitted. Subsequent
 submission records and audit results must explicitly supersede this statement;
 never infer a job ID from an authorization or code commit.
 
-## Locations
+## Current locations (two-GPU attempt)
 
-- Launch: `/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009`
+- Launch: `/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu`
 - Frozen source: launch root `/source`
 - Private input panels: launch root `/private_data`
-- Outputs: `/work/users/y/u/yuhe32/ipo_runs/oracle2_real_20261009`
-- Local records: `oracle2_real_launch_20261009`
+- Outputs: `/work/users/y/u/yuhe32/ipo_runs/oracle2_real_20261009_v3_2gpu`
+- Local records: `oracle2_real_launch_20261009/attempt3`
 
 The source archive includes this experiment and the unchanged shared history
 engine. `deployment.json` binds the actual commit and every deployed source
@@ -133,12 +147,12 @@ Use the existing h100env312 Python. Preparation is CPU-only. These commands
 are documentation, not a batch that blindly starts every phase:
 
 ```bash
-ROOT=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v2
+ROOT=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu
 PY=/work/users/y/u/yuhe32/h100env312/bin/python
 CODE=$ROOT/source/experiments/oracle2
-$PY $CODE/prepare_data.py --plan $ROOT/plan.json
+# Data preparation is performed once by deployment; do not overwrite it.
 $PY $CODE/campaigns/oracle2_real_20261009/queue.py --root "$ROOT" --phase audit
-# --submit only after explicit approval to retry the failed audit.
+# --submit only after preflight and confirming no existing intent/receipt.
 ```
 
 Inspect candidate score manifest and `private_data/scored/audit.json` before

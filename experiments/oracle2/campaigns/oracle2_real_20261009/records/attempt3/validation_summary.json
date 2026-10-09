@@ -1,0 +1,66 @@
+[
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/oracle2",
+      "-p",
+      "test_oracle2.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests": 29,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/cyclic_history",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests": 76,
+    "skipped": false
+  },
+  {
+    "command": [
+      "bash",
+      "-n",
+      "experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/probe_tokenizers.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu/plan.json"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/prepare_data.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu/plan.json"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  }
+]

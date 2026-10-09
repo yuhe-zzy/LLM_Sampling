@@ -1,5 +1,44 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Scoring completed; training held for insufficient cyclic data
+
+Checked **2026-10-09T17:42:45Z**: job **4773843 COMPLETED, exit 0:0**, elapsed
+18m07s. Both Nemotron and Skywork completed **3200/3200** scores without logged
+OOM, Traceback or nonfinite failures. Nemotron peak tensor allocation was
+66.33/66.30 GiB across two H100s; Skywork peak was 14.18 GiB on its active GPU.
+This validates two-GPU scoring for this candidate bank, not every future input.
+The complete owner/UID queue was empty, total allocated GPUs zero.
+
+The **scientific readiness review is on hold**, distinct from successful code
+execution. Frozen 0.6/0.4 mixture, temperatures 1, four real responses per prompt:
+
+| Split | Total prompts | Cyclic | Transitive | Ambiguous |
+|---|---:|---:|---:|---:|
+| Calibration | 100 | 0 | 81 | 19 |
+| Training | 500 | 1 | 436 | 63 |
+| Evaluation | 200 | 0 | 160 | 40 |
+
+"Cyclic" uses the prespecified robust criterion: one directed triangle with
+**all three edges P > 0.52**. Ambiguous panels may include near ties or weaker
+cycles; these counts do not assert that every ambiguous panel is acyclic.
+The cached-score diagnostic 0.7/0.3 mixture has zero robust cyclic panels in
+all three splits, so simply switching to 7/3 is not supported by this audit.
+Training-set component saturation (P<.01 or P>.99) is 34.8% for Nemotron and
+49.3% for Skywork; these are diagnostics, not proof of the cause of scarcity.
+BT solver checks had no failures (maximum training residual <1e-10).
+
+One training cyclic prompt and none in evaluation cannot support the intended
+cyclic/noncyclic comparison. **No baseline or six-arm training is approved or
+submitted**, no `APPROVE_SIX_ARMS` was created, and no settings were retuned.
+Preserve all scores and await user discussion of data/scale diagnostics.
+Heartbeat `oracle2` retains its ten-minute schedule because readiness did not
+pass; unchanged waiting status remains silent. No task was cancelled or rerun.
+
+Evidence: [candidate audit](records/attempt3/completed_candidate_audit.json),
+[score/memory manifest](records/attempt3/completed_score_manifest.json), and
+[held readiness review](records/attempt3/completion_review.json).
+Actual execution source remains `55e835ec5b9015404a7068c7ebf940af1feb020f`.
+
 ## First actual two-GPU scoring milestone
 
 At 2026-10-09T17:22:53Z, **4773843** remained the sole owned RUNNING job,

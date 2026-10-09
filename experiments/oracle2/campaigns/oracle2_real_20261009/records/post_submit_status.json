@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-10-09T16:56:02.380059+00:00",
+  "queue": {
+    "checked_at_utc": "2026-10-09T16:56:02.376152+00:00",
+    "full_queue_rows": 38084,
+    "owned_queue": [
+      "4773811|yuhe32|448057|RUNNING|gres/gpu:3|g15070306"
+    ],
+    "owned_scontrol": [
+      "JobId=4773811 JobName=oracle2_audit UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6617 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:43 TimeLimit=12:00:00 TimeMin=N/A SubmitTime=2026-10-09T12:55:18 EligibleTime=2026-10-09T12:55:18 AccrueTime=2026-10-09T12:55:18 StartTime=2026-10-09T12:55:19 EndTime=2026-10-10T00:55:19 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-09T12:55:19 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:3946016 ReqNodeList=(null) ExcNodeList=(null) NodeList=g15070306 BatchHost=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=256G,node=1,billing=3,gres/gpu=3 AllocTRES=cpu=8,mem=256G,node=1,billing=3,gres/gpu=3,gres/gpu:h100=3 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=256G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009/logs/audit-4773811_4294967294.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009/logs/audit-4773811_4294967294.out TresPerNode=gres/gpu:3 TresPerTask=cpu=8 "
+    ],
+    "allocated_gpus": 3,
+    "hard_account_cap_installed": false
+  },
+  "jobs": {
+    "audit": "4773811|RUNNING|0:0|billing=3,cpu=8,gres/gpu:h100=3,gres/gpu=3,mem=256G,node=1|00:00:43"
+  },
+  "phases": {
+    "candidate_scores": {
+      "state": "SCORING",
+      "records_sha256": "92e1a0efdd52e53c6de91be565d6408b315401bdd45615029b650f36aa2c9f21",
+      "count": 3200,
+      "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+      "components": {},
+      "templates": "own model chat template, tokenize=True, no duplicate BOS",
+      "truncation_allowed": false,
+      "written_rows": {}
+    }
+  },
+  "errors": [],
+  "runs": {}
+}

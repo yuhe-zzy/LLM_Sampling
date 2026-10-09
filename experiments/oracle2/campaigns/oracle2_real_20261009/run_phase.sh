@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009
+ROOT=${ORACLE2_LAUNCH_ROOT:?Submit through the checked queue entry point}
 PYTHON=/work/users/y/u/yuhe32/h100env312/bin/python
 CODE="$ROOT/source/experiments/oracle2"
 PLAN="$ROOT/plan.json"
-OUT=/work/users/y/u/yuhe32/ipo_runs/oracle2_real_20261009
+OUT=$("$PYTHON" -c 'import json,sys; print(json.load(open(sys.argv[1]))["output_root"])' "$PLAN")
 export HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8
 export OPENBLAS_NUM_THREADS=1 PYTHONUNBUFFERED=1
-"$PYTHON" "$CODE/campaigns/oracle2_real_20261009/queue.py" --verify
+"$PYTHON" "$CODE/campaigns/oracle2_real_20261009/queue.py" --root "$ROOT" --verify
 case "${1:?Missing phase}" in
   audit)
     "$PYTHON" "$CODE/score_records.py" --plan "$PLAN" \

@@ -46,10 +46,16 @@ def owned_snapshot():
         if fields[1] == 'yuhe32' or fields[2] == '448057':
             owned.append(line)
     control = run(['scontrol', '-a', 'show', 'job', '-o'])
-    control_owned = [line for line in control.splitlines() if re.search(
+    all_owned = [line for line in control.splitlines() if re.search(
         r'\bUserId=(?:yuhe32\(\d+\)|[^ ()]+\(448057\))', line)]
+    terminal = {'COMPLETED', 'FAILED', 'CANCELLED', 'TIMEOUT', 'NODE_FAIL', 'OUT_OF_MEMORY', 'PREEMPTED', 'BOOT_FAIL', 'DEADLINE'}
+    control_owned, recent_terminal = [], []
+    for line in all_owned:
+        match = re.search(r'\bJobState=(\S+)', line)
+        (recent_terminal if match and match[1] in terminal else control_owned).append(line)
     return dict(checked_at_utc=datetime.now(timezone.utc).isoformat(),
                 full_queue_rows=len(raw.splitlines()), owned_queue=owned, owned_scontrol=control_owned,
+                recent_terminal_scontrol=recent_terminal,
                 allocated_gpus=0 if not owned and not control_owned else None,
                 hard_account_cap_installed=False)
 
@@ -84,6 +90,7 @@ def main():
         raise RuntimeError('Account not empty. Leave this phase unsubmitted; review dependencies/budget')
     script = source / 'campaigns/oracle2_real_20261009/run_phase.sh'
     command = ['sbatch', '--parsable', '--partition=h100_all', '--account=rc_fanyao_pi',
+               f'--export=ALL,ORACLE2_LAUNCH_ROOT={a.root}',
                f'--gres=gpu:{resource["gpus"]}', '--cpus-per-task=8', f'--mem={resource["memory"]}',
                f'--time={resource["time"]}', '--no-requeue', f'--job-name=oracle2_{a.phase}',
                f'--output={a.root}/logs/{a.phase}-%A_%a.out', f'--error={a.root}/logs/{a.phase}-%A_%a.err']

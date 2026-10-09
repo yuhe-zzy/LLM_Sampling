@@ -6,7 +6,7 @@ import random
 import unicodedata
 from pathlib import Path
 
-from common import jsonl, load_json, save_jsonl, sha256, verify_model_lock, write_json
+from common import judge_token_ids, jsonl, load_json, save_jsonl, sha256, verify_model_lock, write_json
 
 
 def prompt_key(text):
@@ -72,9 +72,7 @@ def main():
             continue
         judge_lengths = {}
         for name in ('nemotron', 'skywork'):
-            judge_lengths[name] = [len(tokenizers[name].apply_chat_template(
-                [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': r}],
-                tokenize=True, add_generation_prompt=False)) for r in responses]
+            judge_lengths[name] = [len(judge_token_ids(tokenizers[name], prompt, r)) for r in responses]
         if max(max(v) for v in judge_lengths.values()) > spec['max_judge_length']:
             rejected['judge_length'] += 1
             continue

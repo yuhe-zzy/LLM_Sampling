@@ -22,6 +22,16 @@ def load_json(path):
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
 
+def judge_token_ids(tokenizer, prompt, response):
+    # Transformers 5 can default to BatchEncoding, whose length counts keys.
+    ids = tokenizer.apply_chat_template(
+        [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': response}],
+        tokenize=True, add_generation_prompt=False, return_dict=False)
+    if not isinstance(ids, list) or not ids or any(type(i) is not int or i < 0 for i in ids):
+        raise TypeError('Judge tokenizer must return a nonempty flat list of integer token IDs')
+    return ids
+
+
 def jsonl(path):
     with open(path, encoding='utf-8') as handle:
         return [json.loads(line) for line in handle if line.strip()]

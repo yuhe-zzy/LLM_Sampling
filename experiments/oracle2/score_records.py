@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import time
 
-from common import jsonl, load_json, require_gpu, sha256, verify_model_lock, write_json
+from common import judge_token_ids, jsonl, load_json, require_gpu, sha256, verify_model_lock, write_json
 
 
 def score(plan, records_path, output):
@@ -45,9 +45,7 @@ def score(plan, records_path, output):
             lengths, scores = [], []
             with path.open('x', encoding='utf-8') as handle, torch.inference_mode():
                 for index, row in enumerate(records):
-                    ids = tok.apply_chat_template([{'role': 'user', 'content': row['prompt']},
-                                                  {'role': 'assistant', 'content': row['response']}],
-                                                 tokenize=True, add_generation_prompt=False)
+                    ids = judge_token_ids(tok, row['prompt'], row['response'])
                     if len(ids) > plan['dataset']['max_judge_length'] or not ids:
                         raise ValueError(f'Judge input length violation: {row["id"]}')
                     inputs = torch.tensor([ids], dtype=torch.long, device=device)

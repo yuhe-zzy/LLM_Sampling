@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-09T16:58:02.273902+00:00",
+  "jobs": {
+    "audit": "4773811|FAILED|1:0|billing=3,cpu=8,gres/gpu:h100=3,gres/gpu=3,mem=256G,node=1|00:02:03"
+  },
+  "phases": {
+    "candidate_scores": {
+      "state": "FAILED",
+      "records_sha256": "92e1a0efdd52e53c6de91be565d6408b315401bdd45615029b650f36aa2c9f21",
+      "count": 3200,
+      "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+      "components": {},
+      "templates": "own model chat template, tokenize=True, no duplicate BOS",
+      "truncation_allowed": false,
+      "error": "TypeError: 'str' object cannot be interpreted as an integer",
+      "written_rows": {
+        "nemotron": 0
+      }
+    }
+  },
+  "errors": [
+    {
+      "file": "audit-4773811_4294967294.err",
+      "line": "Traceback (most recent call last):"
+    }
+  ],
+  "owned_squeue": [],
+  "accounting_correction": "Terminal scontrol AllocTRES is historical; do not count it as live allocation"
+}

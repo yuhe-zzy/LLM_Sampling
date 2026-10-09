@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 
-from common import load_json, save_jsonl, sha256, write_json
+from common import judge_token_ids, load_json, save_jsonl, sha256, write_json
 from oracle_math import classify_panel, generated_wr, preference_matrix, probability, wr_steps
 from prepare_data import prompt_key, split_panels
 from generate_evaluation import generation_seed
@@ -38,6 +38,10 @@ class OracleMathTests(unittest.TestCase):
     def test_groups_are_not_forced(self):
         self.assertEqual(classify_panel(np.full((4, 4), .5))['group'], 'ambiguous')
         self.assertEqual(classify_panel(preference_matrix([0, 1, 2, 3], [0, 1, 2, 3]))['group'], 'transitive')
+
+    def test_strict_cycle_margin_boundary(self):
+        p = np.array([[.5, .52, .48], [.48, .5, .52], [.52, .48, .5]])
+        self.assertEqual(classify_panel(p)['group'], 'ambiguous')
 
     def test_reject_invalid_input(self):
         for t in ((0, 1), (1, float('nan')), (-1, 1)):
@@ -87,6 +91,19 @@ class OracleMathTests(unittest.TestCase):
 
 
 class DataAndPlanTests(unittest.TestCase):
+    def test_chat_template_mapping_default_is_explicitly_disabled(self):
+        class Tokenizer:
+            def apply_chat_template(self, messages, **kwargs):
+                return [1, 2, 3] if kwargs.get('return_dict') is False else {'input_ids': [1, 2, 3]}
+        self.assertEqual(judge_token_ids(Tokenizer(), 'Hello', 'Hi'), [1, 2, 3])
+
+    def test_bad_chat_template_output_cannot_pass_length_audit(self):
+        class Tokenizer:
+            def apply_chat_template(self, *args, **kwargs):
+                return {'input_ids': [1, 2, 3], 'attention_mask': [1, 1, 1]}
+        with self.assertRaises(TypeError):
+            judge_token_ids(Tokenizer(), 'Hello', 'Hi')
+
     def test_split_disjoint_and_deterministic(self):
         rows = [dict(prompt_key=str(i)) for i in range(1000)]
         sizes = dict(calibration=100, train=500, evaluation=200)
@@ -115,6 +132,14 @@ class DataAndPlanTests(unittest.TestCase):
             self.assertEqual(cfg['num_prompts'], 500)
             self.assertEqual(cfg['support_probability'], 'softmax_sequence_sum')
             self.assertEqual(cfg['beta_train'], .2 if run['method'] == 'ipo' else .8)
+
+    def test_repair_attempt_changes_paths_not_experimental_parameters(self):
+        first = load_json(PLAN)
+        second = load_json(PLAN.with_name('plan_attempt2.json'))
+        for field in ('data_root', 'output_root', 'model_lock'):
+            first.pop(field)
+            second.pop(field)
+        self.assertEqual(first, second)
 
     def test_generation_rng_matched_between_arms_independent_from_baseline(self):
         self.assertEqual(generation_seed(100780, 10, 5, 2), generation_seed(100780, 10, 5, 2))
@@ -174,6 +199,14 @@ class QueueTests(unittest.TestCase):
     def test_budget_and_readonly_preview_resources(self):
         for resource in self.queue.RESOURCES.values():
             self.assertLessEqual(resource['tasks']*resource['gpus'], 6)
+
+    def test_terminal_scontrol_is_not_live_gpu_allocation(self):
+        outputs = ['', 'JobId=123 UserId=yuhe32(448057) JobState=FAILED AllocTRES=gres/gpu=3,gres/gpu:h100=3']
+        with patch.object(self.queue, 'run', side_effect=outputs):
+            result = self.queue.owned_snapshot()
+        self.assertEqual(result['owned_scontrol'], [])
+        self.assertEqual(result['allocated_gpus'], 0)
+        self.assertEqual(len(result['recent_terminal_scontrol']), 1)
 
     def test_existing_receipt_is_not_overwritten(self):
         with tempfile.TemporaryDirectory() as tmp:

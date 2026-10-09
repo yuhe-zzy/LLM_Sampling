@@ -6,6 +6,11 @@ six configurations and 100/500/200 disjoint prompt split. Evaluation cadence is
 Implementation/authorization is not a submission receipt. See the dated
 [campaign record](campaigns/oracle2_real_20261009/README.md) for actual status.
 
+First GPU audit 4773811 failed before any score due to the Transformers 5
+chat-template return-type default. The explicit-token-list repair is separate
+from its frozen source; attempt2 is prepared pending retry approval. See the
+campaign's latest status before interpreting earlier running/preflight records.
+
 ## Fixed judges and genuine pairwise mixing
 
 Oracle1 remains `nvidia/Llama-3.1-Nemotron-70B-Reward-HF`. Oracle2 is the

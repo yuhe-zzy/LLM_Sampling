@@ -32,6 +32,23 @@ one-GPU policy tasks, six one-GPU generation tasks, three-GPU WR scoring.
 This newly approved cached-judge design does not authorize six simultaneous
 three-GPU oracle jobs. No extra seed/arm and no cancellation of older jobs.
 
+Oracle2 candidate audit has been submitted as **4773811**, three H100s,
+frozen source `975726c30675e9a3df11da1582482f6bd9c07b46`; 96 server CPU tests
+passed without skips. At 2026-10-09T16:56:02Z it was RUNNING and was the only
+owned job (three allocated GPUs). Judge scores were still initializing, so
+this is not inference/audit completion. Six formal training arms have NOT
+been submitted; inspect the actual audit before creating its review record.
+Never duplicate the audit or silently retune temperatures. No automatic
+phase chaining/follow-up was created. See the campaign's receipts/status.
+
+Later 2026-10-09 update supersedes the running snapshot: 4773811 FAILED at
+16:57:22Z before scoring any candidate. Transformers 5 chat templates returned
+BatchEncoding instead of token IDs; the original judge-length check also
+counted dict keys and is invalid. The repair explicitly requests/validates flat
+IDs for both preprocessing/scoring. Attempt2 uses separate `_v2` roots and
+unchanged experiment parameters. Retry approval was requested; do not submit
+it without that approval or duplicate the original. No training is submitted.
+
 At most six allocated GPUs total across all owner programs, not six per array.
 Before resource actions inspect both running and pending work using the full
 `squeue -a -r` owner/UID listing and `scontrol -a show job`. On Sycamore the owner

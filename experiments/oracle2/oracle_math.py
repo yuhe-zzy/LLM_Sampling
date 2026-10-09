@@ -45,9 +45,10 @@ def classify_panel(p, margin=.02):
     for a, b, c in itertools.combinations(range(len(p)), 3):
         for cycle in ((a, b, c), (a, c, b)):
             i, j, k = cycle
-            m = float(min(p[i, j], p[j, k], p[k, i]) - .5)
+            minimum = float(min(p[i, j], p[j, k], p[k, i]))
+            m = minimum - .5
             majority_cycles += int(m > 0)
-            if m > margin:
+            if minimum > .5 + margin:
                 triangles.append(dict(vertices=list(cycle), min_edge_margin=m))
     edges = p[np.triu_indices(len(p), 1)]
     all_decisive = bool(np.all(np.abs(edges - .5) >= margin))

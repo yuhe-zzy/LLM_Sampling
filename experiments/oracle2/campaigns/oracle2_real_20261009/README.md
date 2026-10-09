@@ -1,6 +1,28 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
-## Latest: repaired and CPU-validated, no resubmission
+## Latest authorization: two-GPU audit, four-GPU account ceiling
+
+The user lifted the temporary no-retry hold and authorized starting the repaired
+code with TWO GPUs. The new total account limit is FOUR, superseding all older
+six-GPU text. New immutable launch/output suffix: `oracle2_real_20261009_v3_2gpu`,
+local records: `oracle2_real_launch_20261009/attempt3`.
+Use [plan_two_gpu.json](plan_two_gpu.json); only allocation and paths change.
+This section records authorization, not submission. Inspect receipts first.
+
+Candidate scoring and WR scoring load Nemotron then Skywork sequentially on
+two H100s. Training/generation retain six arms at one H100 each, array `0-5%2`.
+Each phase requires an empty full-account queue and checks allocation at startup;
+no phases overlap, and unrelated jobs must be included. This is not an installed
+administrator account cap. No old job is cancelled or duplicated.
+
+The user-authorized heartbeat `oracle2` checks every 10 minutes for OOM,
+Tracebacks, numerical errors and progress, and may debug technical failures.
+After BOTH judges complete all candidate scores and the audit passes with actual
+cyclic counts, update this same heartbeat to every two hours. Missing/tiny cyclic
+groups or saturation issues require discussion, not silent scientific changes.
+No-change checks stay quiet. Source/receipt and completed artifacts stay immutable.
+
+## Earlier repair validation and temporary hold (superseded)
 
 The user explicitly requested **code repair only; do not resubmit for now**.
 No new GPU job, six-arm training or automatic follow-up was submitted/scheduled.
@@ -129,7 +151,7 @@ the evidence and discuss calibration; do not silently change the 6/4 oracle.
 Subsequent supported phases: `baseline`, `train`, `generate`, `wrscore`.
 Wait for each preceding phase to finish, inspect results and live account
 state, then submit the next. No phase submits another phase. The training
-array uses 0..5%6, one H100/task. Candidate/WR scoring uses three H100s only.
+array uses 0..5%2, one H100/task. Candidate/WR scoring tries two H100s.
 All submissions require fresh empty-account checks and exclusive intent files.
 
 See the [experiment README](../../README.md) for objectives, grouping, WR

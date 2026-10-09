@@ -7,15 +7,35 @@ from pathlib import Path
 import re
 import subprocess
 
-ROOT = Path('/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009')
+ROOT = Path('/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu')
 PYTHON = '/work/users/y/u/yuhe32/h100env312/bin/python'
+ACCOUNT_GPU_LIMIT = 4
 RESOURCES = {
-    'audit': dict(gpus=3, tasks=1, memory='256G', time='12:00:00'),
-    'baseline': dict(gpus=1, tasks=1, memory='80G', time='03:00:00'),
-    'train': dict(gpus=1, tasks=6, memory='80G', time='5-00:00:00'),
-    'generate': dict(gpus=1, tasks=6, memory='80G', time='12:00:00'),
-    'wrscore': dict(gpus=3, tasks=1, memory='256G', time='5-00:00:00'),
+    'audit': dict(gpus=2, tasks=1, concurrency=1, memory='256G', time='12:00:00'),
+    'baseline': dict(gpus=1, tasks=1, concurrency=1, memory='80G', time='03:00:00'),
+    'train': dict(gpus=1, tasks=6, concurrency=2, memory='80G', time='5-00:00:00'),
+    'generate': dict(gpus=1, tasks=6, concurrency=2, memory='80G', time='12:00:00'),
+    'wrscore': dict(gpus=2, tasks=1, concurrency=1, memory='256G', time='5-00:00:00'),
 }
+
+
+def maximum_phase_gpus(resource):
+    if not 1 <= resource['concurrency'] <= resource['tasks'] or resource['gpus'] < 1:
+        raise ValueError('Invalid task/GPU concurrency')
+    maximum = resource['concurrency'] * resource['gpus']
+    if maximum > ACCOUNT_GPU_LIMIT:
+        raise ValueError('Phase exceeds four-GPU account budget')
+    return maximum
+
+
+def job_aliases(line):
+    job = re.search(r'\bJobId=(\S+)', line)
+    array = re.search(r'\bArrayJobId=(\d+)', line)
+    index = re.search(r'\bArrayTaskId=(\d+)\b', line)
+    aliases = {job[1]} if job else set()
+    if array and index:
+        aliases.add(f'{array[1]}_{index[1]}')
+    return aliases
 
 
 def run(args):
@@ -50,30 +70,69 @@ def owned_snapshot():
         r'\bUserId=(?:yuhe32\(\d+\)|[^ ()]+\(448057\))', line)]
     terminal = {'COMPLETED', 'FAILED', 'CANCELLED', 'TIMEOUT', 'NODE_FAIL', 'OUT_OF_MEMORY', 'PREEMPTED', 'BOOT_FAIL', 'DEADLINE'}
     control_owned, recent_terminal = [], []
+    queued_ids = {row.split('|')[0] for row in owned}
     for line in all_owned:
         match = re.search(r'\bJobState=(\S+)', line)
-        (recent_terminal if match and match[1] in terminal else control_owned).append(line)
+        job = re.search(r'\bJobId=(\S+)', line)
+        finished = match and match[1] in terminal and job and not (job_aliases(line) & queued_ids)
+        (recent_terminal if finished else control_owned).append(line)
+    allocated = 0
+    accounted_ids = set()
+    for line in control_owned:
+        job = re.search(r'\bJobId=(\S+)', line)
+        state = re.search(r'\bJobState=(\S+)', line)
+        value = re.search(r'\bAllocTRES=(\S+)', line)
+        if not job or job[1] in accounted_ids:
+            raise ValueError('Missing or duplicate scontrol job ID')
+        accounted_ids.update(job_aliases(line))
+        generic = re.search(r'(?:^|,)gres/gpu=(\d+)(?:,|$)', value[1]) if value else None
+        if generic:
+            allocated += int(generic[1])
+        elif value and 'gres/gpu:' in value[1]:
+            allocated = None
+            break
+        elif not state or (state[1] != 'PENDING' and not value):
+            allocated = None
+            break
+    if any(row.split('|')[3] != 'PENDING' and row.split('|')[0] not in accounted_ids for row in owned):
+        allocated = None
     return dict(checked_at_utc=datetime.now(timezone.utc).isoformat(),
                 full_queue_rows=len(raw.splitlines()), owned_queue=owned, owned_scontrol=control_owned,
                 recent_terminal_scontrol=recent_terminal,
-                allocated_gpus=0 if not owned and not control_owned else None,
+                allocated_gpus=allocated, account_gpu_limit=ACCOUNT_GPU_LIMIT,
                 hard_account_cap_installed=False)
+
+
+def check_live_budget(snapshot):
+    allocated = snapshot['allocated_gpus']
+    if allocated is None or allocated > ACCOUNT_GPU_LIMIT:
+        raise RuntimeError('Cannot verify allocation within four-GPU account budget; do not start GPU work')
 
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root', type=Path, default=ROOT)
     p.add_argument('--verify', action='store_true')
+    p.add_argument('--check-budget', action='store_true')
     p.add_argument('--phase', choices=list(RESOURCES))
     p.add_argument('--submit', action='store_true')
     a = p.parse_args()
     deployment = verify(a.root)
+    if a.check_budget:
+        snapshot = owned_snapshot()
+        print(json.dumps(snapshot), flush=True)
+        check_live_budget(snapshot)
+        return
     if a.verify:
         print('VERIFIED', deployment['source_commit'])
         return
     if a.phase is None:
         p.error('--phase required')
     resource = RESOURCES[a.phase]
+    maximum = maximum_phase_gpus(resource)
+    plan = json.loads((a.root / 'plan.json').read_text())
+    if a.phase in ('audit', 'wrscore') and plan['oracle']['scoring_gpus'] != resource['gpus']:
+        raise ValueError('Judge GPU request disagrees with frozen plan')
     source = a.root / 'source/experiments/oracle2'
     if a.phase in ('train', 'generate', 'wrscore'):
         for arm in json.loads((a.root / 'plan.json').read_text())['runs']:
@@ -86,6 +145,7 @@ def main():
         raise FileExistsError('Existing intent/receipt: inspect live scheduler; never blindly retry')
     snapshot = owned_snapshot()
     print(json.dumps(snapshot), flush=True)
+    check_live_budget(snapshot)
     if snapshot['owned_queue'] or snapshot['owned_scontrol']:
         raise RuntimeError('Account not empty. Leave this phase unsubmitted; review dependencies/budget')
     script = source / 'campaigns/oracle2_real_20261009/run_phase.sh'
@@ -95,14 +155,14 @@ def main():
                f'--time={resource["time"]}', '--no-requeue', f'--job-name=oracle2_{a.phase}',
                f'--output={a.root}/logs/{a.phase}-%A_%a.out', f'--error={a.root}/logs/{a.phase}-%A_%a.err']
     if resource['tasks'] > 1:
-        command.append(f'--array=0-{resource["tasks"]-1}%{resource["tasks"]}')
+        command.append(f'--array=0-{resource["tasks"]-1}%{resource["concurrency"]}')
     command += [str(script), a.phase]
     if not a.submit:
         print(json.dumps(dict(preview=command)))
         return
     (a.root / 'logs').mkdir(exist_ok=True)
     save_new(intent, dict(source_commit=deployment['source_commit'], command=command, preflight=snapshot,
-                          phase=a.phase, maximum_phase_gpus=resource['gpus']*resource['tasks']))
+                          phase=a.phase, maximum_phase_gpus=maximum, account_gpu_limit=ACCOUNT_GPU_LIMIT))
     job_id = run(command)
     if not job_id.split(';')[0].isdigit():
         raise RuntimeError('Ambiguous sbatch result; preserve intent and inspect scheduler before any retry')

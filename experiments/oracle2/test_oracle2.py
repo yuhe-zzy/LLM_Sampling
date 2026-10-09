@@ -12,6 +12,7 @@ from prepare_data import prompt_key, split_panels
 from generate_evaluation import generation_seed
 from train_oracle2 import configuration
 from evaluate_wr import summarize
+from score_records import weight_memory_budget
 from history_math import build_outer_state, pair_distribution
 
 HERE = Path(__file__).resolve().parent
@@ -141,6 +142,24 @@ class DataAndPlanTests(unittest.TestCase):
             second.pop(field)
         self.assertEqual(first, second)
 
+    def test_two_gpu_attempt_only_changes_paths_and_allocation(self):
+        old = load_json(PLAN.with_name('plan_attempt2.json'))
+        new = load_json(PLAN.with_name('plan_two_gpu.json'))
+        self.assertEqual(new['oracle']['scoring_gpus'], 2)
+        for field in ('data_root', 'output_root', 'model_lock'):
+            old.pop(field)
+            new.pop(field)
+        old['oracle']['scoring_gpus'] = 2
+        self.assertEqual(old, new)
+
+    def test_inference_headroom_kept_without_fixed_65gib_weight_cap(self):
+        gib = 1024**3
+        self.assertEqual(weight_memory_budget([80*gib, 79*gib]), {0: 72*gib, 1: 71*gib})
+        with self.assertRaises(RuntimeError):
+            weight_memory_budget([7*gib])
+        with self.assertRaises(ValueError):
+            weight_memory_budget([80*gib], 0)
+
     def test_generation_rng_matched_between_arms_independent_from_baseline(self):
         self.assertEqual(generation_seed(100780, 10, 5, 2), generation_seed(100780, 10, 5, 2))
         self.assertNotEqual(generation_seed(777, 0, 5, 2), generation_seed(100780, 0, 5, 2))
@@ -194,11 +213,33 @@ class QueueTests(unittest.TestCase):
             result = self.queue.owned_snapshot()
         self.assertEqual(len(result['owned_queue']), 2)
         self.assertEqual(len(result['owned_scontrol']), 1)
-        self.assertIsNone(result['allocated_gpus'])
+        self.assertEqual(result['allocated_gpus'], 1)
 
     def test_budget_and_readonly_preview_resources(self):
         for resource in self.queue.RESOURCES.values():
-            self.assertLessEqual(resource['tasks']*resource['gpus'], 6)
+            self.assertLessEqual(self.queue.maximum_phase_gpus(resource), 4)
+        self.assertEqual(self.queue.RESOURCES['train']['tasks'], 6)
+        self.assertEqual(self.queue.RESOURCES['train']['concurrency'], 2)
+        self.assertEqual(self.queue.RESOURCES['audit']['gpus'], 2)
+        with self.assertRaises(ValueError):
+            self.queue.maximum_phase_gpus(dict(gpus=1, tasks=6, concurrency=6))
+        for count in (None, 5):
+            with self.assertRaises(RuntimeError):
+                self.queue.check_live_budget(dict(allocated_gpus=count))
+        self.queue.check_live_budget(dict(allocated_gpus=4))
+
+    def test_array_running_alias_and_completing_resources_count_once(self):
+        outputs = ['120_0|yuhe32|448057|RUNNING|gpu:1|n1\n120_1|yuhe32|448057|COMPLETING|gpu:1|n2',
+                   'JobId=121 ArrayJobId=120 ArrayTaskId=0 UserId=yuhe32(448057) JobState=RUNNING AllocTRES=gres/gpu=1,gres/gpu:h100=1\n'
+                   'JobId=122 ArrayJobId=120 ArrayTaskId=1 UserId=yuhe32(448057) JobState=CANCELLED AllocTRES=gres/gpu=1,gres/gpu:h100=1']
+        with patch.object(self.queue, 'run', side_effect=outputs):
+            result = self.queue.owned_snapshot()
+        self.assertEqual(result['allocated_gpus'], 2)
+        self.assertEqual(len(result['owned_scontrol']), 2)
+
+    def test_incomplete_accounting_is_not_zero(self):
+        with patch.object(self.queue, 'run', side_effect=['123|yuhe32|448057|RUNNING|gpu:2|n1', '']):
+            self.assertIsNone(self.queue.owned_snapshot()['allocated_gpus'])
 
     def test_terminal_scontrol_is_not_live_gpu_allocation(self):
         outputs = ['', 'JobId=123 UserId=yuhe32(448057) JobState=FAILED AllocTRES=gres/gpu=3,gres/gpu:h100=3']

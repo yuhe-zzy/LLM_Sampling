@@ -8,10 +8,11 @@ Implementation/authorization is not a submission receipt. See the dated
 
 First GPU audit 4773811 failed before any score due to the Transformers 5
 chat-template return-type default. The explicit-token-list repair is separate
-from its frozen source. The user requested **code repair only, no resubmission**.
-Corrected CPU deployment passed 101 tests and full data/tokenizer checks;
-post-repair GPU inference remains untested. No retry or six-arm training was
-submitted. See the campaign's latest status and validation records.
+from its frozen source. Corrected CPU deployment passed 101 tests and full
+data/tokenizer checks. The user's latest instruction lifts the temporary hold:
+try two GPUs, with an account-wide maximum of FOUR. Training/generation start
+with two concurrent one-GPU tasks, six arms total. GPU viability is to be
+measured, not assumed. See the campaign's latest status and receipts.
 
 ## Fixed judges and genuine pairwise mixing
 
@@ -36,7 +37,7 @@ it does not claim to rehash every old weight shard. Inference uses local
 files and model-specific templates with no doubled BOS or text truncation.
 Nemotron uses its causal-LM one-step reward interface; Skywork uses scalar
 sequence-classification logits. Both are frozen BF16 models, loaded
-**sequentially** in one three-H100 scoring allocation. This interface still
+**sequentially** in one two-H100 scoring allocation. This interface still
 requires a fresh GPU check; CPU tests cannot establish inference correctness.
 
 Primary model documentation:
@@ -156,13 +157,20 @@ guarantee its newly generated responses remain transitive.
 
 ## Execution, audit trail and privacy
 
-CPU preparation -> three-GPU candidate scoring/audit -> review -> one-GPU
-baseline generation -> six one-GPU training tasks -> six one-GPU generation
-tasks -> one three-GPU scoring/summarization job. These are **nonoverlapping
+CPU preparation -> two-GPU candidate scoring/audit -> review -> one-GPU
+baseline generation -> six one-GPU training tasks (two concurrent) -> six
+one-GPU generation tasks (two concurrent) -> one two-GPU scoring/summarization
+job. These are **nonoverlapping
 phases**, with fresh full owner/UID queue checks before each submission.
 `queue.py` requires an empty full account and preserves exclusive intent and
-receipt files. No automated resubmission, phase chaining, cancellation or
-account-wide hard scheduler cap is claimed. Pending jobs count in preflight.
+receipt files. A user-authorized heartbeat checks every ten minutes until the
+complete scoring/cycle audit passes, then every two hours; it may debug and
+advance only successful approved phases. No blind resubmission or account-wide
+hard scheduler cap is claimed. Pending jobs count in preflight. The queue and
+startup guards enforce the four-GPU workflow budget, not independent submissions.
+Nemotron weight placement reserves at least 8 GiB free per GPU for inference;
+periodic memory telemetry records free/reserved/peak bytes. No quantization,
+CPU/disk offload, truncation or mixture/temperature change is used to make it fit.
 Source bytes are frozen and verified at startup. All old campaigns remain intact.
 
 Keep raw candidate text, generated text, score records, adapters and snapshots

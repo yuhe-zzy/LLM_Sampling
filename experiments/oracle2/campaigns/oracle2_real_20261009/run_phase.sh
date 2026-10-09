@@ -8,6 +8,7 @@ OUT=$("$PYTHON" -c 'import json,sys; print(json.load(open(sys.argv[1]))["output_
 export HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8
 export OPENBLAS_NUM_THREADS=1 PYTHONUNBUFFERED=1
 "$PYTHON" "$CODE/campaigns/oracle2_real_20261009/queue.py" --root "$ROOT" --verify
+"$PYTHON" "$CODE/campaigns/oracle2_real_20261009/queue.py" --root "$ROOT" --check-budget
 case "${1:?Missing phase}" in
   audit)
     "$PYTHON" "$CODE/score_records.py" --plan "$PLAN" \

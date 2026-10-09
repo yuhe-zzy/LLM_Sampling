@@ -15,13 +15,6 @@ def inspect(root):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     queue = module.owned_snapshot()
-    gpu_count = 0
-    for line in queue['owned_scontrol']:
-        value = re.search(r'\bAllocTRES=(\S+)', line)
-        if value:
-            match = re.search(r'(?:^|,)gres/gpu=(\d+)(?:,|$)', value[1])
-            gpu_count += int(match[1]) if match else 0
-    queue['allocated_gpus'] = gpu_count
     result = dict(checked_at_utc=datetime.now(timezone.utc).isoformat(), queue=queue, jobs={},
                   phases={}, errors=[], runs={})
     for receipt in root.glob('*_submission_receipt.json'):
@@ -41,6 +34,8 @@ def inspect(root):
                     with path.open() as handle:
                         status['written_rows'][component] = sum(1 for _ in handle)
             result['phases'][name] = status
+            if (directory/'progress.json').exists():
+                status['progress'] = json.loads((directory/'progress.json').read_text())
     audit = Path(plan['data_root'])/'scored/audit.json'
     if audit.exists():
         result['candidate_audit'] = json.loads(audit.read_text())

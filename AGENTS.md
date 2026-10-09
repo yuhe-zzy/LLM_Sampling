@@ -27,10 +27,19 @@ WR must use outer states 0,10,...,100. Code and status live in
 read deployment/intent/receipt and live owner/UID queue first. Audit the true
 mixed matrices and judge interfaces before training, report too few cycles
 or saturated scales rather than silently changing temperatures or mixture.
-Oracle2 phases are sequential: three-GPU scoring, one-GPU baseline, six
-one-GPU policy tasks, six one-GPU generation tasks, three-GPU WR scoring.
-This newly approved cached-judge design does not authorize six simultaneous
-three-GPU oracle jobs. No extra seed/arm and no cancellation of older jobs.
+Latest user authorization 2026-10-09 supersedes older six-GPU limits and the
+no-retry hold below: FOUR GPUs maximum across the entire account. Try TWO
+H100s for the repaired Oracle2 audit in new immutable `_v3_2gpu` roots using
+`plan_two_gpu.json`. Six one-GPU training/generation tasks use 0-5%2, and
+scoring loads the two judges sequentially. Phases never overlap; full-account
+empty-queue preflight and startup allocation guards are mandatory. Preserve
+old sources/results; check new intent/receipt before any retry. Technical
+debugging/repair is authorized, not altered science or duplicate completed work.
+Heartbeat `oracle2`: 10-minute checks until both judges finish all candidate
+scores and cyclic-count audit passes, then update it to two-hour checks.
+Notify errors/milestones only; absent/tiny cyclic groups need discussion.
+No extra seed/arm and no cancellation of unrelated jobs. Hard scheduler cap
+is not installed; guards cannot prevent independent external submissions.
 
 Oracle2 candidate audit has been submitted as **4773811**, three H100s,
 frozen source `975726c30675e9a3df11da1582482f6bd9c07b46`; 96 server CPU tests
@@ -56,7 +65,7 @@ Any new GPU submission requires fresh user authorization. Full owner/UID
 queue at 2026-10-09T17:07:44Z was empty, zero allocated GPUs. Preserve the
 failed source and first-attempt records; see the campaign's attempt2 records.
 
-At most six allocated GPUs total across all owner programs, not six per array.
+At most FOUR allocated GPUs total across all owner programs, not four per array.
 Before resource actions inspect both running and pending work using the full
 `squeue -a -r` owner/UID listing and `scontrol -a show job`. On Sycamore the owner
 is yuhe32, UID448057; `squeue -u` has returned false empty results. Count generic

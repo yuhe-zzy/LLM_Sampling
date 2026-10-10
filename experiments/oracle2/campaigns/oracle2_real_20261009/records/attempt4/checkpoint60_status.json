@@ -1,0 +1,124 @@
+{
+  "checked_at_utc": "2026-10-10T08:02:07.567726+00:00",
+  "jobs": {
+    "baseline": "4773899|COMPLETED|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:37:33",
+    "train": "4773902_0|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|13:28:40\n4773902_1|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|13:28:40\n4773902_[2-5%2]|PENDING|0:0||00:00:00"
+  },
+  "allocated_gpus": 2,
+  "owned_queue": [
+    "4773902_2|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4773902_3|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4773902_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4773902_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4773902_0|yuhe32|448057|RUNNING|gres/gpu:1|g15070304",
+    "4773902_1|yuhe32|448057|RUNNING|gres/gpu:1|g15070304"
+  ],
+  "errors": [],
+  "numeric_validation": {
+    "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+    "baseline_hash_count_verified": true,
+    "runs": {
+      "ipo_ordinary": {
+        "last_complete_step": 61,
+        "contiguous_metrics": 62,
+        "finite_snapshots": 62,
+        "numeric_fields": [
+          "centered_logits",
+          "panel_entropy",
+          "panel_log_mass",
+          "panel_probability",
+          "relative_sequence_entropy",
+          "response_token_count",
+          "sequence_sum_logprob",
+          "training_effective_reference",
+          "training_feedback_delta",
+          "training_mu",
+          "training_offset",
+          "training_previous_feedback_delta",
+          "training_reference",
+          "training_solver_residual",
+          "training_target_logits",
+          "tv"
+        ],
+        "latest_metrics": {
+          "bt_solver_residual_max": "0.0",
+          "grad_norm_max": "2733.324462890625",
+          "grad_norm_mean": "346.67137036387123",
+          "operator_residual_max": "4.866923579373662",
+          "operator_residual_rms": "0.993561869491816",
+          "optimizer_steps": "750",
+          "outer_wall_seconds": "778.9669630015269",
+          "panel_entropy_mean": "0.05752603371189748",
+          "panel_log_mass_mean": "-71.15131924606561",
+          "relative_sequence_entropy_mean": "0.12011194022846922",
+          "step": "61",
+          "train_loss": "4.332904997053288",
+          "train_pairs": "3000",
+          "tv_mean": "0.01713832837857193"
+        },
+        "truncated_prompt_tokens": 0,
+        "saved_WR_checkpoints": [
+          "step_0010",
+          "step_0020",
+          "step_0030",
+          "step_0040",
+          "step_0050",
+          "step_0060"
+        ]
+      },
+      "ipo_reference": {
+        "last_complete_step": 62,
+        "contiguous_metrics": 63,
+        "finite_snapshots": 63,
+        "numeric_fields": [
+          "centered_logits",
+          "panel_entropy",
+          "panel_log_mass",
+          "panel_probability",
+          "relative_sequence_entropy",
+          "response_token_count",
+          "sequence_sum_logprob",
+          "training_effective_reference",
+          "training_feedback_delta",
+          "training_mu",
+          "training_offset",
+          "training_previous_feedback_delta",
+          "training_reference",
+          "training_solver_residual",
+          "training_target_logits",
+          "tv"
+        ],
+        "latest_metrics": {
+          "bt_solver_residual_max": "0.0",
+          "grad_norm_max": "3042.7509765625",
+          "grad_norm_mean": "370.32241433207196",
+          "operator_residual_max": "5.040186937843657",
+          "operator_residual_rms": "0.9079324823836872",
+          "optimizer_steps": "750",
+          "outer_wall_seconds": "773.0547198168933",
+          "panel_entropy_mean": "0.05573527444818242",
+          "panel_log_mass_mean": "-70.56159230308116",
+          "relative_sequence_entropy_mean": "0.10944057758298982",
+          "step": "62",
+          "train_loss": "4.543655524930491",
+          "train_pairs": "3000",
+          "tv_mean": "0.02043900536419196"
+        },
+        "truncated_prompt_tokens": 0,
+        "saved_WR_checkpoints": [
+          "step_0010",
+          "step_0020",
+          "step_0030",
+          "step_0040",
+          "step_0050",
+          "step_0060"
+        ]
+      }
+    },
+    "training_gpu_memory_telemetry": "not recorded by frozen trainer; do not substitute candidate-judge peaks",
+    "matched_initial_scores": true
+  },
+  "generated_checkpoint_wr_available": false,
+  "actions": "None: no submission, cancellation, retry, dependency, concurrency or scientific changes.",
+  "interpretation": "Checkpoint availability is not a WR result, evidence of convergence, or an arm-effect conclusion."
+}

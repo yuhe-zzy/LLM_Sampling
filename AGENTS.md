@@ -18,6 +18,13 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 monitoring blocked 2026-10-10T10:00:29Z: two SSH connection attempts
+timed out before any remote command. Current GPU allocation, progress and
+logs are UNKNOWN; do not treat the 08:02 checkpoint snapshot below as live.
+No experiment or timer changed. Ask owner to check UNC VPN/Sycamore access;
+retry read-only on the next check. Campaign record:
+records/attempt4/connection_failure_20261010T1000.json.
+
 Oracle2 checkpoint milestone 2026-10-10T08:02:07Z: train4773902_0/1 remain
 RUNNING, ordinary complete outer61/100 and reference62/100; step-10/20/30/40/50/60
 adapters saved. Metrics contiguous from state0, 125 finite snapshots, matching initial scores and

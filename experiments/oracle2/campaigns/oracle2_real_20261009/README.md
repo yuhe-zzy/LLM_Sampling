@@ -1,5 +1,16 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Latest monitoring check blocked by SSH connectivity
+
+At **2026-10-10T10:00:29Z**, both connection attempts for the 09:58 heartbeat
+had timed out in `sock.connect`, before any remote command ran. Current GPU
+allocation, training progress and execution errors are **unknown**. This does
+not establish an experiment failure. The 08:02 checkpoint snapshot below is
+the last successful check, not a current-status claim. The owner was asked to
+check UNC VPN and Sycamore connectivity. No task, source or timer was changed;
+the existing two-hour monitor remains in place. See
+[connection failure record](records/attempt4/connection_failure_20261010T1000.json).
+
 ## WR checkpoints through step 60 saved
 
 At **2026-10-10T08:02:07Z**, IPO ordinary (`4773902_0`) reached complete outer

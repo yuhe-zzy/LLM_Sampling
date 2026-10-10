@@ -1,0 +1,20 @@
+{
+  "recorded_at_utc": "2026-10-10T10:00:29Z",
+  "heartbeat_at_utc": "2026-10-10T09:58:46.523Z",
+  "inspection_state": "BLOCKED_SSH_CONNECT_TIMEOUT",
+  "connection_attempts": 2,
+  "transport": "tmp/oracle2_remote.py using existing SSH credentials without echo",
+  "error": "socket.timeout: timed out in paramiko client.connect / sock.connect",
+  "failed_before_remote_commands": true,
+  "remote_commands_executed": 0,
+  "raw_ssh_transcript_saved": false,
+  "transcript_note": "The helper connects before its transcript-writing try/finally, so no remote transcript files were produced.",
+  "current_allocated_gpus": null,
+  "current_run_states": null,
+  "current_errors": null,
+  "last_successful_check_at_utc": "2026-10-10T08:02:07.567726+00:00",
+  "last_successful_record": "checkpoint60_status.json",
+  "actions": "No submission, cancellation, retry of experiments, dependency, concurrency, source, scientific-setting or timer changes.",
+  "requested_user_action": "Check UNC VPN and connectivity to Sycamore.",
+  "interpretation": "This is a monitoring connectivity failure, not evidence that experiments failed or that previous allocation/progress remains current."
+}

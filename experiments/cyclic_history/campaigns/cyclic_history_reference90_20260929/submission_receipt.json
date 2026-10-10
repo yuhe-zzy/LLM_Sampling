@@ -1,0 +1,14 @@
+{
+  "job_id": "4608669",
+  "submitted_at_utc": "2026-09-29T14:52:59.487190+00:00",
+  "run_ids": [
+    "ipo_reference90_a1_b100_s0",
+    "dpo_reference90_a1_b100_s0"
+  ],
+  "array": "0-1%2",
+  "gpu_per_task": 1,
+  "outer_updates": 100,
+  "scheduler_response": "4608669",
+  "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_reference90_20260929",
+  "source_git_commit": "2e73527d3508d0da85b90f86654d21d61ea40adc"
+}

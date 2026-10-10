@@ -1,0 +1,378 @@
+[
+  {
+    "run": "dpo_ordinary_calibrated_s0",
+    "beta": 0.8,
+    "measurements": [
+      {
+        "epochs": 0,
+        "error_rms": 0.41153916931674267,
+        "normalized_error": 1.0,
+        "objective": 0.6902604379499339,
+        "excess_objective": 0.028436169150387863
+      },
+      {
+        "epochs": 10,
+        "error_rms": 0.2907665415698091,
+        "normalized_error": 0.7065343064490163,
+        "objective": 0.6818101371904343,
+        "excess_objective": 0.01998586839088821
+      },
+      {
+        "epochs": 20,
+        "error_rms": 0.42819379413863995,
+        "normalized_error": 1.040469112210019,
+        "objective": 0.7037827344591022,
+        "excess_objective": 0.04195846565955615
+      },
+      {
+        "epochs": 30,
+        "error_rms": 0.4503439726913708,
+        "normalized_error": 1.0942918834167201,
+        "objective": 0.7106211369327246,
+        "excess_objective": 0.048796868133178684
+      },
+      {
+        "epochs": 40,
+        "error_rms": 0.49116217400476,
+        "normalized_error": 1.193476127242545,
+        "objective": 0.7200566881642522,
+        "excess_objective": 0.058232419364706155
+      },
+      {
+        "epochs": 50,
+        "error_rms": 0.48956765454922285,
+        "normalized_error": 1.1896016006496462,
+        "objective": 0.7197858576441839,
+        "excess_objective": 0.05796158884463785
+      },
+      {
+        "epochs": 60,
+        "error_rms": 0.47972626514483563,
+        "normalized_error": 1.165687985280479,
+        "objective": 0.7168720513115275,
+        "excess_objective": 0.05504778251198169
+      }
+    ],
+    "prompts_with_larger_error_60_vs_10": 6,
+    "per_prompt": [
+      {
+        "prompt_id": 54,
+        "error10": 0.4067055173115593,
+        "error30": 0.6176697190004198,
+        "error60": 0.6383476391930321
+      },
+      {
+        "prompt_id": 251,
+        "error10": 0.14884387415153516,
+        "error30": 0.24465595747456928,
+        "error60": 0.31121484537084376
+      },
+      {
+        "prompt_id": 612,
+        "error10": 0.24230752011748008,
+        "error30": 0.42151985959938965,
+        "error60": 0.5152553673996708
+      },
+      {
+        "prompt_id": 737,
+        "error10": 0.43362330524115633,
+        "error30": 0.6013516390588952,
+        "error60": 0.5618314635502566
+      },
+      {
+        "prompt_id": 867,
+        "error10": 0.10099825789515905,
+        "error30": 0.31549078866788155,
+        "error60": 0.37298233573565526
+      },
+      {
+        "prompt_id": 945,
+        "error10": 0.2505283621530681,
+        "error30": 0.3696600053684871,
+        "error60": 0.39525034919193314
+      }
+    ]
+  },
+  {
+    "run": "dpo_stable_calibrated_s0",
+    "beta": 1.6,
+    "measurements": [
+      {
+        "epochs": 0,
+        "error_rms": 0.1673331264005714,
+        "normalized_error": 1.0,
+        "objective": 0.6629723370223791,
+        "excess_objective": 0.02380928594828084
+      },
+      {
+        "epochs": 10,
+        "error_rms": 0.23074257972539255,
+        "normalized_error": 1.3789414247423313,
+        "objective": 0.672411539131977,
+        "excess_objective": 0.03324848805787887
+      },
+      {
+        "epochs": 20,
+        "error_rms": 0.21636365413015118,
+        "normalized_error": 1.2930114842425626,
+        "objective": 0.6699675662530497,
+        "excess_objective": 0.030804515178951497
+      },
+      {
+        "epochs": 30,
+        "error_rms": 0.24654867581604356,
+        "normalized_error": 1.4734002831324715,
+        "objective": 0.6769796288280401,
+        "excess_objective": 0.037816577753941906
+      },
+      {
+        "epochs": 40,
+        "error_rms": 0.2080184830825858,
+        "normalized_error": 1.243139882443955,
+        "objective": 0.6631789225950439,
+        "excess_objective": 0.02401587152094568
+      },
+      {
+        "epochs": 50,
+        "error_rms": 0.2195168005329467,
+        "normalized_error": 1.311855011944587,
+        "objective": 0.667407166345647,
+        "excess_objective": 0.02824411527154889
+      },
+      {
+        "epochs": 60,
+        "error_rms": 0.23543573123470166,
+        "normalized_error": 1.4069881815935383,
+        "objective": 0.6718262070490698,
+        "excess_objective": 0.03266315597497166
+      }
+    ],
+    "prompts_with_larger_error_60_vs_10": 3,
+    "per_prompt": [
+      {
+        "prompt_id": 54,
+        "error10": 0.24586859876249953,
+        "error30": 0.21372632136874856,
+        "error60": 0.2099516165102627
+      },
+      {
+        "prompt_id": 251,
+        "error10": 0.1954139492353481,
+        "error30": 0.2060373167588743,
+        "error60": 0.19341994452827557
+      },
+      {
+        "prompt_id": 612,
+        "error10": 0.2522295145244117,
+        "error30": 0.31740602412072594,
+        "error60": 0.25017373116407565
+      },
+      {
+        "prompt_id": 737,
+        "error10": 0.338395228425306,
+        "error30": 0.3309707226671432,
+        "error60": 0.35544736554995904
+      },
+      {
+        "prompt_id": 867,
+        "error10": 0.12496856251364724,
+        "error30": 0.12884173844307129,
+        "error60": 0.1405688596214309
+      },
+      {
+        "prompt_id": 945,
+        "error10": 0.16451944852151007,
+        "error30": 0.22293224073893442,
+        "error60": 0.20591166868171287
+      }
+    ]
+  },
+  {
+    "run": "ipo_ordinary_calibrated_s0",
+    "beta": 0.2,
+    "measurements": [
+      {
+        "epochs": 0,
+        "error_rms": 0.35976555353384093,
+        "normalized_error": 1.0,
+        "objective": 6.204343626833379,
+        "excess_objective": 0.2897340850488555
+      },
+      {
+        "epochs": 10,
+        "error_rms": 0.25687064943553206,
+        "normalized_error": 0.7139945637162559,
+        "objective": 6.142576705034155,
+        "excess_objective": 0.2279671632496306
+      },
+      {
+        "epochs": 20,
+        "error_rms": 0.3739666250298443,
+        "normalized_error": 1.0394731273089144,
+        "objective": 6.378191614511074,
+        "excess_objective": 0.46358207272655133
+      },
+      {
+        "epochs": 30,
+        "error_rms": 0.424878343154871,
+        "normalized_error": 1.1809867258870443,
+        "objective": 6.495500702227414,
+        "excess_objective": 0.5808911604428894
+      },
+      {
+        "epochs": 40,
+        "error_rms": 0.41462497338677406,
+        "normalized_error": 1.1524865827594382,
+        "objective": 6.47355805279533,
+        "excess_objective": 0.5589485110108049
+      },
+      {
+        "epochs": 50,
+        "error_rms": 0.4173306125188175,
+        "normalized_error": 1.1600071447072593,
+        "objective": 6.472820337636462,
+        "excess_objective": 0.5582107958519386
+      },
+      {
+        "epochs": 60,
+        "error_rms": 0.4275398446771363,
+        "normalized_error": 1.1883846034662688,
+        "objective": 6.5011813084842265,
+        "excess_objective": 0.5865717666997027
+      }
+    ],
+    "prompts_with_larger_error_60_vs_10": 6,
+    "per_prompt": [
+      {
+        "prompt_id": 54,
+        "error10": 0.32919833175799873,
+        "error30": 0.5872444084318766,
+        "error60": 0.6146813405690499
+      },
+      {
+        "prompt_id": 251,
+        "error10": 0.14217111325363943,
+        "error30": 0.35864374652893477,
+        "error60": 0.2607296204697252
+      },
+      {
+        "prompt_id": 612,
+        "error10": 0.13245867022939503,
+        "error30": 0.3818240683048013,
+        "error60": 0.4028919425680459
+      },
+      {
+        "prompt_id": 737,
+        "error10": 0.4419111297743129,
+        "error30": 0.5670945332558157,
+        "error60": 0.5579786064791459
+      },
+      {
+        "prompt_id": 867,
+        "error10": 0.12025921945964105,
+        "error30": 0.2663672057013223,
+        "error60": 0.2737124122040335
+      },
+      {
+        "prompt_id": 945,
+        "error10": 0.20004497086948217,
+        "error30": 0.26704117599119986,
+        "error60": 0.3199192085762187
+      }
+    ]
+  },
+  {
+    "run": "ipo_stable_calibrated_s0",
+    "beta": 0.4,
+    "measurements": [
+      {
+        "epochs": 0,
+        "error_rms": 0.15017461329996834,
+        "normalized_error": 1.0,
+        "objective": 1.4689835005787488,
+        "excess_objective": 0.07206022583564142
+      },
+      {
+        "epochs": 10,
+        "error_rms": 0.19423764731853688,
+        "normalized_error": 1.2934120025370348,
+        "objective": 1.4829188281083443,
+        "excess_objective": 0.08599555336523683
+      },
+      {
+        "epochs": 20,
+        "error_rms": 0.2425864550046328,
+        "normalized_error": 1.61536260805996,
+        "objective": 1.5305548373706959,
+        "excess_objective": 0.13363156262758835
+      },
+      {
+        "epochs": 30,
+        "error_rms": 0.19678706911251367,
+        "normalized_error": 1.3103883858148424,
+        "objective": 1.4905836142977245,
+        "excess_objective": 0.09366033955461676
+      },
+      {
+        "epochs": 40,
+        "error_rms": 0.225640610618081,
+        "normalized_error": 1.5025216690078773,
+        "objective": 1.5062549576432709,
+        "excess_objective": 0.10933168290016342
+      },
+      {
+        "epochs": 50,
+        "error_rms": 0.21093397054040766,
+        "normalized_error": 1.4045914013380858,
+        "objective": 1.497570085654395,
+        "excess_objective": 0.10064681091128735
+      },
+      {
+        "epochs": 60,
+        "error_rms": 0.21966923825217102,
+        "normalized_error": 1.4627588073983562,
+        "objective": 1.5057178322713913,
+        "excess_objective": 0.108794557528284
+      }
+    ],
+    "prompts_with_larger_error_60_vs_10": 4,
+    "per_prompt": [
+      {
+        "prompt_id": 54,
+        "error10": 0.20942734690934875,
+        "error30": 0.2080705406367381,
+        "error60": 0.23179323825948203
+      },
+      {
+        "prompt_id": 251,
+        "error10": 0.13587795344723813,
+        "error30": 0.2500353600738304,
+        "error60": 0.2163265411761189
+      },
+      {
+        "prompt_id": 612,
+        "error10": 0.15018687434779945,
+        "error30": 0.12129114848400976,
+        "error60": 0.20401813821781026
+      },
+      {
+        "prompt_id": 737,
+        "error10": 0.2438176101983903,
+        "error30": 0.2521185225102362,
+        "error60": 0.2922677611897492
+      },
+      {
+        "prompt_id": 867,
+        "error10": 0.13721462729552228,
+        "error30": 0.12934082185137225,
+        "error60": 0.1160929522894893
+      },
+      {
+        "prompt_id": 945,
+        "error10": 0.25142786586907667,
+        "error30": 0.1775824652400736,
+        "error60": 0.2201834443405656
+      }
+    ]
+  }
+]

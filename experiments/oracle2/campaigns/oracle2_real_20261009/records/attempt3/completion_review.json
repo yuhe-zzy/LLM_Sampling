@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-10-09T17:42:45.146591+00:00",
+  "job": "4773843|COMPLETED|0:0|billing=2,cpu=8,gres/gpu:h100=2,gres/gpu=2,mem=256G,node=1|00:18:07",
+  "source_commit": "55e835ec5b9015404a7068c7ebf940af1feb020f",
+  "allocated_gpus": 0,
+  "errors": [],
+  "scoring_and_memory_check": "PASSED_FOR_THIS_CANDIDATE_BANK",
+  "experiment_readiness": "HOLD_MISSING_EVALUATION_CYCLIC_GROUP_AND_ONLY_ONE_TRAIN_CYCLIC_PROMPT",
+  "training_approved": false,
+  "next_phase_submitted": false,
+  "audit_sha256": "c12650e55bf75bb581eb6fae36eed2d4b8a65bfec331ed76968676c9b90fb8a1",
+  "score_manifest_sha256": "12fd91a04074f2751a6b63e707c852f0d93bdade456f2c8a0f22b2c05de22e6b",
+  "robust_cycle_rule": "all three directed edges P > 0.52; no threshold changed",
+  "groups": {
+    "calibration": {
+      "total": 100,
+      "cyclic": 0,
+      "transitive": 81,
+      "ambiguous": 19
+    },
+    "train": {
+      "total": 500,
+      "cyclic": 1,
+      "transitive": 436,
+      "ambiguous": 63
+    },
+    "evaluation": {
+      "total": 200,
+      "cyclic": 0,
+      "transitive": 160,
+      "ambiguous": 40
+    }
+  },
+  "note": "Numerical scoring passed; insufficient cyclic data is not a code/OOM failure. Await user discussion."
+}

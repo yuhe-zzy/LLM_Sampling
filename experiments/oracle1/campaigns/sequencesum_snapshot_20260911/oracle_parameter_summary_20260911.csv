@@ -1,0 +1,17 @@
+method,alpha,lambda_value,beta,status,latest_iter,entropy_initial,entropy_latest,latest_wr_iter,latest_wr,source_file,wr_0,wr_20,wr_40,wr_60,wr_80
+dpo,0.8,0.5,1,complete,80.0,1.5583518316246514,0.1619429204135365,80.0,0.85475,dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv,0.4845,0.848,0.885625,0.8925,0.85475
+dpo,0.9,0.5,1,complete,80.0,1.558304398571417,0.0828903774821644,80.0,0.9155,dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv,0.486125,0.89375,0.92325,0.930125,0.9155
+dpo,0.95,0.5,1,complete,80.0,1.5527117880737025,0.0334480959629053,80.0,0.869375,dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv,0.484875,0.907875,0.92725,0.92025,0.869375
+dpo,0.99,0.5,1,complete,80.0,1.5520299348997617,0.0059743626212541,80.0,0.87,dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv,0.476375,0.90625,0.92475,0.910875,0.87
+dpo,0.8,0.9,1,complete,80.0,1.5569997481993374,0.2090536127216832,80.0,0.859,dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv,0.47725,0.81225,0.8315,0.86,0.859
+dpo,0.9,0.9,1,complete,80.0,1.5494587013130283,0.0620724131743368,80.0,0.917625,dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv,0.482,0.865125,0.897125,0.9045,0.917625
+dpo,0.95,0.9,1,pending_rerun,,,,,,,,,,,
+dpo,0.99,0.9,1,pending_rerun,,,,,,,,,,,
+ipo,0.8,0.5,1,complete,80.0,1.5588797627163202,1.257036446513223,80.0,0.54775,ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.487,0.551125,0.535125,0.5505,0.54775
+ipo,0.9,0.5,1,pending_rerun,,,,,,,,,,,
+ipo,0.95,0.5,1,running,65.0,1.5511373606945045,0.6226577280244175,60.0,0.698875,ipo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.479,0.635875,0.704,0.698875,
+ipo,0.99,0.5,1,complete,80.0,1.5610295542404218,0.2995653031580157,80.0,0.844875,ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.47725,0.67225,0.77575,0.82275,0.844875
+ipo,0.8,0.9,1,complete,80.0,1.5581278884759069,1.2559911650107434,80.0,0.547,ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.479125,0.563125,0.554,0.552,0.547
+ipo,0.9,0.9,1,complete,80.0,1.5583860425604574,0.938655710204759,80.0,0.6195,ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.477875,0.6095,0.610875,0.6105,0.6195
+ipo,0.95,0.9,1,complete,80.0,1.565141004270547,0.6099858715672726,80.0,0.716,ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.486375,0.649,0.690375,0.7085,0.716
+ipo,0.99,0.9,1,complete,80.0,1.5444795221176435,0.2779144507094886,80.0,0.83225,ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv,0.487,0.68325,0.778125,0.8145,0.83225

@@ -1,0 +1,23 @@
+{
+  "eligible_panels": 969,
+  "rejected": {
+    "policy_length": 31
+  },
+  "requested": {
+    "calibration": 100,
+    "train": 500,
+    "evaluation": 200
+  },
+  "selection": "seeded shuffle after content/length checks; before reward scoring",
+  "plan_sha256": "762a6026114f225f4b18bfd24410ed34d8166bc17a3d0e1481e1d97148de38b0",
+  "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+  "source_sha256": "83d94b6ffcb962a95e8e325371a24b3c1f9d3bafe3dfe349c9dfbac3a361549e",
+  "raw_source_sha256": "9d12c5774025b75a47bafc27259baa92e4569a6955cc876b83442cafc00f4ec9",
+  "files_sha256": {
+    "calibration.jsonl": "e17dcf486a5d954b024a22beed3ee9ceddf1de9d17281b205054d432d143f459",
+    "candidate_records.jsonl": "92e1a0efdd52e53c6de91be565d6408b315401bdd45615029b650f36aa2c9f21",
+    "evaluation.jsonl": "f392beb42de238af5449947c256258f4ee0284ce62a245c81830a2f6771d953e",
+    "train.jsonl": "2a1bf8256c99caafe69e80d8d6a90f40c9e570b2d9ead65272aef8660fc5b3da"
+  },
+  "state": "PREPARED_REAL_UNSCORED"
+}

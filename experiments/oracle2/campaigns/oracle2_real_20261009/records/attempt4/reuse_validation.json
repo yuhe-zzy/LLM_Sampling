@@ -1,0 +1,13 @@
+{
+  "state": "PASSED",
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "audit_source_commit": "55e835ec5b9015404a7068c7ebf940af1feb020f",
+  "audit_job": "4773843|COMPLETED|0:0",
+  "audit_sha256": "c12650e55bf75bb581eb6fae36eed2d4b8a65bfec331ed76968676c9b90fb8a1",
+  "plan_sha256": "4b9f040f086b3a4dae0eb7588bac26a49190a57445563f68188cb0a012c0791c",
+  "audit_review_sha256": "cff27e9bb45f421e656bd02a4c1b097bd92b0cb106d02dd8e8dd811dc101009d",
+  "scores_reused": true,
+  "candidate_rescoring": false,
+  "settings_changed": false,
+  "six_config_checks": "PASSED"
+}

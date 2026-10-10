@@ -1,0 +1,17 @@
+{
+  "job_id": "4605560",
+  "submitted_at_utc": "2026-09-29T01:18:53.872246+00:00",
+  "run_ids": [
+    "ipo_ordinary_b100_s0",
+    "ipo_reference_b100_s0",
+    "ipo_feedback_b100_s0",
+    "dpo_ordinary_b100_s0",
+    "dpo_reference_b100_s0",
+    "dpo_feedback_b100_s0"
+  ],
+  "array": "0-5%6",
+  "gpu_per_task": 1,
+  "outer_updates": 100,
+  "scheduler_response": "4605560",
+  "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_stage_b100_20260929"
+}

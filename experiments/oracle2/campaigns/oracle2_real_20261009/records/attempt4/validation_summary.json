@@ -1,0 +1,146 @@
+[
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/oracle2",
+      "-p",
+      "test_oracle2.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests": 37,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/cyclic_history",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests": 76,
+    "skipped": false
+  },
+  {
+    "command": [
+      "bash",
+      "-n",
+      "experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/train_oracle2.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/plan.json",
+      "--review",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/audit_review.json",
+      "--run-id",
+      "ipo_ordinary",
+      "--source-commit",
+      "23401de58b27ef2f7b1ea645551f37602a3c1bb8"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/train_oracle2.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/plan.json",
+      "--review",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/audit_review.json",
+      "--run-id",
+      "ipo_reference",
+      "--source-commit",
+      "23401de58b27ef2f7b1ea645551f37602a3c1bb8"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/train_oracle2.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/plan.json",
+      "--review",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/audit_review.json",
+      "--run-id",
+      "ipo_feedback",
+      "--source-commit",
+      "23401de58b27ef2f7b1ea645551f37602a3c1bb8"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/train_oracle2.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/plan.json",
+      "--review",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/audit_review.json",
+      "--run-id",
+      "dpo_ordinary",
+      "--source-commit",
+      "23401de58b27ef2f7b1ea645551f37602a3c1bb8"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/train_oracle2.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/plan.json",
+      "--review",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/audit_review.json",
+      "--run-id",
+      "dpo_reference",
+      "--source-commit",
+      "23401de58b27ef2f7b1ea645551f37602a3c1bb8"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  },
+  {
+    "command": [
+      "/work/users/y/u/yuhe32/h100env312/bin/python",
+      "experiments/oracle2/train_oracle2.py",
+      "--plan",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/plan.json",
+      "--review",
+      "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/audit_review.json",
+      "--run-id",
+      "dpo_feedback",
+      "--source-commit",
+      "23401de58b27ef2f7b1ea645551f37602a3c1bb8"
+    ],
+    "exit_code": 0,
+    "tests": null,
+    "skipped": false
+  }
+]

@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paper B Validation Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column (~72ch) beside a sticky contents rail on wide screens; wide tables, the phase diagram and the schedule scroll inside their own frames. */
+:root {
+  --paper: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #1b2130;
+  --ink-2: #4b5364;
+  --ink-3: #6b7383;
+  --rule: #dde1e8;
+  --accent: #2957a4;
+  --accent-soft: #e7eef9;
+  --stable: #2a78d6;
+  --stable-bg: #e5effb;
+  --unstable: #eb6834;
+  --unstable-bg: #fde9df;
+  --curve-nu: #1baf7a;
+  --curve-k: #eda100;
+  --bar: #c9d6ee;
+  --bar-strong: #2957a4;
+  --gate: #b3261e;
+  --display: "Spectral", "Iowan Old Style", Georgia, serif;
+  --body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.25rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11141a; --surface: #181c24; --ink: #e6e9ef; --ink-2: #aab2c0; --ink-3: #8a93a3;
+    --rule: #2a303b; --accent: #86a9ea; --accent-soft: #1b2638; --stable: #3987e5; --stable-bg: #15253b;
+    --unstable: #d95926; --unstable-bg: #37201a; --curve-nu: #199e70; --curve-k: #c98500;
+    --bar: #28344a; --bar-strong: #86a9ea; --gate: #f28b82; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11141a; --surface: #181c24; --ink: #e6e9ef; --ink-2: #aab2c0; --ink-3: #8a93a3;
+  --rule: #2a303b; --accent: #86a9ea; --accent-soft: #1b2638; --stable: #3987e5; --stable-bg: #15253b;
+  --unstable: #d95926; --unstable-bg: #37201a; --curve-nu: #199e70; --curve-k: #c98500;
+  --bar: #28344a; --bar-strong: #86a9ea; --gate: #f28b82; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 var(--step-0)/1.6 var(--body);
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+  padding-block: 0;
+}
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+code, .num { font-family: var(--mono); font-size: 0.92em; }
+.num { font-variant-numeric: tabular-nums; }
+
+.page { max-width: 1120px; margin-inline: auto; padding-block: 40px 72px; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1000px) { .page { grid-template-columns: 200px minmax(0, 1fr); } }
+
+.rail { display: none; }
+@media (min-width: 1000px) {
+  .rail { display: block; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+  .rail nav { display: grid; gap: 4px; font-size: var(--step--1); border-left: 1px solid var(--rule); padding-left: 14px; }
+  .rail nav a { color: var(--ink-2); text-decoration: none; padding-block: 2px; }
+  .rail nav a:hover { color: var(--accent); }
+  .rail .rail-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+}
+
+main { min-width: 0; display: grid; gap: 56px; }
+main > section { display: grid; gap: 18px; min-width: 0; }
+.prose { max-width: 72ch; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+h1 { font-size: var(--step-3); line-height: 1.12; letter-spacing: -0.01em; }
+h2 { font-size: var(--step-2); line-height: 1.2; }
+h3 { font-size: var(--step-1); line-height: 1.3; }
+p { margin: 0; }
+.eyebrow { font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--ink-2); max-width: 62ch; }
+
+header.top { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: var(--step--1); color: var(--ink-2); }
+.meta span strong { color: var(--ink); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.notice { max-width: 72ch; font-size: var(--step--1); color: var(--ink-2); border-left: 3px solid var(--accent); padding: 8px 14px; background: var(--surface); }
+
+.criteria { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.criterion { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.criterion .k { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.04em; }
+.criterion h3 { font-size: 1.05rem; }
+.criterion p { font-size: 0.94rem; color: var(--ink-2); }
+
+ul.tight, ol.tight { margin: 0; padding-left: 1.25em; display: grid; gap: 6px; max-width: 72ch; }
+ul.tight li::marker { color: var(--ink-3); }
+
+.frame { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); background: var(--surface); }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+tbody th { font-weight: 600; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+
+.spec { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
+.spec > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 10px 16px; border-bottom: 1px solid var(--rule); }
+.spec > div:last-child { border-bottom: 0; }
+@media (min-width: 640px) { .spec > div { grid-template-columns: 170px minmax(0, 1fr); gap: 16px; } }
+.spec dt { font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; padding-top: 2px; }
+.spec dd { margin: 0; font-size: 0.95rem; }
+
+figure { margin: 0; display: grid; gap: 10px; }
+figure .frame { padding: 8px; }
+figure svg { display: block; width: 100%; min-width: 520px; height: auto; }
+figcaption { font-size: var(--step--1); color: var(--ink-2); max-width: 80ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: var(--step--1); color: var(--ink-2); padding: 4px 8px 2px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 14px; height: 14px; display: inline-block; }
+.sw.line { height: 0; border-top: 2px solid var(--ink); width: 18px; }
+.sw.dash-nu { height: 0; border-top: 2px dashed var(--curve-nu); width: 18px; }
+.sw.dash-k { height: 0; border-top: 2px dashed var(--curve-k); width: 18px; }
+.sw.dot-s { border-radius: 50%; border: 2px solid var(--stable); background: var(--surface); width: 12px; height: 12px; }
+.sw.dot-u { border-radius: 50%; background: var(--unstable); width: 12px; height: 12px; }
+.sw.dia { width: 11px; height: 11px; background: var(--ink); transform: rotate(45deg); }
+
+.exp { display: grid; gap: 14px; }
+.exp-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; display: grid; gap: 12px; min-width: 0; }
+.exp-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.exp-head .id { font-family: var(--mono); font-weight: 500; color: var(--accent); }
+.tier { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink-2); }
+.tier.t1 { border-color: var(--accent); color: var(--accent); }
+.exp-card dl { margin: 0; display: grid; gap: 8px; }
+.exp-card dl > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+@media (min-width: 640px) { .exp-card dl > div { grid-template-columns: 110px minmax(0, 1fr); gap: 14px; } }
+.exp-card dt { font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; padding-top: 3px; }
+.exp-card dd { margin: 0; font-size: 0.95rem; color: var(--ink); }
+.gate { color: var(--gate); font-weight: 600; }
+
+.matrix td.cell { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.matrix td.cell span.tag { display: block; font-family: var(--body); font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; margin-top: 1px; }
+.matrix td.s { background: var(--stable-bg); }
+.matrix td.s span.tag { color: var(--stable); }
+.matrix td.u { background: var(--unstable-bg); }
+.matrix td.u span.tag { color: var(--unstable); }
+.matrix td.na { color: var(--ink-3); text-align: center; }
+.matrix td.star { box-shadow: inset 0 0 0 2px var(--unstable); }
+
+.gantt { min-width: 760px; display: grid; grid-template-columns: 190px repeat(14, minmax(0, 1fr)); font-size: 0.8rem; }
+.gantt .day { text-align: center; padding: 6px 0; color: var(--ink-3); border-bottom: 1px solid var(--rule); line-height: 1.25; }
+.gantt .day.we { background: var(--paper); }
+.gantt .row-label { padding: 8px 10px 8px 12px; border-bottom: 1px solid var(--rule); color: var(--ink); font-weight: 500; }
+.gantt .cell { border-bottom: 1px solid var(--rule); position: relative; }
+.gantt .cell.we { background: var(--paper); }
+.gantt .bar { position: absolute; top: 9px; bottom: 9px; left: 3px; right: 3px; background: var(--bar); border-radius: 3px; }
+.gantt .bar.core { background: var(--bar-strong); }
+.gantt .bar.stretch { background: transparent; border: 1.5px dashed var(--bar-strong); }
+.gantt .mark { position: absolute; top: 3px; right: 2px; font-family: var(--mono); font-size: 0.68rem; font-weight: 500; color: var(--gate); background: var(--surface); padding: 0 3px; border-radius: 3px; line-height: 1.4; }
+.gantt .corner { border-bottom: 1px solid var(--rule); }
+
+.cols-2 { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.footer { font-size: var(--step--1); color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 18px; display: grid; gap: 6px; max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+.where { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.where .criterion ol, .where .criterion ul { margin: 4px 0 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 0.92rem; color: var(--ink-2); }
+.stage td, .stage th { white-space: normal; }
+</style>
+</head>
+<body>
+<div class="page">
+  <aside class="rail" aria-label="Contents">
+    <div class="rail-label">Contents</div>
+    <nav>
+      <a href="#why">Why these experiments</a>
+      <a href="#start">Where we start</a>
+      <a href="#success">Success criteria</a>
+      <a href="#testbed">Testbed</a>
+      <a href="#phase1">Phase 1 micropilot</a>
+      <a href="#phase">Phase diagram</a>
+      <a href="#experiments">Phase 2 experiments</a>
+      <a href="#matrix">Stabilizer predictions</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#compute">Compute</a>
+      <a href="#risks">Risks</a>
+      <a href="#decisions">Decisions needed</a>
+      <a href="#iterations">How the plan changed</a>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="top">
+      <div class="eyebrow">Paper B · JMLR-B-v3 Section 7 · Iterative PsiPO</div>
+      <h1>Paper B validation plan</h1>
+      <p class="lede">Two weeks of neural experiments on 2 × H100 that test the adaptation–stability frontier, the two history-aware stabilizers, and when either matters in practice. Window: Wed 30 Sep – Tue 13 Oct 2026.</p>
+      <div class="meta">
+        <span class="chip">Proposed</span>
+        <span><strong>Drafted</strong> 29 Sep 2026, revised the same day</span>
+        <span><strong>For</strong> Fan Yao, Yu He</span>
+        <span><strong>Source</strong> <code>plans/2026-09-29-two-week-experiment-plan.md</code></span>
+      </div>
+      <p class="notice">No experiment in this plan has run. Run-time predictions come from the actual IPO and DPO operators in <code>cyclic_history/population_calibration.py</code>; the stabilizer table and phase diagram are a uniform-reference design illustration from <code>hodge/population.py</code>, recomputed per panel before preregistration. Every run time is an estimate that the first measured runs replace.</p>
+    </header>
+
+    <section id="why">
+      <h2>Why these experiments</h2>
+      <p class="prose">A JMLR reviewer will ask whether iterative preference optimization of a real language model obeys the paper's formulas, or whether the results stay inside the finite-response model. The answer has to be quantitative: predictions registered before the runs, computed from the theory with no fitted parameters, and then checked on LoRA fine-tuning with the operators the training code actually implements.</p>
+    </section>
+
+    <section id="start">
+      <h2>Where we start</h2>
+      <div class="where">
+        <div class="criterion"><div class="k">25 Sep · Hodge diagnostics</div><h3>Curated data are negative controls</h3><p>HelpSteer, UltraFeedback, MT-Bench and Arena panels sit inside the frontier, so they cannot show instability on their own.</p></div>
+        <div class="criterion"><div class="k">26 Sep · Fan's review</div><h3>Four constraints</h3>
+          <ol>
+            <li>DPO predictions use the actual pairwise BT optimizer, not entrywise logit(P).</li>
+            <li>The raw sampler 0.2 · Unif + 0.8 · softmax(sequence sum) stays; a relative-to-initial sampler would be a different protocol.</li>
+            <li>The current κ arm is <em>oracle-assisted feedback extrapolation</em>, distinct from the two-sampler estimator.</li>
+            <li>Beyond the frontier the claim is generic nonconvergence with an oscillation signature, not a periodic cycle.</li>
+          </ol></div>
+        <div class="criterion"><div class="k">28 Sep · Yu He's calibration</div><h3>Actual operators and a staged micropilot</h3><p>Actual IPO/BT fixed points, Jacobians and exact trajectories; a balanced soft four-cycle; a 10-arm micropilot on six selected panels, ready after approval. Bottleneck: only 8 of 500 existing panels have every initial raw probability ≥ 0.005.</p></div>
+      </div>
+      <p class="notice">Correction to the 25 Sep diagnostics: “the pilot is predicted to converge” holds for IPO only (radius 0.929 with a flat reference). The actual DPO operator predicts instability at the same point (radius 1.289), and the prepared ν = 0.45 and κ = 0.25 do not stabilize it (1.021 and 1.292).</p>
+    </section>
+
+    <section id="success">
+      <h2>Success criteria</h2>
+      <p class="prose">Four figures, each with preregistered predictions and at least two seeds per cell. A failed prediction is reported with its diagnosis: inner-update error (relaxation h, fixed-point residuals) or accessible modes under parameter sharing.</p>
+      <div class="criteria">
+        <div class="criterion"><div class="k">E1 · Adaptation</div><h3>Horizon collapse</h3><p>Neural limit points equal β u / (1 − α); the approach follows the discounted horizon M<sub>T</sub>.</p></div>
+        <div class="criterion"><div class="k">E2 · Frontier</div><h3>Panel-level phase diagram</h3><p>Runs show the preregistered oscillation signature exactly when the predicted index exceeds one; measured growth and rotation track the predicted radius and argument. Every panel is a point with its own realized gain.</p></div>
+        <div class="criterion"><div class="k">E3 · Stabilizers</div><h3>Prediction matrix</h3><p>Predicted stable and unstable cells are confirmed, including extrapolation that destabilizes a stable run; stabilized runs approach the computed π*(α); maximal lag costs about twice the rounds.</p></div>
+        <div class="criterion"><div class="k">E4 · Relevance</div><h3>When it matters</h3><p>Curated data stay inside the frontier, persona heterogeneity crosses it, and role-aligned and mixed orientations are compared under shared LoRA parameters.</p></div>
+      </div>
+    </section>
+
+    <section id="testbed">
+      <h2>Testbed: panel-restricted iterative PsiPO</h2>
+      <p class="prose">The paper's finite-response model, run with a real language model: the calibrated <code>experiments/cyclic_history</code> protocol plus three additions.</p>
+      <dl class="spec">
+        <div><dt>Frozen environment</dt><dd>Qwen2.5-1.5B, sequence sums including EOS; raw sampler <code>μ = 0.2 · Unif + 0.8 · softmax(sequence sum)</code>; full-pair soft-label mode; cached log-score reference <code>(1−α) s_0 + (α−ν) s_t + ν s_{t−1}</code>; optimizer reset each round; fixed-point residuals and per-prompt cyclic-mode amplitude and phase logged.</dd></div>
+        <div><dt>Phase 0 panels</dt><dd>For 256 training and 64 held-out prompts, sample 24 candidates per prompt from the base model (temperature 1, ≤ 192 new tokens), score them, and keep K = 4 whose initial raw panel probabilities are all ≥ 0.05, preferring near-equal lengths; roles by ascending length. This keeps the raw sampler and removes the 8-of-500 bottleneck. If fewer than 128 prompts qualify, lower the threshold toward 0.005 and report it.</dd></div>
+        <div><dt>Predictions</dt><dd>Per panel and objective, <code>population_calibration.py</code> gives the fixed point, realized gain, ordinary and history radii, and exact population trajectories used as shadow runs. Failed roots stay “unresolved”.</dd></div>
+        <div><dt>Relaxation h</dt><dd><code>h_t = ⟨Δx_t, T(x_t) − x_t⟩ / ‖T(x_t) − x_t‖²</code>. If h ≠ 1, the relaxed map <code>x + h (T(x) − x)</code> is reported beside the exact one.</dd></div>
+      </dl>
+      <div class="frame">
+        <table>
+          <thead><tr><th>Oracle</th><th>Construction</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><th>O1</th><td>Bradley–Terry from a scalar score; C = 0 under the logit link, where actual DPO equals entrywise-logit PsiPO</td><td>E1 horizon, E3 cost, E5 labels</td></tr>
+            <tr><th>O2</th><td>Calibrated balanced soft four-cycle over fixed roles: adjacent 0.8 / 0.2, opposite pairs 0.5, zero directional component</td><td>Phase 1, E2, E3</td></tr>
+            <tr><th>O2m</th><td>O2 with the orientation reversed on half the prompts (mixed orientation)</td><td>Stage C, E4</td></tr>
+            <tr><th>O3</th><td>O2 plus a potential, so the fixed point carries directional forcing</td><td>E2 gain-collapse breakdown, E3 same target</td></tr>
+            <tr><th>O4</th><td>Persona mixture: an LLM judge under three personas with cyclic style preferences, over concise / step-by-step / bulleted responses</td><td>E4 realistic heterogeneity, E6</td></tr>
+            <tr><th>O5</th><td>UltraFeedback aspect mixture</td><td>E4 curated control</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="prose" style="font-size:var(--step--1);color:var(--ink-2)">Metrics, all computed by script: log-amplitude slope and rotation of the cyclic mode, preregistered oscillating / converged / concentrated labels, step norm, fixed-point residual, KL to the computed π*(α), rounds to 90% of the terminal log-odds, last-iterate exploitability, and held-out quality.</p>
+    </section>
+
+    <section id="phase1">
+      <h2>Phase 1: calibrated micropilot</h2>
+      <p class="prose">Prepared by Yu He on 28 Sep; runs only after approval. Six panels (54, 251, 612, 737, 867, 945), α = 0.9, λ = 0.8, 30 rounds, 10 inner epochs, one seed.</p>
+      <div class="frame">
+        <table class="stage">
+          <thead><tr><th>Stage</th><th>Arms</th><th>Predicted radius</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><th>A · 4 runs</th><td>Per objective: ordinary at IPO β<sub>train</sub> = 0.2 / DPO 0.8, and a stable control at 0.4 / 1.6</td><td class="num">1.05–1.08 vs &lt; 1</td><td>Does the unstable arm show the signature and the control not?</td></tr>
+            <tr><th>B · 4 runs</th><td>ν = 0.45 and oracle-assisted κ = 0.5 at the unstable β, per objective</td><td class="num">0.96 · 0.92–0.96</td><td>Do both interventions suppress it? Launched only if A passes</td></tr>
+            <tr><th>C · 2 runs</th><td>Mixed orientation, ordinary, per objective</td><td class="num">calibrated per panel</td><td>First look at shared-parameter behavior</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="prose"><span class="gate">G0</span> In Stage A, the unstable arms show the signature and the stable controls do not, for both objectives. If not, measure inner-update error and accessible modes before any scale-up. Phase 1 also gives the first measured wall time.</p>
+    </section>
+
+    <section id="phase">
+      <h2>Phase diagram of the design</h2>
+      <figure>
+        <div class="frame">
+          <div class="legend" aria-hidden="true">
+            <span><i class="sw line"></i>Ordinary frontier α² + γ² = 1</span>
+            <span><i class="sw dash-nu"></i>Lagged reference ν = α/2</span>
+            <span><i class="sw dash-k"></i>Best lagged sampling κ*(α)</span>
+            <span><i class="sw dot-s"></i>E2 target, predicted to converge</span>
+            <span><i class="sw dot-u"></i>E2 target, predicted not to converge</span>
+            <span><i class="sw dia"></i>E3 configuration</span>
+          </div>
+          <svg viewBox="0 0 640 420" role="img" aria-labelledby="pd-title pd-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="pd-title">Planned runs on the (alpha, gamma) phase diagram</title>
+<desc id="pd-desc">The ordinary frontier alpha squared plus gamma squared equals one, the lagged-reference boundary for nu equal alpha over two, and the best lagged-sampling boundary, with the twenty E2 cells and the five E3 configurations S1 to S5.</desc>
+<style>.g{stroke:var(--rule);stroke-width:1}.ax{stroke:var(--ink-3);stroke-width:1}.t{fill:var(--ink-2);font:11px var(--mono)}.at{fill:var(--ink-2);font:500 12px var(--body)}.lab{font:500 12px var(--body)}</style>
+<line class="g" x1="58" y1="18" x2="58" y2="368"/>
+<text class="t" x="58" y="386" text-anchor="middle">0.0</text>
+<line class="g" x1="169.6" y1="18" x2="169.6" y2="368"/>
+<text class="t" x="169.6" y="386" text-anchor="middle">0.2</text>
+<line class="g" x1="281.2" y1="18" x2="281.2" y2="368"/>
+<text class="t" x="281.2" y="386" text-anchor="middle">0.4</text>
+<line class="g" x1="392.8" y1="18" x2="392.8" y2="368"/>
+<text class="t" x="392.8" y="386" text-anchor="middle">0.6</text>
+<line class="g" x1="504.4" y1="18" x2="504.4" y2="368"/>
+<text class="t" x="504.4" y="386" text-anchor="middle">0.8</text>
+<line class="g" x1="616.0" y1="18" x2="616.0" y2="368"/>
+<text class="t" x="616.0" y="386" text-anchor="middle">1.0</text>
+<line class="g" x1="58" y1="368.0" x2="616" y2="368.0"/>
+<text class="t" x="50" y="372.0" text-anchor="end">0.0</text>
+<line class="g" x1="58" y1="318.0" x2="616" y2="318.0"/>
+<text class="t" x="50" y="322.0" text-anchor="end">0.2</text>
+<line class="g" x1="58" y1="268.0" x2="616" y2="268.0"/>
+<text class="t" x="50" y="272.0" text-anchor="end">0.4</text>
+<line class="g" x1="58" y1="218.0" x2="616" y2="218.0"/>
+<text class="t" x="50" y="222.0" text-anchor="end">0.6</text>
+<line class="g" x1="58" y1="168.0" x2="616" y2="168.0"/>
+<text class="t" x="50" y="172.0" text-anchor="end">0.8</text>
+<line class="g" x1="58" y1="118.0" x2="616" y2="118.0"/>
+<text class="t" x="50" y="122.0" text-anchor="end">1.0</text>
+<line class="g" x1="58" y1="68.0" x2="616" y2="68.0"/>
+<text class="t" x="50" y="72.0" text-anchor="end">1.2</text>
+<line class="g" x1="58" y1="18.0" x2="616" y2="18.0"/>
+<text class="t" x="50" y="22.0" text-anchor="end">1.4</text>
+<line class="ax" x1="58" y1="368" x2="616" y2="368"/><line class="ax" x1="58" y1="18" x2="58" y2="368"/>
+<text class="at" x="337.0" y="408" text-anchor="middle">reference refresh α</text>
+<text class="at" transform="translate(16 193.0) rotate(-90)" text-anchor="middle">realized cyclic gain γ</text>
+<path d="M58.0,118.0 L60.8,117.4 L63.6,116.7 L66.4,116.1 L69.2,115.5 L72.0,114.9 L74.8,114.3 L77.6,113.6 L80.4,113.0 L83.2,112.4 L86.0,111.8 L88.8,111.2 L91.6,110.6 L94.4,110.0 L97.3,109.4 L100.1,108.8 L102.9,108.2 L105.7,107.6 L108.5,107.0 L111.3,106.4 L114.1,105.8 L116.9,105.2 L119.7,104.6 L122.5,104.1 L125.3,103.5 L128.1,102.9 L130.9,102.3 L133.7,101.7 L136.5,101.2 L139.3,100.6 L142.1,100.1 L144.9,99.5 L147.7,98.9 L150.5,98.4 L153.3,97.8 L156.1,97.3 L158.9,96.7 L161.7,96.2 L164.5,95.7 L167.3,95.1 L170.1,94.6 L173.0,94.1 L175.8,93.6 L178.6,93.0 L181.4,92.5 L184.2,92.0 L187.0,91.5 L189.8,91.0 L192.6,90.5 L195.4,90.0 L198.2,89.5 L201.0,89.0 L203.8,88.5 L206.6,88.1 L209.4,87.6 L212.2,87.1 L215.0,86.7 L217.8,86.2 L220.6,85.8 L223.4,85.3 L226.2,84.9 L229.0,84.4 L231.8,84.0 L234.6,83.6 L237.4,83.2 L240.2,82.8 L243.0,82.4 L245.9,82.0 L248.7,81.6 L251.5,81.2 L254.3,80.8 L257.1,80.4 L259.9,80.1 L262.7,79.7 L265.5,79.4 L268.3,79.0 L271.1,78.7 L273.9,78.3 L276.7,78.0 L279.5,77.7 L282.3,77.4 L285.1,77.1 L287.9,76.8 L290.7,76.5 L293.5,76.3 L296.3,76.0 L299.1,75.8 L301.9,75.5 L304.7,75.3 L307.5,75.1 L310.3,74.8 L313.1,74.6 L315.9,74.5 L318.7,74.3 L321.6,74.1 L324.4,73.9 L327.2,73.8 L330.0,73.7 L332.8,73.5 L335.6,73.4 L338.4,73.3 L341.2,73.2 L344.0,73.2 L346.8,73.1 L349.6,73.1 L352.4,73.0 L355.2,73.0 L358.0,73.0 L360.8,73.0 L363.6,73.1 L366.4,73.1 L369.2,73.2 L372.0,73.2 L374.8,73.3 L377.6,73.4 L380.4,73.6 L383.2,73.7 L386.0,73.9 L388.8,74.1 L391.6,74.3 L394.4,74.5 L397.3,74.7 L400.1,75.0 L402.9,75.3 L405.7,75.6 L408.5,75.9 L411.3,76.3 L414.1,76.7 L416.9,77.1 L419.7,77.5 L422.5,78.0 L425.3,78.5 L428.1,79.0 L430.9,79.5 L433.7,80.1 L436.5,80.7 L439.3,81.3 L442.1,82.0 L444.9,82.6 L447.7,83.4 L450.5,84.1 L453.3,84.9 L456.1,85.8 L458.9,86.6 L461.7,87.5 L464.5,88.5 L467.3,89.5 L470.1,90.5 L473.0,91.6 L475.8,92.7 L478.6,93.9 L481.4,95.1 L484.2,96.3 L487.0,97.7 L489.8,99.0 L492.6,100.5 L495.4,101.9 L498.2,103.5 L501.0,105.1 L503.8,106.8 L506.6,108.5 L509.4,110.3 L512.2,112.2 L515.0,114.1 L517.8,116.2 L520.6,118.3 L523.4,120.5 L526.2,122.8 L529.0,125.1 L531.8,127.6 L534.6,130.2 L537.4,132.9 L540.2,135.7 L543.0,138.6 L545.9,141.7 L548.7,144.9 L551.5,148.2 L554.3,151.7 L557.1,155.3 L559.9,159.1 L562.7,163.1 L565.5,167.3 L568.3,171.7 L571.1,176.4 L573.9,181.2 L576.7,186.4 L579.5,191.9 L582.3,197.7 L585.1,203.9 L587.9,210.5 L590.7,217.6 L593.5,225.2 L596.3,233.5 L599.1,242.7 L601.9,252.8 L604.7,264.2 L607.5,277.5 L610.3,293.5 L613.1,314.7 L615.9,360.5" fill="none" stroke="var(--curve-nu)" stroke-width="2" stroke-dasharray="6 4"/>
+<path d="M337.0,151.5 L339.3,152.1 L341.7,152.7 L344.0,153.3 L346.4,153.9 L348.7,154.5 L351.1,155.1 L353.4,155.7 L355.8,156.3 L358.1,156.9 L360.4,157.5 L362.8,158.1 L365.1,158.7 L367.5,159.3 L369.8,159.9 L372.2,160.5 L374.5,161.1 L376.9,161.7 L379.2,162.3 L381.5,162.9 L383.9,163.5 L386.2,164.0 L388.6,164.6 L390.9,165.2 L393.3,165.8 L395.6,166.4 L398.0,167.0 L400.3,167.6 L402.6,168.1 L405.0,168.7 L407.3,169.3 L409.7,169.9 L412.0,170.5 L414.4,171.0 L416.7,171.6 L419.1,172.2 L421.4,172.8 L423.7,173.4 L426.1,173.9 L428.4,174.5 L430.8,175.1 L433.1,175.7 L435.5,176.2 L437.8,176.8 L440.2,177.4 L442.5,177.9 L444.8,178.5 L447.2,179.1 L449.5,179.6 L451.9,180.2 L454.2,180.8 L456.6,181.3 L458.9,181.9 L461.3,182.5 L463.6,183.0 L465.9,183.6 L468.3,184.1 L470.6,184.7 L473.0,185.3 L475.3,185.8 L477.7,186.4 L480.0,186.9 L482.4,187.5 L484.7,188.0 L487.1,188.6 L489.4,189.2 L491.7,189.7 L494.1,190.3 L496.4,190.8 L498.8,191.4 L501.1,191.9 L503.5,192.5 L505.8,193.0 L508.2,193.6 L510.5,194.1 L512.8,194.6 L515.2,195.2 L517.5,195.7 L519.9,196.3 L522.2,196.8 L524.6,197.4 L526.9,197.9 L529.3,198.4 L531.6,199.0 L533.9,199.5 L536.3,200.1 L538.6,200.6 L541.0,201.1 L543.3,201.7 L545.7,202.2 L548.0,202.7 L550.4,203.3 L552.7,203.8 L555.0,204.3 L557.4,204.9 L559.7,205.4 L562.1,205.9 L564.4,206.4 L566.8,207.0 L569.1,207.5 L571.5,208.0 L573.8,208.5 L576.1,209.1 L578.5,209.6 L580.8,210.1 L583.2,210.6 L585.5,211.2 L587.9,211.7 L590.2,212.2 L592.6,212.7 L594.9,213.2 L597.2,213.8 L599.6,214.3 L601.9,214.8 L604.3,215.3 L606.6,215.8 L609.0,216.3 L611.3,216.8 L613.7,217.3 L616.0,217.9" fill="none" stroke="var(--curve-k)" stroke-width="2" stroke-dasharray="6 4"/>
+<path d="M58.0,118.0 L60.8,118.0 L63.6,118.0 L66.4,118.0 L69.2,118.1 L72.0,118.1 L74.8,118.1 L77.6,118.2 L80.4,118.2 L83.2,118.3 L86.0,118.3 L88.8,118.4 L91.6,118.5 L94.5,118.5 L97.3,118.6 L100.1,118.7 L102.9,118.8 L105.7,118.9 L108.5,119.0 L111.3,119.1 L114.1,119.3 L116.9,119.4 L119.7,119.5 L122.5,119.7 L125.3,119.8 L128.1,120.0 L130.9,120.1 L133.7,120.3 L136.5,120.5 L139.3,120.7 L142.1,120.9 L144.9,121.1 L147.7,121.3 L150.5,121.5 L153.3,121.7 L156.1,121.9 L158.9,122.1 L161.7,122.4 L164.6,122.6 L167.4,122.8 L170.2,123.1 L173.0,123.4 L175.8,123.6 L178.6,123.9 L181.4,124.2 L184.2,124.5 L187.0,124.8 L189.8,125.1 L192.6,125.4 L195.4,125.7 L198.2,126.0 L201.0,126.3 L203.8,126.7 L206.6,127.0 L209.4,127.4 L212.2,127.7 L215.0,128.1 L217.8,128.5 L220.6,128.9 L223.4,129.2 L226.2,129.6 L229.0,130.0 L231.8,130.4 L234.7,130.9 L237.5,131.3 L240.3,131.7 L243.1,132.2 L245.9,132.6 L248.7,133.0 L251.5,133.5 L254.3,134.0 L257.1,134.5 L259.9,134.9 L262.7,135.4 L265.5,135.9 L268.3,136.4 L271.1,137.0 L273.9,137.5 L276.7,138.0 L279.5,138.5 L282.3,139.1 L285.1,139.6 L287.9,140.2 L290.7,140.8 L293.5,141.4 L296.3,142.0 L299.1,142.6 L301.9,143.2 L304.8,143.8 L307.6,144.4 L310.4,145.0 L313.2,145.7 L316.0,146.3 L318.8,147.0 L321.6,147.6 L324.4,148.3 L327.2,149.0 L330.0,149.7 L332.8,150.4 L335.6,151.1 L338.4,151.9 L341.2,152.6 L344.0,153.3 L346.8,154.1 L349.6,154.9 L352.4,155.6 L355.2,156.4 L358.0,157.2 L360.8,158.0 L363.6,158.8 L366.4,159.7 L369.2,160.5 L372.1,161.4 L374.9,162.2 L377.7,163.1 L380.5,164.0 L383.3,164.9 L386.1,165.8 L388.9,166.7 L391.7,167.6 L394.5,168.6 L397.3,169.5 L400.1,170.5 L402.9,171.5 L405.7,172.5 L408.5,173.5 L411.3,174.5 L414.1,175.5 L416.9,176.6 L419.7,177.6 L422.5,178.7 L425.3,179.8 L428.1,180.9 L430.9,182.0 L433.7,183.2 L436.5,184.3 L439.3,185.5 L442.2,186.7 L445.0,187.9 L447.8,189.1 L450.6,190.3 L453.4,191.6 L456.2,192.9 L459.0,194.1 L461.8,195.4 L464.6,196.8 L467.4,198.1 L470.2,199.5 L473.0,200.9 L475.8,202.3 L478.6,203.7 L481.4,205.2 L484.2,206.6 L487.0,208.1 L489.8,209.7 L492.6,211.2 L495.4,212.8 L498.2,214.4 L501.0,216.0 L503.8,217.7 L506.6,219.3 L509.4,221.1 L512.3,222.8 L515.1,224.6 L517.9,226.4 L520.7,228.2 L523.5,230.1 L526.3,232.0 L529.1,234.0 L531.9,236.0 L534.7,238.0 L537.5,240.1 L540.3,242.3 L543.1,244.4 L545.9,246.7 L548.7,249.0 L551.5,251.3 L554.3,253.7 L557.1,256.2 L559.9,258.8 L562.7,261.4 L565.5,264.1 L568.3,266.9 L571.1,269.8 L573.9,272.8 L576.7,275.9 L579.5,279.1 L582.4,282.5 L585.2,286.0 L588.0,289.7 L590.8,293.7 L593.6,297.8 L596.4,302.3 L599.2,307.1 L602.0,312.3 L604.8,318.1 L607.6,324.8 L610.4,332.6 L613.2,343.0 L616.0,368.0" fill="none" stroke="var(--ink)" stroke-width="2"/>
+<text class="lab" x="219.4" y="151.5" fill="var(--ink)">α² + γ² = 1</text>
+<text class="lab" x="169.6" y="85.7" fill="var(--ink-2)">ν = α/2</text>
+<text class="lab" x="595.3" y="204.2" text-anchor="end" fill="var(--ink-2)">best κ</text>
+<circle cx="337.0" cy="238.1" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.5, gamma=0.52: predicted to converge</title></circle>
+<circle cx="337.0" cy="184.0" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.5, gamma=0.736: predicted to converge</title></circle>
+<circle cx="337.0" cy="97.4" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.5, gamma=1.083: predicted not to converge</title></circle>
+<circle cx="337.0" cy="21.6" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.5, gamma=1.386: predicted not to converge</title></circle>
+<circle cx="448.6" cy="260.9" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.7, gamma=0.428: predicted to converge</title></circle>
+<circle cx="448.6" cy="216.2" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.7, gamma=0.607: predicted to converge</title></circle>
+<circle cx="448.6" cy="144.8" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.7, gamma=0.893: predicted not to converge</title></circle>
+<circle cx="448.6" cy="82.3" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.7, gamma=1.143: predicted not to converge</title></circle>
+<circle cx="504.4" cy="278.0" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.8, gamma=0.36: predicted to converge</title></circle>
+<circle cx="504.4" cy="240.5" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.8, gamma=0.51: predicted to converge</title></circle>
+<circle cx="504.4" cy="180.5" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.8, gamma=0.75: predicted not to converge</title></circle>
+<circle cx="504.4" cy="128.0" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.8, gamma=0.96: predicted not to converge</title></circle>
+<circle cx="560.2" cy="302.6" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.9, gamma=0.262: predicted to converge</title></circle>
+<circle cx="560.2" cy="275.4" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.9, gamma=0.371: predicted to converge</title></circle>
+<circle cx="560.2" cy="231.8" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.9, gamma=0.545: predicted not to converge</title></circle>
+<circle cx="560.2" cy="193.6" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.9, gamma=0.697: predicted not to converge</title></circle>
+<circle cx="588.1" cy="321.2" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.95, gamma=0.187: predicted to converge</title></circle>
+<circle cx="588.1" cy="301.6" r="4.5" fill="var(--surface)" stroke="var(--stable)" stroke-width="2"><title>E2 cell alpha=0.95, gamma=0.265: predicted to converge</title></circle>
+<circle cx="588.1" cy="270.4" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.95, gamma=0.39: predicted not to converge</title></circle>
+<circle cx="588.1" cy="243.1" r="5" fill="var(--unstable)" stroke="var(--surface)" stroke-width="1.5"><title>E2 cell alpha=0.95, gamma=0.5: predicted not to converge</title></circle>
+<rect x="555.2" y="208.0" width="10" height="10" transform="rotate(45 560.2 213.0)" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"><title>S1: alpha=0.9, gamma=0.62</title></rect>
+<text class="lab" x="550.2" y="217.0" text-anchor="end" fill="var(--ink)">S1</text>
+<rect x="443.6" y="208.0" width="10" height="10" transform="rotate(45 448.6 213.0)" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"><title>S2: alpha=0.7, gamma=0.62</title></rect>
+<text class="lab" x="438.6" y="217.0" text-anchor="end" fill="var(--ink)">S2</text>
+<rect x="304.1" y="168.0" width="10" height="10" transform="rotate(45 309.1 173.0)" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"><title>S3: alpha=0.45, gamma=0.78</title></rect>
+<text class="lab" x="299.1" y="177.0" text-anchor="end" fill="var(--ink)">S3</text>
+<rect x="555.2" y="138.0" width="10" height="10" transform="rotate(45 560.2 143.0)" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"><title>S4: alpha=0.9, gamma=0.9</title></rect>
+<text class="lab" x="550.2" y="147.0" text-anchor="end" fill="var(--ink)">S4</text>
+<rect x="583.1" y="250.5" width="10" height="10" transform="rotate(45 588.1 255.5)" fill="var(--ink)" stroke="var(--surface)" stroke-width="1.5"><title>S5: alpha=0.95, gamma=0.45</title></rect>
+<text class="lab" x="598.1" y="259.5" fill="var(--ink)">S5</text>
+</svg>
+        </div>
+        <figcaption>Design illustration for a balanced cycle with a uniform panel reference, where γ is the realized gain at the fixed point. A mode is stable below each curve for its scheme. The E2 targets sit at 0.6, 0.85, 1.25 and 1.6 times the ordinary critical gain for each α; with the raw sampler each panel has its own fixed point and gain, so in Phase 2 every panel of every run becomes its own point on this plane. α = 0.99 is left out: its onset period is about 44 rounds and growth at 1.3 × critical gain is 0.7% per round. The lagged-reference boundary for ν = α lies above the plot (γ = 1 + α). S2 nearly coincides with the α = 0.7 target at 0.85 × critical gain; both are predicted to converge.</figcaption>
+      </figure>
+    </section>
+
+    <section id="experiments">
+      <h2>Phase 2 experiments</h2>
+      <div class="exp">
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">E1</span><h3>Adaptation horizon and relaxation calibration</h3><span class="tier t1">Tier 1</span></div>
+          <dl>
+            <div><dt>Setup</dt><dd>O1 on the Phase 0 panels; DPO with soft labels, IPO as the link comparison. α ∈ {0, 0.5, 0.8, 0.9, 0.95, 1}, 30 rounds; Qwen2.5-0.5B × 3 seeds, 1.5B × 2 seeds.</dd></div>
+            <div><dt>Predicts</dt><dd>Limit β(u<sub>i</sub> − u<sub>j</sub>)/(1 − α), linear growth at α = 1; with relaxation h the approach is <code>hβu Σ_k (1 − h(1−α))^k</code>.</dd></div>
+            <div><dt>Gate</dt><dd><span class="gate">G1</span> Limit points within 10% of prediction for α ≤ 0.9.</dd></div>
+          </dl>
+        </article>
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">E2</span><h3>Frontier</h3><span class="tier t1">Tier 1</span></div>
+          <dl>
+            <div><dt>Setup</dt><dd>O2 on the Phase 0 panels, IPO and actual DPO, α ∈ {0.5, 0.7, 0.8, 0.9, 0.95}. β<sub>train</sub> per objective sets the median panel's predicted index at 0.6, 0.85, 1.25 and 1.6 times its boundary; panel heterogeneity fills the plane within each run. 60 rounds (80 at α = 0.95). 0.5B full grid × 2 seeds; 1.5B on the α = 0.8 and 0.9 columns × 2 seeds.</dd></div>
+            <div><dt>Controls</dt><dd>Gain collapse only where u = 0 with matched reference and coverage, then its breakdown as O3 adds a potential. A random, unselected panel set at one cell, predicted mostly stable because its initial mass is concentrated.</dd></div>
+            <div><dt>Analysis</dt><dd>Panel-level predicted index against observed amplitude (ROC); measured against predicted radius and rotation.</dd></div>
+            <div><dt>Gate</dt><dd><span class="gate">G2</span> At least 80% agreement outside a 10% boundary band; correlation ≥ 0.8 in log radius.</dd></div>
+          </dl>
+        </article>
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">E3</span><h3>Stabilizers at the same limit point</h3><span class="tier t1">Tier 1</span></div>
+          <dl>
+            <div><dt>Design</dt><dd>The five configurations of the <a href="#matrix">prediction matrix</a>. Before preregistration every cell is recomputed per panel with the actual operators on the Phase 0 panels, β is re-set so the median panel reproduces the target radii, and cells whose margin falls below 0.02 are replaced.</dd></div>
+            <div><dt>Schemes</dt><dd>Ordinary; oracle-assisted κ ∈ {0.25, 0.5, 1, κ*}; ν ∈ {α/2, α}; the two-sampler estimator at S1 if the authors choose. 26 cells × 2 seeds on 0.5B; S1 and S2 × 2 seeds on 1.5B.</dd></div>
+            <div><dt>Same target</dt><dd>On O3, endpoints compared with π*(α) from the solver and with the time average of the ordinary orbit.</dd></div>
+            <div><dt>Cost</dt><dd>On O1, ν = α needs about twice the rounds to reach 90% of the terminal log-odds; κ leaves them unchanged.</dd></div>
+          </dl>
+        </article>
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">E4</span><h3>When it matters</h3><span class="tier">Tier 2</span></div>
+          <dl>
+            <div><dt>Personas</dt><dd>Three style variants per prompt, judged in both orders by Qwen2.5-7B-Instruct under three personas with cyclic style preferences (choice-token probabilities); validated with <code>hodge.coherence</code> and the actual operators before training. 4 α × 2 seeds, plus ν = α and κ* at one unstable cell.</dd></div>
+            <div><dt>Orientation</dt><dd>O2 against O2m at matched per-panel norms and zero potential, at S1 and one E2 cell, 2 seeds on 0.5B and 1.5B: Stage C extended to many panels. Enters Section 7 only if the authors agree, and only as a measurement of shared-parameter behavior.</dd></div>
+            <div><dt>Curated</dt><dd>O5 at α ∈ {0.9, 0.95}, 2 seeds.</dd></div>
+          </dl>
+        </article>
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">E5</span><h3>DPO labels</h3><span class="tier">Tier 2</span></div>
+          <dl>
+            <div><dt>Setup</dt><dd>O1 with transitive hard labels (an acyclic win graph, so the BT optimum is infinite) against soft labels, α ∈ {0.8, 0.95}, 2 seeds on 0.5B.</dd></div>
+            <div><dt>Predicts</dt><dd>Soft labels reach the E1 limit; hard labels drift at a rate set by the optimizer budget. On a strongly connected cyclic oracle hard labels do have a finite DPO optimum, so the comparison is specific to transitive labels.</dd></div>
+          </dl>
+        </article>
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">Scale</span><h3>Model-size check</h3><span class="tier">Tier 2</span></div>
+          <dl><div><dt>Setup</dt><dd>S1 with ordinary refresh, ν = α, κ* and κ = 1, × 2 seeds on Qwen2.5-3B.</dd></div></dl>
+        </article>
+        <article class="exp-card">
+          <div class="exp-head"><span class="id">E6</span><h3>On-policy loop</h3><span class="tier">Tier 3 · stretch</span></div>
+          <dl>
+            <div><dt>Setup</dt><dd>Each round, generate K = 4 responses per prompt and judge them with the O4 personas; read out the style shares, with styles as the finite response set. Ordinary refresh at α ∈ {0.5, 0.95} and ν = α at 0.95, 2 seeds on 1.5B.</dd></div>
+            <div><dt>Predicts</dt><dd>Style shares keep moving at α = 0.95 and settle under ν. Go/no-go on Fri 9 Oct.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section id="matrix">
+      <h2>Stabilizer prediction matrix (E3)</h2>
+      <p class="prose">Design illustration: predicted spectral radius on a balanced cycle with a uniform panel reference, in units of the realized gain γ. Values above 1 grow and the run does not converge; values below 1 decay. Outlined cells are the counter-intuitive predictions: extrapolation that destabilizes a run that is stable without it. The final cells are recomputed per panel with the actual operators before preregistration.</p>
+      <div class="frame">
+        <table class="matrix">
+          <thead><tr><th>Configuration</th><th class="num">Ordinary</th><th class="num">κ = 0.25</th><th class="num">κ = 0.5</th><th class="num">κ = 1</th><th class="num">κ*</th><th class="num">ν = α/2</th><th class="num">ν = α</th></tr></thead>
+          <tbody>
+            <tr><th>S1 · α = 0.9, γ = 0.62</th><td class="cell u">1.093<span class="tag">grows</span></td><td class="cell u">1.041<span class="tag">grows</span></td><td class="cell s">0.978<span class="tag">decays</span></td><td class="cell u">1.118<span class="tag">grows</span></td><td class="cell s">0.961<span class="tag">decays · κ* = 0.58</span></td><td class="cell s">0.965<span class="tag">decays</span></td><td class="cell s">0.949<span class="tag">decays</span></td></tr>
+            <tr><th>S2 · α = 0.7, γ = 0.62</th><td class="cell s">0.935<span class="tag">decays</span></td><td class="cell s">0.867<span class="tag">decays</span></td><td class="na">–</td><td class="cell u star">1.174<span class="tag">grows</span></td><td class="na">–</td><td class="na">–</td><td class="cell s">0.837<span class="tag">decays</span></td></tr>
+            <tr><th>S3 · α = 0.45, γ = 0.78</th><td class="cell s">0.900<span class="tag">decays</span></td><td class="cell s">0.955<span class="tag">decays</span></td><td class="cell u star">1.142<span class="tag">grows</span></td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="cell s">0.671<span class="tag">decays</span></td></tr>
+            <tr><th>S4 · α = 0.9, γ = 0.90</th><td class="cell u">1.273<span class="tag">grows</span></td><td class="na">–</td><td class="na">–</td><td class="cell u">1.727<span class="tag">grows</span></td><td class="cell u">1.387<span class="tag">grows</span></td><td class="cell u">1.015<span class="tag">grows</span></td><td class="cell s">0.949<span class="tag">decays</span></td></tr>
+            <tr><th>S5 · α = 0.95, γ = 0.45</th><td class="cell u">1.051<span class="tag">grows</span></td><td class="na">–</td><td class="cell s">0.958<span class="tag">decays</span></td><td class="cell s">0.747<span class="tag">decays</span></td><td class="cell s">0.902<span class="tag">decays · κ* = 0.69</span></td><td class="cell s">0.983<span class="tag">decays</span></td><td class="cell s">0.975<span class="tag">decays</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="tight">
+        <li><strong>S1</strong> is non-monotone in κ: moderate extrapolation stabilizes, κ = 1 is worse than none, and both lags work.</li>
+        <li><strong>S2</strong> and <strong>S3</strong> are the negative predictions of the lagged-sampling theorem (κ = 1 hurts for α &lt; 0.83; any κ hurts for α ≤ ½).</li>
+        <li><strong>S4</strong> is a strong cycle that only maximal lag removes; <strong>S5</strong> is high α, where extrapolation is the cheaper remedy because it costs no adaptation.</li>
+      </ul>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <div class="frame">
+        <div class="gantt" role="table" aria-label="Schedule, 30 September to 13 October 2026">
+<div class="corner" role="columnheader"></div>
+<div class="day" role="columnheader">Wed<br>9/30</div>
+<div class="day" role="columnheader">Thu<br>10/1</div>
+<div class="day" role="columnheader">Fri<br>10/2</div>
+<div class="day we" role="columnheader">Sat<br>10/3</div>
+<div class="day we" role="columnheader">Sun<br>10/4</div>
+<div class="day" role="columnheader">Mon<br>10/5</div>
+<div class="day" role="columnheader">Tue<br>10/6</div>
+<div class="day" role="columnheader">Wed<br>10/7</div>
+<div class="day" role="columnheader">Thu<br>10/8</div>
+<div class="day" role="columnheader">Fri<br>10/9</div>
+<div class="day we" role="columnheader">Sat<br>10/10</div>
+<div class="day we" role="columnheader">Sun<br>10/11</div>
+<div class="day" role="columnheader">Mon<br>10/12</div>
+<div class="day" role="columnheader">Tue<br>10/13</div>
+<div class="row-label" role="rowheader">Phase 1 micropilot (A, then B/C)</div>
+<div class="cell" role="cell"><span class="bar core" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:0;border-radius:0 0 0 0;"></span><span class="mark">G0</span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">Phase 0 panel construction</div>
+<div class="cell" role="cell"><span class="bar" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell" role="cell"><span class="bar" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">E1 adaptation horizon</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"><span class="bar core" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span><span class="mark">G1</span></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">Preregistration (Phase 2)</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"><span class="bar" style="left:3px;right:3px;border-radius:3px 3px 3px 3px;"></span></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">E2 frontier</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"><span class="bar core" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell we" role="cell"><span class="bar core" style="left:0;right:0;border-radius:0 0 0 0;"></span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:0;border-radius:0 0 0 0;"></span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span><span class="mark">G2</span></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">E3 stabilizers</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"><span class="bar core" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:0;border-radius:0 0 0 0;"></span></div>
+<div class="cell" role="cell"><span class="bar core" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">E4 personas, orientation, curated</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"><span class="bar" style="left:3px;right:3px;border-radius:3px 3px 3px 3px;"></span></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"><span class="bar" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell" role="cell"><span class="bar" style="left:0;right:0;border-radius:0 0 0 0;"></span></div>
+<div class="cell we" role="cell"><span class="bar" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">E5 labels and 3B check</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"><span class="bar" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell we" role="cell"><span class="bar" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">E6 on-policy (stretch)</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"><span class="mark">go?</span></div>
+<div class="cell we" role="cell"><span class="bar stretch" style="left:3px;right:0;border-radius:3px 0 0 3px;border-right:0;"></span></div>
+<div class="cell we" role="cell"><span class="bar stretch" style="left:0;right:3px;border-radius:0 3px 3px 0;border-left:0;"></span></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="row-label" role="rowheader">Analysis and Section 7</div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell" role="cell"></div>
+<div class="cell we" role="cell"></div>
+<div class="cell we" role="cell"><span class="bar" style="left:3px;right:0;border-radius:3px 0 0 3px;"></span></div>
+<div class="cell" role="cell"><span class="bar" style="left:0;right:0;border-radius:0 0 0 0;"></span></div>
+<div class="cell" role="cell"><span class="bar" style="left:0;right:3px;border-radius:0 3px 3px 0;"></span></div>
+</div>
+      </div>
+      <p class="prose" style="font-size:var(--step--1);color:var(--ink-2)">Solid bars are the micropilot and Tier 1 runs; pale bars are panel construction, preregistration, Tier 2 runs and writing; the dashed bar is the stretch goal. Red marks are decision gates. The persona oracle is built and validated on 3 Oct while E2 runs.</p>
+    </section>
+
+    <section id="compute">
+      <h2>Compute</h2>
+      <div class="frame">
+        <table>
+          <thead><tr><th>Item</th><th>Scope</th><th class="num">GPU-hours</th></tr></thead>
+          <tbody>
+            <tr><th>Phase 0</th><td>Candidate generation and scoring for 320 prompts</td><td class="num">≈ 4</td></tr>
+            <tr><th>Phase 1</th><td>10 arms, 6 panels, 30 rounds</td><td class="num">≈ 5–10</td></tr>
+            <tr><th>Tier 1 · E1, E2, E3</th><td>about 120 runs on 0.5B and 50 on 1.5B, in 60-round equivalents</td><td class="num">≈ 150</td></tr>
+            <tr><th>Tier 2 · E4, E5, scale</th><td>about 20 on 0.5B, 20 on 1.5B, 8 on 3B, plus judging</td><td class="num">≈ 70</td></tr>
+            <tr><th>Tier 3 · E6</th><td>6 runs of about 4 hours</td><td class="num">≈ 25</td></tr>
+            <tr><th>Total</th><td>against 2 × 24 × 9 = 432 GPU-hours in the execution window</td><td class="num">≈ 260</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="tight">
+        <li>If runs are twice as slow: keep 2 seeds, drop Tier 3 and the 3B check, run the E2 grid on 0.5B only.</li>
+        <li>If runs are faster: raise seeds on the headline cells.</li>
+      </ul>
+    </section>
+
+    <section id="risks">
+      <h2>Risks</h2>
+      <div class="frame">
+        <table>
+          <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Phase 0 finds too few panels with interior support</td><td>Lower the threshold toward 0.005, shorten responses or sample more candidates; report the selection as theory-guided and keep a random-panel arm</td></tr>
+            <tr><td>SGD noise near the frontier</td><td>Boundary band, full pairs, seeds</td></tr>
+            <tr><td>Relaxation h far from 1 or anisotropic</td><td>Report relaxed predictions and per-panel h in the shadow runs</td></tr>
+            <tr><td>LoRA capacity or sharing damps panel-specific dynamics</td><td>Read the orientation arm; measure accessible modes before adding seeds</td></tr>
+            <tr><td>Persona judges too consistent</td><td>Validate before training; sharpen personas or fall back to O2 on style roles</td></tr>
+            <tr><td>Reviewers call the oracle synthetic</td><td>Real prompts and model-generated responses; E4, E6 and the public-data diagnostics</td></tr>
+            <tr><td>Schedule slips</td><td>Tier 1 carries the core claim; cut Tiers 3 and 2 first</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <h2>Decisions needed</h2>
+      <ol class="tight">
+        <li><strong>Approve Stage A of the prepared micropilot now</strong> (Fan with Yu He); Stages B and C follow gate G0.</li>
+        <li><strong>Approve Phase 0 panel construction</strong> as the way to scale while keeping the raw sampler. A relative-to-initial sampler would be a separate protocol and is not proposed.</li>
+        <li><strong>DPO scope:</strong> the actual pairwise DPO operator (recommended, since it matches training), entrywise-logit PsiPO, or both with separate boundaries.</li>
+        <li><strong>Sampling intervention:</strong> oracle-assisted feedback extrapolation (mechanism test, implemented), the two-sampler estimator (practical, needs implementation), or both at S1.</li>
+        <li>Whether the role-aligned / mixed-orientation arm may enter Section 7.</li>
+        <li><strong>Division of work.</strong> Proposed: Yu He owns the pipeline, Phase 0/1 runs and launches; Claude writes the panel-construction and persona scripts, preregistered predictions from the actual operators, analysis and figures; Fan owns the decisions and Section 7.</li>
+      </ol>
+      <p class="prose"><strong>Next action:</strong> Fan and Yu He approve Stage A and Phase 0 so both start on 30 Sep on the two H100s. Review date: 2 Oct, after gates G0 and G1.</p>
+    </section>
+
+    <section id="iterations">
+      <h2>How the plan changed</h2>
+      <ol class="tight">
+        <li><strong>v0 · the 22 Sep roadmap grid</strong> (9 α × 3 oracles × 2 objectives × 5 seeds, 100 rounds): too expensive, and most cells are predicted stable.</li>
+        <li><strong>v1 · controlled cycles and exact pair enumeration</strong>, so E2 and E3 test the deterministic theorems.</li>
+        <li><strong>v2 · calibration and preregistration:</strong> relaxation h, shadow population runs, a timestamped prediction file.</li>
+        <li><strong>v3 · separation:</strong> stabilizer configurations whose radii sit at least 0.02 from 1; α = 0.99 dropped; counter-intuitive cells added.</li>
+        <li><strong>v4 · realism:</strong> persona mixture, orientation arm, curated control, gated E6, model tiers.</li>
+        <li><strong>v5 · reconciled with the 26 Sep review and the 28 Sep calibration</strong> (same day): kept the raw sampler and replaced the relative-to-initial sampler with constructed panels that have interior support; made the actual IPO and DPO operators the prediction source; put the prepared micropilot first with gate G0; renamed the κ and orientation arms; corrected the IPO-only “pilot is stable” statement; restricted gain collapse to u = 0.</li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <span>Run-time predictions: <code>experiments/cyclic_history/population_calibration.py</code> (actual IPO and DPO operators). Design illustration: <code>hodge/population.py</code> (Γ<sub>κ</sub>, κ<sub>exp</sub>, R<sub>ν</sub> and the characteristic roots); the phase diagram is drawn to scale from the same functions.</span>
+      <span>Context on branch <code>hodge-diagnostics</code>: <code>HANDOFF.md</code>, <code>HANDOFF_TO_YU_HE_2026-09-26.md</code>, <code>HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md</code>, <code>reports/2026-09-25/REPORT.md</code>, <code>../cyclic_history/CALIBRATED_PROTOCOL.md</code>.</span>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

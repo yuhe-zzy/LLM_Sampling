@@ -1,0 +1,13 @@
+{
+  "job_id": "4773902",
+  "phase": "train",
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "submitted_at_utc": "2026-10-09T17:56:02.702572+00:00",
+  "resources": {
+    "gpus": 1,
+    "tasks": 6,
+    "concurrency": 2,
+    "memory": "80G",
+    "time": "5-00:00:00"
+  }
+}

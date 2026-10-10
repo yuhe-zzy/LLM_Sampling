@@ -2,6 +2,33 @@
 
 This repository update does not launch or modify any job.
 
+## Current budget and executed campaigns (September 29, 2026)
+
+The owner replaced the earlier phased two-GPU sampling schedule on September
+27: **at most six allocated GPUs total across all owner programs**. Each cyclic
+history task uses one GPU; oracle tasks remain serial and use three GPUs.
+Stage A, fixed-target probes and the six Stage B100 arms have completed. The
+remaining two Stage C100 arms 4606367_0..1%2 also completed states 0..100,
+verified September 29 at 13:44 UTC. The full account queue was empty (0 GPUs).
+Do not duplicate them. See [campaign records](../experiments/cyclic_history/campaigns/README.md).
+
+Respect the full live account budget, including unrelated/interactive jobs,
+pending work that can start automatically, and allocations releasing resources.
+Templates are examples, not hard caps. No new job is authorized by a GitHub
+sync or by the collaborator's proposed two-week roadmap. The earlier phase
+rules below are retained only as history and do not override the six-GPU total.
+
+## Calibration release authorization (September 28, 2026; historical)
+
+The newly calibrated protocol is prepared only and needs separate approval.
+Publishing a ten-row plan does not authorize ten tasks or increase the budget.
+The supplied workspace `AGENTS.md` retains the phased rules below. Earlier
+six-GPU approvals for specific runs must not be treated as a blanket budget
+increase for this new protocol. Reconcile the active phase and inspect live
+state before any submission. Preserve existing work; this release neither
+cancels jobs nor changes their dependencies. No account-wide scheduler hard
+cap has been installed.
+
 ## Preflight
 
 Before submitting, releasing, requeuing, or changing concurrency, inspect both
@@ -11,10 +38,10 @@ interactive jobs, and jobs still completing/releasing GPUs.
 On the original host, user-filtered queue queries have sometimes returned an
 empty result despite active jobs. Cross-check the full expanded queue
 (`squeue -a -r`) by displayed owner/UID, then verify selected allocations with
-`scontrol show job`. Count generic AllocTRES `gres/gpu` once; do not add the
+`scontrol -a show job` (GPU partitions can be hidden). Count generic AllocTRES `gres/gpu` once; do not add the
 typed `gres/gpu:h100` breakdown again.
 
-## Phase order
+## Earlier Phase Order (Superseded)
 
 1. Preserve already-approved running work. An existing 3-GPU oracle plus
    one 1-GPU sampling task can be a transitional four-GPU allocation.
@@ -28,7 +55,8 @@ as an absolute cap applying to oracle training.
 
 ## Array templates are not account-wide caps
 
-- Sampling templates use `%2`; command-line `--array` overrides must retain it.
+- Sampling templates may still default to `%2`; choose any approved override
+  only after accounting for the current six-GPU total, not as a per-array cap.
 - Oracle templates use `%1`.
 - Separate arrays have independent throttles. Two sampling arrays at `%2`
   can allocate four GPUs. Chain them or otherwise account for the total.

@@ -1,0 +1,14 @@
+{
+  "job_id": "4728255",
+  "submitted_at_utc": "2026-10-06T14:52:50.200071+00:00",
+  "run_ids": [
+    "ipo_anchor90_a01_b100_s0",
+    "dpo_anchor90_a01_b100_s0"
+  ],
+  "array": "0-1%2",
+  "gpu_per_task": 1,
+  "outer_updates": 100,
+  "scheduler_response": "4728255",
+  "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_anchor90_20261006",
+  "source_git_commit": "6d5510875eee5127b7307fe7a85cab0b6b3dc0f3"
+}

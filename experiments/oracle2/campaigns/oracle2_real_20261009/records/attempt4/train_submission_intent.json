@@ -1,0 +1,39 @@
+{
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--partition=h100_all",
+    "--account=rc_fanyao_pi",
+    "--export=ALL,ORACLE2_LAUNCH_ROOT=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical",
+    "--gres=gpu:1",
+    "--cpus-per-task=8",
+    "--mem=80G",
+    "--time=5-00:00:00",
+    "--no-requeue",
+    "--job-name=oracle2_train",
+    "--output=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/train-%A_%a.out",
+    "--error=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/train-%A_%a.err",
+    "--array=0-5%2",
+    "--dependency=afterok:4773899",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh",
+    "train"
+  ],
+  "preflight": {
+    "checked_at_utc": "2026-10-09T17:56:02.664027+00:00",
+    "full_queue_rows": 37966,
+    "owned_queue": [
+      "4773899|yuhe32|448057|RUNNING|gres/gpu:1|g15070304"
+    ],
+    "owned_scontrol": [
+      "JobId=4773899 JobName=oracle2_baseline UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6617 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:08 TimeLimit=03:00:00 TimeMin=N/A SubmitTime=2026-10-09T13:55:53 EligibleTime=2026-10-09T13:55:53 AccrueTime=2026-10-09T13:55:53 StartTime=2026-10-09T13:55:54 EndTime=2026-10-09T16:55:54 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-09T13:55:54 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:247470 ReqNodeList=(null) ExcNodeList=(null) NodeList=g15070304 BatchHost=g15070304 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1,gres/gpu:h100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/baseline-4773899_4294967294.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/baseline-4773899_4294967294.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+    ],
+    "recent_terminal_scontrol": [],
+    "allocated_gpus": 1,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "phase": "train",
+  "maximum_phase_gpus": 2,
+  "account_gpu_limit": 4
+}

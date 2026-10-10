@@ -1,0 +1,16 @@
+{
+  "checked_at_utc": "2026-10-09T17:07:44.497649+00:00",
+  "queue": {
+    "checked_at_utc": "2026-10-09T17:07:44.493340+00:00",
+    "full_queue_rows": 38054,
+    "owned_queue": [],
+    "owned_scontrol": [],
+    "recent_terminal_scontrol": [],
+    "allocated_gpus": 0,
+    "hard_account_cap_installed": false
+  },
+  "jobs": {},
+  "phases": {},
+  "errors": [],
+  "runs": {}
+}

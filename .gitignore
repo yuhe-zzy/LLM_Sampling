@@ -28,3 +28,8 @@ results/
 *.jsonl
 *.zip
 .pytest_cache/
+*.tar
+*.tar.gz
+raw/
+slurm_logs/
+response_mapping.json

@@ -1,0 +1,23 @@
+{
+  "decision": "APPROVE_SIX_ARMS",
+  "audit_sha256": "c12650e55bf75bb581eb6fae36eed2d4b8a65bfec331ed76968676c9b90fb8a1",
+  "analysis_scope": "empirical_stability_trends",
+  "user_authorized_sparse_cycles": true,
+  "authorization_date": "2026-10-09",
+  "authorization": "Owner explicitly requested proceeding with all six arms even with only one cyclic prompt, to inspect relative stabilization trends rather than require oscillation elimination.",
+  "observed_groups": {
+    "calibration": {"cyclic": 0, "transitive": 81, "ambiguous": 19},
+    "train": {"cyclic": 1, "transitive": 436, "ambiguous": 63},
+    "evaluation": {"cyclic": 0, "transitive": 160, "ambiguous": 40}
+  },
+  "interpretation_limits": "no_cyclic_subgroup_claim_or_convergence_proof",
+  "analysis_notes": [
+    "Compare matched ordinary/reference/feedback trajectories and empirical stability metrics across all prompts; retain counterexamples.",
+    "The single robust cyclic training prompt is a descriptive case, not a replicated cyclic-group comparison.",
+    "Ambiguous does not establish failure of stochastic transitivity; do not relabel these panels.",
+    "Evaluation has no robust cyclic prompt; cyclic WR subgroup remains missing, not zero.",
+    "Open-generation WR against the shared initial model is a relative quality and temporal trend measurement, not a convergence proof."
+  ],
+  "scientific_changes": "none; same panels, split, scores, mixture .6/.4, native temperatures 1, thresholds, six arms and seed0",
+  "previous_review": "records/attempt3/completion_review.json (historical HOLD superseded by this explicit user decision)"
+}

@@ -1,0 +1,222 @@
+{
+  "skywork": {
+    "repo_id": "Skywork/Skywork-Reward-Llama-3.1-8B-v0.2",
+    "revision": "d4117fbfd81b72f41b96341238baa1e3e90a4ce1",
+    "path": "/work/users/y/u/yuhe32/ipo/model/Skywork-Reward-Llama-3.1-8B-v0.2-d4117fbfd81b",
+    "files_sha256": {
+      "config.json": "06851b05c7f8a1ccad2cf3babe6978a488ab5e2c6867a2a09fa2998ef066f6a6",
+      "model.safetensors.index.json": "8a4b0b738cb0795eb1e248cd372e5448264cb3b90ab070a8785d12f022f6222c",
+      "special_tokens_map.json": "f526dabe70ae46e1fb9caff406987c5e46a18f2c572906efa75b890e7833fb2a",
+      "tokenizer.json": "79e3e522635f3171300913bb421464a87de6222182a0570b9b2ccba2a964b2b4",
+      "tokenizer_config.json": "e334ebb246b3024e7c80ac349e31fd901b682424f63146dcfb553ab7c670f733",
+      "trainer_state.json": "d00b501753f92643a2dc626f1fe21b148f68d1c487a4e73421bf2515eef41269"
+    },
+    "weights": {
+      "model-00001-of-00004.safetensors": {
+        "bytes": 4976698672,
+        "revision": "d4117fbfd81b72f41b96341238baa1e3e90a4ce1",
+        "etag": "027da2fad607605dd8fd21ea132a0123df3cafee2e2ba02f6af6b8f1567eb6e3"
+      },
+      "model-00002-of-00004.safetensors": {
+        "bytes": 4999802720,
+        "revision": "d4117fbfd81b72f41b96341238baa1e3e90a4ce1",
+        "etag": "6c0dbb9a666607dce48004cdee7c206a1984250529aa521d5813432d5f65aed6"
+      },
+      "model-00003-of-00004.safetensors": {
+        "bytes": 4915916176,
+        "revision": "d4117fbfd81b72f41b96341238baa1e3e90a4ce1",
+        "etag": "c47caaa1c18b5b62dd4ff0d7e8e7ea667752627879be8a3125cf51f54a581b3b"
+      },
+      "model-00004-of-00004.safetensors": {
+        "bytes": 117473824,
+        "revision": "d4117fbfd81b72f41b96341238baa1e3e90a4ce1",
+        "etag": "9d898e0b281dbe0930fbb97e9f9d1b15ff2b9f54e2d4c2bfdb221f40671dad80"
+      }
+    },
+    "weight_verification": "download_metadata_etag_and_size; not a fresh weight rehash"
+  },
+  "nemotron": {
+    "repo_id": "nvidia/Llama-3.1-Nemotron-70B-Reward-HF",
+    "path": "/work/users/y/u/yuhe32/ipo/model/Llama-3.1-Nemotron-70B-Reward-HF",
+    "files_sha256": {
+      "config.json": "1330597d2193d4d90288e65a9047f9b06e127de424bd6d121fe7c487610dea99",
+      "generation_config.json": "7a4335d2b9c6b3a56a4770147a9b0d2c847d6c1faf9e4af954607bb9ba36e4be",
+      "model.safetensors.index.json": "2abe0910e23770a30ccf9b1b91804c64831c47f9c98defaa5293aa999433fc2b",
+      "special_tokens_map.json": "6f38c73729248f6c127296386e3cdde96e254636cc58b4169d3fd32328d9a8ec",
+      "tokenizer.json": "79e3e522635f3171300913bb421464a87de6222182a0570b9b2ccba2a964b2b4",
+      "tokenizer_config.json": "4bf5284e15fe63439e081641988ff787a97a6c6ad041fd33887baf7c8f9c11ad"
+    },
+    "weights": {
+      "model-00001-of-00030.safetensors": {
+        "bytes": 4584408808,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "d296644dfa1ea2d531470696e0251c60f886679d43cf50008108741aaeb70d4e"
+      },
+      "model-00002-of-00030.safetensors": {
+        "bytes": 4664167376,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "180e080e3206534c256f01172dafeb8fabf5260006759ef2304e00788e1e547d"
+      },
+      "model-00003-of-00030.safetensors": {
+        "bytes": 4999711704,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "788b21432ff515db2d9f5e3a08a10433ea332432c8657a6915b937093250b3c0"
+      },
+      "model-00004-of-00030.safetensors": {
+        "bytes": 4966157032,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "b2ee2ec8e57e4e6295ff8dba3f8715661547b702ceaa57f9532f06b0801ba247"
+      },
+      "model-00005-of-00030.safetensors": {
+        "bytes": 4664134408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "5083d354ccb1686f86b75054cd6bce7f4aff9b52c9a2b86ac83abb9b7f4b7c7e"
+      },
+      "model-00006-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "d6a90ef7fa790ed0b3709dfe6046a0fd56dab2bde3b5912a14134a34341d6e49"
+      },
+      "model-00007-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "5f62338ff01831a103f0722ca00c1cf681ca88747a09c068efb97438af88728f"
+      },
+      "model-00008-of-00030.safetensors": {
+        "bytes": 4999711728,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "dc0e04ff21f273256293d94f4a731948cd81165cf2a37dcff945ed37cd8c31ca"
+      },
+      "model-00009-of-00030.safetensors": {
+        "bytes": 4966157056,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "6f49212986a7d5006812d7ebf31e49023fc3d5e2218dfa5b66a6155a8219c898"
+      },
+      "model-00010-of-00030.safetensors": {
+        "bytes": 4664134408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "5bbe6cced3d4eeb2d3bba97eb34cffe297eae02c442c6cf0bdd8e81cb8f3ad06"
+      },
+      "model-00011-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "a2ab054c3d895e3bad0afeee418c170d226ec02d196cc906d2a427f9feb41dca"
+      },
+      "model-00012-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "afd3f8985e26d0a2defe88f9e0367e88d19d5de4b06563710f802f23ac2f8e33"
+      },
+      "model-00013-of-00030.safetensors": {
+        "bytes": 4999711728,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "f58024a00d56fd0bd77b7a750bbf2ea6e8e99c54d7db2b3d02e2473f62ada41f"
+      },
+      "model-00014-of-00030.safetensors": {
+        "bytes": 4966157056,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "bd2baabf649d85eb884685899930af0de7b4a3ad7c1d335b17499b6bc0d44e85"
+      },
+      "model-00015-of-00030.safetensors": {
+        "bytes": 4664134408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "492c8469c95ce639250766ce2a991ccc7d0f98943a1c5f6c0fc44183a50f116e"
+      },
+      "model-00016-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "09117205b575e079b2bd65a8a8b4f657c952be383d4b2e59845e7ba668da9f91"
+      },
+      "model-00017-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "83eb229430c3232b395c5bec23c6413bb7385e06409e767a4eaf95a266dfe0a9"
+      },
+      "model-00018-of-00030.safetensors": {
+        "bytes": 4999711728,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "8c91df6b8022f157d26669b9869c783ac315c9c63a4cf034997fecd6121a6f24"
+      },
+      "model-00019-of-00030.safetensors": {
+        "bytes": 4966157056,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "5f9add1ace96688d90c1c6fea131c691f52512715e21adfefa9a8385849a0fff"
+      },
+      "model-00020-of-00030.safetensors": {
+        "bytes": 4664134408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "2aa27e7d9a6a5fc33a022954144f7033aa535b410e17ae8a185202693bacaca0"
+      },
+      "model-00021-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "02dd8f24985526f15a5bc13ba452ddb46aa33a219a2e0f7876f0ff9cc1ffb218"
+      },
+      "model-00022-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "3727ef6d1e213f48d28a672088709725cfb4fd4ae471e0356591a395dd24d81e"
+      },
+      "model-00023-of-00030.safetensors": {
+        "bytes": 4999711728,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "084e3067bfd2e418fe29e2b793b5f02568c96b71adfe6b350aae1f798db82e90"
+      },
+      "model-00024-of-00030.safetensors": {
+        "bytes": 4966157056,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "6c6aba9d3a251097e3a6e79079b369be6616aea9d48aca129f9859a7ec536f99"
+      },
+      "model-00025-of-00030.safetensors": {
+        "bytes": 4664134408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "b45539b9c9f9548f9a24fc811df1f8c9d02a36ebaf651c70cc60a8f8c905d072"
+      },
+      "model-00026-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "f4506c6a8d73ca818a055ff8b5606fb6f35530e90a901d40867496ebd8e03aed"
+      },
+      "model-00027-of-00030.safetensors": {
+        "bytes": 4664167408,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "3fc786e1b6ff696af09c4492f358042e9f971ada85a7f0740cc0850940e63892"
+      },
+      "model-00028-of-00030.safetensors": {
+        "bytes": 4999711728,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "bb777dcca71ed5bec8073c41295880d91b71e8d23daca7bf9c9e7fc92f24e94c"
+      },
+      "model-00029-of-00030.safetensors": {
+        "bytes": 4966173536,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "d1c44cf3001e7e3aadda15427448e780ba0cf0d1702341a6b9f68f36db4d2fd3"
+      },
+      "model-00030-of-00030.safetensors": {
+        "bytes": 2101346432,
+        "revision": "5e30252d2621dcb792837817ed33aefd87910136",
+        "etag": "8e79f4187d2fa2d1e16e9f74604d0786ab6a6cade79fc90afb932d7c36f0025e"
+      }
+    },
+    "weight_verification": "download_metadata_etag_and_size; not a fresh weight rehash"
+  },
+  "policy": {
+    "path": "/work/users/y/u/yuhe32/ipo/model/Qwen2.5-1.5B",
+    "files_sha256": {
+      "config.json": "0e8c8aa86468aba09c9d32157ff4bc2301c7e6c50e4398960425b2ea71e66f77",
+      "generation_config.json": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "weights": {
+      "model.safetensors": {
+        "bytes": 3087467144,
+        "revision": "8faed761d45a263340a0528343f099c05c9a4323",
+        "etag": "a961db72e75d52b18e6b0c9d379e51a26973b233385e0e127fdda7d648aec796"
+      }
+    },
+    "weight_verification": "download_metadata_etag_and_size; not a fresh weight rehash"
+  }
+}

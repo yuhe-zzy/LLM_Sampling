@@ -1,18 +1,19 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
-## WR checkpoints through step 40 saved
+## WR checkpoints through step 50 saved
 
-At **2026-10-10T03:58:00Z**, IPO ordinary (`4773902_0`) and IPO reference
-(`4773902_1`) both reached complete outer **43/100**. Both have saved
-their **step-10/20/30/40 adapters** for later open-generation evaluation.
-Metrics are contiguous from state 0, with **88 finite numeric snapshots**
+At **2026-10-10T06:00:35Z**, IPO ordinary (`4773902_0`) reached complete outer
+**52/100** and IPO reference (`4773902_1`) reached **53/100**. Both have saved
+their **step-10/20/30/40/50 adapters** for later open-generation evaluation.
+Metrics are contiguous from state 0, with **107 finite numeric snapshots**
 in total; initial scores still match and
 frozen source/review hashes verify. The shared 800-response baseline remains
 complete and hash-valid. Tasks 2..5 remain PENDING(JobArrayTaskLimit), with
 TWO H100s allocated across the full account and no unrelated owned work.
 No logged OOM/Traceback/nonfinite failure was found. No trained-checkpoint
 generation or WR result exists yet; no phase was submitted or changed.
-See [current checkpoint milestone](records/attempt4/checkpoint40_status.json),
+See [current checkpoint milestone](records/attempt4/checkpoint50_status.json),
+[earlier step-40 milestone](records/attempt4/checkpoint40_status.json),
 [earlier step-30 milestone](records/attempt4/checkpoint30_status.json),
 [earlier step-20 milestone](records/attempt4/checkpoint20_status.json),
 and [earlier step-10 milestone](records/attempt4/checkpoint10_status.json).

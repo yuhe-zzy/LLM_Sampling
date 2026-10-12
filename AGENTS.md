@@ -18,6 +18,24 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 generation time-limit warning 2026-10-12T22:21:28Z: array4794738
+tasks0/1 remain RUNNING with12-hour limits; tasks2..5 are PENDING and NOW
+have24-hour limits. An in-place array update to1-00:00:00 returned code1:
+pending tasks changed, but `4794738_0-1: Access/permission denied` for the
+running tasks. This was partial success, not an all-or-nothing failure.
+UTC scontrol verified0/1 EndTime2026-10-13T06:14:50Z. Current throughput
+suggests overrun risk, not certain timeout; owner notified that administrator
+help is needed to extend running jobs. Do not repeat the denied operation.
+No cancellation/requeue/restart, GPU/concurrency or scientific changes.
+Full account remains TWO H100s, throttle2, no unrelated owned work. At22:19:21Z,
+ordinary generated complete states0/10/20 plus91/800 rows at30; reference
+complete0/10 plus775/800 at20. Complete banks passed count/hash/finite-field
+checks, baseline hash valid, all606 training snapshots finite; no logged
+execution errors. WRscore remains unsubmitted. Preserve source23401de and
+original12-hour submission receipt; this is a scheduler override only.
+Campaign record: records/attempt4/generate_timelimit_risk_20261012T2221.json.
+Existing two-hour monitor includes this warning; no new timer or experiment.
+
 Oracle2 generation submitted 2026-10-12T18:14:50Z: **4794738_0..5%2**,
 one H100/task, frozen source23401de58b27ef2f7b1ea645551f37602a3c1bb8.
 All train4773902_0..5 COMPLETED0:0 at100; 606 finite snapshots, contiguous

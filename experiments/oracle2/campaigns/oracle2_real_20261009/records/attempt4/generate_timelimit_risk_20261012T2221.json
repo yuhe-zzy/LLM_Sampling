@@ -1,0 +1,63 @@
+{
+  "checked_at_utc": "2026-10-12T22:21:28.539930+00:00",
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "phase": "generate",
+  "job_id": "4794738",
+  "progress_checked_at_utc": "2026-10-12T22:19:21.493005+00:00",
+  "generation_progress": {
+    "ipo_ordinary": {
+      "task": 0,
+      "state": "RUNNING",
+      "hash_count_verified_steps": [0, 10, 20],
+      "written_rows": {"step_0000.jsonl": 800, "step_0010.jsonl": 800, "step_0020.jsonl": 800, "step_0030.jsonl": 91}
+    },
+    "ipo_reference": {
+      "task": 1,
+      "state": "RUNNING",
+      "hash_count_verified_steps": [0, 10],
+      "written_rows": {"step_0000.jsonl": 800, "step_0010.jsonl": 800, "step_0020.jsonl": 775}
+    }
+  },
+  "validation": {
+    "frozen_deployment_hashes_verified": true,
+    "baseline_800_count_hash_verified": true,
+    "finite_training_snapshots": 606,
+    "matching_initial_scores": true,
+    "logged_execution_errors": [],
+    "completed_generation_checks": ["sha256", "800 rows", "unique record IDs", "200 prompt keys", "run and step identity", "finite numeric diagnostics"],
+    "all_generation_complete": false
+  },
+  "runtime_risk": "About four elapsed hours have produced about three of eleven banks per running arm. The original twelve-hour limit may be insufficient; future response lengths and throughput are uncertain.",
+  "scheduler_update": {
+    "command": ["scontrol", "update", "JobId=4794738", "TimeLimit=1-00:00:00"],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "4794738_0-1: Access/permission denied\n",
+    "outcome": "PARTIAL_SUCCESS",
+    "time_limits_before": {"0": "12:00:00", "1": "12:00:00", "2-5": "12:00:00"},
+    "time_limits_after": {"0": "12:00:00", "1": "12:00:00", "2-5": "1-00:00:00"},
+    "running_end_time_utc": "2026-10-13T06:14:50Z",
+    "deadline_verified_with": "env TZ=UTC scontrol -a show job 4794738_0 and 4794738_1",
+    "partition_max_time": "5-00:00:00",
+    "account_admin_level": "None"
+  },
+  "resources": {
+    "allocated_gpus_before": 2,
+    "allocated_gpus_after": 2,
+    "gpus_per_task": 1,
+    "array_task_throttle": 2,
+    "account_gpu_limit": 4,
+    "unrelated_owned_work": false,
+    "hard_account_cap_installed": false
+  },
+  "sacct_after_update": "4794738_0|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|04:06:38|12:00:00\n4794738_1|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|04:06:38|12:00:00\n4794738_[2-5%2]|PENDING|0:0||00:00:00|1-00:00:00\n",
+  "actions_not_taken": ["cancel", "requeue", "resubmit", "new GPU allocation", "concurrency increase", "executable source change", "scientific setting change", "overwrite original receipt", "WRscore submission"],
+  "follow_up": "Administrator assistance is needed to extend running tasks0/1 in place. Do not repeat the denied operation. Preserve all output if timeout occurs; recovery must not duplicate completed banks. Existing oracle2 monitor remains every two hours with this warning recorded.",
+  "local_evidence": [
+    "oracle2_real_launch_20261009/attempt4/heartbeat_20261012T2219.json",
+    "oracle2_real_launch_20261009/attempt4/generate_timelimit_preflight_20261012.json",
+    "oracle2_real_launch_20261009/attempt4/generate_timelimit_attempt_20261012.json",
+    "oracle2_real_launch_20261009/attempt4/generate_deadlines_utc_20261012.json"
+  ],
+  "interpretation": "Partial generation progress is not a WR result. This record describes a scheduler override, not a new source version or a new experiment."
+}

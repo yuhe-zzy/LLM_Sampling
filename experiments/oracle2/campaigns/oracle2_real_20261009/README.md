@@ -1,5 +1,48 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Generation time-limit risk and partial extension
+
+At **2026-10-12T22:19:21Z**, generation tasks `4794738_0/1` had run for
+about four hours. IPO ordinary had complete banks at states **0/10/20** and
+91/800 rows at30; IPO reference had complete **0/10** and775/800 rows at20.
+All completed banks passed SHA256,800-row,unique-ID,prompt-count and finite
+diagnostic checks. The shared baseline remains hash-valid and all606 training
+snapshots remain finite. No logged OOM/Traceback/nonfinite failures were found.
+Tasks2..5 were normally pending; the full account used two H100s with no
+unrelated owned work. WRscore is still unsubmitted.
+
+The observed throughput suggests that generating all11 banks per arm may
+exceed the original12-hour request. This is a runtime risk, not an assertion
+of inevitable timeout: response lengths can change between checkpoints.
+After fresh full-account/source checks, an in-place scheduler update requested
+**24 hours for the existing array**, with no cancellation, restart or new job.
+At **22:21:28Z**, the update returned code1 and
+`4794738_0-1: Access/permission denied`. Post-update scontrol and sacct showed
+**partial success**, which must not be inferred from the exit code alone:
+
+| Tasks | State | Actual time limit after update |
+| --- | --- | --- |
+| 4794738_0,4794738_1 | RUNNING | 12 hours, unchanged; update denied |
+| 4794738_2..5 | PENDING | 24 hours, successfully extended |
+
+`TZ=UTC scontrol` confirms the running tasks' scheduled end is
+**2026-10-13T06:14:50Z**. Administrator assistance is needed to extend these
+running tasks in place; the owner has been notified. Do not repeat the denied
+operation or bypass permissions. The pending tasks retain the same IDs and
+array throttle2; allocated GPUs remain2 and the account ceiling remains4.
+The partition maximum is five days, but that does not grant this non-admin
+account permission to extend an already-running job.
+
+This is a **scheduler-only override**. Frozen source23401de, plan, review,
+models, data, sampling parameters and original submission receipts are
+unchanged. There is no replacement launch or resubmission. Preserve complete
+and partial generation outputs if a later timeout occurs; diagnose and test
+any recovery without overwriting or regenerating completed banks. The existing
+two-hour monitor now includes this risk and partial result. Only all66
+completed and validated banks plus an idle account can unlock WRscore.
+
+See [time-limit risk and verified partial update](records/attempt4/generate_timelimit_risk_20261012T2221.json).
+
 ## All training complete; open generation started
 
 At **2026-10-12T18:10:50Z**, all six `4773902_0..5` tasks were verified

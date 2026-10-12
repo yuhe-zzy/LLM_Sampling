@@ -1,5 +1,49 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## All training complete; open generation started
+
+At **2026-10-12T18:10:50Z**, all six `4773902_0..5` tasks were verified
+**COMPLETED, exit 0:0**, with all outer states **0..100**. All **606 numeric
+snapshots** are finite, metrics are contiguous, initial scores match, and
+source/review hashes are unchanged. The shared baseline remains hash-valid,
+800/800 responses. No logged OOM/Traceback/nonfinite failures were found.
+The full owner/UID account queue was empty with zero allocated GPUs.
+
+After verifying all 66 required state adapters and the absence of earlier
+generation outputs/intents/receipts, the frozen `queue.py` repeated its
+source/config/review, phase-completion, and empty-account guards and submitted
+**generation array `4794738_0..5%2` at 2026-10-12T18:14:50Z**. Each task
+requests one H100, 80 GB host memory, and a 12-hour limit. Task order remains
+IPO ordinary/reference/feedback, then DPO ordinary/reference/feedback.
+**Never duplicate this submission.** No training or candidate scoring was rerun.
+
+At **18:16:56Z**, tasks0/1 were RUNNING and tasks2..5 were normally pending
+with `JobArrayTaskLimit`. Full-account allocation was **TWO H100s**, with no
+unrelated owned work. The two running arms had written **14/800** and
+**13/800** step-0 responses respectively; these are partial banks, not completed
+checkpoints or WR results. No logged execution errors were found. The initial
+18:15:29Z snapshot had zero written rows, so actual generation has progressed.
+
+Each arm will generate 800 responses (200 evaluation prompts, four draws) at
+each of 11 states: 0,10,...,100. WR scoring remains **unsubmitted**. Only after
+the baseline and all 66 arm/state banks complete with validated counts/hashes
+and the full account is idle may the approved two-GPU sequential judge phase
+start. The existing two-hour monitor now records this generation phase.
+The four-GPU account ceiling still applies; the array throttle is not a hard
+account-wide cap. Training/generation peak GPU-memory telemetry is not recorded
+by the frozen executables; earlier candidate-judge peaks must not substitute.
+
+Execution source remains **`23401de58b27ef2f7b1ea645551f37602a3c1bb8`** in the
+immutable `_v4_empirical` launch, reusing the same v3 private data/output root.
+This update changes documentation and aggregate records only, not code or
+scientific settings. Completion does not establish convergence or a history-arm
+benefit; those questions require trajectory and subsequent WR analysis.
+
+Records: [training completion](records/attempt4/training_complete_status_20261012.json),
+[generation intent](records/attempt4/generate_submission_intent.json),
+[generation receipt](records/attempt4/generate_submission_receipt.json), and
+[generation startup](records/attempt4/generate_started_status_20261012.json).
+
 ## DPO history arms saved step-90 checkpoints
 
 At **2026-10-12T09:30:31Z**, DPO reference (`4773902_4`) and feedback

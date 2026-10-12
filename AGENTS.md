@@ -18,6 +18,23 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 generation submitted 2026-10-12T18:14:50Z: **4794738_0..5%2**,
+one H100/task, frozen source23401de58b27ef2f7b1ea645551f37602a3c1bb8.
+All train4773902_0..5 COMPLETED0:0 at100; 606 finite snapshots, contiguous
+metrics, matching initial scores, unchanged review and hash-valid800 baseline
+verified at18:10:50Z. Empty full-account preflight and all66 required adapter
+checks passed. Generation intent/receipt saved in campaign records/attempt4;
+NEVER duplicate this array. At18:16:56Z tasks0/1 RUNNING (IPO ordinary/reference),
+step0 partial rows14/13; tasks2..5 normal PENDING(JobArrayTaskLimit). Full account
+TWO H100s, no unrelated owned work or logged OOM/Traceback/nonfinite. No complete
+checkpoint generation bank or WR result yet. WRscore remains unsubmitted until
+baseline and all66 generated banks pass complete count/hash checks and the full
+account is empty. Existing oracle2 monitor updated to generation phase, still
+every two hours. FOUR-GPU account ceiling and nonoverlapping phases remain;
+no hard account cap exists. See training_complete_status_20261012.json and
+generate_started_status_20261012.json under campaign records/attempt4.
+No scientific or executable source changes.
+
 Oracle2 checkpoint milestone 2026-10-12T09:30:31Z: DPO reference4773902_4
 and feedback4773902_5 RUNNING at complete outer92/91, both saved step90.
 Tasks0..3 remain COMPLETED0:0 at100. Full account TWO H100s, no unrelated

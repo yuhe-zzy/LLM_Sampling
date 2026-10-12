@@ -1,5 +1,23 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## DPO reference saved its step-80 checkpoint
+
+At **2026-10-12T06:56:10Z**, DPO reference (`4773902_4`) reached complete
+outer state **80/100**, with adapters saved through80. DPO feedback
+(`4773902_5`) reached **79/100**, with adapters through70; its step80 is not
+yet complete. The other four arms remain COMPLETED, exit0:0, at state100.
+Only tasks4/5 are in the full owner/UID queue, allocating **TWO H100s total**,
+with no unrelated owned work. All **565 snapshots** are finite, metrics are
+contiguous from state0, initial scores match, and frozen source/review hashes
+remain unchanged. The shared 800/800 baseline remains hash-valid.
+No logged OOM/Traceback/nonfinite failures were found.
+
+No resource, code or scientific change was made. Generation and WR remain
+unsubmitted until all six training arms succeed and the full account is idle.
+The two-hour monitor continues. Training GPU-memory peaks are not recorded
+by the frozen trainer and cannot be inferred from candidate-judge telemetry.
+See [validated reference step-80 milestone](records/attempt4/dpo_reference_checkpoint80_status_20261012T0656.json).
+
 ## DPO history arms saved step-70 checkpoints
 
 At **2026-10-12T04:59:33Z**, DPO reference (`4773902_4`) and feedback

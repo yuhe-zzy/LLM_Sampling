@@ -1,12 +1,44 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
-## Latest monitoring check blocked by SSH connectivity
+## Connection recovered; four of six training arms complete
+
+At **2026-10-12T01:05:30Z** (October 11, 20:05 America/Chicago), SSH access
+recovered. The full owner/UID queue, scontrol allocations and sacct agree:
+
+| Task | Arm | State | Latest complete outer state |
+| --- | --- | --- | --- |
+| 4773902_0 | IPO ordinary | COMPLETED, exit 0:0 | 100 |
+| 4773902_1 | IPO reference | COMPLETED, exit 0:0 | 100 |
+| 4773902_2 | IPO feedback | COMPLETED, exit 0:0 | 100 |
+| 4773902_3 | DPO ordinary | COMPLETED, exit 0:0 | 100 |
+| 4773902_4 | DPO reference | RUNNING | 53 |
+| 4773902_5 | DPO feedback | RUNNING | 52 |
+
+The only owned live jobs are tasks 4 and 5, allocating **TWO H100s total**;
+no unrelated owned running or pending work was found. All **511 snapshots**
+through the latest complete states are finite, with contiguous metrics,
+matching initial scores, unchanged source/review hashes and no prompt
+truncation. All four completed arms saved adapters at 10,20,...,100; the two
+running arms saved them through 50. No logged OOM/Traceback/nonfinite failures.
+Training GPU-memory peaks are not recorded by the frozen trainer; candidate
+judge peaks are not training telemetry.
+
+The shared **800/800 baseline** remains complete and hash-valid. Trained
+checkpoint generation and WR scoring have **not** been submitted: wait until
+all six training arms complete successfully and the full account is idle.
+No submission, cancellation, rerun, concurrency or scientific change was made.
+The existing two-hour monitor continues. Execution source remains
+`23401de58b27ef2f7b1ea645551f37602a3c1bb8`, not this status-documentation commit.
+See [validated recovery and completion milestone](records/attempt4/four_arms_complete_status_20261012T0105.json).
+This status alone is not evidence for convergence or a history-term benefit.
+
+## Historical SSH connectivity interruption (resolved above)
 
 At **2026-10-10T10:00:29Z**, both connection attempts for the 09:58 heartbeat
-had timed out in `sock.connect`, before any remote command ran. Current GPU
-allocation, training progress and execution errors are **unknown**. This does
-not establish an experiment failure. The 08:02 checkpoint snapshot below is
-the last successful check, not a current-status claim. The owner was asked to
+had timed out in `sock.connect`, before any remote command ran. GPU allocation,
+training progress and execution errors were **unknown during the interruption**.
+This did not establish an experiment failure. The 08:02 checkpoint snapshot below
+was then the last successful check. The owner was asked to
 check UNC VPN and Sycamore connectivity. No task, source or timer was changed;
 the existing two-hour monitor remains in place. See
 [connection failure record](records/attempt4/connection_failure_20261010T1000.json).

@@ -18,6 +18,19 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 connection recovered 2026-10-12T01:05:30Z: train4773902_0..3
+COMPLETED exit0:0, all states0..100 (IPO ordinary/reference/feedback and DPO
+ordinary). DPO reference _4 and feedback _5 RUNNING at complete outer53/52,
+both with adapters through50; completed arms have adapters through100.
+Full owner/UID queue contains only _4/_5, TWO H100s total. All 511 snapshots
+finite, metrics contiguous, initial scores matching, source/review unchanged;
+baseline800/800 hash-valid, no logged OOM/Traceback/nonfinite. Frozen trainer
+does not record GPU-memory peaks. No new phase or resource action taken.
+Wait for ALL six training arms to finish and full account idle before generate;
+checkpoint generation/WR remain unsubmitted. Two-hour monitor unchanged.
+See campaign records/attempt4/four_arms_complete_status_20261012T0105.json.
+The SSH blocker and earlier running snapshots below are historical.
+
 Oracle2 monitoring blocked 2026-10-10T10:00:29Z: two SSH connection attempts
 timed out before any remote command. Current GPU allocation, progress and
 logs are UNKNOWN; do not treat the 08:02 checkpoint snapshot below as live.

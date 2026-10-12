@@ -18,6 +18,15 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 checkpoint milestone 2026-10-12T03:01:46Z: DPO reference4773902_4
+and feedback4773902_5 RUNNING at complete outer62/61, both saved step60.
+Tasks0..3 remain COMPLETED0:0 at100. Full account TWO H100s, no unrelated
+owned work; all 529 snapshots finite, contiguous metrics, matching initial
+scores, unchanged source/review and hash-valid800/800 baseline. No logged
+OOM/Traceback/nonfinite. No resource or scientific changes; generate/WR wait
+for all six completed training arms and empty account. Two-hour timer unchanged.
+See campaign records/attempt4/dpo_checkpoint60_status_20261012T0301.json.
+
 Oracle2 connection recovered 2026-10-12T01:05:30Z: train4773902_0..3
 COMPLETED exit0:0, all states0..100 (IPO ordinary/reference/feedback and DPO
 ordinary). DPO reference _4 and feedback _5 RUNNING at complete outer53/52,

@@ -2,7 +2,7 @@
 
 One line per claim or number shown in the report: the claim, where it comes from, and its status: **confirmed** (primary source read; plan statements are confirmed as statements of the plan, not as facts about data), **single-source** (participant report in the meeting minutes, not verified against code or data), or **inference** (ours, added in this report). All files accessed 2026-10-13. Paths relative to the report folder `latent-estimation-plan/text-report/`.
 
-Short names: **H** = `../HANDOFF_TO_YU_HE_2026-10-13.md`; **D** = `../draft-v2.md`; **L** = `../../latent-preference/latent_preference_framework.md`; **PS** = `../../partial-sharing/partial_sharing_theorem.md`; **R** = `/Users/fanyao/Desktop/UNC/Research/Iterative_PsiPO/hodge_diagnostics/reports/2026-09-25/REPORT.md`; **M** = `/Users/fanyao/Desktop/UNC/Research/Iterative_PsiPO/meetings/2026-10-13-latent-evaluation-and-preference-shift.md`.
+Short names: **H** = `../../HANDOFF_TO_YU_HE_2026-10-13.md`; **D** = `../../draft-v2.md`; **L** = `../../references/latent_preference_framework.md`; **PS** = `../../references/partial_sharing_theorem.md`; **R** = `../../../../reports/2026-09-25/REPORT.md`; **M** = private project meeting minutes dated2026-10-13 (not included in this share bundle).
 
 ## Scope, authorship, context
 

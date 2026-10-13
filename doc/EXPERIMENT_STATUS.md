@@ -1,7 +1,7 @@
 # Current experiment status
 
 Updated 2026-10-13, America/Chicago. Scheduler evidence below was captured at
-10:00:34 CDT (15:00:34 UTC); it is not a live dashboard.
+18:00:08 CDT (23:00:08 UTC); it is not a live dashboard.
 
 ## Oracle2: verified evidence
 
@@ -11,9 +11,11 @@ Updated 2026-10-13, America/Chicago. Scheduler evidence below was captured at
   `23401de58b27ef2f7b1ea645551f37602a3c1bb8`.
 - Generation4794738_0/1 timed out at12hours. Complete banks0..70 plus partial80
   rows728/561 are preserved. Stale RUNNING file manifests do not override sacct.
-- At the dated check, generation2/3 (IPO feedback/DPO ordinary) ran on twoH100s,
-  complete banks0..50, partial60 rows390/364. Tasks4/5 were normally queued.
-  There was no unrelated owned work or new logged execution error.
+- Generation2/3 (IPO feedback/DPO ordinary) COMPLETED0:0, all11 banks0..100
+  hash/count/identity validated,800 rows each. Original queue started4/5
+  (DPO reference/feedback), running on twoH100s with complete0, partial10
+  rows150/79 at the dated check. No pending or unrelated owned work; no new
+  logged execution error. All606 training snapshots remain finite.
 - No generated-response WR exists. WR checkpoints are0,10,...100, but the
   implementation scores in a later batch after generation, not live in training.
 - Missing-only recovery is tested and CPU-deployed, NOT submitted or GPU-tested.

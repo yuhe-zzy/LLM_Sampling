@@ -1,5 +1,27 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Two generators complete; final original pair running
+
+At2026-10-13T23:00:08Z, IPO feedback4794738_2 and DPO ordinary4794738_3
+were COMPLETED0:0. Each has all11 generation banks at states0,10,...,100,
+800 responses per bank (8800 per arm), with count/hash/identity and finite
+diagnostic checks passed. The original queue automatically started DPO
+reference4794738_4 and feedback4794738_5; both have complete state0 and partial
+state10 (150/79 rows). They retain24-hour limits. The full owner/UID account
+contains only those two running tasks, allocating TWO H100s, no pending jobs.
+
+Original0/1 remain TIMEOUT, with their validated complete/partial banks intact.
+Recovery has no output/intent/receipt yet; WR remains unsubmitted and unavailable.
+All606 training snapshots remain finite, metrics contiguous, initial scores
+matching, baseline800/800 hash-valid, and frozen source/review unchanged. No new
+logged OOM/Traceback/nonfinite error. Training/generation memory peaks are not
+recorded. No job, science setting, source or result bank was changed.
+
+Wait for4/5 to succeed and full account idle, then follow the existing v5 recovery
+guards; do not duplicate completed2/3. The same two-hour monitor continues.
+See [validated completion milestone](records/attempt5/two_generators_complete_20261013T2300.json).
+All running/pending snapshots in earlier sections are historical.
+
 ## Recovery deployed for CPU validation, not submitted
 
 At2026-10-13T06:40:26Z, recovery source

@@ -59,8 +59,9 @@ Start with [results atlas](../docs/RESULTS_INDEX.md) and
 
 ## Experiment state (dated, not live)
 
-At2026-10-13 10:00:34 CDT all six Oracle2 training arms were complete0..100.
-Generation4794738_2/3 ran on twoH100s, through complete50/partial60;4/5 queued.
+At2026-10-13 18:00:08 CDT all six Oracle2 training arms were complete0..100.
+Generation4794738_2/3 COMPLETED0:0 with all11 banks validated;4/5 now run on
+twoH100s, complete0/partial10 (150/79 rows), no pending or unrelated owned work.
 Original0/1 remain TIMEOUT with complete0..70 and partial80 preserved. No WR.
 Recovery source2d6b574 is CPU-validated/deployed but not GPU-tested/submitted.
 Original training/generation source23401de remains frozen.

@@ -2,7 +2,16 @@
 
 Updated2026-10-13, America/Chicago. Read [context index](../doc/INDEX.md).
 
-## Latest request
+## Latest inspection request
+
+Print Hodge cyclic L2 norms for the displayed Oracle2 matrices416,4,5,7,6,11.
+Computed both identity and logit flows with existing core; all12 decompositions
+pass independent least-squares and orthogonality checks. Norm is spectral
+(also unique-edge Euclidean here for K4), not Frobenius. Ordinal transitive
+does not imply zero cyclic residual. No experiment or GPU action. See today's
+note and scientific context; local pytest suite unavailable, no suite-pass claim.
+
+## Completed publication request
 
 Enroll this project in agent-native-context and put reviewed shareable results
 on GitHub. The canonical context root is this Git checkout (`github_release`
@@ -10,9 +19,10 @@ in the owner's local workspace), not the outer private working directory.
 
 ## Current work
 
-Context and results reconciliation are locally complete and validated. Six
-publication tests pass; inventory contains435 PNG/PDF/CSV artifacts. Check the
-daily note for final remote verification; do not mistake preparation for push.
+Context and reviewed results were pushed to origin/hodge-diagnostics as
+2a25ed505978e4ab8acde0c475137db0656988ac; remote SHA verified2026-10-13.
+Six publication tests pass; inventory contains435 PNG/PDF/CSV artifacts.
+This covers reviewed local artifacts, not missing WR or unexported server data.
 Start with [results atlas](../docs/RESULTS_INDEX.md) and
 [coverage/exclusions](../docs/RESULT_PUBLICATION_20261013.md).
 

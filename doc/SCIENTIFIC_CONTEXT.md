@@ -43,6 +43,26 @@ WR is missing, not0. Single-seed/all-prompt findings are descriptive.
 Lower temporal SD can coexist with higher adjacent-step TV. Neither alone
 proves convergence or absence of periodicity. Preserve counterexamples.
 
+Matrix inspection2026-10-13: ground-truth P[i,j] is the Oracle2 BT mixture
+probability that fixed candidate i beats j, not policy probability; all six
+arms share it. Prompt416 has a robust1>2>4>1 subtriangle, while candidate3
+beats each other candidate (one-based indices). Its weakest cycle edge is
+.5204165987, only .0004165987 above the fixed .52 cutoff. A cyclic
+subtriangle and a Condorcet winner coexist; this does not predict that neural
+training must cycle. The displayed ambiguous prompts6/11 have no majority
+triangle and include near-tie edges. Group labels do not certify or reject
+strong stochastic transitivity. Values were checked against the hash-validated
+export and published policy_results_20261013/prompt_metadata.json.
+
+Hodge norm convention checked2026-10-13: reuse hodge_diagnostics/hodge/core.py
+on the complete uniform graph. Identity flow is A=P-.5, logit flow is
+A=log(P/(1-P)); u=A1/K, G_ij=u_i-u_j, C=A-G. C_norm2 is the matrix spectral
+norm, not Frobenius. For these K4 skew zero-row-sum residuals, the unique-edge
+Euclidean norm equals spectral norm and Frobenius is sqrt(2) times it.
+All six displayed panels have nonzero residuals for both links, despite their
+different ordinal labels. Logit diagnostics are not the actual DPO optimizer.
+See the dated note for numeric values and independent projection validation.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

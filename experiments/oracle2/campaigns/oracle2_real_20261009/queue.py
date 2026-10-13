@@ -6,6 +6,10 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from generation_recovery import checked_contract, check_failed_jobs, generation_directories, inspect_arm
 
 ROOT = Path('/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical')
 PYTHON = '/work/users/y/u/yuhe32/h100env312/bin/python'
@@ -15,6 +19,7 @@ RESOURCES = {
     'baseline': dict(gpus=1, tasks=1, concurrency=1, memory='80G', time='03:00:00'),
     'train': dict(gpus=1, tasks=6, concurrency=2, memory='80G', time='5-00:00:00'),
     'generate': dict(gpus=1, tasks=6, concurrency=2, memory='80G', time='12:00:00'),
+    'recover': dict(gpus=1, tasks=2, concurrency=2, memory='80G', time='1-00:00:00'),
     'wrscore': dict(gpus=2, tasks=1, concurrency=1, memory='256G', time='5-00:00:00'),
 }
 
@@ -119,9 +124,53 @@ def require_complete_generation(directory, expected_files):
             raise ValueError('Generation bank count/hash mismatch')
 
 
+def require_successful_jobs(expected):
+    raw = run(['sacct', '-X', '-n', '-P', '-j', ','.join(expected), '-o', 'JobID,State,ExitCode'])
+    rows = [row.split('|') for row in raw.splitlines() if row.strip()]
+    for job in expected:
+        parent = [r for r in rows if r[0] == job]
+        if len(parent) != 1 or parent[0][1:] != ['COMPLETED', '0:0']:
+            raise ValueError('Predecessor generation must be COMPLETED 0:0, not just have output files')
+
+
+def check_other_generators(plan, contract):
+    receipt = json.loads((Path(contract['original_launch_root'])/'generate_submission_receipt.json').read_text())
+    recovered = {a['run_id'] for a in contract['arms']}
+    jobs = [receipt['job_id'].split(';')[0]+'_'+str(i)
+            for i, arm in enumerate(plan['runs']) if arm['run_id'] not in recovered]
+    if jobs:
+        require_successful_jobs(jobs)
+
+
 def phase_prerequisites(root, phase, defer_baseline=False):
     plan = json.loads((root / 'plan.json').read_text())
     output = Path(plan['output_root'])
+    recovery = root / 'generation_recovery.json'
+    if recovery.exists() and phase not in ('recover', 'wrscore'):
+        raise ValueError('Recovery launch cannot rerun audit/baseline/training/original generation')
+    if phase == 'recover':
+        plan, contract = checked_contract(root/'plan.json', recovery)
+        check_failed_jobs(contract)
+        check_other_generators(plan, contract)
+        old = Path(contract['original_launch_root'])
+        if any((old/f'wrscore_submission_{kind}.json').exists() for kind in ('intent', 'receipt')):
+            raise FileExistsError('Original WR phase already has an intent/receipt')
+        if any((output/name).exists() for name in ('evaluation_records.jsonl', 'evaluation_scores', 'wr_results')):
+            raise FileExistsError('WR output already exists; inspect before recovery')
+        count = plan['dataset']['evaluation'] * plan['evaluation']['responses_per_prompt']
+        require_complete_generation(output/'generations/baseline', {'step_0000.jsonl': count})
+        names = {arm['run_id'] for arm in contract['arms']}
+        for run in plan['runs']:
+            train = json.loads((output/run['run_id']/'manifest.json').read_text())
+            if train['state'] != 'COMPLETED' or train['last_complete_step'] != plan['training']['iters']:
+                raise ValueError('All training must remain complete')
+            if run['run_id'] not in names:
+                require_complete_generation(output/'generations'/run['run_id'],
+                    {f'step_{s:04d}.jsonl': count for s in plan['evaluation']['steps']})
+        for arm in contract['arms']:
+            inspect_arm(plan, contract, arm)
+            if Path(arm['target_dir']).exists():
+                raise FileExistsError('Recovery target already exists; do not restart blindly')
     if phase == 'audit':
         if (root / 'reuse_candidate_audit.json').exists() or (Path(plan['data_root']) / 'scored/audit.json').exists():
             raise ValueError('Candidate audit already exists; never duplicate scoring')
@@ -139,10 +188,23 @@ def phase_prerequisites(root, phase, defer_baseline=False):
             if manifest['state'] != 'COMPLETED' or manifest['last_complete_step'] != plan['training']['iters']:
                 raise ValueError('All training arms must finish before generation phase')
     if phase == 'wrscore':
+        directories = generation_directories(root/'plan.json', recovery if recovery.exists() else None)
+        if recovery.exists():
+            _, contract = checked_contract(root/'plan.json', recovery)
+            check_other_generators(plan, contract)
+            recovered = json.loads((root/'recover_submission_receipt.json').read_text())
+            job = recovered['job_id'].split(';')[0]
+            jobs = [f'{job}_{i}' for i in range(len(contract['arms']))] if len(contract['arms']) > 1 else [job]
+            require_successful_jobs(jobs)
+            old = Path(contract['original_launch_root'])
+            if any((old/f'wrscore_submission_{kind}.json').exists() for kind in ('intent', 'receipt')):
+                raise FileExistsError('WR intent/receipt exists in original launch')
+        if any((output/name).exists() for name in ('evaluation_records.jsonl', 'evaluation_records.jsonl.tmp', 'evaluation_scores', 'wr_results')):
+            raise FileExistsError('WR phase has existing outputs; do not overwrite or duplicate scoring')
         count = plan['dataset']['evaluation'] * plan['evaluation']['responses_per_prompt']
-        require_complete_generation(output / 'generations/baseline', {'step_0000.jsonl': count})
+        require_complete_generation(directories['baseline'], {'step_0000.jsonl': count})
         for arm in plan['runs']:
-            require_complete_generation(output / 'generations' / arm['run_id'],
+            require_complete_generation(directories[arm['run_id']],
                 {f'step_{step:04d}.jsonl': count for step in plan['evaluation']['steps']})
 
 
@@ -193,13 +255,16 @@ def main():
         p.error('--phase required')
     if a.after_baseline and a.phase != 'train':
         p.error('--after-baseline is only valid for train')
-    resource = RESOURCES[a.phase]
+    resource = dict(RESOURCES[a.phase])
+    if a.phase == 'recover':
+        _, recovery = checked_contract(a.root/'plan.json', a.root/'generation_recovery.json')
+        resource['tasks'] = resource['concurrency'] = len(recovery['arms'])
     maximum = maximum_phase_gpus(resource)
     plan = json.loads((a.root / 'plan.json').read_text())
     if a.phase in ('audit', 'wrscore') and plan['oracle']['scoring_gpus'] != resource['gpus']:
         raise ValueError('Judge GPU request disagrees with frozen plan')
     source = a.root / 'source/experiments/oracle2'
-    if a.phase in ('baseline', 'train', 'generate', 'wrscore'):
+    if a.phase in ('baseline', 'train', 'generate', 'recover', 'wrscore'):
         for arm in json.loads((a.root / 'plan.json').read_text())['runs']:
             run([PYTHON, str(source / 'train_oracle2.py'), '--plan', str(a.root / 'plan.json'),
                  '--review', str(a.root / 'audit_review.json'), '--run-id', arm['run_id'],

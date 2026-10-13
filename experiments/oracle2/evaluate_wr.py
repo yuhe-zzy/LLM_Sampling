@@ -7,15 +7,16 @@ import numpy as np
 
 from common import jsonl, load_json, save_jsonl, sha256, write_json
 from oracle_math import generated_wr
+from generation_recovery import generation_directories
 
 
-def collect(plan_path, destination):
+def collect(plan_path, destination, recovery_path=None):
     plan = load_json(plan_path)
-    generations = Path(plan['output_root']) / 'generations'
+    generations = generation_directories(plan_path, recovery_path)
     rows, sources = [], {}
     expected = plan['dataset']['evaluation'] * plan['evaluation']['responses_per_prompt']
     for name in ['baseline'] + [r['run_id'] for r in plan['runs']]:
-        root = generations / name
+        root = generations[name]
         manifest = load_json(root / 'manifest.json')
         if manifest['state'] != 'COMPLETE' or manifest['plan_sha256'] != sha256(plan_path):
             raise ValueError(f'Incomplete or mismatched generation bank {name}')
@@ -101,9 +102,10 @@ if __name__ == '__main__':
     p.add_argument('--records', type=Path, required=True)
     p.add_argument('--scores', type=Path)
     p.add_argument('--output', type=Path)
+    p.add_argument('--recovery', type=Path)
     a = p.parse_args()
     if a.action == 'collect':
-        collect(a.plan, a.records)
+        collect(a.plan, a.records, a.recovery)
     else:
         if a.scores is None or a.output is None:
             p.error('summarize requires --scores and --output')

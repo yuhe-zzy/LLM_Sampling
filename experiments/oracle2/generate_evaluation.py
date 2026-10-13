@@ -4,17 +4,13 @@ from collections import Counter
 import gc
 import json
 from pathlib import Path
-import numpy as np
 
 from common import jsonl, load_json, require_gpu, sha256, verify_model_lock, write_json
 from run_cyclic_history import stable_attention
+from generation_recovery import bank_info, generation_seed, prepare_recovery
 
 
-def generation_seed(base, step, prompt_id, draw):
-    return int(np.random.SeedSequence([base, step, prompt_id, draw]).generate_state(1)[0])
-
-
-def generate(plan_path, run_id=None):
+def generate(plan_path, run_id=None, recovery_path=None):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from peft import PeftModel
@@ -43,17 +39,26 @@ def generate(plan_path, run_id=None):
         steps = spec['steps']
     else:
         run_root, steps = None, [0]
-    target = output_root / 'generations' / (run_id or 'baseline')
-    target.mkdir(parents=True, exist_ok=False)
-    status = dict(state='RUNNING', plan_sha256=sha256(plan_path),
-                  audit_sha256=sha256(data / 'audit.json'), run_id=run_id or 'baseline', files={},
-                  model_lock_sha256=sha256(plan['model_lock']), settings=spec)
+    existing = {}
+    if recovery_path is not None:
+        if run_id is None:
+            raise ValueError('Do not regenerate the completed baseline')
+        target, status, existing = prepare_recovery(plan_path, recovery_path, run_id)
+    else:
+        target = output_root / 'generations' / (run_id or 'baseline')
+        target.mkdir(parents=True, exist_ok=False)
+        status = dict(state='RUNNING', plan_sha256=sha256(plan_path),
+                      audit_sha256=sha256(data / 'audit.json'), run_id=run_id or 'baseline', files={},
+                      model_lock_sha256=sha256(plan['model_lock']), settings=spec)
     write_json(target / 'manifest.json', status)
     tok = AutoTokenizer.from_pretrained(lock['policy']['path'], local_files_only=True)
     if tok.pad_token_id is None:
         tok.pad_token = tok.eos_token
     try:
         for step in steps:
+            name = f'step_{step:04d}.jsonl'
+            if name in status['files']:
+                continue
             model = AutoModelForCausalLM.from_pretrained(lock['policy']['path'], local_files_only=True,
                 torch_dtype=torch.bfloat16, attn_implementation='sdpa').to('cuda')
             adapter = None
@@ -62,14 +67,19 @@ def generate(plan_path, run_id=None):
                 model = PeftModel.from_pretrained(model, adapter, is_trainable=False)
             model.eval()
             path = target / f'step_{step:04d}.jsonl'
-            diagnostic_rows = []
-            with path.open('x', encoding='utf-8') as handle, torch.inference_mode(), stable_attention():
-                for prompt in panels:
+            diagnostic_rows = list(existing.get(name, []))
+            reused_count = len(diagnostic_rows)
+            with path.open('a' if name in existing else 'x', encoding='utf-8') as handle, torch.inference_mode(), stable_attention():
+                for prompt_index, prompt in enumerate(panels):
+                    if (prompt_index+1)*spec['responses_per_prompt'] <= reused_count:
+                        continue
                     ids = tok.encode(prompt['prompt'], add_special_tokens=False)
                     if len(ids)+spec['max_new_tokens'] > plan['dataset']['max_policy_length']:
                         raise ValueError('Generation prompt exceeds preflight length limit')
                     inputs = torch.tensor([ids], device='cuda', dtype=torch.long)
                     for draw in range(spec['responses_per_prompt']):
+                        if prompt_index*spec['responses_per_prompt']+draw < reused_count:
+                            continue
                         seed = generation_seed(spec['baseline_seed'] if run_id is None else spec['checkpoint_seed'],
                                                step, prompt['prompt_id'], draw)
                         torch.manual_seed(seed)
@@ -95,11 +105,8 @@ def generate(plan_path, run_id=None):
                         handle.flush()
                         diagnostic_rows.append(stats)
                         del result
-            status['files'][path.name] = dict(sha256=sha256(path), count=len(diagnostic_rows),
-                adapter_sha256=sha256(adapter / 'adapter_model.safetensors') if adapter else None,
-                hit_max_new_tokens_fraction=float(np.mean([r['hit_max_new_tokens'] for r in diagnostic_rows])),
-                dominant_token_ge_0_95_fraction=float(np.mean([r['dominant_token_fraction'] >= .95 for r in diagnostic_rows])),
-                mean_unique_token_ratio=float(np.mean([r['unique_token_ratio'] for r in diagnostic_rows])))
+            status['files'][path.name] = bank_info(path, diagnostic_rows,
+                sha256(adapter / 'adapter_model.safetensors') if adapter else None)
             write_json(target / 'manifest.json', status)
             print(json.dumps(dict(run=run_id or 'baseline', completed_outer_state=step)), flush=True)
             del model
@@ -117,5 +124,6 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--plan', type=Path, required=True)
     p.add_argument('--run-id')
+    p.add_argument('--recovery', type=Path)
     a = p.parse_args()
-    generate(a.plan, a.run_id)
+    generate(a.plan, a.run_id, a.recovery)

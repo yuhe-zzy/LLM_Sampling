@@ -18,6 +18,12 @@ case "${1:?Missing phase}" in
   baseline)
     "$PYTHON" "$CODE/generate_evaluation.py" --plan "$PLAN"
     ;;
+  recover)
+    INDEX=${SLURM_ARRAY_TASK_ID:-0}
+    [[ "$INDEX" =~ ^[0-1]$ ]] || exit 2
+    RUN_ID=$("$PYTHON" -c 'import json,sys; print(json.load(open(sys.argv[1]))["arms"][int(sys.argv[2])]["run_id"])' "$ROOT/generation_recovery.json" "$INDEX")
+    "$PYTHON" "$CODE/generate_evaluation.py" --plan "$PLAN" --run-id "$RUN_ID" --recovery "$ROOT/generation_recovery.json"
+    ;;
   train|generate)
     INDEX=${SLURM_ARRAY_TASK_ID:?Missing array index}
     [[ "$INDEX" =~ ^[0-5]$ ]] || exit 2
@@ -32,7 +38,11 @@ case "${1:?Missing phase}" in
     fi
     ;;
   wrscore)
-    "$PYTHON" "$CODE/evaluate_wr.py" collect --plan "$PLAN" --records "$OUT/evaluation_records.jsonl"
+    RECOVERY=()
+    if [[ -f "$ROOT/generation_recovery.json" ]]; then
+      RECOVERY=(--recovery "$ROOT/generation_recovery.json")
+    fi
+    "$PYTHON" "$CODE/evaluate_wr.py" collect --plan "$PLAN" --records "$OUT/evaluation_records.jsonl" "${RECOVERY[@]}"
     "$PYTHON" "$CODE/score_records.py" --plan "$PLAN" \
       --records "$OUT/evaluation_records.jsonl" --output "$OUT/evaluation_scores"
     "$PYTHON" "$CODE/evaluate_wr.py" summarize --plan "$PLAN" \

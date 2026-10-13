@@ -1,5 +1,6 @@
 """Read-only campaign inspection. Does not submit, cancel, retry or schedule anything."""
 import argparse
+import hashlib
 from datetime import datetime, timezone
 import importlib.util
 import json
@@ -17,7 +18,16 @@ def inspect(root):
     queue = module.owned_snapshot()
     result = dict(checked_at_utc=datetime.now(timezone.utc).isoformat(), queue=queue, jobs={},
                   phases={}, errors=[], runs={})
-    for receipt in root.glob('*_submission_receipt.json'):
+    receipt_roots = [root]
+    recovery_path = root/'generation_recovery.json'
+    recovery = json.loads(recovery_path.read_text()) if recovery_path.exists() else None
+    if recovery:
+        receipt_roots.append(Path(recovery['original_launch_root']))
+        module.checked_contract(root/'plan.json', recovery_path)
+        result['recovery'] = dict(contract_sha256=hashlib.sha256(recovery_path.read_bytes()).hexdigest(),
+            original_source_commit=recovery['original_source_commit'],
+            destinations={a['run_id']: a['target_dir'] for a in recovery['arms']})
+    for receipt in [p for r in receipt_roots for p in r.glob('*_submission_receipt.json')]:
         data = json.loads(receipt.read_text())
         job = data['job_id'].split(';')[0]
         result['jobs'][data['phase']] = subprocess.check_output(
@@ -29,6 +39,10 @@ def inspect(root):
     result['generations'] = {}
     for name in ['baseline'] + [arm['run_id'] for arm in plan['runs']]:
         directory = output/'generations'/name
+        if recovery:
+            replacement = next((Path(a['target_dir']) for a in recovery['arms'] if a['run_id'] == name), None)
+            if replacement is not None and (replacement/'manifest.json').exists():
+                directory = replacement
         if (directory/'manifest.json').exists():
             status = json.loads((directory/'manifest.json').read_text())
             status['written_rows'] = {}
@@ -58,7 +72,7 @@ def inspect(root):
             data = json.loads(path.read_text())
             result['runs'][arm['run_id']] = {k: data[k] for k in ('state', 'last_complete_step', 'error') if k in data}
     pattern = re.compile(r'Traceback|CUDA out of memory|OutOfMemoryError|oom-kill|OUT_OF_MEMORY|CUDNN_STATUS_ALLOC_FAILED|Nonfinite|Non-finite')
-    for path in (root/'logs').glob('*'):
+    for path in [p for r in receipt_roots for p in (r/'logs').glob('*')]:
         if path.is_file():
             for line in path.read_text(errors='replace').splitlines():
                 if pattern.search(line):

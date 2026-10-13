@@ -1,5 +1,14 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Missing-response recovery implementation
+
+A tested copy-on-recovery path now preserves completed/partial outputs from
+timed-out generation0/1 and generates only missing responses in a separate
+directory. No scientific setting or original frozen source is changed.
+Recovery submission must wait for successful tasks2..5 and an empty full
+account; WR still waits for all66 complete banks. Code publication is not
+submission. See [recovery protocol and validation](RECOVERY_20261013.md).
+
 ## Policy result inspection, 2026-10-13
 
 Generation tasks4794738_0/1 are now **TIMEOUT**, confirmed06:15:34Z UTC.

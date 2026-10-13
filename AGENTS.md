@@ -18,6 +18,21 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 result inspection2026-10-13T06:15:34Z: six TRAINING arms remain
+COMPLETE0..100; policy figures/numeric summaries published in campaign
+policy_results_20261013. Generation4794738_0/1 now TIMEOUT after12:00:26,
+not successful despite sacct exit0:0 and stale RUNNING file manifests.
+Each has validated complete banks0..70; partial80 rows728/561 preserved.
+Tasks2/3 RUNNING with24-hour limits,4/5 PENDING(JobArrayTaskLimit), full
+accountTWO H100s. No OOM/Traceback/nonfinite found; WR still unsubmitted.
+No retries, cancellations, source/science changes or overwritten banks.
+Do not blindly restart generators (existing output dirs are rejected).
+Any recovery must be tested, preserve/reuse finished and partial banks,
+use new immutable source, sync GitHub and obey existing full-account guards.
+The sole cyclic prompt416 initially assigns near-unit panel probability to
+a2-token candidate; flat raw policy is not evidence of history stabilization.
+See records/attempt4/generate_timeout_and_policy_results_20261013.json.
+
 Oracle2 generation time-limit warning 2026-10-12T22:21:28Z: array4794738
 tasks0/1 remain RUNNING with12-hour limits; tasks2..5 are PENDING and NOW
 have24-hour limits. An in-place array update to1-00:00:00 returned code1:

@@ -1,5 +1,22 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Policy result inspection, 2026-10-13
+
+Generation tasks4794738_0/1 are now **TIMEOUT**, confirmed06:15:34Z UTC.
+Both retain complete states0..70, and partial80 (728/561 rows). Tasks2/3
+started under24-hour limits;4/5 wait normally, full account2H100s. WR remains
+unsubmitted. Stale RUNNING manifests do not override sacct TIMEOUT. No jobs
+were changed or retried, and no completed/partial outputs were overwritten.
+See [timeout evidence](records/attempt4/generate_timeout_and_policy_results_20261013.json).
+
+All six completed training trajectories are now available as matched policy
+plots, all500-prompt diagnostics and text-free numeric results. Generated WR
+is not available yet. The only cyclic training prompt416 starts with almost
+all panel probability on a two-token candidate; its flat raw policy is not
+evidence of history-induced stabilization. See the full definitions, fixed
+prompt-selection rule, counterexamples and reproduction instructions in
+[policy results](policy_results_20261013/README.md).
+
 ## Generation time-limit risk and partial extension
 
 At **2026-10-12T22:19:21Z**, generation tasks `4794738_0/1` had run for

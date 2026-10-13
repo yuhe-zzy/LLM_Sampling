@@ -1,5 +1,34 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Recovery deployed for CPU validation, not submitted
+
+At2026-10-13T06:40:26Z, recovery source
+**2d6b5747c251abc44700799be24e3e1e05e9b984** was deployed immutably at
+`/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery`.
+All129 server CPU tests passed without skips, shell syntax and six reviewed
+config checks passed, and real original response identities/seeds/hash bindings
+were validated. The byte-identical original plan/lock/review and all old banks
+are unchanged. Recovery GPU inference has NOT run.
+
+The contract binds each arm's eight complete banks and state80 prefixes728/561;
+remaining responses are1672/1839. New outputs will be written only under
+`/work/users/y/u/yuhe32/ipo_runs/oracle2_generation_recovery_20261013_v1`.
+No recovery output, submission intent, receipt, or WR job exists yet.
+Tasks4794738_2/3 are still RUNNING (state0 rows250 each),4/5 pending, and the
+full account allocates2H100s. Recovery preflight correctly rejects this state.
+No new logged OOM/Traceback/nonfinite failure was found.
+
+When all four remaining original generators are COMPLETED0:0, recheck the
+full owner/UID account is empty and inspect latest intents/receipts. Then use
+the frozen v5 `queue.py --root <v5-root> --phase recover --submit` once.
+It creates two1-H100 tasks at most2 concurrent,24-hour limits. The subsequent
+v5 WR phase uses the two verified recovered arms plus four original arms and
+unchanged baseline, still requiring all66 complete banks and an idle account.
+Never submit the original six-arm generate phase again. Original running code
+and all training remain source23401de. Existing monitoring remains every2hours.
+See [deployment and validation status](records/attempt5/recovery_preparation_status.json)
+and [bound recovery contract](records/attempt5/generation_recovery.json).
+
 ## Missing-response recovery implementation
 
 A tested copy-on-recovery path now preserves completed/partial outputs from

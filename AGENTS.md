@@ -18,6 +18,25 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle2 recovery prepared2026-10-13T06:40:26Z: frozen source2d6b5747c251abc44700799be24e3e1e05e9b984
+is deployed at ipo/diagnostics/oracle2_real_20261009_v5_recovery. All129 server
+CPU tests passed without skips, plus six config checks and real response-prefix,
+seed, hash and adapter validation. This is NOT GPU inference or submission.
+Original training/generators remain immutable source23401de. Recovery contract
+hash89c1397acd414d3f7badddb8d6a885f74b8ae33a2b894c33d2166dc95e8309fd
+reuses eight complete banks per failed arm plus state80 rows728/561; only
+1672/1839 responses remain. Original banks remain untouched; new recovery
+output ipo_runs/oracle2_generation_recovery_20261013_v1 does NOT exist yet.
+No recovery intent/receipt or WR job. Tasks4794738_2/3 RUNNING (step0 rows250),
+4/5 PENDING(JobArrayTaskLimit), full accountTWO H100s. The recovery phase guard
+was verified BLOCKED while predecessors remain incomplete. Once original2..5
+COMPLETED0:0 and full account idle, recheck latest intents/receipts and use v5
+frozen queue.py --phase recover once, oneH100/task,two concurrent,24h. Do not
+resubmit original generate. Later v5 WRscore routes two recovered arms plus
+four originals; all66 banks, successful jobs and idle account are still required.
+Do not implement incremental WR based only on the user's explanatory question.
+Records: campaign records/attempt5 and RECOVERY_20261013.md. Monitor stays2hours.
+
 Oracle2 result inspection2026-10-13T06:15:34Z: six TRAINING arms remain
 COMPLETE0..100; policy figures/numeric summaries published in campaign
 policy_results_20261013. Generation4794738_0/1 now TIMEOUT after12:00:26,

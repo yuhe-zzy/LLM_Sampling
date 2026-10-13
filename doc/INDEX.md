@@ -12,6 +12,7 @@ Start with [current handoff](../handoff/current.md), then the newest
 - [Oracle2 execution record](../experiments/oracle2/campaigns/oracle2_real_20261009/README.md)
 - [Cyclic campaign registry](../experiments/cyclic_history/campaigns/README.md)
 - [Hodge collaborator material](../experiments/hodge_diagnostics/README.md)
+- [Fan's aligned latent-preference analysis plan](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md): embedding first, judged style second; execution clarifications take precedence over draft shorthand.
 
 `doc/` is the current context layer. Existing `docs/` and campaign directories
 remain authoritative for their detailed protocols and dated evidence. The daily

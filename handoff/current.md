@@ -2,6 +2,19 @@
 
 Updated2026-10-13, America/Chicago. Read [context index](../doc/INDEX.md).
 
+## Fan's aligned-latent analysis plan (shared2026-10-13)
+
+Fan requested publishing his Claude-drafted S0–S5 plan so Yu He can run it on
+the exact existing500-panel bank. Start with the
+[plan bundle](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md)
+and execution clarifications (take precedence over original draft shorthand).
+Both features requested: frozen embeddings/PCA8,16 first (no annotation fee),
+new judged continuous style attributes second (2000 responses; confirm judge
+channel/budget). Pure latent fit only this round; identity/logit, each oracle
+and mixture, rank/fit, held-out signal and500-draw permutation/flip nulls.
+No aligned signal has yet been computed. Keep WR/existing runs untouched;
+no new training, rho-scan, oracle construction or extra GPU allocation.
+
 ## Latest inspection request
 
 Latest clarification: mean P is the elementwise equal average of500 training

@@ -12,6 +12,8 @@ semantic axes. Logit averaging orders reported separately. Seven focused CPU
 unittests passed; no full-suite/GPU test or scheduler action. See
 [average report and proposed latent analysis](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md).
 Shared-feature trajectory/latent-plane analysis is a proposal, not yet executed.
+Analysis commit657af2ac09f95bb39c918cc3e9e487053c01b9bf was pushed to
+origin/hodge-diagnostics and exact remote SHA verified2026-10-13.
 
 ## Completed publication request
 

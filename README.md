@@ -5,6 +5,22 @@ optimization. This release separates **scalar-oracle transitive training**,
 **fixed-data non-oracle training**, **cyclic sampling sweeps**, and
 the **new cyclic history pilot**.
 
+## Project context and results
+
+October13 update: [current handoff](handoff/current.md), [project context](doc/INDEX.md),
+and [daily notes](daily-notes/) are the shared agent-native context. Start with
+the [results atlas](docs/RESULTS_INDEX.md) for figures, numeric tables and reports.
+[Publication coverage](docs/RESULT_PUBLICATION_20261013.md) distinguishes verified
+results, historical previews, invalid tails and missing outputs.
+
+Oracle2 now has [six complete policy trajectories](experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/README.md),
+including all500-prompt numeric evidence. Generated-response WR is not yet
+available. Its [dated status](doc/EXPERIMENT_STATUS.md) records generation
+timeouts and prepared recovery; no plot or upload implies a new GPU submission.
+The [historical sampling ablation](experiments/legacy_sampling_analysis/snapshot_20260911/README.md)
+is also published, explicitly retaining its token-average definition and DPO
+NaN caveat. All current runnable trainers still use sequence-sum.
+
 The code was synchronized with the experiment server on 24 September 2026.
 See [migration and provenance](docs/MIGRATION.md) before comparing with the
 older version of this repository. Model weights, data, adapters, result dumps,

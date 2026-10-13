@@ -1,0 +1,113 @@
+{
+  "captured_at_utc": "2026-09-11T19:57:48.160762+00:00",
+  "private_snapshot_sha256": "c8e694d30a78fc328cdb8a0f08102098495ef53e6491448029b9201331dfc81c",
+  "analysis_script_sha256": "60ad3ba8db615a2440cf5ca5c54de4e982e5f22a417abdb2b8153769bb74122c",
+  "training_commit": null,
+  "training_commit_note": "Unknown; never substitute the current repository commit.",
+  "metric": "legacy softmax of average response log-probability; NOT sequence-sum",
+  "runs": [
+    {
+      "run": "dpo_a0.99_l0.00_b1.0_seed0",
+      "method": "dpo",
+      "lambda": 0.0,
+      "rho": 1.0,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "dpo_a0.99_l0.25_b1.0_seed0",
+      "method": "dpo",
+      "lambda": 0.25,
+      "rho": 0.75,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "dpo_a0.99_l0.50_b1.0_seed0",
+      "method": "dpo",
+      "lambda": 0.5,
+      "rho": 0.5,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "dpo_a0.99_l0.75_b1.0_seed0",
+      "method": "dpo",
+      "lambda": 0.75,
+      "rho": 0.25,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "dpo_a0.99_l1.00_b1.0_seed0",
+      "method": "dpo",
+      "lambda": 1.0,
+      "rho": 0.0,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "ipo_a0.99_l0.00_b10.0_seed0",
+      "method": "ipo",
+      "lambda": 0.0,
+      "rho": 1.0,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "ipo_a0.99_l0.25_b10.0_seed0",
+      "method": "ipo",
+      "lambda": 0.25,
+      "rho": 0.75,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "ipo_a0.99_l0.50_b10.0_seed0",
+      "method": "ipo",
+      "lambda": 0.5,
+      "rho": 0.5,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "ipo_a0.99_l0.75_b10.0_seed0",
+      "method": "ipo",
+      "lambda": 0.75,
+      "rho": 0.25,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    },
+    {
+      "run": "ipo_a0.99_l1.00_b10.0_seed0",
+      "method": "ipo",
+      "lambda": 1.0,
+      "rho": 0.0,
+      "seed": 0,
+      "iterations": 150,
+      "prompts": 500,
+      "support_sha256": "707ac50cc0d1b0f494fb355ef5a3a245b5d5dcb84a5ce0cd86a84f12b915754c"
+    }
+  ],
+  "validation": "Recomputed all common-window metrics from private numeric snapshot; tables match.",
+  "private_text_exported": false,
+  "dpo_baseline_invalid_from": 82
+}

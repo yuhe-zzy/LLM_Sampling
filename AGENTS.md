@@ -1,5 +1,24 @@
 # Experiment collaboration
 
+## Agent-native project context
+
+The owner enrolled this project in agent-native-context on 2026-10-13.
+This Git checkout is the ONE canonical context root. The outer local workspace
+contains private working artifacts and points here; do not duplicate memory.
+At session start read `handoff/current.md`, `doc/INDEX.md`, and the newest
+`daily-notes/YYYY-MM-DD.md`. Follow the linked campaign evidence as needed.
+During substantive work append dated findings/decisions to the daily note,
+update current docs, and leave a concise handoff (normally under 80 lines).
+Use America/Chicago dates/times with timezone labels. Avoid notes for unchanged
+routine polling. Distinguish requirements, verified evidence, historical
+reports, known issues and proposals. Never store hidden reasoning, credentials,
+raw private text or whole tool transcripts in context files. Keep existing
+`docs/` reference documents and immutable campaign paths; `doc/` indexes them.
+Publish reviewed results via `docs/RESULTS_INDEX.md`, not the whole workspace.
+Always recheck live scheduler state before resource operations. Current budget
+is FOUR account GPUs, with Oracle2 at two concurrent one-GPU generators or one
+two-GPU judge job, nonoverlapping phases; older six-GPU notes are historical.
+
 ## Synchronize changes to GitHub
 
 The owner requested on 2026-09-29 that every experiment modification be

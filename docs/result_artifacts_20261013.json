@@ -1,0 +1,2624 @@
+{
+  "publication_date": "2026-10-13",
+  "scope": "Public experiment PNG/PDF/CSV artifacts; not raw server coverage",
+  "hash_encoding": "Per-file Git text attributes respected; binary and explicitly -text files unchanged",
+  "file_count": 435,
+  "total_bytes": 146802991,
+  "by_extension": {
+    ".csv": 175,
+    ".pdf": 72,
+    ".png": 188
+  },
+  "files": [
+    {
+      "path": "experiments/cyclic_history/calibration/2026-09-28/population_recovery.pdf",
+      "bytes": 33225,
+      "hash_encoding": "source_bytes",
+      "sha256": "d8db487ad27630570cfd3dcdeb46b3959ab3d79d31a45533aec3632982c23a59"
+    },
+    {
+      "path": "experiments/cyclic_history/calibration/2026-09-28/population_recovery.png",
+      "bytes": 145354,
+      "hash_encoding": "source_bytes",
+      "sha256": "2e367815958e97dd6d8b3bbdf4e22c7667636ae18dd112c2cd6d413697876d9a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/dpo_ordinary_calibrated_s0.csv",
+      "bytes": 2223,
+      "hash_encoding": "lf_normalized",
+      "sha256": "dfed751df8b6f037d5859eeead157bee96caf23faf57bdd248fed04a534d12d8"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/dpo_stable_calibrated_s0.csv",
+      "bytes": 2238,
+      "hash_encoding": "lf_normalized",
+      "sha256": "af614dfbe0ad245a06d6258097e2c0925a16fced0b38faed79b6a44eeea499aa"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/ipo_ordinary_calibrated_s0.csv",
+      "bytes": 2201,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6fac0696aede7b7e213496d893eddd651352d460c77f486eeaa51cb46fc62fa9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/ipo_stable_calibrated_s0.csv",
+      "bytes": 2236,
+      "hash_encoding": "lf_normalized",
+      "sha256": "c6e4886eb7b630fc0c7d4308103697f71096472daeb77ea60e36b90a04444469"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/metrics_original/dpo_reference90_a1_b100_s0.csv",
+      "bytes": 22478,
+      "hash_encoding": "lf_normalized",
+      "sha256": "deb50308df0f65f23e27d28671a86f1d5e5004c9d023f938810b6b5cd24936c0"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/metrics_original/ipo_reference90_a1_b100_s0.csv",
+      "bytes": 20512,
+      "hash_encoding": "lf_normalized",
+      "sha256": "1fee14a07cbebd2afe051e49a2529ed8a0a1cbf589cebf827da011d09a9366ab"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_all_prompts.png",
+      "bytes": 1174973,
+      "hash_encoding": "source_bytes",
+      "sha256": "7628f6d4c063303ac4d759268f46ad585a5ff84a4519c07dcc1d077d43ccaddb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_prompt_251.png",
+      "bytes": 258120,
+      "hash_encoding": "source_bytes",
+      "sha256": "fa80f0f20c8b71da7e306acedb61ba01a32cbf69e7bf07d136b4c21110d2914e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_prompt_54.png",
+      "bytes": 252685,
+      "hash_encoding": "source_bytes",
+      "sha256": "7325dbe6e467ac7e55774d695d3c4ff609fce2c70cce3a0104f2315c8cf8ce5b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_prompt_612.png",
+      "bytes": 247130,
+      "hash_encoding": "source_bytes",
+      "sha256": "d257ff8e124b55a5814d8ab71bdce0d245e32c5b07a3aca62696ea12e1f1b455"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_prompt_737.png",
+      "bytes": 270738,
+      "hash_encoding": "source_bytes",
+      "sha256": "f9ed6aa1d89b2b2d718fa6500c4ff5c1effa922b3c0fdf9acfeaaffdc07e80a6"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_prompt_867.png",
+      "bytes": 254797,
+      "hash_encoding": "source_bytes",
+      "sha256": "a9b7b241158c5c0a561429fa9d5285574e2cb7ac0ef845e7fb503c2ad01cf33f"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/dpo_reference90_vs_ordinary_prompt_945.png",
+      "bytes": 273594,
+      "hash_encoding": "source_bytes",
+      "sha256": "a5b764413804ce4aee312947024bd91e8f26ef2594793bc0f2a977d7c25a469e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_all_prompts.png",
+      "bytes": 1171108,
+      "hash_encoding": "source_bytes",
+      "sha256": "57d9fcf9e3e084dfb59924433f0f0acf9ab381d642f07f59d37fd17d8620618e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_prompt_251.png",
+      "bytes": 253489,
+      "hash_encoding": "source_bytes",
+      "sha256": "b2a93f7659020d5330510ce38757dadece79176e3d2825f44983bde9740d8f43"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_prompt_54.png",
+      "bytes": 250235,
+      "hash_encoding": "source_bytes",
+      "sha256": "b92f67b9f88034e17386e256ed0251f4f45c1b9e1d10984354bf3f79d85a5ee5"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_prompt_612.png",
+      "bytes": 252264,
+      "hash_encoding": "source_bytes",
+      "sha256": "857b40d0139ae9edd93b494149b1c09ba284357d6720020cf641ed7f9795f078"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_prompt_737.png",
+      "bytes": 272948,
+      "hash_encoding": "source_bytes",
+      "sha256": "4b9bca4d71c83921ced70401dd57da561e8b22e37507e54469283b34f9a57d6e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_prompt_867.png",
+      "bytes": 259515,
+      "hash_encoding": "source_bytes",
+      "sha256": "71d87830664f92f9331f3bad63ce262e98d99b8b886d5418f759399d4dae151c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/ipo_reference90_vs_ordinary_prompt_945.png",
+      "bytes": 258572,
+      "hash_encoding": "source_bytes",
+      "sha256": "a8847018afd3d6e6ff312c23f6bb027cb36e0d613fc2c82d5a0e09dc7e458a6c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/ordinary_comparison_20261006/reference90_vs_ordinary.pdf",
+      "bytes": 217087,
+      "hash_encoding": "source_bytes",
+      "sha256": "afd6e30361410fa18f057c7771bb9681fca95f5433bdbbe335306d0cb80ff73b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/dpo_reference90_pi_vs_iter.pdf",
+      "bytes": 47735,
+      "hash_encoding": "source_bytes",
+      "sha256": "55ac982c9dbb20910bd4161fe594fce1ad9e603f474e574041bc1a1bbcaa38b9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/dpo_reference90_pi_vs_iter.png",
+      "bytes": 645069,
+      "hash_encoding": "source_bytes",
+      "sha256": "a88e2630f3de5364817c7d04e007deaddee8c103f3d450a0041a4c47a3f9c877"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/ipo_reference90_pi_vs_iter.pdf",
+      "bytes": 47747,
+      "hash_encoding": "source_bytes",
+      "sha256": "4cba48ef583d52769942320188b7ab9254a640f8615e5cb69ee1fff23449f61d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/ipo_reference90_pi_vs_iter.png",
+      "bytes": 655611,
+      "hash_encoding": "source_bytes",
+      "sha256": "4ed52784e65b2aff705354dd8100ba4abb99018ecb8024689d81d2da4e3bad1e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/per_prompt_summary.csv",
+      "bytes": 8897,
+      "hash_encoding": "lf_normalized",
+      "sha256": "2f2f451acba909f1555dc21fe6af519d1307a9420cefcfac6f7e795d4b5d0493"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/pi_trajectories.csv",
+      "bytes": 253084,
+      "hash_encoding": "lf_normalized",
+      "sha256": "85111ad1c98fe068aafa13bc2c4be9249f02a24d3242b5cbd0e1aeca88be318c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/reference90_all_figures.pdf",
+      "bytes": 89383,
+      "hash_encoding": "source_bytes",
+      "sha256": "788c08baf814849486ef7525e1d0854b9ab5b78d1c32977cee172f71942c8478"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/reference90_relative_entropy.pdf",
+      "bytes": 37339,
+      "hash_encoding": "source_bytes",
+      "sha256": "e56e24a69e0c56b02df657754fe47e4ad941482777e8c1f6b5815dc8fe9d55e8"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/reference90_relative_entropy.png",
+      "bytes": 442265,
+      "hash_encoding": "source_bytes",
+      "sha256": "7864bcb3f4613b3e413aff6e57e6752930baa725e2a27e8448d5a7e321966ee8"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/results/run_summary.csv",
+      "bytes": 1699,
+      "hash_encoding": "lf_normalized",
+      "sha256": "1176d1c7e2c4f45108e3769798c50f54ea3f2a99a360356623644d90ee0609d5"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/dpo_all_prompt_trajectories.pdf",
+      "bytes": 51050,
+      "hash_encoding": "source_bytes",
+      "sha256": "811b58510a9c17826aaf9d7ac06aa7f1d63d70b3e1394fde9a4f823f6e563eb4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/dpo_all_prompt_trajectories.png",
+      "bytes": 647484,
+      "hash_encoding": "source_bytes",
+      "sha256": "63df22508603a4f9ee4c0964a0ad297b2e576addcee992c89df39b17047febce"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/ipo_all_prompt_trajectories.pdf",
+      "bytes": 50950,
+      "hash_encoding": "source_bytes",
+      "sha256": "935f75342517b64e1ed65732bbc0698c7bc7f7b8e38d06e91a53a4a20f88d077"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/ipo_all_prompt_trajectories.png",
+      "bytes": 646446,
+      "hash_encoding": "source_bytes",
+      "sha256": "9b720938fbe7846e94a9690e47db53a5c23b6b1f04942af74420b747a887ff6b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/dpo_ordinary_calibrated_s0.csv",
+      "bytes": 8747,
+      "hash_encoding": "lf_normalized",
+      "sha256": "832240c47e085d1b72d8155daef17105b8021bc016f32724705bfc86bcfd7759"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/dpo_stable_calibrated_s0.csv",
+      "bytes": 8787,
+      "hash_encoding": "lf_normalized",
+      "sha256": "8f30ab022a9aa0207b8ae111f6d41db9cbd7e49c1ea0da31689ec324940cc94a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/ipo_ordinary_calibrated_s0.csv",
+      "bytes": 8164,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9d5b2570a0930484c7767a7bd6b7b12c958773a66ca4735d77ef0ee5c7826acb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/ipo_stable_calibrated_s0.csv",
+      "bytes": 8242,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9d9de5a1009b3c6d863e51c18bbd70b75ef379879504d6caa0b0e16ca530d3cd"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/per_prompt_summary.csv",
+      "bytes": 6679,
+      "hash_encoding": "lf_normalized",
+      "sha256": "a38da8f477203e7a998237bb2457a6511e795279fbd87e778f0f37c75532bd07"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/run_summary.csv",
+      "bytes": 1816,
+      "hash_encoding": "lf_normalized",
+      "sha256": "4f5b9f7b3d49bf5646ae6aa0282b7b36789b97fe6225fdc9eea3eb9985442461"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/stage_a_overview.pdf",
+      "bytes": 33530,
+      "hash_encoding": "source_bytes",
+      "sha256": "120b33b657c64d2a9e28e03bf41c07093f4b9f9246f73a73ed83103ee42aabf6"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/stage_a_overview.png",
+      "bytes": 512188,
+      "hash_encoding": "source_bytes",
+      "sha256": "84433f06a637a65260bd6c373f2e5571cf948c346bd5dbcffec514c4494b5a16"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/stage_a_target_fit.pdf",
+      "bytes": 19968,
+      "hash_encoding": "source_bytes",
+      "sha256": "36657854d502392a0a1e11529aee7be11c4cc07a8fdef55e817c52fd867f4f4e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/stage_a_target_fit.png",
+      "bytes": 239308,
+      "hash_encoding": "source_bytes",
+      "sha256": "7344824b83de89e18299dbfa3894aa8ad79722a27a93b33f5ad11866cf9e8d10"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/dpo_all_prompt_trajectories.pdf",
+      "bytes": 48699,
+      "hash_encoding": "source_bytes",
+      "sha256": "c0ffa4c142d8ffb0dbf597d2e9288ea0fccd497c24f13791e36f6a0496e5b98b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/dpo_all_prompt_trajectories.png",
+      "bytes": 519397,
+      "hash_encoding": "source_bytes",
+      "sha256": "5899e626746404b6ed4ae0b66c7a2f4fbc57d9e293d4e7f67dd311aa90aae17b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/dpo_amplitude_phase.pdf",
+      "bytes": 63294,
+      "hash_encoding": "source_bytes",
+      "sha256": "b874dada22b2cf1fb7339d27db23e26b5e51fe27cbb73e2e21176b1cd070ad74"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/dpo_amplitude_phase.png",
+      "bytes": 757298,
+      "hash_encoding": "source_bytes",
+      "sha256": "8d052cd556e2fa81574bdf11c47078e52d55cd87abf48afbb2ce551ddc0da52a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/dpo_relative_entropy.pdf",
+      "bytes": 39550,
+      "hash_encoding": "source_bytes",
+      "sha256": "07f692191f825ea74dc78ee5b22473687d35a28ad41145a79fce0c11934fcf7b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/dpo_relative_entropy.png",
+      "bytes": 485875,
+      "hash_encoding": "source_bytes",
+      "sha256": "9179924ed81487621e5a808cb207adf6dc736e62fe2e2d9e952757b36f87b92f"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/ipo_all_prompt_trajectories.pdf",
+      "bytes": 48580,
+      "hash_encoding": "source_bytes",
+      "sha256": "d747f32e6b9397a64ce8557270388157f5bb596561ddbcb2171b31e50763fb89"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/ipo_all_prompt_trajectories.png",
+      "bytes": 483901,
+      "hash_encoding": "source_bytes",
+      "sha256": "97d11e700ce07ce363199a584935607fd3a237fd244a6c2f810787aaaf97cc58"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/ipo_amplitude_phase.pdf",
+      "bytes": 62877,
+      "hash_encoding": "source_bytes",
+      "sha256": "09d9566819f221dbddea03ea4d75a30456bffdb2516e743a9020cf5c602a5533"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/ipo_amplitude_phase.png",
+      "bytes": 744228,
+      "hash_encoding": "source_bytes",
+      "sha256": "61a264cd40ec4317998fdab1261caabf4dac37e2b36b2c011753205d527a0445"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/ipo_relative_entropy.pdf",
+      "bytes": 39465,
+      "hash_encoding": "source_bytes",
+      "sha256": "5754bd098981a410d373b9386dff1be0d112d2ec4cac6e073545c40106cc6636"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/ipo_relative_entropy.png",
+      "bytes": 471297,
+      "hash_encoding": "source_bytes",
+      "sha256": "497f2546345343a979811e0af1d4cd1452d65dd9dd1cc71a77d0f77816ce19ea"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/dpo_feedback_b100_s0.csv",
+      "bytes": 28271,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d828d272991ca7528cc741d5735457935750be52683b7ec7b1b2846b60f4a081"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/dpo_ordinary_b100_s0.csv",
+      "bytes": 28296,
+      "hash_encoding": "lf_normalized",
+      "sha256": "952b727f8ddef097955b937310525773fc1a7921b1714012f680ce672f21c0ed"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/dpo_reference_b100_s0.csv",
+      "bytes": 28318,
+      "hash_encoding": "lf_normalized",
+      "sha256": "b9aefba9ec66031bf698ee9c45b4decc4a9ddb7b178495906f6eec554582a12a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/ipo_feedback_b100_s0.csv",
+      "bytes": 26353,
+      "hash_encoding": "lf_normalized",
+      "sha256": "7c56673244d6ce7073af6c4d46adab78567efb2939fb4808b18a684fc664d3ca"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/ipo_ordinary_b100_s0.csv",
+      "bytes": 26314,
+      "hash_encoding": "lf_normalized",
+      "sha256": "348759387227f000f04347458c85b610cfb831b26efda91480ecd8cad8fc3ce9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/ipo_reference_b100_s0.csv",
+      "bytes": 26351,
+      "hash_encoding": "lf_normalized",
+      "sha256": "8ee07fdd5698eecaac8025efd1887bdb62f69cee2cd98e3e83b4244f131a824a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/per_prompt_summary.csv",
+      "bytes": 8378,
+      "hash_encoding": "lf_normalized",
+      "sha256": "32429954279e8a4ceee47ad3f69770f86c2f2980add2587db67703c523bae771"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/dpo_feedback_pi_vs_iter.pdf",
+      "bytes": 43661,
+      "hash_encoding": "source_bytes",
+      "sha256": "906e068d3343514e5167e6c448e1e54d5de6ad56416d8991dfe8cc61b142c546"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/dpo_feedback_pi_vs_iter.png",
+      "bytes": 643314,
+      "hash_encoding": "source_bytes",
+      "sha256": "aecff2014d2123a72eccfe9475286919d1d0fb41a17ed398bae0c8d69f6fdf50"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/dpo_ordinary_pi_vs_iter.pdf",
+      "bytes": 42967,
+      "hash_encoding": "source_bytes",
+      "sha256": "10a5a874a3b1b727eea68ef1291675301d495be38dfc00644cab296751d1fa66"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/dpo_ordinary_pi_vs_iter.png",
+      "bytes": 665866,
+      "hash_encoding": "source_bytes",
+      "sha256": "a3c00867bbfe8d2a1c82cbe1fc86230a7978cb49c6482418afb2d6057eb242f6"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/dpo_reference_pi_vs_iter.pdf",
+      "bytes": 43250,
+      "hash_encoding": "source_bytes",
+      "sha256": "63fcd18dccc857b90b645be686ea6d0560aa292744d55a26051c2f66b822c8ef"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/dpo_reference_pi_vs_iter.png",
+      "bytes": 637681,
+      "hash_encoding": "source_bytes",
+      "sha256": "6cd1723866c1e67cd1ddb04ca9080c23e7c30536dfd2cb573cd1160dc5038036"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/ipo_feedback_pi_vs_iter.pdf",
+      "bytes": 43637,
+      "hash_encoding": "source_bytes",
+      "sha256": "4171e30cb4159283abb87b31769802a653fae629929b4b18e8e59d61adfde785"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/ipo_feedback_pi_vs_iter.png",
+      "bytes": 630863,
+      "hash_encoding": "source_bytes",
+      "sha256": "1322eadd0372388424a022264e74e8cf11e1585088bfc57cedc664502d5d92c2"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/ipo_ordinary_pi_vs_iter.pdf",
+      "bytes": 42890,
+      "hash_encoding": "source_bytes",
+      "sha256": "ee683c96ad35dc0aad0ff397f75ce43a81ac6d99d930c440d5fe37cec2882d5f"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/ipo_ordinary_pi_vs_iter.png",
+      "bytes": 649180,
+      "hash_encoding": "source_bytes",
+      "sha256": "10f415814d0e360927ed2da5cc4fe3a9ad939d8aca15f94c18c95356c0ea8ad9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/ipo_reference_pi_vs_iter.pdf",
+      "bytes": 43199,
+      "hash_encoding": "source_bytes",
+      "sha256": "0e1b9b7169b8494b355f910e80fde120f4b2409bb180cdabba8571d8631638d4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/ipo_reference_pi_vs_iter.png",
+      "bytes": 636858,
+      "hash_encoding": "source_bytes",
+      "sha256": "396d730aaca73a51f5d5ded1393ef6ec64f2611e367733140adbcbb8f67b40e9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/pi_trajectories.csv",
+      "bytes": 893315,
+      "hash_encoding": "lf_normalized",
+      "sha256": "56dc65fdc4e26545192580f0cfd9fcc70c7f6e381bceaeba367c0cadc5df84fb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/stage_b_all_pi_curves.pdf",
+      "bytes": 171120,
+      "hash_encoding": "source_bytes",
+      "sha256": "b38663d160bfc3fe32e01cfeb480efc73e11c932ae5c28dd52827b89a0a1118e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/run_summary.csv",
+      "bytes": 1726,
+      "hash_encoding": "lf_normalized",
+      "sha256": "4ca283d7b20f76ebdfdcf8c82c00712d6d282b58ee1922ddcf860a4841e504dd"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/stage_b_overview.pdf",
+      "bytes": 42627,
+      "hash_encoding": "source_bytes",
+      "sha256": "edc9588acf3cc2510111da0132e0458271a08ab9617e8b36fe2072d270b85205"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/stage_b_overview.png",
+      "bytes": 529605,
+      "hash_encoding": "source_bytes",
+      "sha256": "d5de8d4654cfcd4f5bd2aff808de312dfee089b94fee94d90d28ebc34f293f61"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/trajectory_points.csv",
+      "bytes": 423023,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9ba7169123355016ce6c521a82e5bd8f03f10489822341e96ae5589514b7c2e1"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/all_arms_overview.pdf",
+      "bytes": 47912,
+      "hash_encoding": "source_bytes",
+      "sha256": "52d0f89df1e4cfcb146ebc05b9306ecee253169b0e638ed49cec98c946ce5c50"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/all_arms_overview.png",
+      "bytes": 623473,
+      "hash_encoding": "source_bytes",
+      "sha256": "aec6501f59b6562197edeaa97f5f048afcb06dd2d86c0dbb14f3a993d04879aa"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/all_stage_c_figures.pdf",
+      "bytes": 305720,
+      "hash_encoding": "source_bytes",
+      "sha256": "6d9690e4c85f95fbb31631783e297bfa50023a1e757a3e39174db1906c9aefa2"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_aligned_vs_mixed_pi.pdf",
+      "bytes": 70540,
+      "hash_encoding": "source_bytes",
+      "sha256": "70440c4cb235d110c5d9ae02997895c99f1fcb9fe1d6391b4c805feb3e797b29"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_aligned_vs_mixed_pi.png",
+      "bytes": 1099160,
+      "hash_encoding": "source_bytes",
+      "sha256": "62620e623a944d57499c74c4325b903b0beee43c9b0a203ab6484767ffc5f91d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_common_probability_trajectories.pdf",
+      "bytes": 41086,
+      "hash_encoding": "source_bytes",
+      "sha256": "6bae8e42feb624592163162df04334439a4b9913b64b0960811318cece02f882"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_common_probability_trajectories.png",
+      "bytes": 494939,
+      "hash_encoding": "source_bytes",
+      "sha256": "56e99b41b84598e79c09a420d5bb2baee57bced8bbd52fb74c5f38586be7461e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_mixed_pi_vs_iter.pdf",
+      "bytes": 44616,
+      "hash_encoding": "source_bytes",
+      "sha256": "9aa71525fc53c43ed9946bdfef9a46b073fe684a0115a42cd87622493173ca07"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_mixed_pi_vs_iter.png",
+      "bytes": 605452,
+      "hash_encoding": "source_bytes",
+      "sha256": "a32c5e326ca8c8a5e135f08382b4a6be676e1711711bee26bcc4efc0fc81ec1c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_probability_motion.pdf",
+      "bytes": 35336,
+      "hash_encoding": "source_bytes",
+      "sha256": "22da2fa6a786bd8646a96b091e40d5980e6b6876a5fff51332264be40e29b0ff"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_probability_motion.png",
+      "bytes": 541696,
+      "hash_encoding": "source_bytes",
+      "sha256": "b898ac6ba0d8ddf749224a5081317c8ed8700ef197140f49c23b7e359f03e124"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_relative_entropy.pdf",
+      "bytes": 35526,
+      "hash_encoding": "source_bytes",
+      "sha256": "f874c9f32ba8df024e5466a82d9a2d07fe198f3e77bbdbd394430a28e9b2e2d7"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/dpo_relative_entropy.png",
+      "bytes": 394302,
+      "hash_encoding": "source_bytes",
+      "sha256": "0005cfb4a3b1172c239b3efd63c08357cfc21a61e3e802534cdf159b19b6fd84"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_aligned_vs_mixed_pi.pdf",
+      "bytes": 70300,
+      "hash_encoding": "source_bytes",
+      "sha256": "baecacd2e8d1a2bc2e6495c4702059e2f4f31b3f5af54ab41c8edf850d7da085"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_aligned_vs_mixed_pi.png",
+      "bytes": 1072324,
+      "hash_encoding": "source_bytes",
+      "sha256": "8450a884c3a2005f3269d8682ee2604405b565c5b087ad8fcde6a04d2e481407"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_common_probability_trajectories.pdf",
+      "bytes": 41094,
+      "hash_encoding": "source_bytes",
+      "sha256": "df58930d0f80e66fad896de1c0d0569fb57388cc66bc7872c35223cac727d5d5"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_common_probability_trajectories.png",
+      "bytes": 453237,
+      "hash_encoding": "source_bytes",
+      "sha256": "2ac82ec4e2c2e5c586809c03f9a3ca7c1275347d96df4955a4170f210d27db19"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_mixed_pi_vs_iter.pdf",
+      "bytes": 44593,
+      "hash_encoding": "source_bytes",
+      "sha256": "b2a3a71952e21bf5d0579f7874ad096164fb736ecd31266e3356bdf017a13f85"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_mixed_pi_vs_iter.png",
+      "bytes": 587676,
+      "hash_encoding": "source_bytes",
+      "sha256": "8b7d30f5c4e9f96f47894c27a89e5ddf306313658981400a6b28c73c02e280a3"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_probability_motion.pdf",
+      "bytes": 35221,
+      "hash_encoding": "source_bytes",
+      "sha256": "8ceb99575f738add7e20de639ea3dea23bb617c066c518858772b05eff981bc4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_probability_motion.png",
+      "bytes": 530949,
+      "hash_encoding": "source_bytes",
+      "sha256": "ea480037f4b2962930b1940f2f69b8914140ea2d7614a06e1afad66c0078c1e9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_relative_entropy.pdf",
+      "bytes": 35479,
+      "hash_encoding": "source_bytes",
+      "sha256": "e12f19a01377a93ca9f66a8e38b9034eb789d1a61b1fafbadb12d69436bb2011"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/ipo_relative_entropy.png",
+      "bytes": 384640,
+      "hash_encoding": "source_bytes",
+      "sha256": "3731483b2f78de0f592bd1f9d6e068ad79550099f18db8e5245fe6e597b4018b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/metrics_original/dpo_mixed_c100_s0.csv",
+      "bytes": 28256,
+      "hash_encoding": "lf_normalized",
+      "sha256": "eba4be35d0c45c8f3824f21bf70a3007e96a00998fe7a7ec74b04c2c2fd14209"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/metrics_original/ipo_mixed_c100_s0.csv",
+      "bytes": 26308,
+      "hash_encoding": "lf_normalized",
+      "sha256": "36fa6d4ae2db9fce242402aa685ef83998a367753b359f0a6960c8d9e832b988"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/per_prompt_summary.csv",
+      "bytes": 5694,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d0e0b03132000f1ce7ae036043015cae19ac9298bac981c2e84cd6350e52e8eb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/pi_trajectories.csv",
+      "bytes": 3062543,
+      "hash_encoding": "lf_normalized",
+      "sha256": "df0159d3f1bda1cddd147f5701891ae93734b9aed18c39f64dd8e20b099c5509"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/run_summary.csv",
+      "bytes": 1280,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d3437a37373f94a4c4fbec9d1d7e262e13273dadf8a7856658d77b7adb9146e0"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/all_variants_20261005/column_mapping.csv",
+      "bytes": 4250,
+      "hash_encoding": "lf_normalized",
+      "sha256": "505c48351a49bde1c3bc3ae7fead4c380a223c4c3066df212a27e782397592e6"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/all_variants_20261005/dpo_feedback_ordinary_v1_to_v10.png",
+      "bytes": 4718680,
+      "hash_encoding": "source_bytes",
+      "sha256": "13004f3c07b6359de653284e035cc0f2b38386a99c2584c281aec53630e87577"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/all_variants_20261005/dpo_reference_ordinary_v1_to_v10.png",
+      "bytes": 5241961,
+      "hash_encoding": "source_bytes",
+      "sha256": "781edf7a38070a1dab2d0ed3d2ffc2f6400111cbd3c931e75e3810265c4d4194"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/all_variants_20261005/ipo_feedback_ordinary_v1_to_v10.png",
+      "bytes": 4656876,
+      "hash_encoding": "source_bytes",
+      "sha256": "de6a9dbdf349c7da4a7b6783e03965eea428451b0318ae4de37c38d54b3a7553"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/all_variants_20261005/ipo_reference_ordinary_v1_to_v10.png",
+      "bytes": 5154295,
+      "hash_encoding": "source_bytes",
+      "sha256": "b2efbd82d521dafc829de711c7d341da979741a47a6b0635d81ed10acb08e32f"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/all_variants_20261005/ordinary_and_all_ten_variants.pdf",
+      "bytes": 1353132,
+      "hash_encoding": "source_bytes",
+      "sha256": "9a090a3b4d839148574cbcd3a1ec4e77de308454887318a423a4644fa3a7b860"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/comparison_grid.csv",
+      "bytes": 7014,
+      "hash_encoding": "lf_normalized",
+      "sha256": "cd077b39ee3bbc3e5a7f2f866336487fdc0512233e43f2bd0d0fc483334be92e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_feedback_half_b100_s0.csv",
+      "bytes": 22465,
+      "hash_encoding": "lf_normalized",
+      "sha256": "082a3521abd21ec6f92cf3e309645eda7fd2bb93321bcab0e50d4220ea36b63b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_feedback_one_b100_s0.csv",
+      "bytes": 22416,
+      "hash_encoding": "lf_normalized",
+      "sha256": "ac6871b766b1e642b69d78ec7f94dcc65f395065203c43f8d270f04696ecb907"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_ordinary_b100_s0.csv",
+      "bytes": 22430,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6532ac24217725f5c05c903f6d8c2caf8deede0161c94411d8218f8028cc1b0a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_reference_half_b100_s0.csv",
+      "bytes": 22455,
+      "hash_encoding": "lf_normalized",
+      "sha256": "ec770de921ca84423c2004dd7b7d28c05896d8be44622fa83c8801bf3f178b46"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_reference_max_b100_s0.csv",
+      "bytes": 22428,
+      "hash_encoding": "lf_normalized",
+      "sha256": "cc9afe3a023e547ec6aed4ceaae4a324bf225875cc4367339b460fa9029fca6c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_feedback_half_b100_s0.csv",
+      "bytes": 22458,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9106b294c1885dc4742d2412027bfe74b042d63c89e32c54146879c97a373d74"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_feedback_one_b100_s0.csv",
+      "bytes": 22522,
+      "hash_encoding": "lf_normalized",
+      "sha256": "8a63e85e8768e80174d10f23133faa1e62a6dcc7b19b71d596be423b1f4d189d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_ordinary_b100_s0.csv",
+      "bytes": 22507,
+      "hash_encoding": "lf_normalized",
+      "sha256": "f10cc4b2e812c166367e795eb121f4f5f4040bcdbf8b69fde65b08d365431022"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_reference_half_b100_s0.csv",
+      "bytes": 22430,
+      "hash_encoding": "lf_normalized",
+      "sha256": "c216ae71054d0776d8be756f2073a5ec4925a8234bc3fd6a434049cff6097541"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_reference_max_b100_s0.csv",
+      "bytes": 22447,
+      "hash_encoding": "lf_normalized",
+      "sha256": "5eb1f6657c84e83cb18c469abcee2f0461e4308059df51f15e59e49e4b74510c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_feedback_half_b100_s0.csv",
+      "bytes": 22444,
+      "hash_encoding": "lf_normalized",
+      "sha256": "327694ebdb869869dcc68de72ddbbf8fd86c2b0845dd7724b120b8ef569f1fbc"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_feedback_one_b100_s0.csv",
+      "bytes": 22472,
+      "hash_encoding": "lf_normalized",
+      "sha256": "55812ac951d614435c7e5b87faa55b899e1aa62362b4952f0eec38818a67cbbf"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_ordinary_b100_s0.csv",
+      "bytes": 22496,
+      "hash_encoding": "lf_normalized",
+      "sha256": "2418e585c6ac31e61d525d84608da25cad0938762b53078e67b3f91318920a5d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_reference_half_b100_s0.csv",
+      "bytes": 22479,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6b018cc9f73c22c997052073693b9e00580b0adabb933487403a5aa889950e1f"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_reference_max_b100_s0.csv",
+      "bytes": 22451,
+      "hash_encoding": "lf_normalized",
+      "sha256": "5ebb03f5542f18d799e8d4dc4ac528a954521f2fabd25f1d816892712e3610eb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_center_feedback_one_b100_s0.csv",
+      "bytes": 22447,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6352ceeabfbd905b9859afd4ccbce4f820743da852ac6bb152af9021329f51f1"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_center_reference_max_b100_s0.csv",
+      "bytes": 22421,
+      "hash_encoding": "lf_normalized",
+      "sha256": "efb70460b95f06cbca32299cfa1d966324cacccdf5d92ae38f56805cacdf0185"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_feedback_half_b100_s0.csv",
+      "bytes": 22459,
+      "hash_encoding": "lf_normalized",
+      "sha256": "c5b4c43e206d444d698a98e4d441f41087416753b2b9370a74a798652e717d69"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_feedback_one_b100_s0.csv",
+      "bytes": 22456,
+      "hash_encoding": "lf_normalized",
+      "sha256": "f72c414c5ffb3849651d2f861182c57b8a09f95942fe6207d4e4f74b4389eae3"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_ordinary_b100_s0.csv",
+      "bytes": 22466,
+      "hash_encoding": "lf_normalized",
+      "sha256": "cb2acf30d91b524fd8076d6ae2828196381dec446e6fb9245ce1a8d042d3cf8e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_reference_half_b100_s0.csv",
+      "bytes": 22470,
+      "hash_encoding": "lf_normalized",
+      "sha256": "671d609a730b99e13e2b439db9584c84e48dfd110ee064f5794319e09221f65b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_reference_max_b100_s0.csv",
+      "bytes": 22463,
+      "hash_encoding": "lf_normalized",
+      "sha256": "3e34ad91b4e6fbbac3436173945385bd36320e90f0dc29516819741810a7d38b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_feedback_b100_s0.csv",
+      "bytes": 28271,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d828d272991ca7528cc741d5735457935750be52683b7ec7b1b2846b60f4a081"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_ordinary_b100_s0.csv",
+      "bytes": 28296,
+      "hash_encoding": "lf_normalized",
+      "sha256": "952b727f8ddef097955b937310525773fc1a7921b1714012f680ce672f21c0ed"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_reference_b100_s0.csv",
+      "bytes": 28318,
+      "hash_encoding": "lf_normalized",
+      "sha256": "b9aefba9ec66031bf698ee9c45b4decc4a9ddb7b178495906f6eec554582a12a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_feedback_half_b100_s0.csv",
+      "bytes": 20498,
+      "hash_encoding": "lf_normalized",
+      "sha256": "0ffa293c132cf2f2e41dc14c90401c0cf5fb733f1801817a4a70be7c1e9d9dab"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_feedback_one_b100_s0.csv",
+      "bytes": 20479,
+      "hash_encoding": "lf_normalized",
+      "sha256": "487f31e334b4c74f88c916842adc7b3e70b695f194c434a54ad8d49eefc3f22a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_ordinary_b100_s0.csv",
+      "bytes": 20503,
+      "hash_encoding": "lf_normalized",
+      "sha256": "03157bbe4c67b0135198fbbee26231bd847282b556fc061755eaf164fe2fecda"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_reference_half_b100_s0.csv",
+      "bytes": 20499,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d9078a3ba797a4e8e0e8665bf0198515bd3aad2bf1914b9e6be496787b95097a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_reference_max_b100_s0.csv",
+      "bytes": 20516,
+      "hash_encoding": "lf_normalized",
+      "sha256": "2d31137768da0c514c57e3d474ffce0db86ea2f46e0d01fd0529107771e708ec"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_feedback_half_b100_s0.csv",
+      "bytes": 20526,
+      "hash_encoding": "lf_normalized",
+      "sha256": "b44c937995599f9d1d072b1a0396bfd7a09448b18f75aae301b9d5d080de0e23"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_feedback_one_b100_s0.csv",
+      "bytes": 20597,
+      "hash_encoding": "lf_normalized",
+      "sha256": "3a6f688f1aca65e5b8a82ce4bdba3bab33787b4f81214556850027f400975f56"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_ordinary_b100_s0.csv",
+      "bytes": 20534,
+      "hash_encoding": "lf_normalized",
+      "sha256": "4dc4fafc4a85f437d3dd43b728a5a54fc9a9198ecd78c1e0e047ded8b3b1923e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_reference_half_b100_s0.csv",
+      "bytes": 20541,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d2cc4df2d6158fb0e73e015b9019df72ab911f6c005c69f903b4215a65bea5ea"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_reference_max_b100_s0.csv",
+      "bytes": 20509,
+      "hash_encoding": "lf_normalized",
+      "sha256": "51ecfb821c7485e1bebcc7e20373dd4cdb5d18387f27ff31f9a4a97bafcd1b1e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_feedback_half_b100_s0.csv",
+      "bytes": 20630,
+      "hash_encoding": "lf_normalized",
+      "sha256": "a317acd8b09e1f728b2dcbba2c62f192bdcd9c4d9e4c4ecbde462ccbfb68180b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_feedback_one_b100_s0.csv",
+      "bytes": 20644,
+      "hash_encoding": "lf_normalized",
+      "sha256": "5dddb8f5b7b85d82fc0ac0ef9aeadb4ec0bc4c22755cecd30a4566b79bedfa45"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_ordinary_b100_s0.csv",
+      "bytes": 20671,
+      "hash_encoding": "lf_normalized",
+      "sha256": "68136e16549bd59b94e40320c2de39503d3f901da43c96405ad02f02e7e6d411"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_reference_half_b100_s0.csv",
+      "bytes": 20652,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d78adf7862ab4c6ad566cb7889b176ad2be910cfa5b58e6de0660273e77e41bc"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_reference_max_b100_s0.csv",
+      "bytes": 20621,
+      "hash_encoding": "lf_normalized",
+      "sha256": "b05ae64cc01c57cdfcb05471e4a616dd884e6a2f51b05b40c6b5853a7cd16a31"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_center_feedback_one_b100_s0.csv",
+      "bytes": 20509,
+      "hash_encoding": "lf_normalized",
+      "sha256": "da14c705c196d0cf394644c72e57df41020fd010749a4ff8a32312c95aa647ff"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_center_reference_max_b100_s0.csv",
+      "bytes": 20513,
+      "hash_encoding": "lf_normalized",
+      "sha256": "83b5a380e4db03eb33ba281c65b565cb1badf52319c5b7d8242beb6aedfd81de"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_feedback_half_b100_s0.csv",
+      "bytes": 20533,
+      "hash_encoding": "lf_normalized",
+      "sha256": "acd2d850b9fbec81fb69458506aaffbc0adb32bbdc99d3d02952323fc4567348"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_feedback_one_b100_s0.csv",
+      "bytes": 20547,
+      "hash_encoding": "lf_normalized",
+      "sha256": "3e4987bb83c0e5f7932b3006e26a1ecf5fa6f6a8717efde822fa1d75451d2f13"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_ordinary_b100_s0.csv",
+      "bytes": 20520,
+      "hash_encoding": "lf_normalized",
+      "sha256": "c006b58e8f6156295517771fbb9238db91e00d017e5076c1c870d1f734b65330"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_reference_half_b100_s0.csv",
+      "bytes": 20524,
+      "hash_encoding": "lf_normalized",
+      "sha256": "0b0b9041f27eb996e38c58390dd5365a30bca2a5b5c9e2230bdb3a4d90805e6c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_reference_max_b100_s0.csv",
+      "bytes": 20533,
+      "hash_encoding": "lf_normalized",
+      "sha256": "13f962e8e9099ce1dd14e1c45878c2bf5dbc6c34c854c62eee4024b23b118421"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_feedback_b100_s0.csv",
+      "bytes": 26353,
+      "hash_encoding": "lf_normalized",
+      "sha256": "7c56673244d6ce7073af6c4d46adab78567efb2939fb4808b18a684fc664d3ca"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_ordinary_b100_s0.csv",
+      "bytes": 26314,
+      "hash_encoding": "lf_normalized",
+      "sha256": "348759387227f000f04347458c85b610cfb831b26efda91480ecd8cad8fc3ce9"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_reference_b100_s0.csv",
+      "bytes": 26351,
+      "hash_encoding": "lf_normalized",
+      "sha256": "8ee07fdd5698eecaac8025efd1887bdb62f69cee2cd98e3e83b4244f131a824a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/column_mapping.csv",
+      "bytes": 42444,
+      "hash_encoding": "lf_normalized",
+      "sha256": "26ed09a79a4accbf34a7f5f80adaa6f2a150fe73d0d63237ce2487c2f8cab8c2"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_feedback_prompt_251_sorted.png",
+      "bytes": 1022262,
+      "hash_encoding": "source_bytes",
+      "sha256": "0138e36d1871f0fa9483a0c1e2dbe736e3962b42e17d74668cc12f29fffa2dbe"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_feedback_prompt_54_sorted.png",
+      "bytes": 847573,
+      "hash_encoding": "source_bytes",
+      "sha256": "420079bacf1e1419b254e217606e7dc2d5b2e297238756a2ad84dc128be97fb4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_feedback_prompt_612_sorted.png",
+      "bytes": 990676,
+      "hash_encoding": "source_bytes",
+      "sha256": "834222823c46c01abd39ce7076d4505bfb5373d2f53b01927e6eb3b867948b5d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_feedback_prompt_737_sorted.png",
+      "bytes": 1000709,
+      "hash_encoding": "source_bytes",
+      "sha256": "523aa4cdf7a77bf4edef615c59de66e16e7777567ea6ebaf3ad81c605aadb8b6"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_feedback_prompt_867_sorted.png",
+      "bytes": 974286,
+      "hash_encoding": "source_bytes",
+      "sha256": "8db623b70e8b831b39b01d803399ba005466c96ad4298fa48bc2539eb3489c05"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_feedback_prompt_945_sorted.png",
+      "bytes": 943621,
+      "hash_encoding": "source_bytes",
+      "sha256": "69f57686fd0f934eb0e4bdc2cb28fc0d73b568511c82ba3d8ae5b75f9238cf35"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_reference_prompt_251_sorted.png",
+      "bytes": 1089224,
+      "hash_encoding": "source_bytes",
+      "sha256": "de27cbc1ee25ba0b63df19c6d74f0f23e6b65d88f7cdc4871fa4a0474c2943dc"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_reference_prompt_54_sorted.png",
+      "bytes": 953421,
+      "hash_encoding": "source_bytes",
+      "sha256": "575f0bd3b20702b8c2beba3128861b50f2d1d15de0ed67fb21c12fed01c5f65b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_reference_prompt_612_sorted.png",
+      "bytes": 1060337,
+      "hash_encoding": "source_bytes",
+      "sha256": "c11d304d62981586bf4fefff747d9902e41c19e0d5d4093b1effe7102989bcf4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_reference_prompt_737_sorted.png",
+      "bytes": 1096584,
+      "hash_encoding": "source_bytes",
+      "sha256": "a54571c4f50d660ce9df560ebc3d59dd85ba2968a3227d980342a7aa9cabdb4b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_reference_prompt_867_sorted.png",
+      "bytes": 1038511,
+      "hash_encoding": "source_bytes",
+      "sha256": "251b1a0d97c1d6759018c25b2d22fa62f42533bdf44881b974f041b560e960f0"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/dpo_reference_prompt_945_sorted.png",
+      "bytes": 1010158,
+      "hash_encoding": "source_bytes",
+      "sha256": "4a5028c324e1c1f2d5b116693e0d44b28dd5a2b8f3dae842e308caca3b41c2f2"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_feedback_prompt_251_sorted.png",
+      "bytes": 1015169,
+      "hash_encoding": "source_bytes",
+      "sha256": "11ad74e93a4ff80f90d35a8e4b0ec04b2ebc7b008aa2db9e280b56179e2a31ef"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_feedback_prompt_54_sorted.png",
+      "bytes": 834688,
+      "hash_encoding": "source_bytes",
+      "sha256": "49b73b60836288fad4f431e15472910328513d2cd62a4d27a6764c839bc6004c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_feedback_prompt_612_sorted.png",
+      "bytes": 957721,
+      "hash_encoding": "source_bytes",
+      "sha256": "b79369ab0718ebb938bbbfbae35d549d07545563e0a40c25439e077c085e6945"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_feedback_prompt_737_sorted.png",
+      "bytes": 983549,
+      "hash_encoding": "source_bytes",
+      "sha256": "f054b7a4770b8e3ab0a9cd0ab0b2cc13398644c9b4d2ee68a6106120934d4f97"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_feedback_prompt_867_sorted.png",
+      "bytes": 961579,
+      "hash_encoding": "source_bytes",
+      "sha256": "95f8b8e97e780f51112294dc9b3bc13b03e931dc0f889654d77033b641f38859"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_feedback_prompt_945_sorted.png",
+      "bytes": 926044,
+      "hash_encoding": "source_bytes",
+      "sha256": "19054239d41ac5b59e61baa3754a74d4b4f185d02815b85e84d7cea6f8f8ded1"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_reference_prompt_251_sorted.png",
+      "bytes": 1077418,
+      "hash_encoding": "source_bytes",
+      "sha256": "21846052f3239826c8f3c7ae5adedff6df972a5ccbd931ece0c0034ece52ff9e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_reference_prompt_54_sorted.png",
+      "bytes": 928394,
+      "hash_encoding": "source_bytes",
+      "sha256": "b59455825726a7572ebbef8b58aeb542f4487a8b218ac965ec05f54e46ebb783"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_reference_prompt_612_sorted.png",
+      "bytes": 1020640,
+      "hash_encoding": "source_bytes",
+      "sha256": "e57ed0300ae026d263b820356264f912b4dbc44603ff68904bfd3577dc8ede7c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_reference_prompt_737_sorted.png",
+      "bytes": 1088783,
+      "hash_encoding": "source_bytes",
+      "sha256": "20d86ec2e6d49b268dfa9a3d273dbd19c5b0923a546b49bcca7a2de3709f8397"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_reference_prompt_867_sorted.png",
+      "bytes": 1031304,
+      "hash_encoding": "source_bytes",
+      "sha256": "50e0889eee9a77017794345978bfb34faa1544c06ab518bb56a76a50ea4c7af8"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/ipo_reference_prompt_945_sorted.png",
+      "bytes": 976181,
+      "hash_encoding": "source_bytes",
+      "sha256": "7a5455ea88d40f2125f96bf0d93c3f769447948eeb80d0cc4b718f979dd04a86"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/prompt_sorted_20261006/prompt_sorted_comparisons.pdf",
+      "bytes": 1425902,
+      "hash_encoding": "source_bytes",
+      "sha256": "bbef7bc306e2fedf964fb889e719a7b38af590ccb531ee8409c0ec88de26a6cb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_feedback_comparison.png",
+      "bytes": 1068470,
+      "hash_encoding": "source_bytes",
+      "sha256": "a435e209e5edee4586a8843897dd8b3f21ba2fb92ca75cbf3adecb52853a43bf"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_feedback_half_pi.png",
+      "bytes": 428130,
+      "hash_encoding": "source_bytes",
+      "sha256": "cd60b05c3ba07cff1fc8b7b94749f11f291fac97ea799e288d54f46ed0dfe036"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_feedback_one_pi.png",
+      "bytes": 444613,
+      "hash_encoding": "source_bytes",
+      "sha256": "f8457741e58431c2190543122e09741747fe9813201e60572ac0a182313901a8"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_ordinary_pi.png",
+      "bytes": 427301,
+      "hash_encoding": "source_bytes",
+      "sha256": "f5a23414cd71ea219a6a4bf37dbfb57e9acd1a864c31b3eed4ee66dd5baa15a3"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_reference_comparison.png",
+      "bytes": 1072317,
+      "hash_encoding": "source_bytes",
+      "sha256": "7d853d3475f383848df58bdeb5e45046163028714da983756d49e07790a9ce32"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_reference_half_pi.png",
+      "bytes": 416015,
+      "hash_encoding": "source_bytes",
+      "sha256": "6e17abf49a48dced1108d87fff4d7ff64a6485b18787b3c67e58e45b2bffe1df"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_reference_max_pi.png",
+      "bytes": 462879,
+      "hash_encoding": "source_bytes",
+      "sha256": "8d369ec00f6f35f42cf48f6a7ebc78f04802b609efc820744ba57b8cd8c187df"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha08_relative_entropy.png",
+      "bytes": 385444,
+      "hash_encoding": "source_bytes",
+      "sha256": "b548327a8103cff4855207ad6fd3df7212bb46efd94a5d90c22d27ff92b65874"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_feedback_comparison.png",
+      "bytes": 976215,
+      "hash_encoding": "source_bytes",
+      "sha256": "f43b77b5cc94c66c930543ee77215cab5295250b605c4a5699d205d803b6f129"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_feedback_half_pi.png",
+      "bytes": 386541,
+      "hash_encoding": "source_bytes",
+      "sha256": "8c4cacd290c9973b03710333f84bd1190030c96378d86c211ba462c6c734db27"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_feedback_one_pi.png",
+      "bytes": 338858,
+      "hash_encoding": "source_bytes",
+      "sha256": "7b65b4170f77a1491ea85b544ff535bd0df13461eb6fe660d977f81fc22a60b8"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_ordinary_pi.png",
+      "bytes": 437551,
+      "hash_encoding": "source_bytes",
+      "sha256": "d51056df8ce40420a8ab22cf631245405107529c2816259ad7dcb898b99780a5"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_reference_comparison.png",
+      "bytes": 1204570,
+      "hash_encoding": "source_bytes",
+      "sha256": "782dcfb180071511885f20401a2326adda66c73460cd8369ff364a2a9e070e45"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_reference_half_pi.png",
+      "bytes": 453061,
+      "hash_encoding": "source_bytes",
+      "sha256": "d681a8fb5a3f6a2b82e431c867f9fb4b7b1bb3f4add6e82295743607b0e5b8a6"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_reference_max_pi.png",
+      "bytes": 535971,
+      "hash_encoding": "source_bytes",
+      "sha256": "4b3bac32e8a7546a98f91c9c0c396a45e6a4104807dc44dd16f6d30d45512b5e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_alpha099_relative_entropy.png",
+      "bytes": 531229,
+      "hash_encoding": "source_bytes",
+      "sha256": "b989ddaca8e240e0f59aa191826e194e7b03104dc1d3ee5b4cbe8493dd7428ab"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_feedback_comparison.png",
+      "bytes": 932510,
+      "hash_encoding": "source_bytes",
+      "sha256": "d268584389da1dc658ffde5003f110291fc53ed5c6f9b5a7d0324e11b35882c7"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_feedback_half_pi.png",
+      "bytes": 380977,
+      "hash_encoding": "source_bytes",
+      "sha256": "3fe5162eb209c396ef90ca334b0d8ed63c12cc9052551ce7363f888007a6f301"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_feedback_one_pi.png",
+      "bytes": 375757,
+      "hash_encoding": "source_bytes",
+      "sha256": "4421bc50dc6c79b1364384239ff713716f29a91c4fb8d9861ab5eda404d637e2"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_ordinary_pi.png",
+      "bytes": 381149,
+      "hash_encoding": "source_bytes",
+      "sha256": "70e942644c5cd3b4d9e3f8130dd11aa18b4c3b1fa3cb275650eb3029fd158469"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_reference_comparison.png",
+      "bytes": 1000561,
+      "hash_encoding": "source_bytes",
+      "sha256": "abe3df1398d3c89de1055044948f0b772c80d5039c069d054ff73352ee2f2e9e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_reference_half_pi.png",
+      "bytes": 379840,
+      "hash_encoding": "source_bytes",
+      "sha256": "1751a2795c389ca99478db951b1073e550769a4431b022a6f6e268d15cdd2e87"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_reference_max_pi.png",
+      "bytes": 450559,
+      "hash_encoding": "source_bytes",
+      "sha256": "fd387567181ef0c013e3be903a071d281941fda54f6e0a3d2aac92158a55c545"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_beta15_relative_entropy.png",
+      "bytes": 390077,
+      "hash_encoding": "source_bytes",
+      "sha256": "900c78a6737f4b4e595d623688c3f505e7809297b27bee2e6fca701cb091ee05"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_feedback_comparison.png",
+      "bytes": 1072078,
+      "hash_encoding": "source_bytes",
+      "sha256": "2001aff3ee9e29772a6f9dc156e7f3fbf739a1c48b15d2c76d811f977653addb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_feedback_half_pi.png",
+      "bytes": 424630,
+      "hash_encoding": "source_bytes",
+      "sha256": "9a074e57d4ddd916ad47b4b3d0506ddab8e3106ec04171ac69f164b81a35c8ca"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_feedback_one_pi.png",
+      "bytes": 424059,
+      "hash_encoding": "source_bytes",
+      "sha256": "e170cc1714e90620eafdd39115c04b7815730d65c6d9af99982194f9ec55d98c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_ordinary_pi.png",
+      "bytes": 439857,
+      "hash_encoding": "source_bytes",
+      "sha256": "b24d5afd08eeaeccd2839635e82fd25e509341ab99a72b54f46504eba23ca11e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_reference_comparison.png",
+      "bytes": 1145727,
+      "hash_encoding": "source_bytes",
+      "sha256": "25e00263eda6953a1cab2962bfb3a4a5be71806b766d651da7d67666cad14486"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_reference_half_pi.png",
+      "bytes": 423183,
+      "hash_encoding": "source_bytes",
+      "sha256": "456df8369f6d6b90ea6e7ff9cd453422d925ca365bd774f6853e9bb7c068641d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_reference_max_pi.png",
+      "bytes": 506157,
+      "hash_encoding": "source_bytes",
+      "sha256": "94592f8a9e2ceac56614534bfab5f034b2854e0d873f0eb972cdba8e990f0346"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_center_relative_entropy.png",
+      "bytes": 442238,
+      "hash_encoding": "source_bytes",
+      "sha256": "6ad2970ee30bbed4ca0a85f3a182bb4d4ab940c3a78aca64904905557c0a988d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_complete_figures.pdf",
+      "bytes": 1443151,
+      "hash_encoding": "source_bytes",
+      "sha256": "f3a8da551ae041f02c9242e7fef357baa46b37537cdd6dea3e51cea032bc2a24"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_feedback_comparison.png",
+      "bytes": 935799,
+      "hash_encoding": "source_bytes",
+      "sha256": "5169f74cf7bbe797a8398f03dbf2d938eeceffdf50ddb63fec8ee0275ea9ac26"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_feedback_half_pi.png",
+      "bytes": 381409,
+      "hash_encoding": "source_bytes",
+      "sha256": "e6ee9401a32bf5edbd2885f227c11a9f328c390919d7efa378ce7b05d170d5b7"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_feedback_one_pi.png",
+      "bytes": 379264,
+      "hash_encoding": "source_bytes",
+      "sha256": "ce5ed2d1c117166fdc96a77dc906112adb7328f5904caceeb76d9de48b8d15f7"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_ordinary_pi.png",
+      "bytes": 383470,
+      "hash_encoding": "source_bytes",
+      "sha256": "9234bc2859be5c182a149fee892179e6ee559644df35dc31eba1d509fa9e2026"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_reference_comparison.png",
+      "bytes": 990379,
+      "hash_encoding": "source_bytes",
+      "sha256": "c54f96141f6ab3a313fe03a9f2df81ef9dde467d215ccf9ca27b487688b40a40"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_reference_half_pi.png",
+      "bytes": 382833,
+      "hash_encoding": "source_bytes",
+      "sha256": "90e61c1b5819883bcb65213adeff5ab37f050ed6b8d480f7350fdd5814e94d6b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_reference_max_pi.png",
+      "bytes": 440554,
+      "hash_encoding": "source_bytes",
+      "sha256": "8b6503c91a5dc10da8d009901d2204e59355cc8dcdb205a9ae9ce14391e38f4d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/dpo_coverage05_relative_entropy.png",
+      "bytes": 382443,
+      "hash_encoding": "source_bytes",
+      "sha256": "f0db4d0153d83ce8a96a56c260e2babe1255750f7127dc0011cba43190412b3a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_feedback_comparison.png",
+      "bytes": 1053310,
+      "hash_encoding": "source_bytes",
+      "sha256": "a434c7c8bb444d0df189afc5bbae5944fede7ebfafe1ea19f8e1c43195b0ebdc"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_feedback_half_pi.png",
+      "bytes": 423861,
+      "hash_encoding": "source_bytes",
+      "sha256": "cb15b6cbbfaa95886ae08e15031b137d8582aa0680d5d825e8faae6499964923"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_feedback_one_pi.png",
+      "bytes": 439208,
+      "hash_encoding": "source_bytes",
+      "sha256": "bd12c1fc09e19944129a52352ebdc7f6b69416aace13869d2cc35f4a3ed6b439"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_ordinary_pi.png",
+      "bytes": 421548,
+      "hash_encoding": "source_bytes",
+      "sha256": "ffbe41ccb69c13b3ef23a09dbdd864481e4069ea946c9f17f7bd9e4fbdfe8182"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_reference_comparison.png",
+      "bytes": 1061090,
+      "hash_encoding": "source_bytes",
+      "sha256": "47693b47775e202ec8ab392c90d80cace9e46d3574975991e2d718dd08f9232c"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_reference_half_pi.png",
+      "bytes": 411715,
+      "hash_encoding": "source_bytes",
+      "sha256": "04382632676f7505808028382c9b426a16a3012bf476c4778dbb7e293b2b257b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_reference_max_pi.png",
+      "bytes": 459860,
+      "hash_encoding": "source_bytes",
+      "sha256": "6810f9d904537c922b8f25950a45d97b9c88e0e7f2a2db78fccf831c5df006f0"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha08_relative_entropy.png",
+      "bytes": 391701,
+      "hash_encoding": "source_bytes",
+      "sha256": "2e0e04ee9f3b0aab6415a5657bf5d5d746f1b783c75865fef0fbcba95c7db4bf"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_feedback_comparison.png",
+      "bytes": 952131,
+      "hash_encoding": "source_bytes",
+      "sha256": "f58545cdbb39800fc9a20e59b3938306438891a29a4e8165d48945e4d8cf9aeb"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_feedback_half_pi.png",
+      "bytes": 382116,
+      "hash_encoding": "source_bytes",
+      "sha256": "fd8a432498c407831c1f79d352a45d2f134dea4c6b5b78d94bb805b8e8163660"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_feedback_one_pi.png",
+      "bytes": 337094,
+      "hash_encoding": "source_bytes",
+      "sha256": "d6d78abca1ca4d3e4c12a4081cbe92bff026589564ef150864d3247835aa6987"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_ordinary_pi.png",
+      "bytes": 421953,
+      "hash_encoding": "source_bytes",
+      "sha256": "1e3d589a2094c383b2438ef61c317d2ca795503761b3ae733f56b109bf90b03d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_reference_comparison.png",
+      "bytes": 1184519,
+      "hash_encoding": "source_bytes",
+      "sha256": "66c9e6e4c2372eb9cd617c48b4aa3433f3167ee54f9f4cff57f18f669f1a6e89"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_reference_half_pi.png",
+      "bytes": 415742,
+      "hash_encoding": "source_bytes",
+      "sha256": "4bffe1135295b5a056c806d1a4be0e73c6dc74b52befd7f93009426eca200478"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_reference_max_pi.png",
+      "bytes": 562960,
+      "hash_encoding": "source_bytes",
+      "sha256": "ed83fd1917b9ad6dfe755eb207571670e0c5760a1118ddd3c555a86959be0f22"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_alpha099_relative_entropy.png",
+      "bytes": 520490,
+      "hash_encoding": "source_bytes",
+      "sha256": "158d07aaf245febe618a7ce540cca47b69753a63d394536b11d1d963e6cad989"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_feedback_comparison.png",
+      "bytes": 919340,
+      "hash_encoding": "source_bytes",
+      "sha256": "6d87c7933afb916d271f1e873ccf211cf0c21f89b69f6a40b03f8de939bb2892"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_feedback_half_pi.png",
+      "bytes": 373476,
+      "hash_encoding": "source_bytes",
+      "sha256": "78f8ba2e4b9adebd309bc1166be290d2460e3633e2653205b02cb155547e3584"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_feedback_one_pi.png",
+      "bytes": 372074,
+      "hash_encoding": "source_bytes",
+      "sha256": "06bc78b273a512a160994df5c456e179b417bf68fccfe1c6a3ad66b46bc81820"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_ordinary_pi.png",
+      "bytes": 375829,
+      "hash_encoding": "source_bytes",
+      "sha256": "99347578c85d04affd10e17d4a6e2913237f7d8cdc62de6ec026139e66e2abec"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_reference_comparison.png",
+      "bytes": 985747,
+      "hash_encoding": "source_bytes",
+      "sha256": "5c1ba47be082e336dca31077e30dbcc2cb027cd3cd5f34bd2b9dd6ee6f1970ce"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_reference_half_pi.png",
+      "bytes": 373476,
+      "hash_encoding": "source_bytes",
+      "sha256": "9e0378a4351e2043aa194198150a32f2bc3ca1a77047e52efde5c90e69e7096e"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_reference_max_pi.png",
+      "bytes": 447758,
+      "hash_encoding": "source_bytes",
+      "sha256": "1bb311ce016950fddeec4420e507503482e57fb1c8cfd23c4171ed598bf478f0"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_beta15_relative_entropy.png",
+      "bytes": 384142,
+      "hash_encoding": "source_bytes",
+      "sha256": "78a39064afcb0b40b88e0e144aef3e03745aadd75628163dba5c80659ceb599f"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_feedback_comparison.png",
+      "bytes": 1054951,
+      "hash_encoding": "source_bytes",
+      "sha256": "29c78b01f9c994136a1bec775ba7c1e6cc03db30f78a31344a6fe39335aafa13"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_feedback_half_pi.png",
+      "bytes": 416586,
+      "hash_encoding": "source_bytes",
+      "sha256": "219fbeac989d3a51f0ad1b3120879837046fcff9dfff0f3b719bda6ecfee7c2a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_feedback_one_pi.png",
+      "bytes": 422643,
+      "hash_encoding": "source_bytes",
+      "sha256": "53964757ddce7774eb2d5286e457e884a35ce482c3815c9a422aa33b63eb1d5d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_ordinary_pi.png",
+      "bytes": 428749,
+      "hash_encoding": "source_bytes",
+      "sha256": "13aadb6b373a676675c4101e8edcc46ca0bd910fc37edffcffc295d7fd73fb37"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_reference_comparison.png",
+      "bytes": 1115904,
+      "hash_encoding": "source_bytes",
+      "sha256": "2bff9f0c2c0bb182ee8593d367a00264d43298ed4af48a7060ce5f0a069655f4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_reference_half_pi.png",
+      "bytes": 422400,
+      "hash_encoding": "source_bytes",
+      "sha256": "2917dfd5b87c340fc9c3ff3ef72858c24865c3085dd1fc7e3ac6530d43c3bbce"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_reference_max_pi.png",
+      "bytes": 480969,
+      "hash_encoding": "source_bytes",
+      "sha256": "c538be9911d42b16df6bb0c5650560d60562f9f17217782adcc7b034687056bf"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_center_relative_entropy.png",
+      "bytes": 429228,
+      "hash_encoding": "source_bytes",
+      "sha256": "760a87efcb994d5303d13f6361609709267aae6a59e399170a066f4ff075a976"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_complete_figures.pdf",
+      "bytes": 1444190,
+      "hash_encoding": "source_bytes",
+      "sha256": "53ba4571d424008edeba0bdbcb0e7449e61477326e61c784f455d6f8e3366976"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_feedback_comparison.png",
+      "bytes": 928238,
+      "hash_encoding": "source_bytes",
+      "sha256": "9f51025bfe4a57d4ff1ca03841f478e9945d846d1ed73e236d865d9c7e0cdec3"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_feedback_half_pi.png",
+      "bytes": 379337,
+      "hash_encoding": "source_bytes",
+      "sha256": "70ca1157714bac409acde89dbae9e78c70c49d5bb3cf57010d47dabf0fb2a20d"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_feedback_one_pi.png",
+      "bytes": 378798,
+      "hash_encoding": "source_bytes",
+      "sha256": "c37abae344aad001ee15b14b27a143e320d7310a76d7ccb2d17c76d21266c567"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_ordinary_pi.png",
+      "bytes": 377850,
+      "hash_encoding": "source_bytes",
+      "sha256": "ef48cae6682c55b73489acf7ba419467e8774123634e36febd57accb84bb74fc"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_reference_comparison.png",
+      "bytes": 980979,
+      "hash_encoding": "source_bytes",
+      "sha256": "c016493f92bcfedc5bc72ba3348c444b53867ee0921ceeb18a7cae536cae45a1"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_reference_half_pi.png",
+      "bytes": 378324,
+      "hash_encoding": "source_bytes",
+      "sha256": "f50452978ccfe4b5664308dd4d9232f128c4f7c1511a38f978347193708637d4"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_reference_max_pi.png",
+      "bytes": 439258,
+      "hash_encoding": "source_bytes",
+      "sha256": "088d6b154481367af887f6d67d729f8922ba872703abeaab241135f9786912a7"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_coverage05_relative_entropy.png",
+      "bytes": 372637,
+      "hash_encoding": "source_bytes",
+      "sha256": "7b8d6b6de8075437951ebbf2740721d1349b1d4eb1e7b0146422ce7c233c933b"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/paired_fluctuation_overview.png",
+      "bytes": 225518,
+      "hash_encoding": "source_bytes",
+      "sha256": "7bf5a33e2b1bf2e072514faeb0685ab584298c73a3455f3cee0c5fd3f4bd9b8a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/paired_prompt_summary.csv",
+      "bytes": 413697,
+      "hash_encoding": "lf_normalized",
+      "sha256": "94c197a265e783d87b2ffeedd3e75b5e2b7fe6420f5d7eb05b6c9420775165af"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/paired_summary.csv",
+      "bytes": 93237,
+      "hash_encoding": "lf_normalized",
+      "sha256": "2a33a5c762bc7a3adc98c744de3b7cd1d4c7a26c12e26e0ff452afb4579e656a"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/prompt_summary.csv",
+      "bytes": 257161,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6a1cb45ed6caf429a4c17d058e05d1798bca0cb835ede8ab898d76b9f2f3d4ec"
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/run_summary.csv",
+      "bytes": 44398,
+      "hash_encoding": "lf_normalized",
+      "sha256": "551f5db91a130812a99fd714d7d332c31546867d6ff13fe216c0e73cb145ebd5"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/restricted_helpsteer_by_length_rank.csv",
+      "bytes": 815,
+      "hash_encoding": "lf_normalized",
+      "sha256": "0e365e7d2d912e61a07c38808f6d77ef07f3e2931766689ade853ff354de9f7e"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/restricted_mt_bench_gpt4_by_model.csv",
+      "bytes": 675,
+      "hash_encoding": "lf_normalized",
+      "sha256": "0918d4a58824f3d00ba4bd228122dc6ea28da64ef01a7d82640317877ca9d31e"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/restricted_mt_bench_human_by_model.csv",
+      "bytes": 765,
+      "hash_encoding": "lf_normalized",
+      "sha256": "da6fcccffceeac6aaf2b3756f8c6bde488dc476052d04f8a62d2f004cd8e2aa9"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/restricted_ultrafeedback_by_model.csv",
+      "bytes": 955,
+      "hash_encoding": "lf_normalized",
+      "sha256": "20816e98624d766161a1bbdfe4e3db11b6aa25b440617b64e6658b3c4a8647e9"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/surrogates.csv",
+      "bytes": 1776,
+      "hash_encoding": "lf_normalized",
+      "sha256": "db466df701d64d2998379d5e6bf82c07b271b185221566fccf198b948770371a"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/triangles_helpsteer_by_length_rank.csv",
+      "bytes": 452,
+      "hash_encoding": "lf_normalized",
+      "sha256": "a34dd5dea58e94c77c290131ed3517a4580d29b81b31e75e4c8c7a0f7731b781"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/triangles_mt_bench_gpt4_by_model.csv",
+      "bytes": 923,
+      "hash_encoding": "lf_normalized",
+      "sha256": "19127eccf2e50d8bac689495d8fbc4e873ba614a5263e96942edf85146263348"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/triangles_mt_bench_human_by_model.csv",
+      "bytes": 930,
+      "hash_encoding": "lf_normalized",
+      "sha256": "f0f4297ff881517849b78030ee5b2c9331d99f7575b6f73515ca3f7e1fcb1561"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/coherence/triangles_ultrafeedback_by_model.csv",
+      "bytes": 954,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9fd48567bb80c3a76fcc16f25fe1037adb0910eafa62206aee765b13456609de"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/figures/cyclic_share.png",
+      "bytes": 102764,
+      "hash_encoding": "source_bytes",
+      "sha256": "33d9ae6624a48eecc0385d93ace336bbc89f2592eb6b915765e618237d066d43"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/figures/frontier.png",
+      "bytes": 89617,
+      "hash_encoding": "source_bytes",
+      "sha256": "21accee851634d216b1a302f392b62eac8e3d73b008244feb7947f6ac783b308"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/frontier_summary.csv",
+      "bytes": 10452,
+      "hash_encoding": "lf_normalized",
+      "sha256": "81aa59ad03344d8e92effa42d8bd8f649e969a6369b8f64baa43e825e292fcef"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/near_tie.csv",
+      "bytes": 14562,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9388649ae8e7ad83810fb58aa9cb540f3daedcd0554dafb0291a7f890bb43f8c"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/static_summary.csv",
+      "bytes": 2107,
+      "hash_encoding": "lf_normalized",
+      "sha256": "209bbb93f926d94faf4c49f443532735a6d7b055d1bb01e8ef4d1308d01fe81f"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_arena55k.csv",
+      "bytes": 1010,
+      "hash_encoding": "lf_normalized",
+      "sha256": "aa94f33bf6527598db14e42fa0d2d623b93ae1cf1a6e303a0dd47652dea4727a"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_helpsteer.csv",
+      "bytes": 2065,
+      "hash_encoding": "lf_normalized",
+      "sha256": "fa71ae2dbc09a28c9271a64f1781de687195759ab1ad661d122bfa37b2fa170c"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_helpsteer_quality3.csv",
+      "bytes": 2015,
+      "hash_encoding": "lf_normalized",
+      "sha256": "94f17b1f7bc0161306c967ece3eec4df9d9f817e63a06db49f950e1e1ed7be56"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_mt_bench_gpt4.csv",
+      "bytes": 983,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9e401a9ca2f4e5c205fc9b6071d0100ad40a09eb0df3b30f546aa3cd87052a65"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_mt_bench_human.csv",
+      "bytes": 1013,
+      "hash_encoding": "lf_normalized",
+      "sha256": "1f618fc4fe84d05ba98662a1fb1bc46492ee63c28916597bb50ec0970ecdefc3"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_mt_bench_human_pooled.csv",
+      "bytes": 927,
+      "hash_encoding": "lf_normalized",
+      "sha256": "45cacddfbe48d87d0ea16d20a4977c01c9b3dd48defe2f6c3add2d35892d2934"
+    },
+    {
+      "path": "experiments/hodge_diagnostics/reports/2026-09-25/summary_ultrafeedback.csv",
+      "bytes": 2086,
+      "hash_encoding": "lf_normalized",
+      "sha256": "413468941a4d90f03cee2561fbabd80c4bbbd86d175b61e6314080d096be4037"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/all_original_cyclic_pi.pdf",
+      "bytes": 119507,
+      "hash_encoding": "source_bytes",
+      "sha256": "9de2acd66ebb6757210168ffd24598b0b911ea75c52004008561c77b81a9c2fa"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/dpo_additional_pi.pdf",
+      "bytes": 23018,
+      "hash_encoding": "source_bytes",
+      "sha256": "5987cd24332b32f5cbe64589df54de6a253c9c478976a24ec9a0cd44899e77bb"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/dpo_additional_pi.png",
+      "bytes": 191422,
+      "hash_encoding": "source_bytes",
+      "sha256": "714747dc71e61d394e2106b4d3c6560a65440fa6e5ccba73d02c215fe8d232d7"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/dpo_main_pi.pdf",
+      "bytes": 51084,
+      "hash_encoding": "source_bytes",
+      "sha256": "d92a4f9fc1f6fafb1267fe6a18c3e8c06aa0e7b2c86d1ab9255a14ebab7b262f"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/dpo_main_pi.png",
+      "bytes": 560810,
+      "hash_encoding": "source_bytes",
+      "sha256": "b69ea427824acdfefbbbad6d1678e5bdcdd90b8b6ba337a3310e671af53abb44"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/ipo_additional_pi.pdf",
+      "bytes": 33464,
+      "hash_encoding": "source_bytes",
+      "sha256": "8ac57f4170cf297a1d0f244d2c5b46768a65d2f6a8c3a8185090597f7dcb845d"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/ipo_additional_pi.png",
+      "bytes": 366310,
+      "hash_encoding": "source_bytes",
+      "sha256": "07a0356344ef6c365b6d6d1e4aed4e61fbf70c6fb6c860f18345a99ca10e4a57"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/ipo_beta_comparison_pi.pdf",
+      "bytes": 34660,
+      "hash_encoding": "source_bytes",
+      "sha256": "e0fb7a419e07178a5bb2f02603462a6af068ee3a328f2f4fb4d8464409080fcd"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/ipo_beta_comparison_pi.png",
+      "bytes": 376282,
+      "hash_encoding": "source_bytes",
+      "sha256": "6da132ddeca1d16eb1119b2a6238ae4c919b95f9024d3657919d40d2cbe9baf5"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/ipo_main_pi.pdf",
+      "bytes": 41657,
+      "hash_encoding": "source_bytes",
+      "sha256": "58fcf7f0f9b763cb4d5de0cafabfe275e6788d669c06f75b0ed41c1a5282ab78"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/ipo_main_pi.png",
+      "bytes": 299873,
+      "hash_encoding": "source_bytes",
+      "sha256": "e8537ae69221e6ac5f07ab0ef86eb72c900ccf8eb1e22497fb715fdeafefecc6"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/selected_pi_trajectories.csv",
+      "bytes": 314671,
+      "hash_encoding": "lf_normalized",
+      "sha256": "b7f2bc1f4e38b7dd7af22569f0d4532a6cacdcee94d3ce48412605bd1368a3f6"
+    },
+    {
+      "path": "experiments/legacy_cyclic_analysis/figures/selected_prompt_summary.csv",
+      "bytes": 2615,
+      "hash_encoding": "lf_normalized",
+      "sha256": "4ef9bdc9ffc14b3e7deb9f1fc22278362e337fff3b75d8d7a30bdb157e8c4f5f"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/dpo_policy_comparison.pdf",
+      "bytes": 59837,
+      "hash_encoding": "source_bytes",
+      "sha256": "89dcf0075bc9c7043f43bd6972e8d4654f87a4205e74433f332ab0bd825bd2d3"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/dpo_policy_comparison.png",
+      "bytes": 584142,
+      "hash_encoding": "source_bytes",
+      "sha256": "ea198e98ab79343663820d2b1d4c0afb5eff89b4ce0744346830e63666649576"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/dpo_policy_trajectories.pdf",
+      "bytes": 89348,
+      "hash_encoding": "source_bytes",
+      "sha256": "20b4407cf5786ac2c822f18b9aa5132537fc0befa7e7cbfacca74f179bc92a54"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/dpo_policy_trajectories.png",
+      "bytes": 872761,
+      "hash_encoding": "source_bytes",
+      "sha256": "464d43d5706224d6266e08bb7ba3ba5026e60e7ce73cd926a26e9dc8f20a7bf2"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/ipo_policy_comparison.pdf",
+      "bytes": 70135,
+      "hash_encoding": "source_bytes",
+      "sha256": "a8d140252e60748b661a6eedd23874a2b8dd1d754b894e78bffcc6ee08a7dd14"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/ipo_policy_comparison.png",
+      "bytes": 741445,
+      "hash_encoding": "source_bytes",
+      "sha256": "092861baab46aaefef597f7cfb29ebe1df7aede57c2c969eaedaaa6a4bac2543"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/ipo_policy_trajectories.pdf",
+      "bytes": 102363,
+      "hash_encoding": "source_bytes",
+      "sha256": "3c0d1cf7d09feaa816acca5e10bfccfdc242ee5b81911fa4053a05598c33969e"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/ipo_policy_trajectories.png",
+      "bytes": 1034265,
+      "hash_encoding": "source_bytes",
+      "sha256": "3b4986a229313691992c3b9a07e1734eedad7c3b1d338d1374da7f0c2b703be5"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/population_diagnostics.pdf",
+      "bytes": 23874,
+      "hash_encoding": "source_bytes",
+      "sha256": "f98cc2a5f93785979f9d65a58bca10b9ad6acf7a1eee79386e6cf9f701f5bd43"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/population_diagnostics.png",
+      "bytes": 249152,
+      "hash_encoding": "source_bytes",
+      "sha256": "23f9c5f84db99d6fa6e607d7343b7c2be8fd4b9c6e6b970da47922ac2e0cd741"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/population_time_series.pdf",
+      "bytes": 41468,
+      "hash_encoding": "source_bytes",
+      "sha256": "aa48d7e09068b6d166d4690c93ebf8311b4dfffee2cd4dc15ce2b131343b9690"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/figures/population_time_series.png",
+      "bytes": 729038,
+      "hash_encoding": "source_bytes",
+      "sha256": "8de5c4ab3bc74d293eaa67603fcc2358e25871d1116573178b957bd9e3abba22"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/metrics/paired_comparisons.csv",
+      "bytes": 947,
+      "hash_encoding": "lf_normalized",
+      "sha256": "7c9e9b0e19a5ccb0e876e4e479afbc50696b93c355aa6345e176acbdea7eaa3a"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/metrics/population_time_series.csv",
+      "bytes": 81332,
+      "hash_encoding": "lf_normalized",
+      "sha256": "591e12c54ca3b4f82f3359d670dc7c676ec4dd4e81ec3f963d255f112264d0a9"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/metrics/prompt_diagnostics.csv",
+      "bytes": 1297937,
+      "hash_encoding": "lf_normalized",
+      "sha256": "be6682f893a00e8d000af7c6539791786b0027dbae2a4681c14cfdb6a413e169"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/metrics/run_diagnostics.csv",
+      "bytes": 3967,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9f11a657aef0113341650ee2d2f14449c50566212f76ea786cb34bea9dd1fc05"
+    },
+    {
+      "path": "experiments/legacy_sampling_analysis/snapshot_20260911/metrics/selected_policy.csv",
+      "bytes": 432022,
+      "hash_encoding": "lf_normalized",
+      "sha256": "c4c62ed013fd4c745a70fcda6e6a4555752dda2c68e0a017a936a13dd6b31b3b"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/metrics_a0.8_l0.5.csv",
+      "bytes": 21833,
+      "hash_encoding": "lf_normalized",
+      "sha256": "2fc8cc6ab4663222e0897e1569a12f950fd0d1b83929d170e86b5f0f79e5d63e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/metrics_a0.9_l0.5.csv",
+      "bytes": 18814,
+      "hash_encoding": "lf_normalized",
+      "sha256": "f53ebe87d642a80103a2fa5a5815d76720636c5ac2d57bd402a287e6b29a648e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_entropy_partial.pdf",
+      "bytes": 16197,
+      "hash_encoding": "source_bytes",
+      "sha256": "ddd462216a91b3f7e824b10c83bce82806f76230241f4a62266f732c4d8b29c7"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_entropy_partial.png",
+      "bytes": 70875,
+      "hash_encoding": "source_bytes",
+      "sha256": "5a6bfa7021ff15bd29062a475e6174cc381d79f0c94a2c557c9c56c52604b379"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_winning_rate_partial.pdf",
+      "bytes": 17366,
+      "hash_encoding": "source_bytes",
+      "sha256": "8d58704f8af2579a208cc39f45304b7465a11c48c185817d961cf4162b2e3e5a"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_winning_rate_partial.png",
+      "bytes": 78559,
+      "hash_encoding": "source_bytes",
+      "sha256": "d50d663b815af7c9eb78a615a75fbd94fee330cae982a32b738177d79a13b13e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.8_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "bytes": 33701,
+      "hash_encoding": "lf_normalized",
+      "sha256": "960828777ccf703007f8e1271ab9f5baf933ec3c7b6827a966099fa04abb76e7"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.8_l0.9_b1_dynoracle_frozenref_v1.csv",
+      "bytes": 21696,
+      "hash_encoding": "lf_normalized",
+      "sha256": "25162d5db19449f926104242f570ad16f39007386ec9efb278aee3e20ec2f5e8"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.95_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "bytes": 34112,
+      "hash_encoding": "lf_normalized",
+      "sha256": "673449201315e753ca002f414d9c24f9f02f1bebe927823d8b683abde99af379"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.99_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "bytes": 28340,
+      "hash_encoding": "lf_normalized",
+      "sha256": "ca3309084b00c5617ec2b3ae72cebd91cd813ac7bec24c55a834b70e3a4b7eb7"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.9_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "bytes": 31107,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6e2eba1bfb5860112baaa9f25fb9956fe42a23c1cc4f64646de4dd1b14ee5f95"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_entropy_partial.pdf",
+      "bytes": 18946,
+      "hash_encoding": "source_bytes",
+      "sha256": "83340bae56bb77d7c452d33d005cb2ff9e9517a6e8d69a0cab5484a5c659d42e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_entropy_partial.png",
+      "bytes": 115948,
+      "hash_encoding": "source_bytes",
+      "sha256": "ab969b0d66ed6367da9fb2a2512cefdcabde2abdcac85480f35dddf1a9ca4b7e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_winning_rate_partial.pdf",
+      "bytes": 18707,
+      "hash_encoding": "source_bytes",
+      "sha256": "d17390dff63a0587811a6aead58dc03dca81654585816552228248d702a867a5"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_winning_rate_partial.png",
+      "bytes": 108876,
+      "hash_encoding": "source_bytes",
+      "sha256": "b61a406301e4890cac8265acac4361ed51310c03022b08cbcc83a18616b91456"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21842,
+      "hash_encoding": "lf_normalized",
+      "sha256": "afd624407deb79ebee03ca73c8735a54cb437cd011ce8dbb1d761810fcacb33e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19481,
+      "hash_encoding": "lf_normalized",
+      "sha256": "7e5596d66faed78d8ab874d43ae97382bfde80da614aff04d5b7ca738fa4f5f3"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 22093,
+      "hash_encoding": "lf_normalized",
+      "sha256": "6723e42c0ecfdad40b88ac3920849b767517ec3585920a0e9dcf1b53a4dffe49"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21902,
+      "hash_encoding": "lf_normalized",
+      "sha256": "06f45bc91cc2116e902252b41b58ef352697b3e6155032e42c078e35160b0800"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21856,
+      "hash_encoding": "lf_normalized",
+      "sha256": "8c68ddb5a852c0ad9256aa4467212afefe7d1efebe0475c3147d01a244bcb032"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 18508,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d692d3bfdaab86baa30d270eff35ee7010682f8ba69a52e2341732a3536b6e26"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 4711,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d07fdcc12985ba214ee929b2bd54e7f53d8639a818ab03de9cfeda84641f936c"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21922,
+      "hash_encoding": "lf_normalized",
+      "sha256": "14fe2126be716ba8443a363b84b254a9d3b7c1d16e3d0706ef062b908ba41ab6"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21920,
+      "hash_encoding": "lf_normalized",
+      "sha256": "9362d8146b551fc491cf25d5de33e3dcc36ae99e8b29183bab56fc315dd31c42"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 22049,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d8abcac536b1c7041444df7e72d3d19023761801dca24bf45aea38d9431cb2fa"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19861,
+      "hash_encoding": "lf_normalized",
+      "sha256": "c3e79653cdd23567272265f966c581a28c54faf174715d4a1d1833882a047c3a"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 4015,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d3151156628acd71914a2fd1617741c314cd7eff8a8ba62867e058fc61e4271d"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21926,
+      "hash_encoding": "lf_normalized",
+      "sha256": "b9cc174f12fbe09358fe4c778c81fcd7653321eb055556292b3781fd77385812"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_dpo_relative_sequence_entropy_current.pdf",
+      "bytes": 26036,
+      "hash_encoding": "source_bytes",
+      "sha256": "57ab5db1c2227ce0f5c64f07555f484eba2e2131528b72752d4f77164fef6842"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_dpo_relative_sequence_entropy_current.png",
+      "bytes": 161730,
+      "hash_encoding": "source_bytes",
+      "sha256": "b32a9e156973b0c021855f8d1db3f375186f740d8c649308883fb82dd43b3b09"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_ipo_relative_sequence_entropy_current.pdf",
+      "bytes": 25656,
+      "hash_encoding": "source_bytes",
+      "sha256": "2e36fc52ebd58b71cc92b99304472316cc98209f7d9c16b2d85ae2677b7afb26"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_ipo_relative_sequence_entropy_current.png",
+      "bytes": 158140,
+      "hash_encoding": "source_bytes",
+      "sha256": "a25d5bf3013cf0297250b13a1b5ed17493408e6b2042ba1e5f7323d6f71e39d5"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_relative_sequence_entropy_summary.csv",
+      "bytes": 2448,
+      "hash_encoding": "lf_normalized",
+      "sha256": "8fd0dc4838d1dbe9524da6bd4afe47dc9d4b3767ffb111cae3ac240d94006d5c"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "bytes": 31220,
+      "hash_encoding": "lf_normalized",
+      "sha256": "e25ead306a311b9b7696ee3837381198bd98e4235392b528705824a339899cf6"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "bytes": 6793,
+      "hash_encoding": "lf_normalized",
+      "sha256": "7cfd298fba06280e030a57dd70ea0a600de56039cff811c7adbb3eed8212e373"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "bytes": 6804,
+      "hash_encoding": "lf_normalized",
+      "sha256": "bd3c1470fb97e9b03f4f6bea1e6bb9092f1020d0768b395c157f77f2805a8246"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "bytes": 30952,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d7d8990cac1b5239b0ba9dbc341d57ca2bd9eca11fc09070fd320d63308a3378"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "bytes": 29949,
+      "hash_encoding": "lf_normalized",
+      "sha256": "efc3492056251bd61cf2a774d2e7411a2b5e2c20dee1fe4206251ed666b95470"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "bytes": 8063,
+      "hash_encoding": "lf_normalized",
+      "sha256": "befd476f954d0c64d19e3a5a0e10f7c58fb7185bf45fc960681201401d705941"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "bytes": 31105,
+      "hash_encoding": "lf_normalized",
+      "sha256": "3a53d55e56ac8154879065b449ab0a9651dd41f82b8b6a9755136e5f64b2a86f"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "bytes": 7948,
+      "hash_encoding": "lf_normalized",
+      "sha256": "194216597d84b8031d0f098573e648a606c7922e78d260e52b3abfc55c72455e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_entropy_current.pdf",
+      "bytes": 19407,
+      "hash_encoding": "source_bytes",
+      "sha256": "26fffcb425cbefea633205e7b79730756823c3df51652f56f6744624dd2dec5b"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_entropy_current.png",
+      "bytes": 121511,
+      "hash_encoding": "source_bytes",
+      "sha256": "ff3ea7e4733564e3e69c5defd39fcea6c35db3dcc63f1c1700a573444f905b02"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_winning_rate_current.pdf",
+      "bytes": 20158,
+      "hash_encoding": "source_bytes",
+      "sha256": "9bcacc768eca3c7adb57ccfeab3fa0b72d4488e4f52fb0996b7b94a984f19bf4"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_winning_rate_current.png",
+      "bytes": 107432,
+      "hash_encoding": "source_bytes",
+      "sha256": "4c0b3c97992e559a1050eab735337466ebd8c1f50398b848e9b0077c0fb49826"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_entropy_current.pdf",
+      "bytes": 19399,
+      "hash_encoding": "source_bytes",
+      "sha256": "09f98a330ffc06b22f1de02a925d0c8b43e09e2ab9340e061b8ef0ea74069cdf"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_entropy_current.png",
+      "bytes": 102486,
+      "hash_encoding": "source_bytes",
+      "sha256": "6dbb523f5ebe44f28108eb0cddea8accff00da11dd8fa18536edad5f9570806e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_winning_rate_current.pdf",
+      "bytes": 20379,
+      "hash_encoding": "source_bytes",
+      "sha256": "1603b150ceb979c782dddf4705298ad3915706ff28e5de852dc93815f6b3f3f7"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_winning_rate_current.png",
+      "bytes": 110531,
+      "hash_encoding": "source_bytes",
+      "sha256": "7dbdf730b45d3cc8cb9dbb23f6051d4f9b0debca1bcd6321b1a71bb754c58e8f"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_sequencesum_current_summary.csv",
+      "bytes": 1248,
+      "hash_encoding": "lf_normalized",
+      "sha256": "901fc2aed50537d12b4299fb47728219c7aa03d6aab4f35dd23408364970a151"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21842,
+      "hash_encoding": "source_bytes",
+      "sha256": "afd624407deb79ebee03ca73c8735a54cb437cd011ce8dbb1d761810fcacb33e"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 31220,
+      "hash_encoding": "source_bytes",
+      "sha256": "e25ead306a311b9b7696ee3837381198bd98e4235392b528705824a339899cf6"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19724,
+      "hash_encoding": "source_bytes",
+      "sha256": "3b0a92ad9cbea149f5652154841597ada7f34e6c43fec053a935fd9686a5dc6a"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 50476,
+      "hash_encoding": "source_bytes",
+      "sha256": "307052bbde9b1881f4d7086f2a1a57d81649eb77e56c256ec94ec4836ffcfd3f"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 22093,
+      "hash_encoding": "source_bytes",
+      "sha256": "6723e42c0ecfdad40b88ac3920849b767517ec3585920a0e9dcf1b53a4dffe49"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30131,
+      "hash_encoding": "source_bytes",
+      "sha256": "2bff0904ade625e469279eed536f4d9dcef823ef73bc2305d01ec6ad3681c7b3"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21902,
+      "hash_encoding": "source_bytes",
+      "sha256": "06f45bc91cc2116e902252b41b58ef352697b3e6155032e42c078e35160b0800"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 29735,
+      "hash_encoding": "source_bytes",
+      "sha256": "d871cee5df55ebdf73699400bbe00a9f927cef4035c3285a022cb363a9fbd477"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21856,
+      "hash_encoding": "source_bytes",
+      "sha256": "8c68ddb5a852c0ad9256aa4467212afefe7d1efebe0475c3147d01a244bcb032"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30952,
+      "hash_encoding": "source_bytes",
+      "sha256": "d7d8990cac1b5239b0ba9dbc341d57ca2bd9eca11fc09070fd320d63308a3378"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19709,
+      "hash_encoding": "source_bytes",
+      "sha256": "6d1b95a3469d701dfbfcdd562cfe479bbbdf3eb0847eb5744ac794f940fbc769"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 50418,
+      "hash_encoding": "source_bytes",
+      "sha256": "b36144cd972309d8ff5f6b18cd085047ef840e575e52de04e0b7875b4c979a95"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19749,
+      "hash_encoding": "source_bytes",
+      "sha256": "218f4915470fcfffca561426c876eb42e0a49567471d7cb084703f2c7b5ad234"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 49373,
+      "hash_encoding": "source_bytes",
+      "sha256": "a434583de4de6198f0bdab20863fcc4e46e5c729974d6021c0605a61850cd7c1"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21922,
+      "hash_encoding": "source_bytes",
+      "sha256": "14fe2126be716ba8443a363b84b254a9d3b7c1d16e3d0706ef062b908ba41ab6"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 29949,
+      "hash_encoding": "source_bytes",
+      "sha256": "efc3492056251bd61cf2a774d2e7411a2b5e2c20dee1fe4206251ed666b95470"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 16234,
+      "hash_encoding": "source_bytes",
+      "sha256": "627464626708074a77430aacd5cb9efced4521030e8629bc7fcb770ae95d6dc2"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 40822,
+      "hash_encoding": "source_bytes",
+      "sha256": "2a7101535c94dc1bd7382167121f1c06c95f68e9e58b2be4e6094100339a5d2d"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21920,
+      "hash_encoding": "source_bytes",
+      "sha256": "9362d8146b551fc491cf25d5de33e3dcc36ae99e8b29183bab56fc315dd31c42"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30506,
+      "hash_encoding": "source_bytes",
+      "sha256": "15e9dcc26543755144f66082d52ccfa0f5f6040df23fac07acac9b353f5eb3dc"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 22049,
+      "hash_encoding": "source_bytes",
+      "sha256": "d8abcac536b1c7041444df7e72d3d19023761801dca24bf45aea38d9431cb2fa"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 31105,
+      "hash_encoding": "source_bytes",
+      "sha256": "3a53d55e56ac8154879065b449ab0a9651dd41f82b8b6a9755136e5f64b2a86f"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19861,
+      "hash_encoding": "source_bytes",
+      "sha256": "c3e79653cdd23567272265f966c581a28c54faf174715d4a1d1833882a047c3a"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 50526,
+      "hash_encoding": "source_bytes",
+      "sha256": "8a33d0478e1ad9121262f9c8ca7ba70caba6b52964c3d8faddc15279c14dca3d"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21926,
+      "hash_encoding": "source_bytes",
+      "sha256": "b9cc174f12fbe09358fe4c778c81fcd7653321eb055556292b3781fd77385812"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30165,
+      "hash_encoding": "source_bytes",
+      "sha256": "64ffa1b8bc66ba1ca8dea58d9c6cb8168c8118167d6751ee0634e5f59c3b96ee"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_curves_20260911.csv",
+      "bytes": 143390,
+      "hash_encoding": "source_bytes",
+      "sha256": "b45f785ce480d5bf6bd8586be49f4ef79d7f204603462a61a435c310f8cd9625"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_dpo_relative_sequence_entropy_20260911.pdf",
+      "bytes": 26194,
+      "hash_encoding": "source_bytes",
+      "sha256": "73dcc177150e78351c771cb10f591da3bb00c19bdf9247da97f65806a063764c"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_dpo_relative_sequence_entropy_20260911.png",
+      "bytes": 193062,
+      "hash_encoding": "source_bytes",
+      "sha256": "6d8cb3b862fbb4e624724115f95d3f729d3b5a0a16979ba4052fe4a9e75646a5"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_dpo_winning_rate_20260911.pdf",
+      "bytes": 23056,
+      "hash_encoding": "source_bytes",
+      "sha256": "623afcde362292ce7e46804fd366aadd273fc1152209800c99c1a75ac3496fe2"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_dpo_winning_rate_20260911.png",
+      "bytes": 187540,
+      "hash_encoding": "source_bytes",
+      "sha256": "39151872f65ea303528aa164abd590832c0450a13ef7926b299617e18983699c"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_ipo_relative_sequence_entropy_20260911.pdf",
+      "bytes": 27154,
+      "hash_encoding": "source_bytes",
+      "sha256": "4da2566218bc7516f479d0a86d44d71836e8b5c76cd8576d8d6544f775b8416c"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_ipo_relative_sequence_entropy_20260911.png",
+      "bytes": 206658,
+      "hash_encoding": "source_bytes",
+      "sha256": "269f3b8ed4a00fd71c07349ffd9156a1fc4c333a652475e0de8be6ce58af4be5"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_ipo_winning_rate_20260911.pdf",
+      "bytes": 23772,
+      "hash_encoding": "source_bytes",
+      "sha256": "ee6fc7c602ce053283709a75bb68553d97c3bd7497f76d1a01f2bde3d0c303d5"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_ipo_winning_rate_20260911.png",
+      "bytes": 188036,
+      "hash_encoding": "source_bytes",
+      "sha256": "f47a0da679a79f6eca56238a826b74371e5ed9201052c022f033c979063fd8ef"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_parameter_summary_20260911.csv",
+      "bytes": 3066,
+      "hash_encoding": "source_bytes",
+      "sha256": "b6095f6cd7402077c248dc505beb31b45d8d53b4c69dfe04f6abe12f029a345c"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/sequencesum_snapshot_20260911/oracle_winning_rate_checkpoints_20260911.csv",
+      "bytes": 947,
+      "hash_encoding": "source_bytes",
+      "sha256": "e7442f468c94c176d82bd33b120f9fda393163b9166677f6a3ce1b864ceeabed"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/all_prompt_change_heatmap.pdf",
+      "bytes": 110535,
+      "hash_encoding": "source_bytes",
+      "sha256": "f2c7d05d04c5c13d22fbec7037ae178a9f21ff3b5bd53b1b7527287c32870e60"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/all_prompt_change_heatmap.png",
+      "bytes": 353928,
+      "hash_encoding": "source_bytes",
+      "sha256": "0b1245f1a5adc1755659152423547f7832aad8dd611316225f137d41f8a2e19e"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/all_prompt_stability.pdf",
+      "bytes": 25918,
+      "hash_encoding": "source_bytes",
+      "sha256": "be59d3200aceb80ef8253c9ab392be9ebd9097239bae0767a14858fa11be0138"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/all_prompt_stability.png",
+      "bytes": 274334,
+      "hash_encoding": "source_bytes",
+      "sha256": "9f14a0b4915c1a5ab83b57c80b34fbafe9299f9c84550451f64b99c8af632d7b"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/dpo_policy_vs_step.pdf",
+      "bytes": 47739,
+      "hash_encoding": "source_bytes",
+      "sha256": "871aa487c9a15d5f179933a03a6c8fca858a9018afd59a836fd8a234f0717920"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/dpo_policy_vs_step.png",
+      "bytes": 671996,
+      "hash_encoding": "source_bytes",
+      "sha256": "528e63fa7e7a39996f99eafda52d4dc9aaaf0eb0d9d32d7078068020f96c8b7c"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/dpo_relative_weights.pdf",
+      "bytes": 53260,
+      "hash_encoding": "source_bytes",
+      "sha256": "efe48e174c8558e928f862e65edfaff181e92a34c6b603977831008ae06f3505"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/dpo_relative_weights.png",
+      "bytes": 1126995,
+      "hash_encoding": "source_bytes",
+      "sha256": "9471e761da48e6f706f07b0f387d0e6ff70c7d0c88884fd885f6790d74b8a0f9"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/ipo_policy_vs_step.pdf",
+      "bytes": 48865,
+      "hash_encoding": "source_bytes",
+      "sha256": "3c258b31d1f66ffbfedcbca1281f1fa04448d843f3581c4b59b8ae3a87860cd3"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/ipo_policy_vs_step.png",
+      "bytes": 487016,
+      "hash_encoding": "source_bytes",
+      "sha256": "fe1d39671e968b0209d80a84281a088185bec1d2cde15f6e14e435a3484a150c"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/ipo_relative_weights.pdf",
+      "bytes": 63342,
+      "hash_encoding": "source_bytes",
+      "sha256": "eed1f5f74c60d565afaae01845460e26617ca5cec3ca440c0624439a70840aa1"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/ipo_relative_weights.png",
+      "bytes": 979905,
+      "hash_encoding": "source_bytes",
+      "sha256": "c8745de38afb9b2110f48289c42b88f00f149f5053b3f4d7e1327d2343e6ab62"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/per_prompt_summary.csv",
+      "bytes": 387704,
+      "hash_encoding": "lf_normalized",
+      "sha256": "f076be2014bbeaed6e0a911c4f023b3907e657c25c529ac254be5b19a5d05077"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/selected_trajectories.csv",
+      "bytes": 1027242,
+      "hash_encoding": "lf_normalized",
+      "sha256": "d7d9f587e86d91b3b872092a7f0d1dbab01298f75d096048b65f0305452857cc"
+    },
+    {
+      "path": "experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/stability_summary.csv",
+      "bytes": 3088,
+      "hash_encoding": "lf_normalized",
+      "sha256": "1554db67ac48bd628da6517fb190a1f874daedcf1d532a9e2f98e521c15c38cb"
+    }
+  ]
+}

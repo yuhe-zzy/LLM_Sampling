@@ -4,12 +4,14 @@ Updated2026-10-13, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest inspection request
 
-Print Hodge cyclic L2 norms for the displayed Oracle2 matrices416,4,5,7,6,11.
-Computed both identity and logit flows with existing core; all12 decompositions
-pass independent least-squares and orthogonality checks. Norm is spectral
-(also unique-edge Euclidean here for K4), not Frobenius. Ordinal transitive
-does not imply zero cyclic residual. No experiment or GPU action. See today's
-note and scientific context; local pytest suite unavailable, no suite-pass claim.
+User wants shared semantic/output-direction oscillations, not only prompt-level
+cycles; first compute average Hodge decomposition. All500 training panels now
+computed with existing core: identity norm(mean C)=.022619 vs mean(norm C)=.221816,
+aggregate cyclic energy share .357286%. Original candidate indices are not
+semantic axes. Logit averaging orders reported separately. Seven focused CPU
+unittests passed; no full-suite/GPU test or scheduler action. See
+[average report and proposed latent analysis](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md).
+Shared-feature trajectory/latent-plane analysis is a proposal, not yet executed.
 
 ## Completed publication request
 

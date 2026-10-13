@@ -63,6 +63,37 @@ All six displayed panels have nonzero residuals for both links, despite their
 different ordinal labels. Logit diagnostics are not the actual DPO optimizer.
 See the dated note for numeric values and independent projection validation.
 
+## Cross-prompt averages and latent directions
+
+User clarification2026-10-13: the scientific target is shared output-direction
+behavior across prompts (detail, tone or latent semantics), not just individual
+response trajectories. First requested diagnostic is the mean preference/Hodge
+matrix. [All500 training-panel results](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md)
+are computed in original candidate-index coordinates with equal prompt weights.
+Identity norm(mean C)=.022618963780 versus mean(norm C)=.221815660192;
+aggregate cyclic energy share=.357286%, versus mean individual share6.844496%.
+Mean logit-flow norm(mean C)=.052292636504, mean(norm C)=1.145352103763;
+aggregate share=.010474%. Logit of mean P is different: norm=.057420385418,
+share=.128827%. No clipping. Full matrices and independent numerical checks
+are saved; seven focused CPU tests pass, not the entire repository suite.
+
+The builder orders candidates by source scalar u, and Oracle2 preserves their
+order; these are not shared semantic labels. Exact historical score-field
+arguments have not been re-audited. Weak signed average cyclic signal in these
+coordinates does not prove that semantic cycling is absent or noise dominates.
+PCA variance is not coherent mean cyclic strength. A fixed shared orthonormal
+projection cannot recover cancellation in the full mean matrix. Semantic
+alignment must follow a common feature rule, not independent sign choices.
+
+Proposal, not executed: define shared response features, inspect dataset-mean
+expected-feature trajectories across all six arms, and optionally discover a
+two-dimensional cyclic plane using the collaborator's shared-feature compression
+in hodge/coherence.py. Fit directions on discovery prompts and freeze before
+held-out comparison. Initial-policy saturation and the difference between a
+feature-policy proxy and the actual LLM Jacobian must remain explicit. A scalar
+trajectory can oscillate, but one real scalar axis cannot represent a nonzero
+skew cyclic operator. No new GPU job or scientific setting was authorized here.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

@@ -4,6 +4,11 @@ Updated2026-10-13, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest inspection request
 
+Latest clarification: mean P is the elementwise equal average of500 training
+matrices in original candidate slots, with no semantic alignment, policy weights
+or step averaging. Verified sum P12=281.2262593683416 and mean=.5624525187366831.
+Do not present it as an already aligned global semantic preference matrix.
+
 Follow-up asks for concrete shared-direction measurement standards using the
 existing data. Proposed six features (five HelpSteer attributes plus log length),
 mean expected-feature trajectories, excursion/backtracking/late-motion metrics,

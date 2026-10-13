@@ -94,6 +94,55 @@ feature-policy proxy and the actual LLM Jacobian must remain explicit. A scalar
 trajectory can oscillate, but one real scalar axis cannot represent a nonzero
 skew cyclic operator. No new GPU job or scientific setting was authorized here.
 
+### Proposed operational protocol, not yet executed
+
+2026-10-13 follow-up asks how to make the shared-direction question concrete
+with existing data. The numeric export actually contains static response token
+counts and panel probabilities of shape101x500x4 for each of six arms. The five
+original HelpSteer attributes are not in this numeric export; join them from
+the raw source by exact prompt/response identity and audit duplicates/missing
+matches before claiming all500 feature panels. Dataset documentation confirms
+helpfulness, correctness, coherence, complexity, verbosity scores0..4; none
+directly measures tone. Proposed first feature set: those five scores and log
+token count. Attributes are diagnostics, never a substitute for Oracle2 P.
+
+Define f_xi as the fixed feature vector, with within-prompt centering and common
+scales established on discovery prompts; retain native-unit plots as well.
+Shared change trajectory is z_t=mean_x sum_i(pi_txi-pi_0xi)*f_xi. Use raw panel
+probabilities, not relative-sequence weights. Reweighting static responses is
+a fixed-panel output diagnostic, not measured open-generation semantics.
+
+Proposed continuous metrics (no universal convergence cutoff): per-coordinate
+excursion range; total variation L=sum_t|z_(t+1)-z_t|; backtracking B=L-|z_end-z_start|.
+Monotone scalar drift has B=0; reversals make B positive. B alone also responds
+to stochastic jitter and does not establish periodicity. Report absolute units,
+not just normalized ratios that can inflate nearly-flat curves. Moving10-update
+mean increment magnitude and predeclared early0..20 versus late80..100 windows
+describe late movement; no post-hoc best window or convergence-time claim.
+Compare the six arms on identical features/axes/windows, within each objective.
+Also compare magnitude of mean prompt increment versus mean of individual
+magnitudes to reveal cancellation; these are not equivalent global metrics.
+
+Optional latent plane: fit only to static C/features, not to whichever training
+trajectory looks cyclic. Reuse the shared-feature S/M construction described
+above, initially with uniform J and identity P-.5 as the primary diagnostic;
+initial-policy J and logit are separately labeled sensitivity analyses. A
+leading skew plane maximizes projected cyclic coupling under the declared
+feature metric, not arbitrary unnormalized feature scale. It is not itself a
+preference probability matrix or the true neural Jacobian. A plane restricted
+to these six features says nothing exhaustive about all language semantics.
+
+For the first post-hoc analysis, propose a fixed seed0 prompt split250/250:
+fit scales/plane on one half and evaluate the signed coupling in the frozen
+plane and trajectories on the other, without refitting its direction. These
+are held out from axis selection, NOT held out from model training, since all
+500 prompts trained the LLM. Use within-prompt feature-label permutation as
+an alignment-null diagnostic, keeping the validation plane fixed; report its
+exchangeability assumption. Paired prompt bootstrap can describe uncertainty
+across sampled prompts but cannot supply missing independent training seeds.
+No semantic features, latent plane, permutations or new metrics have been
+computed yet. No new jobs, judging, embeddings or scientific changes approved.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

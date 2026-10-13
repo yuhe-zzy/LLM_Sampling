@@ -4,6 +4,15 @@ Updated2026-10-13, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest inspection request
 
+Follow-up asks for concrete shared-direction measurement standards using the
+existing data. Proposed six features (five HelpSteer attributes plus log length),
+mean expected-feature trajectories, excursion/backtracking/late-motion metrics,
+and optional static-preference-selected 2D plane with250/250 prompt validation.
+All remain proposals, not executed or approved new experiments. Attributes still
+need identity-checked joining from raw source; six-arm numeric lengths/trajectories
+are confirmed locally. The split holds out axis selection, not model training.
+See [operational proposal](../doc/SCIENTIFIC_CONTEXT.md#proposed-operational-protocol-not-yet-executed).
+
 User wants shared semantic/output-direction oscillations, not only prompt-level
 cycles; first compute average Hodge decomposition. All500 training panels now
 computed with existing core: identity norm(mean C)=.022619 vs mean(norm C)=.221816,

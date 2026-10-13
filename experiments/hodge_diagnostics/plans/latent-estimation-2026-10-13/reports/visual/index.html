@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual intro: One skew form, many prompts: how to find the shared cycle before training anything</title>
+<meta name="description" content="Visual version of the handoff plan for aligned latent-preference aggregation: estimate one skew form from pooled pairs, find its shared cyclic direction, test it against nulls, and project checkpoints onto it.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Visual intro: One skew form, many prompts: how to find the shared cycle before training anything">
+<meta property="og:description" content="Visual version of the handoff plan for aligned latent-preference aggregation: estimate one skew form from pooled pairs, find its shared cyclic direction, test it against nulls, and project checkpoints onto it.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="_deck/deck.css">
+<script defer src="_deck/deck.js"></script>
+<style>
+  .lp-chip { display:inline-block; padding:.05em .6em; border-radius:999px; font-family:var(--sans); font-size:.72em; vertical-align:.12em; border:1px solid var(--line); color:var(--muted); }
+  .pl-node { cursor:pointer; outline:none; }
+  .pl-node rect.pl-box { fill:var(--bg); stroke-width:1.6; transition:stroke-width .2s, fill .2s; }
+  .pl-node:hover rect.pl-box { stroke-width:2.6; }
+  .pl-node[aria-pressed="true"] rect.pl-box { stroke-width:3.4; }
+  .pl-node[aria-pressed="true"].c-people rect.pl-box { fill:var(--people-soft); }
+  .pl-node[aria-pressed="true"].c-platform rect.pl-box { fill:var(--platform-soft); }
+  .pl-node[aria-pressed="true"].c-creator rect.pl-box { fill:var(--creator-soft); }
+  .pl-node[aria-pressed="true"].c-teal rect.pl-box { fill:var(--teal-soft); }
+  .pl-node:focus-visible rect.pl-box { stroke-dasharray:4 3; }
+  .pl-card { max-width:960px; margin:.6rem auto 0; padding:.7rem 1.1rem .8rem; border:1px solid var(--line); border-left:5px solid var(--pl-c, var(--people)); border-radius:8px; background:var(--bg); }
+  .pl-head { color:var(--ink); font-size:1.12rem; margin-bottom:.35rem; }
+  .pl-head b { color:var(--pl-c, var(--people)); margin-right:.4rem; }
+  .pl-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:.3rem 1.4rem; }
+  .pl-grid h4 { margin:0 0 .15rem; font-family:var(--sans); font-weight:600; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); }
+  .pl-grid p { margin:0; font-size:.9rem; line-height:1.38; color:var(--text); }
+  @media (max-width: 640px) { .pl-grid { grid-template-columns:minmax(0,1fr); } .pl-card { padding:.6rem .8rem; } }
+  tspan.sb { font-size:.7em; baseline-shift:sub; }
+  .dk-inner sub { font-size:.7em; line-height:0; }
+  .src-list li { margin-bottom:.9rem; }
+  .src-list .d { font-family:var(--sans); font-size:.78rem; word-break:break-all; }
+  .src-list .t { font-size:1.1em; }
+</style>
+</head>
+<body>
+<header class="dk-bar">
+  <span></span>
+  <span class="dk-paper">One skew form, many prompts: finding the shared cycle</span>
+  <span style="color:var(--muted)">Plan, not results</span>
+</header>
+
+<main class="dk-deck" aria-label="Visual introduction, use arrow keys or the buttons below">
+
+  <!-- 1 Title -->
+  <section class="dk-slide">
+    <div class="dk-inner">
+      <h1 class="dk-h">One skew form, many prompts:<br>how to find the shared cycle<br>before training anything</h1>
+      <hr class="dk-rule">
+      <p class="dk-sub">Handoff to Yu He · feasibility check · as of 2026-10-13</p>
+      <p class="dk-meta">Paper B · drafted by Fan Yao with Claude</p>
+      <p class="dk-hint">Press → or click to step through</p>
+    </div>
+  </section>
+
+  <!-- 2 The answer in one picture -->
+  <section class="dk-slide" data-label="The plan">
+    <div class="dk-inner">
+      <h2 class="dk-h">The plan in one picture: three objects, kept apart</h2>
+      <figure class="dk-fig" style="max-width:960px">
+        <svg viewBox="0 -14 960 390" role="img" aria-label="Per-prompt panels are pooled to fit one latent matrix; its rotation plane receives the checkpoints' latent states">
+          <!-- panels -->
+          <g data-step="1" class="dk-rise">
+            <rect x="84" y="46" width="200" height="170" rx="8" class="ln-thin s-people" style="fill:var(--bg);opacity:.5"/>
+            <rect x="72" y="58" width="200" height="170" rx="8" class="ln-thin s-people" style="fill:var(--bg);opacity:.75"/>
+            <rect x="60" y="70" width="200" height="170" rx="8" class="f-people-soft s-people" stroke-width="1.7"/>
+            <path class="ln-thin s-people" d="M110 110 H210 V200 H110 Z M110 110 L210 200 M210 110 L110 200"/>
+            <circle cx="110" cy="110" r="9" class="f-people"/><circle cx="210" cy="110" r="9" class="f-people"/>
+            <circle cx="210" cy="200" r="9" class="f-people"/><circle cx="110" cy="200" r="9" class="f-people"/>
+            <g class="dk-badge"><circle cx="60" cy="70" r="14" class="f-gold"/><text x="60" y="75" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">2</text></g>
+            <text x="160" y="275" text-anchor="middle" class="t-people" font-size="22">per-prompt panels</text>
+            <text x="160" y="298" text-anchor="middle" class="t-muted" font-size="16">estimated each round;</text>
+            <text x="160" y="318" text-anchor="middle" class="t-muted" font-size="16">here only S0’s fixed panels</text>
+          </g>
+          <!-- latent matrix -->
+          <g data-step="2" class="dk-rise">
+            <path class="ln s-platform dk-draw" d="M270 156 C320 156 340 156 390 156"/>
+            <path class="ln s-platform" d="M381 150 L391 156 L381 162"/>
+            <text x="330" y="140" text-anchor="middle" class="t-muted" font-size="16">S2: pool &amp; fit</text>
+            <text x="479" y="64" text-anchor="middle" class="t-platform" font-size="26">Ā</text>
+            <g stroke-width="1.4">
+              <rect x="403" y="80" width="114" height="114" class="f-platform-soft s-platform" stroke-width="2.4"/>
+              <path class="ln-thin s-platform" d="M441 80 V194 M479 80 V194 M403 118 H517 M403 156 H517"/>
+              <rect x="517" y="80" width="38" height="152" class="f-soft s-line"/>
+              <rect x="403" y="194" width="114" height="38" class="f-soft s-line"/>
+              <path class="ln-thin s-line" d="M441 194 V232 M479 194 V232 M517 118 H555 M517 156 H555"/>
+            </g>
+            <g class="dk-badge"><circle cx="389" cy="66" r="14" class="f-gold"/><text x="389" y="71" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">1</text></g>
+            <text x="479" y="275" text-anchor="middle" class="t-platform" font-size="22">latent preference Ā</text>
+            <text x="479" y="298" text-anchor="middle" class="t-muted" font-size="16">one fixed skew form on features</text>
+            <text x="479" y="318" text-anchor="middle" class="t-muted" font-size="16">attribute block Ā<tspan class="sb">cyc</tspan> = shared cycle</text>
+          </g>
+          <!-- illegal shortcut -->
+          <g data-step="3" class="dk-rise">
+            <text x="40" y="364" class="t-bad" font-size="17">✗  averaging raw response-index matrices across prompts: not a legal aggregation</text>
+          </g>
+          <!-- plane and checkpoints -->
+          <g data-step="4" class="dk-rise">
+            <path class="ln s-platform dk-draw" d="M563 156 C610 156 650 156 696 156"/>
+            <path class="ln s-platform" d="M687 150 L697 156 L687 162"/>
+            <text x="630" y="140" text-anchor="middle" class="t-muted" font-size="16">S3: plane</text>
+            <path d="M690 215 L880 215 L910 95 L720 95 Z" class="f-platform-soft s-platform" stroke-width="1.4" stroke-dasharray="6 5"/>
+            <path class="ln s-creator" d="M744 144 C755 132 768 126 780 125 C798 122 815 122 830 127 C846 133 856 140 858 150 C860 162 856 170 845 175 C830 183 815 187 800 187"/>
+            <path class="ln s-creator" d="M811 181 L800 187 L810 194"/>
+            <circle cx="744" cy="144" r="6" class="f-creator" style="opacity:.35"/>
+            <circle cx="780" cy="125" r="6" class="f-creator" style="opacity:.5"/>
+            <circle cx="830" cy="127" r="6" class="f-creator" style="opacity:.65"/>
+            <circle cx="858" cy="150" r="6" class="f-creator" style="opacity:.8"/>
+            <circle cx="845" cy="175" r="6" class="f-creator" style="opacity:.9"/>
+            <circle cx="800" cy="187" r="6" class="f-creator"/>
+            <text x="800" y="82" text-anchor="middle" class="t-creator" font-size="16">S4: project each θ⁽ᵗ⁾</text>
+            <g class="dk-badge"><circle cx="905" cy="200" r="14" class="f-gold"/><text x="905" y="205" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">3</text></g>
+            <text x="800" y="275" text-anchor="middle" class="t-creator" font-size="22">checkpoint latent state θ⁽ᵗ⁾</text>
+            <text x="800" y="298" text-anchor="middle" class="t-muted" font-size="16">logits regressed on shared features</text>
+            <text x="800" y="318" text-anchor="middle" class="t-muted" font-size="16">one point per saved checkpoint</text>
+          </g>
+        </svg>
+      </figure>
+      <p class="dk-take" data-step="5">Fit one skew form from pooled pairs, find its main rotation plane, show it is not noise, then watch the checkpoints in that plane.</p>
+      <p class="dk-note" data-step="5">CPU-only diagnostics on data and checkpoints that already exist: no new GPU training, no change to the training protocol. Numbering follows handoff §1.</p>
+    </div>
+  </section>
+
+  <!-- 3 The latent preference -->
+  <section class="dk-slide" data-label="The object">
+    <div class="dk-inner">
+      <h2 class="dk-h">One skew matrix Ā; every prompt sees a compression of it</h2>
+      <figure class="dk-fig" style="max-width:960px">
+        <svg viewBox="0 -18 960 392" role="img" aria-label="A 4 by 4 skew matrix with an attribute block and an intercept row; panels of 4, 3 and 2 responses see 51, 30 and 0 percent of its cycle">
+          <g data-step="1" class="dk-rise">
+            <text x="192" y="12" text-anchor="middle" class="t-platform" font-size="26">Ā</text>
+            <g class="t-muted" font-size="17" text-anchor="middle"><text x="108" y="48">ψ₁</text><text x="164" y="48">ψ₂</text><text x="220" y="48">ψ₃</text><text x="276" y="48">1</text></g>
+            <g class="t-muted" font-size="17" text-anchor="end"><text x="68" y="94">ψ₁</text><text x="68" y="150">ψ₂</text><text x="68" y="206">ψ₃</text><text x="68" y="262">1</text></g>
+            <g stroke-width="1.2">
+              <rect x="80" y="60" width="168" height="168" class="f-platform-soft s-line"/>
+              <rect x="248" y="60" width="56" height="224" class="f-soft s-line"/>
+              <rect x="80" y="228" width="168" height="56" class="f-soft s-line"/>
+              <path class="ln-thin s-line" d="M136 60 V284 M192 60 V284 M80 116 H304 M80 172 H304"/>
+            </g>
+            <g font-size="20" text-anchor="middle">
+              <text x="108" y="94" class="t-faint">0</text><text x="164" y="94" class="t-platform">a</text><text x="220" y="94" class="t-platform">b</text><text x="276" y="94" class="t-muted">u₁</text>
+              <text x="108" y="150" class="t-platform">−a</text><text x="164" y="150" class="t-faint">0</text><text x="220" y="150" class="t-platform">c</text><text x="276" y="150" class="t-muted">u₂</text>
+              <text x="108" y="206" class="t-platform">−b</text><text x="164" y="206" class="t-platform">−c</text><text x="220" y="206" class="t-faint">0</text><text x="276" y="206" class="t-muted">u₃</text>
+              <text x="108" y="262" class="t-muted">−u₁</text><text x="164" y="262" class="t-muted">−u₂</text><text x="220" y="262" class="t-muted">−u₃</text><text x="276" y="262" class="t-faint">0</text>
+            </g>
+          </g>
+          <g data-step="2" class="dk-rise">
+            <rect x="80" y="60" width="168" height="168" rx="3" class="ln-thick s-platform"/>
+            <text x="164" y="318" text-anchor="middle" class="t-platform" font-size="19">Ā<tspan class="sb">cyc</tspan>: the shared cycle</text>
+            <text x="164" y="342" text-anchor="middle" class="t-muted" font-size="16">intercept row: latent potential,</text>
+            <text x="164" y="362" text-anchor="middle" class="t-muted" font-size="16">a linear score</text>
+          </g>
+          <g data-step="3" class="dk-rise">
+            <text x="480" y="2" class="t-muted" font-size="15">mean share of a pure latent cycle that a panel exposes (synthetic)</text>
+            <path class="ln s-platform dk-draw" d="M312 172 C390 172 400 70 470 70"/>
+            <path class="ln s-platform dk-draw" d="M312 172 C390 172 400 190 470 190"/>
+            <path class="ln s-platform dk-draw" d="M312 172 C390 172 400 310 470 310"/>
+            <text x="404" y="153" text-anchor="middle" class="t-platform knock" font-size="17">Φ<tspan class="sb">a</tspan> Ā Φ<tspan class="sb">a</tspan>ᵀ</text>
+            <!-- K = 4 -->
+            <rect x="480" y="22" width="110" height="96" rx="6" class="f-people-soft s-people" stroke-width="1.5"/>
+            <path class="ln-thin s-people" d="M505 45 H565 V95 H505 Z M505 45 L565 95 M565 45 L505 95"/>
+            <circle cx="505" cy="45" r="6" class="f-people"/><circle cx="565" cy="45" r="6" class="f-people"/><circle cx="565" cy="95" r="6" class="f-people"/><circle cx="505" cy="95" r="6" class="f-people"/>
+            <path class="ln s-platform" d="M547 58 A17 17 0 1 1 525 60"/><path class="ln s-platform" d="M529 52 L524 61 L534 63"/>
+            <text x="615" y="56" class="t-people" font-size="18">4 responses: part of the cycle</text>
+            <rect class="f-platform dk-grow" x="615" y="72" width="122.2" height="16" rx="2"/>
+            <text x="745" y="86" class="t-platform" font-size="16">51%</text>
+            <!-- K = 3 -->
+            <rect x="480" y="142" width="110" height="96" rx="6" class="f-people-soft s-people" stroke-width="1.5"/>
+            <path class="ln-thin s-people" d="M535 160 L505 218 H565 Z"/>
+            <circle cx="535" cy="160" r="6" class="f-people"/><circle cx="505" cy="218" r="6" class="f-people"/><circle cx="565" cy="218" r="6" class="f-people"/>
+            <path class="ln s-platform" d="M545 186 A12 12 0 1 1 527 186"/><path class="ln s-platform" d="M531 180 L526 188 L535 191"/>
+            <text x="615" y="176" class="t-people" font-size="18">3 responses: less of it</text>
+            <rect class="f-platform dk-grow" x="615" y="192" width="73" height="16" rx="2" style="transition-delay:.08s"/>
+            <text x="696" y="206" class="t-platform" font-size="16">30%</text>
+          </g>
+          <g data-step="4" class="dk-rise">
+            <!-- K = 2 -->
+            <rect x="480" y="262" width="110" height="96" rx="6" class="f-people-soft s-people" stroke-width="1.5"/>
+            <path class="ln-thin s-people" d="M505 310 H565"/>
+            <circle cx="505" cy="310" r="6" class="f-people"/><circle cx="565" cy="310" r="6" class="f-people"/>
+            <text x="615" y="296" class="t-ink" font-size="18">a pair sees no cycle: C<tspan class="sb">a</tspan> = 0</text>
+            <path class="ln-thin s-muted" d="M615 312 V328"/>
+            <text x="623" y="326" class="t-muted" font-size="16">0%, yet the pair still informs Ā</text>
+          </g>
+        </svg>
+      </figure>
+      <p class="dk-take" data-step="5">Each prompt’s cycle depends only on Ā<sub>cyc</sub>, and only Ā<sub>cyc</sub> survives a shift of the attribute origin: it is the object to find.</p>
+      <p class="dk-note" data-step="5">Prop L1: C<sub>a</sub> = Φ̃<sub>a</sub> Ā<sub>cyc</sub> Φ̃<sub>a</sub>ᵀ. Shares from the framework note’s synthetic check §5(2): random standard-normal attributes in 3-D, pure latent cycle, 200 panels per size (6 responses: 67%). Illustrative matrix entries.</p>
+    </div>
+  </section>
+
+  <!-- 4 Estimation -->
+  <section class="dk-slide" data-label="Estimation">
+    <div class="dk-inner">
+      <h2 class="dk-h">Estimate Ā from pooled sparse pairs, with one regression</h2>
+      <figure class="dk-fig" style="max-width:960px">
+        <svg viewBox="0 0 960 240" role="img" aria-label="Labelled pairs from many prompts become design rows; a skew-bilinear Bradley-Terry fit returns the latent matrix">
+          <g data-step="1" class="dk-rise">
+            <rect x="30" y="20" width="64" height="46" rx="5" class="f-people-soft s-people" stroke-width="1.4"/>
+            <path class="ln s-people" d="M46 33 L78 33"/>
+            <circle cx="46" cy="33" r="4.5" class="f-people"/>
+            <circle cx="78" cy="33" r="4.5" class="f-people"/>
+            <circle cx="46" cy="53" r="4.5" class="f-faint"/>
+            <circle cx="78" cy="53" r="4.5" class="f-faint"/>
+            <rect x="110" y="20" width="64" height="46" rx="5" class="f-people-soft s-people" stroke-width="1.4"/>
+            <path class="ln s-people" d="M126 53 L158 53"/>
+            <circle cx="126" cy="33" r="4.5" class="f-faint"/>
+            <circle cx="158" cy="33" r="4.5" class="f-faint"/>
+            <circle cx="126" cy="53" r="4.5" class="f-people"/>
+            <circle cx="158" cy="53" r="4.5" class="f-people"/>
+            <rect x="30" y="85" width="64" height="46" rx="5" class="f-people-soft s-people" stroke-width="1.4"/>
+            <path class="ln s-people" d="M46 98 L78 118"/>
+            <circle cx="46" cy="98" r="4.5" class="f-people"/>
+            <circle cx="78" cy="98" r="4.5" class="f-faint"/>
+            <circle cx="46" cy="118" r="4.5" class="f-faint"/>
+            <circle cx="78" cy="118" r="4.5" class="f-people"/>
+            <rect x="110" y="85" width="64" height="46" rx="5" class="f-people-soft s-people" stroke-width="1.4"/>
+            <path class="ln s-people" d="M158 98 L126 118"/>
+            <circle cx="126" cy="98" r="4.5" class="f-faint"/>
+            <circle cx="158" cy="98" r="4.5" class="f-people"/>
+            <circle cx="126" cy="118" r="4.5" class="f-people"/>
+            <circle cx="158" cy="118" r="4.5" class="f-faint"/>
+            <rect x="30" y="150" width="64" height="46" rx="5" class="f-people-soft s-people" stroke-width="1.4"/>
+            <path class="ln s-people" d="M46 163 L46 183"/>
+            <circle cx="46" cy="163" r="4.5" class="f-people"/>
+            <circle cx="78" cy="163" r="4.5" class="f-faint"/>
+            <circle cx="46" cy="183" r="4.5" class="f-people"/>
+            <circle cx="78" cy="183" r="4.5" class="f-faint"/>
+            <rect x="110" y="150" width="64" height="46" rx="5" class="f-people-soft s-people" stroke-width="1.4"/>
+            <path class="ln s-people" d="M158 163 L158 183"/>
+            <circle cx="126" cy="163" r="4.5" class="f-faint"/>
+            <circle cx="158" cy="163" r="4.5" class="f-people"/>
+            <circle cx="126" cy="183" r="4.5" class="f-faint"/>
+            <circle cx="158" cy="183" r="4.5" class="f-people"/>
+            <text x="102" y="226" text-anchor="middle" class="t-people" font-size="17">one pair here, one there</text>
+          </g>
+          <g data-step="2" class="dk-rise">
+            <path class="ln-thin s-faint" d="M186 43 C230 43 236 110 270 110 M186 108 H270 M186 173 C230 173 236 110 270 110"/>
+            <path class="ln-thin s-faint" d="M262 104 L271 110 L262 116"/>
+            <text x="400" y="26" text-anchor="middle" class="t-ink" font-size="17">design row: vec(skew(φ<tspan class="sb">i</tspan> φ<tspan class="sb">j</tspan>ᵀ))</text>
+            <rect x="282" y="42" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="322" y="42" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="362" y="42" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="402" y="42" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="442" y="42" width="36" height="16" rx="2" class="f-platform" style="opacity:0.7"/>
+            <rect x="482" y="42" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="282" y="62" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="322" y="62" width="36" height="16" rx="2" class="f-platform" style="opacity:0.6"/>
+            <rect x="362" y="62" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="402" y="62" width="36" height="16" rx="2" class="f-platform" style="opacity:0.25"/>
+            <rect x="442" y="62" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="482" y="62" width="36" height="16" rx="2" class="f-platform" style="opacity:0.25"/>
+            <rect x="282" y="82" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="322" y="82" width="36" height="16" rx="2" class="f-platform" style="opacity:0.7"/>
+            <rect x="362" y="82" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="402" y="82" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="442" y="82" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="482" y="82" width="36" height="16" rx="2" class="f-platform" style="opacity:0.6"/>
+            <rect x="282" y="102" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="322" y="102" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="362" y="102" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="402" y="102" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="442" y="102" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="482" y="102" width="36" height="16" rx="2" class="f-platform" style="opacity:0.6"/>
+            <rect x="282" y="122" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="322" y="122" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="362" y="122" width="36" height="16" rx="2" class="f-platform" style="opacity:0.6"/>
+            <rect x="402" y="122" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="442" y="122" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="482" y="122" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="282" y="142" width="36" height="16" rx="2" class="f-platform" style="opacity:0.6"/>
+            <rect x="322" y="142" width="36" height="16" rx="2" class="f-platform" style="opacity:0.25"/>
+            <rect x="362" y="142" width="36" height="16" rx="2" class="f-platform" style="opacity:0.6"/>
+            <rect x="402" y="142" width="36" height="16" rx="2" class="f-platform" style="opacity:0.25"/>
+            <rect x="442" y="142" width="36" height="16" rx="2" class="f-platform" style="opacity:0.45"/>
+            <rect x="482" y="142" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <rect x="282" y="162" width="36" height="16" rx="2" class="f-platform" style="opacity:0.25"/>
+            <rect x="322" y="162" width="36" height="16" rx="2" class="f-platform" style="opacity:0.7"/>
+            <rect x="362" y="162" width="36" height="16" rx="2" class="f-platform" style="opacity:0.25"/>
+            <rect x="402" y="162" width="36" height="16" rx="2" class="f-platform" style="opacity:0.7"/>
+            <rect x="442" y="162" width="36" height="16" rx="2" class="f-platform" style="opacity:0.9"/>
+            <rect x="482" y="162" width="36" height="16" rx="2" class="f-platform" style="opacity:0.35"/>
+            <text x="400" y="206" text-anchor="middle" class="t-muted" font-size="16">m(m−1)/2 unknowns</text>
+          </g>
+          <g data-step="3" class="dk-rise">
+            <path class="ln s-platform dk-draw" d="M528 110 H592"/><path class="ln s-platform" d="M583 104 L593 110 L583 116"/>
+            <rect x="600" y="64" width="170" height="92" rx="8" class="f-platform-soft s-platform" stroke-width="1.7"/>
+            <text x="685" y="100" text-anchor="middle" class="t-platform" font-size="19">skew-bilinear</text>
+            <text x="685" y="124" text-anchor="middle" class="t-platform" font-size="19">Bradley–Terry</text>
+            <text x="685" y="146" text-anchor="middle" class="t-muted" font-size="15">ridge 10⁻³</text>
+            <text x="685" y="190" text-anchor="middle" class="t-muted" font-size="15">logit link: logistic (DPO)</text>
+            <text x="685" y="210" text-anchor="middle" class="t-muted" font-size="15">identity: least squares (IPO)</text>
+            <path class="ln s-platform dk-draw" d="M776 110 H822"/><path class="ln s-platform" d="M813 104 L823 110 L813 116"/>
+            <text x="880" y="54" text-anchor="middle" class="t-platform" font-size="24">Ā</text>
+            <rect x="832" y="64" width="72" height="72" class="f-platform-soft s-platform" stroke-width="2"/>
+            <rect x="904" y="64" width="24" height="96" class="f-soft s-line"/><rect x="832" y="136" width="72" height="24" class="f-soft s-line"/>
+            <path class="ln-thin s-platform" d="M856 64 V136 M880 64 V136 M832 88 H904 M832 112 H904"/>
+            <text x="880" y="190" text-anchor="middle" class="t-muted" font-size="15">one per feature set</text>
+            <text x="880" y="210" text-anchor="middle" class="t-muted" font-size="15">× link × oracle</text>
+          </g>
+        </svg>
+      </figure>
+      <div class="dk-cols" style="gap:.4rem 2rem;margin-top:.4rem">
+        <figure class="dk-fig" style="max-width:450px" data-step="4">
+          <svg viewBox="0 0 450 150" role="img" aria-label="Continuous features: design rank 6 of 6">
+            <text x="225" y="24" text-anchor="middle" class="t-good" font-size="20">continuous features</text>
+            <g class="f-good"><rect x="105" y="42" width="34" height="26" rx="3"/><rect x="145" y="42" width="34" height="26" rx="3"/><rect x="185" y="42" width="34" height="26" rx="3"/><rect x="225" y="42" width="34" height="26" rx="3"/><rect x="265" y="42" width="34" height="26" rx="3"/><rect x="305" y="42" width="34" height="26" rx="3"/></g>
+            <text x="225" y="94" text-anchor="middle" class="t-ink" font-size="17">rank 6 of 6: every skew entry identified</text>
+            <text x="225" y="120" text-anchor="middle" class="t-muted" font-size="15">synthetic: 60 prompts × 1 pair, m = 4</text>
+            <text x="225" y="140" text-anchor="middle" class="t-muted" font-size="15">→ Ā recovered to 2·10⁻¹⁶</text>
+          </svg>
+        </figure>
+        <figure class="dk-fig" style="max-width:450px" data-step="5">
+          <svg viewBox="0 0 450 150" role="img" aria-label="One-hot roles plus intercept: design rank 3 of 6, cycle confounded with potential">
+            <text x="225" y="24" text-anchor="middle" class="t-bad" font-size="20">one-hot roles + intercept</text>
+            <g class="f-bad"><rect x="105" y="42" width="34" height="26" rx="3"/><rect x="145" y="42" width="34" height="26" rx="3"/><rect x="185" y="42" width="34" height="26" rx="3"/></g>
+            <g class="ln-thin s-bad dash"><rect x="225" y="42" width="34" height="26" rx="3"/><rect x="265" y="42" width="34" height="26" rx="3"/><rect x="305" y="42" width="34" height="26" rx="3"/></g>
+            <text x="225" y="94" text-anchor="middle" class="t-ink" font-size="17">rank 3 of 6: each pair reads Ā<tspan class="sb">rs</tspan> + ū<tspan class="sb">r</tspan> − ū<tspan class="sb">s</tspan></text>
+            <text x="225" y="120" text-anchor="middle" class="t-bad" font-size="16">cycle and potential confounded</text>
+            <text x="225" y="140" text-anchor="middle" class="t-muted" font-size="15">synthetic: 3 prompts, 3 role pairs</text>
+          </svg>
+        </figure>
+      </div>
+      <p class="dk-take" data-step="6">So features must vary continuously across prompts on the same attribute: embedding PCA first, judge-scored attributes second.</p>
+      <p class="dk-note" data-step="6">Prop L2 as corrected by the referee; numbers from the framework note §5(1). S1 features: embedding PCA to d ∈ {8, 16}; one judge call per response, 0–10 on about 6–8 style attributes plus length; the cheap length set for comparison with 09-25. All centred on the pooled mean.</p>
+    </div>
+  </section>
+
+  <!-- 5 Shared cyclic direction -->
+  <section class="dk-slide" data-label="The shared cycle">
+    <div class="dk-inner">
+      <h2 class="dk-h">The shared cycle is a rotation plane, and it must beat three nulls</h2>
+      <div class="dk-cols" style="gap:.6rem 2.4rem">
+        <figure class="dk-fig" style="max-width:470px">
+          <svg viewBox="0 0 470 392" role="img" aria-label="The principal rotation plane of the effective skew operator, with its rate and the latent frontier">
+            <g data-step="1" class="dk-rise">
+              <text x="235" y="22" text-anchor="middle" class="t-ink" font-size="18">S<tspan class="sb">eff</tspan> = G⁻¹ᐟ² S G⁻¹ᐟ² is real skew</text>
+              <text x="235" y="44" text-anchor="middle" class="t-muted" font-size="16">eigenvalues ±iω̃; G, S weighted by policy mass J<tspan class="sb">a</tspan></text>
+              <path class="ln-thin s-muted" d="M110 290 H430 M110 290 V78 M110 290 L72 322"/>
+              <text x="438" y="295" class="t-muted" font-size="17">ψ₁</text>
+              <text x="118" y="90" class="t-muted" font-size="17">ψ₂</text>
+              <text x="64" y="322" text-anchor="end" class="t-muted" font-size="17">ψ₃</text>
+              <path d="M150 255 L380 232 L404 110 L174 133 Z" class="f-platform-soft s-platform" stroke-width="1.6"/>
+              <path class="ln-thick s-platform" d="M352 178 C352 208 320 220 278 222 C232 224 200 208 200 186 C200 160 232 146 276 144 C312 142 340 150 350 165"/>
+              <path class="ln-thick s-platform" d="M339 160 L351 168 L354 154"/>
+              <text x="278" y="190" text-anchor="middle" class="t-platform" font-size="22">ω̃₁</text>
+              <text x="275" y="316" text-anchor="middle" class="t-platform" font-size="18">principal rotation plane</text>
+            </g>
+            <g data-step="2" class="dk-rise">
+              <rect x="30" y="334" width="410" height="52" rx="8" class="ln-thin s-gold" style="fill:none"/>
+              <text x="235" y="356" text-anchor="middle" class="t-ink" font-size="19">latent frontier β* = √(1−α²) / (λω̃₁)</text>
+              <text x="235" y="377" text-anchor="middle" class="t-muted" font-size="15">compare with the run’s β (DPO β<tspan class="sb">train</tspan> 0.1 ⇒ β = 10)</text>
+            </g>
+          </svg>
+        </figure>
+        <figure class="dk-fig" style="max-width:470px">
+          <svg viewBox="0 0 470 398" role="img" aria-label="Cross-fitting over prompt halves, two null distributions with their 95th percentiles and a transitive-surrogate value; schematic">
+            <g data-step="3" class="dk-rise">
+              <text x="235" y="22" text-anchor="middle" class="t-ink" font-size="18">cross-fitting over prompts</text>
+              <g class="ln s-platform f-platform-soft" stroke-width="2"><rect x="55" y="40" width="22" height="22" rx="3"/><rect x="85" y="40" width="22" height="22" rx="3"/><rect x="115" y="40" width="22" height="22" rx="3"/><rect x="145" y="40" width="22" height="22" rx="3"/><rect x="175" y="40" width="22" height="22" rx="3"/><rect x="205" y="40" width="22" height="22" rx="3"/></g>
+              <g class="f-people-soft s-people" stroke-width="1.6"><rect x="245" y="40" width="22" height="22" rx="3"/><rect x="275" y="40" width="22" height="22" rx="3"/><rect x="305" y="40" width="22" height="22" rx="3"/><rect x="335" y="40" width="22" height="22" rx="3"/><rect x="365" y="40" width="22" height="22" rx="3"/><rect x="395" y="40" width="22" height="22" rx="3"/></g>
+              <text x="141" y="86" text-anchor="middle" class="t-platform" font-size="16">fit Ā<tspan class="sb">cyc</tspan> + plane</text>
+              <text x="331" y="86" text-anchor="middle" class="t-people" font-size="16">test ω̃₁ + nulls here</text>
+            </g>
+            <g data-step="4" class="dk-rise">
+              <path class="ln-thin s-muted" d="M40 300 H440"/>
+              <text x="440" y="322" text-anchor="end" class="t-muted" font-size="16">ω̃₁ →</text>
+              <g class="f-faint" style="opacity:.55">
+                <rect x="60" y="290" width="15" height="10"/><rect x="76" y="272" width="15" height="28"/><rect x="92" y="248" width="15" height="52"/><rect x="108" y="230" width="15" height="70"/><rect x="124" y="238" width="15" height="62"/><rect x="140" y="260" width="15" height="40"/><rect x="156" y="278" width="15" height="22"/><rect x="172" y="291" width="15" height="9"/>
+              </g>
+              <g class="ln-thin s-muted" style="fill:none">
+                <rect x="70" y="286" width="15" height="14"/><rect x="86" y="266" width="15" height="34"/><rect x="102" y="242" width="15" height="58"/><rect x="118" y="234" width="15" height="66"/><rect x="134" y="250" width="15" height="50"/><rect x="150" y="270" width="15" height="30"/><rect x="166" y="286" width="15" height="14"/><rect x="182" y="294" width="15" height="6"/>
+              </g>
+              <path class="ln-thin s-muted dash" d="M176 150 V300 M192 150 V300"/>
+              <text x="184" y="140" text-anchor="middle" class="t-muted" font-size="15">null 95th pct.</text>
+              <path class="ln s-ink" stroke-dasharray="2 4" d="M230 116 V300"/>
+              <text x="236" y="112" text-anchor="middle" class="t-ink" font-size="15">transitive surrogate</text>
+              <text x="60" y="338" class="t-muted" font-size="15">filled: within-prompt label shuffle</text>
+              <text x="60" y="356" class="t-muted" font-size="15">outline: per-prompt orientation flip</text>
+              <text x="60" y="374" class="t-muted" font-size="15">dotted: transitive surrogate (one value)</text>
+              <text x="60" y="392" class="t-faint" font-size="15">500 draws each · schematic, not data</text>
+            </g>
+            <g data-step="5" class="dk-pop">
+              <path class="ln s-platform" d="M305 262 H385 M305 254 V270 M385 254 V270"/>
+              <path d="M345 250 L357 262 L345 274 L333 262 Z" class="f-platform"/>
+              <text x="345" y="214" text-anchor="middle" class="t-platform" font-size="17">held-out ω̃₁</text>
+              <text x="345" y="235" text-anchor="middle" class="t-muted" font-size="15">prompt-bootstrap CI</text>
+            </g>
+          </svg>
+        </figure>
+      </div>
+      <p class="dk-take" data-step="5">Shuffle and flip destroy only alignment; the surrogate is the transitive baseline. Beating all three means a shared direction.</p>
+      <p class="dk-note" data-step="5">Thm L3; handoff S3 (corrected 10-13). Primary policy: the initial checkpoint’s π<sub>a</sub> (uniform secondary); all nulls and ω̃₁ on the held-out half. Synthetic check (framework §5(3)): ω̃ = 0.0797 ⇒ β* = 5.47 at α = 0.9, λ = 1. Right panel schematic.</p>
+    </div>
+  </section>
+
+  <!-- 6 Pipeline, interactive -->
+  <section class="dk-slide" data-label="Steps S0–S5">
+    <div class="dk-inner">
+      <h2 class="dk-h">Six CPU steps, each with a deliverable: click one</h2>
+      <div data-interactive>
+        <figure class="dk-fig" style="max-width:960px">
+          <svg viewBox="0 0 960 176" id="pl-flow" role="group" aria-label="Pipeline steps S0 to S5; select a step for details">
+            <g class="ln-thin s-faint">
+              <path d="M146 64 H166 M304 64 H324 M462 64 H482 M620 64 H640 M778 64 H798"/>
+            </g>
+            <g class="s-faint ln-thin"><path d="M160 59 L167 64 L160 69 M318 59 L325 64 L318 69 M476 59 L483 64 L476 69 M634 59 L641 64 L634 69 M792 59 L799 64 L792 69"/></g>
+          </svg>
+        </figure>
+        <div class="pl-card" id="pl-card" aria-live="polite">
+          <div class="pl-head"><b id="pl-id">S0</b><span id="pl-title"></span></div>
+          <div class="pl-grid">
+            <div><h4>In</h4><p id="pl-in"></p></div>
+            <div><h4>Out</h4><p id="pl-out"></p></div>
+            <div><h4>Check · decision</h4><p id="pl-chk"></p></div>
+          </div>
+        </div>
+      </div>
+      <p class="dk-note">Deliverables go to outputs/latent/ with a short REPORT.md (verdict, exact commands). Code: hodge/latent.py next to hodge/coherence.py, tested on a synthetic Ā (recover Ā<sub>cyc</sub> to 10⁻⁸ from 60 prompts × 1 pair; K = 2 ⇒ C<sub>a</sub> = 0). The six GPU runs and the per-step win-rate task stay untouched.</p>
+    </div>
+  </section>
+
+  <!-- 7 S4 outcomes -->
+  <section class="dk-slide" data-label="S4: checkpoints">
+    <div class="dk-inner">
+      <h2 class="dk-h">S4 reads each checkpoint as a point in the shared plane</h2>
+      <div class="dk-cols" style="gap:.6rem 1.6rem">
+        <figure class="dk-fig" style="max-width:300px" data-step="1">
+          <svg viewBox="0 -34 300 390" role="img" aria-label="Rotation: phase advances, radius bounded">
+            <text x="150" y="-10" text-anchor="middle" class="t-ink" font-size="22">rotation</text>
+            <path class="ln-thin s-line" d="M40 130 H260 M150 20 V240"/>
+            <text x="264" y="135" class="t-muted" font-size="15">p</text><text x="156" y="26" class="t-muted" font-size="15">q</text>
+            <circle cx="150" cy="130" r="72" class="ln-thin s-platform dash" style="fill:none"/>
+            <path class="ln s-creator dk-draw" d="M222 130 A72 72 0 0 0 150 58 A72 72 0 0 0 78 130 A72 72 0 0 0 125 197"/>
+            <path class="ln s-creator" d="M115 201 L126 198 L119 189"/>
+            <g class="f-creator"><circle cx="222" cy="130" r="5" style="opacity:.3"/><circle cx="201" cy="79" r="5" style="opacity:.4"/><circle cx="150" cy="58" r="5" style="opacity:.55"/><circle cx="99" cy="79" r="5" style="opacity:.7"/><circle cx="78" cy="130" r="5" style="opacity:.85"/><circle cx="125" cy="197" r="5"/></g>
+            <g class="ln-thin s-muted"><path d="M30 300 H130 M30 300 V256 M170 300 H270 M170 300 V256"/></g>
+            <path class="ln s-creator" d="M32 276 C60 272 90 280 128 275"/>
+            <path class="ln s-creator" d="M172 298 L268 258"/>
+            <text x="80" y="320" text-anchor="middle" class="t-muted" font-size="15">radius vs t</text>
+            <text x="220" y="320" text-anchor="middle" class="t-muted" font-size="15">phase vs t</text>
+            <text x="150" y="344" text-anchor="middle" class="t-ink" font-size="16">phase advances, radius bounded</text>
+          </svg>
+        </figure>
+        <figure class="dk-fig" style="max-width:300px" data-step="2">
+          <svg viewBox="0 -34 300 390" role="img" aria-label="Polarization: radius grows, phase freezes">
+            <text x="150" y="-10" text-anchor="middle" class="t-ink" font-size="22">polarization</text>
+            <path class="ln-thin s-line" d="M40 130 H260 M150 20 V240"/>
+            <text x="264" y="135" class="t-muted" font-size="15">p</text><text x="156" y="26" class="t-muted" font-size="15">q</text>
+            <path class="ln s-creator dk-draw" d="M158 125 L242 72"/>
+            <path class="ln s-creator" d="M231 73 L242 72 L237 82"/>
+            <g class="f-creator"><circle cx="158" cy="125" r="5" style="opacity:.3"/><circle cx="167" cy="119" r="5" style="opacity:.45"/><circle cx="180" cy="111" r="5" style="opacity:.6"/><circle cx="198" cy="100" r="5" style="opacity:.75"/><circle cx="222" cy="85" r="5"/></g>
+            <g class="ln-thin s-muted"><path d="M30 300 H130 M30 300 V256 M170 300 H270 M170 300 V256"/></g>
+            <path class="ln s-creator" d="M32 296 C70 292 100 280 128 258"/>
+            <path class="ln s-creator" d="M172 278 C200 276 230 277 268 277"/>
+            <text x="80" y="320" text-anchor="middle" class="t-muted" font-size="15">radius vs t</text>
+            <text x="220" y="320" text-anchor="middle" class="t-muted" font-size="15">phase vs t</text>
+            <text x="150" y="344" text-anchor="middle" class="t-ink" font-size="16">radius grows, phase freezes</text>
+          </svg>
+        </figure>
+        <figure class="dk-fig" style="max-width:300px" data-step="3">
+          <svg viewBox="0 -34 300 390" role="img" aria-label="Noise or stationary: small radius, random phase">
+            <text x="150" y="-10" text-anchor="middle" class="t-ink" font-size="22">noise / stationary</text>
+            <path class="ln-thin s-line" d="M40 130 H260 M150 20 V240"/>
+            <text x="264" y="135" class="t-muted" font-size="15">p</text><text x="156" y="26" class="t-muted" font-size="15">q</text>
+            <circle cx="150" cy="130" r="72" class="ln-thin s-platform dash" style="fill:none"/>
+            <g class="f-creator"><circle cx="158" cy="122" r="5" style="opacity:.35"/><circle cx="139" cy="137" r="5" style="opacity:.45"/><circle cx="163" cy="141" r="5" style="opacity:.55"/><circle cx="144" cy="118" r="5" style="opacity:.65"/><circle cx="133" cy="128" r="5" style="opacity:.75"/><circle cx="156" cy="146" r="5" style="opacity:.85"/><circle cx="166" cy="129" r="5"/></g>
+            <g class="ln-thin s-muted"><path d="M30 300 H130 M30 300 V256 M170 300 H270 M170 300 V256"/></g>
+            <path class="ln s-creator" d="M32 292 L46 288 L60 293 L74 289 L88 292 L102 287 L116 291 L128 289"/>
+            <path class="ln s-creator" d="M172 280 L186 262 L200 292 L214 270 L228 286 L242 260 L256 289 L268 272"/>
+            <text x="80" y="320" text-anchor="middle" class="t-muted" font-size="15">radius vs t</text>
+            <text x="220" y="320" text-anchor="middle" class="t-muted" font-size="15">phase vs t</text>
+            <text x="150" y="344" text-anchor="middle" class="t-ink" font-size="16">small radius, random phase</text>
+          </svg>
+        </figure>
+      </div>
+      <p class="dk-take" data-step="4">Only the logged panel log-probs are needed: no re-scoring. Report radius, phase and the share of policy motion the plane explains.</p>
+      <p class="dk-note" data-step="4">Schematic sketches, not data. θ⁽ᵗ⁾ is the J<sub>a</sub>-weighted regression of within-panel-centred sequence-sum log-probs on the shared features, projected onto the S3 plane as (p<sub>t</sub>, q<sub>t</sub>). Two metrics, as Fan decided: J<sub>a</sub> from the initial checkpoint (fixed) and from checkpoint t (moving); both links, both feature sets.</p>
+    </div>
+  </section>
+
+  <!-- 8 Background: 09-25 one-hot coherence -->
+  <section class="dk-slide" data-label="Background (09-25)">
+    <div class="dk-inner">
+      <h2 class="dk-h">Background: the one-hot version found alignment real but small</h2>
+      <figure class="dk-fig" style="max-width:900px">
+        <svg viewBox="0 0 960 440" role="img" aria-label="Per-prompt omega RMS, coherent omega tilde, shuffle null and transitive surrogate for four datasets">
+          <g font-size="16">
+            <rect x="40" y="14" width="18" height="14" rx="2" class="f-people"/><text x="66" y="27" class="t-people">per-prompt ω, RMS</text>
+            <rect x="250" y="14" width="18" height="14" rx="2" class="f-platform"/><text x="276" y="27" class="t-platform">coherent ω̃ (shared)</text>
+            <rect x="470" y="14" width="18" height="14" rx="2" class="f-faint"/><text x="496" y="27" class="t-muted">shuffle null, 95th pct.</text>
+            <rect x="700" y="14.6" width="18" height="12.8" rx="2" class="ln-thin s-muted dash" style="fill:none"/><text x="726" y="27" class="t-muted">transitive surrogate ω̃</text>
+          </g>
+          <path class="ln-thin s-line" d="M330 56 V404"/>
+          <text x="312" y="82" text-anchor="end" class="t-ink" font-size="19">UltraFeedback</text>
+          <text x="312" y="104" text-anchor="end" class="t-muted" font-size="15">model identity · 63,966 panels</text>
+          <text x="312" y="172" text-anchor="end" class="t-ink" font-size="19">HelpSteer, K = 4</text>
+          <text x="312" y="194" text-anchor="end" class="t-muted" font-size="15">length rank · 6,692 panels</text>
+          <text x="312" y="262" text-anchor="end" class="t-ink" font-size="19">MT-Bench human</text>
+          <text x="312" y="284" text-anchor="end" class="t-muted" font-size="15">model identity · 160 panels</text>
+          <text x="312" y="352" text-anchor="end" class="t-ink" font-size="19">MT-Bench GPT-4</text>
+          <text x="312" y="374" text-anchor="end" class="t-muted" font-size="15">model identity · 160 panels</text>
+          <g data-step="1">
+            <rect class="f-people dk-grow" x="330" y="62" width="235.3" height="14" rx="2" style="transition-delay:0.00s"/>
+            <text x="573.3" y="74" class="t-people" font-size="15">0.181</text>
+            <rect class="f-people dk-grow" x="330" y="152" width="133.9" height="14" rx="2" style="transition-delay:0.08s"/>
+            <text x="471.9" y="164" class="t-people" font-size="15">0.103</text>
+            <rect class="f-people dk-grow" x="330" y="242" width="473.2" height="14" rx="2" style="transition-delay:0.16s"/>
+            <text x="811.2" y="254" class="t-people" font-size="15">0.364</text>
+            <rect class="f-people dk-grow" x="330" y="332" width="308.1" height="14" rx="2" style="transition-delay:0.24s"/>
+            <text x="646.1" y="344" class="t-people" font-size="15">0.237</text>
+          </g>
+          <g data-step="2">
+            <rect class="f-platform dk-grow" x="330" y="80" width="23.4" height="14" rx="2" style="transition-delay:0.00s"/>
+            <text x="361.4" y="92" class="t-platform" font-size="15">0.018  (ratio 0.10)</text>
+            <rect class="f-platform dk-grow" x="330" y="170" width="18.2" height="14" rx="2" style="transition-delay:0.08s"/>
+            <text x="356.2" y="182" class="t-platform" font-size="15">0.014  (ratio 0.14)</text>
+            <rect class="f-platform dk-grow" x="330" y="260" width="85.8" height="14" rx="2" style="transition-delay:0.16s"/>
+            <text x="423.8" y="272" class="t-platform" font-size="15">0.066  (ratio 0.18)</text>
+            <rect class="f-platform dk-grow" x="330" y="350" width="126.1" height="14" rx="2" style="transition-delay:0.24s"/>
+            <text x="464.1" y="362" class="t-platform" font-size="15">0.097  (ratio 0.41)</text>
+          </g>
+          <g data-step="3">
+            <rect class="f-faint dk-grow" x="330" y="98" width="3.9" height="14" rx="2" style="transition-delay:0.00s"/>
+            <text x="341.9" y="110" class="t-muted" font-size="15">0.003</text>
+            <rect class="f-faint dk-grow" x="330" y="188" width="3.0" height="14" rx="2" style="transition-delay:0.08s"/>
+            <text x="341.0" y="200" class="t-muted" font-size="15">0.002</text>
+            <rect class="f-faint dk-grow" x="330" y="278" width="50.7" height="14" rx="2" style="transition-delay:0.16s"/>
+            <text x="388.7" y="290" class="t-muted" font-size="15">0.039</text>
+            <rect class="f-faint dk-grow" x="330" y="368" width="31.2" height="14" rx="2" style="transition-delay:0.24s"/>
+            <text x="369.2" y="380" class="t-muted" font-size="15">0.024</text>
+          </g>
+          <g data-step="4">
+            <rect class="ln-thin s-muted dash" x="330" y="116.6" width="68.9" height="12.8" rx="2" style="fill:none"/>
+            <text x="406.9" y="128" class="t-muted" font-size="15">0.053</text>
+            <rect class="ln-thin s-muted dash" x="330" y="206.6" width="81.9" height="12.8" rx="2" style="fill:none"/>
+            <text x="419.9" y="218" class="t-muted" font-size="15">0.063</text>
+            <rect class="ln-thin s-muted dash" x="330" y="296.6" width="135.2" height="12.8" rx="2" style="fill:none"/>
+            <text x="473.2" y="308" class="t-muted" font-size="15">0.104</text>
+            <rect class="ln-thin s-muted dash" x="330" y="386.6" width="154.7" height="12.8" rx="2" style="fill:none"/>
+            <text x="492.7" y="398" class="t-muted" font-size="15">0.119</text>
+          </g>
+          <text x="10" y="430" class="t-faint" font-size="15">uniform policies, logit link, 0.5 pseudo-votes; REPORT.md 2026-09-25, “Cross-prompt coherence under parameter sharing”</text>
+        </svg>
+      </figure>
+      <p class="dk-take" data-step="4">Every shared ω̃ beat its shuffle null, but stayed at 10–41% of the per-prompt scale and below a transitive surrogate: mostly an artefact of discrete labels.</p>
+      <p class="dk-note" data-step="4">Prior diagnostic, not a result of this plan. One-hot shared features only (model identity, or length rank); exact shared dynamics did not cycle. S1–S3 extend this tool to continuous features, where coherence was not excluded.</p>
+    </div>
+  </section>
+
+  <!-- 9 Decision rule and scope -->
+  <section class="dk-slide" data-label="Decision and scope">
+    <div class="dk-inner">
+      <h2 class="dk-h">The verdict needs both tests; everything else waits</h2>
+      <figure class="dk-fig" style="max-width:960px">
+        <svg viewBox="0 0 960 206" role="img" aria-label="Decision rule: held-out rate above both nulls and frontier inside the beta range gives a measurable common cycle; otherwise none is visible">
+          <g data-step="1" class="dk-rise">
+            <rect x="20" y="60" width="270" height="76" rx="8" class="f-platform-soft s-platform" stroke-width="1.6"/>
+            <text x="155" y="84" text-anchor="middle" class="t-ink" font-size="17">held-out ω̃₁ above both</text>
+            <text x="155" y="105" text-anchor="middle" class="t-ink" font-size="17">null 95th percentiles and</text>
+            <text x="155" y="126" text-anchor="middle" class="t-ink" font-size="17">the transitive surrogate</text>
+            <text x="320" y="104" text-anchor="middle" class="t-gold" font-size="20">and</text>
+            <rect x="350" y="60" width="250" height="76" rx="8" class="f-platform-soft s-platform" stroke-width="1.6"/>
+            <text x="475" y="92" text-anchor="middle" class="t-ink" font-size="18">β* inside the run’s</text>
+            <text x="475" y="116" text-anchor="middle" class="t-ink" font-size="18">actual β range, per link</text>
+            <text x="310" y="166" text-anchor="middle" class="t-muted" font-size="15">primary policy: the initial checkpoint’s π<tspan class="sb">a</tspan> (uniform secondary)</text>
+            <text x="310" y="188" text-anchor="middle" class="t-muted" font-size="15">all tests on the held-out half · DPO β = 1/β<tspan class="sb">train</tspan>, IPO β = 1/τ</text>
+          </g>
+          <g data-step="2" class="dk-rise">
+            <path class="ln s-good dk-draw" d="M606 88 C640 88 640 48 668 48"/><path class="ln s-good" d="M659 42 L669 48 L659 54"/>
+            <text x="626" y="54" text-anchor="middle" class="t-good knock" font-size="15">both</text>
+            <rect x="676" y="12" width="270" height="72" rx="8" class="f-good-soft s-good" stroke-width="1.6"/>
+            <text x="811" y="42" text-anchor="middle" class="t-good" font-size="18">measurable common</text>
+            <text x="811" y="66" text-anchor="middle" class="t-good" font-size="18">cyclic signal</text>
+          </g>
+          <g data-step="3" class="dk-rise">
+            <path class="ln s-bad dk-draw" d="M606 108 C640 108 640 152 668 152"/><path class="ln s-bad" d="M659 146 L669 152 L659 158"/>
+            <text x="626" y="152" text-anchor="middle" class="t-bad knock" font-size="15">else</text>
+            <rect x="676" y="110" width="270" height="90" rx="8" class="f-bad-soft s-bad" stroke-width="1.6"/>
+            <text x="811" y="140" text-anchor="middle" class="t-bad" font-size="17">current two-oracle data give</text>
+            <text x="811" y="162" text-anchor="middle" class="t-bad" font-size="17">no visible common cycle</text>
+            <text x="811" y="186" text-anchor="middle" class="t-muted" font-size="15">(conditional reading)</text>
+          </g>
+        </svg>
+      </figure>
+      <div class="dk-cols" style="gap:.4rem 2.4rem">
+        <figure class="dk-fig" style="max-width:460px" data-step="4">
+          <svg viewBox="0 0 460 190" role="img" aria-label="Not authorized now">
+            <text x="20" y="24" class="t-bad" font-size="19">Not in this round</text>
+            <g font-size="17" class="t-ink">
+              <circle cx="32" cy="56" r="10" class="ln-thin s-bad" style="fill:none"/><path class="ln-thin s-bad" d="M27 51 L37 61 M37 51 L27 61"/><text x="52" y="62">no new training runs</text>
+              <circle cx="32" cy="94" r="10" class="ln-thin s-bad" style="fill:none"/><path class="ln-thin s-bad" d="M27 89 L37 99 M37 89 L27 99"/><text x="52" y="100">no latent cyclic oracle (only if S3 fails)</text>
+              <circle cx="32" cy="132" r="10" class="ln-thin s-bad" style="fill:none"/><path class="ln-thin s-bad" d="M27 127 L37 137 M37 127 L27 137"/><text x="52" y="138">no ρ-scan (second round)</text>
+              <circle cx="32" cy="170" r="10" class="ln-thin s-bad" style="fill:none"/><path class="ln-thin s-bad" d="M27 165 L37 175 M37 165 L27 175"/><text x="52" y="176">no manuscript edits</text>
+            </g>
+          </svg>
+        </figure>
+        <figure class="dk-fig" style="max-width:460px" data-step="5">
+          <svg viewBox="0 0 460 190" role="img" aria-label="Fan's four decisions">
+            <text x="20" y="24" class="t-gold" font-size="19">Fan’s decisions (10-13)</text>
+            <g font-size="17" class="t-ink">
+              <g class="dk-badge"><circle cx="32" cy="56" r="11" class="f-gold"/><text x="32" y="61" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">1</text></g><text x="52" y="62">both feature sets; embedding first</text>
+              <g class="dk-badge"><circle cx="32" cy="94" r="11" class="f-gold"/><text x="32" y="99" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">2</text></g><text x="52" y="100">S4: fixed and moving J<tspan class="sb">a</tspan></text>
+              <g class="dk-badge"><circle cx="32" cy="132" r="11" class="f-gold"/><text x="32" y="137" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">3</text></g><text x="52" y="138">round 1: pure latent fit only</text>
+              <g class="dk-badge"><circle cx="32" cy="170" r="11" class="f-gold"/><text x="32" y="175" text-anchor="middle" class="f-bg" font-size="15" font-weight="700">4</text></g><text x="52" y="176">both links: identity (IPO), logit (DPO)</text>
+            </g>
+          </svg>
+        </figure>
+      </div>
+      <p class="dk-take" data-step="5">Numbers from this handoff are diagnostics of data and checkpoints, not neural stability results.</p>
+      <p class="dk-note" data-step="5">Handoff S3 (decision rule as corrected 10-13) and §4; draft-v2 §6. If S3 is negative, the plan reads HelpSteer-type data as a negative control (concentration without oscillation) and the latent cyclic oracle is discussed then (draft-v2 §5).</p>
+    </div>
+  </section>
+
+  <!-- 10 Sources -->
+  <section class="dk-slide" data-label="Sources">
+    <div class="dk-inner">
+      <h2 class="dk-h">Sources, and three questions to send back early</h2>
+      <div class="dk-cols dk-cols--2-1" style="align-items:start;gap:1rem 2.6rem">
+        <ol class="dk-list src-list" style="margin:0">
+          <li><span class="n">1</span><span class="t">Handoff to Yu He (authoritative)</span><span class="d">…/latent-estimation-plan/HANDOFF_TO_YU_HE_2026-10-13.md</span></li>
+          <li><span class="n">2</span><span class="t">Plan v2, Fan’s decisions in §6</span><span class="d">…/latent-estimation-plan/draft-v2.md</span></li>
+          <li><span class="n">3</span><span class="t">Latent preference framework (Props L1–L2, Thm L3, §5)</span><span class="d">…/latent-preference/latent_preference_framework.md</span></li>
+          <li><span class="n">4</span><span class="t">Hodge diagnostics 09-25, coherence section</span><span class="d">hodge_diagnostics/reports/2026-09-25/REPORT.md</span></li>
+        </ol>
+        <figure class="dk-fig" style="max-width:340px">
+          <svg viewBox="0 0 340 250" role="img" aria-label="Questions for Yu He">
+            <svg x="0" y="0" width="40" height="40" class="icon c-people"><use href="_deck/icons.svg#chat"/></svg>
+            <text x="52" y="28" class="t-people" font-size="19">for Yu He (handoff §5)</text>
+            <g font-size="16" class="t-ink">
+              <text x="8" y="76">Which encoder and judge run on</text>
+              <text x="8" y="96" class="t-muted">the server without new access?</text>
+              <text x="8" y="140">Are the 500 panels fixed HelpSteer</text>
+              <text x="8" y="160" class="t-muted">text, with log-probs per checkpoint?</text>
+              <text x="8" y="204">α, λ, β<tspan class="sb">train</tspan> of the run</text>
+              <text x="8" y="224" class="t-muted">whose checkpoints are projected?</text>
+            </g>
+          </svg>
+        </figure>
+      </div>
+      <p class="dk-note">Paths relative to the Iterative_PsiPO workspace; “…” stands for paper/reviews/2026-10-08-cross-prompt-coupling-theorems. All read on 2026-10-13. Claim-by-claim marks (confirmed, single-source, inference) are in sources.md next to this deck.</p>
+    </div>
+  </section>
+</main>
+
+<nav class="dk-nav" aria-label="Slides">
+  <button type="button" data-dk-prev aria-label="Previous">←</button>
+  <span class="dk-dots" aria-hidden="true"></span>
+  <span data-dk-count aria-live="polite"></span>
+  <button type="button" data-dk-next aria-label="Next">→</button>
+</nav>
+
+<script>
+/* Pipeline S0–S5: text from HANDOFF_TO_YU_HE_2026-10-13.md §2 (steps) and draft-v2.md §6 (Fan's decisions). */
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var steps = [
+    { id: "S0", l1: "freeze", l2: "the data", del: "one table", c: "people",
+      title: "Freeze the data table",
+      inp: "The current 500-panel run: all 6 pairs of each 4-response panel, with oracle 1, oracle 2 and the mixed probability kept separate; mixing rule, run and config IDs.",
+      out: "One parquet/CSV plus a README line per column. Flows under both links: identity P − 1/2 (IPO) and logit log P/(1−P) with 0.5 pseudo-counts (DPO).",
+      chk: "Confirm that the responses are fixed HelpSteer text, not regenerated each round, and which checkpoint generated them." },
+    { id: "S1", l1: "build", l2: "features", del: "two feature sets", c: "people",
+      title: "Features: embedding first, interpretable second",
+      inp: "The 2000 responses (500 panels × 4).",
+      out: "(b) A frozen sentence encoder, pooled PCA to d ∈ {8, 16}. (a) One judge call per response: 0–10 on about 6–8 style attributes, plus length in tokens. The cheap length set, for comparison with 09-25.",
+      chk: "Features vary continuously across prompts; all centred on the pooled mean. Record the encoder, the judge model and its prompt verbatim." },
+    { id: "S2", l1: "fit Ā", l2: "", del: "Ā_cyc, shares", c: "platform",
+      title: "Fit Ā (pure latent, no prompt-specific residual)",
+      inp: "S0 flows and labels × S1 feature sets × link × {oracle 1, oracle 2, mixed}.",
+      out: "Ā_cyc; latent cyclic share ‖Ā_cyc‖²/‖Ā‖²; design rank against m(m−1)/2; each prompt’s exposed share ‖C_a‖²/‖A_a‖².",
+      chk: "Ridge 10⁻³ only for conditioning. The ρ-scan (shared plus prompt-specific residual) is second round, not now." },
+    { id: "S3", l1: "shared plane", l2: "+ nulls", del: "ω̃₁, nulls, β*", c: "platform",
+      title: "The shared cyclic direction and its nulls",
+      inp: "Ā_cyc at the initial checkpoint’s panel probabilities π_a (primary) and at uniform panels (secondary).",
+      out: "ω̃₁, its 2-D plane (attribute loadings once set (a) exists), and β* against the run’s β.",
+      chk: "On the held-out half: 500 shuffles and 500 orientation flips (95th pct.) plus a transitive surrogate; prompt-bootstrap CI. Pass: ω̃₁ above all three and β* inside the run’s actual β range per link." },
+    { id: "S4", l1: "project", l2: "checkpoints", del: "radius, phase vs t", c: "creator",
+      title: "Checkpoint projection (the Idea A metric)",
+      inp: "Sequence-sum log-probs of the 4 fixed responses at every saved checkpoint, already logged.",
+      out: "θ⁽ᵗ⁾ per checkpoint; (p_t, q_t) in the S3 plane; radius and phase over t; the explained share.",
+      chk: "Both metrics: J_a from the initial checkpoint and from checkpoint t. Both links, both feature sets. Tells rotation, polarization and noise apart." },
+    { id: "S5", l1: "trace the", l2: "cycle’s source", del: "oracle 1 vs 2", c: "teal",
+      title: "Where the cycle comes from (both links)",
+      inp: "Ā_cyc fitted on oracle 1, oracle 2 and the mixture, under identity and logit; plus a transitive-surrogate refit as control.",
+      out: "A comparison table. Baseline fact (09-25): a single BT oracle leaves zero residual under logit and a positive one under identity.",
+      chk: "Single oracle cyclic under identity only → link mismatch. Single oracle cyclic under logit → it is not BT-transitive in feature coordinates. Only the mixture, under logit → heterogeneity. Surrogate Ā_cyc → artefact." }
+  ];
+  var svg = document.getElementById("pl-flow");
+  var card = document.getElementById("pl-card");
+  var nodes = [];
+  function el(tag, attrs, text) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text) e.textContent = text; return e; }
+  steps.forEach(function (s, i) {
+    var x = 12 + i * 158;
+    var g = el("g", { "class": "pl-node c-" + s.c, tabindex: "0", role: "button", "aria-pressed": "false", "aria-label": s.id + ": " + s.title });
+    g.appendChild(el("rect", { "class": "pl-box s-" + s.c, x: x, y: 26, width: 134, height: 76, rx: 8 }));
+    g.appendChild(el("text", { x: x + 67, y: 18, "text-anchor": "middle", "class": "t-gold", "font-size": 17, "font-weight": 700 }, s.id));
+    if (s.l2) {
+      g.appendChild(el("text", { x: x + 67, y: 59, "text-anchor": "middle", "class": "t-" + s.c, "font-size": 18 }, s.l1));
+      g.appendChild(el("text", { x: x + 67, y: 81, "text-anchor": "middle", "class": "t-" + s.c, "font-size": 18 }, s.l2));
+    } else {
+      g.appendChild(el("text", { x: x + 67, y: 71, "text-anchor": "middle", "class": "t-" + s.c, "font-size": 20 }, s.l1));
+    }
+    if (s.id === "S5") {
+      var t = el("text", { x: x + 67, y: 130, "text-anchor": "middle", "font-size": 15 });
+      t.appendChild(el("tspan", { "class": "t-teal" }, "oracle 1"));
+      t.appendChild(el("tspan", { "class": "t-muted" }, " vs "));
+      t.appendChild(el("tspan", { "class": "t-gold" }, "2"));
+      g.appendChild(t);
+    } else {
+      var d = el("text", { x: x + 67, y: 130, "text-anchor": "middle", "class": "t-muted", "font-size": 15 });
+      s.del.split(/_(cyc)/).forEach(function (part, k) { d.appendChild(k % 2 ? el("tspan", { "class": "sb" }, part) : document.createTextNode(part)); });
+      g.appendChild(d);
+    }
+    g.addEventListener("click", function () { show(i); });
+    g.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); show(i); }
+    });
+    svg.appendChild(g); nodes.push(g);
+  });
+  svg.appendChild(el("text", { x: 480, y: 166, "text-anchor": "middle", "class": "t-faint", "font-size": 15 }, "blue: data and features · purple: latent Ā · orange: checkpoints · teal / gold: oracle 1 / 2"));
+  var colours = { people: "var(--people)", platform: "var(--platform)", creator: "var(--creator)", teal: "var(--teal)" };
+  function sub(s) { return s.replace(/_(cyc|eff|train|rs|a|i|j|r|s|t)(?![A-Za-z])/g, "<sub>$1</sub>"); }
+  function show(i) {
+    var s = steps[i];
+    nodes.forEach(function (n, j) { n.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+    card.style.setProperty("--pl-c", colours[s.c]);
+    document.getElementById("pl-id").textContent = s.id;
+    document.getElementById("pl-title").textContent = s.title;
+    document.getElementById("pl-in").innerHTML = sub(s.inp);
+    document.getElementById("pl-out").innerHTML = sub(s.out);
+    document.getElementById("pl-chk").innerHTML = sub(s.chk);
+  }
+  window.plShow = show;
+  show(0);
+})();
+</script>
+</body>
+</html>

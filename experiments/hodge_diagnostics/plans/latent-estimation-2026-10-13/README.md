@@ -14,6 +14,13 @@ Read in order:
    Sections0–3 first; [partial-sharing background](references/partial_sharing_theorem.md)
    is context only, not a request to run rho scans.
 
+## Two report versions of the handoff (added 2026-10-13, evening)
+
+- [Text report](reports/text/report.pdf) (15 pages; [HTML](reports/text/report.html), [sources](reports/text/sources.md)): the complete, ordered version with definitions, figures, the S0–S5 steps, decision rule and limits.
+- [Visual deck](reports/visual/report.html) (10 slides, single file; also [index.html](reports/visual/index.html) with `_deck/`; [sources](reports/visual/sources.md)): the same plan for a quick grasp; slide 6 is clickable.
+
+Both were built from the corrected handoff (S5 link logic, transitive-surrogate null, precise decision rule). Where they differ from `EXECUTION_CLARIFICATIONS.md` (e.g. the norm-preserving form of the shuffle null, pseudo-counts for continuous probabilities, gain ratio instead of β-range membership), the clarifications take precedence, as for the drafts.
+
 ## Immediate task and order
 
 - Work from the exact frozen500 training panels and their per-oracle scores,

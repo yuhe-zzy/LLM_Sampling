@@ -1,46 +1,39 @@
 # Current handoff
 
-Updated2026-10-13, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-14, America/Chicago. Read [context index](../doc/INDEX.md).
 
-## Fan's aligned-latent analysis plan (shared2026-10-13)
+## Latest request: explain Fan's aligned-latent plan
 
-Fan requested publishing his Claude-drafted S0–S5 plan so Yu He can run it on
-the exact existing500-panel bank. Start with the
+Owner requested reading/explaining fan/latent-estimation-2026-10-13, reviewed
+at7e152a2 (agent documents, references and both HTML report texts). This turn
+does not authorize execution or merging the report branch. Start with the
 [plan bundle](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md)
 and execution clarifications (take precedence over original draft shorthand).
-Both features requested: frozen embeddings/PCA8,16 first (no annotation fee),
+The proposal fits a shared skew feature operator, not a literal mean P; its
+cyclic block and model-induced Hodge residual are distinct from observed C.
+Then regress saved logits onto shared features and project onto a discovery-
+selected cyclic plane, not a plane chosen from visually rotating trajectories.
+Both features proposed: frozen embeddings/PCA8,16 first (no annotation fee),
 new judged continuous style attributes second (2000 responses; confirm judge
 channel/budget). Pure latent fit only this round; identity/logit, each oracle
 and mixture, rank/fit, held-out signal and500-draw permutation/flip nulls.
 No aligned signal has yet been computed. Keep WR/existing runs untouched;
 no new training, rho-scan, oracle construction or extra GPU allocation.
 
-## Latest inspection request
+## Previous average-matrix clarification
 
 Latest clarification: mean P is the elementwise equal average of500 training
 matrices in original candidate slots, with no semantic alignment, policy weights
 or step averaging. Verified sum P12=281.2262593683416 and mean=.5624525187366831.
 Do not present it as an already aligned global semantic preference matrix.
 
-Follow-up asks for concrete shared-direction measurement standards using the
-existing data. Proposed six features (five HelpSteer attributes plus log length),
-mean expected-feature trajectories, excursion/backtracking/late-motion metrics,
-and optional static-preference-selected 2D plane with250/250 prompt validation.
-All remain proposals, not executed or approved new experiments. Attributes still
-need identity-checked joining from raw source; six-arm numeric lengths/trajectories
-are confirmed locally. The split holds out axis selection, not model training.
-See [operational proposal](../doc/SCIENTIFIC_CONTEXT.md#proposed-operational-protocol-not-yet-executed).
-
-User wants shared semantic/output-direction oscillations, not only prompt-level
-cycles; first compute average Hodge decomposition. All500 training panels now
-computed with existing core: identity norm(mean C)=.022619 vs mean(norm C)=.221816,
-aggregate cyclic energy share .357286%. Original candidate indices are not
-semantic axes. Logit averaging orders reported separately. Seven focused CPU
-unittests passed; no full-suite/GPU test or scheduler action. See
-[average report and proposed latent analysis](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md).
-Shared-feature trajectory/latent-plane analysis is a proposal, not yet executed.
-Analysis commit657af2ac09f95bb39c918cc3e9e487053c01b9bf was pushed to
-origin/hodge-diagnostics and exact remote SHA verified2026-10-13.
+Prior expected-feature trajectories and cheap HelpSteer attributes were a
+different unexecuted proposal. Fan's proposal instead regresses logits, starts
+with embeddings, and requests newly judged style attributes. See
+[scientific distinctions](../doc/SCIENTIFIC_CONTEXT.md#fans-shared-latent-estimator-proposal-reviewed2026-10-14).
+Completed [average Hodge results](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md):
+identity norm(mean C)=.022619 vs mean(norm C)=.221816, aggregate share .357286%.
+These original-slot results do not establish absence of a semantic cycle.
 
 ## Completed publication request
 

@@ -143,6 +143,48 @@ across sampled prompts but cannot supply missing independent training seeds.
 No semantic features, latent plane, permutations or new metrics have been
 computed yet. No new jobs, judging, embeddings or scientific changes approved.
 
+### Fan's shared latent estimator proposal, reviewed2026-10-14
+
+Owner requested explanation only of fan/latent-estimation-2026-10-13 at7e152a2.
+Read the agent documents, reference notes and both HTML report texts; no report
+PDF rendering, proof certification, new computation or branch merge performed.
+The [execution clarifications](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/EXECUTION_CLARIFICATIONS.md)
+override shorthand remaining in the draft/human reports. This is not a result.
+
+Fit pooled within-prompt comparisons using common response features psi:
+flow_hat(i,j)=u^T(psi_i-psi_j)+psi_i^T B psi_j, B skew. The shared coefficient
+operator is not a probability matrix or the arithmetic average of aligned P.
+For model-induced panel flows, C_hat=Psi_centered B Psi_centered^T; observed
+Hodge C can differ because of fit error. This is a declared modeling assumption,
+not the only possible shared estimator. Coefficient energy shares depend on
+feature scaling/origin convention, so require predictive and panel-flow checks.
+
+S0 uses the exact private500x4 fixed bank, no guessed reconstruction. S1 uses
+frozen embeddings/PCA8,16 first and new0..10 judged style features second;
+existing HelpSteer attributes are an optional control, not a substitute for
+new style labels. Paid annotation channel/budget and new resources need owner
+confirmation. Mean/scales/PCA/fit/plane use discovery250 prompts only (seed0),
+with250 held out from estimator selection, not from original model training.
+
+S2 fits identity or a declared logit estimator separately for Nemotron, Skywork
+and their mixed Oracle2. Preserve user naming: Oracle1=Nemotron, Oracle2=mix,
+not Skywork. Pure shared fitting first; no prompt-specific residual/rho sweep.
+S3 weights cyclic coupling by panel softmax geometry, actual initial policy
+primary and uniform secondary; leading skew mode gives a2D plane, not a single
+PCA axis. Require held-out observed-flow fit, potential-only baseline, fixed-plane
+observed-Hodge alignment,500-draw candidate-conjugation/orientation-flip nulls
+and transitive surrogates. Prompt bootstrap, not independent-edge bootstrap.
+The local linear-feature beta frontier is a diagnostic proxy, not an LLM theorem.
+
+S4 regresses within-panel-centered saved sequence-sum logits on shared features
+to estimate theta_t, then uses the S3 plane for all arms. Report both initial-
+fixed and checkpoint-moving policy metrics, fit explained share/residuals,
+radius/phase. This differs from the earlier E_pi[features] proposal and measures
+fixed-panel behavior, not newly generated output semantics. S5 compares judges
+and links; a nonzero fitted B for a scalar BT judge can be feature misspecification
+even though its exact per-panel logit Hodge residual is zero. No rotation cannot
+identify training noise/capacity as its cause. No aligned result has been computed.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

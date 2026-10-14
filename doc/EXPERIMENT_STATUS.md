@@ -1,7 +1,11 @@
 # Current experiment status
 
-Updated 2026-10-13, America/Chicago. Scheduler evidence below was captured at
-18:00:08 CDT (23:00:08 UTC); it is not a live dashboard.
+Updated 2026-10-14, America/Chicago. At14:00 CDT, two SSH attempts timed out
+before remote commands. Current GPU allocation, progress and logs are UNKNOWN.
+No recovery/WR submission or remote task change was made. Existing two-hour
+monitor continues; owner asked to check UNC VPN/Sycamore access. See the
+[connection failure record](../experiments/oracle2/campaigns/oracle2_real_20261009/records/attempt5/connection_failure_20261014T1858.json).
+Last successful scheduler evidence is00:01:00 CDT (05:01:00 UTC), not live.
 
 ## Oracle2: verified evidence
 
@@ -13,12 +17,13 @@ Updated 2026-10-13, America/Chicago. Scheduler evidence below was captured at
   rows728/561 are preserved. Stale RUNNING file manifests do not override sacct.
 - Generation2/3 (IPO feedback/DPO ordinary) COMPLETED0:0, all11 banks0..100
   hash/count/identity validated,800 rows each. Original queue started4/5
-  (DPO reference/feedback), running on twoH100s with complete0, partial10
-  rows150/79 at the dated check. No pending or unrelated owned work; no new
+  (DPO reference/feedback), running on twoH100s with complete0/10/20/30/40,
+  partial50 rows548/461 at the last successful check. No pending or unrelated owned work; no new
   logged execution error. All606 training snapshots remain finite.
-- No generated-response WR exists. WR checkpoints are0,10,...100, but the
+- At the last successful check, no generated-response WR existed. WR checkpoints are0,10,...100, but the
   implementation scores in a later batch after generation, not live in training.
-- Missing-only recovery is tested and CPU-deployed, NOT submitted or GPU-tested.
+- Missing-only recovery was tested and CPU-deployed, not submitted or GPU-tested
+  at the last successful check; re-read remote intents/receipts after reconnection.
   Source `2d6b5747c251abc44700799be24e3e1e05e9b984`, frozen launch
   `oracle2_real_20261009_v5_recovery`; original v4 remains unchanged.
 

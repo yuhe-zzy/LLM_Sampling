@@ -1,5 +1,17 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Monitoring connection blocked, 2026-10-14
+
+The18:58Z check made two SSH connection attempts, both timing out before any
+remote command. Current allocation, task progress and logs are UNKNOWN, not
+inferred from older snapshots. No recovery/WR submission or job change was made.
+Last successful inspection05:01:00Z saw only4794738_4/5 RUNNING on twoH100s,
+validated banks0/10/20/30/40, partial50 rows548/461, and no new logged error.
+Recovery had no output/intent/receipt and WR was unsubmitted at that older check.
+The owner was asked to check UNC VPN/Sycamore access. Existing two-hour monitor
+continues with read-only inspection; all phase guards remain required.
+See [connection failure record](records/attempt5/connection_failure_20261014T1858.json).
+
 ## Two generators complete; final original pair running
 
 At2026-10-13T23:00:08Z, IPO feedback4794738_2 and DPO ordinary4794738_3

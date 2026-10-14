@@ -52,16 +52,18 @@ Start with [results atlas](../docs/RESULTS_INDEX.md) and
 
 ## Experiment state (dated, not live)
 
-At2026-10-13 18:00:08 CDT all six Oracle2 training arms were complete0..100.
-Generation4794738_2/3 COMPLETED0:0 with all11 banks validated;4/5 now run on
-twoH100s, complete0/partial10 (150/79 rows), no pending or unrelated owned work.
-Original0/1 remain TIMEOUT with complete0..70 and partial80 preserved. No WR.
-Recovery source2d6b574 is CPU-validated/deployed but not GPU-tested/submitted.
+At2026-10-14 14:00 CDT two SSH attempts timed out before remote commands.
+Current allocation/progress/logs UNKNOWN; owner asked to check VPN/access.
+Last successful check00:01 CDT: all training complete0..100; generation2/3
+COMPLETED with11 validated banks;4/5 RUNNING on twoH100s, complete0..40 every10,
+partial50 rows548/461, no other owned work or new logged error. Original0/1
+TIMEOUT with preserved banks. Recovery source2d6b574 was CPU-deployed but
+not GPU-tested/submitted; no WR at that snapshot. No remote change this turn.
 Original training/generation source23401de remains frozen.
 
 ## Next operational action
 
-Existing two-hour monitor: re-read live full account and latest intent/receipt.
+Existing two-hour monitor: retry read-only SSH; re-read full account and intents/receipts.
 Wait for original2..5 successful/validated and full account empty. Then v5
 frozen queue.py recover once, two1GPU tasks. Only after successful recovery,
 all66 banks and baseline validate, and empty account, use v5 WRscore.

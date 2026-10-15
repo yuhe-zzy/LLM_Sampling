@@ -410,6 +410,24 @@ not measured guarantees; previous Nemotron memory evidence covers its audited
 candidate bank only. Full-account queue/receipt guards still required, no
 unrelated pending/running work, no automatic timer restart. Planning only.
 
+### Training preference source clarification,2026-10-15
+
+Owner asks what would supply training preferences if not Oracle1 alone. The
+existing alternative is the already implemented Oracle2, not a new annotator:
+P_ij=.6*sigmoid(r_Ni-r_Nj)+.4*sigmoid(r_Si-r_Sj), native temperatures1.
+It still includes Oracle1/Nemotron; it is not Skywork alone, an average of raw
+rewards, or the proposed five-dimensional labels. This fixed candidate P is
+the base preference input for the IPO/DPO schemes. Qwen3-32B's proposed role
+is frozen attribute measurement, not training preference generation.
+
+Retaining Oracle2 training and reporting Oracle1-only WR is a possible separate
+measurement choice: it measures Nemotron preference, not Oracle2 WR or direct
+validation of the mixed training objective. The matching Oracle2 training/WR
+protocol remains unchanged for the existing campaign. A future all-Oracle1
+campaign is also a valid descriptive dynamics study with the previously stated
+mechanistic limits; no switch has been selected by this clarification question.
+No model download, scientific configuration, analysis or GPU action authorized.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

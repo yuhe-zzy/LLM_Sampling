@@ -24,7 +24,11 @@ old model lock: Qwen2.5-1.5B policy and Nemotron70B Reward-HF Oracle1. Recommend
 Qwen/Qwen3-4B non-thinking for a NEW campaign, not a3B dense model; no new run
 approved/submitted. Changing post-training/template too is not a size-only test.
 Clarify whether Oracle1 is WR-only or also training ground truth before edits
-to scientific configs. Single-BT per-prompt logit Hodge C is exactly zero;
+to scientific configs. Latest explanation: the existing alternative is Oracle2,
+.6 Nemotron BT probability+.4 Skywork BT probability, not the five-trait labeler.
+Oracle1-only WR of Oracle2 training is a distinct single-judge endpoint, not
+Oracle2 WR. User's clarification question does not choose a new protocol.
+Single-BT per-prompt logit Hodge C is exactly zero;
 identity/aggregate/fitted-feature residuals do not establish non-BT ground truth.
 Oracle1 can support descriptive output dynamics, but do not claim an equivalent
 preference-cycle mechanism. Existing Oracle2 results/definitions stay intact.

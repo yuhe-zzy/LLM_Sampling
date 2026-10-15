@@ -1,5 +1,26 @@
 # Current experiment status
 
+## Active authorization: Oracle1 / Qwen3, 2026-10-15
+
+Owner now explicitly authorizes a NEW campaign with Oracle1 for training AND WR,
+Qwen3-4B policy and five-trait Qwen3-32B measurement; implementation and submission
+approved. Old Oracle2 recovery/WR are set aside, not cancelled or resumed.
+See [new protocol](../experiments/oracle1_semantic/README.md) and
+[campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
+Every outer update commits a complete restart state, with10-update/18h soft-stop
+segments and24h allocation. Start IPO/DPO ordinary one update each, then verify
+real reload and one further update before all six arms. FOUR accountGPUs max,
+two1GPU training/generation tasks, one2GPU judge, one1GPU rater, no overlap.
+New monitor authorized5min, change same timer to5h only after startup/resume
+validation. Human pilot review still gates bulk annotation. No cycle-count gate.
+
+At03:42 CDT account empty after SSH reconnect. Qwen3 model revisions downloaded
+and pinned, all800 exact panels pass new tokenizer audit without truncation.
+At04:14 CDT server22 CPU tests passed with no skips, including actual tiny
+Qwen3/LoRA save-load-train equivalence. Full-size GPU training/reload has not
+yet run; preparation alone is not submission. Current receipt determines jobs.
+The status and future-action instructions below concern historical Oracle2 only.
+
 Owner update2026-10-14 23:31 CDT: `oracle2` timer deleted in the app at the
 owner's request; deletion confirmed. No server experiment was cancelled or
 modified. No automatic checks or stage submissions will continue through this

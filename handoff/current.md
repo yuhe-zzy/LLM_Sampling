@@ -2,101 +2,60 @@
 
 Updated2026-10-15, America/Chicago. Read [context index](../doc/INDEX.md).
 
-## Latest operational request: stop the timer
+## Latest authorization: launch Oracle1 / Qwen3
 
-Owner requested stopping this timer on2026-10-14. Automation `oracle2`
-(Oracle2 runtime/memory checks) was deleted in the app; deletion confirmed.
-No future automatic checks or phase submissions from that timer. No server
-job was cancelled, modified or submitted. Do not recreate monitoring without
-a new user request. Latest remote state remains unknown after SSH timeouts.
+Owner explicitly switches BOTH training preferences and WR to Oracle1 Nemotron,
+sets Oracle2 aside, approves writing code and submitting the new experiment.
+Use Qwen3-4B non-thinking policy, frozen Qwen3-32B five-trait rater; seed0 six
+IPO/DPO ordinary/reference/feedback arms, same100/500/200 panels, states0..100.
+FOUR full-accountGPUs maximum, two1GPU training/generation tasks, one2GPU WR
+judge, one1GPU rater, nonoverlapping. Full queue/AllocTRES/sacct preflight and
+receipt guards mandatory. No new old-Oracle2 recovery or WR, no cancellations.
 
-## Latest request: concrete revised plan only, do not run
+Owner requests NEW5-minute monitor, updating that SAME timer to5hours only
+after actual IPO/DPO training AND successful checkpoint reload/continued update.
+Every outer boundary saves adapter+s0/st/st-1+RNG+counts+metrics with atomic
+commit/hashes. At most10 updates/segment,18h soft stop,24h allocation.
+First0/3 tasks run one update, then another allocation resumes them for one
+update, then all six. No blind retries after FAILED/TIMEOUT/ambiguous intent.
+Generation/scoring/annotation reuse atomic per-response journals. Human review
+of the200-response annotation pilot gates full bulk labels, never fabricated.
 
-Owner asks to reorganize Fan's plan around actual generated-output dynamics,
-specifying annotation model/traits, common directions and reusable generations.
-[Concrete proposal](../experiments/hodge_diagnostics/plans/generated-output-dynamics-2026-10-15/PLAN.md)
-now exists separately from Fan's unchanged plan. Latest owner choice is FIVE
-dimensions. Recommended response-only0..10 traits: elaboration, linguistic
-complexity, formality, politeness, hedging; proposed frozen Qwen3-32B BF16
-non-thinking rater remains untested. Earlier seven/three options are historical.
-Owner also asks about Oracle1-only scoring and a larger Qwen3 policy. Verified
-old model lock: Qwen2.5-1.5B policy and Nemotron70B Reward-HF Oracle1. Recommend
-Qwen/Qwen3-4B non-thinking for a NEW campaign, not a3B dense model; no new run
-approved/submitted. Changing post-training/template too is not a size-only test.
-Clarify whether Oracle1 is WR-only or also training ground truth before edits
-to scientific configs. Latest explanation: the existing alternative is Oracle2,
-.6 Nemotron BT probability+.4 Skywork BT probability, not the five-trait labeler.
-Oracle1-only WR of Oracle2 training is a distinct single-judge endpoint, not
-Oracle2 WR. User's clarification question does not choose a new protocol.
-Single-BT per-prompt logit Hodge C is exactly zero;
-identity/aggregate/fitted-feature residuals do not establish non-BT ground truth.
-Oracle1 can support descriptive output dynamics, but do not claim an equivalent
-preference-cycle mechanism. Existing Oracle2 results/definitions stay intact.
-Five-dimensional scope is accepted; trait/model/rubric/pilot and execution remain
-proposals. No downloads, annotation, analysis, SSH/resource/timer actions. FOUR
-accountGPUs maximum, proposed phases nonoverlapping, targets not memory guarantees.
+## Current preparation
 
-Owner corrects the endpoint: test whether actual model outputs oscillate in
-shared/global dimensions, not just fixed-response probabilities within prompts.
-Open generation plus frozen multidimensional feature measurements is the main
-evidence; fixed-panel diagnostics are auxiliary. Each response can have a score
-on every trait, not one exclusive label. Compare prompt-balanced feature means,
-distributions and fixed-plane trajectories with sampling/annotation uncertainty.
-Distinguish drift/jitter from repeated swings; do not presume a positive result.
-Existing plan has200 eval prompts x4 responses at11 checkpoints0,10,...,100.
-Validated WR banks can be reused; current completion unknown. Historical48
-complete banks, not66; step0 length-cap rate43.5% under256-token generation.
-Full proposed main annotation55,600 rows plus200 pilot, before text caching.
-Do not invent101 generated states from101 numeric fixed-panel snapshots.
-No new model/run, executable config change or jobs approved by this discussion.
-See [definitions and proposal](../doc/SCIENTIFIC_CONTEXT.md) and today's note.
+[Protocol/code](../experiments/oracle1_semantic/README.md),
+[campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
+Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
+output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
+Model revisions pinned/downloaded: Qwen3-4B1cfa9a720891 and Qwen3-32B9216db5781bf.
+Exact existing Nemotron scores reused, pure BT matrices rebuilt; all800 panels
+pass Qwen3 full chat/EOS length audit1537 without dropping/truncation.
+At03:42 CDT account empty. At04:14 CDT22 server CPU tests pass without skips,
+including tiny Qwen3/LoRA actual round-save-reload-round equality. These do NOT
+prove full-model GPU memory or inference. Submission/source/monitor receipts
+must be read before acting; preparation is not evidence of submitted jobs.
 
-Fan's branch at7e152a2 was read, not merged or executed. His S0-S3 fits shared
-preference structure; S4 regresses saved fixed-candidate logits, not generated
-features. These are different estimands; explain any proposed connection.
-Start with [plan and clarifications](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md).
-HelpSteer is our existing dataset; its labels apply to the original answers,
-not new generated texts. Style measurements and Oracle2 WR have separate roles.
-No aligned latent signal computed. Original-slot mean Hodge is not a semantic
-average; [results](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md)
-remain valid only under their declared unaligned candidate-slot definition.
+## Interpretation
 
-## Publication state
+Primary endpoint is generated-output motion in five simultaneous measured
+traits, not fixed-response probabilities alone. WR generation every10states,
+scored later in a batch, not live WR during training. New model has NEW initial
+baseline; do not reuse1.5B responses. Preserve256-token cap diagnostics.
+Raw trait curves and discovery-frozen descriptive PCA are primary views.
+Single-BT exact logit Hodge cyclic part is zero. DPO exact feedback is also
+zero, so its requested feedback arm is a NULL control, not an expected benefit.
+No selecting latent axes to maximize visible oscillations; one seed, prompt SE
+not seed/rater uncertainty, no convergence or non-BT mechanism claim.
 
-Context and reviewed results were pushed to origin/hodge-diagnostics as
-2a25ed505978e4ab8acde0c475137db0656988ac; remote SHA verified2026-10-13.
-Six publication tests pass; inventory contains435 PNG/PDF/CSV artifacts.
-This covers reviewed local artifacts, not missing WR or unexported server data.
-Start with [results atlas](../docs/RESULTS_INDEX.md) and
-[coverage/exclusions](../docs/RESULT_PUBLICATION_20261013.md).
+## Existing results / old campaigns
 
-## Experiment state (dated, not live)
+Old Oracle2 timer was deleted at owner's request onOctober14; do not recreate
+it. This new Oracle1 monitoring request is separate. Historical oldtraining is
+complete, originalgeneration0/1 timed out with outputs preserved;2..5 now
+reportCOMPLETED in scheduler, but latest full-bank audit is not performed here.
+No old WR is inferred. Frozen old sources23401de and2d6b574 stay untouched.
 
-At2026-10-14 14:00 CDT two SSH attempts timed out before remote commands.
-Current allocation/progress/logs UNKNOWN; owner asked to check VPN/access.
-Last successful check00:01 CDT: all training complete0..100; generation2/3
-COMPLETED with11 validated banks;4/5 RUNNING on twoH100s, complete0..40 every10,
-partial50 rows548/461, no other owned work or new logged error. Original0/1
-TIMEOUT with preserved banks. Recovery source2d6b574 was CPU-deployed but
-not GPU-tested/submitted; no WR at that snapshot. No remote change this turn.
-Original training/generation source23401de remains frozen.
-
-## Next operational action
-
-Timer stopped by owner. For a future requested inspection, re-read full account
-and intents/receipts; do not assume the historical scheduler state is current.
-Wait for original2..5 successful/validated and full account empty. Then v5
-frozen queue.py recover once, two1GPU tasks. Only after successful recovery,
-all66 banks and baseline validate, and empty account, use v5 WRscore.
-See [status and constraints](../doc/EXPERIMENT_STATUS.md) and
-[recovery instructions](../experiments/oracle2/campaigns/oracle2_real_20261009/RECOVERY_20261013.md).
-Never duplicate training, baseline, candidate audit, original generation or
-existing recovery submissions. Do not overlap phases or exceed4 accountGPUs.
-
-## Publication follow-ups, not new experiment authorization
-
-Anchor90 trajectories still need a dedicated validated export; completed Slurm
-status alone is not a published figure. Oracle1 final missing/partial grid
-coverage remains unreconciled. Oracle2 WR is genuinely absent, not0.
-Keep historical token-average panels separate from sequence-sum. Preserve
-known DPO NaN tails as invalid, not uniform-policy convergence.
+[Results atlas](../docs/RESULTS_INDEX.md) and [publication coverage](../docs/RESULT_PUBLICATION_20261013.md).
+Fan's plan remains a separate collaborator proposal, not executed. Original-slot
+average Hodge is not a semantic average. Anchor90 still needs dedicated export;
+old Oracle1 final grid remains unreconciled. No hidden/private text in GitHub.

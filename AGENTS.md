@@ -37,6 +37,23 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Latest owner authorization2026-10-15 supersedes old Oracle2 continuation:
+set Oracle2 aside, use Oracle1 Nemotron ONLY for BOTH training preferences and
+WR in a NEW Qwen3-4B six-arm experiment. Five traits/Qwen3-32B rater, seed0,
+same100/500/200 panels, states0..100, generation every10. See
+experiments/oracle1_semantic/README.md and campaigns/oracle1_qwen3_20261015.
+FOUR full-account GPUs maximum; start2 concurrent1GPU tasks, judge2GPU,
+nonoverlapping phases, empty account before submission. Preserve old Oracle2
+results/jobs; do not recover or score them. New5-minute monitor is authorized,
+switch SAME timer to5hours only after IPO/DPO actual training and full-model
+resume/continued update verified. Per-outer atomic checkpoints must retain
+adapter, s0/st/st-1 and RNG. Never duplicate intents/receipts or blind-retry
+FAILED/TIMEOUT. User authorizes tested technical fixes, not science changes.
+Human review of the200-response style pilot precedes full annotation.
+DPO feedback is exactly null under a single BT oracle; retain as null control.
+Source must be tested/pushed/frozen before GPU submission. Preparation is not
+GPU validation. The dated Oracle2 instructions below are historical only.
+
 Oracle2 recovery prepared2026-10-13T06:40:26Z: frozen source2d6b5747c251abc44700799be24e3e1e05e9b984
 is deployed at ipo/diagnostics/oracle2_real_20261009_v5_recovery. All129 server
 CPU tests passed without skips, plus six config checks and real response-prefix,

@@ -1,0 +1,27 @@
+{
+  "created": "2026-10-15T08:55:36.032927+00:00",
+  "plan_sha256": "12fda47d7ca0e797a62d3fcec25696e54d1620b1d6224f9a9fd3d250b42eac23",
+  "model_lock_sha256": "4a55aca6afeac3e65f276e89e36db0a43768bc5091e2608d2be0434dabbdb115",
+  "source_audit_sha256": "c12650e55bf75bb581eb6fae36eed2d4b8a65bfec331ed76968676c9b90fb8a1",
+  "oracle": "nemotron_only_BT_T1",
+  "truncation": false,
+  "files_sha256": {
+    "calibration.jsonl": "bb59f0829ea676dc2a4a378c916e55cdf9049d976c640470152259fc0a84638c",
+    "train.jsonl": "703f3f7657fef4fb058c7e1ee06948d421dbe0a68d068dcf3c84d244c6fca6a0",
+    "evaluation.jsonl": "313575192f27a2f9acba1444d8195572c8d2f4d56b925c5f2a9cafa919e6ffac"
+  },
+  "lengths": {
+    "calibration": {
+      "panels": 100,
+      "max_total_tokens": 1509
+    },
+    "train": {
+      "panels": 500,
+      "max_total_tokens": 1517
+    },
+    "evaluation": {
+      "panels": 200,
+      "max_total_tokens": 1486
+    }
+  }
+}

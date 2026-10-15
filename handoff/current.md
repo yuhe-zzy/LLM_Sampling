@@ -27,14 +27,17 @@ channel/budget). Pure latent fit only this round; identity/logit, each oracle
 and mixture, rank/fit, held-out signal and500-draw permutation/flip nulls.
 No aligned signal has yet been computed. Keep WR/existing runs untouched;
 no new training, rho-scan, oracle construction or extra GPU allocation.
-Follow-up: style annotation needs a structured LLM judge, model not yet selected;
-its features do not replace Nemotron/Skywork preference labels or Oracle2 WR.
+Fan proposes a structured LLM for new style labels, model not yet selected;
+it is not mandatory for all feature analysis and does not replace Oracle2 WR.
 No engineered cycle required: distinguish majority cycles, link-specific Hodge
 residuals, fitted latent B and measured training motion; keep null outcomes valid.
 Latest follow-up: Oracle1 can test descriptive stability; Oracle2's cyclic-
 mechanism claim needs measured structure beyond scalar BT/link/fit artifacts.
 Feature literature checked: HelpSteer, TACL2016 formality, ACL2013 politeness,
 APM2026 preprint; candidate rubric only, no annotation or analysis authorized.
+Owner correction: HelpSteer is our actual source dataset. Exact existing labels
+can support fixed-panel S2/S4 without rejudging; only missing attributes or new
+generated texts need added labels/predictions. No simplified analysis executed.
 
 ## Previous average-matrix clarification
 

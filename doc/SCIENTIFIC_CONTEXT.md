@@ -235,6 +235,25 @@ native scales or explicitly document a0..10 adaptation; discovery-only scaling.
 Suggested pilot/reliability checks precede paid full annotation and any cycle
 selection; no model, budget, dimensions, new labels or experiments approved.
 
+Owner correction2026-10-14: HelpSteer is our existing candidate-source dataset,
+not a newly discovered replacement dataset. Its exact response-level attribute
+labels can be reused after identity/order validation; the numeric export alone
+does not contain them. Shared-feature/Hodge analysis does not inherently require
+a new LLM judge. Fan's S4 uses saved log-probs on the same fixed responses at
+each step, so one set of fixed features suffices. Existing labels can support
+an explicitly named reduced feature analysis, but do not fulfill Fan's separate
+proposal for newly judged politeness/formality/uncertainty style attributes.
+
+Open-generation style analysis needs features for the new response texts; old
+response labels cannot be transferred merely because the prompt matches. These
+could be obtained by humans, a validated attribute predictor, deterministic
+metrics for suitable attributes, or an LLM; a new LLM is convenient, not logically
+required. A different labeled dataset can train/calibrate a predictor but cannot
+directly provide labels for our unannotated responses. Pairwise preference labels
+alone likewise do not supply multidimensional features. Oracle2's already-defined
+open-generation WR judging is separate and does not need style annotations.
+No new evaluation, annotations, simplified feature analysis or data join executed.
+
 S2 fits identity or a declared logit estimator separately for Nemotron, Skywork
 and their mixed Oracle2. Preserve user naming: Oracle1=Nemotron, Oracle2=mix,
 not Skywork. Pure shared fitting first; no prompt-specific residual/rho sweep.

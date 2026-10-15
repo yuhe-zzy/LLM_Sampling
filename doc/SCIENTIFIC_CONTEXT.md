@@ -273,6 +273,50 @@ and links; a nonzero fitted B for a scalar BT judge can be feature misspecificat
 even though its exact per-panel logit Hodge residual is zero. No rotation cannot
 identify training noise/capacity as its cause. No aligned result has been computed.
 
+### Primary endpoint correction: actual generated outputs,2026-10-15
+
+User requirement: test whether actual model outputs exhibit shared semantic or
+style oscillation across training checkpoints, not merely movement of fixed
+response probabilities within individual prompts. Earlier fixed-panel label
+reuse discussion remains technically valid, but is insufficient for this goal.
+Fan S0-S3 may discover common preference-related directions; his saved-logit S4
+is an auxiliary fixed-panel diagnostic, not the final open-generation endpoint.
+Finding no motion does not identify training noise/capacity as its cause.
+
+Proposed measurement, not executed or approved for implementation: on the same
+evaluation prompts at each checkpoint, sample under a fixed decoding protocol
+and extract a multidimensional feature vector phi(prompt,response). Traits
+are simultaneous scores, not mutually exclusive response classes. Keep quality,
+style and Oracle2 pairwise WR separate. For N prompts and K responses each,
+m_t=(1/N) sum_x (1/K) sum_k phi(x,y_t,x,k), with equal prompt weights and no
+additional likelihood reweighting of generated samples. This estimates output
+features under this prompt distribution and decoder, not universal model behavior.
+New responses need their own features; original HelpSteer labels cannot directly
+label them. A structured LLM is one practical measurement tool, not logically
+mandatory: validated predictors or frozen embeddings are alternatives.
+
+Freeze feature scales/extractor and any learned directions across arms/time;
+calibrate original human labels versus generated-text predictions if mixed.
+Do not choose/refit axes on visually appealing trajectories. A common latent
+projection of m_t is not automatically Fan's theta_t coefficient estimator or
+its theoretical dynamical operator. Validate the intended connection explicitly.
+Proposed figures: per-feature means/uncertainty, fixed-plane trajectories, and
+feature distributions/quantiles (means can hide opposing groups). Distinguish
+drift, isolated reversals, sampling/annotation jitter, damped swings and repeated
+rotation. A nonzero Hodge component alone is not measured dynamic oscillation.
+Use repeated outputs and prompt-level paired uncertainty checks; responses from
+one prompt are not independent prompts. Seed0 evidence does not establish
+between-training-seed robustness. No numeric acceptance threshold selected.
+
+Checked plan_two_gpu.json:200 evaluation prompts,4 responses each, states
+0,10,...,100, temperature.8, top_p.95, max_new_tokens256. Existing validated WR
+generation banks could be reused without duplicate generation, subject to a
+fresh completeness/provenance check; current server completion is unknown.
+These are11 observed checkpoints, not101. Fixed-panel numeric snapshots do not
+supply unsaved model states or generated answers. Ten-step sampling can miss
+faster motion; denser checkpoint generation requires separate planning/approval.
+No new annotation, generation, GPU work, timer or scientific config was changed.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

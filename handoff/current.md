@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-14, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-15, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest operational request: stop the timer
 
@@ -10,57 +10,32 @@ No future automatic checks or phase submissions from that timer. No server
 job was cancelled, modified or submitted. Do not recreate monitoring without
 a new user request. Latest remote state remains unknown after SSH timeouts.
 
-## Latest request: explain Fan's aligned-latent plan
+## Latest request: actual generated-output semantic dynamics
 
-Owner requested reading/explaining fan/latent-estimation-2026-10-13, reviewed
-at7e152a2 (agent documents, references and both HTML report texts). This turn
-does not authorize execution or merging the report branch. Start with the
-[plan bundle](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md)
-and execution clarifications (take precedence over original draft shorthand).
-The proposal fits a shared skew feature operator, not a literal mean P; its
-cyclic block and model-induced Hodge residual are distinct from observed C.
-Then regress saved logits onto shared features and project onto a discovery-
-selected cyclic plane, not a plane chosen from visually rotating trajectories.
-Both features proposed: frozen embeddings/PCA8,16 first (no annotation fee),
-new judged continuous style attributes second (2000 responses; confirm judge
-channel/budget). Pure latent fit only this round; identity/logit, each oracle
-and mixture, rank/fit, held-out signal and500-draw permutation/flip nulls.
-No aligned signal has yet been computed. Keep WR/existing runs untouched;
-no new training, rho-scan, oracle construction or extra GPU allocation.
-Fan proposes a structured LLM for new style labels, model not yet selected;
-it is not mandatory for all feature analysis and does not replace Oracle2 WR.
-No engineered cycle required: distinguish majority cycles, link-specific Hodge
-residuals, fitted latent B and measured training motion; keep null outcomes valid.
-Latest follow-up: Oracle1 can test descriptive stability; Oracle2's cyclic-
-mechanism claim needs measured structure beyond scalar BT/link/fit artifacts.
-Feature literature checked: HelpSteer, TACL2016 formality, ACL2013 politeness,
-APM2026 preprint; candidate rubric only, no annotation or analysis authorized.
-Owner correction: HelpSteer is our actual source dataset. Exact existing labels
-can support fixed-panel S2/S4 without rejudging; only missing attributes or new
-generated texts need added labels/predictions. No simplified analysis executed.
+Owner corrects the endpoint: test whether actual model outputs oscillate in
+shared/global dimensions, not just fixed-response probabilities within prompts.
+Open generation plus frozen multidimensional feature measurements is the main
+evidence; fixed-panel diagnostics are auxiliary. Each response can have a score
+on every trait, not one exclusive label. Compare prompt-balanced feature means,
+distributions and fixed-plane trajectories with sampling/annotation uncertainty.
+Distinguish drift/jitter from repeated swings; do not presume a positive result.
+Existing plan has200 eval prompts x4 responses at11 checkpoints0,10,...,100.
+Validated WR generation banks could be reused; current completion is unknown.
+Do not invent101 generated states from101 numeric fixed-panel snapshots.
+No annotation model/budget, new experiment, code/config change or jobs approved.
+See [definitions and proposal](../doc/SCIENTIFIC_CONTEXT.md) and today's note.
 
-## Previous average-matrix clarification
+Fan's branch at7e152a2 was read, not merged or executed. His S0-S3 fits shared
+preference structure; S4 regresses saved fixed-candidate logits, not generated
+features. These are different estimands; explain any proposed connection.
+Start with [plan and clarifications](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md).
+HelpSteer is our existing dataset; its labels apply to the original answers,
+not new generated texts. Style measurements and Oracle2 WR have separate roles.
+No aligned latent signal computed. Original-slot mean Hodge is not a semantic
+average; [results](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md)
+remain valid only under their declared unaligned candidate-slot definition.
 
-Latest clarification: mean P is the elementwise equal average of500 training
-matrices in original candidate slots, with no semantic alignment, policy weights
-or step averaging. Verified sum P12=281.2262593683416 and mean=.5624525187366831.
-Do not present it as an already aligned global semantic preference matrix.
-
-Prior expected-feature trajectories and cheap HelpSteer attributes were a
-different unexecuted proposal. Fan's proposal instead regresses logits, starts
-with embeddings, and requests newly judged style attributes. See
-[scientific distinctions](../doc/SCIENTIFIC_CONTEXT.md#fans-shared-latent-estimator-proposal-reviewed2026-10-14).
-Completed [average Hodge results](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md):
-identity norm(mean C)=.022619 vs mean(norm C)=.221816, aggregate share .357286%.
-These original-slot results do not establish absence of a semantic cycle.
-
-## Completed publication request
-
-Enroll this project in agent-native-context and put reviewed shareable results
-on GitHub. The canonical context root is this Git checkout (`github_release`
-in the owner's local workspace), not the outer private working directory.
-
-## Current work
+## Publication state
 
 Context and reviewed results were pushed to origin/hodge-diagnostics as
 2a25ed505978e4ab8acde0c475137db0656988ac; remote SHA verified2026-10-13.

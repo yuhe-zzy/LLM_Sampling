@@ -31,6 +31,10 @@ Follow-up: style annotation needs a structured LLM judge, model not yet selected
 its features do not replace Nemotron/Skywork preference labels or Oracle2 WR.
 No engineered cycle required: distinguish majority cycles, link-specific Hodge
 residuals, fitted latent B and measured training motion; keep null outcomes valid.
+Latest follow-up: Oracle1 can test descriptive stability; Oracle2's cyclic-
+mechanism claim needs measured structure beyond scalar BT/link/fit artifacts.
+Feature literature checked: HelpSteer, TACL2016 formality, ACL2013 politeness,
+APM2026 preprint; candidate rubric only, no annotation or analysis authorized.
 
 ## Previous average-matrix clarification
 

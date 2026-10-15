@@ -188,6 +188,53 @@ training oscillation, and jitter does not identify cyclic preferences as its
 cause. Empirical history/stability comparisons do not require majority cycles.
 No new cycle-enriched dataset, annotator tuning or scientific change authorized.
 
+### Oracle comparison and feature literature, discussed2026-10-14
+
+Owner challenges whether Oracle2 remains scientifically distinct if cycles are
+not needed. Clarification: descriptive history/stability comparisons can use
+either oracle; a claim about cyclic-preference mechanisms needs actual measured
+non-potential signal under the declared link and appropriate controls. Do not
+equate no manufactured cycles with no need for cycle evidence. Oracle1 has
+P_N=sigmoid(delta r_N), so exact logit flow is additive. Oracle2 mixes .6 P_N+
+.4 P_S and need not admit a single BT score, but non-BT signal is not guaranteed
+on a given bank. It can also change ranking/strength without meaningful shared
+cycling; these effects are not isolated by comparing unmatched old campaigns.
+Identity Hodge residual can be nonzero for a scalar BT judge, so logit checks
+are useful for separating mixture nonadditivity from link effects, alongside
+the identity diagnostics relevant to the intended analysis. S5 can compare all
+three stored score components on identical panels/features without new training;
+this discussion does not authorize running it. Shared feature misspecification
+can still yield nonzero fitted B for an exactly additive observed flow.
+
+Primary sources inspected (paper text, not rendered-layout review):
+- HelpSteer, NAACL2024, Appendix A.1: five0..4 attributes; helpfulness,
+  correctness and coherence are quality-oriented, complexity/verbosity give
+  expression-related axes. Verbosity is prompt-relative, not simply length.
+  https://aclanthology.org/2024.naacl-long.185.pdf
+- Pavlick and Tetreault, TACL2016: perceived formality,7-point scale -3..3,
+  five human ratings and agreement analysis; not a ready validated LLM rubric
+  for our response domain. https://aclanthology.org/Q16-1005/
+- Danescu-Niculescu-Mizil et al., ACL2013: request politeness on a continuous
+  perceived-politeness scale, with multiple annotators; adaptation from requests
+  to assistant responses requires checks. https://aclanthology.org/P13-1025/
+- APM,2026 preprint, Appendix D/E/Table6: LLM-judged1..10 response principles
+  include elaborate, acknowledges uncertainty, casual, gentle and multiple
+  perspectives. It screens low-variation/redundant attributes. Borrowing these
+  features does not authorize its synthetic preference mapping or judge model.
+  https://arxiv.org/html/2605.21063v1
+
+Proposed compact attributes: verbosity/elaboration, linguistic complexity,
+formality, politeness, uncertainty expression and multiple perspectives; keep
+token length/formatting as separate deterministic diagnostics. This is an
+adapted candidate set, not a universal standard or accepted change to Fan's
+plan. Do not double-count concise/detailed as presumed independent dimensions
+or treat expressed uncertainty as factual error/calibration. Higher style scores
+do not mean better quality. Existing HelpSteer labels remain optional controls
+after exact identity join, not newly judged style annotations. Preserve/report
+native scales or explicitly document a0..10 adaptation; discovery-only scaling.
+Suggested pilot/reliability checks precede paid full annotation and any cycle
+selection; no model, budget, dimensions, new labels or experiments approved.
+
 S2 fits identity or a declared logit estimator separately for Nemotron, Skywork
 and their mixed Oracle2. Preserve user naming: Oracle1=Nemotron, Oracle2=mix,
 not Skywork. Pure shared fitting first; no prompt-specific residual/rho sweep.

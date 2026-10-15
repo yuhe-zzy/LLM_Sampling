@@ -317,6 +317,39 @@ supply unsaved model states or generated answers. Ten-step sampling can miss
 faster motion; denser checkpoint generation requires separate planning/approval.
 No new annotation, generation, GPU work, timer or scientific config was changed.
 
+### Concrete generated-output proposal,2026-10-15
+
+Owner requested a concrete reorganization of Fan's plan, explicitly no running.
+See [proposed study](../experiments/hodge_diagnostics/plans/generated-output-dynamics-2026-10-15/PLAN.md).
+Proposed local rater is Qwen/Qwen3-32B BF16 non-thinking, with seven simultaneous
+0..10 response-only traits: elaboration, formality, politeness, hedging, structure,
+exemplification and linguistic complexity. New original/generated answers use
+the same rater/scales. Prompt-relative appropriateness and WR remain separate.
+Proposed secondary encoder is Qwen3-Embedding-0.6B, fixed1024 output then
+discovery-only PCA8/16. Official cards checked; no local availability, memory,
+annotation quality or immutable revision verified and no model downloaded.
+
+Primary plane proposal is the leading2D skew block of the discovery-fitted B
+under standardized features, mixed-Oracle2 soft-logit fit; identity/components
+are predeclared secondary analyses. Fan's initial-panel S_eff and theta regression
+are retained as auxiliary, not equated with generated-feature means. This is
+an explicit analytical change, not an implementation or overwrite of Fan's plan.
+Freeze the plane before any trajectory selection; hold out250 estimator panels
+and the200 evaluation prompts. Include observed-Hodge alignment/nulls and
+potential-only/single-BT controls, and allow all raw trait dynamics even if the
+plane lacks shared-cycle evidence. No static-signal gate for descriptive plots.
+
+Re-read local inspection2026-10-14T05:01Z:48 complete banks=38,400 generated
+rows, plus800 baseline. IPO ordinary/reference complete0..70, feedback and DPO
+ordinary0..100, DPO reference/feedback0..40; partial prefixes remain incomplete.
+This is dated evidence, not live progress. Step0 cap rate43.5% at256 tokens is
+a substantial limitation: report capped-output behavior and length/cap diagnostics,
+not unrestricted-answer dynamics. Full main labeling would be55,600 rows before
+cache reuse; pilot adds200 original calibration responses. No GPU-hour claim
+without measured pilot throughput. No paid endpoint, runtime or resources approved.
+Raw text remains private; proposed oneGPU sequential annotation/extraction must
+still respect the accountFOUR ceiling and protected phases after new approval.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

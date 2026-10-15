@@ -10,7 +10,16 @@ No future automatic checks or phase submissions from that timer. No server
 job was cancelled, modified or submitted. Do not recreate monitoring without
 a new user request. Latest remote state remains unknown after SSH timeouts.
 
-## Latest request: actual generated-output semantic dynamics
+## Latest request: concrete revised plan only, do not run
+
+Owner asks to reorganize Fan's plan around actual generated-output dynamics,
+specifying annotation model/traits, common directions and reusable generations.
+[Concrete proposal](../experiments/hodge_diagnostics/plans/generated-output-dynamics-2026-10-15/PLAN.md)
+now exists separately from Fan's unchanged plan. Proposed Qwen3-32B local BF16
+non-thinking rater, seven response-only0..10 traits; Qwen3-Embedding-0.6B/PCA8,16
+secondary. Primary B-plane is fixed on discovery data, S_eff/theta auxiliary.
+Models, rubric, pilot/runtime and execution still await approval. No downloads,
+annotation, numerical analysis, SSH or resource actions; timer remains deleted.
 
 Owner corrects the endpoint: test whether actual model outputs oscillate in
 shared/global dimensions, not just fixed-response probabilities within prompts.
@@ -20,9 +29,11 @@ on every trait, not one exclusive label. Compare prompt-balanced feature means,
 distributions and fixed-plane trajectories with sampling/annotation uncertainty.
 Distinguish drift/jitter from repeated swings; do not presume a positive result.
 Existing plan has200 eval prompts x4 responses at11 checkpoints0,10,...,100.
-Validated WR generation banks could be reused; current completion is unknown.
+Validated WR banks can be reused; current completion unknown. Historical48
+complete banks, not66; step0 length-cap rate43.5% under256-token generation.
+Full proposed main annotation55,600 rows plus200 pilot, before text caching.
 Do not invent101 generated states from101 numeric fixed-panel snapshots.
-No annotation model/budget, new experiment, code/config change or jobs approved.
+No proposed model/budget, new experiment, code/config change or jobs approved.
 See [definitions and proposal](../doc/SCIENTIFIC_CONTEXT.md) and today's note.
 
 Fan's branch at7e152a2 was read, not merged or executed. His S0-S3 fits shared

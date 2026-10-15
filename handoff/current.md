@@ -2,6 +2,14 @@
 
 Updated2026-10-14, America/Chicago. Read [context index](../doc/INDEX.md).
 
+## Latest operational request: stop the timer
+
+Owner requested stopping this timer on2026-10-14. Automation `oracle2`
+(Oracle2 runtime/memory checks) was deleted in the app; deletion confirmed.
+No future automatic checks or phase submissions from that timer. No server
+job was cancelled, modified or submitted. Do not recreate monitoring without
+a new user request. Latest remote state remains unknown after SSH timeouts.
+
 ## Latest request: explain Fan's aligned-latent plan
 
 Owner requested reading/explaining fan/latent-estimation-2026-10-13, reviewed
@@ -63,7 +71,8 @@ Original training/generation source23401de remains frozen.
 
 ## Next operational action
 
-Existing two-hour monitor: retry read-only SSH; re-read full account and intents/receipts.
+Timer stopped by owner. For a future requested inspection, re-read full account
+and intents/receipts; do not assume the historical scheduler state is current.
 Wait for original2..5 successful/validated and full account empty. Then v5
 frozen queue.py recover once, two1GPU tasks. Only after successful recovery,
 all66 banks and baseline validate, and empty account, use v5 WRscore.

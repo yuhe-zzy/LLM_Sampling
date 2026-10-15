@@ -1,5 +1,14 @@
 # Oracle2 real-panel campaign, 2026-10-09
 
+## Monitoring stopped by owner, 2026-10-14
+
+The owner requested stopping this timer. Automation `oracle2` was deleted in
+the app, with deletion confirmed. No server job was cancelled, changed or
+submitted. This stops automatic checks and phase progression through the timer,
+not the experiments already on Sycamore. Do not recreate it without a new user
+request. Current remote status remains unknown after the recorded SSH failures.
+Earlier statements that the two-hour monitor continues are historical.
+
 ## Monitoring connection blocked, 2026-10-14
 
 The18:58Z check made two SSH connection attempts, both timing out before any

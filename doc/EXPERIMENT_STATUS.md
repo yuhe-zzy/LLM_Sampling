@@ -1,9 +1,14 @@
 # Current experiment status
 
+Owner update2026-10-14 23:31 CDT: `oracle2` timer deleted in the app at the
+owner's request; deletion confirmed. No server experiment was cancelled or
+modified. No automatic checks or stage submissions will continue through this
+timer. Do not recreate it without a new request. Remote state remains unknown.
+
 Updated 2026-10-14, America/Chicago. At14:00 CDT, two SSH attempts timed out
 before remote commands. Current GPU allocation, progress and logs are UNKNOWN.
-No recovery/WR submission or remote task change was made. Existing two-hour
-monitor continues; owner asked to check UNC VPN/Sycamore access. See the
+No recovery/WR submission or remote task change was made. Owner was asked to
+check UNC VPN/Sycamore access; monitoring has since been stopped above. See the
 [connection failure record](../experiments/oracle2/campaigns/oracle2_real_20261009/records/attempt5/connection_failure_20261014T1858.json).
 Last successful scheduler evidence is00:01:00 CDT (05:01:00 UTC), not live.
 
@@ -32,7 +37,7 @@ and [recovery protocol](../experiments/oracle2/campaigns/oracle2_real_20261009/R
 The private raw status transcript stays outside Git. This document records only
 reviewed aggregate facts.
 
-## Authorized next action, not yet performed
+## Preconditions for future requested continuation
 
 Only after original tasks2..5 are COMPLETED0:0, all their banks validate, and
 the FULL owner/UID account is empty: inspect latest v4/v5 intents and receipts,
@@ -41,9 +46,9 @@ one-H100 tasks, at most2 concurrent,24hours. Preserve every original bank.
 After successful recovery and all66 banks plus baseline validate, and the
 account is empty, submit v5 WRscore (twoGPUs, sequential judges).
 
-The existing oracle2 two-hour monitor continues; no extra timer. It stays quiet
-on normal progress and reports meaningful changes/failure/action needs. Account
-ceiling4 overrides historical6. Throttle2 is not a scheduler-wide hard cap.
+The oracle2 two-hour monitor is deleted at the owner's request. No automatic
+continuation is scheduled. Account ceiling4 overrides historical6.
+Throttle2 is not a scheduler-wide hard cap.
 Do not overlap phases, cancel unrelated jobs, bypass guards, duplicate jobs or
 turn an explanation request into authorization for incremental scoring.
 

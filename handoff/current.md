@@ -21,7 +21,7 @@ update, then all six. No blind retries after FAILED/TIMEOUT/ambiguous intent.
 Generation/scoring/annotation reuse atomic per-response journals. Human review
 of the200-response annotation pilot gates full bulk labels, never fabricated.
 
-## Current preparation
+## Current execution
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
@@ -30,10 +30,17 @@ output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Model revisions pinned/downloaded: Qwen3-4B1cfa9a720891 and Qwen3-32B9216db5781bf.
 Exact existing Nemotron scores reused, pure BT matrices rebuilt; all800 panels
 pass Qwen3 full chat/EOS length audit1537 without dropping/truncation.
-At03:42 CDT account empty. At04:14 CDT22 server CPU tests pass without skips,
-including tiny Qwen3/LoRA actual round-save-reload-round equality. These do NOT
-prove full-model GPU memory or inference. Submission/source/monitor receipts
-must be read before acting; preparation is not evidence of submitted jobs.
+Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
+Final23 server CPU tests pass without skips, plus shell/contract/config checks.
+At09:19:12Z submitted **4811149_0,3%2**, one H100/task, one outer update each.
+At09:25:22Z both RUNNING, full account2H100, no other owned work/logged errors.
+Both finite step0 committed, initial scores/support match; first update ongoing.
+Full-model complete training update/resume not yet claimed validated.
+Intent/receipt/deployment are in campaign records and local private launch dir.
+Heartbeat `oracle1-qwen3-training-and-resume-checks` ACTIVE every5min; do not
+duplicate it. Change SAME timer to5h only after both startup and reload/update
+pass. Next action: inspect live state; after both COMPLETED0:0, validatedstep1
+and idle account, frozen queue --advance/--submit resumes0/3 one update to2.
 
 ## Interpretation
 

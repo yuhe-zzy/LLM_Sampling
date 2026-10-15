@@ -5,7 +5,25 @@ submission and early5-minute checks, changing the same monitor to5-hour checks
 only after real IPO/DPO training AND checkpoint reload/continued training work.
 No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
-## Preparation evidence
+## Submitted and running
+
+2026-10-15T09:19:12Z: **4811149_0,4811149_3%2** submitted once, actual frozen
+source `0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2`, one H100/task. Final server
+23 CPU tests passed without skips, shell syntax and full contract/six configs
+passed. Fresh complete-account preflight empty. At09:25:22Z both RUNNING,
+full account TWO H100s, no unrelated work or logged execution errors. Both
+completed initial scoring and committed finite step0; initial scores/support
+match across arms. First outer updates are in progress; no completed update
+or full-model GPU resume success claimed yet.
+
+Five-minute heartbeat `oracle1-qwen3-training-and-resume-checks` ACTIVE and
+verified in app. Change SAME timer to5hours only after both actual objective
+startup and next-allocation resume pass. Intent/receipt/deployment and aggregate
+startup status are in [records](records/). Never duplicate this submission.
+Remaining four arms are approved but not yet submitted; receipt-guarded advance
+unlocks them only after the initial IPO/DPO startup and resume phases succeed.
+
+## Earlier preparation evidence
 
 At approximately03:42 CDT, SSH reconnected and full owner/UID account inspection
 found no queued/running/releasing jobs and zero allocated GPUs. This is a dated

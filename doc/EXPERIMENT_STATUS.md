@@ -2,6 +2,16 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
+Submitted2026-10-15T09:19:12Z: **4811149_0,3%2**, one H100/task, initial one
+outer update per IPO/DPO ordinary. Source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2
+is frozen and GitHub verified. Final23 serverCPU tests pass without skips;
+shell/config/model/data verification passes. At09:25:22Z both RUNNING, full
+account2H100, no unrelated work or logged errors; both finite step0 committed
+with matching initial scores/support, first update ongoing. No full-model GPU
+resume claim. New heartbeat oracle1-qwen3-training-and-resume-checks
+ACTIVE every5min; only change to5h after both GPU startup and reload/update pass.
+See campaign records for immutable intent/receipt/deployment; never duplicate.
+
 Owner now explicitly authorizes a NEW campaign with Oracle1 for training AND WR,
 Qwen3-4B policy and five-trait Qwen3-32B measurement; implementation and submission
 approved. Old Oracle2 recovery/WR are set aside, not cancelled or resumed.
@@ -16,9 +26,9 @@ validation. Human pilot review still gates bulk annotation. No cycle-count gate.
 
 At03:42 CDT account empty after SSH reconnect. Qwen3 model revisions downloaded
 and pinned, all800 exact panels pass new tokenizer audit without truncation.
-At04:14 CDT server22 CPU tests passed with no skips, including actual tiny
-Qwen3/LoRA save-load-train equivalence. Full-size GPU training/reload has not
-yet run; preparation alone is not submission. Current receipt determines jobs.
+Earlier22 CPU tests passed, superseded by final23 above; includes actual tiny
+Qwen3/LoRA save-load-train equivalence. Full-size GPU startup/reload must still
+be checked rather than inferred from unit tests. Current receipt determines jobs.
 The status and future-action instructions below concern historical Oracle2 only.
 
 Owner update2026-10-14 23:31 CDT: `oracle2` timer deleted in the app at the

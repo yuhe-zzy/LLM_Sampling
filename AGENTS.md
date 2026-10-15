@@ -37,6 +37,16 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 Qwen3 submitted2026-10-15T09:19:12Z:4811149_0,3%2, oneH100/task,
+one real outer update for IPO/DPO ordinary. Source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2
+frozen/pushed/verified. Final23 serverCPU tests no skips, shell/contract checks
+pass. At09:25:22Z both RUNNING, account2H100, no other work/errors, both finite
+step0 committed with matching initial scores/support, first update ongoing.
+GPU training/reload not validated merely by CPU tests. Five-minute
+heartbeat oracle1-qwen3-training-and-resume-checks ACTIVE; update SAME timer to
+5h only after both startup and cross-allocation resume/update pass. Read campaign
+records/intent/receipt before any advance. Current v1 root is documented below.
+
 Latest owner authorization2026-10-15 supersedes old Oracle2 continuation:
 set Oracle2 aside, use Oracle1 Nemotron ONLY for BOTH training preferences and
 WR in a NEW Qwen3-4B six-arm experiment. Five traits/Qwen3-32B rater, seed0,

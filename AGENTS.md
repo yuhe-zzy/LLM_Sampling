@@ -37,6 +37,17 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 sequence0004 submitted2026-10-15T23:32:42Z:4814410_0..5%2, same
+source0e7793f/contract. At23:31:17Z all0001..0003 tasksCOMPLETED0:0, six arms
+at12/10/10/12/10/10 with70 finite/contiguous/hash-valid states and shared
+initial scores/support; account empty. Frozen dry-run then guarded submit
+resumes at most10 updates, targets22/20/20/22/20/20. At23:35:26Z0/1 RUNNING,
+2..5 normalPENDING(JobArrayTaskLimit), account2H100, no unrelated work/errors.
+Logs confirm RESUME_VERIFIED IPOordinary12/IPOreference10, both training;
+no new round complete yet. Pending arms have not reloaded in this allocation.
+Read latest records0004 before any action; never duplicate. Same5h monitor,
+no downstream stage or oldOracle2 action; no source/science changes.
+
 Oracle1 progress2026-10-15T18:32:21Z: all six arms started.4811252_0..3
 COMPLETED0:0 for this10-update segment at12/10/10/12;4/5 RUNNING at4/4.
 Full account2H100, no pending/unrelated work or logged execution errors.

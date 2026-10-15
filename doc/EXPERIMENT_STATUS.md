@@ -9,23 +9,25 @@ gradients. Contiguous checkpoint hashes/states and shared initial scores pass.
 Resume peak allocated11.89GiB/reserved21.35GiB; no logged execution errors.
 Full-model startup AND cross-process continued-training gate has passed.
 
-Frozen guarded dry-run and fresh empty-account preflight then submitted all six
-**4811252_0..5%2** at10:27:10Z, sequence0003, at most10 further outer updates per
-arm, oneH100/task,24h allocation/18h soft stop. Ordinary starts fromstep2, other
-arms from0. At18:32:21Z all six have started: tasks0..3 COMPLETED0:0 for this
-segment at IPOordinary12, IPOreference10, IPOfeedback10, DPOordinary12;
-DPOreference/feedback tasks4/5 RUNNING at complete4/4, toward10. Full account
-2H100, no pending/unrelated work or loggedOOM/Traceback/nonfinite. All58 saved
-states pass finite/contiguous/hash checks and initial scores/token support match.
-Latest recorded round peaks about11.90GiB allocated, at most28.60GiB reserved.
-No task changes/new submissions; only0001..0003 intents/receipts exist. Wait for
-both remaining tasks and empty account before advancing the next segment.
+At23:31:17Z sequence0003 array4811252_0..5 allCOMPLETED0:0, complete outer
+12/10/10/12/10/10 (IPOordinary/reference/feedback then DPOordinary/reference/
+feedback). All70 saved states finite/contiguous/hash-valid, initial scores/token
+support match, frozen contract unchanged, no logged execution errors. Full
+account empty; all previous receipt tasks successful. Latest recorded round
+peaks about11.90GiB allocated, at most28.60GiB reserved perGPU.
+Fresh frozen dry-run and guarded submit created **4814410_0..5%2** at23:32:42Z,
+sequence0004. OneH100/task, at most2 concurrent,24h allocation/18h soft stop,
+up to10 further updates to targets22/20/20/22/20/20. At23:35:26Z0/1 RUNNING,
+2..5 normalPENDING(JobArrayTaskLimit), full account2H100, no unrelated work or
+logged errors. Logs confirm RESUME_VERIFIED at IPOordinary12 and IPOreference10;
+both train after matching loaded scores/support. No new round completed yet.
+This is continuation, not restart from0; future queued arms need their own checks.
 Segment completion does NOT mean the100-round experiment is finished.
 Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
 without skips before freeze. No code/scientific change. The SAME heartbeat
 oracle1-qwen3-training-and-resume-checks nowACTIVE every5HOURS, tool and stored
-configuration verified. See campaign records0003 and
-[18:32 progress](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment_progress_20261015T1832.json);
+configuration verified. See campaign records0004 and
+[segment3 completion](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment3_complete_20261015T2331.json);
 never duplicate submissions. Baseline/generation/WR/annotation not submitted.
 
 Owner now explicitly authorizes a NEW campaign with Oracle1 for training AND WR,

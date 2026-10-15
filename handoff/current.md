@@ -37,16 +37,15 @@ Both actual4B objectives passed RESUME_VERIFIED and continued update tostep2,
 with finite loss/gradients, valid contiguous hashes/states and matching initial
 scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 Full-model startup AND cross-process resume/update gate has passed.
-After full-account empty preflight and dry-run, submitted **4811252_0..5%2**
-at10:27:10Z, sequence0003, up to10 updates per arm, same frozen source/contract.
-At18:32:21Z all six have started. Tasks0..3 COMPLETED0:0 for THIS SEGMENT:
-IPOordinary12, IPOreference10, IPOfeedback10, DPOordinary12. Tasks4/5 RUNNING
-at complete4/4, toward10. These are not completed100-round experiments.
-Full account2H100, no pending/unrelated work or logged execution errors.
-All58 committed states are finite, contiguous, hash-valid with matching initial
-scores/support; frozen source/data/model contract unchanged. Latest recorded
-round peaks approximately11.90GiB allocated, at most28.60GiB reserved perGPU.
-Only0001..0003 intents/receipts exist; no new submission or scheduler change.
+At23:31:17Z sequence0003 array4811252_0..5 allCOMPLETED0:0 at12/10/10/12/10/10.
+All70 committed states finite/contiguous/hash-valid with matching initial scores
+and token support; source/data/model contract unchanged, no logged errors.
+Full account empty. Fresh frozen dry-run/submit created **4814410_0..5%2**,
+sequence0004, at23:32:42Z. Each arm resumes its own latest checkpoint for at
+most10 updates; targets22/20/20/22/20/20, not completed100-round experiments.
+At23:35:26Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no unrelated work/errors. Logs confirm RESUME_VERIFIED IPOordinary12 and
+IPOreference10; both now training. No new round complete yet; never repeat0004.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

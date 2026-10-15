@@ -7,7 +7,25 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
-Latest check2026-10-15T18:32:21Z: all six arms have now started; four finished
+Sequence0003 completed2026-10-15T23:31:17Z check:4811252_0..5 allCOMPLETED0:0
+at12/10/10/12/10/10, respectively. All70 committed states finite/contiguous/
+hash-valid with matching initial scores/token support and unchanged contract.
+No logged execution errors; full account empty. This is not100-round completion.
+Fresh frozen queue dry-run and guarded submit created **4814410_0..5%2** at
+23:32:42Z, sequence0004, oneH100/task, at most2 concurrent,24h/18h soft stop.
+Resume existing states for up to10 further updates; targets22/20/20/22/20/20.
+At23:35:26Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100 and
+no unrelated work/logged errors. RESUME_VERIFIED confirms IPOordinary12 and
+IPOreference10 loaded scores/support; both training, no new round complete yet.
+See [startup audit](records/segment4_startup_20261015T2335.json).
+Exact [intent](records/0004_intent.json)
+and [receipt](records/0004_receipt.json) preserved; never duplicate0004.
+See [completed predecessor audit](records/segment3_complete_20261015T2331.json).
+Same5-hour timer; no baseline/generation/WR/annotation submission.
+
+The earlier checks below are historical:
+
+Check2026-10-15T18:32:21Z: all six arms have now started; four finished
 their first all-arm SEGMENT, not all100 updates. Tasks4811252_0..3 COMPLETED0:0
 at IPOordinary12, IPOreference10, IPOfeedback10, DPOordinary12. DPOreference4
 and DPOfeedback5 RUNNING at complete outer4/4, toward10. Full owner/UID queue

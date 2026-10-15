@@ -166,6 +166,13 @@ new style labels. Paid annotation channel/budget and new resources need owner
 confirmation. Mean/scales/PCA/fit/plane use discovery250 prompts only (seed0),
 with250 held out from estimator selection, not from original model training.
 
+Owner follow-up2026-10-14 asks whether style labels come from the oracle. The
+proposal leaves the structured style-annotation judge/model unspecified. It
+is a feature extractor role, distinct from preference ground truth and WR.
+Existing scalar Nemotron/Skywork rewards or mixed pairwise probabilities do
+not directly supply the requested multidimensional style scores. No model,
+paid annotation batch or new judging action was selected/authorized here.
+
 S2 fits identity or a declared logit estimator separately for Nemotron, Skywork
 and their mixed Oracle2. Preserve user naming: Oracle1=Nemotron, Oracle2=mix,
 not Skywork. Pure shared fitting first; no prompt-specific residual/rho sweep.

@@ -27,6 +27,8 @@ channel/budget). Pure latent fit only this round; identity/logit, each oracle
 and mixture, rank/fit, held-out signal and500-draw permutation/flip nulls.
 No aligned signal has yet been computed. Keep WR/existing runs untouched;
 no new training, rho-scan, oracle construction or extra GPU allocation.
+Follow-up: style annotation needs a structured LLM judge, model not yet selected;
+its features do not replace Nemotron/Skywork preference labels or Oracle2 WR.
 
 ## Previous average-matrix clarification
 

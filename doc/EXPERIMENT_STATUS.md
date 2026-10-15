@@ -12,14 +12,21 @@ Full-model startup AND cross-process continued-training gate has passed.
 Frozen guarded dry-run and fresh empty-account preflight then submitted all six
 **4811252_0..5%2** at10:27:10Z, sequence0003, at most10 further outer updates per
 arm, oneH100/task,24h allocation/18h soft stop. Ordinary starts fromstep2, other
-arms from0. At10:30:56Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account
-2H100, no unrelated work/errors. All six submitted, not simultaneous6GPU use.
-IPOordinary reloaded2 successfully; IPOreference finite0 shares initial scores
-and token support. Both are in their next update, no new round completed yet.
+arms from0. At18:32:21Z all six have started: tasks0..3 COMPLETED0:0 for this
+segment at IPOordinary12, IPOreference10, IPOfeedback10, DPOordinary12;
+DPOreference/feedback tasks4/5 RUNNING at complete4/4, toward10. Full account
+2H100, no pending/unrelated work or loggedOOM/Traceback/nonfinite. All58 saved
+states pass finite/contiguous/hash checks and initial scores/token support match.
+Latest recorded round peaks about11.90GiB allocated, at most28.60GiB reserved.
+No task changes/new submissions; only0001..0003 intents/receipts exist. Wait for
+both remaining tasks and empty account before advancing the next segment.
+Segment completion does NOT mean the100-round experiment is finished.
 Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
 without skips before freeze. No code/scientific change. The SAME heartbeat
 oracle1-qwen3-training-and-resume-checks nowACTIVE every5HOURS, tool and stored
-configuration verified. See campaign records0003; never duplicate submissions.
+configuration verified. See campaign records0003 and
+[18:32 progress](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment_progress_20261015T1832.json);
+never duplicate submissions. Baseline/generation/WR/annotation not submitted.
 
 Owner now explicitly authorizes a NEW campaign with Oracle1 for training AND WR,
 Qwen3-4B policy and five-trait Qwen3-32B measurement; implementation and submission

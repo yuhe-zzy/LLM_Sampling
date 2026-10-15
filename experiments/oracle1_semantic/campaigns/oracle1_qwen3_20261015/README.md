@@ -7,6 +7,21 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+Latest check2026-10-15T18:32:21Z: all six arms have now started; four finished
+their first all-arm SEGMENT, not all100 updates. Tasks4811252_0..3 COMPLETED0:0
+at IPOordinary12, IPOreference10, IPOfeedback10, DPOordinary12. DPOreference4
+and DPOfeedback5 RUNNING at complete outer4/4, toward10. Full owner/UID queue
+has only these two one-H100 tasks, no pending/unrelated work. All58 committed
+states finite/contiguous/hash-valid, shared initial scores/token support match,
+frozen deployment/data/model contract unchanged. No logged execution errors;
+latest round peaks approximately11.90GiB allocated, up to28.60GiB reserved.
+Only0001..0003 intents/receipts exist. No new job or scheduler action taken.
+Next segment waits for both remaining tasks to succeed and full account idle.
+Same5-hour monitor continues; baseline/generation/WR/annotation not submitted.
+See [checked progress](records/segment_progress_20261015T1832.json).
+
+The startup and submission snapshot below is historical:
+
 2026-10-15T10:25:58Z: **full-model checkpoint resume PASSED** for IPO and DPO.
 First4811149_0/3 and resumed4811197_0/3 allCOMPLETED0:0. Both actual4B adapters
 reproduce saved scores/support, emit RESUME_VERIFIED, and finishstep2 with finite

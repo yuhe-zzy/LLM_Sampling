@@ -37,6 +37,15 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 progress2026-10-15T18:32:21Z: all six arms started.4811252_0..3
+COMPLETED0:0 for this10-update segment at12/10/10/12;4/5 RUNNING at4/4.
+Full account2H100, no pending/unrelated work or logged execution errors.
+All58 committed states finite, contiguous and hash-valid; initial scores and
+token support match, deployment/data/model contract unchanged. Only0001..0003
+intents/receipts exist. No new job/scheduler action; wait for4/5 success and idle
+account before advancing. Same5h timer; no baseline/generation/WR/labels yet.
+Do not confuse segment completion with100 updates or the older snapshots below.
+
 Oracle1 full-model resume PASSED2026-10-15T10:25:58Z:4811197_0/3 both
 COMPLETED0:0 atstep2, RESUME_VERIFIED, finite loss/gradients/states, valid
 contiguous checkpoint hashes and shared initial support. Source0e7793f unchanged.

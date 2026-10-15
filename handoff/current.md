@@ -39,11 +39,14 @@ scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 Full-model startup AND cross-process resume/update gate has passed.
 After full-account empty preflight and dry-run, submitted **4811252_0..5%2**
 at10:27:10Z, sequence0003, up to10 updates per arm, same frozen source/contract.
-At10:30:56Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
-no other owned work/errors. All six submitted, NOT all six simultaneously running.
-Ordinary0/3 continue from2, other arms start0. IPOordinary logs RESUME_VERIFIED
-at2; IPOreference committed finite0 with matching initial scores/support.
-Both are now training; no new completed round inferred.
+At18:32:21Z all six have started. Tasks0..3 COMPLETED0:0 for THIS SEGMENT:
+IPOordinary12, IPOreference10, IPOfeedback10, DPOordinary12. Tasks4/5 RUNNING
+at complete4/4, toward10. These are not completed100-round experiments.
+Full account2H100, no pending/unrelated work or logged execution errors.
+All58 committed states are finite, contiguous, hash-valid with matching initial
+scores/support; frozen source/data/model contract unchanged. Latest recorded
+round peaks approximately11.90GiB allocated, at most28.60GiB reserved perGPU.
+Only0001..0003 intents/receipts exist; no new submission or scheduler change.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

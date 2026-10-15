@@ -2,20 +2,24 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Submitted2026-10-15T09:19:12Z: **4811149_0,3%2**, one H100/task, initial one
-outer update per IPO/DPO ordinary. Source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2
-is frozen and GitHub verified. Final23 serverCPU tests pass without skips;
-shell/config/model/data verification passes. At09:49:45Z both first segments
-COMPLETED0:0 atstep1, finite loss/gradients and valid checkpoint chains, initial
-scores/support matched. Each took about22m30s; peak allocated11.90GiB and
-reserved28.59GiB. No logged errors, full account empty. Frozen guarded dry-run
-then submit created4811197_0,3%2 at09:51:04Z for reload and update tostep2.
-At09:53:56Z both RUNNING, account2H100, no unrelated work/errors. Both actual4B
-reloads emit RESUME_VERIFIED atouter1 and reproduce saved scores/support.
-Continued update tostep2 remains pending; four other arms remain unsubmitted.
-Heartbeat oracle1-qwen3-training-and-resume-checks
-ACTIVE every5min; only change to5h after both GPU startup and reload/update pass.
-See campaign records for immutable intent/receipt/deployment; never duplicate.
+Verified2026-10-15T10:25:58Z: both first4811149_0/3 and resume4811197_0/3
+COMPLETED0:0. Actual Qwen3-4B IPO/DPO reloads reproduce saved scores/support,
+emit RESUME_VERIFIED and complete another update tostep2 with finite loss and
+gradients. Contiguous checkpoint hashes/states and shared initial scores pass.
+Resume peak allocated11.89GiB/reserved21.35GiB; no logged execution errors.
+Full-model startup AND cross-process continued-training gate has passed.
+
+Frozen guarded dry-run and fresh empty-account preflight then submitted all six
+**4811252_0..5%2** at10:27:10Z, sequence0003, at most10 further outer updates per
+arm, oneH100/task,24h allocation/18h soft stop. Ordinary starts fromstep2, other
+arms from0. At10:30:56Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account
+2H100, no unrelated work/errors. All six submitted, not simultaneous6GPU use.
+IPOordinary reloaded2 successfully; IPOreference finite0 shares initial scores
+and token support. Both are in their next update, no new round completed yet.
+Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
+without skips before freeze. No code/scientific change. The SAME heartbeat
+oracle1-qwen3-training-and-resume-checks nowACTIVE every5HOURS, tool and stored
+configuration verified. See campaign records0003; never duplicate submissions.
 
 Owner now explicitly authorizes a NEW campaign with Oracle1 for training AND WR,
 Qwen3-4B policy and five-trait Qwen3-32B measurement; implementation and submission
@@ -32,8 +36,8 @@ validation. Human pilot review still gates bulk annotation. No cycle-count gate.
 At03:42 CDT account empty after SSH reconnect. Qwen3 model revisions downloaded
 and pinned, all800 exact panels pass new tokenizer audit without truncation.
 Earlier22 CPU tests passed, superseded by final23 above; includes actual tiny
-Qwen3/LoRA save-load-train equivalence. Full-size GPU startup/reload must still
-be checked rather than inferred from unit tests. Current receipt determines jobs.
+Qwen3/LoRA save-load-train equivalence. Full-size startup/reload/continued update
+have now separately passed as recorded above; future jobs still require checks.
 The status and future-action instructions below concern historical Oracle2 only.
 
 Owner update2026-10-14 23:31 CDT: `oracle2` timer deleted in the app at the

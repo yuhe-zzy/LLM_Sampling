@@ -32,21 +32,23 @@ Exact existing Nemotron scores reused, pure BT matrices rebuilt; all800 panels
 pass Qwen3 full chat/EOS length audit1537 without dropping/truncation.
 Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 Final23 server CPU tests pass without skips, plus shell/contract/config checks.
-At09:19:12Z submitted **4811149_0,3%2**, one H100/task, one outer update each.
-At09:49:45Z both first segments COMPLETED0:0 atstep1 with valid contiguous
-checkpoints, matching initial scores/support, finite loss/gradients, no errors.
-Each took about22m30s including loading/scoring; peak allocated11.90GiB and
-reserved28.59GiB. Full account was empty. Guarded dry-run/submit launched
-**4811197_0,3%2** at09:51:04Z for actual reload plus one update tostep2.
-At09:53:56Z both RUNNING, full account2H100, no unrelated work/logged error.
-Both emit RESUME_VERIFIED atouter1: actual4B reload scores/support match.
-Continued update tostep2 still pending, so full resume/update gate not yet passed.
+At10:25:58Z first4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0.
+Both actual4B objectives passed RESUME_VERIFIED and continued update tostep2,
+with finite loss/gradients, valid contiguous hashes/states and matching initial
+scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
+Full-model startup AND cross-process resume/update gate has passed.
+After full-account empty preflight and dry-run, submitted **4811252_0..5%2**
+at10:27:10Z, sequence0003, up to10 updates per arm, same frozen source/contract.
+At10:30:56Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no other owned work/errors. All six submitted, NOT all six simultaneously running.
+Ordinary0/3 continue from2, other arms start0. IPOordinary logs RESUME_VERIFIED
+at2; IPOreference committed finite0 with matching initial scores/support.
+Both are now training; no new completed round inferred.
 Intent/receipt/deployment are in campaign records and local private launch dir.
-Heartbeat `oracle1-qwen3-training-and-resume-checks` ACTIVE every5min; do not
-duplicate it. Change SAME timer to5h only after both startup and reload/update
-pass. Next action: verify RESUME_VERIFIED and finite committedstep2 for BOTH
-4811197 tasks, then COMPLETED0:0 and idle account before advancing all six.
-The remaining four arms have NOT been submitted. Never duplicate sequence0002.
+SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
+tool and stored schedule verified. Do not create another timer or repeat probes.
+Next: inspect live progress; only all prior receipt tasksCOMPLETED0:0 and empty
+full account permit frozen queue advance/dry-run/submit for the next segment.
 
 ## Interpretation
 

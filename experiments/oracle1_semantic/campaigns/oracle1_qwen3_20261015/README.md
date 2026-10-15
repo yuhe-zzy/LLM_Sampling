@@ -7,6 +7,31 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+2026-10-15T10:25:58Z: **full-model checkpoint resume PASSED** for IPO and DPO.
+First4811149_0/3 and resumed4811197_0/3 allCOMPLETED0:0. Both actual4B adapters
+reproduce saved scores/support, emit RESUME_VERIFIED, and finishstep2 with finite
+loss/gradients and contiguous hash-valid states0..2. Resume peak allocation
+11.89GiB and reservation21.35GiB perGPU; no loggedOOM/Traceback/nonfinite.
+
+Fresh full-account empty preflight and guarded dry-run passed, then submitted
+**4811252_0..5%2** at10:27:10Z, sequence0003, up to10 outer updates per arm.
+One H100/task, at most two concurrent,24h allocation/18h soft stop. Ordinary
+arms continue fromstep2 toward12, others start0 toward10, not restarting probes.
+At10:30:56Z tasks0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no unrelated work/errors. All six are SUBMITTED, not all running simultaneously.
+IPOordinary logs RESUME_VERIFIED at2; IPOreference committed finite0 with matching
+initial scores/support. Both are training; no later completed round inferred.
+Source/plan/contract/scientific settings unchanged.
+
+Same heartbeat `oracle1-qwen3-training-and-resume-checks` updated to5HOURS;
+tool and stored schedule verified after actual startup/resume completion.
+Read [records0003](records/0003_receipt.json) and
+[resume-pass/status](records/resume_passed_six_arms_20261015.json) before actions.
+Only all successful previous receipts and empty full account permit next segment.
+Baseline/generation/WR/annotation remain unsubmitted. No oldOracle2 action.
+
+## Historical startup
+
 2026-10-15T09:49:45Z: first tasks4811149_0/3 bothCOMPLETED0:0, each has complete
 states0..1 and finite training loss/gradients. Hashes/initial scores/support pass.
 Elapsed22m30s/22m32s including loading/scoring; each GPU peak allocated11.90GiB,

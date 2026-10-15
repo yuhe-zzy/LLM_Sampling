@@ -37,6 +37,19 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 full-model resume PASSED2026-10-15T10:25:58Z:4811197_0/3 both
+COMPLETED0:0 atstep2, RESUME_VERIFIED, finite loss/gradients/states, valid
+contiguous checkpoint hashes and shared initial support. Source0e7793f unchanged.
+After empty-account preflight/dry-run, all six4811252_0..5%2 submitted10:27:10Z
+as sequence0003, up to10 outer updates per arm, oneH100/task,24h/18h soft stop.
+At10:30:56Z0/1 RUNNING,2..5 normalPENDING(JobArrayTaskLimit), full account2H100,
+no unrelated work/errors. Both ordinary arms continue from2; others start0.
+IPOordinary RESUME_VERIFIED at2; IPOreference finite0/initial support verified.
+All six submitted does NOT mean all six running. SAME monitor nowACTIVE every
+5HOURS, tool/stored schedule verified. Do not repeat startup/resume probes or
+duplicate0003. Future advance needs all receiptsCOMPLETED0:0 and account idle.
+The earlier running/pending-resume snapshots below are historical.
+
 Oracle1 resume submitted2026-10-15T09:51:04Z:4811197_0,3%2, sequence0002,
 same frozen source0e7793f and contract. First4811149_0/3 bothCOMPLETED0:0
 atstep1;09:49:45Z hashes/finite states/initial support verified, full account

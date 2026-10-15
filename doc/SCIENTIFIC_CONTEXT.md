@@ -173,6 +173,21 @@ Existing scalar Nemotron/Skywork rewards or mixed pairwise probabilities do
 not directly supply the requested multidimensional style scores. No model,
 paid annotation batch or new judging action was selected/authorized here.
 
+Follow-up: style labels are response feature vectors, not pairwise preferences;
+do not request/retune annotations to manufacture cycles. Freeze the rubric and
+validate shared structure independently. Majority cycles (A>B>C>A) are distinct
+from non-gradient Hodge residuals under a specified link. For example, probabilities
+Pab=.7, Pbc=.7, Pac=.8 have an acyclic majority order, but identity-flow triangle
+sum .2+.2-.3=.1 is nonzero (illustration, not experimental data). The single
+robust cyclic train label does not mean all other Hodge residuals vanish.
+References: Jiang et al., Statistical ranking and combinatorial Hodge theory,
+https://arxiv.org/abs/0811.1067; the existing complete-graph Hodge implementation.
+Nonzero fitted B alone is not measured shared cycling; require observed-data
+and held-out checks and allow a null result. Static Hodge signal need not induce
+training oscillation, and jitter does not identify cyclic preferences as its
+cause. Empirical history/stability comparisons do not require majority cycles.
+No new cycle-enriched dataset, annotator tuning or scientific change authorized.
+
 S2 fits identity or a declared logit estimator separately for Nemotron, Skywork
 and their mixed Oracle2. Preserve user naming: Oracle1=Nemotron, Oracle2=mix,
 not Skywork. Pure shared fitting first; no prompt-specific residual/rho sweep.

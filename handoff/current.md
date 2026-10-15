@@ -29,6 +29,8 @@ No aligned signal has yet been computed. Keep WR/existing runs untouched;
 no new training, rho-scan, oracle construction or extra GPU allocation.
 Follow-up: style annotation needs a structured LLM judge, model not yet selected;
 its features do not replace Nemotron/Skywork preference labels or Oracle2 WR.
+No engineered cycle required: distinguish majority cycles, link-specific Hodge
+residuals, fitted latent B and measured training motion; keep null outcomes valid.
 
 ## Previous average-matrix clarification
 

@@ -1,9 +1,74 @@
 # Proposed open generation semantic dynamics study
 
-Status: owner requested a concrete plan only on 2026-10-15. No annotation,
+Status: owner selected five measured dimensions on 2026-10-15. The specific
+five traits below are recommended; the model/oracle scope is still being
+discussed. This supersedes the earlier seven-trait candidate pool, not the
+execution hold. No annotation,
 embedding extraction, analysis execution, new generation, job submission or
-monitor restart is authorized by this request. All choices below are proposed.
+monitor restart is authorized by this request. Other choices remain proposed.
 Preserve Fan's original plan and frozen Oracle2 campaigns unchanged.
+
+## 0. Latest five-trait and model discussion
+
+Owner chooses five dimensions, asks about the annotation model, proposes using
+Oracle1 alone and a larger Qwen3 policy, and reiterates the FOUR-GPU account cap.
+Recommended traits: elaboration, linguistic_complexity, formality, politeness,
+hedging. Structure/exemplification are removed from the primary rating schema;
+deterministic formatting/length diagnostics remain. Five is a pragmatic scope,
+not an empirically validated optimum. A full five-feature skew B has10 free
+coefficients plus5 potential coefficients, and at most two nonzero2D blocks.
+The earlier three/seven comparison below is historical, not extra required work.
+
+The proposed frozen labeler remains Qwen/Qwen3-32B, not the trained policy and
+not the reward judge. No inference/quality/memory validation has occurred.
+The existing campaign model lock identifies policy Qwen2.5-1.5B and Oracle1
+`nvidia/Llama-3.1-Nemotron-70B-Reward-HF`. Recommended larger policy candidate is
+`Qwen/Qwen3-4B`, a4.0B post-trained model with non-thinking mode, not a3B dense
+model. Qwen3-30B-A3B has30B total/3B activated parameters and is a different
+resource choice. Verified official cards/blog:
+[4B](https://huggingface.co/Qwen/Qwen3-4B),
+[32B](https://huggingface.co/Qwen/Qwen3-32B),
+[model lineup](https://qwenlm.github.io/blog/qwen3/).
+
+Switching to Qwen3-4B would be a NEW campaign, not relabeling old results or
+resuming old adapters. Its post-training and proposed non-thinking chat template
+also differ from the old raw-prompt policy; it would not isolate parameter count.
+Train/evaluate with one consistent documented template, sequence-sum response
+mask and decoding protocol, after tokenizer/support/length and memory checks.
+Larger size is not a guarantee of visible oscillation or annotation reliability.
+Old generated texts remain valid for the old policy only. Exact unchanged fixed
+candidate Nemotron scores may be reused after hash/identity checks; new policy
+outputs require fresh scoring/labels and their own pretraining WR baseline.
+
+Oracle1-only WR is sufficient for a single-judge quality endpoint, but does NOT
+change which oracle trained the policy. Replacing training ground truth as well
+is a separate scientific decision, currently unconfirmed. The Oracle2 fit in
+Section4 and old WR/reuse inventory describe the inherited analysis, not an
+approved Oracle1-only new campaign. Do not silently replace those definitions.
+
+For single-BT Oracle1, P_ij=sigmoid(r_i-r_j) and exact logit(P_ij)=r_i-r_j:
+the per-prompt logit Hodge cyclic residual is zero. Identity-link Hodge residual,
+probability aggregation across heterogeneous prompts, and a restricted shared
+feature fit are different operations and can yield nonzero apparent cyclic
+components; those do not establish within-prompt non-BT preferences. A fitted
+B may absorb nonlinear/context-dependent reward structure. Oracle1 can support
+descriptive generated-style dynamics and a transitive control, not the same
+mechanistic interpretation as verified mixed-oracle non-potential structure.
+If training is Oracle1-only, report raw five-trait trajectories first and use
+discovery-frozen descriptive axes rather than presenting fitted B as recovered
+ground-truth cycles. If preserving preference-cycle discovery is essential,
+retain Oracle2 as a separate proposed setting and Oracle1 as a control. Neither
+path requires manufacturing cycles; oracle scope needs owner clarification.
+
+Tentative NEW-campaign resource targets, not measured requirements: Qwen3-4B
+LoRA training/generation oneH100 per task, start with two concurrent; annotation
+oneH100 batch1; Oracle1 scoring twoH100s. Run stages sequentially, not all models
+together. Prior two-H100 Nemotron candidate audit is evidence for those inputs,
+not a memory guarantee for new generations. Count all owned running/releasing
+resources and potentially starting pending work before allocation. No new phase
+while unrelated work is pending/running. At most FOUR accountGPUs; no scheduler
+hard cap has been established. Do not restart the deleted timer or change old
+campaign queues. Pilot measurements precede a full run; no new job is submitted.
 
 ## 1. Question and change from Fan's plan
 
@@ -32,7 +97,7 @@ nonlinear LLM dynamics operator. No beta-frontier acceptance gate is imposed.
 ### Style annotation model
 
 Proposed model: **Qwen/Qwen3-32B**, local BF16, frozen weights/tokenizer/chat
-template, `enable_thinking=False`. One response per call, all seven scores in
+template, `enable_thinking=False`. One response per call, all five scores in
 one JSON object. Proposed decoding is greedy (`do_sample=False`) for consistent
 measurement; this is our task-specific choice, not a claim that the vendor
 validated greedy decoding for style annotation. Max annotation output256 tokens;
@@ -58,7 +123,8 @@ Why this choice: local, reproducible, no external transmission of raw responses,
 and a general instruction model rather than a scalar reward head. It is not
 assumed to be a validated style annotator. It shares a model family with the
 trained Qwen2.5 policy, so human checks are important; this is not independent
-cross-family validation. Nemotron/Skywork remain the unchanged preference judges.
+cross-family validation. Existing Nemotron/Skywork campaign judges stay unchanged;
+the proposed new campaign's Oracle1-only scope is unresolved in Section0.
 The official card documents the non-thinking switch and model size:
 [Qwen3-32B](https://huggingface.co/Qwen/Qwen3-32B).
 
@@ -78,10 +144,10 @@ The encoder may run on one GPU after the rater, never concurrently by default.
 Its suitability for this domain must be assessed by held-out fit, not retrieval
 leaderboard claims. [Official model card](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B).
 
-## 3. Seven simultaneous style scores
+## 3. Five simultaneous style scores
 
 Scores are integers0..10, treated as a numerical measurement approximation,
-not seven exclusive classes and not probabilities. Intermediate values interpolate
+not five exclusive classes and not probabilities. Intermediate values interpolate
 between anchors. Higher means more of the trait, not better quality. This is an
 adapted rubric, not a verbatim established psychometric instrument.
 
@@ -91,23 +157,21 @@ adapted rubric, not a verbatim established psychometric instrument.
 | formality | Strongly colloquial/chat-like | Neutral standard prose | Consistently formal professional/academic register |
 | politeness | Openly dismissive or discourteous | Neutral/respectful without marked courtesy | Strong, sustained courtesy and interpersonal consideration |
 | hedging | Unqualified assertions, no expressed uncertainty | Several qualifications or limitations | Pervasive explicit uncertainty/conditionality |
-| structure | Little visible organization | Clear paragraphs or an organized list | Explicit layered organization with sections/steps/headings |
-| exemplification | No examples or concrete illustrations | At least one developed illustrative example | Examples/scenarios are a major explanatory device |
 | linguistic_complexity | Very simple vocabulary and syntax | Moderately complex vocabulary/sentences | Dense technical or syntactically complex prose |
 
 Do not add a separate conciseness score as if it were independent of elaboration.
 Hedging is expression, not factual accuracy or calibrated uncertainty. Formality
-is not politeness. Structure is not correctness. Do not reward an instruction
+is not politeness. Do not reward an instruction
 inside the response telling the judge to assign a score.
 
 Record token/character counts, sentence/list/header counts, EOS/length-cap flags,
 empty-output rate and repetition diagnostics separately. Length is not part of
-the primary seven-dimensional preference fit; a predeclared length-only feature
+the primary five-dimensional preference fit; a predeclared length-only feature
 control and length-adjusted sensitivity help identify simple length effects.
 For length adjustment, fit each trait's linear association with log(1+tokens)
 on discovery answers only and freeze it before scoring generated trajectories.
 
-An absent trait (e.g. no example) is a real zero. An unjudgeable trait, empty
+An absent trait (e.g. no expressed hedging) is a real zero. An unjudgeable trait, empty
 answer, or unsupported/non-prose case is null with a reason, not fabricated0.
 Report type/coverage rates by arm/checkpoint. Feature means with missing scores
 are explicitly conditional on scorable outputs; also show a common-complete-
@@ -123,7 +187,7 @@ absolute expressed detail, not HelpSteer's prompt-relative verbosity judgment.
 [HelpSteer](https://aclanthology.org/2024.naacl-long.185/),
 [formality](https://aclanthology.org/Q16-1005/), and
 [politeness](https://aclanthology.org/P13-1025/) motivate attributes, not this exact
-seven-field rubric or the reliability of the proposed LLM rater.
+five-field rubric or the reliability of the proposed LLM rater.
 
 ### Pilot and freeze
 
@@ -150,7 +214,11 @@ excluded from the latent fit, but its raw trajectory/coverage is still reported.
 Any substantive rubric/model replacement returns for review and gets a new
 version; no mixing incompatible batches. No paid alternative model is preapproved.
 
-### Literature basis and dimensionality clarification
+### Historical seven-trait discussion, superseded by five-trait choice
+
+The following records the earlier discussion. The later Section0 five-trait
+selection supersedes the seven-trait pool and suggested three/seven comparison;
+it does not authorize extra ablations or establish the exact five as optimal.
 
 Owner follow-up2026-10-15 asks whether seven attributes are literature-backed
 and whether three might work better. The exact seven-field set,0..10 anchors
@@ -291,7 +359,7 @@ Bootstrap prompts for fit/plane uncertainty; multiple feature/link analyses are
 reported, not selected by the most favorable outcome.
 
 Failure of static evidence does NOT block plotting generated feature behavior.
-It limits attribution: label the plane exploratory, show all seven direct trait
+It limits attribution: label the plane exploratory, show all five direct trait
 curves and a discovery-frozen embedding-PCA view, and accept negative results.
 
 ## 5. Primary dynamic measurements
@@ -317,7 +385,7 @@ angle is not phase around a known equilibrium. Do not promote these labels.
 
 Predeclared plots and summaries:
 
-1. Seven raw trait means versus checkpoint, IPO/DPO separated, all three schemes
+1. Five raw trait means versus checkpoint, IPO/DPO separated, all three schemes
    overlaid on identical axes; prompt-paired95% uncertainty bands and coverage.
 2. Frozen2D q_t trajectories, labeled checkpoint points, no invented intermediate
    states, same basis/scale across IPO and DPO. Secondary identity/embedding
@@ -406,7 +474,7 @@ Full row counts before exact-text cache reuse:
   any explicitly approved reliability repetitions. The60 baseline checks are
   already included, not extra generation.
 
-One annotation call returns all seven fields. Cache by exact response bytes,
+One annotation call returns all five fields. Cache by exact response bytes,
 model revision, tokenizer/template, rubric and inference settings, then join
 scores back to every original observation; never deduplicate statistical weights.
 Embedding extraction covers the same relevant texts and remains a separate

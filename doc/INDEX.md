@@ -13,7 +13,7 @@ Start with [current handoff](../handoff/current.md), then the newest
 - [Cyclic campaign registry](../experiments/cyclic_history/campaigns/README.md)
 - [Hodge collaborator material](../experiments/hodge_diagnostics/README.md)
 - [Fan's aligned latent-preference analysis plan](../experiments/hodge_diagnostics/plans/latent-estimation-2026-10-13/README.md): embedding first, judged style second; execution clarifications take precedence over draft shorthand.
-- [Proposed generated-output dynamics plan](../experiments/hodge_diagnostics/plans/generated-output-dynamics-2026-10-15/PLAN.md): concrete rater, seven attributes, fixed preference-related directions and reuse inventory; planning only, execution on hold.
+- [Proposed generated-output dynamics plan](../experiments/hodge_diagnostics/plans/generated-output-dynamics-2026-10-15/PLAN.md): five-dimensional scope selected; proposed rater/traits, fixed directions and reuse inventory. New Qwen3-4B policy and Oracle1-only scope under discussion; execution on hold.
 
 `doc/` is the current context layer. Existing `docs/` and campaign directories
 remain authoritative for their detailed protocols and dated evidence. The daily

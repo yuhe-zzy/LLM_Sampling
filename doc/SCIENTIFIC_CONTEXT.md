@@ -374,6 +374,42 @@ checks. Any dimension selection uses discovery-only grouped CV, keeping final
 validation and generated dynamics untouched. No automatic replacement of the
 primary plan and no annotation/analysis execution. Negative outcomes remain valid.
 
+### Five-trait scope and proposed Oracle1/Qwen3 change,2026-10-15
+
+Owner chooses five dimensions and reaffirms FOUR total accountGPUs. Recommended
+five simultaneous0..10 traits are elaboration, linguistic complexity, formality,
+politeness and hedging. Structure/exemplification leave the primary rubric;
+format/length diagnostics remain. Count accepted, specific rubric/model still
+proposed. Historical three/seven options are not additional required experiments.
+Five-feature B has10 free skew coefficients plus5 potential coefficients; no
+claim this dimension is optimal or produces a stronger scientific result.
+
+Proposed labeler remains frozen Qwen/Qwen3-32B BF16 non-thinking, unvalidated.
+The actual campaign model lock confirms Qwen2.5-1.5B, not3B, and Oracle1 is
+nvidia/Llama-3.1-Nemotron-70B-Reward-HF. Official Qwen cards/blog confirm4B dense
+and30B-A3B MoE are different sizes. Recommend Qwen/Qwen3-4B non-thinking as a
+new policy candidate. Existing adapters/generated texts cannot become4B results;
+new training/generation/baseline are needed if approved. Post-training/template
+differences mean this is not a controlled size-only comparison. No model was
+downloaded or tested, and no campaign settings were changed.
+
+Clarify Oracle1-only WR versus replacing training preferences. Oracle1 suffices
+for a declared single-judge WR endpoint and descriptive style dynamics, not an
+equivalent mixed-oracle mechanism. Exact single-BT logit flow is r_i-r_j and
+per-prompt cyclic residual zero. Identity link, probability aggregation across
+heterogeneous prompts and restricted feature compression can have residuals;
+do not conflate them with intrinsic within-prompt non-BT preference. A nonzero
+fitted B can reflect feature/nonlinear/context misspecification. For Oracle1-only
+training, lead with raw five-trait/generated trajectories and frozen descriptive
+axes; preference-cycle claims require separate evidence. The inherited Oracle2
+fit remains a proposal for old-data analysis, not silently replaced by Oracle1.
+
+Tentative resources:4B LoRA/generation oneH100/task initially two concurrent,
+32B labeler oneH100, Oracle1 twoH100s, phases sequential. These are targets,
+not measured guarantees; previous Nemotron memory evidence covers its audited
+candidate bank only. Full-account queue/receipt guards still required, no
+unrelated pending/running work, no automatic timer restart. Planning only.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

@@ -15,16 +15,22 @@ a new user request. Latest remote state remains unknown after SSH timeouts.
 Owner asks to reorganize Fan's plan around actual generated-output dynamics,
 specifying annotation model/traits, common directions and reusable generations.
 [Concrete proposal](../experiments/hodge_diagnostics/plans/generated-output-dynamics-2026-10-15/PLAN.md)
-now exists separately from Fan's unchanged plan. Proposed Qwen3-32B local BF16
-non-thinking rater, seven response-only0..10 traits; Qwen3-Embedding-0.6B/PCA8,16
-secondary. Primary B-plane is fixed on discovery data, S_eff/theta auxiliary.
-Models, rubric, pilot/runtime and execution still await approval. No downloads,
-annotation, numerical analysis, SSH or resource actions; timer remains deleted.
-Latest follow-up: literature supports individual traits, not this exact seven-
-item instrument. Three versus seven is a bias/variance and coverage question;
-raw traits differ from effective rank and a2D cyclic plane. Compact3-trait,
-7-trait rank2 and full7 comparisons are suggestions only, not new approval.
-Select on discovery reliability/fit, never on visually attractive oscillation.
+now exists separately from Fan's unchanged plan. Latest owner choice is FIVE
+dimensions. Recommended response-only0..10 traits: elaboration, linguistic
+complexity, formality, politeness, hedging; proposed frozen Qwen3-32B BF16
+non-thinking rater remains untested. Earlier seven/three options are historical.
+Owner also asks about Oracle1-only scoring and a larger Qwen3 policy. Verified
+old model lock: Qwen2.5-1.5B policy and Nemotron70B Reward-HF Oracle1. Recommend
+Qwen/Qwen3-4B non-thinking for a NEW campaign, not a3B dense model; no new run
+approved/submitted. Changing post-training/template too is not a size-only test.
+Clarify whether Oracle1 is WR-only or also training ground truth before edits
+to scientific configs. Single-BT per-prompt logit Hodge C is exactly zero;
+identity/aggregate/fitted-feature residuals do not establish non-BT ground truth.
+Oracle1 can support descriptive output dynamics, but do not claim an equivalent
+preference-cycle mechanism. Existing Oracle2 results/definitions stay intact.
+Five-dimensional scope is accepted; trait/model/rubric/pilot and execution remain
+proposals. No downloads, annotation, analysis, SSH/resource/timer actions. FOUR
+accountGPUs maximum, proposed phases nonoverlapping, targets not memory guarantees.
 
 Owner corrects the endpoint: test whether actual model outputs oscillate in
 shared/global dimensions, not just fixed-response probabilities within prompts.
@@ -38,7 +44,7 @@ Validated WR banks can be reused; current completion unknown. Historical48
 complete banks, not66; step0 length-cap rate43.5% under256-token generation.
 Full proposed main annotation55,600 rows plus200 pilot, before text caching.
 Do not invent101 generated states from101 numeric fixed-panel snapshots.
-No proposed model/budget, new experiment, code/config change or jobs approved.
+No new model/run, executable config change or jobs approved by this discussion.
 See [definitions and proposal](../doc/SCIENTIFIC_CONTEXT.md) and today's note.
 
 Fan's branch at7e152a2 was read, not merged or executed. His S0-S3 fits shared

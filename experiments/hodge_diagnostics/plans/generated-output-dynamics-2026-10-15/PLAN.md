@@ -150,6 +150,58 @@ excluded from the latent fit, but its raw trajectory/coverage is still reported.
 Any substantive rubric/model replacement returns for review and gets a new
 version; no mixing incompatible batches. No paid alternative model is preapproved.
 
+### Literature basis and dimensionality clarification
+
+Owner follow-up2026-10-15 asks whether seven attributes are literature-backed
+and whether three might work better. The exact seven-field set,0..10 anchors
+and Qwen3-32B measurement protocol are our proposed adaptation, not a validated
+published instrument or an established optimal dimensionality.
+
+| Proposed trait | Relevant evidence and boundary |
+| --- | --- |
+| Elaboration | HelpSteer verbosity is related but prompt-relative; APM Table6 explicitly uses Elaborate |
+| Linguistic complexity | HelpSteer annotates complexity; our response-only rubric still needs validation |
+| Formality | Pavlick/Tetreault2016 studies perceived formality, not this exact LLM scoring protocol |
+| Politeness | Danescu-Niculescu-Mizil et al.2013 studies politeness, with a different text domain/rubric |
+| Hedging | APM Table6 uses Acknowledges uncertainty; Table8 groups hedged/confident/cautious expressions |
+| Structure and exemplification | Operational candidates adapted from Fan's proposal; no direct validation of these exact scales established here |
+
+[APM2026 preprint](https://arxiv.org/html/2605.21063v1), Appendix E/Table6,
+filters candidate traits and uses correlation/PCA/rotation to reduce redundancy;
+it does not establish that its dimensions or our seven are optimal on HelpSteer.
+Its synthetic preference construction and personalization task are not evidence
+for cyclic training dynamics. Borrow measurement ideas, not those conclusions.
+
+Distinguish raw measured attributes d, effective feature rank, and the dimension
+of a selected dynamic plane. A7-trait input can support one2D plane; choosing
+three raw attributes is not the same operation as selecting a rank2 B using
+all seven. In the current model, B has d(d-1)/2 free coefficients, plus d for u:
+3 attributes give3 cyclic/6 total;7 give21 cyclic/28 total. A3x3 skew matrix has
+rank at most2; a7x7 one can have up to three2D blocks. Two attributes already
+allow nonzero skew coupling: the number of attributes is not the number of
+responses in a preference triangle.
+
+Three may reduce variance and annotation/redundancy problems, but may miss
+directions involving omitted traits. Seven may retain useful signal while also
+giving more scope to fit noise. More measured attributes do not change the
+already-trained model's behavior; they change what can be detected and how
+reliably it is estimated. Raw fitted B norms are not fair cross-dimension evidence.
+High-variance PCA components need not retain weak but preference-relevant signal.
+
+Suggested comparison, NOT a newly approved replacement of the primary plan:
+retain seven as a pilot candidate pool; predeclare a compact three-trait view
+(elaboration, formality, hedging), seven-trait rank2 B, and full-rank seven-trait
+B sensitivity. The compact set spans content detail/register/uncertainty but
+is not established to be optimal. Report raw attribute curves regardless of fit.
+If using model selection, choose dimension/regularization within prompt-grouped
+CV on discovery only; reserve the validation250 and generated trajectories for
+untouched evaluation. Use annotation reliability, rank/conditioning, held-out
+prediction, plane bootstrap stability and dimension-matched nulls, not apparent
+rotation or maximal cyclic norm. Label multiple planned comparisons exploratory.
+Pilot may show that some traits are uninformative; do not force seven, three or
+a desired cycle. Final attribute/rank protocol remains to be confirmed before
+full annotation. No scoring, PCA, model fit or experiment was run for this note.
+
 ## 4. Learn and validate the common directions
 
 ### Separate discovery from validation and trajectories

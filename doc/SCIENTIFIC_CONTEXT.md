@@ -350,6 +350,30 @@ without measured pilot throughput. No paid endpoint, runtime or resources approv
 Raw text remains private; proposed oneGPU sequential annotation/extraction must
 still respect the accountFOUR ceiling and protected phases after new approval.
 
+### Attribute references and dimension choice,2026-10-15
+
+Owner asks whether the seven traits have references and whether three would
+perform better. Rechecked HelpSteer, formality/politeness primary papers and
+APM2026 Appendix E/Tables6,8. Individual traits have related precedents, not
+validation of this exact seven-item0..10 instrument or Qwen3-32B annotation.
+Structure/example scores are proposed operational choices. APM supports explicit
+elaboration/uncertainty traits and redundancy screening, not our dimension count
+or cyclic-dynamics conclusions. Exact citations/boundaries added to the plan.
+
+Keep raw trait count, effective rank and the final2D plane separate. For d traits,
+skew B has d(d-1)/2 coefficients plus d potential coefficients:3 traits give3/6,
+7 give21/28. Three may estimate more stably but omit relevant directions; seven
+may carry more information and more noise. A rank2 seven-trait fit can retain
+all measured attributes while limiting the number of coupled modes. Attribute
+count does not alter already-trained policy behavior. No evidence of an optimal
+count yet; neither a larger fitted B norm nor more visible rotation selects it.
+
+Suggested, unapproved comparison: compact elaboration/formality/hedging view,
+seven-trait rank2 model and full seven-trait sensitivity after pilot reliability
+checks. Any dimension selection uses discovery-only grouped CV, keeping final
+validation and generated dynamics untouched. No automatic replacement of the
+primary plan and no annotation/analysis execution. Negative outcomes remain valid.
+
 ## Proposal versus execution
 
 The collaborator's Hodge notes and two-week roadmap are hypotheses/plans unless

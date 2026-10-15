@@ -20,6 +20,11 @@ non-thinking rater, seven response-only0..10 traits; Qwen3-Embedding-0.6B/PCA8,1
 secondary. Primary B-plane is fixed on discovery data, S_eff/theta auxiliary.
 Models, rubric, pilot/runtime and execution still await approval. No downloads,
 annotation, numerical analysis, SSH or resource actions; timer remains deleted.
+Latest follow-up: literature supports individual traits, not this exact seven-
+item instrument. Three versus seven is a bias/variance and coverage question;
+raw traits differ from effective rank and a2D cyclic plane. Compact3-trait,
+7-trait rank2 and full7 comparisons are suggestions only, not new approval.
+Select on discovery reliability/fit, never on visually attractive oscillation.
 
 Owner corrects the endpoint: test whether actual model outputs oscillate in
 shared/global dimensions, not just fixed-response probabilities within prompts.

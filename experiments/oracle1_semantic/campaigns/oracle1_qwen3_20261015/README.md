@@ -7,6 +7,22 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+2026-10-15T09:49:45Z: first tasks4811149_0/3 bothCOMPLETED0:0, each has complete
+states0..1 and finite training loss/gradients. Hashes/initial scores/support pass.
+Elapsed22m30s/22m32s including loading/scoring; each GPU peak allocated11.90GiB,
+reserved28.59GiB. No logged OOM/Traceback/nonfinite; full account empty.
+After a fresh guarded dry-run, **4811197_0,4811197_3%2** submitted09:51:04Z,
+sequence0002, to reloadstep1 and perform one more real update tostep2.
+At09:53:56Z bothRUNNING, full account2H100 and no unrelated work/errors.
+Both log RESUME_VERIFIED atouter1: actual4B adapters reproduce saved sequence
+sums/support. Continuedstep2 is in progress, NOT completed full resume validation.
+Remaining four arms still unsubmitted. Verify both reload logs and completed
+step2/sacct before advancing all six; retain the five-minute timer meanwhile.
+Source/contract/scientific settings are unchanged; see records0002 and
+[resume status](records/resume_started_20261015.json). Do not duplicate.
+
+The following initial submission snapshot is historical:
+
 2026-10-15T09:19:12Z: **4811149_0,4811149_3%2** submitted once, actual frozen
 source `0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2`, one H100/task. Final server
 23 CPU tests passed without skips, shell syntax and full contract/six configs

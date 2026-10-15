@@ -37,6 +37,17 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 resume submitted2026-10-15T09:51:04Z:4811197_0,3%2, sequence0002,
+same frozen source0e7793f and contract. First4811149_0/3 bothCOMPLETED0:0
+atstep1;09:49:45Z hashes/finite states/initial support verified, full account
+empty. Peak allocated11.90GiB, reserved28.59GiB. Dry-run then guarded advance
+submitted exactly one further update tostep2. At09:53:56Z bothRUNNING,
+full account2H100, no other owned work/logged error. Both actual4B reloads
+emit RESUME_VERIFIED atouter1 with matching scores/support; continuedstep2
+is NOT yet complete. Keep5min timer. Verify finite completedstep2
+for both before all-six advancement and5h cadence. Four other arms unsubmitted.
+Read records0002 and live state; never duplicate. No science/source changes.
+
 Oracle1 Qwen3 submitted2026-10-15T09:19:12Z:4811149_0,3%2, oneH100/task,
 one real outer update for IPO/DPO ordinary. Source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2
 frozen/pushed/verified. Final23 serverCPU tests no skips, shell/contract checks

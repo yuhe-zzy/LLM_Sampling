@@ -33,14 +33,20 @@ pass Qwen3 full chat/EOS length audit1537 without dropping/truncation.
 Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 Final23 server CPU tests pass without skips, plus shell/contract/config checks.
 At09:19:12Z submitted **4811149_0,3%2**, one H100/task, one outer update each.
-At09:25:22Z both RUNNING, full account2H100, no other owned work/logged errors.
-Both finite step0 committed, initial scores/support match; first update ongoing.
-Full-model complete training update/resume not yet claimed validated.
+At09:49:45Z both first segments COMPLETED0:0 atstep1 with valid contiguous
+checkpoints, matching initial scores/support, finite loss/gradients, no errors.
+Each took about22m30s including loading/scoring; peak allocated11.90GiB and
+reserved28.59GiB. Full account was empty. Guarded dry-run/submit launched
+**4811197_0,3%2** at09:51:04Z for actual reload plus one update tostep2.
+At09:53:56Z both RUNNING, full account2H100, no unrelated work/logged error.
+Both emit RESUME_VERIFIED atouter1: actual4B reload scores/support match.
+Continued update tostep2 still pending, so full resume/update gate not yet passed.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 Heartbeat `oracle1-qwen3-training-and-resume-checks` ACTIVE every5min; do not
 duplicate it. Change SAME timer to5h only after both startup and reload/update
-pass. Next action: inspect live state; after both COMPLETED0:0, validatedstep1
-and idle account, frozen queue --advance/--submit resumes0/3 one update to2.
+pass. Next action: verify RESUME_VERIFIED and finite committedstep2 for BOTH
+4811197 tasks, then COMPLETED0:0 and idle account before advancing all six.
+The remaining four arms have NOT been submitted. Never duplicate sequence0002.
 
 ## Interpretation
 

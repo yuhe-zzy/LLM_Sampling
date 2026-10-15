@@ -5,10 +5,15 @@
 Submitted2026-10-15T09:19:12Z: **4811149_0,3%2**, one H100/task, initial one
 outer update per IPO/DPO ordinary. Source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2
 is frozen and GitHub verified. Final23 serverCPU tests pass without skips;
-shell/config/model/data verification passes. At09:25:22Z both RUNNING, full
-account2H100, no unrelated work or logged errors; both finite step0 committed
-with matching initial scores/support, first update ongoing. No full-model GPU
-resume claim. New heartbeat oracle1-qwen3-training-and-resume-checks
+shell/config/model/data verification passes. At09:49:45Z both first segments
+COMPLETED0:0 atstep1, finite loss/gradients and valid checkpoint chains, initial
+scores/support matched. Each took about22m30s; peak allocated11.90GiB and
+reserved28.59GiB. No logged errors, full account empty. Frozen guarded dry-run
+then submit created4811197_0,3%2 at09:51:04Z for reload and update tostep2.
+At09:53:56Z both RUNNING, account2H100, no unrelated work/errors. Both actual4B
+reloads emit RESUME_VERIFIED atouter1 and reproduce saved scores/support.
+Continued update tostep2 remains pending; four other arms remain unsubmitted.
+Heartbeat oracle1-qwen3-training-and-resume-checks
 ACTIVE every5min; only change to5h after both GPU startup and reload/update pass.
 See campaign records for immutable intent/receipt/deployment; never duplicate.
 

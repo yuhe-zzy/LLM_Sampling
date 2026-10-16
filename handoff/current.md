@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-15, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-16, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest authorization: launch Oracle1 / Qwen3
 
@@ -37,17 +37,15 @@ Both actual4B objectives passed RESUME_VERIFIED and continued update tostep2,
 with finite loss/gradients, valid contiguous hashes/states and matching initial
 scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 Full-model startup AND cross-process resume/update gate has passed.
-At23:31:17Z sequence0003 array4811252_0..5 allCOMPLETED0:0 at12/10/10/12/10/10.
-All70 committed states finite/contiguous/hash-valid with matching initial scores
-and token support; source/data/model contract unchanged, no logged errors.
-Full account empty. Fresh frozen dry-run/submit created **4814410_0..5%2**,
-sequence0004, at23:32:42Z. Each arm resumes its own latest checkpoint for at
-most10 updates; targets22/20/20/22/20/20, not completed100-round experiments.
-At2026-10-16T04:37:02Z0/1 COMPLETED0:0 at22/20;2/3 RUNNING at15/17;
-4/5 PENDING(JobArrayTaskLimit), still10/10. Full account2H100, no unrelated work
-or logged errors. All100 states finite/contiguous/hash-valid, shared initial
-scores/support and contract valid. Logs confirm IPOfeedback10/DPOordinary12
-reloads and five new updates each. No new submission; never repeat0004.
+At2026-10-16T09:35:06Z sequence0004 array4814410_0..5 allCOMPLETED0:0,
+as are all prior receipts. Complete steps22/20/20/22/20/20;130 saved states
+finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
+no errors. DPOreference/feedback also verified reload10 then ten more updates.
+Full account empty. Frozen dry-run/guarded submit created **4819533_0..5%2**,
+sequence0005, at09:37:17Z, up to10 more updates toward32/30/30/32/30/30.
+At09:41:20Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), account2H100,
+no unrelated work/errors. Fresh logs RESUME_VERIFIED IPOordinary22/IPOreference20;
+both training, no new outer completed yet. Never duplicate0005 or earlier jobs.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

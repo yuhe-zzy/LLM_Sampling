@@ -9,32 +9,29 @@ gradients. Contiguous checkpoint hashes/states and shared initial scores pass.
 Resume peak allocated11.89GiB/reserved21.35GiB; no logged execution errors.
 Full-model startup AND cross-process continued-training gate has passed.
 
-At23:31:17Z sequence0003 array4811252_0..5 allCOMPLETED0:0, complete outer
-12/10/10/12/10/10 (IPOordinary/reference/feedback then DPOordinary/reference/
-feedback). All70 saved states finite/contiguous/hash-valid, initial scores/token
-support match, frozen contract unchanged, no logged execution errors. Full
-account empty; all previous receipt tasks successful. Latest recorded round
-peaks about11.90GiB allocated, at most28.60GiB reserved perGPU.
-Fresh frozen dry-run and guarded submit created **4814410_0..5%2** at23:32:42Z,
-sequence0004. OneH100/task, at most2 concurrent,24h allocation/18h soft stop,
-up to10 further updates to targets22/20/20/22/20/20.
-Latest2026-10-16T04:37:02Z:0/1 COMPLETED0:0 at22/20;2/3 RUNNING at15/17;
-4/5 PENDING(JobArrayTaskLimit), retaining previous complete10/10. Full account
-2H100, no unrelated/releasing work or logged errors. All100 committed states
-finite/contiguous/hash-valid, shared initial scores/support and contract valid.
-Fresh logs confirm RESUME_VERIFIED IPOfeedback10/DPOordinary12, followed by
-five completed updates each. Latest-round maximum allocated11.90GiB and
-reserved30.38GiB; this is not device-wide lifetime memory telemetry.
-Only0001..0004 records exist. No new submission, scheduler or source change.
-See [segment4 progress](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment4_progress_20261016T0437.json).
-This is continuation, not restart from0; queued arms need their own checks.
+At2026-10-16T09:35:06Z sequence0004 array4814410_0..5 allCOMPLETED0:0,
+as are all prior receipt tasks. Complete outer22/20/20/22/20/20 (IPOordinary/
+reference/feedback, then DPOordinary/reference/feedback). All130 saved states
+finite/contiguous/hash-valid, initial scores/token support match, frozen contract
+unchanged and latest losses/gradients finite. No logged execution errors.
+DPOreference/feedback reload10 and ten subsequent updates independently checked.
+Latest-round maximum allocated11.90GiB/reserved30.38GiB, not lifetime telemetry.
+Full owner/UID account empty, including no releasing allocations; two terminal
+scontrol records were correctly excluded from live GPU totals.
+Frozen dry-run and fresh guarded submit created **4819533_0..5%2** at09:37:17Z,
+sequence0005, oneH100/task, two concurrent,24h/18h soft stop, up to10 further
+updates toward32/30/30/32/30/30. At09:41:20Z0/1 RUNNING,2..5 normal
+PENDING(JobArrayTaskLimit), full account2H100, no unrelated work or errors.
+Fresh logs confirm RESUME_VERIFIED IPOordinary22/IPOreference20; new manifests
+RUNNING, no new outer completed yet. See [startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment5_startup_20261016T0941.json),
+[completed segment4](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment4_complete_20261016T0935.json)
+and [new receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0005_receipt.json).
+This is checkpoint continuation, not restart from0; never duplicate0005.
 Segment completion does NOT mean the100-round experiment is finished.
 Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
 without skips before freeze. No code/scientific change. The SAME heartbeat
 oracle1-qwen3-training-and-resume-checks nowACTIVE every5HOURS, tool and stored
-configuration verified. See campaign records0004 and
-[segment3 completion](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment3_complete_20261015T2331.json);
-never duplicate submissions. Baseline/generation/WR/annotation not submitted.
+configuration verified. Baseline/generation/WR/annotation not submitted.
 
 Owner now explicitly authorizes a NEW campaign with Oracle1 for training AND WR,
 Qwen3-4B policy and five-trait Qwen3-32B measurement; implementation and submission

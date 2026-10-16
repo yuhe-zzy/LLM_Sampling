@@ -7,6 +7,24 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+Sequence0005 completion verified2026-10-16T19:42:55Z:4819533_0..5 all
+COMPLETED0:0 at32/30/30/32/30/30; all earlier receipts successful. All190
+committed states finite/contiguous/hash-valid, initial scores/support match,
+contract unchanged, latest losses/gradients finite, no logged execution errors.
+Full account empty. DPOreference/feedback reload20 then ten updates checked.
+See [completion audit](records/segment5_complete_20261016T1942.json).
+Frozen dry-run then guarded submit created **4836621_0..5%2** at19:44:50Z,
+sequence0006, at most10 further updates to targets42/40/40/42/40/40. OneH100/task,
+two concurrent,24h allocation/18h soft stop. At19:47:57Z0/1 RUNNING,2..5
+PENDING(JobArrayTaskLimit), full account2H100, no unrelated work/errors.
+Fresh logs confirm RESUME_VERIFIED IPOordinary32/IPOreference30; new manifests
+RUNNING, no new outer complete yet. See [startup audit](records/segment6_startup_20261016T1947.json).
+Exact [intent](records/0006_intent.json) and [receipt](records/0006_receipt.json)
+preserved; never duplicate0006. Same5h monitor, no source/science changes,
+no baseline/generation/WR/labels or oldOracle2 action.
+
+The earlier segment0005 snapshots below are historical:
+
 Sequence0004 completion verified2026-10-16T09:35:06Z:4814410_0..5 all
 COMPLETED0:0 at22/20/20/22/20/20; all earlier receipts successful. All130
 committed states finite/contiguous/hash-valid, initial scores/support match,

@@ -37,19 +37,18 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
-Oracle1 sequence0005 submitted2026-10-16T09:37:17Z:4819533_0..5%2, same
-source0e7793f/contract. At09:35:06Z all0001..0004 tasksCOMPLETED0:0, arms
-at22/20/20/22/20/20;130 finite/contiguous/hash-valid states, shared initial
+Oracle1 sequence0006 submitted2026-10-16T19:44:50Z:4836621_0..5%2, same
+source0e7793f/contract. At19:42:55Z all0001..0005 tasksCOMPLETED0:0, arms
+at32/30/30/32/30/30;190 finite/contiguous/hash-valid states, shared initial
 scores/support and finite latest loss/gradients. Full account empty, no errors.
-Frozen dry-run then guarded advance resumes at most10 updates toward
-32/30/30/32/30/30, not from0. Latest14:30:00Z0/1 COMPLETED0:0 at32/30;
-2/3 RUNNING at24/26;4/5 PENDING(JobArrayTaskLimit), still20/20. Account2H100,
-no unrelated/releasing work or errors. All158 states finite/contiguous/hash-valid,
-initial scores/support and contract pass. Logs RESUME_VERIFIED IPOfeedback20/
-DPOordinary22 and four further updates each. No new submission this check.
-See campaign records/segment5_progress_20261016T1430.json.
-Exact0005 intent/receipt saved; never duplicate. Same5h monitor; no downstream
-or oldOracle2 action. Read latest startup records before any later action.
+DPOreference/feedback reload20 and ten further updates verified. Frozen dry-run
+then fresh guarded advance resumes up to10 updates toward42/40/40/42/40/40.
+At19:47:57Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no unrelated/releasing work or errors. RESUME_VERIFIED IPOordinary32/reference30;
+new manifests RUNNING, no new outer complete yet. Exact0006 intent/receipt in
+campaign records and local private launch dir; never duplicate0006 or earlier.
+See records/segment6_startup_20261016T1947.json. Same5h monitor; no source,
+science, downstream or oldOracle2 change. Read latest startup records first.
 
 Oracle1 progress2026-10-16T04:37:02Z: sequence0004 array4814410_0/1 now
 COMPLETED0:0 at22/20;2/3 RUNNING at15/17;4/5 PENDING(JobArrayTaskLimit),

@@ -37,16 +37,15 @@ Both actual4B objectives passed RESUME_VERIFIED and continued update tostep2,
 with finite loss/gradients, valid contiguous hashes/states and matching initial
 scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 Full-model startup AND cross-process resume/update gate has passed.
-At2026-10-16T09:35:06Z sequence0004 array4814410_0..5 allCOMPLETED0:0,
-as are all prior receipts. Complete steps22/20/20/22/20/20;130 saved states
+At2026-10-16T19:42:55Z sequence0005 array4819533_0..5 allCOMPLETED0:0,
+as are all prior receipts. Complete steps32/30/30/32/30/30;190 saved states
 finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
-no errors. DPOreference/feedback also verified reload10 then ten more updates.
-Full account empty. Frozen dry-run/guarded submit created **4819533_0..5%2**,
-sequence0005, at09:37:17Z, up to10 more updates toward32/30/30/32/30/30.
-At14:30:00Z0/1 COMPLETED0:0 at32/30;2/3 RUNNING at24/26;4/5 pending, still20/20.
-Account2H100, no unrelated work/errors;158 finite contiguous hash-valid states,
-shared initial scores/support and contract pass. IPOfeedback20/DPOordinary22
-reloads verified, four further updates each. No new submission; never repeat0005.
+no errors. DPOreference/feedback also verified reload20 then ten more updates.
+Full account empty. Frozen dry-run/guarded submit created **4836621_0..5%2**,
+sequence0006, at19:44:50Z, up to10 more updates toward42/40/40/42/40/40.
+At19:47:57Z0/1 RUNNING,2..5 normalPENDING(JobArrayTaskLimit), account2H100,
+no unrelated work/errors. RESUME_VERIFIED IPOordinary32/IPOreference30; both
+training, no new round complete yet. Never repeat0006 or earlier segments.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

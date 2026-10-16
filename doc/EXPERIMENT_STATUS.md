@@ -17,11 +17,17 @@ account empty; all previous receipt tasks successful. Latest recorded round
 peaks about11.90GiB allocated, at most28.60GiB reserved perGPU.
 Fresh frozen dry-run and guarded submit created **4814410_0..5%2** at23:32:42Z,
 sequence0004. OneH100/task, at most2 concurrent,24h allocation/18h soft stop,
-up to10 further updates to targets22/20/20/22/20/20. At23:35:26Z0/1 RUNNING,
-2..5 normalPENDING(JobArrayTaskLimit), full account2H100, no unrelated work or
-logged errors. Logs confirm RESUME_VERIFIED at IPOordinary12 and IPOreference10;
-both train after matching loaded scores/support. No new round completed yet.
-This is continuation, not restart from0; future queued arms need their own checks.
+up to10 further updates to targets22/20/20/22/20/20.
+Latest2026-10-16T04:37:02Z:0/1 COMPLETED0:0 at22/20;2/3 RUNNING at15/17;
+4/5 PENDING(JobArrayTaskLimit), retaining previous complete10/10. Full account
+2H100, no unrelated/releasing work or logged errors. All100 committed states
+finite/contiguous/hash-valid, shared initial scores/support and contract valid.
+Fresh logs confirm RESUME_VERIFIED IPOfeedback10/DPOordinary12, followed by
+five completed updates each. Latest-round maximum allocated11.90GiB and
+reserved30.38GiB; this is not device-wide lifetime memory telemetry.
+Only0001..0004 records exist. No new submission, scheduler or source change.
+See [segment4 progress](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment4_progress_20261016T0437.json).
+This is continuation, not restart from0; queued arms need their own checks.
 Segment completion does NOT mean the100-round experiment is finished.
 Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
 without skips before freeze. No code/scientific change. The SAME heartbeat

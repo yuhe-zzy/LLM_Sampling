@@ -7,6 +7,20 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+Latest check2026-10-16T04:37:02Z: sequence0004 array4814410_0/1 COMPLETED0:0
+at22/20;2/3 RUNNING at15/17;4/5 PENDING(JobArrayTaskLimit), retaining previous
+complete10/10. All100 committed states finite/contiguous/hash-valid; initial
+scores/support and frozen contract pass. Full account2H100, no unrelated or
+releasing work, no loggedOOM/Traceback/nonfinite. Fresh logs confirm successful
+IPOfeedback10/DPOordinary12 reloads and five further updates each. Latest-round
+maximum allocated11.90GiB/reserved30.38GiB, not lifetime device-wide telemetry.
+Only0001..0004 intent/receipt pairs exist. No new job/scheduler/source change;
+next advance waits for all receipt tasks successful and full account idle.
+Same5h monitor; no baseline/generation/WR/annotation submission. See
+[progress audit](records/segment4_progress_20261016T0437.json). Never repeat0004.
+
+The sequence0004 launch snapshot below is historical:
+
 Sequence0003 completed2026-10-15T23:31:17Z check:4811252_0..5 allCOMPLETED0:0
 at12/10/10/12/10/10, respectively. All70 committed states finite/contiguous/
 hash-valid with matching initial scores/token support and unchanged contract.

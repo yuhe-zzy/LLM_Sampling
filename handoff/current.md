@@ -43,9 +43,11 @@ and token support; source/data/model contract unchanged, no logged errors.
 Full account empty. Fresh frozen dry-run/submit created **4814410_0..5%2**,
 sequence0004, at23:32:42Z. Each arm resumes its own latest checkpoint for at
 most10 updates; targets22/20/20/22/20/20, not completed100-round experiments.
-At23:35:26Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
-no unrelated work/errors. Logs confirm RESUME_VERIFIED IPOordinary12 and
-IPOreference10; both now training. No new round complete yet; never repeat0004.
+At2026-10-16T04:37:02Z0/1 COMPLETED0:0 at22/20;2/3 RUNNING at15/17;
+4/5 PENDING(JobArrayTaskLimit), still10/10. Full account2H100, no unrelated work
+or logged errors. All100 states finite/contiguous/hash-valid, shared initial
+scores/support and contract valid. Logs confirm IPOfeedback10/DPOordinary12
+reloads and five new updates each. No new submission; never repeat0004.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

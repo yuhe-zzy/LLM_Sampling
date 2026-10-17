@@ -1,0 +1,206 @@
+{
+  "publication_date": "2026-10-06",
+  "source_snapshot_utc": "2026-09-11T19:57:40.424482+00:00",
+  "source_bundle": "oracle_results_20260911",
+  "training_commit": null,
+  "training_commit_status": "not recorded in source snapshot; publication commit is not training source",
+  "contains_raw_prompt_response_text": false,
+  "source_retrieved_again_this_turn": false,
+  "expected_grid_cells": 16,
+  "curves_available": 13,
+  "complete_to_80": 12,
+  "partial_to_65": 1,
+  "absent": 3,
+  "files": [
+    {
+      "path": "dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21842,
+      "sha256": "afd624407deb79ebee03ca73c8735a54cb437cd011ce8dbb1d761810fcacb33e"
+    },
+    {
+      "path": "dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 31220,
+      "sha256": "e25ead306a311b9b7696ee3837381198bd98e4235392b528705824a339899cf6"
+    },
+    {
+      "path": "dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19724,
+      "sha256": "3b0a92ad9cbea149f5652154841597ada7f34e6c43fec053a935fd9686a5dc6a"
+    },
+    {
+      "path": "dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 50476,
+      "sha256": "307052bbde9b1881f4d7086f2a1a57d81649eb77e56c256ec94ec4836ffcfd3f"
+    },
+    {
+      "path": "dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21856,
+      "sha256": "8c68ddb5a852c0ad9256aa4467212afefe7d1efebe0475c3147d01a244bcb032"
+    },
+    {
+      "path": "dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30952,
+      "sha256": "d7d8990cac1b5239b0ba9dbc341d57ca2bd9eca11fc09070fd320d63308a3378"
+    },
+    {
+      "path": "dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19709,
+      "sha256": "6d1b95a3469d701dfbfcdd562cfe479bbbdf3eb0847eb5744ac794f940fbc769"
+    },
+    {
+      "path": "dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 50418,
+      "sha256": "b36144cd972309d8ff5f6b18cd085047ef840e575e52de04e0b7875b4c979a95"
+    },
+    {
+      "path": "dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 22093,
+      "sha256": "6723e42c0ecfdad40b88ac3920849b767517ec3585920a0e9dcf1b53a4dffe49"
+    },
+    {
+      "path": "dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30131,
+      "sha256": "2bff0904ade625e469279eed536f4d9dcef823ef73bc2305d01ec6ad3681c7b3"
+    },
+    {
+      "path": "dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21902,
+      "sha256": "06f45bc91cc2116e902252b41b58ef352697b3e6155032e42c078e35160b0800"
+    },
+    {
+      "path": "dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_training_metrics.csv",
+      "bytes": 29735,
+      "sha256": "d871cee5df55ebdf73699400bbe00a9f927cef4035c3285a022cb363a9fbd477"
+    },
+    {
+      "path": "ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19749,
+      "sha256": "218f4915470fcfffca561426c876eb42e0a49567471d7cb084703f2c7b5ad234"
+    },
+    {
+      "path": "ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 49373,
+      "sha256": "a434583de4de6198f0bdab20863fcc4e46e5c729974d6021c0605a61850cd7c1"
+    },
+    {
+      "path": "ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21922,
+      "sha256": "14fe2126be716ba8443a363b84b254a9d3b7c1d16e3d0706ef062b908ba41ab6"
+    },
+    {
+      "path": "ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 29949,
+      "sha256": "efc3492056251bd61cf2a774d2e7411a2b5e2c20dee1fe4206251ed666b95470"
+    },
+    {
+      "path": "ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21926,
+      "sha256": "b9cc174f12fbe09358fe4c778c81fcd7653321eb055556292b3781fd77385812"
+    },
+    {
+      "path": "ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30165,
+      "sha256": "64ffa1b8bc66ba1ca8dea58d9c6cb8168c8118167d6751ee0634e5f59c3b96ee"
+    },
+    {
+      "path": "ipo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 16234,
+      "sha256": "627464626708074a77430aacd5cb9efced4521030e8629bc7fcb770ae95d6dc2"
+    },
+    {
+      "path": "ipo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 40822,
+      "sha256": "2a7101535c94dc1bd7382167121f1c06c95f68e9e58b2be4e6094100339a5d2d"
+    },
+    {
+      "path": "ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 21920,
+      "sha256": "9362d8146b551fc491cf25d5de33e3dcc36ae99e8b29183bab56fc315dd31c42"
+    },
+    {
+      "path": "ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 30506,
+      "sha256": "15e9dcc26543755144f66082d52ccfa0f5f6040df23fac07acac9b353f5eb3dc"
+    },
+    {
+      "path": "ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 22049,
+      "sha256": "d8abcac536b1c7041444df7e72d3d19023761801dca24bf45aea38d9431cb2fa"
+    },
+    {
+      "path": "ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 31105,
+      "sha256": "3a53d55e56ac8154879065b449ab0a9651dd41f82b8b6a9755136e5f64b2a86f"
+    },
+    {
+      "path": "ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "bytes": 19861,
+      "sha256": "c3e79653cdd23567272265f966c581a28c54faf174715d4a1d1833882a047c3a"
+    },
+    {
+      "path": "ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_training_metrics.csv",
+      "bytes": 50526,
+      "sha256": "8a33d0478e1ad9121262f9c8ca7ba70caba6b52964c3d8faddc15279c14dca3d"
+    },
+    {
+      "path": "oracle_curves_20260911.csv",
+      "bytes": 143390,
+      "sha256": "b45f785ce480d5bf6bd8586be49f4ef79d7f204603462a61a435c310f8cd9625"
+    },
+    {
+      "path": "oracle_dpo_relative_sequence_entropy_20260911.pdf",
+      "bytes": 26194,
+      "sha256": "73dcc177150e78351c771cb10f591da3bb00c19bdf9247da97f65806a063764c"
+    },
+    {
+      "path": "oracle_dpo_relative_sequence_entropy_20260911.png",
+      "bytes": 193062,
+      "sha256": "6d8cb3b862fbb4e624724115f95d3f729d3b5a0a16979ba4052fe4a9e75646a5"
+    },
+    {
+      "path": "oracle_dpo_winning_rate_20260911.pdf",
+      "bytes": 23056,
+      "sha256": "623afcde362292ce7e46804fd366aadd273fc1152209800c99c1a75ac3496fe2"
+    },
+    {
+      "path": "oracle_dpo_winning_rate_20260911.png",
+      "bytes": 187540,
+      "sha256": "39151872f65ea303528aa164abd590832c0450a13ef7926b299617e18983699c"
+    },
+    {
+      "path": "oracle_ipo_relative_sequence_entropy_20260911.pdf",
+      "bytes": 27154,
+      "sha256": "4da2566218bc7516f479d0a86d44d71836e8b5c76cd8576d8d6544f775b8416c"
+    },
+    {
+      "path": "oracle_ipo_relative_sequence_entropy_20260911.png",
+      "bytes": 206658,
+      "sha256": "269f3b8ed4a00fd71c07349ffd9156a1fc4c333a652475e0de8be6ce58af4be5"
+    },
+    {
+      "path": "oracle_ipo_winning_rate_20260911.pdf",
+      "bytes": 23772,
+      "sha256": "ee6fc7c602ce053283709a75bb68553d97c3bd7497f76d1a01f2bde3d0c303d5"
+    },
+    {
+      "path": "oracle_ipo_winning_rate_20260911.png",
+      "bytes": 188036,
+      "sha256": "f47a0da679a79f6eca56238a826b74371e5ed9201052c022f033c979063fd8ef"
+    },
+    {
+      "path": "oracle_parameter_summary_20260911.csv",
+      "bytes": 3066,
+      "sha256": "b6095f6cd7402077c248dc505beb31b45d8d53b4c69dfe04f6abe12f029a345c"
+    },
+    {
+      "path": "oracle_winning_rate_checkpoints_20260911.csv",
+      "bytes": 947,
+      "sha256": "e7442f468c94c176d82bd33b120f9fda393163b9166677f6a3ce1b864ceeabed"
+    },
+    {
+      "path": "plot_oracle_results.py",
+      "bytes": 8513,
+      "sha256": "78f6a2ce34b59e6d320b87950e7a2bab25ab5ec82d0df00ad470f32932904f2d"
+    }
+  ]
+}

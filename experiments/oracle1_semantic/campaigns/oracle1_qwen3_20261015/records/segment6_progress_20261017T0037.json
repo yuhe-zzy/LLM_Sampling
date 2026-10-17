@@ -1,0 +1,67 @@
+{
+  "checked_at_utc": "2026-10-17T00:37:34.563922+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "submission_sequence": "0006",
+  "array_job_id": "4836621",
+  "training_steps": {
+    "ipo_ordinary": 42,
+    "ipo_reference": 40,
+    "ipo_feedback": 34,
+    "dpo_ordinary": 36,
+    "dpo_reference": 30,
+    "dpo_feedback": 30
+  },
+  "scheduler": {
+    "checked_at_utc": "2026-10-17T00:36:49.954369+00:00",
+    "full_queue_rows": 19399,
+    "completed_tasks": ["4836621_0", "4836621_1"],
+    "completed_exit_code": "0:0",
+    "completed_elapsed": {"4836621_0": "03:19:29", "4836621_1": "03:20:01"},
+    "running_tasks": ["4836621_2", "4836621_3"],
+    "pending_tasks": ["4836621_4", "4836621_5"],
+    "pending_reason": "JobArrayTaskLimit",
+    "allocated_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false,
+    "unrelated_owned_work": false,
+    "releasing_allocations": false,
+    "all_prior_sequences_completed_exit_zero": true,
+    "submission_sequences_present": ["0001", "0002", "0003", "0004", "0005", "0006"]
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 218,
+    "contiguous_checkpoint_hashes_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "latest_loss_and_gradient_metrics_finite": true,
+    "logged_execution_errors": [],
+    "new_resume_verified": {"ipo_feedback": 30, "dpo_ordinary": 32},
+    "completed_updates_since_new_resume": {"ipo_feedback": 4, "dpo_ordinary": 4},
+    "memory_scope": "Latest completed outer update of the two currently running arms; not device-wide lifetime usage",
+    "running_arms_max_cuda_peak_allocated_bytes": 12778849280,
+    "running_arms_max_cuda_peak_reserved_bytes": 39023804416
+  },
+  "actions": {
+    "read_only_remote_checks": true,
+    "new_job_submitted": false,
+    "scheduler_or_scientific_settings_changed": false,
+    "source_changed": false,
+    "old_oracle2_touched": false,
+    "downstream_phases_submitted": false,
+    "monitor_interval_hours": 5
+  },
+  "limitations": [
+    "Two tasks completed this segment, not the complete100-update experiment.",
+    "DPO reference/feedback retain previous-segment manifests; current tasks are pending.",
+    "No generated-response WR or five-trait measurement result yet.",
+    "Scheduler, manifests and logs were read sequentially."
+  ],
+  "next_action": "Continue sequence0006; only all successful prior receipts and an empty full account permit frozen dry-run and advance for the next segment. Never duplicate0006.",
+  "private_evidence": [
+    "oracle1_qwen3_launch_20261015/heartbeat_20261017T0035.json",
+    "oracle1_qwen3_launch_20261015/segment6_midpoint_resume_20261017.json"
+  ]
+}

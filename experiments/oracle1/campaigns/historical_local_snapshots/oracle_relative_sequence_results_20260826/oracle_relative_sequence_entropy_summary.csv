@@ -1,0 +1,14 @@
+method,alpha,lambda,latest_iter,relative_sequence_entropy_initial,relative_sequence_entropy_latest,legacy_length_normalized_entropy_latest,latest_oracle_win_rate,source_file
+dpo,0.8,0.5,80,1.5583518316246514,0.1619429204135365,1.530272261410267,0.85475,dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv
+dpo,0.9,0.5,80,1.558304398571417,0.0828903774821644,1.475449372812814,0.9155,dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv
+dpo,0.95,0.5,80,1.5527117880737025,0.0334480959629053,1.2632817936776752,0.869375,dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv
+dpo,0.99,0.5,80,1.5520299348997617,0.0059743626212541,0.5313358732427673,0.87,dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv
+dpo,0.8,0.9,79,1.5569997481993374,0.2012906309982484,1.531663128333011,0.86,dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv
+dpo,0.9,0.9,75,1.5494587013130283,0.0613830598492916,1.4868124216335754,0.9045,dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.8,0.5,17,1.5588797627163202,1.3034450653397502,,0.487,ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.9,0.5,14,1.5544627255484105,1.127022276752301,1.5387223552309963,0.479125,ipo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.99,0.5,80,1.5610295542404218,0.2995653031580157,1.5396212702114986,0.844875,ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.8,0.9,80,1.5581278884759069,1.2559911650107434,1.5426500558364582,0.547,ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.9,0.9,80,1.5583860425604574,0.938655710204759,1.5373824277063315,0.6195,ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.95,0.9,80,1.565141004270547,0.6099858715672726,1.5455518192250683,0.716,ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv
+ipo,0.99,0.9,80,1.5444795221176435,0.2779144507094886,1.5272466482973868,0.83225,ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv

@@ -1,0 +1,50 @@
+{
+  "phase": "train",
+  "indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "updates": 10,
+  "stage": "training_segment",
+  "sequence": 6,
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--partition=h100_all",
+    "--account=rc_fanyao_pi",
+    "--gres=gpu:1",
+    "--cpus-per-task=8",
+    "--mem=96G",
+    "--time=1-00:00:00",
+    "--signal=USR1@3600",
+    "--no-requeue",
+    "--job-name=o1q3_0006_train",
+    "--output=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1/logs/0006-%A_%a.out",
+    "--error=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1/logs/0006-%A_%a.err",
+    "--array=0,1,2,3,4,5%2",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1/source/experiments/oracle1_semantic/run_phase.sh",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1",
+    "train",
+    "10"
+  ],
+  "preflight": {
+    "checked_at_utc": "2026-10-16T19:44:20.377732+00:00",
+    "full_queue_rows": 18462,
+    "owned_queue": [],
+    "owned_scontrol": [],
+    "recent_terminal_scontrol": [
+      "JobId=4819533 ArrayJobId=4819533 ArrayTaskId=5 ArrayTaskThrottle=2 JobName=o1q3_0005_train UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6656 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=COMPLETED Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=03:21:58 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-10-16T05:37:17 EligibleTime=2026-10-16T12:19:15 AccrueTime=2026-10-16T05:37:17 StartTime=2026-10-16T12:19:15 EndTime=2026-10-16T15:41:13 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-16T12:19:15 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:2815996 ReqNodeList=(null) ExcNodeList=(null) NodeList=g15070304 BatchHost=g15070304 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1 AllocTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1,gres/gpu:h100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=96G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1/source/experiments/oracle1_semantic/run_phase.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1/logs/0005-4819533_5.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1/logs/0005-4819533_5.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8 "
+    ],
+    "allocated_gpus": 0,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "created": "2026-10-16T19:44:50.785223+00:00",
+  "job_id": "4836621"
+}

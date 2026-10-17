@@ -1,0 +1,288 @@
+{
+  "state": "CPU_VALIDATED_NOT_SUBMITTED",
+  "checked_at_utc": "2026-10-13T06:40:26.457915+00:00",
+  "source_commit": "2d6b5747c251abc44700799be24e3e1e05e9b984",
+  "original_source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "launch_root": "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery",
+  "recovery_output_root": "/work/users/y/u/yuhe32/ipo_runs/oracle2_generation_recovery_20261013_v1",
+  "recovery_sha256": "89c1397acd414d3f7badddb8d6a885f74b8ae33a2b894c33d2166dc95e8309fd",
+  "tests": [
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "experiments/oracle2",
+        "-p",
+        "test*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "test_count": 53,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "experiments/cyclic_history",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "test_count": 76,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "bash",
+        "-n",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/train_oracle2.py",
+        "--plan",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/plan.json",
+        "--review",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/audit_review.json",
+        "--run-id",
+        "ipo_ordinary",
+        "--source-commit",
+        "2d6b5747c251abc44700799be24e3e1e05e9b984"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/train_oracle2.py",
+        "--plan",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/plan.json",
+        "--review",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/audit_review.json",
+        "--run-id",
+        "ipo_reference",
+        "--source-commit",
+        "2d6b5747c251abc44700799be24e3e1e05e9b984"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/train_oracle2.py",
+        "--plan",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/plan.json",
+        "--review",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/audit_review.json",
+        "--run-id",
+        "ipo_feedback",
+        "--source-commit",
+        "2d6b5747c251abc44700799be24e3e1e05e9b984"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/train_oracle2.py",
+        "--plan",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/plan.json",
+        "--review",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/audit_review.json",
+        "--run-id",
+        "dpo_ordinary",
+        "--source-commit",
+        "2d6b5747c251abc44700799be24e3e1e05e9b984"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/train_oracle2.py",
+        "--plan",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/plan.json",
+        "--review",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/audit_review.json",
+        "--run-id",
+        "dpo_reference",
+        "--source-commit",
+        "2d6b5747c251abc44700799be24e3e1e05e9b984"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    },
+    {
+      "command": [
+        "/work/users/y/u/yuhe32/h100env312/bin/python",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/source/experiments/oracle2/train_oracle2.py",
+        "--plan",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/plan.json",
+        "--review",
+        "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v5_recovery/audit_review.json",
+        "--run-id",
+        "dpo_feedback",
+        "--source-commit",
+        "2d6b5747c251abc44700799be24e3e1e05e9b984"
+      ],
+      "exit_code": 0,
+      "test_count": null,
+      "skipped": 0
+    }
+  ],
+  "real_prefix_validation": {
+    "ipo_ordinary": {
+      "reusable_rows": 7128,
+      "missing_rows": 1672,
+      "complete_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "partial_rows": {
+        "step_0080.jsonl": 728
+      },
+      "preserved_trailing_bytes": 0
+    },
+    "ipo_reference": {
+      "reusable_rows": 6961,
+      "missing_rows": 1839,
+      "complete_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "partial_rows": {
+        "step_0080.jsonl": 561
+      },
+      "preserved_trailing_bytes": 0
+    }
+  },
+  "recovery_gate": {
+    "source_commit": "2d6b5747c251abc44700799be24e3e1e05e9b984",
+    "recovery_gate": "BLOCKED_AS_EXPECTED",
+    "reason": "Predecessor generation must be COMPLETED 0:0, not just have output files",
+    "allocated_gpus": 2,
+    "owned_queue": [
+      "4794738_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4794738_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4794738_2|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+      "4794738_3|yuhe32|448057|RUNNING|gres/gpu:1|g15070306"
+    ],
+    "no_submission_intent_or_receipt": true
+  },
+  "gpu_inference_tested": false,
+  "recovery_submitted": false,
+  "wrscore_submitted": false,
+  "original_banks_modified": false,
+  "plan_changed": false,
+  "results_output_created": false,
+  "scheduler_accounting_utc": [
+    "4794738_0|TIMEOUT|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|12:00:26|12:00:00|2026-10-12T18:14:50|2026-10-13T06:15:16",
+    "4794738_1|TIMEOUT|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|12:00:26|12:00:00|2026-10-12T18:14:50|2026-10-13T06:15:16",
+    "4794738_2|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:25:11|1-00:00:00|2026-10-13T06:15:16|Unknown",
+    "4794738_3|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:25:11|1-00:00:00|2026-10-13T06:15:16|Unknown",
+    "4794738_[4-5%2]|PENDING|0:0||00:00:00|1-00:00:00|Unknown|Unknown"
+  ],
+  "allocated_gpus": 2,
+  "owned_queue": [
+    "4794738_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_2|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+    "4794738_3|yuhe32|448057|RUNNING|gres/gpu:1|g15070306"
+  ],
+  "logged_execution_errors": [],
+  "training": {
+    "ipo_ordinary": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "ipo_reference": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "ipo_feedback": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "dpo_ordinary": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "dpo_reference": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "dpo_feedback": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    }
+  },
+  "original_generation_written_rows": {
+    "baseline": {
+      "step_0000.jsonl": 800
+    },
+    "ipo_ordinary": {
+      "step_0000.jsonl": 800,
+      "step_0010.jsonl": 800,
+      "step_0020.jsonl": 800,
+      "step_0030.jsonl": 800,
+      "step_0040.jsonl": 800,
+      "step_0050.jsonl": 800,
+      "step_0060.jsonl": 800,
+      "step_0070.jsonl": 800,
+      "step_0080.jsonl": 728
+    },
+    "ipo_reference": {
+      "step_0000.jsonl": 800,
+      "step_0010.jsonl": 800,
+      "step_0020.jsonl": 800,
+      "step_0030.jsonl": 800,
+      "step_0040.jsonl": 800,
+      "step_0050.jsonl": 800,
+      "step_0060.jsonl": 800,
+      "step_0070.jsonl": 800,
+      "step_0080.jsonl": 561
+    },
+    "ipo_feedback": {
+      "step_0000.jsonl": 250
+    },
+    "dpo_ordinary": {
+      "step_0000.jsonl": 250
+    }
+  },
+  "next_action": "Wait for original tasks2..5 COMPLETED0:0 and empty full owner/UID account; then use v5 frozen queue recover. Never duplicate intent/receipt. WR after all66 banks and successful recovery.",
+  "memory_telemetry": "No generator GPU peak recorded; CPU tests and prefix checks are not GPU inference validation."
+}

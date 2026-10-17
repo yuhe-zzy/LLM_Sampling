@@ -1,0 +1,13 @@
+{
+  "job_id": "4606367",
+  "submitted_at_utc": "2026-09-29T05:56:05.170713+00:00",
+  "run_ids": [
+    "ipo_mixed_c100_s0",
+    "dpo_mixed_c100_s0"
+  ],
+  "array": "0-1%2",
+  "gpu_per_task": 1,
+  "outer_updates": 100,
+  "scheduler_response": "4606367",
+  "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_stage_c100_20260929"
+}

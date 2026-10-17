@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-10-15T18:32:21.868051+00:00",
+  "queue_checked_at_utc": "2026-10-15T18:31:52.128065+00:00",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "sequence": 3,
+  "job_id": "4811252",
+  "arms": {
+    "ipo_ordinary": {"task": 0, "scheduler_state": "COMPLETED", "exit_code": "0:0", "elapsed": "03:20:00", "latest_complete_outer": 12, "manifest_state": "SEGMENT_COMPLETE", "latest_loss": 9.605311303049799},
+    "ipo_reference": {"task": 1, "scheduler_state": "COMPLETED", "exit_code": "0:0", "elapsed": "03:19:02", "latest_complete_outer": 10, "manifest_state": "SEGMENT_COMPLETE", "latest_loss": 8.83537382418417},
+    "ipo_feedback": {"task": 2, "scheduler_state": "COMPLETED", "exit_code": "0:0", "elapsed": "03:21:04", "latest_complete_outer": 10, "manifest_state": "SEGMENT_COMPLETE", "latest_loss": 9.795921200539102},
+    "dpo_ordinary": {"task": 3, "scheduler_state": "COMPLETED", "exit_code": "0:0", "elapsed": "03:21:36", "latest_complete_outer": 12, "manifest_state": "SEGMENT_COMPLETE", "latest_loss": 0.8450720718749596},
+    "dpo_reference": {"task": 4, "scheduler_state": "RUNNING", "latest_complete_outer": 4, "manifest_state": "RUNNING", "latest_loss": 0.5678959962299754},
+    "dpo_feedback": {"task": 5, "scheduler_state": "RUNNING", "latest_complete_outer": 4, "manifest_state": "RUNNING", "latest_loss": 0.6423869569428151, "exact_null_control": true}
+  },
+  "validation": {
+    "committed_states": 58,
+    "finite_states": true,
+    "contiguous_checkpoint_hashes_valid": true,
+    "initial_scores_and_token_support_match": true,
+    "frozen_contract_valid": true,
+    "logged_execution_errors": [],
+    "all_six_arms_started": true,
+    "all_100_round_runs_complete": false
+  },
+  "full_account": {"allocated_gpus": 2, "gpu_type": "H100", "running_tasks": ["4811252_4", "4811252_5"], "pending_tasks": [], "unrelated_work": false, "account_gpu_ceiling": 4, "administrator_hard_cap_installed": false},
+  "gpu_memory": {"scope": "maximum across each arm's latest completed-round metrics, not lifetime/device-wide usage", "max_allocated_bytes": 12778020864, "max_reserved_bytes": 30706499584},
+  "submission_sequences_present": [1, 2, 3],
+  "new_submission": false,
+  "scheduler_changes": false,
+  "source_or_science_changes": false,
+  "downstream_stages_submitted": false,
+  "monitor_interval_hours": 5,
+  "next_action": "Wait for tasks4/5 COMPLETED0:0 and full account idle, then frozen guarded advance dry-run and one submission."
+}

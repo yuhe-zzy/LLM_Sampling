@@ -1,0 +1,18 @@
+[
+  {
+    "judge": "nemotron",
+    "default_type": "BatchEncoding",
+    "default_length": 2,
+    "explicit_type": "list",
+    "explicit_length": 61,
+    "explicit_all_int": true
+  },
+  {
+    "judge": "skywork",
+    "default_type": "BatchEncoding",
+    "default_length": 2,
+    "explicit_type": "list",
+    "explicit_length": 38,
+    "explicit_all_int": true
+  }
+]

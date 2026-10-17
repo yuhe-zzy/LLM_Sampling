@@ -1,0 +1,977 @@
+{
+  "publication_date": "2026-10-13",
+  "scope": "Reviewed local result reconciliation, no GPU action",
+  "hash_encoding": "sha256 uses Git LF-normalized CSV bytes; source_sha256 uses original local bytes",
+  "files": [
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/dpo_ordinary_calibrated_s0.csv",
+      "local_source": "cyclic_fixed_target_results_20260928/raw/dpo_ordinary_calibrated_s0/metrics.csv",
+      "sha256": "dfed751df8b6f037d5859eeead157bee96caf23faf57bdd248fed04a534d12d8",
+      "source_sha256": "7f5c168f557b5fbcca6cd332ad9d94f7963f074686a62498ac690aaa454a2772",
+      "rows": 7,
+      "coordinate": "block",
+      "last": 6
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/dpo_stable_calibrated_s0.csv",
+      "local_source": "cyclic_fixed_target_results_20260928/raw/dpo_stable_calibrated_s0/metrics.csv",
+      "sha256": "af614dfbe0ad245a06d6258097e2c0925a16fced0b38faed79b6a44eeea499aa",
+      "source_sha256": "8aac71b0ada698d470a198268d91b44cb98bf4bb2e1c6a984a0816cd94e98f55",
+      "rows": 7,
+      "coordinate": "block",
+      "last": 6
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/ipo_ordinary_calibrated_s0.csv",
+      "local_source": "cyclic_fixed_target_results_20260928/raw/ipo_ordinary_calibrated_s0/metrics.csv",
+      "sha256": "6fac0696aede7b7e213496d893eddd651352d460c77f486eeaa51cb46fc62fa9",
+      "source_sha256": "cba05f1f4bd8a7e17527c6d8e291ba9ece9cab25ff92fc57378f726255d25837",
+      "rows": 7,
+      "coordinate": "block",
+      "last": 6
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_fixed_target_results_20260928/metrics_original/ipo_stable_calibrated_s0.csv",
+      "local_source": "cyclic_fixed_target_results_20260928/raw/ipo_stable_calibrated_s0/metrics.csv",
+      "sha256": "c6e4886eb7b630fc0c7d4308103697f71096472daeb77ea60e36b90a04444469",
+      "source_sha256": "daf5dbef1d01dae970e3013b08bf9c6fd232b0e939f03deeb76efe680c3e4121",
+      "rows": 7,
+      "coordinate": "block",
+      "last": 6
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/dpo_ordinary_calibrated_s0.csv",
+      "local_source": "cyclic_history_stage_a_analysis_20260928/raw/dpo_ordinary_calibrated_s0/metrics.csv",
+      "sha256": "832240c47e085d1b72d8155daef17105b8021bc016f32724705bfc86bcfd7759",
+      "source_sha256": "02fcd8b4c3474fd61c840509730a304b1fd5dc5aab620dc161a1ab8b003d97ee",
+      "rows": 31,
+      "coordinate": "step",
+      "last": 30
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/dpo_stable_calibrated_s0.csv",
+      "local_source": "cyclic_history_stage_a_analysis_20260928/raw/dpo_stable_calibrated_s0/metrics.csv",
+      "sha256": "8f30ab022a9aa0207b8ae111f6d41db9cbd7e49c1ea0da31689ec324940cc94a",
+      "source_sha256": "dbbf1071271a892901faa6c015095b7f3010cf15a97b7d00430a5775789b120a",
+      "rows": 31,
+      "coordinate": "step",
+      "last": 30
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/ipo_ordinary_calibrated_s0.csv",
+      "local_source": "cyclic_history_stage_a_analysis_20260928/raw/ipo_ordinary_calibrated_s0/metrics.csv",
+      "sha256": "9d5b2570a0930484c7767a7bd6b7b12c958773a66ca4735d77ef0ee5c7826acb",
+      "source_sha256": "1294cc2cbd1e797816095696d842a51a56ae706e05be1b1908dc4fee9b484f90",
+      "rows": 31,
+      "coordinate": "step",
+      "last": 30
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_a_analysis_20260928/metrics_original/ipo_stable_calibrated_s0.csv",
+      "local_source": "cyclic_history_stage_a_analysis_20260928/raw/ipo_stable_calibrated_s0/metrics.csv",
+      "sha256": "9d9de5a1009b3c6d863e51c18bbd70b75ef379879504d6caa0b0e16ca530d3cd",
+      "source_sha256": "467eecfc6f09a1ed7a5308c947ae8000a2e292b602c28be06e9e69a951f6df68",
+      "rows": 31,
+      "coordinate": "step",
+      "last": 30
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/dpo_feedback_b100_s0.csv",
+      "local_source": "cyclic_history_stage_b100_results_20260929/raw/dpo_feedback_b100_s0/metrics.csv",
+      "sha256": "d828d272991ca7528cc741d5735457935750be52683b7ec7b1b2846b60f4a081",
+      "source_sha256": "1a87ef3ec9e513f59fd131cf78d26360c37ae55fc8b175cde0ae3b7a0f32804f",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/dpo_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_stage_b100_results_20260929/raw/dpo_ordinary_b100_s0/metrics.csv",
+      "sha256": "952b727f8ddef097955b937310525773fc1a7921b1714012f680ce672f21c0ed",
+      "source_sha256": "4a406c8381428ce51b1836615e9748a79f06166e8fc6d6a341f9e59ed542c726",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/dpo_reference_b100_s0.csv",
+      "local_source": "cyclic_history_stage_b100_results_20260929/raw/dpo_reference_b100_s0/metrics.csv",
+      "sha256": "b9aefba9ec66031bf698ee9c45b4decc4a9ddb7b178495906f6eec554582a12a",
+      "source_sha256": "e1f24026481a4ab4f5d533d6ef4d5e7b4622fd128eeba8b140372bd5c1d4a213",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/ipo_feedback_b100_s0.csv",
+      "local_source": "cyclic_history_stage_b100_results_20260929/raw/ipo_feedback_b100_s0/metrics.csv",
+      "sha256": "7c56673244d6ce7073af6c4d46adab78567efb2939fb4808b18a684fc664d3ca",
+      "source_sha256": "afd623718fbeca00bff5aa4a05c7d29958c6a5a376f4050c77a5d1ed3e6c362a",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/ipo_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_stage_b100_results_20260929/raw/ipo_ordinary_b100_s0/metrics.csv",
+      "sha256": "348759387227f000f04347458c85b610cfb831b26efda91480ecd8cad8fc3ce9",
+      "source_sha256": "50bb692c5cd7ab57ce99a3640c849a5a71d5bbeaeafa7bb42552e3be8c03c142",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/metrics_original/ipo_reference_b100_s0.csv",
+      "local_source": "cyclic_history_stage_b100_results_20260929/raw/ipo_reference_b100_s0/metrics.csv",
+      "sha256": "8ee07fdd5698eecaac8025efd1887bdb62f69cee2cd98e3e83b4244f131a824a",
+      "source_sha256": "51b1ce614d9663586c4739af1ffbb60a3aaa798d26347289345f9b1200fd24eb",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/metrics_original/dpo_mixed_c100_s0.csv",
+      "local_source": "cyclic_history_stage_c100_results_20260929/raw/dpo_mixed_c100_s0/metrics.csv",
+      "sha256": "eba4be35d0c45c8f3824f21bf70a3007e96a00998fe7a7ec74b04c2c2fd14209",
+      "source_sha256": "57dedeb20a182c272fea2bfcdd826d48744b8059d2df25a1de45e0b70aada2ca",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/metrics_original/ipo_mixed_c100_s0.csv",
+      "local_source": "cyclic_history_stage_c100_results_20260929/raw/ipo_mixed_c100_s0/metrics.csv",
+      "sha256": "36fa6d4ae2db9fce242402aa685ef83998a367753b359f0a6960c8d9e832b988",
+      "source_sha256": "b106cb7813474bc0b5031e5e9f6549224f1a582ddcaabde5b8eed982457301bd",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/metrics_original/dpo_reference90_a1_b100_s0.csv",
+      "local_source": "cyclic_reference90_results_20261003/raw/dpo_reference90_a1_b100_s0/metrics.csv",
+      "sha256": "deb50308df0f65f23e27d28671a86f1d5e5004c9d023f938810b6b5cd24936c0",
+      "source_sha256": "02ba291e275867014bb832f8598000e051dd53281bb138263bdbe9a398bc5dcc",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_reference90_20260929/metrics_original/ipo_reference90_a1_b100_s0.csv",
+      "local_source": "cyclic_reference90_results_20261003/raw/ipo_reference90_a1_b100_s0/metrics.csv",
+      "sha256": "1fee14a07cbebd2afe051e49a2529ed8a0a1cbf589cebf827da011d09a9366ab",
+      "source_sha256": "9930dbc59eeae5043fc54c1c327d34e1ec01fb6ceb230dc80ec84a8940ab83ed",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha08_feedback_half_b100_s0/metrics.csv",
+      "sha256": "082a3521abd21ec6f92cf3e309645eda7fd2bb93321bcab0e50d4220ea36b63b",
+      "source_sha256": "95f3ce2a7058b0af3fdb633ff0581f72fed4e200a43742d8daceed448d28cb04",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha08_feedback_one_b100_s0/metrics.csv",
+      "sha256": "ac6871b766b1e642b69d78ec7f94dcc65f395065203c43f8d270f04696ecb907",
+      "source_sha256": "dc581179df871f8fa878992dd6237f59f896db52fe97e3b324f5bbbd41e0bf48",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha08_ordinary_b100_s0/metrics.csv",
+      "sha256": "6532ac24217725f5c05c903f6d8c2caf8deede0161c94411d8218f8028cc1b0a",
+      "source_sha256": "f975bc4fb6c225980288379f5eb902d0f65290ca21c7d95b53d692f4e96c839b",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha08_reference_half_b100_s0/metrics.csv",
+      "sha256": "ec770de921ca84423c2004dd7b7d28c05896d8be44622fa83c8801bf3f178b46",
+      "source_sha256": "abe88df27f44127b7f41d8b6a30609ba7f04970956876ba69fa31e8231d112e9",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha08_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha08_reference_max_b100_s0/metrics.csv",
+      "sha256": "cc9afe3a023e547ec6aed4ceaae4a324bf225875cc4367339b460fa9029fca6c",
+      "source_sha256": "d4fa278c4ca77f84777530b07f12fff59331a4bd567ba77dd4c2fa49fc915ba0",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha099_feedback_half_b100_s0/metrics.csv",
+      "sha256": "9106b294c1885dc4742d2412027bfe74b042d63c89e32c54146879c97a373d74",
+      "source_sha256": "55b703dd6af086cc0019cf13c4f489243e41da29a610f8ca5ca986dbda9a2058",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha099_feedback_one_b100_s0/metrics.csv",
+      "sha256": "8a63e85e8768e80174d10f23133faa1e62a6dcc7b19b71d596be423b1f4d189d",
+      "source_sha256": "3d89edd81dd97132ba0a9927e284965d1652125707785f27affb885fec0748ff",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha099_ordinary_b100_s0/metrics.csv",
+      "sha256": "f10cc4b2e812c166367e795eb121f4f5f4040bcdbf8b69fde65b08d365431022",
+      "source_sha256": "d355edccbd779f796af51d7cc6528e09e6a85f24fd20722b6d5085f1fe153b70",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha099_reference_half_b100_s0/metrics.csv",
+      "sha256": "c216ae71054d0776d8be756f2073a5ec4925a8234bc3fd6a434049cff6097541",
+      "source_sha256": "6c025f77b91e18191d5bb2a0fc04470d76bbeab96972e00c4899454c5c65a2b1",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_alpha099_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_alpha099_reference_max_b100_s0/metrics.csv",
+      "sha256": "5eb1f6657c84e83cb18c469abcee2f0461e4308059df51f15e59e49e4b74510c",
+      "source_sha256": "ecf4381eda389309980f29f24d9604f090664c9e52b8e49e8dcb29a5f443f64a",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_beta15_feedback_half_b100_s0/metrics.csv",
+      "sha256": "327694ebdb869869dcc68de72ddbbf8fd86c2b0845dd7724b120b8ef569f1fbc",
+      "source_sha256": "accebb2bb0ee09b1aecca7cdc847933de070ebb4fd865e797da4c61895a92c6a",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_beta15_feedback_one_b100_s0/metrics.csv",
+      "sha256": "55812ac951d614435c7e5b87faa55b899e1aa62362b4952f0eec38818a67cbbf",
+      "source_sha256": "998aa1a41007e4db2773f8bb6ca0b9b3de7e8195f8e9a60cb2cf8e10994222c9",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_beta15_ordinary_b100_s0/metrics.csv",
+      "sha256": "2418e585c6ac31e61d525d84608da25cad0938762b53078e67b3f91318920a5d",
+      "source_sha256": "72a262ae18cc77ad3cb8315f347c5f96ca8c9286c19f5dd16c13ec3fc940940d",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_beta15_reference_half_b100_s0/metrics.csv",
+      "sha256": "6b018cc9f73c22c997052073693b9e00580b0adabb933487403a5aa889950e1f",
+      "source_sha256": "6d2422180c41585233355fb82aaabc67801453d61f333b552d039d6656113c1c",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_beta15_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_beta15_reference_max_b100_s0/metrics.csv",
+      "sha256": "5ebb03f5542f18d799e8d4dc4ac528a954521f2fabd25f1d816892712e3610eb",
+      "source_sha256": "28571c7651600550e49c76412f36838acbf07a7846d9653fc8de9a8e66cd8918",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_center_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_center_feedback_one_b100_s0/metrics.csv",
+      "sha256": "6352ceeabfbd905b9859afd4ccbce4f820743da852ac6bb152af9021329f51f1",
+      "source_sha256": "75037be386574db1488f2d5c07336761188f932efc7f755a1a8c3cc3175b9388",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_center_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_center_reference_max_b100_s0/metrics.csv",
+      "sha256": "efb70460b95f06cbca32299cfa1d966324cacccdf5d92ae38f56805cacdf0185",
+      "source_sha256": "fdb333241a91d4372cffefbd50e0bcf47110e615a70c3a0c6624981db475460f",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_coverage05_feedback_half_b100_s0/metrics.csv",
+      "sha256": "c5b4c43e206d444d698a98e4d441f41087416753b2b9370a74a798652e717d69",
+      "source_sha256": "2089ac9aa87d02328ae2697f8856d883aa3b6400dbffe1279ffbe7c7e5d2ae47",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_coverage05_feedback_one_b100_s0/metrics.csv",
+      "sha256": "f72c414c5ffb3849651d2f861182c57b8a09f95942fe6207d4e4f74b4389eae3",
+      "source_sha256": "53fd7b858de83041be03f94c84401475e8ebf7c354fd7ba0acbc031385d33681",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_coverage05_ordinary_b100_s0/metrics.csv",
+      "sha256": "cb2acf30d91b524fd8076d6ae2828196381dec446e6fb9245ce1a8d042d3cf8e",
+      "source_sha256": "cdbe0b61f37d89001a54340bea2ca9362f039152d0902f01172e4fdf56858001",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_coverage05_reference_half_b100_s0/metrics.csv",
+      "sha256": "671d609a730b99e13e2b439db9584c84e48dfd110ee064f5794319e09221f65b",
+      "source_sha256": "bbf5a5e347c01c7cc58cae0b3f27561496c0a29313bad7ff3ec8cbad92fe7a47",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_coverage05_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_coverage05_reference_max_b100_s0/metrics.csv",
+      "sha256": "3e34ad91b4e6fbbac3436173945385bd36320e90f0dc29516819741810a7d38b",
+      "source_sha256": "1d5a88d7c3c39bfa3fab1b2d561675d816241e89e14a9abf97f7558032d22793",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_feedback_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_feedback_b100_s0/metrics.csv",
+      "sha256": "d828d272991ca7528cc741d5735457935750be52683b7ec7b1b2846b60f4a081",
+      "source_sha256": "1a87ef3ec9e513f59fd131cf78d26360c37ae55fc8b175cde0ae3b7a0f32804f",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_ordinary_b100_s0/metrics.csv",
+      "sha256": "952b727f8ddef097955b937310525773fc1a7921b1714012f680ce672f21c0ed",
+      "source_sha256": "4a406c8381428ce51b1836615e9748a79f06166e8fc6d6a341f9e59ed542c726",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/dpo_reference_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/dpo_reference_b100_s0/metrics.csv",
+      "sha256": "b9aefba9ec66031bf698ee9c45b4decc4a9ddb7b178495906f6eec554582a12a",
+      "source_sha256": "e1f24026481a4ab4f5d533d6ef4d5e7b4622fd128eeba8b140372bd5c1d4a213",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha08_feedback_half_b100_s0/metrics.csv",
+      "sha256": "0ffa293c132cf2f2e41dc14c90401c0cf5fb733f1801817a4a70be7c1e9d9dab",
+      "source_sha256": "7a3fb51ed4fbc427a406a4c8ff71e3cea7351e13daf2fd880c271ab4b29ce5f8",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha08_feedback_one_b100_s0/metrics.csv",
+      "sha256": "487f31e334b4c74f88c916842adc7b3e70b695f194c434a54ad8d49eefc3f22a",
+      "source_sha256": "a74b1a37a7aaae422c1a7cb63e91bba1913ff826258d44a6e8e32cc8d4395062",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha08_ordinary_b100_s0/metrics.csv",
+      "sha256": "03157bbe4c67b0135198fbbee26231bd847282b556fc061755eaf164fe2fecda",
+      "source_sha256": "0f82082e7206893fb2af75e3b570b6e37f7b6cb3825fc0fc4db8bc35c8cf01ca",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha08_reference_half_b100_s0/metrics.csv",
+      "sha256": "d9078a3ba797a4e8e0e8665bf0198515bd3aad2bf1914b9e6be496787b95097a",
+      "source_sha256": "52aab21948f6673fc298df6b294db2ac51114e03a85bcf8723bbf0e93fb8c78f",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha08_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha08_reference_max_b100_s0/metrics.csv",
+      "sha256": "2d31137768da0c514c57e3d474ffce0db86ea2f46e0d01fd0529107771e708ec",
+      "source_sha256": "0fdb4e2883cd8c74edad5658164d99038b1f91065fd42b69b10df32c75abec13",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha099_feedback_half_b100_s0/metrics.csv",
+      "sha256": "b44c937995599f9d1d072b1a0396bfd7a09448b18f75aae301b9d5d080de0e23",
+      "source_sha256": "b7d96736d45409a20d07bab988790b20f966fa4cc050875ea97f922f698bc3e8",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha099_feedback_one_b100_s0/metrics.csv",
+      "sha256": "3a6f688f1aca65e5b8a82ce4bdba3bab33787b4f81214556850027f400975f56",
+      "source_sha256": "7692e0c95dee61ebfbb4820ee3c6fea8e5cad292679afbf88b7e280b7660d914",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha099_ordinary_b100_s0/metrics.csv",
+      "sha256": "4dc4fafc4a85f437d3dd43b728a5a54fc9a9198ecd78c1e0e047ded8b3b1923e",
+      "source_sha256": "bfbe38bd626aea422ba57d48cfa57de5a474e32d1d95f7d8bb3b169f5b7a6843",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha099_reference_half_b100_s0/metrics.csv",
+      "sha256": "d2cc4df2d6158fb0e73e015b9019df72ab911f6c005c69f903b4215a65bea5ea",
+      "source_sha256": "601cc82d2dbbcc15f494940f8d52225c512cbd65f14e48a001d33cf39320245d",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_alpha099_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_alpha099_reference_max_b100_s0/metrics.csv",
+      "sha256": "51ecfb821c7485e1bebcc7e20373dd4cdb5d18387f27ff31f9a4a97bafcd1b1e",
+      "source_sha256": "d764fd288d89e6b6628467536d59022ee2ba78edcd4b037ecc94176b3ae3c76b",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_beta15_feedback_half_b100_s0/metrics.csv",
+      "sha256": "a317acd8b09e1f728b2dcbba2c62f192bdcd9c4d9e4c4ecbde462ccbfb68180b",
+      "source_sha256": "3de057b9a1df4d7bdcc5aa20e21aaff4cb7922fd2539de5e80ce3b2bf796219e",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_beta15_feedback_one_b100_s0/metrics.csv",
+      "sha256": "5dddb8f5b7b85d82fc0ac0ef9aeadb4ec0bc4c22755cecd30a4566b79bedfa45",
+      "source_sha256": "1e2463ee63f1b79a7efb8adf4c0d5c04c697bef7042b50ef5b22d2213aae0487",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_beta15_ordinary_b100_s0/metrics.csv",
+      "sha256": "68136e16549bd59b94e40320c2de39503d3f901da43c96405ad02f02e7e6d411",
+      "source_sha256": "8921eef1b63e3f5b29d8c38e9e0274ef4bd59a4a4159f178a8974975b3825ce3",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_beta15_reference_half_b100_s0/metrics.csv",
+      "sha256": "d78adf7862ab4c6ad566cb7889b176ad2be910cfa5b58e6de0660273e77e41bc",
+      "source_sha256": "f4e59419e9f0f73444521df6fc4485b290a88298dc4342fa72d440ff185db287",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_beta15_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_beta15_reference_max_b100_s0/metrics.csv",
+      "sha256": "b05ae64cc01c57cdfcb05471e4a616dd884e6a2f51b05b40c6b5853a7cd16a31",
+      "source_sha256": "1026db7fdd4e6761aae98a8ecbf2fdb6f80ce18d93b3442ae7d0708226b73af8",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_center_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_center_feedback_one_b100_s0/metrics.csv",
+      "sha256": "da14c705c196d0cf394644c72e57df41020fd010749a4ff8a32312c95aa647ff",
+      "source_sha256": "c44a150debc598374bfbdd713a54257ba72ef016e677f97eec611c9c59692fef",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_center_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_center_reference_max_b100_s0/metrics.csv",
+      "sha256": "83b5a380e4db03eb33ba281c65b565cb1badf52319c5b7d8242beb6aedfd81de",
+      "source_sha256": "9c9eb9479e36ec7169a62dd0cf07c138e9c3cf4ae7e15ad299d8ddea5f3392b7",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_feedback_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_coverage05_feedback_half_b100_s0/metrics.csv",
+      "sha256": "acd2d850b9fbec81fb69458506aaffbc0adb32bbdc99d3d02952323fc4567348",
+      "source_sha256": "ce7f2210d876378d3fe571474c8633a63704f7bdbdd7558207b6d54b6bc3c9f3",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_feedback_one_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_coverage05_feedback_one_b100_s0/metrics.csv",
+      "sha256": "3e4987bb83c0e5f7932b3006e26a1ecf5fa6f6a8717efde822fa1d75451d2f13",
+      "source_sha256": "1462d9b98d6ea047c542ae7c9a5f5dea170c1e9373892ae36bd91b7a061b2fde",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_coverage05_ordinary_b100_s0/metrics.csv",
+      "sha256": "c006b58e8f6156295517771fbb9238db91e00d017e5076c1c870d1f734b65330",
+      "source_sha256": "24a8602f37b498b0f414a9886c31bdbdb311b8d96488d2e1ad191319a02e4ce7",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_reference_half_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_coverage05_reference_half_b100_s0/metrics.csv",
+      "sha256": "0b0b9041f27eb996e38c58390dd5365a30bca2a5b5c9e2230bdb3a4d90805e6c",
+      "source_sha256": "4774a9033eb3ed24d641097ac63ea8b308e01e5628fcd16a46d1dffb432b3e0f",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_coverage05_reference_max_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_coverage05_reference_max_b100_s0/metrics.csv",
+      "sha256": "13f962e8e9099ce1dd14e1c45878c2bf5dbc6c34c854c62eee4024b23b118421",
+      "source_sha256": "a6f67537a45c1be95496902edb16105953a915dfb9e52ca8b7be8e6c565d8ca5",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_feedback_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_feedback_b100_s0/metrics.csv",
+      "sha256": "7c56673244d6ce7073af6c4d46adab78567efb2939fb4808b18a684fc664d3ca",
+      "source_sha256": "afd623718fbeca00bff5aa4a05c7d29958c6a5a376f4050c77a5d1ed3e6c362a",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_ordinary_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_ordinary_b100_s0/metrics.csv",
+      "sha256": "348759387227f000f04347458c85b610cfb831b26efda91480ecd8cad8fc3ce9",
+      "source_sha256": "50bb692c5cd7ab57ce99a3640c849a5a71d5bbeaeafa7bb42552e3be8c03c142",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/metrics_original/ipo_reference_b100_s0.csv",
+      "local_source": "cyclic_history_trend_sweep_results_20261004/raw/ipo_reference_b100_s0/metrics.csv",
+      "sha256": "8ee07fdd5698eecaac8025efd1887bdb62f69cee2cd98e3e83b4244f131a824a",
+      "source_sha256": "51b1ce614d9663586c4739af1ffbb60a3aaa798d26347289345f9b1200fd24eb",
+      "rows": 101,
+      "coordinate": "step",
+      "last": 100
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/metrics_a0.8_l0.5.csv",
+      "local_source": "oracle_dpo_sequencesum_results_20260817/metrics_a0.8_l0.5.csv",
+      "sha256": "2fc8cc6ab4663222e0897e1569a12f950fd0d1b83929d170e86b5f0f79e5d63e",
+      "source_sha256": "2fc8cc6ab4663222e0897e1569a12f950fd0d1b83929d170e86b5f0f79e5d63e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/metrics_a0.9_l0.5.csv",
+      "local_source": "oracle_dpo_sequencesum_results_20260817/metrics_a0.9_l0.5.csv",
+      "sha256": "f53ebe87d642a80103a2fa5a5815d76720636c5ac2d57bd402a287e6b29a648e",
+      "source_sha256": "f53ebe87d642a80103a2fa5a5815d76720636c5ac2d57bd402a287e6b29a648e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_entropy_partial.pdf",
+      "local_source": "oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_entropy_partial.pdf",
+      "sha256": "ddd462216a91b3f7e824b10c83bce82806f76230241f4a62266f732c4d8b29c7",
+      "source_sha256": "ddd462216a91b3f7e824b10c83bce82806f76230241f4a62266f732c4d8b29c7",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_entropy_partial.png",
+      "local_source": "oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_entropy_partial.png",
+      "sha256": "5a6bfa7021ff15bd29062a475e6174cc381d79f0c94a2c557c9c56c52604b379",
+      "source_sha256": "5a6bfa7021ff15bd29062a475e6174cc381d79f0c94a2c557c9c56c52604b379",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_winning_rate_partial.pdf",
+      "local_source": "oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_winning_rate_partial.pdf",
+      "sha256": "8d58704f8af2579a208cc39f45304b7465a11c48c185817d961cf4162b2e3e5a",
+      "source_sha256": "8d58704f8af2579a208cc39f45304b7465a11c48c185817d961cf4162b2e3e5a",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_winning_rate_partial.png",
+      "local_source": "oracle_dpo_sequencesum_results_20260817/oracle_dpo_sequencesum_winning_rate_partial.png",
+      "sha256": "d50d663b815af7c9eb78a615a75fbd94fee330cae982a32b738177d79a13b13e",
+      "source_sha256": "d50d663b815af7c9eb78a615a75fbd94fee330cae982a32b738177d79a13b13e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.8_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "local_source": "oracle_ipo_frozenref_results_20260817/a0.8_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "sha256": "960828777ccf703007f8e1271ab9f5baf933ec3c7b6827a966099fa04abb76e7",
+      "source_sha256": "960828777ccf703007f8e1271ab9f5baf933ec3c7b6827a966099fa04abb76e7",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.8_l0.9_b1_dynoracle_frozenref_v1.csv",
+      "local_source": "oracle_ipo_frozenref_results_20260817/a0.8_l0.9_b1_dynoracle_frozenref_v1.csv",
+      "sha256": "25162d5db19449f926104242f570ad16f39007386ec9efb278aee3e20ec2f5e8",
+      "source_sha256": "25162d5db19449f926104242f570ad16f39007386ec9efb278aee3e20ec2f5e8",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.95_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "local_source": "oracle_ipo_frozenref_results_20260817/a0.95_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "sha256": "673449201315e753ca002f414d9c24f9f02f1bebe927823d8b683abde99af379",
+      "source_sha256": "673449201315e753ca002f414d9c24f9f02f1bebe927823d8b683abde99af379",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.99_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "local_source": "oracle_ipo_frozenref_results_20260817/a0.99_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "sha256": "ca3309084b00c5617ec2b3ae72cebd91cd813ac7bec24c55a834b70e3a4b7eb7",
+      "source_sha256": "ca3309084b00c5617ec2b3ae72cebd91cd813ac7bec24c55a834b70e3a4b7eb7",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/a0.9_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "local_source": "oracle_ipo_frozenref_results_20260817/a0.9_l0.5_b1_dynoracle_frozenref_v1.csv",
+      "sha256": "6e2eba1bfb5860112baaa9f25fb9956fe42a23c1cc4f64646de4dd1b14ee5f95",
+      "source_sha256": "6e2eba1bfb5860112baaa9f25fb9956fe42a23c1cc4f64646de4dd1b14ee5f95",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_entropy_partial.pdf",
+      "local_source": "oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_entropy_partial.pdf",
+      "sha256": "83340bae56bb77d7c452d33d005cb2ff9e9517a6e8d69a0cab5484a5c659d42e",
+      "source_sha256": "83340bae56bb77d7c452d33d005cb2ff9e9517a6e8d69a0cab5484a5c659d42e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_entropy_partial.png",
+      "local_source": "oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_entropy_partial.png",
+      "sha256": "ab969b0d66ed6367da9fb2a2512cefdcabde2abdcac85480f35dddf1a9ca4b7e",
+      "source_sha256": "ab969b0d66ed6367da9fb2a2512cefdcabde2abdcac85480f35dddf1a9ca4b7e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_winning_rate_partial.pdf",
+      "local_source": "oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_winning_rate_partial.pdf",
+      "sha256": "d17390dff63a0587811a6aead58dc03dca81654585816552228248d702a867a5",
+      "source_sha256": "d17390dff63a0587811a6aead58dc03dca81654585816552228248d702a867a5",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_winning_rate_partial.png",
+      "local_source": "oracle_ipo_frozenref_results_20260817/oracle_ipo_frozenref_winning_rate_partial.png",
+      "sha256": "b61a406301e4890cac8265acac4361ed51310c03022b08cbcc83a18616b91456",
+      "source_sha256": "b61a406301e4890cac8265acac4361ed51310c03022b08cbcc83a18616b91456",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "sha256": "e25ead306a311b9b7696ee3837381198bd98e4235392b528705824a339899cf6",
+      "source_sha256": "e25ead306a311b9b7696ee3837381198bd98e4235392b528705824a339899cf6",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "sha256": "7cfd298fba06280e030a57dd70ea0a600de56039cff811c7adbb3eed8212e373",
+      "source_sha256": "7cfd298fba06280e030a57dd70ea0a600de56039cff811c7adbb3eed8212e373",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "sha256": "bd3c1470fb97e9b03f4f6bea1e6bb9092f1020d0768b395c157f77f2805a8246",
+      "source_sha256": "bd3c1470fb97e9b03f4f6bea1e6bb9092f1020d0768b395c157f77f2805a8246",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2.csv",
+      "sha256": "d7d8990cac1b5239b0ba9dbc341d57ca2bd9eca11fc09070fd320d63308a3378",
+      "source_sha256": "d7d8990cac1b5239b0ba9dbc341d57ca2bd9eca11fc09070fd320d63308a3378",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "sha256": "efc3492056251bd61cf2a774d2e7411a2b5e2c20dee1fe4206251ed666b95470",
+      "source_sha256": "efc3492056251bd61cf2a774d2e7411a2b5e2c20dee1fe4206251ed666b95470",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "sha256": "befd476f954d0c64d19e3a5a0e10f7c58fb7185bf45fc960681201401d705941",
+      "source_sha256": "befd476f954d0c64d19e3a5a0e10f7c58fb7185bf45fc960681201401d705941",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "sha256": "3a53d55e56ac8154879065b449ab0a9651dd41f82b8b6a9755136e5f64b2a86f",
+      "source_sha256": "3a53d55e56ac8154879065b449ab0a9651dd41f82b8b6a9755136e5f64b2a86f",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "local_source": "oracle_sequencesum_results_20260825/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2.csv",
+      "sha256": "194216597d84b8031d0f098573e648a606c7922e78d260e52b3abfc55c72455e",
+      "source_sha256": "194216597d84b8031d0f098573e648a606c7922e78d260e52b3abfc55c72455e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_entropy_current.pdf",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_entropy_current.pdf",
+      "sha256": "26fffcb425cbefea633205e7b79730756823c3df51652f56f6744624dd2dec5b",
+      "source_sha256": "26fffcb425cbefea633205e7b79730756823c3df51652f56f6744624dd2dec5b",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_entropy_current.png",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_entropy_current.png",
+      "sha256": "ff3ea7e4733564e3e69c5defd39fcea6c35db3dcc63f1c1700a573444f905b02",
+      "source_sha256": "ff3ea7e4733564e3e69c5defd39fcea6c35db3dcc63f1c1700a573444f905b02",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_winning_rate_current.pdf",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_winning_rate_current.pdf",
+      "sha256": "9bcacc768eca3c7adb57ccfeab3fa0b72d4488e4f52fb0996b7b94a984f19bf4",
+      "source_sha256": "9bcacc768eca3c7adb57ccfeab3fa0b72d4488e4f52fb0996b7b94a984f19bf4",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_winning_rate_current.png",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_dpo_sequencesum_winning_rate_current.png",
+      "sha256": "4c0b3c97992e559a1050eab735337466ebd8c1f50398b848e9b0077c0fb49826",
+      "source_sha256": "4c0b3c97992e559a1050eab735337466ebd8c1f50398b848e9b0077c0fb49826",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_entropy_current.pdf",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_entropy_current.pdf",
+      "sha256": "09f98a330ffc06b22f1de02a925d0c8b43e09e2ab9340e061b8ef0ea74069cdf",
+      "source_sha256": "09f98a330ffc06b22f1de02a925d0c8b43e09e2ab9340e061b8ef0ea74069cdf",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_entropy_current.png",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_entropy_current.png",
+      "sha256": "6dbb523f5ebe44f28108eb0cddea8accff00da11dd8fa18536edad5f9570806e",
+      "source_sha256": "6dbb523f5ebe44f28108eb0cddea8accff00da11dd8fa18536edad5f9570806e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_winning_rate_current.pdf",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_winning_rate_current.pdf",
+      "sha256": "1603b150ceb979c782dddf4705298ad3915706ff28e5de852dc93815f6b3f3f7",
+      "source_sha256": "1603b150ceb979c782dddf4705298ad3915706ff28e5de852dc93815f6b3f3f7",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_winning_rate_current.png",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_ipo_sequencesum_winning_rate_current.png",
+      "sha256": "7dbdf730b45d3cc8cb9dbb23f6051d4f9b0debca1bcd6321b1a71bb754c58e8f",
+      "source_sha256": "7dbdf730b45d3cc8cb9dbb23f6051d4f9b0debca1bcd6321b1a71bb754c58e8f",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_sequencesum_results_20260825/oracle_sequencesum_current_summary.csv",
+      "local_source": "oracle_sequencesum_results_20260825/oracle_sequencesum_current_summary.csv",
+      "sha256": "901fc2aed50537d12b4299fb47728219c7aa03d6aab4f35dd23408364970a151",
+      "source_sha256": "37f312681c662475db0d304d8f187e1231c0bb90b1317d0766bd4de1f8bc5d4f",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/dpo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "afd624407deb79ebee03ca73c8735a54cb437cd011ce8dbb1d761810fcacb33e",
+      "source_sha256": "afd624407deb79ebee03ca73c8735a54cb437cd011ce8dbb1d761810fcacb33e",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/dpo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "7e5596d66faed78d8ab874d43ae97382bfde80da614aff04d5b7ca738fa4f5f3",
+      "source_sha256": "7e5596d66faed78d8ab874d43ae97382bfde80da614aff04d5b7ca738fa4f5f3",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/dpo_transitive_a0.95_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "6723e42c0ecfdad40b88ac3920849b767517ec3585920a0e9dcf1b53a4dffe49",
+      "source_sha256": "6723e42c0ecfdad40b88ac3920849b767517ec3585920a0e9dcf1b53a4dffe49",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/dpo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "06f45bc91cc2116e902252b41b58ef352697b3e6155032e42c078e35160b0800",
+      "source_sha256": "06f45bc91cc2116e902252b41b58ef352697b3e6155032e42c078e35160b0800",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/dpo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "8c68ddb5a852c0ad9256aa4467212afefe7d1efebe0475c3147d01a244bcb032",
+      "source_sha256": "8c68ddb5a852c0ad9256aa4467212afefe7d1efebe0475c3147d01a244bcb032",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/dpo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_dpo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "d692d3bfdaab86baa30d270eff35ee7010682f8ba69a52e2341732a3536b6e26",
+      "source_sha256": "d692d3bfdaab86baa30d270eff35ee7010682f8ba69a52e2341732a3536b6e26",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.8_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "d07fdcc12985ba214ee929b2bd54e7f53d8639a818ab03de9cfeda84641f936c",
+      "source_sha256": "d07fdcc12985ba214ee929b2bd54e7f53d8639a818ab03de9cfeda84641f936c",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.8_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "14fe2126be716ba8443a363b84b254a9d3b7c1d16e3d0706ef062b908ba41ab6",
+      "source_sha256": "14fe2126be716ba8443a363b84b254a9d3b7c1d16e3d0706ef062b908ba41ab6",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.95_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "9362d8146b551fc491cf25d5de33e3dcc36ae99e8b29183bab56fc315dd31c42",
+      "source_sha256": "9362d8146b551fc491cf25d5de33e3dcc36ae99e8b29183bab56fc315dd31c42",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.99_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "d8abcac536b1c7041444df7e72d3d19023761801dca24bf45aea38d9431cb2fa",
+      "source_sha256": "d8abcac536b1c7041444df7e72d3d19023761801dca24bf45aea38d9431cb2fa",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.99_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "c3e79653cdd23567272265f966c581a28c54faf174715d4a1d1833882a047c3a",
+      "source_sha256": "c3e79653cdd23567272265f966c581a28c54faf174715d4a1d1833882a047c3a",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.9_l0.5_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "d3151156628acd71914a2fd1617741c314cd7eff8a8ba62867e058fc61e4271d",
+      "source_sha256": "d3151156628acd71914a2fd1617741c314cd7eff8a8ba62867e058fc61e4271d",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/ipo_transitive_a0.9_l0.9_b1_dynoracle_frozenref_ipo_sequencesum_v2_relative_sequence_metrics.csv",
+      "sha256": "b9cc174f12fbe09358fe4c778c81fcd7653321eb055556292b3781fd77385812",
+      "source_sha256": "b9cc174f12fbe09358fe4c778c81fcd7653321eb055556292b3781fd77385812",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_dpo_relative_sequence_entropy_current.pdf",
+      "local_source": "oracle_relative_sequence_results_20260826/oracle_dpo_relative_sequence_entropy_current.pdf",
+      "sha256": "57ab5db1c2227ce0f5c64f07555f484eba2e2131528b72752d4f77164fef6842",
+      "source_sha256": "57ab5db1c2227ce0f5c64f07555f484eba2e2131528b72752d4f77164fef6842",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_dpo_relative_sequence_entropy_current.png",
+      "local_source": "oracle_relative_sequence_results_20260826/oracle_dpo_relative_sequence_entropy_current.png",
+      "sha256": "b32a9e156973b0c021855f8d1db3f375186f740d8c649308883fb82dd43b3b09",
+      "source_sha256": "b32a9e156973b0c021855f8d1db3f375186f740d8c649308883fb82dd43b3b09",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_ipo_relative_sequence_entropy_current.pdf",
+      "local_source": "oracle_relative_sequence_results_20260826/oracle_ipo_relative_sequence_entropy_current.pdf",
+      "sha256": "2e36fc52ebd58b71cc92b99304472316cc98209f7d9c16b2d85ae2677b7afb26",
+      "source_sha256": "2e36fc52ebd58b71cc92b99304472316cc98209f7d9c16b2d85ae2677b7afb26",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_ipo_relative_sequence_entropy_current.png",
+      "local_source": "oracle_relative_sequence_results_20260826/oracle_ipo_relative_sequence_entropy_current.png",
+      "sha256": "a25d5bf3013cf0297250b13a1b5ed17493408e6b2042ba1e5f7323d6f71e39d5",
+      "source_sha256": "a25d5bf3013cf0297250b13a1b5ed17493408e6b2042ba1e5f7323d6f71e39d5",
+      "status": "historical_local_snapshot_not_final"
+    },
+    {
+      "path": "experiments/oracle1/campaigns/historical_local_snapshots/oracle_relative_sequence_results_20260826/oracle_relative_sequence_entropy_summary.csv",
+      "local_source": "oracle_relative_sequence_results_20260826/oracle_relative_sequence_entropy_summary.csv",
+      "sha256": "8fd0dc4838d1dbe9524da6bd4afe47dc9d4b3767ffb111cae3ac240d94006d5c",
+      "source_sha256": "4f9bedef4601eabcc21fb15b1493983b70f2b01770029dd5b4fc76ca1244567b",
+      "status": "historical_local_snapshot_not_final"
+    }
+  ],
+  "legacy_sampling": "experiments/legacy_sampling_analysis/snapshot_20260911",
+  "excluded": [
+    "raw prompt/response text",
+    "weights/adapters",
+    "credentials",
+    "raw archives/logs",
+    "superseded draft legacy figures (final version already published)"
+  ]
+}

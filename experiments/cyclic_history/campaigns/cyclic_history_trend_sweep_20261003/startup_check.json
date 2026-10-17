@@ -1,0 +1,597 @@
+{
+  "account": {
+    "checked_at_utc": "2026-10-03T07:34:41.660995+00:00",
+    "allocated_gpus": 0,
+    "owned_jobs": [
+      {
+        "queue": "4659985_0|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=0 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_0.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_0.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_1|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=1 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_1.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_1.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_2|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=2 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_2.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_2.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_3|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=3 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_3.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_3.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_4|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=4 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_4.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_4.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_5|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=5 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_5.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_5.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_6|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=6 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_6.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_6.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_7|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=7 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_7.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_7.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_8|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=8 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_8.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_8.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_9|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=9 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_9.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_9.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_10|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=10 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_10.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_10.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_11|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=11 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_11.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_11.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_12|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=12 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_12.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_12.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_13|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=13 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_13.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_13.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_14|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=14 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_14.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_14.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_15|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=15 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_15.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_15.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_16|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=16 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_16.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_16.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_17|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=17 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_17.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_17.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_18|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=18 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_18.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_18.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_19|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=19 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_19.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_19.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_20|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=20 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_20.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_20.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_21|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=21 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_21.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_21.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_22|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=22 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_22.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_22.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_23|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=23 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_23.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_23.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_24|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=24 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_24.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_24.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_25|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=25 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_25.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_25.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_26|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=26 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_26.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_26.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_27|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=27 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_27.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_27.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_28|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=28 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_28.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_28.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_29|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=29 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_29.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_29.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_30|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=30 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_30.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_30.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_31|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=31 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_31.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_31.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_32|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=32 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_32.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_32.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_33|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=33 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_33.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_33.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_34|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=34 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_34.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_34.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_35|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=35 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_35.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_35.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_36|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=36 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_36.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_36.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_37|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=37 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_37.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_37.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_38|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=38 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_38.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_38.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_39|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=39 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_39.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_39.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_40|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=40 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_40.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_40.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_41|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=41 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_41.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_41.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_42|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=42 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_42.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_42.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4659985_43|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_trend_1003",
+        "allocated_gpus": 0,
+        "detail": "JobId=4659985 ArrayJobId=4659985 ArrayTaskId=43 ArrayTaskThrottle=6 JobName=hist_trend_1003 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6514 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-03T03:34:15 EligibleTime=2026-10-03T03:34:15 AccrueTime=2026-10-03T03:34:15 StartTime=2026-10-03T05:52:09 EndTime=2026-10-03T11:52:09 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-03T03:34:40 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login1:4043782 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/run_sweep.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_trend_sweep_20261003/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_43.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_trend_1003-4659985_43.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      }
+    ]
+  },
+  "receipt": {
+    "job_id": "4659985",
+    "submitted_at_utc": "2026-10-03T07:34:15.926215+00:00",
+    "run_ids": [
+      "ipo_center_reference_max_b100_s0",
+      "ipo_center_feedback_one_b100_s0",
+      "dpo_center_reference_max_b100_s0",
+      "dpo_center_feedback_one_b100_s0",
+      "ipo_alpha08_ordinary_b100_s0",
+      "ipo_alpha08_reference_half_b100_s0",
+      "ipo_alpha08_reference_max_b100_s0",
+      "ipo_alpha08_feedback_half_b100_s0",
+      "ipo_alpha08_feedback_one_b100_s0",
+      "dpo_alpha08_ordinary_b100_s0",
+      "dpo_alpha08_reference_half_b100_s0",
+      "dpo_alpha08_reference_max_b100_s0",
+      "dpo_alpha08_feedback_half_b100_s0",
+      "dpo_alpha08_feedback_one_b100_s0",
+      "ipo_alpha099_ordinary_b100_s0",
+      "ipo_alpha099_reference_half_b100_s0",
+      "ipo_alpha099_reference_max_b100_s0",
+      "ipo_alpha099_feedback_half_b100_s0",
+      "ipo_alpha099_feedback_one_b100_s0",
+      "dpo_alpha099_ordinary_b100_s0",
+      "dpo_alpha099_reference_half_b100_s0",
+      "dpo_alpha099_reference_max_b100_s0",
+      "dpo_alpha099_feedback_half_b100_s0",
+      "dpo_alpha099_feedback_one_b100_s0",
+      "ipo_coverage05_ordinary_b100_s0",
+      "ipo_coverage05_reference_half_b100_s0",
+      "ipo_coverage05_reference_max_b100_s0",
+      "ipo_coverage05_feedback_half_b100_s0",
+      "ipo_coverage05_feedback_one_b100_s0",
+      "dpo_coverage05_ordinary_b100_s0",
+      "dpo_coverage05_reference_half_b100_s0",
+      "dpo_coverage05_reference_max_b100_s0",
+      "dpo_coverage05_feedback_half_b100_s0",
+      "dpo_coverage05_feedback_one_b100_s0",
+      "ipo_beta15_ordinary_b100_s0",
+      "ipo_beta15_reference_half_b100_s0",
+      "ipo_beta15_reference_max_b100_s0",
+      "ipo_beta15_feedback_half_b100_s0",
+      "ipo_beta15_feedback_one_b100_s0",
+      "dpo_beta15_ordinary_b100_s0",
+      "dpo_beta15_reference_half_b100_s0",
+      "dpo_beta15_reference_max_b100_s0",
+      "dpo_beta15_feedback_half_b100_s0",
+      "dpo_beta15_feedback_one_b100_s0"
+    ],
+    "array": "0-43%6",
+    "gpu_per_task": 1,
+    "outer_updates": 100,
+    "reused_runs": 6,
+    "logical_comparisons": 50,
+    "scheduler_response": "4659985",
+    "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_trend_sweep_20261003",
+    "source_git_commit": "419565838535a9fa6c5f12af2b919ce8873db4ab"
+  },
+  "sacct": "JobID|State|ExitCode|Elapsed|AllocTRES\n4659985_[0-43%6]|PENDING|0:0|00:00:00|",
+  "runs": [
+    {
+      "task": 0,
+      "run_id": "ipo_center_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 1,
+      "run_id": "ipo_center_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 2,
+      "run_id": "dpo_center_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 3,
+      "run_id": "dpo_center_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 4,
+      "run_id": "ipo_alpha08_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 5,
+      "run_id": "ipo_alpha08_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 6,
+      "run_id": "ipo_alpha08_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 7,
+      "run_id": "ipo_alpha08_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 8,
+      "run_id": "ipo_alpha08_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 9,
+      "run_id": "dpo_alpha08_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 10,
+      "run_id": "dpo_alpha08_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 11,
+      "run_id": "dpo_alpha08_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 12,
+      "run_id": "dpo_alpha08_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 13,
+      "run_id": "dpo_alpha08_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 14,
+      "run_id": "ipo_alpha099_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 15,
+      "run_id": "ipo_alpha099_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 16,
+      "run_id": "ipo_alpha099_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 17,
+      "run_id": "ipo_alpha099_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 18,
+      "run_id": "ipo_alpha099_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 19,
+      "run_id": "dpo_alpha099_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 20,
+      "run_id": "dpo_alpha099_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 21,
+      "run_id": "dpo_alpha099_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 22,
+      "run_id": "dpo_alpha099_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 23,
+      "run_id": "dpo_alpha099_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 24,
+      "run_id": "ipo_coverage05_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 25,
+      "run_id": "ipo_coverage05_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 26,
+      "run_id": "ipo_coverage05_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 27,
+      "run_id": "ipo_coverage05_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 28,
+      "run_id": "ipo_coverage05_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 29,
+      "run_id": "dpo_coverage05_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 30,
+      "run_id": "dpo_coverage05_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 31,
+      "run_id": "dpo_coverage05_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 32,
+      "run_id": "dpo_coverage05_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 33,
+      "run_id": "dpo_coverage05_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 34,
+      "run_id": "ipo_beta15_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 35,
+      "run_id": "ipo_beta15_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 36,
+      "run_id": "ipo_beta15_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 37,
+      "run_id": "ipo_beta15_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 38,
+      "run_id": "ipo_beta15_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 39,
+      "run_id": "dpo_beta15_ordinary_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 40,
+      "run_id": "dpo_beta15_reference_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 41,
+      "run_id": "dpo_beta15_reference_max_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 42,
+      "run_id": "dpo_beta15_feedback_half_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "task": 43,
+      "run_id": "dpo_beta15_feedback_one_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    }
+  ]
+}

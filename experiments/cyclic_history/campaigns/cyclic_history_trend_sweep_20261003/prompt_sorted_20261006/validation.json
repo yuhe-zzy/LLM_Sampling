@@ -1,0 +1,49 @@
+{
+  "figures": 24,
+  "pdf_pages": 24,
+  "columns_per_figure": 15,
+  "ordinary_columns": 5,
+  "history_columns": 10,
+  "identical_panel_dimensions": true,
+  "reference_sort": "nu ascending; ties by baseline B1-B5",
+  "feedback_sort": "kappa ascending; ties by baseline B1-B5",
+  "prompts": [
+    54,
+    251,
+    612,
+    737,
+    867,
+    945
+  ],
+  "states": [
+    0,
+    100
+  ],
+  "all_50_runs_revalidated_from_raw_evidence": true,
+  "filenames": [
+    "ipo_reference_prompt_54_sorted",
+    "ipo_reference_prompt_251_sorted",
+    "ipo_reference_prompt_612_sorted",
+    "ipo_reference_prompt_737_sorted",
+    "ipo_reference_prompt_867_sorted",
+    "ipo_reference_prompt_945_sorted",
+    "ipo_feedback_prompt_54_sorted",
+    "ipo_feedback_prompt_251_sorted",
+    "ipo_feedback_prompt_612_sorted",
+    "ipo_feedback_prompt_737_sorted",
+    "ipo_feedback_prompt_867_sorted",
+    "ipo_feedback_prompt_945_sorted",
+    "dpo_reference_prompt_54_sorted",
+    "dpo_reference_prompt_251_sorted",
+    "dpo_reference_prompt_612_sorted",
+    "dpo_reference_prompt_737_sorted",
+    "dpo_reference_prompt_867_sorted",
+    "dpo_reference_prompt_945_sorted",
+    "dpo_feedback_prompt_54_sorted",
+    "dpo_feedback_prompt_251_sorted",
+    "dpo_feedback_prompt_612_sorted",
+    "dpo_feedback_prompt_737_sorted",
+    "dpo_feedback_prompt_867_sorted",
+    "dpo_feedback_prompt_945_sorted"
+  ]
+}

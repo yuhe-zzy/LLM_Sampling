@@ -19,6 +19,7 @@ from pathlib import Path
 
 import numpy as np
 
+from calibrated_protocol import EMPIRICAL_PROTOCOL, PROTOCOL, TREND_PROTOCOL
 from history_math import (build_outer_state, centered, describe_distribution, finite,
                           load_panels, sample_pairs, support_hash)
 
@@ -44,17 +45,26 @@ def resolve_config(plan_path, run_id):
 def validate_config(c):
     if c["method"] not in ("ipo", "dpo"):
         raise ValueError("Unknown loss")
-    if c["scheme"] not in ("ordinary", "lagged_reference", "lagged_sampling"):
+    if c["scheme"] not in ("ordinary", "lagged_reference", "lagged_sampling", "oracle_feedback_extrapolation"):
         raise ValueError("Unknown scheme")
-    if not 0 <= c["alpha"] < 1 or not 0 <= c["lambda_current"] < 1:
+    empirical = c.get("protocol") == EMPIRICAL_PROTOCOL
+    trend = c.get("protocol") == TREND_PROTOCOL
+    valid_alpha = c["alpha"] == 1 if empirical else 0 <= c["alpha"] < 1
+    if not valid_alpha or not 0 <= c["lambda_current"] < 1:
         raise ValueError("alpha/lambda_current must be in [0,1)")
+    if empirical and (c["scheme"] != "lagged_reference" or
+                      c.get("prediction_role") != "empirical_unclassified"):
+        raise ValueError("Full-refresh empirical protocol requires unclassified lagged reference")
+    if trend and (not 0 < c["alpha"] < 1 or
+                  c.get("prediction_role") != "empirical_unclassified"):
+        raise ValueError("Trend protocol requires partial refresh and an unclassified empirical role")
     if not 0 <= c["nu"] <= c["alpha"] or not np.isfinite(c["kappa"]) or c["kappa"] < 0:
         raise ValueError("Invalid history coefficients")
     if c["scheme"] == "ordinary" and (c["nu"] or c["kappa"]):
         raise ValueError("Ordinary baseline cannot use history coefficients")
     if c["scheme"] == "lagged_reference" and (c["nu"] <= 0 or c["kappa"]):
         raise ValueError("Reference ablation needs positive nu and zero kappa")
-    if c["scheme"] == "lagged_sampling" and (c["kappa"] <= 0 or c["nu"]):
+    if c["scheme"] in ("lagged_sampling", "oracle_feedback_extrapolation") and (c["kappa"] <= 0 or c["nu"]):
         raise ValueError("Sampling ablation needs positive kappa and zero nu")
     for key in ("beta_train", "lr"):
         if not np.isfinite(c[key]) or c[key] <= 0:
@@ -77,6 +87,15 @@ def validate_config(c):
         raise ValueError("Unsupported protocol: changing strings alone cannot change behavior")
     if c["dtype"] not in ("bfloat16", "float32"):
         raise ValueError("Only bfloat16/float32 supported; no unscaled fp16 training")
+    if c.get("pair_mode", "sampled") not in ("sampled", "all_unordered"):
+        raise ValueError("Unsupported pair mode")
+    if c.get("pair_mode") == "all_unordered" and c["pairs_per_prompt"] != 6:
+        raise ValueError("Four-response full-pair mode requires exactly six pairs")
+    if c.get("protocol") in (PROTOCOL, EMPIRICAL_PROTOCOL, TREND_PROTOCOL):
+        if c["scheme"] == "lagged_sampling" or c.get("pair_mode") != "all_unordered":
+            raise ValueError("Calibrated v2 uses named feedback extrapolation and all pairs")
+        if not (empirical or trend) and c["prediction_role"] not in ("ordinary_stable", "ordinary_unstable"):
+            raise ValueError("Unknown prediction role")
     if Path(c["run_id"]).name != c["run_id"] or "/" in c["run_id"] or "\\" in c["run_id"]:
         raise ValueError("run_id must be a filename component")
 
@@ -171,11 +190,19 @@ def pair_loss(delta, preference, beta_train, method):
     raise ValueError("Unknown loss")
 
 
+def stable_attention():
+    """Keep SDPA's cuDNN backward out of both scoring and checkpoint recomputation."""
+    from torch.nn.attention import SDPBackend, sdpa_kernel
+    # cuDNN SDPA produced NaN gradients on the BF16 Qwen/H100 training path.
+    return sdpa_kernel([SDPBackend.FLASH_ATTENTION, SDPBackend.EFFICIENT_ATTENTION,
+                        SDPBackend.MATH])
+
+
 def score_panel(model, encoded, pad_id, device, batch_size, shape):
     import torch
     model.eval()
     scores, counts = [], []
-    with torch.no_grad():
+    with torch.no_grad(), stable_attention():
         for start in range(0, len(encoded), batch_size):
             batch, labels = build_batch(encoded[start:start + batch_size], pad_id, device)
             result = model(**batch, use_cache=False)
@@ -188,7 +215,8 @@ def score_panel(model, encoded, pad_id, device, batch_size, shape):
 def train_round(model, encoded, matrices, outer_state, cfg, pad_id, device, round_index):
     import torch
     from transformers import get_linear_schedule_with_warmup
-    pairs = sample_pairs(outer_state["mu"], cfg["pairs_per_prompt"], cfg["seed"], round_index)
+    pairs = sample_pairs(outer_state["mu"], cfg["pairs_per_prompt"], cfg["seed"], round_index,
+                         mode=cfg.get("pair_mode", "sampled"))
     batches = [pairs[s:s + cfg["batch_size"]] for s in range(0, len(pairs), cfg["batch_size"])]
     batches = batches * cfg["epochs_per_iter"]
     parameters = [p for p in model.parameters() if p.requires_grad]
@@ -210,17 +238,19 @@ def train_round(model, encoded, matrices, outer_state, cfg, pad_id, device, roun
                 probabilities.append(matrices[prompt, left, right])
                 weights.append(weight)
             batch, labels = build_batch(examples, pad_id, device)
-            output = model(**batch, use_cache=False)
-            scores, _ = sequence_scores(output.logits, labels)
-            scores = scores.reshape(-1, 2)
-            ref = torch.tensor(ref_margins, dtype=torch.float32, device=device)
-            probs = torch.tensor(probabilities, dtype=torch.float32, device=device)
-            importance = torch.tensor(weights, dtype=torch.float32, device=device)
-            delta = scores[:, 0] - scores[:, 1] - ref
-            losses = importance * pair_loss(delta, probs, cfg["beta_train"], cfg["method"])
-            if not torch.isfinite(losses).all():
-                raise FloatingPointError("Non-finite loss; stopping instead of masking it")
-            (losses.sum() / group_examples).backward()
+            # Backward must share this context: checkpointing reruns attention.
+            with stable_attention():
+                output = model(**batch, use_cache=False)
+                scores, _ = sequence_scores(output.logits, labels)
+                scores = scores.reshape(-1, 2)
+                ref = torch.tensor(ref_margins, dtype=torch.float32, device=device)
+                probs = torch.tensor(probabilities, dtype=torch.float32, device=device)
+                importance = torch.tensor(weights, dtype=torch.float32, device=device)
+                delta = scores[:, 0] - scores[:, 1] - ref
+                losses = importance * pair_loss(delta, probs, cfg["beta_train"], cfg["method"])
+                if not torch.isfinite(losses).all():
+                    raise FloatingPointError("Non-finite loss; stopping instead of masking it")
+                (losses.sum() / group_examples).backward()
             loss_sum += float(losses.detach().sum())
             count += len(batch_pairs)
         norm = torch.nn.utils.clip_grad_norm_(parameters, 1.0, error_if_nonfinite=True)
@@ -233,11 +263,18 @@ def train_round(model, encoded, matrices, outer_state, cfg, pad_id, device, roun
                 grad_norm_mean=float(np.mean(gradient_norms)), grad_norm_max=max(gradient_norms))
 
 
-def save_snapshot(directory, step, scores, initial, previous, lengths, outer_state=None):
+def save_snapshot(directory, step, scores, initial, previous, lengths, outer_state=None, calibration=None):
     metrics = describe_distribution(scores, initial, previous)
     data = dict(sequence_sum_logprob=scores, response_token_count=lengths, **metrics)
     if outer_state is not None:
         data.update({"training_" + k: v for k, v in outer_state.items()})
+    if calibration is not None:
+        error = centered(scores) - calibration["fixed_logits"]
+        mode = np.sum(calibration["left_modes"] * error, axis=1)
+        data.update(population_fixed_logits=calibration["fixed_logits"],
+                    fixed_point_error=error, cyclic_mode_real=mode.real,
+                    cyclic_mode_imag=mode.imag, cyclic_mode_amplitude=np.abs(mode),
+                    cyclic_mode_phase=np.angle(mode))
     path = directory / f"step_{step:04d}.npz"
     with open(str(path) + ".tmp", "wb") as handle:
         np.savez_compressed(handle, **data)
@@ -251,6 +288,11 @@ def save_snapshot(directory, step, scores, initial, previous, lengths, outer_sta
         row.update(operator_residual_rms=float(np.sqrt(np.mean(target_error ** 2))),
                    operator_residual_max=float(np.max(np.abs(target_error))),
                    bt_solver_residual_max=float(np.max(outer_state["solver_residual"])))
+    if calibration is not None:
+        from calibrated_protocol import calibrated_metrics
+        row.update(calibrated_metrics(scores, initial if previous is None else previous,
+                                      calibration["fixed_logits"]))
+        row["cyclic_mode_amplitude_mean"] = float(data["cyclic_mode_amplitude"].mean())
     return row
 
 
@@ -280,11 +322,14 @@ def train(cfg, panels):
                     slurm_job_id=os.environ["SLURM_JOB_ID"], state="INITIALIZING",
                     feedback_operator=("actual_BT_optimizer_extrapolation_not_logit_PsiPO"
                                        if cfg["method"] == "dpo" else "identity_payoff"))
+    manifest["attention_policy"] = dict(implementation="sdpa", cudnn_enabled=False,
+                                      allowed_backends=["flash", "efficient", "math"])
     manifest["source_sha256"] = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                                  for p in Path(__file__).parent.glob("*.py")}
     write_json(root / "manifest.json", manifest)
     write_json(root / "support.json", panels)
     step_completed = -1
+    calibration_state = None
     try:
         tok = AutoTokenizer.from_pretrained(cfg["model_path"], local_files_only=True)
         if tok.pad_token_id is None:
@@ -299,7 +344,8 @@ def train(cfg, panels):
             prompt_context_shared_within_panel=True))
         dtype = torch.bfloat16 if cfg["dtype"] == "bfloat16" else torch.float32
         base = AutoModelForCausalLM.from_pretrained(cfg["model_path"], torch_dtype=dtype,
-                                                   local_files_only=True).to("cuda")
+                                                   local_files_only=True,
+                                                   attn_implementation="sdpa").to("cuda")
         base.config.use_cache = False
         model = get_peft_model(base, LoraConfig(
             r=cfg["lora_r"], lora_alpha=cfg["lora_alpha"], lora_dropout=0.0,
@@ -312,9 +358,23 @@ def train(cfg, panels):
         model.enable_input_require_grads()
         shape = (len(panels), cfg["keep_k"])
         initial, lengths = score_panel(model, encoded, tok.pad_token_id, "cuda", cfg["score_batch_size"], shape)
+        if cfg["protocol"] == PROTOCOL:
+            from calibrated_protocol import mode_coordinates, verify_calibration
+            predictions = verify_calibration(panels, cfg, initial, lengths)
+            calibration_state = mode_coordinates(panels, cfg, predictions)
+            write_json(root / "verified_population_predictions.json", predictions)
+            manifest["calibration_gate"] = "PASSED_FRESH_INITIAL_SCORES"
+        elif cfg["protocol"] in (EMPIRICAL_PROTOCOL, TREND_PROTOCOL):
+            from calibrated_protocol import verify_support_calibration
+            verify_support_calibration(panels, cfg, initial, lengths)
+            manifest["calibration_gate"] = "PASSED_FRESH_INITIAL_SCORES"
+            manifest["population_prediction"] = ("NOT_COMPUTED_FULL_REFRESH_EMPIRICAL"
+                if cfg["protocol"] == EMPIRICAL_PROTOCOL else "NOT_GATED_EMPIRICAL_TREND_SWEEP")
+            manifest["reference_coefficients"] = dict(initial=1-cfg["alpha"],
+                current=cfg["alpha"]-cfg["nu"], previous=cfg["nu"])
         current, previous = initial.copy(), initial.copy()
         matrices = np.asarray([p["preference_matrix"] for p in panels])
-        rows = [save_snapshot(snapshots, 0, initial, initial, None, lengths)]
+        rows = [save_snapshot(snapshots, 0, initial, initial, None, lengths, calibration=calibration_state)]
         model.save_pretrained(root / "adapter_initial")
         tok.save_pretrained(root / "adapter_initial")
         write_metrics(root, rows)
@@ -332,7 +392,7 @@ def train(cfg, panels):
             if not np.array_equal(lengths, new_lengths):
                 raise RuntimeError("Token support changed between iterations")
             step = outer_iter + 1
-            row = save_snapshot(snapshots, step, updated, initial, current, lengths, state)
+            row = save_snapshot(snapshots, step, updated, initial, current, lengths, state, calibration_state)
             row.update(diagnostics, outer_wall_seconds=time.monotonic() - started)
             rows.append(row)
             previous, current = current.copy(), updated.copy()
@@ -363,6 +423,10 @@ def main(required_scheme=None):
     parser.add_argument("--output-root", help="Override the directory for run artifacts")
     parser.add_argument("--check-data", action="store_true", help="Validate panels without importing Torch")
     parser.add_argument("--execute", action="store_true", help="Explicitly train inside an approved 1-GPU Slurm allocation")
+    parser.add_argument("--approve-calibrated-micropilot", action="store_true",
+                        help="Explicitly approve the selected small-support protocol, not a full-scale study")
+    parser.add_argument("--allow-uncalibrated-legacy", action="store_true",
+                        help="Explicit override for reproducing the old uncalibrated pilot only")
     args = parser.parse_args()
     if args.check_data and args.execute:
         parser.error("--check-data and --execute are mutually exclusive")
@@ -380,7 +444,19 @@ def main(required_scheme=None):
     if not args.check_data and not args.execute:
         print("PREVIEW ONLY: no model loaded, no output directory created, no experiment started.")
         return
-    panels = load_panels(cfg["eval_path"], cfg["num_prompts"], cfg["support_seed"], cfg["keep_k"])
+    calibrated = cfg["protocol"] in (PROTOCOL, EMPIRICAL_PROTOCOL, TREND_PROTOCOL)
+    if args.execute and ((calibrated and not args.approve_calibrated_micropilot)
+                         or (not calibrated and not args.allow_uncalibrated_legacy)):
+        parser.error("Training needs explicit calibrated-micropilot approval or a legacy override")
+    panels = load_panels(cfg["eval_path"], cfg["num_prompts"], cfg["support_seed"], cfg["keep_k"],
+                         prompt_ids=cfg.get("panel_ids"))
+    if calibrated:
+        from calibrated_protocol import transform_panels, verify_calibration, verify_support_calibration
+        panels = transform_panels(panels, cfg)
+        if cfg["protocol"] in (EMPIRICAL_PROTOCOL, TREND_PROTOCOL):
+            verify_support_calibration(panels, cfg)
+        else:
+            verify_calibration(panels, cfg)
     print(json.dumps(dict(panel_count=len(panels), support_sha256=support_hash(panels))), flush=True)
     if args.check_data:
         print("DATA CHECK ONLY: no model loaded and no experiment started.")

@@ -1,0 +1,52 @@
+{
+  "checked_at_utc": "2026-10-09T17:22:53.833455+00:00",
+  "jobs": {
+    "audit": "4773843|RUNNING|0:0|billing=2,cpu=8,gres/gpu:h100=2,gres/gpu=2,mem=256G,node=1|00:04:58"
+  },
+  "owned_queue": [
+    "4773843|yuhe32|448057|RUNNING|gres/gpu:2|g15070304"
+  ],
+  "allocated_gpus": 2,
+  "scoring": {
+    "state": "SCORING",
+    "records_sha256": "92e1a0efdd52e53c6de91be565d6408b315401bdd45615029b650f36aa2c9f21",
+    "count": 3200,
+    "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+    "components": {},
+    "templates": "own model chat template, tokenize=True, no duplicate BOS",
+    "truncation_allowed": false,
+    "written_rows": {
+      "nemotron": 231
+    },
+    "progress": {
+      "component": "nemotron",
+      "scored": 250,
+      "total": 3200,
+      "elapsed_seconds": 270.9767776550725,
+      "memory": [
+        {
+          "device": 0,
+          "name": "NVIDIA H100 80GB HBM3",
+          "free_bytes": 11766005760,
+          "total_bytes": 85019590656,
+          "allocated_bytes": 70691779584,
+          "reserved_bytes": 72500641792,
+          "peak_allocated_bytes": 71216286720,
+          "peak_reserved_bytes": 72500641792
+        },
+        {
+          "device": 1,
+          "name": "NVIDIA H100 80GB HBM3",
+          "free_bytes": 11745034240,
+          "total_bytes": 85019590656,
+          "allocated_bytes": 70690219008,
+          "reserved_bytes": 72521613312,
+          "peak_allocated_bytes": 71189944832,
+          "peak_reserved_bytes": 72521613312
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "note": "Live files read sequentially: line count and progress have different capture times. Audit incomplete."
+}

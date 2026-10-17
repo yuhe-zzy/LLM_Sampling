@@ -1,0 +1,92 @@
+[
+  {
+    "run_id": "ipo_ordinary_calibrated_s0",
+    "radius_min": 1.046867042252849,
+    "radius_max": 1.0781706689353436,
+    "final_distance_max": 2.6473452298407794,
+    "final_distance_min": 2.1009733970483397,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "ipo_reference_calibrated_s0",
+    "radius_min": 0.9560604190370061,
+    "radius_max": 0.9622846257889963,
+    "final_distance_max": 0.0007935813663047397,
+    "final_distance_min": 0.00027961229626443236,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "ipo_feedback_calibrated_s0",
+    "radius_min": 0.9204121900467146,
+    "radius_max": 0.955486609954752,
+    "final_distance_max": 0.00012157430957603517,
+    "final_distance_min": 1.8343828090354258e-07,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "ipo_stable_calibrated_s0",
+    "radius_min": 0.9323987380772697,
+    "radius_max": 0.9457479432997891,
+    "final_distance_max": 1.7835373781806028e-05,
+    "final_distance_min": 2.383565935605083e-06,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "ipo_mixed_calibrated_s0",
+    "radius_min": 1.045276406592438,
+    "radius_max": 1.0781706689353436,
+    "final_distance_max": 2.6473452298407794,
+    "final_distance_min": 2.1009733970483397,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "dpo_ordinary_calibrated_s0",
+    "radius_min": 1.0496060995118417,
+    "radius_max": 1.0790700052363043,
+    "final_distance_max": 3.124172632102655,
+    "final_distance_min": 2.3545020129416714,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "dpo_reference_calibrated_s0",
+    "radius_min": 0.9565861784018265,
+    "radius_max": 0.9624753502602084,
+    "final_distance_max": 0.000915449274042817,
+    "final_distance_min": 0.00042048411381464005,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "dpo_feedback_calibrated_s0",
+    "radius_min": 0.9228003438047794,
+    "radius_max": 0.9567443433036962,
+    "final_distance_max": 0.00017991802546646145,
+    "final_distance_min": 2.543709142494199e-07,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "dpo_stable_calibrated_s0",
+    "radius_min": 0.9366740067607212,
+    "radius_max": 0.9466698562999606,
+    "final_distance_max": 2.2461340456984284e-05,
+    "final_distance_min": 6.144858188740651e-06,
+    "actual_start_check": "PASS",
+    "steps": 200
+  },
+  {
+    "run_id": "dpo_mixed_calibrated_s0",
+    "radius_min": 1.0481449519266002,
+    "radius_max": 1.0790700052363043,
+    "final_distance_max": 3.0802479903194855,
+    "final_distance_min": 2.3545020129416714,
+    "actual_start_check": "PASS",
+    "steps": 200
+  }
+]

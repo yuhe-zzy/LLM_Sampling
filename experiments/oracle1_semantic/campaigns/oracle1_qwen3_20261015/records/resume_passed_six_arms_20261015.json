@@ -1,0 +1,23 @@
+{
+  "resume_checked_at_utc": "2026-10-15T10:25:58.891868+00:00",
+  "latest_checked_at_utc": "2026-10-15T10:30:56.458208+00:00",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "full_model_startup_and_resume_update_passed": true,
+  "checkpoints": {"complete_states": [0, 1, 2], "contiguous_hashes_valid": true, "finite": true, "initial_scores_and_token_support_match": true},
+  "resume_tasks": {
+    "4811197_0": {"run_id": "ipo_ordinary", "state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:22:17", "resume_verified_at": 1, "completed_step": 2, "train_loss": 8.124552429795145, "optimizer_steps": 750, "grad_norm_mean": 1928.9154277140299, "grad_norm_max": 22293.201171875},
+    "4811197_3": {"run_id": "dpo_ordinary", "state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:22:09", "resume_verified_at": 1, "completed_step": 2, "train_loss": 0.5899227344565897, "optimizer_steps": 750, "grad_norm_mean": 88.81168903923034, "grad_norm_max": 622.8598022460938}
+  },
+  "resume_peak_bytes_per_gpu": {"allocated": 12769112064, "reserved": 22928162816},
+  "next_segment": {"sequence": 3, "job_id": "4811252", "indices": [0, 1, 2, 3, 4, 5], "maximum_updates_each": 10, "maximum_concurrency": 2, "gpus_per_task": 1, "time_limit_hours": 24, "soft_stop_hours": 18},
+  "current_job_states": {"4811252_0": "RUNNING", "4811252_1": "RUNNING", "4811252_2": "PENDING(JobArrayTaskLimit)", "4811252_3": "PENDING(JobArrayTaskLimit)", "4811252_4": "PENDING(JobArrayTaskLimit)", "4811252_5": "PENDING(JobArrayTaskLimit)"},
+  "full_account_allocated_gpus": 2,
+  "unrelated_owned_work": false,
+  "logged_execution_errors": [],
+  "new_segment_round_complete_at_snapshot": false,
+  "new_segment_startup": {"ipo_ordinary": "RESUME_VERIFIED ipo_ordinary outer=2", "ipo_reference": "Finite step0 committed; initial scores/token support match ordinary arms"},
+  "monitor": {"id": "oracle1-qwen3-training-and-resume-checks", "status": "ACTIVE", "interval_hours": 5, "same_timer_updated": true, "tool_and_stored_configuration_verified": true},
+  "downstream_stages_submitted": false,
+  "scientific_or_executable_changes": false
+}

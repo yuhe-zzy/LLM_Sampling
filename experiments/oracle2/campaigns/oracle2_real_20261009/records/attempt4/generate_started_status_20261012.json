@@ -1,0 +1,60 @@
+{
+  "checked_at_utc": "2026-10-12T18:16:56.040364+00:00",
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "phase": "generate",
+  "job_id": "4794738",
+  "submission_receipt": "generate_submission_receipt.json",
+  "submission_intent": "generate_submission_intent.json",
+  "preflight": {
+    "all_six_training_jobs_completed_exit_0": true,
+    "training_states_per_arm": 101,
+    "finite_snapshots": 606,
+    "matching_initial_scores": true,
+    "baseline_800_count_hash_valid": true,
+    "source_and_review_unchanged": true,
+    "required_adapters_available": 66,
+    "prior_arm_generation_outputs_absent": true,
+    "prior_generate_intent_receipt_absent": true,
+    "full_account_empty_at_submission": true,
+    "frozen_queue_guards_passed": true
+  },
+  "resources": {
+    "gpus_per_task": 1,
+    "maximum_phase_gpus": 2,
+    "account_gpu_limit": 4,
+    "allocated_gpus_at_check": 2,
+    "unrelated_owned_work": false,
+    "hard_account_cap_installed": false
+  },
+  "owned_queue": [
+    "4794738_2|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_3|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_0|yuhe32|448057|RUNNING|gres/gpu:1|g15070304",
+    "4794738_1|yuhe32|448057|RUNNING|gres/gpu:1|g15070306"
+  ],
+  "sacct_generate": "4794738_0|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:02:06\n4794738_1|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:02:06\n4794738_[2-5%2]|PENDING|0:0||00:00:00",
+  "generations": {
+    "ipo_ordinary": {"task": 0, "state": "RUNNING", "written_rows": {"step_0000.jsonl": 14}, "completed_banks": 0},
+    "ipo_reference": {"task": 1, "state": "RUNNING", "written_rows": {"step_0000.jsonl": 13}, "completed_banks": 0},
+    "ipo_feedback": {"task": 2, "state": "NOT_STARTED"},
+    "dpo_ordinary": {"task": 3, "state": "NOT_STARTED"},
+    "dpo_reference": {"task": 4, "state": "NOT_STARTED"},
+    "dpo_feedback": {"task": 5, "state": "NOT_STARTED"}
+  },
+  "logged_errors": [],
+  "wrscore_submitted": false,
+  "generated_checkpoint_wr_available": false,
+  "generation_gpu_memory_telemetry": "Not recorded by frozen generator; candidate-judge peaks are not generation telemetry.",
+  "next_phase_guard": "All baseline and 66 arm/state banks COMPLETE with 800 rows each and matching hashes; full account empty before frozen queue.py wrscore submission.",
+  "monitor": "Existing oracle2 heartbeat remains ACTIVE every two hours; phase paragraph updated, no additional timer.",
+  "local_evidence": [
+    "oracle2_real_launch_20261009/attempt4/heartbeat_20261012T1811.json",
+    "oracle2_real_launch_20261009/attempt4/generate_preflight_20261012.json",
+    "oracle2_real_launch_20261009/attempt4/generate_submission_20261012.json",
+    "oracle2_real_launch_20261009/attempt4/generate_startup_20261012.json",
+    "oracle2_real_launch_20261009/attempt4/generate_progress_20261012.json"
+  ],
+  "interpretation": "Partial row counts are not completed response banks, WR results, convergence evidence, or an arm-effect conclusion. Live files are not an atomic snapshot."
+}

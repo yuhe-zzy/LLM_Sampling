@@ -1,0 +1,13 @@
+{
+  "job_id": "4773899",
+  "phase": "baseline",
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "submitted_at_utc": "2026-10-09T17:55:53.887664+00:00",
+  "resources": {
+    "gpus": 1,
+    "tasks": 1,
+    "concurrency": 1,
+    "memory": "80G",
+    "time": "03:00:00"
+  }
+}

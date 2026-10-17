@@ -7,6 +7,26 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+Sequence0006 completion verified2026-10-17T05:49:18Z:4836621_0..5 all
+COMPLETED0:0 at42/40/40/42/40/40; all earlier receipts successful. All250
+committed states finite/contiguous/hash-valid, initial scores/support match,
+contract unchanged, latest losses/gradients finite, no logged execution errors.
+Full account empty. DPOreference/feedback reload30 then ten updates checked.
+Latest-round peaks at most11.90GiB allocated/36.35GiB reserved, not lifetime
+device telemetry. See [completion audit](records/segment6_complete_20261017T0549.json).
+Frozen dry-run then guarded submit created **4839924_0..5%2** at05:52:03Z,
+sequence0007, at most10 further updates to targets52/50/50/52/50/50. OneH100/task,
+two concurrent,24h allocation/18h soft stop. At05:55:22Z0/1 RUNNING,2..5
+PENDING(JobArrayTaskLimit), account2H100, no unrelated work/errors. Fresh logs
+confirm RESUME_VERIFIED IPOordinary42/IPOreference40, both new manifests RUNNING;
+no new round complete or new-round memory peak yet. See
+[startup audit](records/segment7_startup_20261017T0555.json).
+Exact [intent](records/0007_intent.json) and [receipt](records/0007_receipt.json)
+preserved; never duplicate0007. Same5h monitor, no source/science changes,
+no baseline/generation/WR/labels or oldOracle2 action.
+
+The earlier segment0006 progress and launch snapshots below are historical:
+
 Sequence0005 completion verified2026-10-16T19:42:55Z:4819533_0..5 all
 COMPLETED0:0 at32/30/30/32/30/30; all earlier receipts successful. All190
 committed states finite/contiguous/hash-valid, initial scores/support match,

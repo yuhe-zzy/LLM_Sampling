@@ -37,20 +37,19 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
-Oracle1 sequence0006 submitted2026-10-16T19:44:50Z:4836621_0..5%2, same
-source0e7793f/contract. At19:42:55Z all0001..0005 tasksCOMPLETED0:0, arms
-at32/30/30/32/30/30;190 finite/contiguous/hash-valid states, shared initial
+Oracle1 sequence0007 submitted2026-10-17T05:52:03Z:4839924_0..5%2, same
+source0e7793f/contract. At05:49:18Z all0001..0006 tasksCOMPLETED0:0, arms
+at42/40/40/42/40/40;250 finite/contiguous/hash-valid states, shared initial
 scores/support and finite latest loss/gradients. Full account empty, no errors.
-DPOreference/feedback reload20 and ten further updates verified. Frozen dry-run
-then fresh guarded advance resumes up to10 updates toward42/40/40/42/40/40.
-Latest2026-10-17T00:37:34Z0/1 COMPLETED0:0 at42/40;2/3 RUNNING at34/36;
-4/5 PENDING(JobArrayTaskLimit), still30/30. Account2H100, no unrelated/releasing
-work/errors. All218 states finite/contiguous/hash-valid; initial scores/support
-and contract pass. IPOfeedback30/DPOordinary32 reloads and four further updates
-each verified. No new submission this check. Exact0006 intent/receipt in
-campaign records and local private launch dir; never duplicate0006 or earlier.
-See records/segment6_progress_20261017T0037.json. Same5h monitor; no source,
-science, downstream or oldOracle2 change. Read latest startup records first.
+DPOreference/feedback reload30 and ten further updates verified. Frozen dry-run
+then fresh guarded advance resumes up to10 updates toward52/50/50/52/50/50.
+At05:55:22Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), account2H100, no
+unrelated work/errors. Fresh RESUME_VERIFIED IPOordinary42/IPOreference40,
+both new manifests RUNNING; no new round complete yet. Exact0007 intent/receipt in
+campaign records and local private launch dir; never duplicate0007 or earlier.
+See records/segment6_complete_20261017T0549.json and
+records/segment7_startup_20261017T0555.json. Same5h monitor; no source,
+science, downstream or oldOracle2 change. Read latest records first.
 
 Oracle1 progress2026-10-16T04:37:02Z: sequence0004 array4814410_0/1 now
 COMPLETED0:0 at22/20;2/3 RUNNING at15/17;4/5 PENDING(JobArrayTaskLimit),

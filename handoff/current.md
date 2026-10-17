@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-16, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-17, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest authorization: launch Oracle1 / Qwen3
 
@@ -37,16 +37,15 @@ Both actual4B objectives passed RESUME_VERIFIED and continued update tostep2,
 with finite loss/gradients, valid contiguous hashes/states and matching initial
 scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 Full-model startup AND cross-process resume/update gate has passed.
-At2026-10-16T19:42:55Z sequence0005 array4819533_0..5 allCOMPLETED0:0,
-as are all prior receipts. Complete steps32/30/30/32/30/30;190 saved states
+At2026-10-17T05:49:18Z sequence0006 array4836621_0..5 allCOMPLETED0:0,
+as are all prior receipts. Complete steps42/40/40/42/40/40;250 saved states
 finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
-no errors. DPOreference/feedback also verified reload20 then ten more updates.
-Full account empty. Frozen dry-run/guarded submit created **4836621_0..5%2**,
-sequence0006, at19:44:50Z, up to10 more updates toward42/40/40/42/40/40.
-At2026-10-17T00:37:34Z0/1 COMPLETED0:0 at42/40;2/3 RUNNING at34/36;
-4/5 pending, still30/30. Account2H100, no unrelated work/errors;218 states
-finite/contiguous/hash-valid, initial support/contract pass. IPOfeedback30 and
-DPOordinary32 reloads plus four updates each verified. No new submission; never repeat0006.
+no errors. DPOreference/feedback also verified reload30 then ten more updates.
+Full account empty. Frozen dry-run/guarded submit created **4839924_0..5%2**,
+sequence0007, at05:52:03Z, up to10 more updates toward52/50/50/52/50/50.
+At05:55:22Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), account2H100,
+no unrelated work/errors. Fresh RESUME_VERIFIED IPOordinary42/IPOreference40,
+both training; no new round complete yet. Never repeat0007 or earlier.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

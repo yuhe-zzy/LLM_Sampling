@@ -9,28 +9,26 @@ gradients. Contiguous checkpoint hashes/states and shared initial scores pass.
 Resume peak allocated11.89GiB/reserved21.35GiB; no logged execution errors.
 Full-model startup AND cross-process continued-training gate has passed.
 
-At2026-10-16T19:42:55Z sequence0005 array4819533_0..5 allCOMPLETED0:0,
-as are all prior receipt tasks. Complete outer32/30/30/32/30/30 (IPOordinary/
-reference/feedback, then DPOordinary/reference/feedback). All190 saved states
+At2026-10-17T05:49:18Z sequence0006 array4836621_0..5 allCOMPLETED0:0,
+as are all prior receipt tasks. Complete outer42/40/40/42/40/40 (IPOordinary/
+reference/feedback, then DPOordinary/reference/feedback). All250 saved states
 finite/contiguous/hash-valid, initial scores/token support match, frozen contract
 unchanged and latest losses/gradients finite. No logged execution errors.
-DPOreference/feedback reload20 and ten subsequent updates independently checked.
-Latest-round maximum allocated11.90GiB/reserved25.73GiB, not lifetime telemetry.
-Full owner/UID account empty, including no releasing allocations; one terminal
-scontrol record was correctly excluded from live GPU totals.
-Frozen dry-run and fresh guarded submit created **4836621_0..5%2** at19:44:50Z,
-sequence0006, oneH100/task, two concurrent,24h/18h soft stop, up to10 further
-updates toward42/40/40/42/40/40. Latest2026-10-17T00:37:34Z0/1 COMPLETED0:0
-at42/40;2/3 RUNNING at34/36;4/5 PENDING(JobArrayTaskLimit), retaining30/30.
-Full account2H100, no unrelated/releasing work/errors. All218 saved states
-finite/contiguous/hash-valid; initial scores/support and frozen contract pass.
-Logs confirm RESUME_VERIFIED IPOfeedback30/DPOordinary32 and four new updates
-each. Active arms' latest-round peaks at most11.90GiB allocated/36.34GiB
-reserved, not lifetime telemetry. Only0001..0006 intent/receipt pairs;
-no new submission or scheduler action. See [current progress](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment6_progress_20261017T0037.json),
-[completed segment5](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment5_complete_20261016T1942.json)
-and [new receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0006_receipt.json).
-This is checkpoint continuation, not restart from0; never duplicate0006.
+DPOreference/feedback reload30 and ten subsequent updates independently checked.
+Latest-round maximum allocated11.90GiB/reserved36.35GiB, not lifetime telemetry.
+Full owner/UID account empty, including no releasing allocations; two terminal
+scontrol records were correctly excluded from live GPU totals.
+Frozen dry-run and fresh guarded submit created **4839924_0..5%2** at05:52:03Z,
+sequence0007, oneH100/task, two concurrent,24h/18h soft stop, up to10 further
+updates toward52/50/50/52/50/50. At05:55:22Z0/1 RUNNING,2..5 normally
+PENDING(JobArrayTaskLimit), full account2H100, no unrelated work/errors.
+Fresh RESUME_VERIFIED IPOordinary42/IPOreference40, both new manifests RUNNING;
+no new round complete or new-round memory peak yet. See
+[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment7_startup_20261017T0555.json).
+Only0001..0007 intent/receipt pairs. See
+[completed segment6](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment6_complete_20261017T0549.json)
+and [new receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0007_receipt.json).
+This is checkpoint continuation, not restart from0; never duplicate0007.
 Segment completion does NOT mean the100-round experiment is finished.
 Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
 without skips before freeze. No code/scientific change. The SAME heartbeat

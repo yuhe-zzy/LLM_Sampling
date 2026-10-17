@@ -43,9 +43,10 @@ finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
 no errors. DPOreference/feedback also verified reload20 then ten more updates.
 Full account empty. Frozen dry-run/guarded submit created **4836621_0..5%2**,
 sequence0006, at19:44:50Z, up to10 more updates toward42/40/40/42/40/40.
-At19:47:57Z0/1 RUNNING,2..5 normalPENDING(JobArrayTaskLimit), account2H100,
-no unrelated work/errors. RESUME_VERIFIED IPOordinary32/IPOreference30; both
-training, no new round complete yet. Never repeat0006 or earlier segments.
+At2026-10-17T00:37:34Z0/1 COMPLETED0:0 at42/40;2/3 RUNNING at34/36;
+4/5 pending, still30/30. Account2H100, no unrelated work/errors;218 states
+finite/contiguous/hash-valid, initial support/contract pass. IPOfeedback30 and
+DPOordinary32 reloads plus four updates each verified. No new submission; never repeat0006.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.

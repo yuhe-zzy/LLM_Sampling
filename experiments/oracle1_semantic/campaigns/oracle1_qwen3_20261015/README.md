@@ -15,10 +15,15 @@ Full account empty. DPOreference/feedback reload20 then ten updates checked.
 See [completion audit](records/segment5_complete_20261016T1942.json).
 Frozen dry-run then guarded submit created **4836621_0..5%2** at19:44:50Z,
 sequence0006, at most10 further updates to targets42/40/40/42/40/40. OneH100/task,
-two concurrent,24h allocation/18h soft stop. At19:47:57Z0/1 RUNNING,2..5
-PENDING(JobArrayTaskLimit), full account2H100, no unrelated work/errors.
-Fresh logs confirm RESUME_VERIFIED IPOordinary32/IPOreference30; new manifests
-RUNNING, no new outer complete yet. See [startup audit](records/segment6_startup_20261016T1947.json).
+two concurrent,24h allocation/18h soft stop. Latest2026-10-17T00:37:34Z0/1
+COMPLETED0:0 at42/40;2/3 RUNNING at34/36;4/5 PENDING(JobArrayTaskLimit),
+retaining30/30. Account2H100, no unrelated/releasing work/errors. All218 states
+finite/contiguous/hash-valid, initial scores/support and frozen contract pass.
+Logs confirm RESUME_VERIFIED IPOfeedback30/DPOordinary32 and four new updates
+each. Active arms' latest-round peaks at most11.90GiB allocated/36.34GiB reserved,
+not lifetime device telemetry. No new job/scheduler action. See
+[current progress](records/segment6_progress_20261017T0037.json) and
+[startup audit](records/segment6_startup_20261016T1947.json).
 Exact [intent](records/0006_intent.json) and [receipt](records/0006_receipt.json)
 preserved; never duplicate0006. Same5h monitor, no source/science changes,
 no baseline/generation/WR/labels or oldOracle2 action.

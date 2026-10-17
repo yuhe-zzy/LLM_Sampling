@@ -43,11 +43,13 @@ at32/30/30/32/30/30;190 finite/contiguous/hash-valid states, shared initial
 scores/support and finite latest loss/gradients. Full account empty, no errors.
 DPOreference/feedback reload20 and ten further updates verified. Frozen dry-run
 then fresh guarded advance resumes up to10 updates toward42/40/40/42/40/40.
-At19:47:57Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
-no unrelated/releasing work or errors. RESUME_VERIFIED IPOordinary32/reference30;
-new manifests RUNNING, no new outer complete yet. Exact0006 intent/receipt in
+Latest2026-10-17T00:37:34Z0/1 COMPLETED0:0 at42/40;2/3 RUNNING at34/36;
+4/5 PENDING(JobArrayTaskLimit), still30/30. Account2H100, no unrelated/releasing
+work/errors. All218 states finite/contiguous/hash-valid; initial scores/support
+and contract pass. IPOfeedback30/DPOordinary32 reloads and four further updates
+each verified. No new submission this check. Exact0006 intent/receipt in
 campaign records and local private launch dir; never duplicate0006 or earlier.
-See records/segment6_startup_20261016T1947.json. Same5h monitor; no source,
+See records/segment6_progress_20261017T0037.json. Same5h monitor; no source,
 science, downstream or oldOracle2 change. Read latest startup records first.
 
 Oracle1 progress2026-10-16T04:37:02Z: sequence0004 array4814410_0/1 now

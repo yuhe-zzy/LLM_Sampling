@@ -25,18 +25,19 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
+Latest19:50:09Z check: TWO SSH TCP timeouts before remote commands. Current
+queue/GPUs/progress/errors UNKNOWN, not a confirmed training failure. Owner
+asked to check UNC VPN/Sycamore. No new submission or timer change; retry
+read-only next5h check. Last successful05:55:22Z evidence below is historical.
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
-Model revisions pinned/downloaded: Qwen3-4B1cfa9a720891 and Qwen3-32B9216db5781bf.
-Exact existing Nemotron scores reused, pure BT matrices rebuilt; all800 panels
-pass Qwen3 full chat/EOS length audit1537 without dropping/truncation.
+Pinned model locks and exact Nemotron score reuse audited; all800 panels pass
+Qwen3 full chat/EOS length1537 without dropping/truncation. See campaign details.
 Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 Final23 server CPU tests pass without skips, plus shell/contract/config checks.
-At10:25:58Z first4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0.
-Both actual4B objectives passed RESUME_VERIFIED and continued update tostep2,
-with finite loss/gradients, valid contiguous hashes/states and matching initial
-scores/token support. Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
-Full-model startup AND cross-process resume/update gate has passed.
+October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
+reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
+Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 At2026-10-17T05:49:18Z sequence0006 array4836621_0..5 allCOMPLETED0:0,
 as are all prior receipts. Complete steps42/40/40/42/40/40;250 saved states
 finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,

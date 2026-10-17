@@ -1,0 +1,41 @@
+{
+  "recorded_at_utc": "2026-10-17T19:50:09+00:00",
+  "heartbeat_at_utc": "2026-10-17T19:48:14.786+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "status": "MONITOR_CONNECTION_BLOCKED",
+  "connection_attempts": 2,
+  "failure": "socket.timeout: timed out while establishing SSH TCP connection",
+  "remote_commands_executed": false,
+  "authentication_or_experiment_failure_established": false,
+  "current_scheduler_state": "UNKNOWN",
+  "current_allocated_gpus": null,
+  "current_training_steps": null,
+  "current_log_errors": "UNKNOWN",
+  "current_downstream_state": "UNKNOWN",
+  "last_successful_inspection_utc": "2026-10-17T05:55:22.377966+00:00",
+  "last_known_submission_sequence": "0007",
+  "last_known_array_job_id": "4839924",
+  "last_known_training_steps": {
+    "ipo_ordinary": 42,
+    "ipo_reference": 40,
+    "ipo_feedback": 40,
+    "dpo_ordinary": 42,
+    "dpo_reference": 40,
+    "dpo_feedback": 40
+  },
+  "last_known_source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "actions": {
+    "new_job_submitted": false,
+    "scheduler_or_remote_files_changed": false,
+    "source_or_scientific_settings_changed": false,
+    "old_oracle2_touched": false,
+    "monitor_changed": false,
+    "monitor_interval_hours": 5
+  },
+  "next_action": "Owner checks UNC VPN/Sycamore SSH reachability; next check retries read-only inspection and latest intents/receipts. No advancement without fresh successful predecessor and full-account checks.",
+  "limitations": [
+    "The earlier running/2-H100 snapshot is historical, not current allocation evidence.",
+    "No progress, completion or absence of errors can be inferred during the connection outage.",
+    "The transport failed before entering its transcript-writing block; no remote inspection transcript was created."
+  ]
+}

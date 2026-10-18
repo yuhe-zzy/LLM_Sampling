@@ -19,10 +19,14 @@ was not a confirmed experiment failure and is no longer blocking this check.
 
 Frozen dry-run then guarded submit created **4846960_0..5%2** at00:55:40Z,
 sequence0008, at most10 further updates to62/60/60/62/60/60. OneH100/task,
-two concurrent,24h allocation/18h soft stop. At01:00:06Z0/1 RUNNING,2..5
-PENDING(JobArrayTaskLimit), full account2H100, no unrelated/releasing work/errors.
-Fresh RESUME_VERIFIED IPOordinary52/IPOreference50; new manifests RUNNING.
-No new outer update complete or new-round memory peak yet. See
+two concurrent,24h allocation/18h soft stop. Latest05:49:29Z0/1 COMPLETED0:0
+at62/60;2/3 RUNNING at54/56,4/5 PENDING(JobArrayTaskLimit), retaining50/50.
+Full account2H100, no unrelated/releasing work or errors. All338 committed states
+finite/contiguous/hash-valid, shared initial scores/support, unchanged contract,
+latest losses/gradients finite. Active IPOfeedback/DPOordinary reload50/52 and
+four further updates each verified. Latest active-round peaks at most11.90GiB
+allocated/29.52GiB reserved, not lifetime telemetry. No new submission. See
+[progress audit](records/segment8_progress_20261018T0549.json) and
 [startup audit](records/segment8_startup_20261018T0100.json).
 Exact [intent](records/0008_intent.json) and [receipt](records/0008_receipt.json)
 preserved; never duplicate0008 or earlier. Same5h monitor, source0e7793f and

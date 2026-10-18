@@ -23,10 +23,14 @@ Latest-round maximum allocated11.90GiB/reserved24.32GiB, not lifetime telemetry.
 Full owner/UID account empty, including no releasing allocations.
 Frozen dry-run and fresh guarded submit created **4846960_0..5%2** at00:55:40Z,
 sequence0008, oneH100/task, two concurrent,24h/18h soft stop, up to10 further
-updates toward62/60/60/62/60/60. At01:00:06Z0/1 RUNNING,2..5 normally
-PENDING(JobArrayTaskLimit), full account2H100, no unrelated work/errors.
-Fresh RESUME_VERIFIED IPOordinary52/IPOreference50, both new manifests RUNNING;
-no new round complete or new-round memory peak yet. See
+updates toward62/60/60/62/60/60. Latest05:49:29Z0/1 COMPLETED0:0 at62/60,
+2/3 RUNNING at54/56,4/5 PENDING(JobArrayTaskLimit), retaining50/50. Full account
+2H100, no unrelated/releasing work or errors. All338 saved states finite,
+contiguous/hash-valid, shared initial scores/support and unchanged contract;
+latest losses/gradients finite. Active IPOfeedback/DPOordinary logs verify
+reload50/52 plus four new updates each. Active-arm latest-round peaks at most
+11.90GiB allocated/29.52GiB reserved, not lifetime telemetry. No new submission.
+See [progress audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment8_progress_20261018T0549.json) and
 [startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment8_startup_20261018T0100.json).
 Only0001..0008 intent/receipt pairs. See
 [completed segment7](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment7_complete_20261018T0051.json)

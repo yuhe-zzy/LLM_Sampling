@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-17, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-18, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest authorization: launch Oracle1 / Qwen3
 
@@ -43,9 +43,10 @@ no errors. DPOreference/feedback also verified reload40 then ten more updates.
 Latest-round peaks at most11.90GiB allocated/24.32GiB reserved, not lifetime.
 Full account empty. Frozen dry-run/guarded submit created **4846960_0..5%2**,
 sequence0008, at00:55:40Z, up to10 more updates toward62/60/60/62/60/60.
-At01:00:06Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), account2H100,
-no unrelated work/errors. Fresh RESUME_VERIFIED IPOordinary52/IPOreference50,
-both training; no new round complete yet. Never repeat0008 or earlier.
+At05:49:29Z0/1 COMPLETED0:0 at62/60;2/3 RUNNING at54/56;4/5 pending50/50.
+All338 states/contract/shared support and latest losses/gradients valid, no errors.
+Resume IPOfeedback50/DPOordinary52 plus four updates checked; account2H100,
+no unrelated work. Same0008, no new submission; never repeat it or earlier jobs.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,

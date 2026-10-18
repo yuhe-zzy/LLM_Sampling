@@ -41,9 +41,10 @@ latest loss/gradients finite, no errors. DPOreference/feedback verified reload50
 then ten more updates. Full account empty. Frozen dry-run/guarded submit created
 **4849728_0..5%2**, sequence0009, at15:56:47Z, up to10 more updates toward
 72/70/70/72/70/70. OneH100/task,two concurrent,24h/18h soft stop.
-At16:00:12Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
-no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary62 and
-IPOreference60, new RUNNING manifests checked; no new outer complete yet.
+At20:47:29Z0/1 COMPLETED0:0 at72/70;2/3 RUNNING at64/66;4/5 pending60/60.
+All398 states/contract/shared support and latest loss/gradients valid, no errors.
+IPOfeedback60/DPOordinary62 reload plus four updates each checked; full account
+2H100, no unrelated/releasing work. Same0009; no new submission this check.
 Never repeat0009 or earlier jobs. No source/scientific change or oldOracle2 action.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.

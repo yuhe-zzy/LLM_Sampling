@@ -37,6 +37,17 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 progress2026-10-18T20:47:29Z: sequence0009 array4849728_0/1
+COMPLETED0:0 at72/70;2/3 RUNNING at64/66,4/5 PENDING(JobArrayTaskLimit),
+retaining60/60. All398 states finite/contiguous/hash-valid, initial scores/support
+match, frozen contract and latest loss/gradients valid. Active pair verifies
+reload IPOfeedback60/DPOordinary62 plus four updates each. Full account2H100,
+no unrelated/releasing work or logged errors. Only0001..0009 intent/receipt
+pairs; no new submission, source/science/downstream/oldOracle2 action. Same5h
+monitor. See Oracle1 campaign records/segment9_progress_20261018T2047.json.
+Next advance still requires all current receipt tasks successful and full account
+empty. Never duplicate0009 or infer100-round completion. Older checks follow.
+
 Oracle1 connection recovered2026-10-18T15:53:17Z: sequence0008 array4846960
 and all40 prior receipt tasks COMPLETED0:0 at62/60/60/62/60/60. All370 states
 finite/contiguous/hash-valid, initial scores/support match, contract unchanged,

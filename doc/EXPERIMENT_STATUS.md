@@ -18,10 +18,15 @@ sequence0009, up to10 more updates toward72/70/70/72/70/70. OneH100/task,
 two concurrent,24h/18h soft stop. Exact
 [intent](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0009_intent.json)
 and [receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0009_receipt.json)
-preserved. At16:00:12Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account
-2H100, no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary62
-and IPOreference60, new RUNNING manifests checked; no new outer complete yet.
-See [startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_startup_20261018T1600.json).
+preserved. Latest20:47:29Z0/1 COMPLETED0:0 at72/70,2/3 RUNNING at64/66,
+4/5 PENDING(JobArrayTaskLimit), retaining60/60. Full account2H100, no unrelated/
+releasing work or errors. All398 saved states finite/contiguous/hash-valid,
+shared initial scores/support and frozen contract unchanged; latest loss/gradients
+finite. Active pair verifies IPOfeedback60/DPOordinary62 reload plus four updates
+each. Latest active-round peaks at most11.90GiB allocated/35.41GiB reserved,
+not lifetime device-wide telemetry. No new submission this check. See
+[progress audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_progress_20261018T2047.json) and
+[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_startup_20261018T1600.json).
 Same5h monitor/source/science; no downstream or oldOracle2 action. Never
 duplicate0009 or earlier. Older execution snapshots below are historical.
 

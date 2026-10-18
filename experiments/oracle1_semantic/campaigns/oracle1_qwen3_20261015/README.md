@@ -22,10 +22,15 @@ Frozen dry-run then fresh guarded submit created **4849728_0..5%2** at15:56:47Z,
 sequence0009, up to10 more updates toward72/70/70/72/70/70. OneH100/task,
 two concurrent,24h/18h soft stop. Exact [intent](records/0009_intent.json) and
 [receipt](records/0009_receipt.json) preserved; never duplicate0009 or earlier.
-At16:00:12Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
-no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary62 and
-IPOreference60, new RUNNING manifests checked; no new outer complete yet.
-See [startup audit](records/segment9_startup_20261018T1600.json).
+Latest20:47:29Z0/1 COMPLETED0:0 at72/70;2/3 RUNNING at64/66;4/5 normal
+PENDING(JobArrayTaskLimit), retaining60/60. All398 states finite/contiguous/
+hash-valid, shared initial scores/support, frozen contract and latest finite
+loss/gradients checked. Active pair verifies IPOfeedback60/DPOordinary62 reload
+and four further updates each. Full account2H100, no unrelated/releasing work
+or logged errors. Latest active-round maxima11.90GiB allocated/35.41GiB reserved,
+not lifetime telemetry. No new submission this check. See
+[progress audit](records/segment9_progress_20261018T2047.json) and
+[startup audit](records/segment9_startup_20261018T1600.json).
 Same5h monitor, source0e7793f and science unchanged. No baseline/generation/WR/
 annotation or oldOracle2 action. Older execution snapshots below are historical.
 

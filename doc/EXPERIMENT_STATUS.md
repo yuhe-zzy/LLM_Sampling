@@ -2,9 +2,15 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-SSH recovered2026-10-18T00:51:42Z (October17 19:51 CDT). The earlier
-[connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261017T1950.json)
-is historical; fresh scheduler/checkpoint evidence is available again.
+Latest check2026-10-18T10:48:36Z (05:48 CDT): two SSH TCP connections timed
+out before authentication or any remote command. Current queue/GPU allocation,
+training steps, logs and downstream state UNKNOWN. This is a monitoring
+connection failure, not evidence that training failed or completed. No new job,
+remote change or timer change; the5h monitor remains. Owner asked to check UNC
+VPN/Sycamore SSH. Next check retries read-only and requires latest receipts,
+successful predecessors and full empty-account evidence before advancement.
+See [connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261018T1048.json).
+Last successful05:49:29Z and all execution snapshots below are historical.
 
 Verified2026-10-15T10:25:58Z: both first4811149_0/3 and resume4811197_0/3
 COMPLETED0:0. Actual Qwen3-4B IPO/DPO reloads reproduce saved scores/support,

@@ -25,8 +25,10 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
-SSH recovered at2026-10-18T00:51:42Z; prior October17 connection outage is
-historical, with no experiment failure inferred. Fresh evidence follows.
+Latest10:48:36Z check: two SSH TCP timeouts before authentication/remote commands.
+Current queue/GPUs/progress/errors UNKNOWN, not a confirmed experiment failure.
+No submission or timer change; owner asked to check UNC VPN/Sycamore. Retry
+read-only next5h check. Last successful05:49:29Z evidence below is historical.
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Pinned model locks and exact Nemotron score reuse audited; all800 panels pass
@@ -35,12 +37,10 @@ Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 Final23 server CPU tests pass without skips, plus shell/contract/config checks.
 October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
 reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
-Resume peak allocated11.89GiB/reserved21.35GiB perGPU.
 At2026-10-18T00:51:42Z sequence0007 array4839924_0..5 allCOMPLETED0:0,
 as are all prior receipts. Complete steps52/50/50/52/50/50;310 saved states
 finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
 no errors. DPOreference/feedback also verified reload40 then ten more updates.
-Latest-round peaks at most11.90GiB allocated/24.32GiB reserved, not lifetime.
 Full account empty. Frozen dry-run/guarded submit created **4846960_0..5%2**,
 sequence0008, at00:55:40Z, up to10 more updates toward62/60/60/62/60/60.
 At05:49:29Z0/1 COMPLETED0:0 at62/60;2/3 RUNNING at54/56;4/5 pending50/50.

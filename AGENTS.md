@@ -37,6 +37,16 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 monitoring blocked2026-10-18T10:48:36Z: two SSH TCP timeouts before
+authentication/remote commands. Current queue/GPU allocation, training steps,
+logs and downstream state UNKNOWN; not a confirmed experiment failure. Last
+successful05:49:29Z snapshot below is historical. No submission, cancellation,
+remote/source/science or timer change. Owner asked to check UNC VPN/Sycamore;
+next5h check retries read-only and reads latest intents/receipts before actions.
+Do not infer segment completion from elapsed time or submit without fresh
+successful-predecessor/full-empty-account evidence. See Oracle1 campaign
+records/connection_failure_20261018T1048.json.
+
 Oracle1 progress2026-10-18T05:49:29Z: sequence0008 array4846960_0/1 now
 COMPLETED0:0 at62/60;2/3 RUNNING at54/56,4/5 PENDING(JobArrayTaskLimit),
 retaining50/50. All338 committed states finite/contiguous/hash-valid, shared

@@ -2,15 +2,28 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Latest check2026-10-18T10:48:36Z (05:48 CDT): two SSH TCP connections timed
-out before authentication or any remote command. Current queue/GPU allocation,
-training steps, logs and downstream state UNKNOWN. This is a monitoring
-connection failure, not evidence that training failed or completed. No new job,
-remote change or timer change; the5h monitor remains. Owner asked to check UNC
-VPN/Sycamore SSH. Next check retries read-only and requires latest receipts,
-successful predecessors and full empty-account evidence before advancement.
-See [connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261018T1048.json).
-Last successful05:49:29Z and all execution snapshots below are historical.
+Connection recovered2026-10-18T15:53:17Z (10:53 CDT). Sequence0008 array
+4846960_0..5 and all40 prior receipt tasks COMPLETED0:0. Six arms now at
+62/60/60/62/60/60,370 committed states finite/contiguous/hash-valid; shared
+initial scores/support and frozen contract valid, latest losses/gradients finite,
+no logged errors. DPOreference/feedback reload50 then ten more updates verified.
+Full owner/UID account empty, no releasing allocations. Latest-round maxima
+11.90GiB allocated/29.53GiB reserved, not lifetime device-wide telemetry.
+See [completion audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment8_complete_20261018T1553.json).
+The [10:48Z connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261018T1048.json)
+is historical and no longer blocks this check.
+
+Frozen dry-run then fresh guarded submit created **4849728_0..5%2** at15:56:47Z,
+sequence0009, up to10 more updates toward72/70/70/72/70/70. OneH100/task,
+two concurrent,24h/18h soft stop. Exact
+[intent](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0009_intent.json)
+and [receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0009_receipt.json)
+preserved. At16:00:12Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account
+2H100, no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary62
+and IPOreference60, new RUNNING manifests checked; no new outer complete yet.
+See [startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_startup_20261018T1600.json).
+Same5h monitor/source/science; no downstream or oldOracle2 action. Never
+duplicate0009 or earlier. Older execution snapshots below are historical.
 
 Verified2026-10-15T10:25:58Z: both first4811149_0/3 and resume4811197_0/3
 COMPLETED0:0. Actual Qwen3-4B IPO/DPO reloads reproduce saved scores/support,

@@ -25,10 +25,7 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
-Latest10:48:36Z check: two SSH TCP timeouts before authentication/remote commands.
-Current queue/GPUs/progress/errors UNKNOWN, not a confirmed experiment failure.
-No submission or timer change; owner asked to check UNC VPN/Sycamore. Retry
-read-only next5h check. Last successful05:49:29Z evidence below is historical.
+Connection recovered at2026-10-18T15:53:17Z; the10:48Z outage is historical.
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Pinned model locks and exact Nemotron score reuse audited; all800 panels pass
@@ -37,16 +34,17 @@ Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 Final23 server CPU tests pass without skips, plus shell/contract/config checks.
 October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
 reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
-At2026-10-18T00:51:42Z sequence0007 array4839924_0..5 allCOMPLETED0:0,
-as are all prior receipts. Complete steps52/50/50/52/50/50;310 saved states
+At2026-10-18T15:53:17Z sequence0008 array4846960_0..5 allCOMPLETED0:0,
+as are all40 prior receipt tasks. Complete steps62/60/60/62/60/60;370 saved states
 finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
-no errors. DPOreference/feedback also verified reload40 then ten more updates.
-Full account empty. Frozen dry-run/guarded submit created **4846960_0..5%2**,
-sequence0008, at00:55:40Z, up to10 more updates toward62/60/60/62/60/60.
-At05:49:29Z0/1 COMPLETED0:0 at62/60;2/3 RUNNING at54/56;4/5 pending50/50.
-All338 states/contract/shared support and latest losses/gradients valid, no errors.
-Resume IPOfeedback50/DPOordinary52 plus four updates checked; account2H100,
-no unrelated work. Same0008, no new submission; never repeat it or earlier jobs.
+latest loss/gradients finite, no errors. DPOreference/feedback verified reload50
+then ten more updates. Full account empty. Frozen dry-run/guarded submit created
+**4849728_0..5%2**, sequence0009, at15:56:47Z, up to10 more updates toward
+72/70/70/72/70/70. OneH100/task,two concurrent,24h/18h soft stop.
+At16:00:12Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary62 and
+IPOreference60, new RUNNING manifests checked; no new outer complete yet.
+Never repeat0009 or earlier jobs. No source/scientific change or oldOracle2 action.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,

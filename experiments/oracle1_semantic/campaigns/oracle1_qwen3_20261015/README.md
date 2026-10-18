@@ -7,14 +7,27 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
-Monitoring blocked2026-10-18T10:48:36Z: two SSH TCP timeouts before
-authentication or remote commands. Current scheduler/progress/logs/GPU allocation
-and downstream state UNKNOWN, not a confirmed experiment failure. No submission,
-remote change or timer change. Owner asked to check UNC VPN/Sycamore access.
-Next5h check retries read-only, inspects latest intents/receipts and full account;
-no advancement without successful predecessors and an empty account. See
-[connection failure](records/connection_failure_20261018T1048.json).
-Last successful05:49:29Z and older execution snapshots below are historical.
+Connection recovered2026-10-18T15:53:17Z: sequence0008 array4846960_0..5
+and all40 prior receipt tasks COMPLETED0:0 at62/60/60/62/60/60. All370 committed
+states finite/contiguous/hash-valid, initial scores/support match, frozen
+contract unchanged and latest losses/gradients finite. No logged errors.
+DPOreference/feedback reload50 then ten more updates verified. Full account
+empty, including no releasing allocations. Latest-round maxima11.90GiB allocated/
+29.53GiB reserved, not lifetime telemetry. See
+[completion audit](records/segment8_complete_20261018T1553.json).
+The [10:48Z outage](records/connection_failure_20261018T1048.json) is historical,
+not an experiment failure and no longer blocking this check.
+
+Frozen dry-run then fresh guarded submit created **4849728_0..5%2** at15:56:47Z,
+sequence0009, up to10 more updates toward72/70/70/72/70/70. OneH100/task,
+two concurrent,24h/18h soft stop. Exact [intent](records/0009_intent.json) and
+[receipt](records/0009_receipt.json) preserved; never duplicate0009 or earlier.
+At16:00:12Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary62 and
+IPOreference60, new RUNNING manifests checked; no new outer complete yet.
+See [startup audit](records/segment9_startup_20261018T1600.json).
+Same5h monitor, source0e7793f and science unchanged. No baseline/generation/WR/
+annotation or oldOracle2 action. Older execution snapshots below are historical.
 
 Connection recovered2026-10-18T00:51:42Z: sequence0007 array4839924_0..5
 allCOMPLETED0:0 at52/50/50/52/50/50; all34 previous receipt tasks successful.

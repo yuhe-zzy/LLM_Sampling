@@ -2,14 +2,9 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Latest check2026-10-17T19:50:09Z (14:50 CDT): two SSH TCP connections timed
-out before any remote command. Current queue/GPU allocation, training steps,
-logs and downstream state UNKNOWN. This is a monitoring connection failure,
-not evidence that training failed or completed. No new job, remote change or
-timer change; the5h monitor remains. Owner asked to check UNC VPN/Sycamore SSH.
-Next check retries read-only, reads latest intents/receipts and full account
-before any advancement. See [connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261017T1950.json).
-Last successful inspection05:55:22Z and all status details below are historical.
+SSH recovered2026-10-18T00:51:42Z (October17 19:51 CDT). The earlier
+[connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261017T1950.json)
+is historical; fresh scheduler/checkpoint evidence is available again.
 
 Verified2026-10-15T10:25:58Z: both first4811149_0/3 and resume4811197_0/3
 COMPLETED0:0. Actual Qwen3-4B IPO/DPO reloads reproduce saved scores/support,
@@ -18,26 +13,25 @@ gradients. Contiguous checkpoint hashes/states and shared initial scores pass.
 Resume peak allocated11.89GiB/reserved21.35GiB; no logged execution errors.
 Full-model startup AND cross-process continued-training gate has passed.
 
-At2026-10-17T05:49:18Z sequence0006 array4836621_0..5 allCOMPLETED0:0,
-as are all prior receipt tasks. Complete outer42/40/40/42/40/40 (IPOordinary/
-reference/feedback, then DPOordinary/reference/feedback). All250 saved states
+At2026-10-18T00:51:42Z sequence0007 array4839924_0..5 allCOMPLETED0:0,
+as are all34 prior receipt tasks. Complete outer52/50/50/52/50/50 (IPOordinary/
+reference/feedback, then DPOordinary/reference/feedback). All310 saved states
 finite/contiguous/hash-valid, initial scores/token support match, frozen contract
 unchanged and latest losses/gradients finite. No logged execution errors.
-DPOreference/feedback reload30 and ten subsequent updates independently checked.
-Latest-round maximum allocated11.90GiB/reserved36.35GiB, not lifetime telemetry.
-Full owner/UID account empty, including no releasing allocations; two terminal
-scontrol records were correctly excluded from live GPU totals.
-Frozen dry-run and fresh guarded submit created **4839924_0..5%2** at05:52:03Z,
-sequence0007, oneH100/task, two concurrent,24h/18h soft stop, up to10 further
-updates toward52/50/50/52/50/50. At05:55:22Z0/1 RUNNING,2..5 normally
+DPOreference/feedback reload40 and ten subsequent updates independently checked.
+Latest-round maximum allocated11.90GiB/reserved24.32GiB, not lifetime telemetry.
+Full owner/UID account empty, including no releasing allocations.
+Frozen dry-run and fresh guarded submit created **4846960_0..5%2** at00:55:40Z,
+sequence0008, oneH100/task, two concurrent,24h/18h soft stop, up to10 further
+updates toward62/60/60/62/60/60. At01:00:06Z0/1 RUNNING,2..5 normally
 PENDING(JobArrayTaskLimit), full account2H100, no unrelated work/errors.
-Fresh RESUME_VERIFIED IPOordinary42/IPOreference40, both new manifests RUNNING;
+Fresh RESUME_VERIFIED IPOordinary52/IPOreference50, both new manifests RUNNING;
 no new round complete or new-round memory peak yet. See
-[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment7_startup_20261017T0555.json).
-Only0001..0007 intent/receipt pairs. See
-[completed segment6](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment6_complete_20261017T0549.json)
-and [new receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0007_receipt.json).
-This is checkpoint continuation, not restart from0; never duplicate0007.
+[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment8_startup_20261018T0100.json).
+Only0001..0008 intent/receipt pairs. See
+[completed segment7](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment7_complete_20261018T0051.json)
+and [new receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0008_receipt.json).
+This is checkpoint continuation, not restart from0; never duplicate0008.
 Segment completion does NOT mean the100-round experiment is finished.
 Source remains0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2;23 serverCPU tests passed
 without skips before freeze. No code/scientific change. The SAME heartbeat

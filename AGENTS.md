@@ -37,6 +37,21 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Oracle1 connection recovered2026-10-18T00:51:42Z: sequence0007 array4839924
+and all prior receipt tasks COMPLETED0:0. Six arms at52/50/50/52/50/50,
+310 finite/contiguous/hash-valid states, matching initial scores/support and
+finite latest losses/gradients; contract/source unchanged, no logged errors.
+DPOreference/feedback reload40 then ten more updates checked. Full account
+empty. Frozen dry-run then guarded submit created4846960_0..5%2, sequence0008,
+at00:55:40Z, targets62/60/60/62/60/60, oneH100/task,two concurrent,24h/18hsoft
+stop. At01:00:06Z0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100,
+no unrelated/releasing work or errors. Fresh RESUME_VERIFIED IPOordinary52 and
+IPOreference50; new manifests RUNNING, no new outer complete yet. Exact0008
+intent/receipt saved; never duplicate0008 or earlier. See campaign records/
+segment7_complete_20261018T0051.json and segment8_startup_20261018T0100.json.
+Same5h monitor, no scientific/source/downstream/oldOracle2 changes. The outage
+and older scheduler snapshots below are historical, not current allocation.
+
 Oracle1 monitoring blocked2026-10-17T19:50:09Z: two SSH TCP connections timed
 out before any remote command. Current queue/GPU allocation, training steps,
 logs and downstream state UNKNOWN; not evidence of experiment failure. Last

@@ -20,11 +20,15 @@ Frozen dry-run then fresh guarded submit created **4852338_0..5%2** at02:06:07Z,
 sequence0010, up to10 updates toward82/80/80/82/80/80. OneH100/task,two concurrent,
 24h/18h soft stop. Exact [intent](records/0010_intent.json) and
 [receipt](records/0010_receipt.json) preserved; never duplicate0010 or earlier.
-At02:09:05Z0/1 RUNNING with fresh RESUME_VERIFIED IPOordinary72/IPOreference70
-and new-process manifests;2..5 PENDING(JobArrayTaskLimit). Full account2H100,
-no unrelated/releasing work or logged errors. Still430 validated states, no new
-outer complete or new-round memory peak yet. Pending manifests describe their
-prior segment. See [startup audit](records/segment10_startup_20261019T0209.json).
+Latest07:22:24Z0/1 COMPLETED0:0 at82/80;2/3 RUNNING at75/77;4/5 normal
+PENDING(JobArrayTaskLimit), retaining70/70. All460 states finite/contiguous/
+hash-valid, shared initial scores/support, frozen contract and latest finite
+loss/gradients checked. Active pair verifies IPOfeedback70/DPOordinary72 reload
+and five further updates each. Full account2H100, no unrelated/releasing work
+or logged errors. Latest active-round maxima11.90GiB allocated/39.36GiB reserved,
+not lifetime telemetry. No new submission this check; pending manifests describe
+their prior segment. See [progress audit](records/segment10_progress_20261019T0722.json)
+and [startup audit](records/segment10_startup_20261019T0209.json).
 Same5h monitor, source0e7793f and science unchanged. No baseline/generation/WR/
 annotation or oldOracle2 action. Older execution snapshots below are historical.
 

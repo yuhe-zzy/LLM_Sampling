@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-18, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-19, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest authorization: launch Oracle1 / Qwen3
 
@@ -25,7 +25,7 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
-Connection healthy at2026-10-19T02:09:05Z; the earlier outage is historical.
+Connection healthy at2026-10-19T07:22:24Z; the earlier outage is historical.
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Pinned model locks and exact Nemotron score reuse audited; all800 panels pass
@@ -41,11 +41,11 @@ latest loss/gradients finite, no errors. DPOreference/feedback verified reload60
 then ten more updates. Fresh empty-account preflight/dry-run passed. Guarded
 submit created **4852338_0..5%2**, sequence0010, at02:06:07Z, up to10 updates
 toward82/80/80/82/80/80. OneH100/task,two concurrent,24h/18h soft stop.
-At02:09:05Z0/1 RUNNING with new-process manifests and fresh RESUME_VERIFIED
-IPOordinary72/IPOreference70;2..5 pending normally. Full account2H100, no unrelated
-or releasing work/errors; still430 states, no new outer complete yet.
-Exact0010 intent/receipt preserved. Never repeat0010 or earlier jobs.
-No source/scientific change or oldOracle2 action. See campaign completion/startup.
+At07:22:24Z0/1 COMPLETED0:0 at82/80;2/3 RUNNING at75/77;4/5 pending70/70.
+All460 states/contract/shared support and latest loss/gradients valid, no errors.
+IPOfeedback70/DPOordinary72 reload plus five updates each checked; full account
+2H100, no unrelated/releasing work. Same0010; no new submission this check.
+Never repeat0010 or earlier jobs. No source/scientific change or oldOracle2 action.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,

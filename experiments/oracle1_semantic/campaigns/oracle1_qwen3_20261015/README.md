@@ -5,6 +5,20 @@ submission and early5-minute checks, changing the same monitor to5-hour checks
 only after real IPO/DPO training AND checkpoint reload/continued training work.
 No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
+## Requested interim WR
+
+October19 owner requests curves for all six arms at0,10,...80, not only step80,
+and authorizes ONE additional H100. Read-only saved-checkpoint inference does
+not change training and requires no retraining. Current frozen startup checks
+reject unrelated queued/running jobs, including a new independent evaluator;
+later pending training tasks would therefore refuse startup. BF16 Nemotron WR
+also requires2 GPUs, whereas generation uses1. These are engineering/resource
+constraints, not a requirement to wait for100 training updates. Do not hot-edit
+immutable training code, bypass guards, change judge/precision or assume a
+second extraGPU is approved. Owner's explanatory question does not approve the
+suggested wait-until-segment-end/evaluate-first schedule. No interim executable,
+deployment, intent or receipt yet. Resolve safe scheduling before submission.
+
 ## Submitted and running
 
 Connection recovered2026-10-19T22:32:35Z on the owner's retry request. Sequence0010

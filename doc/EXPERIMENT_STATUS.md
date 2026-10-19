@@ -2,6 +2,17 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
+New request2026-10-19: interim six-arm Oracle1 WR curves at0,10,...80,
+explicitly clarified by owner, with ONE additional H100 authorized. Existing
+saved adapters suffice for read-only generation; no retraining is needed.
+Current frozen startup guard rejects a separate queued/running job, potentially
+blocking later pending training tasks, and BF16 Nemotron scoring requests2 GPUs.
+This is an execution/scheduling issue, not checkpoint dependence or a scientific
+requirement to finish100 updates. Do not alter immutable running sources or
+silently quantize/change the oracle. Owner asked why training would be affected;
+that question is NOT approval of proposed sequential priority or a second extra
+GPU. No interim code, deployment or submission yet; scheduling remains unresolved.
+
 Connection recovered on the owner's retry request, verified2026-10-19T22:32:35Z
 (17:32 CDT). Sequence0010 array4852338_0..5 and all52 receipt tasks COMPLETED0:0.
 Complete steps82/80/80/82/80/80;490 states finite/contiguous/hash-valid, matching

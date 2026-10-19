@@ -12,12 +12,15 @@ FOUR full-accountGPUs maximum, two1GPU training/generation tasks, one2GPU WR
 judge, one1GPU rater, nonoverlapping. Full queue/AllocTRES/sacct preflight and
 receipt guards mandatory. No new old-Oracle2 recovery or WR, no cancellations.
 
-Owner requests NEW5-minute monitor, updating that SAME timer to5hours only
-after actual IPO/DPO training AND successful checkpoint reload/continued update.
+October19 owner requests interim WR curves0,10,...80 and permits ONE additional
+H100. No interim program/submission yet. Checkpoint evaluation is independent;
+old startup rejects unrelated jobs and BF16 WR requires2 GPUs. Owner's question
+does NOT approve waiting/pausing training or a second extraGPU; resolve scheduling.
+
+SAME monitor is now5hours after actual IPO/DPO training/reload gates passed.
 Every outer boundary saves adapter+s0/st/st-1+RNG+counts+metrics with atomic
 commit/hashes. At most10 updates/segment,18h soft stop,24h allocation.
-First0/3 tasks run one update, then another allocation resumes them for one
-update, then all six. No blind retries after FAILED/TIMEOUT/ambiguous intent.
+No blind retries after FAILED/TIMEOUT/ambiguous intent.
 Generation/scoring/annotation reuse atomic per-response journals. Human review
 of the200-response annotation pilot gates full bulk labels, never fabricated.
 
@@ -25,12 +28,10 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
-SSH recovered2026-10-19T22:32:35Z on the owner's explicit retry request.
-Earlier18:00 connection failure was not an established experiment failure.
+SSH recovered2026-10-19T22:32:35Z; earlier18:00 outage was not training failure.
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
-Pinned model locks and exact Nemotron score reuse audited; all800 panels pass
-Qwen3 full chat/EOS length1537 without dropping/truncation. See campaign details.
+Model locks/score reuse audited; all800 panels pass full chat/EOS length1537.
 Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 Final23 server CPU tests pass without skips, plus shell/contract/config checks.
 October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
@@ -49,10 +50,9 @@ update complete or new-round memory peak yet. All490 states remain valid.
 Never repeat0011 or earlier jobs. No source/scientific change or oldOracle2 action.
 Intent/receipt/deployment are in campaign records and local private launch dir.
 Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.
-SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
-tool and stored schedule verified. Do not create another timer or repeat probes.
-Next: monitor0011; only successful receipt tasks and an empty full account
-permit frozen queue advance/dry-run/submit. No blind retry.
+SAME `oracle1-qwen3-training-and-resume-checks` ACTIVE every5HOURS; no new timer/probes.
+Next: resolve interim WR scheduling; preserve0011 and frozen guards. Normal
+continuation still requires successful receipts and empty account; no blind retry.
 
 ## Interpretation
 

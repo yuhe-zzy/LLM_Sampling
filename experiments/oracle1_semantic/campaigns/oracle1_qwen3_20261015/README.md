@@ -7,13 +7,26 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
-Monitoring blocked2026-10-19T18:00:06Z: two SSH TCP connection timeouts before
-authentication or any remote command. Current queue/GPU allocation, progress,
-errors and downstream state UNKNOWN. No submission/restart/cancellation or
-remote/source/science/timer change. Same5h monitor. Owner should check UNC VPN/
-Sycamore reachability; retry read-only, then all normal guards before advancing.
-See [connection failure](records/connection_failure_20261019T1800.json).
-The following snapshots are historical, not evidence of live allocation or success.
+Connection recovered2026-10-19T22:32:35Z on the owner's retry request. Sequence0010
+array4852338_0..5 and all52 receipt tasks COMPLETED0:0. Complete steps82/80/80/
+82/80/80;490 states finite/contiguous/hash-valid, initial scores/support match,
+contract unchanged and latest losses/gradients finite. No logged errors. Last
+pair verified reload70 and ten further updates. Full account empty, including no
+releasing allocations. Latest-round peaks at most11.90GiB allocated/39.36GiB
+reserved, not lifetime device telemetry. See [completion audit](records/segment10_complete_20261019T2232.json).
+The earlier [connection failure](records/connection_failure_20261019T1800.json) is no longer blocking this check.
+
+Frozen dry-run passed22:36:30Z; fresh guarded submit created **4859197_0..5%2**,
+sequence0011, at22:38:18Z, up to10 updates toward92/90/90/92/90/90. OneH100/task,
+two concurrent,24h/18h soft stop. At22:41:45Z0/1 RUNNING,2..5 normal
+PENDING(JobArrayTaskLimit), full account2H100, no unrelated/releasing work or
+errors. Fresh RESUME_VERIFIED IPOordinary82/IPOreference80 and new RUNNING
+manifests checked. No new outer update complete or new-round memory peak yet;
+all490 states remain valid. Exact [intent](records/0011_intent.json),
+[receipt](records/0011_receipt.json) and [startup audit](records/segment11_startup_20261019T2241.json)
+preserved. Same5h monitor and frozen source0e7793f, no scientific or oldOracle2
+changes. Baseline/generation/WR/labels unsubmitted. Never duplicate0011.
+Older execution snapshots follow.
 
 Verified2026-10-19T02:02:34Z: sequence0009 array4849728_0..5 and all46 prior
 receipt tasks COMPLETED0:0 at72/70/70/72/70/70. All430 committed states finite,

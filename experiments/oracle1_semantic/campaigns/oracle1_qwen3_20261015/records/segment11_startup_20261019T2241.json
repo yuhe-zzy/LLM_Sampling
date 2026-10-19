@@ -1,0 +1,64 @@
+{
+  "checked_at_utc": "2026-10-19T22:41:45.878406+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "dry_run_passed_at_utc": "2026-10-19T22:36:30.955841+00:00",
+  "submitted_at_utc": "2026-10-19T22:38:18.134872+00:00",
+  "submission_sequence": "0011",
+  "array_job_id": "4859197",
+  "indices": [0, 1, 2, 3, 4, 5],
+  "maximum_additional_updates_per_task": 10,
+  "segment_target_steps": [92, 90, 90, 92, 90, 90],
+  "training_steps": {
+    "ipo_ordinary": 82,
+    "ipo_reference": 80,
+    "ipo_feedback": 80,
+    "dpo_ordinary": 82,
+    "dpo_reference": 80,
+    "dpo_feedback": 80
+  },
+  "queue": {
+    "checked_at_utc": "2026-10-19T22:40:20.665300+00:00",
+    "full_queue_rows": 12718,
+    "running_tasks": ["4859197_0", "4859197_1"],
+    "pending_tasks": ["4859197_2", "4859197_3", "4859197_4", "4859197_5"],
+    "pending_reason": "JobArrayTaskLimit",
+    "allocated_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false,
+    "unrelated_owned_work": false,
+    "releasing_allocations": false
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 490,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "fresh_resume_verified": {"ipo_ordinary": 82, "ipo_reference": 80},
+    "new_process_manifests_running": true,
+    "logged_execution_errors": [],
+    "new_outer_updates_completed_in_this_segment_at_check": 0,
+    "exact_intent_sha256": "ac2468e4510e929dd00842395c060d27f3ab595e1cb751f15c226358298dc12d",
+    "exact_receipt_sha256": "bca70042f3759b3c46b3044f9f31d53a43d217e052f66b37f3d8647c4d4a0c0a"
+  },
+  "actions": {
+    "new_segment_submitted_once": true,
+    "source_or_scientific_settings_changed": false,
+    "old_oracle2_touched": false,
+    "downstream_phases_submitted": false,
+    "monitor_interval_hours": 5
+  },
+  "limitations": [
+    "Reload verification is not completion of a new outer update or the100-round experiment.",
+    "Pending tasks have not yet reloaded their checkpoints in this allocation; their manifests describe the preceding segment.",
+    "No new-round memory peak is available yet; preceding completed-round telemetry is in the segment10 completion record.",
+    "Scheduler, manifests and logs were read sequentially."
+  ],
+  "private_evidence": [
+    "oracle1_qwen3_launch_20261015/segment11_dry_run_20261019.json",
+    "oracle1_qwen3_launch_20261015/segment11_submitted_20261019.json",
+    "oracle1_qwen3_launch_20261015/segment11_startup_20261019.json"
+  ]
+}

@@ -2,13 +2,29 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Monitoring blocked2026-10-19T18:00:06Z (13:00 CDT): both SSH attempts timed out
-before authentication or any remote command. Current queue/GPU allocation,
-training progress/errors and downstream state UNKNOWN. No new submission,
-remote/source/scientific or timer changes. Owner should check UNC VPN/Sycamore
-SSH reachability; next check retries read-only. Do not infer success/failure from
-elapsed time or historical manifests. See [connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261019T1800.json).
-All execution details below are last-confirmed historical evidence, not live.
+Connection recovered on the owner's retry request, verified2026-10-19T22:32:35Z
+(17:32 CDT). Sequence0010 array4852338_0..5 and all52 receipt tasks COMPLETED0:0.
+Complete steps82/80/80/82/80/80;490 states finite/contiguous/hash-valid, matching
+initial scores/support and unchanged contract. Latest losses/gradients finite,
+no logged errors. Last pair reloaded70 and completed ten further updates.
+Latest-round peaks at most11.90GiB allocated/39.36GiB reserved, not lifetime
+device telemetry. Full account empty, including no releasing allocations.
+See [completion audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment10_complete_20261019T2232.json).
+The earlier [connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261019T1800.json) is resolved for this check, not evidence of a training failure.
+
+Frozen dry-run passed22:36:30Z, then guarded submit created **4859197_0..5%2**,
+sequence0011, at22:38:18Z, up to10 more updates toward92/90/90/92/90/90.
+OneH100/task,two concurrent,24h/18h soft stop. At22:41:45Z0/1 RUNNING,2..5
+PENDING(JobArrayTaskLimit), full account2H100, no unrelated/releasing work or
+errors. Fresh RESUME_VERIFIED IPOordinary82/IPOreference80 and new RUNNING
+manifests checked. No new outer update complete or new-round memory peak yet;
+all490 states remain valid. Exact
+[intent](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0011_intent.json),
+[receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0011_receipt.json) and
+[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment11_startup_20261019T2241.json)
+preserved. Same5h monitor, unchanged source/science; no baseline/generation/WR/
+labels or oldOracle2 action. Never duplicate0011.
+Older execution snapshots below are historical.
 
 Verified2026-10-19T02:02:34Z (October18 21:02 CDT): sequence0009 array
 4849728_0..5 and all46 prior receipt tasks COMPLETED0:0. Six arms now at

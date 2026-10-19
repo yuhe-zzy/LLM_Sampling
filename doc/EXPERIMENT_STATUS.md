@@ -2,6 +2,14 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
+Monitoring blocked2026-10-19T18:00:06Z (13:00 CDT): both SSH attempts timed out
+before authentication or any remote command. Current queue/GPU allocation,
+training progress/errors and downstream state UNKNOWN. No new submission,
+remote/source/scientific or timer changes. Owner should check UNC VPN/Sycamore
+SSH reachability; next check retries read-only. Do not infer success/failure from
+elapsed time or historical manifests. See [connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261019T1800.json).
+All execution details below are last-confirmed historical evidence, not live.
+
 Verified2026-10-19T02:02:34Z (October18 21:02 CDT): sequence0009 array
 4849728_0..5 and all46 prior receipt tasks COMPLETED0:0. Six arms now at
 72/70/70/72/70/70,430 committed states finite/contiguous/hash-valid; shared

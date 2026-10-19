@@ -25,7 +25,8 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md),
 [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
-Connection healthy at2026-10-19T07:22:24Z; the earlier outage is historical.
+SSH blocked2026-10-19T18:00:06Z: two TCP timeouts, no remote command ran.
+Current queue/GPU/progress/errors UNKNOWN; last confirmed snapshot follows.
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Pinned model locks and exact Nemotron score reuse audited; all800 panels pass
@@ -50,8 +51,8 @@ Intent/receipt/deployment are in campaign records and local private launch dir.
 Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.
 SAME heartbeat `oracle1-qwen3-training-and-resume-checks` now ACTIVE every5HOURS,
 tool and stored schedule verified. Do not create another timer or repeat probes.
-Next: inspect live progress; only all prior receipt tasksCOMPLETED0:0 and empty
-full account permit frozen queue advance/dry-run/submit for the next segment.
+Next: check UNC VPN/SSH, retry read-only; only fresh successful receipt tasks and
+empty full account permit frozen queue advance/dry-run/submit. No blind retry.
 
 ## Interpretation
 

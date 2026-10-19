@@ -7,6 +7,14 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
+Monitoring blocked2026-10-19T18:00:06Z: two SSH TCP connection timeouts before
+authentication or any remote command. Current queue/GPU allocation, progress,
+errors and downstream state UNKNOWN. No submission/restart/cancellation or
+remote/source/science/timer change. Same5h monitor. Owner should check UNC VPN/
+Sycamore reachability; retry read-only, then all normal guards before advancing.
+See [connection failure](records/connection_failure_20261019T1800.json).
+The following snapshots are historical, not evidence of live allocation or success.
+
 Verified2026-10-19T02:02:34Z: sequence0009 array4849728_0..5 and all46 prior
 receipt tasks COMPLETED0:0 at72/70/70/72/70/70. All430 committed states finite,
 contiguous/hash-valid, initial scores/support match, frozen contract unchanged

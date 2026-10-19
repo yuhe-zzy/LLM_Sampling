@@ -7,30 +7,24 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Submitted and running
 
-Connection recovered2026-10-18T15:53:17Z: sequence0008 array4846960_0..5
-and all40 prior receipt tasks COMPLETED0:0 at62/60/60/62/60/60. All370 committed
-states finite/contiguous/hash-valid, initial scores/support match, frozen
-contract unchanged and latest losses/gradients finite. No logged errors.
-DPOreference/feedback reload50 then ten more updates verified. Full account
-empty, including no releasing allocations. Latest-round maxima11.90GiB allocated/
-29.53GiB reserved, not lifetime telemetry. See
-[completion audit](records/segment8_complete_20261018T1553.json).
-The [10:48Z outage](records/connection_failure_20261018T1048.json) is historical,
-not an experiment failure and no longer blocking this check.
+Verified2026-10-19T02:02:34Z: sequence0009 array4849728_0..5 and all46 prior
+receipt tasks COMPLETED0:0 at72/70/70/72/70/70. All430 committed states finite,
+contiguous/hash-valid, initial scores/support match, frozen contract unchanged
+and latest losses/gradients finite. No logged errors. DPOreference/feedback
+reload60 then ten more updates verified. Latest-round maxima11.90GiB allocated/
+35.41GiB reserved, not lifetime telemetry. Fresh02:03:16Z preflight confirmed
+full account empty; the earlier inspection queue preceded the final completion.
+See [completion audit](records/segment9_complete_20261019T0202.json).
 
-Frozen dry-run then fresh guarded submit created **4849728_0..5%2** at15:56:47Z,
-sequence0009, up to10 more updates toward72/70/70/72/70/70. OneH100/task,
-two concurrent,24h/18h soft stop. Exact [intent](records/0009_intent.json) and
-[receipt](records/0009_receipt.json) preserved; never duplicate0009 or earlier.
-Latest20:47:29Z0/1 COMPLETED0:0 at72/70;2/3 RUNNING at64/66;4/5 normal
-PENDING(JobArrayTaskLimit), retaining60/60. All398 states finite/contiguous/
-hash-valid, shared initial scores/support, frozen contract and latest finite
-loss/gradients checked. Active pair verifies IPOfeedback60/DPOordinary62 reload
-and four further updates each. Full account2H100, no unrelated/releasing work
-or logged errors. Latest active-round maxima11.90GiB allocated/35.41GiB reserved,
-not lifetime telemetry. No new submission this check. See
-[progress audit](records/segment9_progress_20261018T2047.json) and
-[startup audit](records/segment9_startup_20261018T1600.json).
+Frozen dry-run then fresh guarded submit created **4852338_0..5%2** at02:06:07Z,
+sequence0010, up to10 updates toward82/80/80/82/80/80. OneH100/task,two concurrent,
+24h/18h soft stop. Exact [intent](records/0010_intent.json) and
+[receipt](records/0010_receipt.json) preserved; never duplicate0010 or earlier.
+At02:09:05Z0/1 RUNNING with fresh RESUME_VERIFIED IPOordinary72/IPOreference70
+and new-process manifests;2..5 PENDING(JobArrayTaskLimit). Full account2H100,
+no unrelated/releasing work or logged errors. Still430 validated states, no new
+outer complete or new-round memory peak yet. Pending manifests describe their
+prior segment. See [startup audit](records/segment10_startup_20261019T0209.json).
 Same5h monitor, source0e7793f and science unchanged. No baseline/generation/WR/
 annotation or oldOracle2 action. Older execution snapshots below are historical.
 

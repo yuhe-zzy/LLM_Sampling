@@ -2,33 +2,29 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Connection recovered2026-10-18T15:53:17Z (10:53 CDT). Sequence0008 array
-4846960_0..5 and all40 prior receipt tasks COMPLETED0:0. Six arms now at
-62/60/60/62/60/60,370 committed states finite/contiguous/hash-valid; shared
-initial scores/support and frozen contract valid, latest losses/gradients finite,
-no logged errors. DPOreference/feedback reload50 then ten more updates verified.
-Full owner/UID account empty, no releasing allocations. Latest-round maxima
-11.90GiB allocated/29.53GiB reserved, not lifetime device-wide telemetry.
-See [completion audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment8_complete_20261018T1553.json).
-The [10:48Z connection failure](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261018T1048.json)
-is historical and no longer blocks this check.
+Verified2026-10-19T02:02:34Z (October18 21:02 CDT): sequence0009 array
+4849728_0..5 and all46 prior receipt tasks COMPLETED0:0. Six arms now at
+72/70/70/72/70/70,430 committed states finite/contiguous/hash-valid; shared
+initial scores/support, frozen contract and latest finite losses/gradients valid.
+No logged errors. DPOreference/feedback reload60 then ten more updates verified.
+Latest-round maxima11.90GiB allocated/35.41GiB reserved, not lifetime telemetry.
+Earlier queue reading preceded the final completion; a fresh02:03:16Z preflight
+confirmed the full account empty, excluding one terminal scontrol record.
+See [completion audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_complete_20261019T0202.json).
 
-Frozen dry-run then fresh guarded submit created **4849728_0..5%2** at15:56:47Z,
-sequence0009, up to10 more updates toward72/70/70/72/70/70. OneH100/task,
-two concurrent,24h/18h soft stop. Exact
-[intent](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0009_intent.json)
-and [receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0009_receipt.json)
-preserved. Latest20:47:29Z0/1 COMPLETED0:0 at72/70,2/3 RUNNING at64/66,
-4/5 PENDING(JobArrayTaskLimit), retaining60/60. Full account2H100, no unrelated/
-releasing work or errors. All398 saved states finite/contiguous/hash-valid,
-shared initial scores/support and frozen contract unchanged; latest loss/gradients
-finite. Active pair verifies IPOfeedback60/DPOordinary62 reload plus four updates
-each. Latest active-round peaks at most11.90GiB allocated/35.41GiB reserved,
-not lifetime device-wide telemetry. No new submission this check. See
-[progress audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_progress_20261018T2047.json) and
-[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment9_startup_20261018T1600.json).
+Frozen dry-run then fresh guarded submit created **4852338_0..5%2** at02:06:07Z,
+sequence0010, up to10 updates toward82/80/80/82/80/80. OneH100/task,two concurrent,
+24h/18h soft stop. Exact
+[intent](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0010_intent.json)
+and [receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/0010_receipt.json)
+preserved. At02:09:05Z0/1 RUNNING with new-process manifests and fresh
+RESUME_VERIFIED IPOordinary72/IPOreference70;2..5 PENDING(JobArrayTaskLimit).
+Full account2H100, no unrelated/releasing work or errors. Still430 saved states;
+no new outer complete or new-round memory peak yet. Pending manifests describe
+their preceding segment, not current success. See
+[startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/segment10_startup_20261019T0209.json).
 Same5h monitor/source/science; no downstream or oldOracle2 action. Never
-duplicate0009 or earlier. Older execution snapshots below are historical.
+duplicate0010 or earlier. Older execution snapshots below are historical.
 
 Verified2026-10-15T10:25:58Z: both first4811149_0/3 and resume4811197_0/3
 COMPLETED0:0. Actual Qwen3-4B IPO/DPO reloads reproduce saved scores/support,

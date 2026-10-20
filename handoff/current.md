@@ -1,13 +1,13 @@
 # Current handoff
 
 Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
-Latest discussion: owner questions page10's apparently excellent match.
-Audited all30 embedded trace pairs at1ea6a64; screenshot3B/Prompt1 meanTV is
-.022/.024/.031/.091/.248 across five columns, slow-cycle max.706. Regime
-agreement is not same-round phase accuracy. No plotting smoothing; thick solid
-lines cover thin dashed lines. Three cycle predictions replay independently at
-rounding scale, but raw training arrays/exporter remain unavailable. See
-doc/SCIENTIFIC_CONTEXT.md. Dataset/LoRA confounds and publication caveats remain.
+Latest discussion: explain page10's five separate runs and reported3B initial
+top probability.94 on0.5B candidates. This is a pre-training rescore/selection
+record, not a failed3B training run, accuracy or absolute generation frequency.
+Its.94 value is reported by Fan, not independently recomputed from raw scores.
+Page10 audit remains: meanTV.022/.024/.031/.091/.248 for screenshot3B/Prompt1,
+slow-cycle max.706; regime match is not pointwise phase accuracy. See
+doc/SCIENTIFIC_CONTEXT.md. Candidate changes confound model/LoRA comparisons.
 No branch merge, experiment or job changes. ASD-STE100-style replies apply.
 
 ## Latest authorization: launch Oracle1 / Qwen3

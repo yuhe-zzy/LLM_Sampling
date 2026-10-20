@@ -204,6 +204,16 @@ neither model size nor finetuning method from support selection. HelpSteer3 and
 UltraFeedback in Fan's diagnostic report are ancillary analyses, not evidence
 that his main neural training uses our original HelpSteer panels.
 
+Clarification: the rejected0.5B-bank check happened BEFORE3B training; the
+preregistration states that nothing was trained on those rejected panels.
+The reported.94 is the mean across inspected panels of max_i pi0_i, with pi0
+renormalized over the four specified complete answers. It is not accuracy,
+absolute generation frequency, or a statement that every panel has exactly.94.
+This value is a collaborator-reported design record, not independently
+recomputed here from the omitted original scores. No-oscillation predictions
+apply to the checked support/oracle/initial-state/configuration, not a general
+rule that concentrated distributions or3B models cannot oscillate.
+
 Separate preference sources: soft Skywork BT labels with calibrated temperature;
 hard rankings; three-RM hard-vote fractions; and planted controls. H5/H6 plant
 P=.5+A on real response text, with random response roles, q=e=.3 and half
@@ -285,6 +295,15 @@ hash-bound source/panel identities and the exact exporter for full verification.
 Full-panel one-step errors, same-time trajectory errors and phase-insensitive
 amplitude/frequency summaries should be reported separately. A matched LoRA/full
 finetuning comparison remains a proposal, not authorized or executed here.
+
+Reading guide: the five columns are separate runs from the initial model, not
+successive stages of one run. Within the selected model/prompt, the same four
+candidate identities are retained; colors identify responses, not quality or
+semantic features. Columns1/3 approach mixed panel probabilities, column2
+concentrates on one answer, and4/5 exhibit repeated changes at different rates.
+These are finite-window observations, not global convergence proofs. Columns3/4
+share B12, while column5 has B40; increasing alpha alone is not a general
+stabilization rule. Across model tabs the candidate banks differ.
 
 ## Historical Oracle2 question and settings
 

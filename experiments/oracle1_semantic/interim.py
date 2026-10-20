@@ -111,7 +111,8 @@ def accounting(helpers, all_receipts):
     jobs = [j for r in all_receipts for j in receipt_jobs(r)]
     if len(set(jobs)) != len(jobs):
         raise ValueError('Duplicate registered job')
-    raw = helpers.run(['sacct','-X','-n','-P','-j',','.join(jobs),'-o','JobID,State,ExitCode'])
+    # Slurm otherwise hides lazy pending tasks behind an aggregated array record.
+    raw = helpers.run(['sacct','-X','--array','-n','-P','-j',','.join(jobs),'-o','JobID,State,ExitCode'])
     states = {}
     for line in raw.splitlines():
         parts = line.split('|')

@@ -178,6 +178,13 @@ class InterimTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 accounting(SimpleNamespace(run=lambda _,value=raw:value),[receipt('10',indices=[0])])
 
+    def test_accounting_requests_expanded_pending_arrays(self):
+        def query(command):
+            self.assertIn('--array',command)
+            return '10_0|RUNNING|0:0\n10_1|PENDING|0:0'
+        result=accounting(SimpleNamespace(run=query),[receipt('10')])
+        self.assertEqual(result['10_1'],['PENDING','0:0'])
+
     def test_unknown_intent_or_changed_receipt_blocks(self):
         with tempfile.TemporaryDirectory() as folder:
             path=Path(folder)

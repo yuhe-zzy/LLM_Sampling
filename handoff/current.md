@@ -1,6 +1,8 @@
 # Current handoff
 
 Updated2026-10-19, America/Chicago. Read [context index](../doc/INDEX.md).
+Latest discussion: owner requests a current-experiment explanation and ASD-STE100
+style for future replies; see AGENTS.md. No live status refresh or job changes.
 
 ## Latest authorization: launch Oracle1 / Qwen3
 

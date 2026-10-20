@@ -1,5 +1,15 @@
 # Experiment collaboration
 
+## Conversation style
+
+Owner request, 2026-10-19: use ASD-STE100 for future conversational answers.
+Use short sentences, consistent technical terms, explicit subjects and clear
+separation of verified facts, dated status, plans and interpretation limits.
+Continue in Simplified Chinese unless the owner requests another language.
+ASD-STE100 defines controlled English: apply its clarity principles to Chinese
+without claiming formal Chinese compliance or an unperformed compliance audit.
+Explain technical terms when first used. Keep necessary scientific caveats.
+
 ## Agent-native project context
 
 The owner enrolled this project in agent-native-context on 2026-10-13.

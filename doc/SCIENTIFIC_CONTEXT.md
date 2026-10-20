@@ -169,6 +169,61 @@ No training code or remote GPU job was executed. Current training code/plan
 and imported history implementation were checked identical to frozen0e7793f.
 The review leaves the active Oracle1 generated-trait/WR study unchanged.
 
+### Data and design comparison,2026-10-20
+
+Owner asks whether Fan uses our dataset and requests the full experimental
+design. Checked the published builder, trainer and preregistrations at the same
+1ea6a64 commit, plus our download/export, Oracle2 preparation and Oracle1 plan.
+These are different data pipelines, not a matched LoRA/full-finetuning study.
+
+Our candidate text source is original nvidia/HelpSteer, not HelpSteer2 or3.
+The processed1000-panel source retains four distinct original responses; Oracle2
+checks every response against raw HelpSteer, filters whole panels by length,
+then shuffles eligible panels into100 calibration/500 train/200 evaluation
+before reward scoring. Active Oracle1/Qwen3 reuses those hash-verified panels
+and Nemotron scores. Training preferences are current reward-model probabilities,
+not the original HelpSteer attribute averages used by older baseline scripts.
+
+Fan's main preregistered prompt pool is65 short templates,100 NoveltyBench
+curated prompts and435 NoveltyBench WildChat prompts, up to600. Builder code
+filters source strings to10..400 characters, deduplicates and prioritizes short
+templates/curated prompts. It appends a six-word answer instruction, samples48
+answers per prompt from each policy atT1/top_p1/top_k0/cap20, retains complete
+EOS answers of at most8 words, deduplicates, selects the four highest sampled
+sequence likelihoods, then requires each panel-normalized probability >=.05.
+These are the top four among sampled valid answers, not all possible outputs.
+The tokenization caveat above means the floor does not hold for every training
+panel. Kept counts are130/390/485 for0.5B/1.5B/3B. Main0.5B H1-H4 use130;
+H5-H6 use64, and larger-model replications use64 each. No analogous held-out
+100/500/200 prompt split is part of these main mechanism tests.
+
+The3B preregistration explicitly rejects reusing0.5B panels because mean initial
+top probability was.94 and the population model predicted no oscillation.
+It instead uses its own485-panel bank, first64 for training. This isolates
+neither model size nor finetuning method from support selection. HelpSteer3 and
+UltraFeedback in Fan's diagnostic report are ancillary analyses, not evidence
+that his main neural training uses our original HelpSteer panels.
+
+Separate preference sources: soft Skywork BT labels with calibrated temperature;
+hard rankings; three-RM hard-vote fractions; and planted controls. H5/H6 plant
+P=.5+A on real response text, with random response roles, q=e=.3 and half
+Delta=.05 majority cycles versus half Delta=.2 Condorcet-winner panels.
+This tests conditional dynamics, not the natural prevalence of such cycles.
+X11 real rubric/style pooling did not meet its training trigger. X15 deliberately
+selects rotating quality/concision/originality rankings, varies pair-dependent
+routing and uses K3 main/K4 secondary panels; its amended builder uses96 samples
+and a.02 floor, with64 selected K3 and only4 K4 panels. X15 is not a completed
+result in this commit; predictions and void mismatched-panel runs are not results.
+
+Fan's eight directories are experiment families, not eight individual runs.
+They cover H1-H6, E1-E6 controls, actual-DPO/inner-step tests, schedule/lag/7B-judge
+tests, X11 pooling, X14 diagnostic steering,3B replication and X15 pooled onset.
+Main endpoints are same-panel target KL, entropy, concentration, one-round
+fitting residual and detrended late probability amplitude. Conditional panel
+probabilities do not measure open-generation frequency or held-out win rate.
+The package complements our generated-trait/WR endpoint. Discussion only:
+no experiment settings, jobs, branches or analysis gates were changed.
+
 ## Historical Oracle2 question and settings
 
 Empirical stability trends, not a demand to eliminate oscillations or prove

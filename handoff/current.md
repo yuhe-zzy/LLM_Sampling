@@ -1,10 +1,13 @@
 # Current handoff
 
 Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
-Latest discussion: audited Fan's published v4 bundle at1ea6a64 against the active
-Oracle1/Qwen3 protocol; see doc/SCIENTIFIC_CONTEXT.md. Found embedded raw text,
-missing DPO solver, retokenization/preregistration caveats. No branch merge,
-job or model changes. ASD-STE100-style replies per AGENTS.md.
+Latest discussion: explained Fan's data/design at1ea6a64 versus our active
+Oracle1/Qwen3 study; see doc/SCIENTIFIC_CONTEXT.md. Our source is original
+HelpSteer; his main panels use short templates/NoveltyBench/WildChat and each
+model's own selected short answers. Planted labels and same-panel diagnostics
+are not natural-cycle prevalence or held-out WR. Not a matched LoRA ablation.
+Earlier publication caveats remain. No branch merge, job or model changes.
+ASD-STE100-style replies per AGENTS.md.
 
 ## Latest authorization: launch Oracle1 / Qwen3
 

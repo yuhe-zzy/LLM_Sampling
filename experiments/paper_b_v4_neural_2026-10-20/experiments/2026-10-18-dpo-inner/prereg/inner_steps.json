@@ -1,0 +1,27 @@
+{
+ "eta=0.5,k=1": {
+  "median_radius": 0.9874855915428189,
+  "share_radius_above_1": 0.0,
+  "max_fixed_point_residual": 2.5183966023689663e-11
+ },
+ "eta=0.5,k=2": {
+  "median_radius": 1.0094006097138462,
+  "share_radius_above_1": 0.5625,
+  "max_fixed_point_residual": 3.204292386982388e-11
+ },
+ "eta=0.5,k=5": {
+  "median_radius": 1.0904921431461476,
+  "share_radius_above_1": 0.90625,
+  "max_fixed_point_residual": 3.452316210683648e-11
+ },
+ "eta=0.5,k=20": {
+  "median_radius": 1.0990717194549355,
+  "share_radius_above_1": 0.9375,
+  "max_fixed_point_residual": 3.454164732019649e-11
+ },
+ "eta=0.5,k=200": {
+  "median_radius": 1.099216469922123,
+  "share_radius_above_1": 0.9375,
+  "max_fixed_point_residual": 3.437439222153671e-11
+ }
+}

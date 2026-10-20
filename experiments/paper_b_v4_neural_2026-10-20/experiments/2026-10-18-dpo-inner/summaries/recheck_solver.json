@@ -1,0 +1,16 @@
+{
+ "X1_B4_a08": {
+  "share_new": 0.0,
+  "share_old": 0.0,
+  "share_neural": 0.09375,
+  "max_abs_traj_diff": 2.395710736666045e-12,
+  "agree_panels_new": 0.90625
+ },
+ "X1_B2_a03": {
+  "share_new": 0.28125,
+  "share_old": 0.28125,
+  "share_neural": 0.3125,
+  "max_abs_traj_diff": 5.2229245197762115e-11,
+  "agree_panels_new": 0.90625
+ }
+}

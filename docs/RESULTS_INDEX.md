@@ -28,6 +28,7 @@ separate from preferred consolidated results.
 | Oracle1: earlier intermediate exports | [Historical archive](../experiments/oracle1/campaigns/historical_local_snapshots/README.md) | Dated local previews, not new results or independent replications; entropy definitions kept separate |
 | Collaborator Hodge diagnostics | [Hodge entry point](../experiments/hodge_diagnostics/README.md) | Preserve collaborator definitions and distinction between plans and execution |
 | Oracle2: mixed reward-model judge | [Policy results](../experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/README.md) | Six complete states0..100 arms, all500-prompt metrics; no generated-response WR yet. [Execution/recovery](../experiments/oracle2/campaigns/oracle2_real_20261009/README.md) and [earlier design review](ORACLE2_DESIGN_REVIEW_20261006.md) retained |
+| Paper B v4: theory-matched panel training (0.5B, 1.5B, 3B) | [Fan branch bundle, 2026-10-20](../experiments/paper_b_v4_neural_2026-10-20/README.md) | Preregistered tests with frozen population predictions; one seed per run; X15 still running at publication; no raw prompt/response text |
 | Oracle2: average Hodge residual across prompts | [All500-panel averages](../experiments/oracle2/campaigns/oracle2_real_20261009/average_hodge_20261013/README.md) | Mean residual vs mean norm, identity/logit and averaging order distinguished; original candidate indices, not a validated shared semantic space |
 
 ## Useful figure collections

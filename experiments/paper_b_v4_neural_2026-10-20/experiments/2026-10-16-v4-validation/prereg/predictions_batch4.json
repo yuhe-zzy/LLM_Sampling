@@ -1,0 +1,101 @@
+{
+ "created": "2026-10-16 23:20:56",
+ "ids": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  62,
+  63,
+  64
+ ],
+ "T_soft": 2.6708498795403925,
+ "criteria": {
+  "R1": "final KL to the B=8 target <= 0.02 for both runs; pairwise KL between final policies <= 0.02",
+  "R2": "soft-label DPO final entropy within 0.05 of target; hard-label DPO entropy < 0.05 by t=5 and top-two log-odds gap increasing from t=5 to t=30",
+  "R3": "alpha=0.2: median probability amplitude of balanced panels (last 30 rounds, detrended) within +-25% of the population value and >= 2x the decisive median; alpha=0.9: balanced median <= 0.10"
+ },
+ "R1_target_entropy": 0.8175295365994626,
+ "R2_soft_target_entropy": 0.36443267690855063,
+ "R3_a02": {
+  "balanced": {
+   "gammaB_median": 1.9008257431450215,
+   "share_unstable": 0.96875,
+   "pop_amp_median": 0.311177216827794
+  },
+  "decisive": {
+   "gammaB_median": 0.789527158150775,
+   "share_unstable": 0.09375,
+   "pop_amp_median": 1.2013816118291826e-07
+  }
+ },
+ "R3_a09": {
+  "balanced": {
+   "gammaB_median": 1.9008257431450215,
+   "share_unstable": 0.0,
+   "pop_amp_median": 0.004050626955945004
+  },
+  "decisive": {
+   "gammaB_median": 0.789527158150775,
+   "share_unstable": 0.0,
+   "pop_amp_median": 0.0026434970056675826
+  }
+ }
+}

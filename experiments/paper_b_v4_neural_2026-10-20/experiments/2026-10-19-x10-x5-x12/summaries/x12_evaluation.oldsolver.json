@@ -1,0 +1,121 @@
+{
+ "judge": "/home/azureuser/v4val/models/Qwen2.5-7B-Instruct",
+ "files": {
+  "panels_q05.json": {
+   "letter_top_share": 1.0,
+   "position_bias": -0.1032970300467321,
+   "order_averaged": {
+    "n": 130,
+    "no_condorcet_winner": 0.03076923076923077,
+    "no_cw_count": 4,
+    "majority_three_cycle": 0.023076923076923078,
+    "cyc_share_logit_mean": 0.1412457790286074,
+    "cyc_share_gt_0p1": 0.4846153846153846,
+    "no_cw_ids": [
+     28,
+     36,
+     108,
+     113
+    ],
+    "osc_A_fixedref": 0.5615384615384615,
+    "osc_A_fixedref_count": 73,
+    "osc_B_a05": 0.023076923076923078,
+    "osc_B_a05_count": 3,
+    "osc_C_a09": 0.015384615384615385,
+    "osc_C_a09_count": 2,
+    "sign_agreement_with_skywork8b": 0.36923076923076925,
+    "mean_abs_margin": 0.3305240517936725
+   },
+   "lower_index_first": {
+    "n": 130,
+    "no_condorcet_winner": 0.08461538461538462,
+    "no_cw_count": 11,
+    "majority_three_cycle": 0.1,
+    "cyc_share_logit_mean": 0.1398487091342253,
+    "cyc_share_gt_0p1": 0.7076923076923077,
+    "no_cw_ids": [
+     9,
+     27,
+     32,
+     33,
+     55,
+     74,
+     75,
+     94,
+     103,
+     108,
+     113
+    ]
+   },
+   "lower_index_second": {
+    "n": 130,
+    "no_condorcet_winner": 0.06153846153846154,
+    "no_cw_count": 8,
+    "majority_three_cycle": 0.09230769230769231,
+    "cyc_share_logit_mean": 0.15341105448877534,
+    "cyc_share_gt_0p1": 0.7153846153846154,
+    "no_cw_ids": [
+     34,
+     44,
+     62,
+     90,
+     108,
+     113,
+     118,
+     121
+    ]
+   }
+  },
+  "style_panels.json": {
+   "letter_top_share": 1.0,
+   "position_bias": -0.057129078286901634,
+   "order_averaged": {
+    "n": 25,
+    "no_condorcet_winner": 0.04,
+    "no_cw_count": 1,
+    "majority_three_cycle": 0.08,
+    "cyc_share_logit_mean": 0.09057722482978148,
+    "cyc_share_gt_0p1": 0.36,
+    "no_cw_ids": [
+     21
+    ],
+    "osc_A_fixedref": 0.72,
+    "osc_A_fixedref_count": 18,
+    "osc_B_a05": 0.0,
+    "osc_B_a05_count": 0,
+    "osc_C_a09": 0.0,
+    "osc_C_a09_count": 0,
+    "sign_agreement_with_skywork8b": 0.20666666666666667,
+    "mean_abs_margin": 0.3850659807763613
+   },
+   "lower_index_first": {
+    "n": 25,
+    "no_condorcet_winner": 0.08,
+    "no_cw_count": 2,
+    "majority_three_cycle": 0.16,
+    "cyc_share_logit_mean": 0.16525295063727152,
+    "cyc_share_gt_0p1": 0.68,
+    "no_cw_ids": [
+     18,
+     21
+    ]
+   },
+   "lower_index_second": {
+    "n": 25,
+    "no_condorcet_winner": 0.04,
+    "no_cw_count": 1,
+    "majority_three_cycle": 0.08,
+    "cyc_share_logit_mean": 0.17877293037821623,
+    "cyc_share_gt_0p1": 0.84,
+    "no_cw_ids": [
+     15
+    ]
+   }
+  }
+ },
+ "rule": {
+  "threshold": 0.1,
+  "share": 0.03076923076923077,
+  "triggered": false
+ }
+}

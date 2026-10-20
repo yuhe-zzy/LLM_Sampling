@@ -1,0 +1,28 @@
+{
+ "created": "2026-10-18 17:38:15 EDT",
+ "X1": {
+  "design": "planted panels (64; 32 balanced), DPO with soft planted labels, lambda=1, 120 rounds, 40 Adam steps at lr 2e-5",
+  "runs": {
+   "X1_B4_a08": {
+    "alpha": 0.8,
+    "beta": 0.8,
+    "pred_share_balanced_DPO": 0.0,
+    "pred_share_balanced_logit": 0.78125
+   },
+   "X1_B2_a03": {
+    "alpha": 0.3,
+    "beta": 1.4,
+    "pred_share_balanced_DPO": 0.28125,
+    "pred_share_balanced_logit": 0.75
+   }
+  },
+  "criterion": "in both runs |share - DPO prediction| <= 0.15 and |share - logit prediction| >= 0.35; oscillating = detrended probability amplitude over the last 30 rounds > 0.0536"
+ },
+ "X9": {
+  "design": "planted panels, IPO, lambda=1, alpha=0.5, beta=6 (B=12), 150 rounds, inner Adam steps k in {10, 3, 1} at lr 2e-5; k=40 reference = v4 run H6_B12_a05 (80 rounds, share 0.9375)",
+  "pred_ordinal": "oscillating share of balanced panels non-increasing as k decreases (40 >= 10 >= 3 >= 1) with at least one k giving share <= 0.2",
+  "pred_calibrated": "rho_k = 1 - median over balanced panels and rounds 1-5 of the fraction f = <s_{t+1}-s_t, F(s_t)-s_t>/||F(s_t)-s_t||^2 achieved of the exact round move; alpha_eff = 0.5 + rho_k*0.5; predicted share = population share at alpha_eff from onset_predictions.json (linear interpolation; 0 above 0.62, 0.9375 below 0.45)",
+  "criterion_target": "time-averaged policy over the last 30 rounds within median KL 0.02 of the B=12 target for every run whose mean per-round step over the last 30 rounds is below 0.01 (runs still drifting are reported, not scored)",
+  "tabular_gd_reference": "share of balanced panels with spectral radius > 1 for GD (eta=0.5): 0.94 (k=200), 0.94 (20), 0.91 (5), 0.56 (2), 0.00 (1)"
+ }
+}

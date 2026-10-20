@@ -1,0 +1,14 @@
+{
+ "created": "2026-10-16 20:46:28",
+ "note": "targets from panel-file s0 (bf16); evaluation recomputes them from each run s[0]",
+ "S1_B8": {
+  "B": 8.0,
+  "target_entropy": 0.18775795771621673,
+  "target_top": 0.9335608471517887
+ },
+ "S2_bern_B5": {
+  "B": 5.0,
+  "target_entropy": 0.33514392158279377,
+  "target_top": 0.8680701649928906
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "created": "2026-10-16 20:44:49",
+ "threshold": 0.2778456658887648,
+ "noise_floor": 0.0694614164721912,
+ "configs": {
+  "H5_b4_a05": {
+   "balanced": {
+    "osc_share": 0.0,
+    "amp_median": 2.2846130288930133e-07
+   },
+   "decisive": {
+    "osc_share": 0.0,
+    "amp_median": 1.2687189815970692e-12
+   }
+  },
+  "H5_b4_a09": {
+   "balanced": {
+    "osc_share": 1.0,
+    "amp_median": 1.4477339676427734
+   },
+   "decisive": {
+    "osc_share": 0.0,
+    "amp_median": 0.007063319425847214
+   }
+  },
+  "H5_b4_a095": {
+   "balanced": {
+    "osc_share": 1.0,
+    "amp_median": 2.3790213632432167
+   },
+   "decisive": {
+    "osc_share": 0.0,
+    "amp_median": 0.08350761962182257
+   }
+  },
+  "H6_B12_a02": {
+   "balanced": {
+    "osc_share": 1.0,
+    "amp_median": 1.5666379696940216
+   },
+   "decisive": {
+    "osc_share": 0.125,
+    "amp_median": 1.0512143960225925e-15
+   }
+  },
+  "H6_B12_a05": {
+   "balanced": {
+    "osc_share": 0.875,
+    "amp_median": 0.6450729929174954
+   },
+   "decisive": {
+    "osc_share": 0.0,
+    "amp_median": 1.0303030134183308e-13
+   }
+  },
+  "H6_B12_a08": {
+   "balanced": {
+    "osc_share": 0.0,
+    "amp_median": 0.0004414251708832876
+   },
+   "decisive": {
+    "osc_share": 0.0,
+    "amp_median": 1.1108768387501714e-05
+   }
+  },
+  "H6_B12_a09": {
+   "balanced": {
+    "osc_share": 0.0,
+    "amp_median": 0.0035087229224190215
+   },
+   "decisive": {
+    "osc_share": 0.0,
+    "amp_median": 0.0023153926164933393
+   }
+  }
+ }
+}

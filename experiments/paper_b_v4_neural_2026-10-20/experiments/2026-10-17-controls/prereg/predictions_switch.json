@@ -1,0 +1,12 @@
+{
+ "created": "2026-10-17 22:40:01",
+ "run": "C3b_switch",
+ "H_t60": 0.19596609790463215,
+ "H_target_B8": 0.19598201558731201,
+ "KL_to_B8_median": 2.3850619718805133e-17,
+ "KL_to_B8_mean": 1.3623789828955846e-09,
+ "panels_KL_gt_01": 0,
+ "switch_round_median": 9.0,
+ "never_switched": 0,
+ "criteria": "C3b_switch: median KL to the B=8 target <= 0.02, mean entropy within 0.05 of the target entropy (the frozen E3 criterion); also report panels with KL > 0.1 (C3_drift had 16 of 64)."
+}

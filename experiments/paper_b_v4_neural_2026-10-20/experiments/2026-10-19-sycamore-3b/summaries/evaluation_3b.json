@@ -1,0 +1,158 @@
+{
+ "D3B_conv_rm": {
+  "pass_": "PASS",
+  "prediction": {
+   "alpha": 0.8,
+   "beta": 1.6,
+   "lam": 0.8,
+   "rounds": 30,
+   "end_mean_entropy": 0.9682797162647092,
+   "end_mean_top": 0.5904674456499545,
+   "target_mean_entropy": 0.9679195506930192,
+   "median_kl_target_end": 2.1117364605787532e-07
+  },
+  "result": {
+   "end_entropy": 0.9677885578592642,
+   "median_kl_target": 0.001273105741254173,
+   "target_entropy": 0.967919550103441
+  },
+  "counterpart_05B": "H1_a08_b16",
+  "result_05B": {
+   "end_entropy": 0.7844643558470785,
+   "median_kl_target": 0.0010699666149036548,
+   "target_entropy": 0.7819678075351706
+  }
+ },
+ "D3B_pol_full": {
+  "pass_": "PASS",
+  "prediction": {
+   "alpha": 1.0,
+   "beta": 1.0,
+   "lam": 1.0,
+   "rounds": 40,
+   "end_mean_entropy": 2.1367382430361127e-07,
+   "end_mean_top": 0.9999999890455367,
+   "share_with_cw": 1.0,
+   "mass_on_cw_end_mean": 0.9999999890455367
+  },
+  "result": {
+   "end_entropy": 5.257847390163858e-07,
+   "share_with_cw": 1.0,
+   "mass_on_cw_mean": 0.9999999679474554,
+   "cw_largest_share": 1.0
+  },
+  "counterpart_05B": "H3_a1_b1",
+  "result_05B": {
+   "end_entropy": 7.533704717054669e-07,
+   "share_with_cw": 1.0,
+   "mass_on_cw_mean": 0.9999999543578586,
+   "cw_largest_share": 1.0
+  }
+ },
+ "D3B_osc_fast": {
+  "pass_": "PASS",
+  "prediction": {
+   "alpha": 0.2,
+   "beta": 9.6,
+   "lam": 1.0,
+   "rounds": 80,
+   "end_mean_entropy": 0.6765556121795535,
+   "end_mean_top": 0.7284075343125784,
+   "osc_share_all": 0.640625,
+   "osc_share_balanced": 1.0,
+   "osc_share_decisive": 0.17857142857142858,
+   "median_amp_balanced": 0.3136100493868215,
+   "median_kl_target_end_balanced": 0.6838922422105129,
+   "median_gamma_B_balanced": 1.9229996472169162,
+   "alpha_loc_median_balanced": 0.5742728416275418
+  },
+  "result": {
+   "end_entropy": 0.689016403358107,
+   "osc_share_balanced": 1.0,
+   "osc_share_decisive": 0.17857142857142858,
+   "pop_osc_share_balanced": 1.0,
+   "median_amp_balanced": 0.3144802588909601,
+   "median_kl_target_balanced": 0.5679054924064976
+  },
+  "counterpart_05B": "H6_B12_a02",
+  "result_05B": {
+   "end_entropy": 0.6327722683147734,
+   "osc_share_balanced": 1.0,
+   "osc_share_decisive": 0.125,
+   "pop_osc_share_balanced": 1.0,
+   "median_amp_balanced": 0.31669992292514804,
+   "median_kl_target_balanced": 0.6439864345587167
+  }
+ },
+ "D3B_conv_pl": {
+  "pass_": "PASS",
+  "prediction": {
+   "alpha": 0.8,
+   "beta": 2.4,
+   "lam": 1.0,
+   "rounds": 80,
+   "end_mean_entropy": 0.9226960701477727,
+   "end_mean_top": 0.5687254541478208,
+   "osc_share_all": 0.0,
+   "osc_share_balanced": 0.0,
+   "osc_share_decisive": 0.0,
+   "median_amp_balanced": 0.00011508109344679794,
+   "median_kl_target_end_balanced": 3.4325461320121305e-10,
+   "median_gamma_B_balanced": 1.9229996472169164,
+   "alpha_loc_median_balanced": 0.5742728416275419
+  },
+  "result": {
+   "end_entropy": 0.9268617958412361,
+   "osc_share_balanced": 0.0,
+   "osc_share_decisive": 0.0,
+   "pop_osc_share_balanced": 0.0,
+   "median_amp_balanced": 0.01764125702591577,
+   "median_kl_target_balanced": 0.0014911131425580505
+  },
+  "counterpart_05B": "H6_B12_a08",
+  "result_05B": {
+   "end_entropy": 0.8463917008637458,
+   "osc_share_balanced": 0.0,
+   "osc_share_decisive": 0.0,
+   "pop_osc_share_balanced": 0.0,
+   "median_amp_balanced": 0.023137002982516676,
+   "median_kl_target_balanced": 0.0016418381715601347
+  }
+ },
+ "D3B_osc_slow": {
+  "pass_": "PASS",
+  "prediction": {
+   "alpha": 0.9,
+   "beta": 4.0,
+   "lam": 1.0,
+   "rounds": 80,
+   "end_mean_entropy": 0.44614356591386617,
+   "end_mean_top": 0.8196337676710097,
+   "osc_share_all": 0.5625,
+   "osc_share_balanced": 1.0,
+   "osc_share_decisive": 0.0,
+   "median_amp_balanced": 0.3026353886057777,
+   "median_kl_target_end_balanced": 0.6452563079920322,
+   "median_gamma_B_balanced": 6.612948742097857,
+   "alpha_loc_median_balanced": 0.9552883645563692
+  },
+  "result": {
+   "end_entropy": 0.4502989729583439,
+   "osc_share_balanced": 1.0,
+   "osc_share_decisive": 0.0,
+   "pop_osc_share_balanced": 1.0,
+   "median_amp_balanced": 0.3060133603060582,
+   "median_kl_target_balanced": 0.621161017769449
+  },
+  "counterpart_05B": "H5_b4_a09",
+  "result_05B": {
+   "end_entropy": 0.3981501389262387,
+   "osc_share_balanced": 1.0,
+   "osc_share_decisive": 0.0,
+   "pop_osc_share_balanced": 1.0,
+   "median_amp_balanced": 0.30649441825096485,
+   "median_kl_target_balanced": 0.644178454302251
+  }
+ },
+ "directional_osc_fast_gt_conv_pl": "PASS"
+}

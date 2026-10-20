@@ -1,0 +1,174 @@
+{
+ "created": "2026-10-17 16:08:54",
+ "panels": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62,
+  64
+ ],
+ "runs": {
+  "C1_e0": {
+   "H_t60": 0.6375814540016975,
+   "H_t30": 0.6375814543338871,
+   "top2_t30": 1.2966836886453168,
+   "top2_t60": 1.296683689560553
+  },
+  "C1_e03": {
+   "H_t60": 0.3009776640709949,
+   "H_t30": 0.3012615774595538,
+   "top2_t30": 3.238084840987929,
+   "top2_t60": 3.241704737132656
+  },
+  "C1_e045": {
+   "H_t60": 0.06605650099899554,
+   "H_t30": 0.08451406643953312,
+   "top2_t30": 10.251038184633973,
+   "top2_t60": 12.383921217164774
+  },
+  "C1_e055": {
+   "H_t60": 0.0002191779774616383,
+   "H_t30": 0.01925507002766757,
+   "top2_t30": 44.43198479172949,
+   "top2_t60": 235.10756283860493
+  },
+  "C1_f055": {
+   "H_t60": 0.5272546637909572,
+   "H_t30": 0.5272546641061806,
+   "top2_t30": 1.4823676461749886,
+   "top2_t60": 1.4823676470554235
+  },
+  "C2_eta0125": {
+   "H_t60": 0.18342988184782202,
+   "KL0_t60": 1.6050996972876974
+  },
+  "C2_eta025": {
+   "H_t60": 0.4181227384884499,
+   "KL0_t60": 1.37372918285618
+  },
+  "C2_anchorB8": {
+   "H_t60": 0.19605941809399174,
+   "KL0_t60": 1.2547818580686894
+  },
+  "C2_anchorB4": {
+   "H_t60": 0.40288286223971226,
+   "KL0_t60": 0.9355715941830341
+  },
+  "C3_drift": {
+   "H_t60": 0.2025662990774361,
+   "H_target_B8": 0.19598201558731201,
+   "KL_to_B8_median": 5.366000780721119e-05,
+   "KL_to_B8_mean": 0.0012925761196112444,
+   "B_cum_median": 7.755897400712671
+  },
+  "C3_perround": {
+   "H_t60": 5.782008467004675e-05,
+   "B_cum": 400.53819444444446
+  },
+  "C4_a05_r02": {
+   "osc_share_balanced": 0.0,
+   "amp_balanced_median": 0.0027121284637258228,
+   "osc_share_decisive": 0.0
+  },
+  "C4_a08_r02": {
+   "osc_share_balanced": 0.53125,
+   "amp_balanced_median": 0.05570265817924095,
+   "osc_share_decisive": 0.0
+  },
+  "C4_a05_r1": {
+   "osc_share_balanced": 0.90625,
+   "amp_balanced_median": 0.18164509887903485,
+   "osc_share_decisive": 0.0
+  },
+  "C4_a08_r1": {
+   "osc_share_balanced": 0.0,
+   "amp_balanced_median": 2.9469538636361818e-08,
+   "osc_share_decisive": 0.0
+  },
+  "C5_adapt": {
+   "alpha_path": [
+    0.2,
+    0.44,
+    0.608,
+    0.608,
+    0.608,
+    0.7256,
+    0.7256
+   ],
+   "alpha_final": 0.7256,
+   "osc_share_balanced": 0.0,
+   "KL_to_target_balanced_median": 2.4437932268599324e-08
+  },
+  "C6_wavg": {
+   "policy_avg30_KL_balanced_median_population": 0.007409285847232161,
+   "note": "v4 neural H6_B12_a02: last iterate 0.444, 30-round policy average 0.0077 (balanced median KL to target)"
+  }
+ },
+ "criteria": {
+  "E1": "C1_e0, C1_e03, C1_e045, C1_f055: |H_t60 - predicted H_t60| <= 0.05, and end entropy ordered e0 > e03 > e045. C1_e055: median top-two gap at t60 >= 1.2 x the gap at t30 and H_t60 < 0.05.",
+  "E2": "each run |H_t60 - predicted| <= 0.05; KL to the initial policy: C2_eta0125 > C2_anchorB8 and C2_eta025 > C2_anchorB4.",
+  "E3": "C3_drift: median KL to the B=8 target <= 0.02 and mean entropy within 0.05 of the target entropy; C3_perround: H_t60 < 0.05.",
+  "E4": "oscillating share of balanced panels (v4 amplitude measure, threshold 0.0536): C4_a05_r02 <= 0.2 (v4 neural at rho = 1: 0.94); C4_a08_r02 >= 0.25 (v4 neural at rho = 1: 0.00).",
+  "E5": "C5_adapt: final alpha >= 0.6, oscillating share of balanced panels over the last 30 rounds <= 0.1, median KL to the B=12 target <= 0.02.",
+  "E6": "C6_wavg: balanced-panel median KL of the weight-averaged model (rounds 51-80) to the target <= 2 x that of the run's own 30-round policy average."
+ }
+}

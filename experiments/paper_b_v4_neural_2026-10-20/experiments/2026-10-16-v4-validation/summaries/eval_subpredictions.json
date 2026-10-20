@@ -1,0 +1,89 @@
+{
+ "H1_rate": {
+  "H1_a05_b4": {
+   "alpha": 0.5,
+   "neural": {
+    "rate": 0.519428172220892,
+    "rounds": 2,
+    "floor_final": 0.1252484833893328
+   },
+   "population": {
+    "rate": 0.48381845852035327,
+    "rounds": 2,
+    "floor_final": 1.9843016284451274e-09
+   }
+  },
+  "H1_a08_b16": {
+   "alpha": 0.8,
+   "neural": {
+    "rate": 0.814965080672462,
+    "rounds": 8,
+    "floor_final": 0.15576412578348842
+   },
+   "population": {
+    "rate": 0.7935791191114675,
+    "rounds": 7,
+    "floor_final": 0.0026033114348735778
+   }
+  },
+  "H1_a09_b08": {
+   "alpha": 0.9,
+   "neural": {
+    "rate": 0.9070913492077677,
+    "rounds": 16,
+    "floor_final": 0.28420652694268234
+   },
+   "population": {
+    "rate": 0.8965231709668383,
+    "rounds": 15,
+    "floor_final": 0.10034138229840953
+   }
+  }
+ },
+ "H2_sandwich": {
+  "H1_a05_b1": {
+   "B": 2.0,
+   "pairs": 1560,
+   "target_inside": 1560,
+   "neural_inside": 704,
+   "viol_q99": 0.22885312629424667,
+   "dev_from_target_median": 0.060846634592524707,
+   "dev_q99": 0.24414094121565133,
+   "width_median": 0.09462832384384168
+  },
+  "H2_a0.8": {
+   "B": 5.000000000000001,
+   "pairs": 1560,
+   "target_inside": 1560,
+   "neural_inside": 726,
+   "viol_q99": 0.3642554733655948,
+   "dev_from_target_median": 0.09799132349728978,
+   "dev_q99": 0.4589429972185395,
+   "width_median": 0.23657080960960422
+  },
+  "H2_a0.9": {
+   "B": 10.000000000000002,
+   "pairs": 1560,
+   "target_inside": 1560,
+   "neural_inside": 788,
+   "viol_q99": 0.6110383354282302,
+   "dev_from_target_median": 0.14747676279547173,
+   "dev_q99": 0.7333840968558342,
+   "width_median": 0.47314161921920844
+  },
+  "H2_a0.95": {
+   "B": 19.999999999999982,
+   "pairs": 1560,
+   "target_inside": 1560,
+   "neural_inside": 728,
+   "viol_q99": 0.7639672468734194,
+   "dev_from_target_median": 0.18434337759033492,
+   "dev_q99": 0.9580790202381321,
+   "width_median": 0.9462832384384164
+  }
+ },
+ "H3_cor8": {
+  "panels": 130,
+  "panels_all_worst_case_margins_positive": 0
+ }
+}

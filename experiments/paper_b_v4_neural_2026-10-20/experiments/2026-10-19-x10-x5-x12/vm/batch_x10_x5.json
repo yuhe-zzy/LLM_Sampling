@@ -1,0 +1,12 @@
+{
+ "common": "--panels /home/azureuser/v4val/panels_q05.json --policy /home/azureuser/v4val/models/Qwen2.5-0.5B-Instruct --inner 40 --lr 2e-5 --ids 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,64",
+ "runs": {
+  "X10_a04": "--objective ipo --oracle npz:/home/azureuser/v4val/oracle_planted.npz --lam 1.0 --alpha 0.4 --nu 0.4 --beta 7.2 --rounds 80",
+  "X10_a045": "--objective ipo --oracle npz:/home/azureuser/v4val/oracle_planted.npz --lam 1.0 --alpha 0.45 --nu 0.45 --beta 6.6 --rounds 80",
+  "X5_sw05": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 1.0 --beta 0.5 --beta_ctrl switch --alpha_anchor 0.9375 --drift_targets /home/azureuser/ctrl/drift_targets_B8.npz --rounds 60",
+  "X5_an05": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 0.9375 --beta 0.5 --rounds 60",
+  "X5_sw2": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 1.0 --beta 2.0 --beta_ctrl switch --alpha_anchor 0.75 --drift_targets /home/azureuser/ctrl/drift_targets_B8.npz --rounds 40",
+  "X5_an2": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 0.75 --beta 2.0 --rounds 40"
+ },
+ "parallel": 2
+}

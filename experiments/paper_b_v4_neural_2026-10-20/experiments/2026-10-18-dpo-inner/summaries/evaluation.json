@@ -1,0 +1,164 @@
+{
+ "X1": {
+  "X1_B4_a08": {
+   "alpha": 0.8,
+   "beta": 0.8,
+   "rounds": 120,
+   "share_balanced": 0.09375,
+   "share_decisive": 0.0,
+   "amp_balanced_median": 0.03263867357894255,
+   "pred_DPO": 0.0,
+   "pred_logit": 0.78125,
+   "pop_own_s0_share_DPO": 0.0,
+   "pop_own_s0_share_logit": 0.78125,
+   "agree_panels_DPO": 0.90625,
+   "agree_panels_logit": 0.3125,
+   "onestep_err_median_DPO": 0.08045942828314928,
+   "onestep_err_median_logit": 0.12481743779075419,
+   "KL_last_to_popDPO_balanced_median": 0.00292207652538988,
+   "pass_criterion": true
+  },
+  "X1_B2_a03": {
+   "alpha": 0.3,
+   "beta": 1.4,
+   "rounds": 120,
+   "share_balanced": 0.3125,
+   "share_decisive": 0.09375,
+   "amp_balanced_median": 0.0301211303587285,
+   "pred_DPO": 0.28125,
+   "pred_logit": 0.75,
+   "pop_own_s0_share_DPO": 0.28125,
+   "pop_own_s0_share_logit": 0.75,
+   "agree_panels_DPO": 0.90625,
+   "agree_panels_logit": 0.5625,
+   "onestep_err_median_DPO": 0.07445665661046666,
+   "onestep_err_median_logit": 0.1902976043886271,
+   "KL_last_to_popDPO_balanced_median": 0.004315944455104597,
+   "pass_criterion": true
+  }
+ },
+ "X9": {
+  "k40_ref": {
+   "rounds": 80,
+   "share_balanced": 0.9375,
+   "share_decisive": 0.03125,
+   "amp_balanced_median": 0.18074117184350308,
+   "f_rounds1to5_median": 0.9755751158787183,
+   "f_iqr": [
+    0.8644622183870718,
+    1.1041395398467637
+   ],
+   "rho": 0.024424884121281742,
+   "alpha_eff": 0.5122124420606409,
+   "pred_share_calibrated": 0.8680861185604973,
+   "mean_step_last30": 0.2132817931178429,
+   "drifting": true,
+   "KL_avg30_to_target_balanced_median": 0.000302058008460219,
+   "KL_avg30_to_target_decisive_median": 2.8154795484041392e-05,
+   "KL_last_to_target_balanced_median": 0.11601419186333015,
+   "target_solver_res_max": 9.020564879459621e-11
+  },
+  "k10": {
+   "rounds": 150,
+   "share_balanced": 0.875,
+   "share_decisive": 0.125,
+   "amp_balanced_median": 0.15989724406964564,
+   "f_rounds1to5_median": 0.812265040711795,
+   "f_iqr": [
+    0.4005216284367177,
+    1.1353781279461672
+   ],
+   "rho": 0.18773495928820505,
+   "alpha_eff": 0.5938674796441026,
+   "pred_share_calibrated": 0.2641565044487174,
+   "mean_step_last30": 0.1988582575483692,
+   "drifting": true,
+   "KL_avg30_to_target_balanced_median": 0.0007450347322359367,
+   "KL_avg30_to_target_decisive_median": 0.000120544820101549,
+   "KL_last_to_target_balanced_median": 0.10149021162767416,
+   "target_solver_res_max": 9.020564879459621e-11
+  },
+  "k3": {
+   "rounds": 150,
+   "share_balanced": 1.0,
+   "share_decisive": 0.375,
+   "amp_balanced_median": 0.22296977217193117,
+   "f_rounds1to5_median": 0.6197271156031843,
+   "f_iqr": [
+    0.19479128504181037,
+    1.2072410628624528
+   ],
+   "rho": 0.3802728843968157,
+   "alpha_eff": 0.6901364421984079,
+   "pred_share_calibrated": 0.0,
+   "mean_step_last30": 0.2684254747841264,
+   "drifting": true,
+   "KL_avg30_to_target_balanced_median": 0.0031381386793717485,
+   "KL_avg30_to_target_decisive_median": 0.0046841570998555,
+   "KL_last_to_target_balanced_median": 0.19899490919927182,
+   "target_solver_res_max": 9.020599207296792e-11
+  },
+  "k1": {
+   "rounds": 150,
+   "share_balanced": 0.9375,
+   "share_decisive": 0.625,
+   "amp_balanced_median": 0.2257684913408029,
+   "f_rounds1to5_median": 1.229106980571703,
+   "f_iqr": [
+    0.46535590500839025,
+    2.562161623872767
+   ],
+   "rho": -0.22910698057170298,
+   "alpha_eff": 0.3854465097141485,
+   "pred_share_calibrated": 0.9375,
+   "mean_step_last30": 0.2793641650109416,
+   "drifting": true,
+   "KL_avg30_to_target_balanced_median": 0.006351192105466769,
+   "KL_avg30_to_target_decisive_median": 0.0029340899429623904,
+   "KL_last_to_target_balanced_median": 0.18726538659897662,
+   "target_solver_res_max": 9.020564879459621e-11
+  }
+ },
+ "verdicts": {
+  "X1": {
+   "PASS": true
+  },
+  "X9": {
+   "shares_k40_k10_k3_k1": [
+    0.9375,
+    0.875,
+    1.0,
+    0.9375
+   ],
+   "ordinal_PASS": false,
+   "target_PASS": null,
+   "target_scored": {},
+   "calibrated": [
+    [
+     "k40_ref",
+     0.5122124420606409,
+     0.8680861185604973,
+     0.9375
+    ],
+    [
+     "k10",
+     0.5938674796441026,
+     0.2641565044487174,
+     0.875
+    ],
+    [
+     "k3",
+     0.6901364421984079,
+     0.0,
+     1.0
+    ],
+    [
+     "k1",
+     0.3854465097141485,
+     0.9375,
+     0.9375
+    ]
+   ]
+  }
+ }
+}

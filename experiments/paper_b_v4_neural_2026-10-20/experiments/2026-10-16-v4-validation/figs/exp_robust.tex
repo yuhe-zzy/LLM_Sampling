@@ -1,0 +1,22 @@
+
+\subsection{Sampled pairs and a larger model}
+\label{sec:exp-robust}
+The runs above optimize the expected pairwise loss. In practice each round sees finitely many sampled comparisons with random labels, and models are larger. We repeat the three main tests on 64 of the panels with ordered pairs drawn from $\bmu_t\otimes\bmu_t$ and labels drawn from $P^*$ (512 pairs per prompt and round for the same-target and cycle tests, 32 for the link test), and with Qwen2.5-1.5B-Instruct on its own 390 panels (64 used), again with predictions fixed before training (\Cref{tab:exp-robust}). Sampling adds stationary noise but leaves the targets in place: at the same $B=8$, the time-averaged policies of $\alpha=0$ and $\alpha=0.8$ both lie at the target, and their fluctuation around it differs by a factor of 10.4 in KL, against the factor $(1+\alpha)/(1-\alpha)=9$ that the stationary variance of a linear noise model predicts at a fixed target. Slower refresh at the same target therefore also averages sampling noise. Hard-label DPO still collapses in the first round, and a planted majority cycle still oscillates with the amplitude of the deterministic prediction at $\alpha=0.2$ and settles at $\alpha=0.9$.
+
+\begin{table}[t]
+\centering
+\caption{Robustness of the main predictions: practice-like sampled pairs (0.5B model) and a larger model (1.5B, expected labels). Same target: KL from the policy averaged over the last 10 rounds to the population target at $B=8$, for $\alpha=0$ and $\alpha=0.8$. Link: panel entropy of hard-label DPO after one round, and final entropy of soft-label DPO against its target, at $\alpha=0.8$. Cycles: median detrended oscillation amplitude of answer probabilities over the last 30 rounds on balanced planted-cycle panels at $B=12$, neural against population.}
+\label{tab:exp-robust}
+\small
+\begin{tabular}{lll}
+\toprule
+Test & 0.5B, sampled pairs & 1.5B, expected labels\\
+\midrule
+Same target, $\alpha=0$ / $0.8$ & 0.0086 / 0.0015 & 0.0000 / 0.0008\\
+Hard-label DPO entropy after one round & 0.023 & 0.008\\
+Soft-label DPO entropy (target) & 0.328 (0.331) & 0.382 (0.381)\\
+Cycle amplitude, $\alpha=0.2$ (population) & 0.326 (0.317) & 0.307 (0.306)\\
+Cycle amplitude, $\alpha=0.9$ (population) & 0.028 (0.001) & 0.027 (0.004)\\
+\bottomrule
+\end{tabular}
+\end{table}

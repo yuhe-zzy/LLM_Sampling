@@ -1,0 +1,22 @@
+{
+ "panels_q05.json": {
+  "osc_A_fixedref": 0.023076923076923078,
+  "osc_A_fixedref_count": 3,
+  "osc_B_a05": 0.023076923076923078,
+  "osc_B_a05_count": 3,
+  "osc_C_a09": 0.015384615384615385,
+  "osc_C_a09_count": 2,
+  "max_moment_residual_original_solver": 0.9173222251762669,
+  "max_moment_residual_robust_solver": 1.6652870972609105e-16
+ },
+ "style_panels.json": {
+  "osc_A_fixedref": 0.08,
+  "osc_A_fixedref_count": 2,
+  "osc_B_a05": 0.0,
+  "osc_B_a05_count": 0,
+  "osc_C_a09": 0.0,
+  "osc_C_a09_count": 0,
+  "max_moment_residual_original_solver": 0.5179026458377716,
+  "max_moment_residual_robust_solver": 1.4304692413230624e-16
+ }
+}

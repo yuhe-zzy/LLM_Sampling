@@ -1,0 +1,8 @@
+{
+ "common": "--panels /home/azureuser/x15/data02/panels4.json --policy /home/azureuser/v4val/models/Qwen2.5-0.5B-Instruct --inner 40 --lr 2e-5 --lam 1.0 --rounds 120 --ids 0,1,2,3",
+ "runs": {
+  "X15_K4_c100_A": "--objective dpo --oracle npz:/home/azureuser/x15/oracles/oracle_K4_m1.0_owner_c100.npz --alpha 0.0 --beta 10.0",
+  "X15_K4_c0_A": "--objective dpo --oracle npz:/home/azureuser/x15/oracles/oracle_K4_m1.0_owner_c0.npz --alpha 0.0 --beta 10.0"
+ },
+ "parallel": 2
+}

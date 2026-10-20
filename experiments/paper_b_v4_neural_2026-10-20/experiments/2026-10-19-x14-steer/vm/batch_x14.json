@@ -1,0 +1,15 @@
+{
+ "common": "--panels /home/azureuser/v4val/panels_q05.json --policy /home/azureuser/v4val/models/Qwen2.5-0.5B-Instruct --inner 40 --lr 2e-5 --ids 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,64",
+ "runs": {
+  "X14_c12": "--objective ipo --oracle npz:/home/azureuser/v4val/oracle_planted.npz --lam 1.0 --alpha 0.8748141797660436 --beta 1.502229842807477 --rounds 80",
+  "X14_n24": "--objective ipo --oracle npz:/home/azureuser/v4val/oracle_planted.npz --lam 1.0 --alpha 0.5 --beta 12.0 --rounds 80",
+  "X14_c24": "--objective ipo --oracle npz:/home/azureuser/v4val/oracle_planted.npz --lam 1.0 --alpha 0.95 --beta 1.200000000000001 --rounds 80",
+  "X14_db45": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 0.5 --beta 1.0 --judge_bias 0.45 --d5_round 1 --d5_n 16 --d5_action debias --rounds 60",
+  "X14_db55": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 0.5 --beta 1.0 --judge_bias 0.55 --d5_round 1 --d5_n 16 --d5_action debias --rounds 60",
+  "X14_cp55": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 0.5 --beta 1.0 --judge_bias 0.55 --d5_round 1 --d5_n 16 --d5_action comp --rounds 60",
+  "X14_sw": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 1.0 --beta 0.5 --switch_entropy 0.3 --rounds 60",
+  "X14_fr": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 1.0 --beta 0.5 --rounds 60",
+  "X14_cen": "--objective dpo --oracle soft --temp 3.168 --lam 0.8 --alpha 0.0 --beta 5.551710483683406 --rounds 40"
+ },
+ "parallel": 3
+}

@@ -1,0 +1,34 @@
+{
+ "written": "2026-10-19, before any run",
+ "X10": {
+  "theory": "lag theorem (reviews/2026-10-19-jmlr-storyline, Part II): maximal lagged reference nu = alpha approaches a fixed target at about gamma rounds per e-fold, against 2 gamma^2 for ordinary refresh",
+  "runs": {"X10_a04": {"objective": "ipo", "alpha": 0.4, "nu": 0.4, "beta": 7.2, "B": 12, "rounds": 80},
+           "X10_a045": {"objective": "ipo", "alpha": 0.45, "nu": 0.45, "beta": 6.6, "B": 12, "rounds": 80}},
+  "reference_run": "experiments/2026-10-16-v4-validation/results/runs/H6_B12_a08 (ordinary refresh, alpha 0.8, beta 2.4, B 12)",
+  "population_predictions_balanced": {
+   "first_round_median_KL_stays_below_1e-2": {"X10_a04": 4, "X10_a045": 5, "ordinary_a08": 11},
+   "first_round_q90_KL_stays_below_1e-2": {"X10_a04": 7, "X10_a045": 6, "ordinary_a08": 14},
+   "first_round_median_KL_stays_below_1e-3": {"X10_a04": 7, "X10_a045": 8, "ordinary_a08": 19}
+  },
+  "observed_reference": {"H6_B12_a08_first_round_median_KL_stays_below_1e-2": 17, "floor_last20": 0.0017},
+  "pass": "In both X10 runs, the first round at which the median KL(pi_t || pi*_B12) over the 32 balanced panels falls below 0.01 and stays below is at most half of the same statistic for H6_B12_a08, computed by the same script (17 in the storyline analysis, so at most 8).",
+  "secondary": "Within 3 rounds of the population prediction from the run's own initial scores; whether median KL < 1e-3 is reached; floor over the last 20 rounds; decisive panels reported alongside."
+ },
+ "X5": {
+  "theory": "T5: refresh-then-anchor reaches a target in the fewest rounds allowed by a per-round step cap, about ceil(B / beta_bar)",
+  "runs": {"X5_sw05": {"objective": "dpo", "oracle": "soft (Skywork-8B, temp 3.168)", "lam": 0.8, "alpha": 1.0, "beta": 0.5, "beta_ctrl": "switch", "alpha_anchor": 0.9375, "rounds": 60},
+           "X5_an05": {"objective": "dpo", "oracle": "soft", "lam": 0.8, "alpha": 0.9375, "beta": 0.5, "rounds": 60},
+           "X5_sw2": {"objective": "dpo", "oracle": "soft", "lam": 0.8, "alpha": 1.0, "beta": 2.0, "beta_ctrl": "switch", "alpha_anchor": 0.75, "rounds": 40},
+           "X5_an2": {"objective": "dpo", "oracle": "soft", "lam": 0.8, "alpha": 0.75, "beta": 2.0, "rounds": 40}},
+  "population_predictions": {"first_round_median_KL_below_1e-3": {"beta_bar=0.5": {"switch": 15, "anchor": 37}, "beta_bar=2.0": {"switch": 4, "anchor": 9}},
+                             "source": "reviews/2026-10-18-jmlr-review/theory/schedule_predictions.json (frozen 2026-10-18 in the JMLR review plan)"},
+  "already_observed": "beta_bar = 1 (E3' C3b_switch vs C2_anchorB8): 8 vs 16",
+  "pass": "For each beta_bar, refresh-then-anchor reaches median KL < 1e-3 (first round below, the plan's measure) within 2 rounds of ceil(8 / beta_bar) (16 and 4) and at least 1.8 times sooner than the constant anchor. Target: the B = 8 population target (logit link, lambda 0.8) from the run's own initial scores, as in E3'."
+ },
+ "X12": {
+  "question": "Does a pairwise LLM judge (Qwen2.5-7B-Instruct, both presentation orders, order-averaged soft labels) leave candidate sets without a Condorcet winner?",
+  "panels": "the 130 v4 panels (primary) and the 25 style panels (secondary)",
+  "rule": "If at least 10% of the 130 v4 panels lack a Condorcet winner under the order-averaged labels, the paper's 'How fast / whether' part is moved forward and given more weight, and a neural follow-up (fast vs slow refresh at the same B on those panels, predictions from gamma_B) is proposed to Fan; it is not run without approval. Otherwise the share enters the prevalence table and the structure stays.",
+  "reported": "no-Condorcet-winner share, majority three-cycles, logit cyclic share, position bias (mean q_ij + q_ji - 1), the share of first tokens that are A or B, single-order variants, population DPO oscillation shares under recipes A/B/C as in X11"
+ }
+}

@@ -37,6 +37,18 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
+Latest owner override2026-10-19: interim six-arm Oracle1 WR curves0,10,...80
+may use TWO extra H100s concurrently with training, full account at most FOUR.
+See Oracle1 campaign INTERIM_WR_80.md for the bound new operational extension.
+Preserve immutable base source0e7793f, checkpoints, settings and receipts.
+Legacy array4859197 pending workers reject any sidecar, including pending jobs;
+first sidecar must wait until all have passed startup/reload or completed.
+New extension reserves training2GPU and evaluation2GPU lanes with full account,
+pending/releasing resources and receipt checks; no unrelated work may coexist.
+Do not use the old advance launcher while extension lanes are active. No job
+cancellation/requeue or oldOracle2 work. This supersedes blanket nonoverlap only
+for the explicitly approved new Oracle1 interim evaluation, not historical jobs.
+
 Oracle1 connection recovered and continuation verified2026-10-19T22:41:45Z:
 at22:32:35Z sequence0010 array4852338_0..5 and all52 receipt tasks COMPLETED0:0
 at82/80/80/82/80/80. All490 states finite/contiguous/hash-valid, shared initial

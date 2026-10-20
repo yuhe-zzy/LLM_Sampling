@@ -8,16 +8,16 @@ Owner explicitly switches BOTH training preferences and WR to Oracle1 Nemotron,
 sets Oracle2 aside, approves writing code and submitting the new experiment.
 Use Qwen3-4B non-thinking policy, frozen Qwen3-32B five-trait rater; seed0 six
 IPO/DPO ordinary/reference/feedback arms, same100/500/200 panels, states0..100.
-FOUR full-accountGPUs maximum, two1GPU training/generation tasks, one2GPU WR
-judge, one1GPU rater, nonoverlapping. Full queue/AllocTRES/sacct preflight and
-receipt guards mandatory. No new old-Oracle2 recovery or WR, no cancellations.
+FOUR full-accountGPUs maximum. Full queue/AllocTRES/sacct preflight and receipt
+guards mandatory. No new old-Oracle2 recovery or WR, no cancellations.
 
-October19 owner requests interim WR curves0,10,...80 and permits ONE additional
-H100. No interim program/submission yet. Checkpoint evaluation is independent;
-old startup rejects unrelated jobs and BF16 WR requires2 GPUs. Owner's question
-does NOT approve waiting/pausing training or a second extraGPU; resolve scheduling.
+October19 owner requests interim WR curves0,10,...80 and explicitly permits TWO
+extra H100s alongside training, totalFOUR. New cooperative extension reserves
+training2/evaluation2; old queued workers must pass startup before sidecar joins.
+Never hot-edit base source or bypass guard. [Interim guide](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md).
 
-SAME monitor is now5hours after actual IPO/DPO training/reload gates passed.
+SAME monitor temporarily5minutes for new evaluation startup, then return5hours
+after baseline and first checkpoint generation actually write valid responses.
 Every outer boundary saves adapter+s0/st/st-1+RNG+counts+metrics with atomic
 commit/hashes. At most10 updates/segment,18h soft stop,24h allocation.
 No blind retries after FAILED/TIMEOUT/ambiguous intent.
@@ -26,33 +26,33 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 ## Current execution
 
-[Protocol/code](../experiments/oracle1_semantic/README.md),
-[campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
-SSH recovered2026-10-19T22:32:35Z; earlier18:00 outage was not training failure.
+[Protocol/code](../experiments/oracle1_semantic/README.md), [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
-Model locks/score reuse audited; all800 panels pass full chat/EOS length1537.
 Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
-Final23 server CPU tests pass without skips, plus shell/contract/config checks.
 October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
 reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
-At2026-10-19T22:32:35Z sequence0010 array4852338_0..5 allCOMPLETED0:0,
-as are all52 receipt tasks. Complete steps82/80/80/82/80/80;490 saved states
-finite/contiguous/hash-valid, shared initial scores/support, contract unchanged,
-latest loss/gradients finite, no errors. DPOreference/feedback verified reload70
-then ten more updates. Full account empty, including no releasing allocations.
-Frozen dry-run passed22:36:30Z; guarded submit created **4859197_0..5%2**,
-sequence0011, at22:38:18Z, up to10 updates toward92/90/90/92/90/90. OneH100/task,
-two concurrent,24h/18h soft stop. At22:41:45Z0/1 RUNNING,2..5 pending, full
-account2H100, no unrelated/releasing work or errors. Fresh RESUME_VERIFIED
-IPOordinary82/IPOreference80 and new RUNNING manifests checked; no new outer
-update complete or new-round memory peak yet. All490 states remain valid.
-Never repeat0011 or earlier jobs. No source/scientific change or oldOracle2 action.
-Intent/receipt/deployment are in campaign records and local private launch dir.
-Baseline/generation/WR/annotation remain unsubmitted;100 rounds not yet complete.
-SAME `oracle1-qwen3-training-and-resume-checks` ACTIVE every5HOURS; no new timer/probes.
-Next: resolve interim WR scheduling; preserve0011 and frozen guards. Normal
-continuation still requires successful receipts and empty account; no blind retry.
+Sequence0010/all52 previous receipt tasks successful. Current **4859197_0..5%2**
+sequence0011 submittedOctober19T22:38:18Z, targets92/90/90/92/90/90, oneH100/task,
+two concurrent,24h/18h soft stop. AtOctober20T00:18:18Z steps86/84/80/82/80/80,
+498 valid states;0/1 RUNNING,2..5 pending, full account2H100, no errors. Never repeat0011.
+
+New EXT `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`;
+sourcecaf5ac2b68d0e4d3778260428eedbeb3441a6658 pushed/verified,43 server CPU tests
+pass without skips. FrozenOctober20T00:15:51Z, binding hash
+e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74.
+Base identity unchanged,54 required checkpoint commits bound and validated.
+v1 preserved/unused after pending-array accounting issue; query parent IDs with
+sacct --array, NOT explicit child filters. Do not retry/deploy from v1.
+EXT dry-run correctly blocks legacy pending startup; no interim GPU job/WR yet.
+Inspect both ledgers. Use EXT interim.py --advance --lane evaluation or training,
+dry-run then --submit once only when that lane is idle/successful and full account
+known/within4. Evaluation joins only after legacy pending tasks have passed reload
+or completed. Training lane executes original frozen train.py and resumes to100.
+Do NOT use original advance while EXT lanes active. Journals shared, subset flags
+separate, no rerun of completed answers/scores. Plot actual0..80 tables via --plot.
+Hand back to original pipeline only after interim delivery, training100, both EXT
+lanes successful/finished and account empty; then reuse0..80 and fill90/100.
 
 ## Interpretation
 

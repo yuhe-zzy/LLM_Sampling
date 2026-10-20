@@ -9,8 +9,9 @@ seed, oldOracle2 work or cancellation of other jobs.
 
 ## Immutable extension
 
-Planned extension root:
-`/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v1`.
+Frozen extension root:
+`/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`.
+Execution source `caf5ac2b68d0e4d3778260428eedbeb3441a6658`, pushed and verified.
 The existing base root remains `oracle1_qwen3_20261015_v1`, frozen computational
 source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2. `interim.py --freeze`
 binds the base deployment, identity, original submission ledger, all54 required
@@ -87,7 +88,28 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
-Implementation prepared locally; server tests/deployment/submission pending.
-At2026-10-20T00:02:38Z the original six steps were86/84/80/82/80/80,
+Prepared/deployed, NOT submitted. Frozen2026-10-20T00:15:51Z. Binding hash
+`e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74`.
+All43 server CPU tests passed without skips, shell syntax passed, including real
+tiny Qwen3/LoRA resume, cached generation/scoring reuse and synthetic plot render/
+pixel checks. This is not full-model sidecar GPU inference or an actual WR plot.
+Dry-run verified hashes,54 checkpoints, full-account budget and expanded sacct;
+then correctly blocked on the legacy pending-worker startup restriction, before
+any intent/sbatch/receipt. Same monitor temporarily5minutes until actual baseline
+and first checkpoint generation write valid responses without errors, then5hours.
+
+Preserved v1 (source4cc1506) was never submitted. Real dry-run exposed Slurm's
+lazy pending-array accounting: explicit child filters omitted tasks2..5. Adding
+`--array` alone still omits lazy tasks with child filters. The tested repair
+queries parent array IDs with `sacct -X --array`, validates each expanded child
+against receipts, and rejects unregistered children. All58 original receipt
+tasks are now visible:52 successful, twoRUNNING and fourPENDING at validation.
+No missing status is imputed as success; no GPU retry or scientific change.
+Both validation versions and the unused v1 launch remain intact.
+
+At2026-10-20T00:18:18Z the original six steps were86/84/80/82/80/80,
 0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100, no logged errors.
-This is a dated snapshot, not permission to submit while legacy startup remains.
+All498 committed states valid. No intent/receipt or stale lock in either extension;
+generation journals empty, WR absent. See [prepared status](records/interim80_prepared_20261020.json)
+and [exact binding](records/interim80_v2_extension.json). This is a dated snapshot,
+not permission to submit while legacy startup remains.

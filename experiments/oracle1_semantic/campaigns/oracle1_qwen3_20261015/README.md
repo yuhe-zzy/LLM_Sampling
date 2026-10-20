@@ -7,17 +7,15 @@ No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
 ## Requested interim WR
 
-October19 owner requests curves for all six arms at0,10,...80, not only step80,
-and authorizes ONE additional H100. Read-only saved-checkpoint inference does
-not change training and requires no retraining. Current frozen startup checks
-reject unrelated queued/running jobs, including a new independent evaluator;
-later pending training tasks would therefore refuse startup. BF16 Nemotron WR
-also requires2 GPUs, whereas generation uses1. These are engineering/resource
-constraints, not a requirement to wait for100 training updates. Do not hot-edit
-immutable training code, bypass guards, change judge/precision or assume a
-second extraGPU is approved. Owner's explanatory question does not approve the
-suggested wait-until-segment-end/evaluate-first schedule. No interim executable,
-deployment, intent or receipt yet. Resolve safe scheduling before submission.
+Latest October19 authorization: curves for all six arms at0,10,...80 and TWO
+additional H100s, with FOUR maximum across the entire account. This supersedes
+the earlier one-extra-card limit and permits training/evaluation overlap through
+explicit cooperative guards. Saved-checkpoint inference needs no retraining.
+See [interim execution and reuse](INTERIM_WR_80.md). Original frozen source and
+scientific settings stay unchanged. Existing legacy pending workers reject any
+sidecar; wait until all have started and verified reload (or completed), without
+cancel/requeue/source edits. New immutable extension uses separate bounded
+training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 

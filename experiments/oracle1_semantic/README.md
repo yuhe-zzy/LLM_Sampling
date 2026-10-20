@@ -80,7 +80,11 @@ diagnosis and accounting-backed lock recovery, never an automatic blind retry.
 
 FOUR GPUs maximum for the FULL account. This campaign starts with two concurrent
 one-H100 training/generation tasks; WR is one two-H100 job, annotation one H100.
-All phases are nonoverlapping. Before submission and GPU loading, inspect full
+The original launcher keeps phases nonoverlapping. October19 the owner explicitly
+approved two extra H100s for interim0..80 WR alongside training, still FOUR total;
+use only the [bound cooperative extension](campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md)
+for this exception. The legacy pending-worker startup restriction must first clear.
+Before submission and GPU loading, inspect full
 `squeue -a -r` by owner/UID448057 and `scontrol -a show job`, count generic
 AllocTRES GPU once including releasing allocations, then check sacct. Unrelated
 running OR pending work blocks new submission. These are operational guards,

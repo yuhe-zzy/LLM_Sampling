@@ -2,16 +2,22 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-New request2026-10-19: interim six-arm Oracle1 WR curves at0,10,...80,
-explicitly clarified by owner, with ONE additional H100 authorized. Existing
-saved adapters suffice for read-only generation; no retraining is needed.
-Current frozen startup guard rejects a separate queued/running job, potentially
-blocking later pending training tasks, and BF16 Nemotron scoring requests2 GPUs.
-This is an execution/scheduling issue, not checkpoint dependence or a scientific
-requirement to finish100 updates. Do not alter immutable running sources or
-silently quantize/change the oracle. Owner asked why training would be affected;
-that question is NOT approval of proposed sequential priority or a second extra
-GPU. No interim code, deployment or submission yet; scheduling remains unresolved.
+Latest request2026-10-19: interim six-arm Oracle1 WR curves at0,10,...80 and
+TWO additional H100s, provided full-account concurrent use never exceeds FOUR.
+This explicitly supersedes the one-extraGPU limit and allows checkpoint evaluation
+alongside training; no retraining/science change. New bounded cooperative launcher
+preserves base source0e7793f and original identity, reuses canonical response/score
+journals and labels interim completion separately. Existing legacy pending workers
+still reject sidecars, so all must start and pass reload or complete before first
+sidecar submission. No cancellation/requeue/guard bypass. See
+[interim implementation/status](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md).
+New extensionv2 sourcecaf5ac2 frozen00:15:51Z;43 server CPU tests no skips and
+native expanded parent-array accounting passed. Expected dry-run block on legacy
+pending startup; NO interim intent/receipt/GPU submission or WR yet. Same monitor
+temporarily5minutes for activation/startup, then5hours after real healthy inference.
+At2026-10-20T00:18:18Z six steps86/84/80/82/80/80;498 valid states; original0/1
+RUNNING,2..5 pending, full account2H100, no logged errors. See
+[prepared/deployment evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_prepared_20261020.json).
 
 Connection recovered on the owner's retry request, verified2026-10-19T22:32:35Z
 (17:32 CDT). Sequence0010 array4852338_0..5 and all52 receipt tasks COMPLETED0:0.

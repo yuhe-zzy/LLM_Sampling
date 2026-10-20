@@ -6,6 +6,7 @@ Start with [current handoff](../handoff/current.md), then the newest
 
 - [Current experiment status and decisions](EXPERIMENT_STATUS.md)
 - [Active Oracle1/Qwen3 campaign](../experiments/oracle1_semantic/README.md): owner authorized training+WR Oracle1 only, five traits, restartable0..100, FOUR-GPU account cap.
+- [Interim0..80 WR execution](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md): October19 two extra H100s approved, training/evaluation overlap under four total; immutable checkpoint and response-cache reuse.
 - [Definitions and interpretation limits](SCIENTIFIC_CONTEXT.md)
 - [Results atlas](../docs/RESULTS_INDEX.md): batch reports, figures and tables
 - [Publication coverage and exclusions](../docs/RESULT_PUBLICATION_20261013.md)

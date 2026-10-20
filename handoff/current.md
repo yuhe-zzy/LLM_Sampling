@@ -1,8 +1,9 @@
 # Current handoff
 
 Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
-Latest discussion: explain the experiment's motivation and design-to-goal fit;
-see doc/SCIENTIFIC_CONTEXT.md. ASD-STE100-style replies per AGENTS.md. No job changes.
+Latest discussion: page-by-page review of the coauthor's32-page v4 story deck;
+see doc/SCIENTIFIC_CONTEXT.md. Full-finetuning results are not a matched LoRA
+ablation. ASD-STE100-style replies per AGENTS.md. No job or model changes.
 
 ## Latest authorization: launch Oracle1 / Qwen3
 

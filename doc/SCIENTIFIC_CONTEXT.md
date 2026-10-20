@@ -60,6 +60,59 @@ training seed and five operational traits do not establish universal convergence
 or robust seed-level effects. This explanation changes no settings, thresholds,
 analysis authorization or job state, and claims no new empirical result.
 
+## Coauthor v4 story deck review,2026-10-20
+
+Owner supplied a32-page HTML report and requested a page-by-page explanation,
+including the hypothesis that LoRA caused the mismatch with population theory.
+This is a report-review request, not authorization to replace the active model,
+training method or campaign. Original HTML, extracted prompt/response text and
+embedded data stay outside the shared checkout. Reported PASS labels are author
+claims; source runs, full proofs and preregistration artifacts were not audited.
+
+The deck reports full-parameter Qwen2.5-0.5B/1.5B/3B experiments on fixed short
+answer panels. It selects initially balanced support, uses expected pair losses,
+fresh Adam with40 inner steps per round and FP32 master weights. Thus several
+conditions differ from our experiments besides LoRA. Its beta denotes update
+strength; it explicitly maps common DPO coefficient0.1 to its beta10. Do not
+compare beta numbers across implementations without deriving the loss scaling.
+B=beta/(1-alpha), for alpha<1, controls a theoretical target; gamma is a local
+cyclic gain, not necessarily a separately selected training parameter.
+
+The strongest reported tests connect per-round fitting error, matched-B targets,
+planted-cycle local stability and actual-DPO population dynamics across model
+sizes. Static inspection of all32 pages and independent plots from the literal
+numeric data support the deck's description of the displayed curves. This does
+not independently verify the experiments or prove global neural convergence.
+Late inner-fit residuals remain nonzero; trained oscillations need not track
+theoretical phase point-for-point. Fixed-panel concentration is neither open
+generation quality nor generated-response WR. Larger-model runs use their own
+candidate panels, so they are not a pure model-size intervention.
+
+Pages13-14 need a qualification. In the displayed three-judge BT toy, the
+uniform mixture already has P(A>B)=P(B>C)=P(C>A)=0.5271066931. Pair-dependent
+routing raises each edge to0.7310585786. Both are majority cycles; routing
+amplifies one rather than creating the first cycle. Ordinal transitivity of
+each judge does not imply zero identity-link curl: sigmoid-transformed score
+gaps(+1,+1,-2) give sum(P-.5)=0.0813200793. The decomposition's component-curl
+term cannot generally be discarded under that assumption. Logit-gradient and
+identity-flow statements must be distinguished. The uniformly mixed example
+also has no Condorcet winner, contrary to the schematic wording on page13.
+
+Keep the report's limitations visible: single seeds, selected balanced panels,
+an amended oscillation threshold, post-hoc diagnostic thresholds, mixed steering
+results and pending X15. Directed cycles and absence of a Condorcet winner are
+different prevalence measures for larger panels. The local inequality
+alpha^2+gamma^2<1 is not a claim that every unstable neural trajectory must
+produce sustained periodic motion.
+
+LoRA constrains trainable weight updates, so a different fitting error or local
+response is plausible; this is a hypothesis, not established causation here.
+A matched comparison would hold model, support, labels, loss scaling and
+optimization protocol fixed, then compare inner-fit error and outer dynamics
+between LoRA and full finetuning. No such new experiment is authorized or run
+by this discussion. The coauthor's fixed-panel mechanism tests complement,
+but do not replace, our open-generation trait/WR endpoint.
+
 ## Historical Oracle2 question and settings
 
 Empirical stability trends, not a demand to eliminate oscillations or prove

@@ -1,13 +1,14 @@
 # Current handoff
 
 Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
-Latest discussion: explained Fan's data/design at1ea6a64 versus our active
-Oracle1/Qwen3 study; see doc/SCIENTIFIC_CONTEXT.md. Our source is original
-HelpSteer; his main panels use short templates/NoveltyBench/WildChat and each
-model's own selected short answers. Planted labels and same-panel diagnostics
-are not natural-cycle prevalence or held-out WR. Not a matched LoRA ablation.
-Earlier publication caveats remain. No branch merge, job or model changes.
-ASD-STE100-style replies per AGENTS.md.
+Latest discussion: owner questions page10's apparently excellent match.
+Audited all30 embedded trace pairs at1ea6a64; screenshot3B/Prompt1 meanTV is
+.022/.024/.031/.091/.248 across five columns, slow-cycle max.706. Regime
+agreement is not same-round phase accuracy. No plotting smoothing; thick solid
+lines cover thin dashed lines. Three cycle predictions replay independently at
+rounding scale, but raw training arrays/exporter remain unavailable. See
+doc/SCIENTIFIC_CONTEXT.md. Dataset/LoRA confounds and publication caveats remain.
+No branch merge, experiment or job changes. ASD-STE100-style replies apply.
 
 ## Latest authorization: launch Oracle1 / Qwen3
 

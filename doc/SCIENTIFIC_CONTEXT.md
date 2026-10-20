@@ -224,6 +224,68 @@ probabilities do not measure open-generation frequency or held-out win rate.
 The package complements our generated-trait/WR endpoint. Discussion only:
 no experiment settings, jobs, branches or analysis gates were changed.
 
+### Page10 trajectory audit,2026-10-20
+
+Owner questions whether the displayed match is implausibly good compared with
+our earlier results. Checked the supplied screenshot against the same1ea6a64
+HTML and all30 embedded p/q trace pairs (2 models,3 display prompts,5 settings).
+This is an audit of published figure data, not independent verification of
+training output. No raw prompt/response text is reproduced here.
+
+The screenshot selects3B/displayPrompt1, internal panel1. Computed approximate
+TV(p_t,q_t)=.5*sum_i|p_ti-q_ti| at the SAME round, without smoothing, phase
+alignment or selection of a best time window. Means exclude the shared t0.
+The displayed probabilities are rounded; row sums differ from1 by at most.001
+for this panel. Thus the following are approximate figure-data diagnostics:
+
+| Setting | Mean TV | Maximum TV | Last30 mean TV |
+|---|---:|---:|---:|
+| conv_rm | .021750 | .089000 | .021750 |
+| pol_full | .024288 | .134500 | .003633 |
+| conv_pl | .031456 | .109500 | .015967 |
+| osc_fast | .091031 | .337000 | .099750 |
+| osc_slow | .248369 | .705500 | .388667 |
+
+Other displayed3B fast-cycle prompts have meanTV.371288 and.218175; displayed
+0.5B fast-cycle prompts range.134756..609356. Do not generalize one apparently
+close overlay to all prompts. Similar oscillation amplitude/regime is not
+pointwise phase-accurate trajectory prediction. Accumulated fitting error is
+a plausible explanation for phase drift, not established causation from these
+curves alone. The stable-target and oscillation-regime claims need separate tests.
+
+HTML pathOf connects every embedded round by straight lines; fixed y range0..1,
+no smoothing, no adaptive y scaling. Coordinates are rounded to.1 SVG units.
+Dashed prediction is drawn first at1.2-width/.85-opacity, then solid at2.2-width
+in the same color. Each plot is166 by150 SVG units with80 rounds in cycle arms;
+small differences are obscured and phase differences are visually crowded.
+No display-time phase alignment or curve fitting is in this drawing function.
+
+Independently replayed the disclosed balanced planted IPO recursion from the
+rounded initial probabilities, enumerating24 candidate-role assignments and
+choosing by first-five-round prediction error only. The three screenshot
+cycle columns select the same roles[0,2,1,3]. Their autonomous full-rollout
+meanTV to the dashed data is.000826/.000700/.000468; maxima.001124/.001649/.000897.
+This confirms numerical consistency with the stated free recursion at rounding
+scale. It does not verify actual training labels or provenance of solid p.
+Starts rounded to zero were excluded from this replay rather than silently
+inventing initial log probabilities.
+
+The panel title compares five regimes, but the preference input also changes:
+soft RM, hard RM, then planted cycles. It is not one unchanged real oracle with
+only alpha/beta varied. Display selection is first-three balanced planted panels
+with plain-English answers per caption; the stated pre-view rule and complete
+selection universe cannot be independently audited from the missing exporter.
+The3B pol_full preregistration uses lambda1, despite the slide footer grouping
+both first columns under lambda.8.
+
+The source index names convergence.json/series_convergence.py and deck export
+scripts, but they are absent from the published bundle, as are original run.npz
+trajectories and numerical P archives. Request text-free run arrays, configs,
+hash-bound source/panel identities and the exact exporter for full verification.
+Full-panel one-step errors, same-time trajectory errors and phase-insensitive
+amplitude/frequency summaries should be reported separately. A matched LoRA/full
+finetuning comparison remains a proposal, not authorized or executed here.
+
 ## Historical Oracle2 question and settings
 
 Empirical stability trends, not a demand to eliminate oscillations or prove

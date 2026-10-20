@@ -39,7 +39,19 @@ def bank(root, identity, requests, input_identity):
     return rows
 
 
-def run(root, arm, wall_seconds=64800):
+def selected_steps(plan, steps=None):
+    full = plan['evaluation']['steps']
+    selected = list(full if steps is None else steps)
+    if not selected or selected != sorted(set(selected)) or any(type(s) is not int or s not in full for s in selected):
+        raise ValueError('Expected ordered unique evaluation states from the frozen plan')
+    return selected
+
+
+def completion_name(plan, steps):
+    return 'COMPLETE.json' if steps == plan['evaluation']['steps'] else 'SUBSET_'+digest(steps)+'.json'
+
+
+def run(root, arm, wall_seconds=64800, steps=None):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from peft import PeftModel
@@ -49,7 +61,7 @@ def run(root, arm, wall_seconds=64800):
         raise ValueError('Unknown generation arm')
     spec = plan['evaluation']
     panels = jsonl(root/'data/evaluation.jsonl')
-    steps = [0] if arm == 'baseline' else spec['steps']
+    steps = [0] if arm == 'baseline' else selected_steps(plan, steps)
     target = Path(plan['output_root'])/'generations'/arm
     started = time.monotonic()
     stop = boundary_stop()
@@ -126,15 +138,21 @@ def run(root, arm, wall_seconds=64800):
                 del model
                 gc.collect()
                 torch.cuda.empty_cache()
-        write_json(target/'COMPLETE.json', dict(identity=identity, steps=steps))
+        name = 'COMPLETE.json' if arm == 'baseline' else completion_name(plan, steps)
+        write_json(target/name, dict(identity=identity, steps=steps))
 
 
-def collect(root):
+def collect(root, steps=None, arms=None):
     plan, _, identity = contract(root)
+    steps = selected_steps(plan, steps)
+    allowed = ['baseline']+[r['run_id'] for r in plan['runs']]
+    arms = allowed if arms is None else list(arms)
+    if not arms or len(set(arms)) != len(arms) or any(a not in allowed for a in arms):
+        raise ValueError('Unknown or duplicate bank collection arm')
     panels = jsonl(root/'data/evaluation.jsonl')
     rows = []
-    for arm in ['baseline']+[r['run_id'] for r in plan['runs']]:
-        for step in ([0] if arm == 'baseline' else plan['evaluation']['steps']):
+    for arm in arms:
+        for step in ([0] if arm == 'baseline' else steps):
             directory = Path(plan['output_root'])/'generations'/arm/f'step_{step:04d}'
             adapter_hash = None
             if arm != 'baseline':

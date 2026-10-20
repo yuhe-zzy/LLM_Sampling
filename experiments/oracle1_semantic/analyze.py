@@ -3,8 +3,9 @@ import argparse
 import csv
 from pathlib import Path
 import numpy as np
-from runtime import contract, save_new
-from measure import TRAITS, table
+from runtime import contract, save_new, load_json
+from measure import TRAITS, table, wr_directory
+from generate import selected_steps
 from queue_campaign import measurement_complete
 
 
@@ -27,11 +28,12 @@ def read_csv(path):
         return list(csv.DictReader(f))
 
 
-def plot(root, destination):
+def plot(root, destination, steps=None):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     plan,_,identity=contract(root)
+    steps=selected_steps(plan, steps)
     output=Path(plan['output_root'])
     destination.mkdir(parents=True,exist_ok=False)
     colors={'ordinary':'#333333','reference':'#2473b5','feedback':'#bd4a53'}
@@ -39,8 +41,22 @@ def plot(root, destination):
         fig.savefig(destination/(name+'.png'),dpi=180,bbox_inches='tight')
         fig.savefig(destination/(name+'.pdf'),bbox_inches='tight')
         plt.close(fig)
-    measurement_complete(output/'wr',identity)
-    wr=read_csv(output/'wr/wr_summary.csv')
+    source=wr_directory(plan, steps)
+    measurement_complete(source,identity)
+    manifest=load_json(source/'COMPLETE.json')
+    if manifest.get('steps',plan['evaluation']['steps']) != steps:
+        raise ValueError('WR scope mismatch')
+    wr=read_csv(source/'wr_summary.csv')
+    expected={(r['run_id'],s) for r in plan['runs'] for s in steps}
+    actual=[(r['run_id'],int(r['step'])) for r in wr]
+    if len(actual)!=len(expected) or set(actual)!=expected or any(
+            int(r['prompt_count'])!=plan['dataset']['splits']['evaluation'] for r in wr):
+        raise ValueError('WR table coverage mismatch')
+    for row in wr:
+        for metric in ('oracle1_expected_win_rate','oracle1_majority_win_rate'):
+            value,se=float(row[metric]),float(row[metric+'_prompt_se'])
+            if not np.isfinite([value,se]).all() or not 0<=value<=1 or se<0:
+                raise ValueError('Invalid WR table value')
     table(destination/'wr_summary.csv',wr)
     fig,axes=plt.subplots(1,2,figsize=(10,4),sharey=True,constrained_layout=True)
     for ax,method in zip(axes,('ipo','dpo')):
@@ -56,8 +72,9 @@ def plot(root, destination):
         ax.legend()
     axes[0].set_ylabel('Oracle1 expected win probability vs initial model')
     export(fig,'oracle1_wr')
-    if not (output/'annotation/COMPLETE.json').exists():
-        save_new(destination/'coverage.json',dict(identity=identity,annotation='not_complete',wr='complete'))
+    if steps!=plan['evaluation']['steps'] or not (output/'annotation/COMPLETE.json').exists():
+        save_new(destination/'coverage.json',dict(identity=identity,annotation='not_in_this_report',
+            steps=steps,wr='complete_for_requested_states',uncertainty='prompt_SE_not_training_seed_uncertainty'))
         return
     measurement_complete(output/'annotation',identity)
     features=read_csv(output/'annotation/features.csv')

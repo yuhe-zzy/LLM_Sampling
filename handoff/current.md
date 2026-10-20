@@ -36,6 +36,14 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 ## Current execution
 
+October20T16:45:10Z: TWO SSH TCP connection attempts timed out before
+authentication or remote commands. Current queue/GPU/progress/errors UNKNOWN.
+No job/source/science/timer change; SAME5h monitor remains ACTIVE. Owner should
+check UNC VPN/Sycamore reachability. Next check is read-only EXT inspect plus
+both ledgers; never duplicate4863156/4861879 or advance without fresh guards.
+[Connection record](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261020T1645.json).
+The successful execution snapshots below are historical, not live state.
+
 [Protocol/code](../experiments/oracle1_semantic/README.md), [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).
 Launch `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_20261015_v1`;
 output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.

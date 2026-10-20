@@ -2,6 +2,16 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
+Monitoring blocked2026-10-20T16:45:10Z: two SSH TCP connection attempts timed
+out before authentication or remote commands. Current scheduler/GPU allocation,
+training steps, generation progress, logs and WR status UNKNOWN. No experiment
+failure is established. No new submission, cancellation, remote/source/science
+or timer change; SAME monitor verified ACTIVE every5hours. Owner should check
+UNC VPN/Sycamore reachability. Next check retries read-only frozen EXT inspection
+and both ledgers; no advancement without fresh lane-success/full-account checks.
+Never duplicate4863156/4861879. [Connection record](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261020T1645.json).
+All successful progress and allocation snapshots below are historical.
+
 Latest milestone2026-10-20T12:00:36Z: final-target training array
 **4863156_0..5%2** is active, EXTsequence0003. Predecessor4859197 and all58
 original receipt tasks COMPLETED0:0 at92/90/90/92/90/90;11:49:14Z inspector

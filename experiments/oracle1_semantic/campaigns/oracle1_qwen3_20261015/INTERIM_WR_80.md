@@ -88,6 +88,16 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
+October20T16:45:10Z: monitoring connection blocked. Two SSH TCP attempts timed
+out before authentication or any remote command. Current lane/account allocation,
+progress/errors and WR state UNKNOWN, not an established experiment failure.
+No job/remote/source/science/timer changes; SAME5h monitor remains ACTIVE.
+Owner should check UNC VPN/Sycamore reachability. Next check is read-only frozen
+EXT inspection and both latest ledgers; no advancement without fresh successful
+lane receipts and complete account checks. Never duplicate4863156/4861879.
+[Connection record](records/connection_failure_20261020T1645.json).
+The following successful snapshots are historical, not live state.
+
 AtOctober20T12:00:36Z **4863156_0..5%2** is the active training continuation,
 EXTsequence0003. All58 original receipt tasks including4859197 are successful;
 11:49:14Z inspection passes550 states at92/90/90/92/90/90, hashes/finite values,

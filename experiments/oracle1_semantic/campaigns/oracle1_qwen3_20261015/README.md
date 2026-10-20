@@ -19,6 +19,14 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
+Monitoring blockedOctober20T16:45:10Z: two SSH TCP timeouts before authentication
+or any remote command. Current queue/GPU/progress/errors/WR state UNKNOWN.
+No new job, remote/source/science or timer action. SAME5h monitor stays ACTIVE.
+Owner should check UNC VPN/Sycamore access; next check reads frozen EXT and both
+ledgers first. Never duplicate4863156/4861879 or infer completion from elapsed time.
+See [connection record](records/connection_failure_20261020T1645.json).
+Successful snapshots below are historical, not live allocation evidence.
+
 LatestOctober20T12:00:36Z: **4863156_0..5%2**, EXTsequence0003 training, is active.
 All58 original receipt tasks including4859197 completed successfully at
 92/90/90/92/90/90;11:49:14Z validates550 contiguous/hash/finite states and initial

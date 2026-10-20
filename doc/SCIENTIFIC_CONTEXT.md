@@ -234,6 +234,33 @@ probabilities do not measure open-generation frequency or held-out win rate.
 The package complements our generated-trait/WR endpoint. Discussion only:
 no experiment settings, jobs, branches or analysis gates were changed.
 
+### Core setup interpretation,2026-10-20
+
+Owner requests a setup explanation rather than another result summary.
+Rechecked builder, main trainer,3B trainer, population map and preregistrations.
+The primary neural test optimizes one shared full-parameter LM on fixed answer
+strings; it does not directly assign four free probabilities or regenerate
+candidate answers each round. Within-panel pi renormalizes the four complete
+sequence probabilities and says nothing by itself about their total mass.
+Main expected-label fitting sums all distinct pairs, normalized per prompt,
+with equal prompt weights. Each of40 inner Adam steps accumulates the entire
+selected dataset before updating parameters. The optimizer resets per outer
+round; model weights continue. Actual3B core has five IPO arms, not a joint
+IPO/DPO-by-alpha/beta/gamma factorial design. Gamma is a derived local cyclic
+gain. For fixed labels/support/s0/lambda and alpha<1, equal B=beta/(1-alpha)
+holds the population fixed-point equation constant. It does not guarantee that
+finite neural optimization has the same trajectory or converges globally.
+
+Interpretation: short answers, selected interior support, frozen preferences
+and expected losses intentionally reduce nuisance variation. This is a valid
+conditional realization test, not by itself a test of natural cycle prevalence,
+held-out quality or the causal effect of replacing LoRA. Independent support/
+seed checks, panel-mass diagnostics and a matched finetuning comparison would
+strengthen external validity; these are suggestions, not approved experiments.
+Confirmed implementation/evaluation/publication issues remain those recorded
+above. A designed restriction is not automatically a bug or data leakage.
+No new computational experiment or original-source change was made.
+
 ### Page10 trajectory audit,2026-10-20
 
 Owner questions whether the displayed match is implausibly good compared with

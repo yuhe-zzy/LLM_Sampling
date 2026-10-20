@@ -2,13 +2,23 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Latest inspection issue2026-10-20T05:17Z: frozen interim v2 rejects duplicate
-sacct rows for4859197_4, RUNNING/raw4861114 and PENDING/parent4859197. Task5
-remains pending. No row dropped, no code/guard/scheduler change or submission.
-Separate training audit05:21:11Z passes529 states at92/90/90/91/80/80 with no
-training errors; full account2H100, tasks3/4 RUNNING and5 pending. Cooperative
-accounting remains unresolved; recheck after scheduler changes, then verify all
-legacy reloads before evaluation. Same5min monitor. [Diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json).
+Latest milestone2026-10-20T05:33:52Z: NEW baseline **4861201** RUNNING with
+62/800 real responses validated for full-plan identity, seeds, row hashes and
+finite diagnostics; zero empty responses,20 cap hits, logged allocated peak7.75GiB.
+This is initial GPU inference, not a completed bank or WR result. Account3H100:
+two original trainers plus one baseline, cooperative reserved potential4.
+No unrelated/pending/releasing work. Baseline EXTsequence0001 was submitted once
+after dry-run and fresh guard checks at05:28:21Z. Never duplicate it.
+See [startup audit and exact receipt links](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_baseline_startup_20261020T0533.json).
+
+The05:17 accounting overlap cleared after the last legacy task started05:23:18Z.
+Raw parent accounting and unchanged v2 inspector pass; no deduplication, source,
+guard or scheduler modification. Both active workers verified reload80 and wrote
+matching current-allocation manifests before evaluation joined. Training audit
+05:30:41Z: steps92/90/90/92/80/80,530 valid states,0..3 segment-complete,4/5 running,
+no errors. [Earlier diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json) is historical. Keep5min monitor until baseline AND
+first checkpoint generator show healthy real responses. Neither generator nor WR
+is submitted yet; baseline must finish successfully and validate before advance.
 
 Latest request2026-10-19: interim six-arm Oracle1 WR curves at0,10,...80 and
 TWO additional H100s, provided full-account concurrent use never exceeds FOUR.
@@ -20,9 +30,9 @@ still reject sidecars, so all must start and pass reload or complete before firs
 sidecar submission. No cancellation/requeue/guard bypass. See
 [interim implementation/status](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md).
 New extensionv2 sourcecaf5ac2 frozen00:15:51Z;43 server CPU tests no skips and
-native expanded parent-array accounting passed. Expected dry-run block on legacy
-pending startup; NO interim intent/receipt/GPU submission or WR yet. Same monitor
-temporarily5minutes for activation/startup, then5hours after real healthy inference.
+native expanded parent-array accounting passed. Initial dry-run correctly blocked
+on legacy pending startup; this historical wait has now cleared as recorded above.
+Same monitor temporarily5minutes, then5hours after baseline AND generator validation.
 At2026-10-20T00:18:18Z six steps86/84/80/82/80/80;498 valid states; original0/1
 RUNNING,2..5 pending, full account2H100, no logged errors. See
 [prepared/deployment evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_prepared_20261020.json).

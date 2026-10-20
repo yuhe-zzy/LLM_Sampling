@@ -88,17 +88,30 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
-October20T05:17Z frozen inspection failed closed on duplicate accounting for
-4859197_4: instantiated raw4861114 RUNNING plus parent raw4859197 PENDING.
-Task5 remains pending. No deduplication, guard/source change or new submission.
-Separate original read-only training audit05:21:11Z:529 valid states, steps
-92/90/90/91/80/80, no training errors; full account2H100,3/4 RUNNING and5 pending.
-This training audit does NOT replace successful cooperative accounting. Recheck
-raw records and unchanged inspector after scheduler changes; all legacy reloads
-must also pass before evaluation joins. See [accounting diagnosis](records/accounting_overlap_20261020T0517.json).
-Same five-minute monitor; no evaluation GPU result. Earlier preparation follows.
+Baseline **4861201** submittedOctober20T05:28:21Z, EXTsequence0001, after dry-run
+and fresh guarded submit. OneH100,24h allocation/18h soft stop, no duplicate.
+At05:33:52Z RUNNING:62/800 actual responses have valid full-plan identity, input
+digests, seeds and row hashes; finite diagnostics, zero empty responses,20 cap
+hits. Mean length180.21 tokens; mean unique-token ratio0.6226, maximum dominant
+token fraction0.2857. These are partial-prefix diagnostics, not a quality verdict.
+Progress at50 rows reports8,320,785,408 bytes allocated peak (7.75GiB), not device-
+wide reserved/lifetime telemetry. No logged OOM/Traceback/nonfinite error.
+Full-account05:33:51Z:3H100, two trainers plus baseline, reserved potential4;
+no unrelated/pending/releasing work. [Startup audit](records/interim80_baseline_startup_20261020T0533.json),
+exact [intent](records/interim_v2_0001_intent.json) and [receipt](records/interim_v2_0001_receipt.json).
+No checkpoint generator or WR submitted. Wait for successful baseline receipt
+and complete bank validation before evaluation advance. Keep the SAME5min timer
+until baseline AND first checkpoint generator write healthy real responses.
 
-Prepared/deployed, NOT submitted. Frozen2026-10-20T00:15:51Z. Binding hash
+The05:17 [accounting overlap](records/accounting_overlap_20261020T0517.json) cleared after
+the final legacy task started05:23:18Z. Fresh raw parent accounting and unchanged
+v2 inspector passed05:26:56Z. No row filtering, code/guard or scheduler changes.
+Both active legacy jobs verified reload80 and matching RUNNING manifests before
+the dry-run passed05:27:41Z. Training05:30:41Z:530 valid states,92/90/90/92/80/80,
+0..3 segment-complete and4/5 running, no errors. All54 checkpoint bindings valid.
+Historical preparation follows; it does not describe current submission state.
+
+Prepared/deployed at2026-10-20T00:15:51Z, not yet submitted AT THAT TIME. Binding hash
 `e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74`.
 All43 server CPU tests passed without skips, shell syntax passed, including real
 tiny Qwen3/LoRA resume, cached generation/scoring reuse and synthetic plot render/

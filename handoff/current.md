@@ -36,10 +36,13 @@ October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
 reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
 Sequence0010/all52 previous receipt tasks successful. Current **4859197_0..5%2**
 sequence0011 submittedOctober19T22:38:18Z, targets92/90/90/92/90/90, oneH100/task,
-two concurrent,24h/18h soft stop. AtOctober20T05:21:11Z steps92/90/90/91/80/80,
-529 valid states;0..2 complete,3/4 RUNNING,5 pending, account2H100, no training errors.
-v2 inspect BLOCKED: sacct gives task4 RUNNING and parent-derived PENDING rows.
-Do not discard either row. Recheck after scheduler changes; see [diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json).
+two concurrent,24h/18h soft stop. AtOctober20T05:30:41Z steps92/90/90/92/80/80,
+530 valid states;0..3 segment-complete,4/5 RUNNING with verified reload80, no errors.
+Prior duplicate accounting cleared after task5 started; unchanged v2 checks pass.
+Baseline **4861201** submitted05:28:21Z, EXTsequence0001, oneH100. At05:33:52Z,
+62/800 real responses pass identity/seed/hash/finite checks, zero empty responses,
+20 cap hits; logged allocated peak7.75GiB. Full account3H100, reserved potential4.
+[Startup evidence/receipts](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_baseline_startup_20261020T0533.json). Never duplicate.
 
 New EXT `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`;
 sourcecaf5ac2b68d0e4d3778260428eedbeb3441a6658 pushed/verified,43 server CPU tests
@@ -48,7 +51,8 @@ e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74.
 Base identity unchanged,54 required checkpoint commits bound and validated.
 v1 preserved/unused after pending-array accounting issue; query parent IDs with
 sacct --array, NOT explicit child filters. Do not retry/deploy from v1.
-EXT dry-run correctly blocks legacy pending startup; no interim GPU job/WR yet.
+Baseline is RUNNING, not complete. No checkpoint generator or WR submitted yet.
+Keep same5min timer until baseline AND first generator write healthy real responses.
 Inspect both ledgers. Use EXT interim.py --advance --lane evaluation or training,
 dry-run then --submit once only when that lane is idle/successful and full account
 known/within4. Evaluation joins only after legacy pending tasks have passed reload

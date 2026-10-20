@@ -19,12 +19,22 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
-October20T05:17Z interim inspection stopped on duplicate Slurm accounting for
-task4 (RUNNING and parent-derived PENDING). No new submission or code/guard change.
-Separate training audit05:21:11Z: steps92/90/90/91/80/80,529 valid states, no
-training errors; account2H100, tasks3/4 RUNNING and5 pending. Frozen cooperative
-checks must pass before evaluation joins; do not deduplicate ambiguous rows.
-See [diagnosis](records/accounting_overlap_20261020T0517.json). Same5min monitor.
+NEW baseline **4861201**, EXTsequence0001, submittedOctober20T05:28:21Z after
+successful dry-run and fresh guarded checks. OneH100,24h/18h soft stop. At05:33:52Z,
+62/800 real responses pass canonical identity/seed/hash and finite checks; no
+empty responses or logged errors,20 cap hits, allocated peak7.75GiB at50 rows.
+Full account3H100 (two original trainers plus baseline), reserved potential4,
+no unrelated/pending/releasing work. This is initial inference, not WR/completion.
+Exact [intent](records/interim_v2_0001_intent.json), [receipt](records/interim_v2_0001_receipt.json)
+and [startup audit](records/interim80_baseline_startup_20261020T0533.json). Never duplicate.
+
+Previous duplicate Slurm accounting cleared after task5 started05:23:18Z.
+Unchanged v2 and raw parent accounting pass, without deduplication/source/guard
+or scheduler changes. Both last legacy workers verified reload80 and matching
+manifests before baseline joined. Training05:30:41Z:92/90/90/92/80/80,530 valid
+states,0..3 segment-complete,4/5 running, no errors. [Earlier diagnosis](records/accounting_overlap_20261020T0517.json)
+is historical. Same5min monitor until baseline AND first checkpoint generator
+write healthy real responses. No checkpoint generator or WR submission yet.
 The following launch/status snapshots are historical.
 
 Connection recovered2026-10-19T22:32:35Z on the owner's retry request. Sequence0010

@@ -19,6 +19,14 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
+October20T05:17Z interim inspection stopped on duplicate Slurm accounting for
+task4 (RUNNING and parent-derived PENDING). No new submission or code/guard change.
+Separate training audit05:21:11Z: steps92/90/90/91/80/80,529 valid states, no
+training errors; account2H100, tasks3/4 RUNNING and5 pending. Frozen cooperative
+checks must pass before evaluation joins; do not deduplicate ambiguous rows.
+See [diagnosis](records/accounting_overlap_20261020T0517.json). Same5min monitor.
+The following launch/status snapshots are historical.
+
 Connection recovered2026-10-19T22:32:35Z on the owner's retry request. Sequence0010
 array4852338_0..5 and all52 receipt tasks COMPLETED0:0. Complete steps82/80/80/
 82/80/80;490 states finite/contiguous/hash-valid, initial scores/support match,

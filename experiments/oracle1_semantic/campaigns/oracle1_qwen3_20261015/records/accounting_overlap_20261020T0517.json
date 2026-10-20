@@ -1,0 +1,28 @@
+{
+  "event": "interim_inspection_fail_closed_on_duplicate_accounting",
+  "heartbeat_at_utc": "2026-10-20T05:17:40.231Z",
+  "training_inspected_at_utc": "2026-10-20T05:21:11.343789Z",
+  "full_account_snapshot_at_utc": "2026-10-20T05:19:42.298125Z",
+  "extension_source": "caf5ac2b68d0e4d3778260428eedbeb3441a6658",
+  "training_source": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "error": "ValueError: Ambiguous accounting record",
+  "duplicate_accounting_rows": [
+    {"job_id_raw": "4861114", "job_id": "4859197_4", "state": "RUNNING", "exit_code": "0:0", "start_utc": "2026-10-20T05:17:03"},
+    {"job_id_raw": "4859197", "job_id": "4859197_4", "state": "PENDING", "exit_code": "0:0", "start_utc": "Unknown"}
+  ],
+  "diagnosis": "Parent sacct --array query exposes both an instantiated running task and a parent-derived pending row for the same child while task5 remains pending. The strict extension rejects this overlap. No row was discarded or reclassified.",
+  "resolution": "Unresolved at this snapshot and one bounded read-only recheck. Recheck raw accounting and the unchanged frozen inspector after scheduler state changes; no submission until all checks pass.",
+  "training_steps": {"ipo_ordinary": 92, "ipo_reference": 90, "ipo_feedback": 90, "dpo_ordinary": 91, "dpo_reference": 80, "dpo_feedback": 80},
+  "validated_state_count": 529,
+  "training_errors": [],
+  "training_validation": "Original read-only inspector passed contract, contiguous checkpoint hashes, finite states and shared initial scores/token support. This does not replace the failed cooperative accounting check.",
+  "owned_queue": ["4859197_3 RUNNING", "4859197_4 RUNNING", "4859197_5 PENDING JobArrayTaskLimit"],
+  "allocated_gpus": 2,
+  "unrelated_owned_work": false,
+  "recent_terminal_job": "4859197_2 COMPLETED 0:0; historical AllocTRES excluded from live total",
+  "current_reference_manifest": {"job": "4861114", "state": "RUNNING", "last_complete_step": 80, "last_metrics": null},
+  "new_submission": false,
+  "source_or_scheduler_changes": false,
+  "monitor": "Same five-minute heartbeat; unchanged",
+  "private_evidence": ["heartbeat_20261020T0517.json", "accounting_diagnosis_20261020T0517.json", "accounting_training_diagnosis_20261020T0519.json", "accounting_recheck_20261020T0523.json"]
+}

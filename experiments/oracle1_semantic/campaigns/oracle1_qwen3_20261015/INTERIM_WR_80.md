@@ -88,6 +88,16 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
+October20T05:17Z frozen inspection failed closed on duplicate accounting for
+4859197_4: instantiated raw4861114 RUNNING plus parent raw4859197 PENDING.
+Task5 remains pending. No deduplication, guard/source change or new submission.
+Separate original read-only training audit05:21:11Z:529 valid states, steps
+92/90/90/91/80/80, no training errors; full account2H100,3/4 RUNNING and5 pending.
+This training audit does NOT replace successful cooperative accounting. Recheck
+raw records and unchanged inspector after scheduler changes; all legacy reloads
+must also pass before evaluation joins. See [accounting diagnosis](records/accounting_overlap_20261020T0517.json).
+Same five-minute monitor; no evaluation GPU result. Earlier preparation follows.
+
 Prepared/deployed, NOT submitted. Frozen2026-10-20T00:15:51Z. Binding hash
 `e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74`.
 All43 server CPU tests passed without skips, shell syntax passed, including real

@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-19, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
 Latest discussion: explain the experiment's motivation and design-to-goal fit;
 see doc/SCIENTIFIC_CONTEXT.md. ASD-STE100-style replies per AGENTS.md. No job changes.
 
@@ -36,8 +36,10 @@ October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
 reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
 Sequence0010/all52 previous receipt tasks successful. Current **4859197_0..5%2**
 sequence0011 submittedOctober19T22:38:18Z, targets92/90/90/92/90/90, oneH100/task,
-two concurrent,24h/18h soft stop. AtOctober20T00:18:18Z steps86/84/80/82/80/80,
-498 valid states;0/1 RUNNING,2..5 pending, full account2H100, no errors. Never repeat0011.
+two concurrent,24h/18h soft stop. AtOctober20T05:21:11Z steps92/90/90/91/80/80,
+529 valid states;0..2 complete,3/4 RUNNING,5 pending, account2H100, no training errors.
+v2 inspect BLOCKED: sacct gives task4 RUNNING and parent-derived PENDING rows.
+Do not discard either row. Recheck after scheduler changes; see [diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json).
 
 New EXT `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`;
 sourcecaf5ac2b68d0e4d3778260428eedbeb3441a6658 pushed/verified,43 server CPU tests

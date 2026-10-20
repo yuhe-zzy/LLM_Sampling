@@ -2,6 +2,14 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
+Latest inspection issue2026-10-20T05:17Z: frozen interim v2 rejects duplicate
+sacct rows for4859197_4, RUNNING/raw4861114 and PENDING/parent4859197. Task5
+remains pending. No row dropped, no code/guard/scheduler change or submission.
+Separate training audit05:21:11Z passes529 states at92/90/90/91/80/80 with no
+training errors; full account2H100, tasks3/4 RUNNING and5 pending. Cooperative
+accounting remains unresolved; recheck after scheduler changes, then verify all
+legacy reloads before evaluation. Same5min monitor. [Diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json).
+
 Latest request2026-10-19: interim six-arm Oracle1 WR curves at0,10,...80 and
 TWO additional H100s, provided full-account concurrent use never exceeds FOUR.
 This explicitly supersedes the one-extraGPU limit and allows checkpoint evaluation

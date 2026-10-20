@@ -111,14 +111,18 @@ def accounting(helpers, all_receipts):
     jobs = [j for r in all_receipts for j in receipt_jobs(r)]
     if len(set(jobs)) != len(jobs):
         raise ValueError('Duplicate registered job')
-    # Slurm otherwise hides lazy pending tasks behind an aggregated array record.
-    raw = helpers.run(['sacct','-X','--array','-n','-P','-j',','.join(jobs),'-o','JobID,State,ExitCode'])
+    # Query parents: explicit child filters still omit Slurm's lazy pending tasks,
+    # even with --array. Validate each expanded child against the receipt below.
+    parents = sorted({r['job_id'].split(';')[0] for r in all_receipts})
+    raw = helpers.run(['sacct','-X','--array','-n','-P','-j',','.join(parents),'-o','JobID,State,ExitCode'])
     states = {}
     for line in raw.splitlines():
         parts = line.split('|')
         if len(parts) != 3 or parts[0] in states:
             raise ValueError('Ambiguous accounting record')
         states[parts[0]] = parts[1:]
+    if set(states)-set(jobs):
+        raise ValueError('Unregistered children in scheduler accounting')
     for job in jobs:
         state, code = states.get(job, ('UNKNOWN','UNKNOWN'))
         if not ((state == 'COMPLETED' and code == '0:0') or (state in ACTIVE and code == '0:0')):

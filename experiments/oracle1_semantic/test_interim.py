@@ -181,6 +181,7 @@ class InterimTests(unittest.TestCase):
     def test_accounting_requests_expanded_pending_arrays(self):
         def query(command):
             self.assertIn('--array',command)
+            self.assertEqual(command[command.index('-j')+1],'10')
             return '10_0|RUNNING|0:0\n10_1|PENDING|0:0'
         result=accounting(SimpleNamespace(run=query),[receipt('10')])
         self.assertEqual(result['10_1'],['PENDING','0:0'])

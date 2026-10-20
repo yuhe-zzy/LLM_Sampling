@@ -113,6 +113,62 @@ between LoRA and full finetuning. No such new experiment is authorized or run
 by this discussion. The coauthor's fixed-panel mechanism tests complement,
 but do not replace, our open-generation trait/WR endpoint.
 
+### Published-code audit,2026-10-20
+
+Fetched and verified Fan's branch at
+1ea6a640274b6d677d07a7e36094a3420b81a3df. The published bundle is
+[Paper B v4 neural experiments](https://github.com/yuhe-zzy/LLM_Sampling/tree/1ea6a640274b6d677d07a7e36094a3420b81a3df/experiments/paper_b_v4_neural_2026-10-20):
+174 files,8 experiment directories,10 HTML reports,57 Python scripts,69 JSON
+files and3 figure PDFs. The deck is byte-identical to the supplied HTML.
+The claimed reviews/2026-10-20-fan-branch-v4-experiments-publication.md is absent
+from this commit. X15 remains pending. Fan's branch was not merged or modified.
+
+Corrections to the report-only reading above:
+
+- Both active experiments and Fan's main runs use all distinct pairs, expected
+  soft-label losses and an optimizer reset each outer round. Expected labels are
+  not a difference between these main protocols. Fan uses40 full-data Adam
+  updates at2e-5, whereas ours uses one shuffled pair epoch, AdamW at1e-5,
+  accumulation4, clipping and a linear schedule (500*6/4=750 optimizer updates).
+- Main Fan batch configs leave coverage at its uniform default. Its population
+  code agrees: mu=(1-lambda)/K+lambda*pi_t. The bundle README/deck's description
+  of initial-policy coverage is inaccurate for those runs. Our uniform coverage
+  is the same rule; Fan uses lambda1 for planted cycles versus our fixed.8.
+- Exact comparison of pair losses gives beta_Fan=1/beta_train for both IPO
+  (up to an additive constant) and DPO. Our ordinary IPO.2 maps to5/B50 and
+  DPO.8 maps to1.25/B12.5 at alpha.9. Different labels, temperature, model and
+  optimizer prevent treating these as equivalent empirical experiments.
+- Fan's builder filters probabilities on sampled token IDs, then saves stripped
+  response text. Training re-tokenizes that text with EOS. Its preregistration
+  discloses13/130 main0.5B panels below.05 at training time, including6 below.01.
+  Final population evaluations use actual saved s[0], not always the original
+  frozen builder scores. These are conditional recalculations, not identical
+  untouched pre-run numeric predictions. The main probability oscillation rule
+  also follows two documented metric revisions after results were seen.
+- Full finetuning uses FP32 weights with BF16 autocast; it is not wholly FP32
+  arithmetic. Main H5 residual medians around.18/.44 exceed the original H0
+  .1-nat threshold. This limits exact-map claims without erasing the reported
+  probability-space agreement. Hard-label DPO has no finite target; do not
+  interpret its clipped-logit residual as the same fidelity test.
+
+Publication/reproduction findings: the published deck embeds6 prompt entries
+and24 response entries in its CV JavaScript literal, despite the no-raw-text
+description. Do not copy them into our shared context or repeat their text.
+Actual-DPO analyses import dpo_map.py from an external local review directory;
+that module is absent from the whole fetched Fan branch. Numeric P/s0/full
+trajectories are also omitted. Thus the package supports inspection, not an
+independent reproduction of every verdict. A text-free numerical archive and
+the exact solver/tests would address this without publishing raw responses.
+
+All57 scripts passed AST parsing, and69 JSON files parsed using Python. X15
+onset predictions contain296 Infinity and8 NaN values in threshold statistics,
+so that file is not strict JSON; this is not evidence of neural-training NaNs.
+The declared3B and X14 prediction SHA256 values match the supplied files.
+Hashes confirm artifact identity, not independent proof of pre-run chronology.
+No training code or remote GPU job was executed. Current training code/plan
+and imported history implementation were checked identical to frozen0e7793f.
+The review leaves the active Oracle1 generated-trait/WR study unchanged.
+
 ## Historical Oracle2 question and settings
 
 Empirical stability trends, not a demand to eliminate oscillations or prove

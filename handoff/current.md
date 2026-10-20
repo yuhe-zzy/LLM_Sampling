@@ -1,9 +1,10 @@
 # Current handoff
 
 Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
-Latest discussion: page-by-page review of the coauthor's32-page v4 story deck;
-see doc/SCIENTIFIC_CONTEXT.md. Full-finetuning results are not a matched LoRA
-ablation. ASD-STE100-style replies per AGENTS.md. No job or model changes.
+Latest discussion: audited Fan's published v4 bundle at1ea6a64 against the active
+Oracle1/Qwen3 protocol; see doc/SCIENTIFIC_CONTEXT.md. Found embedded raw text,
+missing DPO solver, retokenization/preregistration caveats. No branch merge,
+job or model changes. ASD-STE100-style replies per AGENTS.md.
 
 ## Latest authorization: launch Oracle1 / Qwen3
 

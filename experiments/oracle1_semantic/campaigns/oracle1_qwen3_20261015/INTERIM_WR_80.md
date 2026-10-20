@@ -88,6 +88,31 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
+AtOctober20T12:00:36Z **4863156_0..5%2** is the active training continuation,
+EXTsequence0003. All58 original receipt tasks including4859197 are successful;
+11:49:14Z inspection passes550 states at92/90/90/92/90/90, hashes/finite values,
+initial scores/support and frozen bindings. Training-lane dry-run11:52:00Z and
+fresh guarded submit11:54:06Z target100 for all six, at most10 updates per arm,
+original train.py unchanged. OneH100/task,two concurrent,24h/18h soft stop.
+Tasks0/1 verify reload92/90, current manifests match4863157/4863158;2..5 pending.
+No new completed outer update claimed. Pending workers have not reloaded yet.
+
+Evaluation4861879 remains active,0/1 running and2..5 pending. Complete validated
+banks: baseline800 plus IPOordinary/reference states0/10,800 each (4/54 checkpoint
+banks). Step20 has359/360 valid answers;4719/44000 total. Full-plan identity,
+response seeds/input/row hashes, finite diagnostics, complete-bank equality and
+adapter hashes pass. Zero empty responses; cap/repetition values preserved in
+the audit, no settings changed. Both generator progress records showstep20 at350
+rows with allocated peak8,642,043,904bytes each (8.05GiB). No logged execution
+errors. Sequential live reads need not have identical counts.
+Full account4H100, potential4, no unrelated/releasing work; full squeue/scontrol
+and parent sacct --array pass. Same5h timer unchanged; no WR submission/results.
+[Audit](records/interim_training_final_segment_startup_20261020T1200.json),
+[intent](records/interim_v2_0003_intent.json), [receipt](records/interim_v2_0003_receipt.json).
+Both lanes active; never duplicate either array or invoke BASE advance.
+
+The following generation-startup snapshot is historical.
+
 AtOctober20T06:44:36Z baseline **4861201** is COMPLETED0:0 with800/800 responses.
 Canonical complete-bank hash, full-plan identity, per-response seed/input/row
 hashes and bank/journal equality pass. Zero empty responses,398 cap hits

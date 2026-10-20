@@ -36,17 +36,17 @@ output `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Frozen source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2 pushed and verified.
 October15 startup4811149_0/3 and resume4811197_0/3 allCOMPLETED0:0: actual4B
 reload/continuedstep2 gate passed, finite metrics, hashes/shared support valid.
-Sequence0010/all52 previous receipt tasks successful. Current **4859197_0..5%2**
-sequence0011 submittedOctober19T22:38:18Z, targets92/90/90/92/90/90, oneH100/task,
-two concurrent,24h/18h soft stop. AtOctober20T06:43:56Z steps92/90/90/92/84/83,
-537 valid states;0..3 segment-complete,4/5 RUNNING after verified reload80, no errors.
-Prior duplicate accounting cleared after task5 started; unchanged v2 checks pass.
-Baseline **4861201** COMPLETED0:0;800/800 bank/journal/seed/hash checks pass.
-Zero empty responses,398 cap hits; allocated peak7.85GiB. EXTsequence0002
-**4861879_0..5%2** submitted06:41:42Z;0/1 RUNNING,2..5 normal pending.
-At06:44:36Z first two generators each have17 valid step0 responses, zero empty,
-four cap hits, no errors. Full account4H100, reserved potential4, no unrelated work.
-[Evidence/receipts](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_generation_startup_20261020T0644.json). Never duplicate.
+AtOctober20T11:49:14Z all58 original receipt tasks, including4859197_0..5,
+COMPLETED0:0 at92/90/90/92/90/90;550 states pass continuity/hash/finite/initial
+score/support checks. Frozen EXT dry-run passed; **4863156_0..5%2** submitted
+11:54:06Z as EXTsequence0003 toward100 for all arms, at most10 updates each.
+At12:00:36Z0/1 RUNNING with verified reload92/90 and matching new manifests;
+2..5 pending normally. No completed new update claimed. Original trainer unchanged.
+Baseline **4861201** remains complete800/800. Generator **4861879_0..5%2**
+has4/54 complete checkpoint banks (IPOordinary/reference0/10), plus359/360
+valid responses at20;4719 total with baseline. Zero empty, no logged errors;
+generator peak allocated8.05GiB each. Full account4H100, potential4, no unrelated work.
+[Evidence/receipts](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim_training_final_segment_startup_20261020T1200.json). Never duplicate either array.
 
 New EXT `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`;
 sourcecaf5ac2b68d0e4d3778260428eedbeb3441a6658 pushed/verified,43 server CPU tests
@@ -56,7 +56,7 @@ Base identity unchanged,54 required checkpoint commits bound and validated.
 v1 preserved/unused after pending-array accounting issue; query parent IDs with
 sacct --array, NOT explicit child filters. Do not retry/deploy from v1.
 Baseline complete; checkpoint generators active, no WR submitted or complete.
-Same5h monitor verified. Generator memory progress was not yet emitted at17 rows.
+Same5h monitor unchanged. Generated banks are not WR; no scoring or plot yet.
 Inspect both ledgers. Use EXT interim.py --advance --lane evaluation or training,
 dry-run then --submit once only when that lane is idle/successful and full account
 known/within4. Evaluation joins only after legacy pending tasks have passed reload

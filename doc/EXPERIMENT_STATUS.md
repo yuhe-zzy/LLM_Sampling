@@ -2,28 +2,37 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
-Latest milestone2026-10-20T06:44:36Z: baseline **4861201** COMPLETED0:0 and
-800/800 canonical bank/journal/seed/hash/finite checks pass. Zero empty responses,
-398 cap hits (49.75%), mean196.7925tokens, allocated peak7.85GiB. Preserve these
-cap diagnostics; completion is not a response-quality or WR result.
-Guarded evaluation dry-run passed06:41:03Z, then EXTsequence0002 generator array
-**4861879_0..5%2** submitted06:41:42Z, oneH100/task,24h/18h soft stop.
-Tasks0/1 RUNNING with17 validated step0 answers each, zero empty and four cap
-hits each;2..5 normalPENDING(JobArrayTaskLimit). No OOM/Traceback/nonfinite.
-Generator memory progress is not yet emitted at17 rows; do not infer a peak.
-Account4H100: two trainers plus two generators; reserved potential4, no unrelated
-or releasing work. Native parent-array accounting and full account checks pass.
-Same monitor restored5hours after both real-generation startup gates passed.
-See [startup audit and exact receipt links](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_generation_startup_20261020T0644.json). Never duplicate either job.
+Latest milestone2026-10-20T12:00:36Z: final-target training array
+**4863156_0..5%2** is active, EXTsequence0003. Predecessor4859197 and all58
+original receipt tasks COMPLETED0:0 at92/90/90/92/90/90;11:49:14Z inspector
+validates550 contiguous/hash/finite states and shared initial scores/support.
+Frozen dry-run passed11:52:00Z; fresh guarded submit11:54:06Z resumes at most10
+updates toward100 per arm, oneH100/task,two concurrent,24h/18h soft stop.
+Tasks0/1 verify reload92/90 and matching current-allocation RUNNING manifests;
+2..5 normal array-limit pending. No new completed update or training100 claimed.
+The extension executes original frozen train.py; no source/science change.
+
+Baseline **4861201** remains COMPLETED0:0 with800 validated responses.
+Generator **4861879** has4/54 complete checkpoint banks: IPOordinary/reference
+states0/10, each800. Their step20 journals have359/360 valid responses.
+Total4719/44000 with baseline; canonical identity/seed/hash/finite checks pass,
+complete bank/journal equality and bound adapters pass. Zero empty responses;
+cap/repetition diagnostics retained in the record. Generator peak allocated
+8,642,043,904bytes each (8.05GiB); progress at350 rows lags live journal reads.
+No OOM/Traceback/nonfinite. Full account4H100, potential4, no unrelated/releasing
+work; native parent sacct --array and full squeue/scontrol checks pass. Same5h
+monitor unchanged. No WR submitted or complete. See
+[startup audit and exact receipt links](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim_training_final_segment_startup_20261020T1200.json).
+Never duplicate either array. Both lanes active; advance only after that lane's
+successful receipts and all guards pass. No original BASE advance while EXT active.
 
 The05:17 accounting overlap cleared after the last legacy task started05:23:18Z.
 Raw parent accounting and unchanged v2 inspector pass; no deduplication, source,
 guard or scheduler modification. Both active workers verified reload80 and wrote
 matching current-allocation manifests before evaluation joined. Training audit
-06:43:56Z: steps92/90/90/92/84/83,537 valid states,0..3 segment-complete,4/5 running,
-no errors. [Earlier diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json) is historical. No WR submitted or complete.
-Both lanes are active. Advance each only after its own successful terminal
-receipts and all guards pass. No original BASE advance while EXT is active.
+06:43:56Z was92/90/90/92/84/83,537 valid states,0..3 segment-complete,4/5 running,
+no errors. [Earlier diagnosis](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/accounting_overlap_20261020T0517.json)
+and [generation startup](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/interim80_generation_startup_20261020T0644.json) are historical.
 
 Latest request2026-10-19: interim six-arm Oracle1 WR curves at0,10,...80 and
 TWO additional H100s, provided full-account concurrent use never exceeds FOUR.

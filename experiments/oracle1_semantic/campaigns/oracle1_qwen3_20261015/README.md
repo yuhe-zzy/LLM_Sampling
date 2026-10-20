@@ -19,6 +19,23 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
+LatestOctober20T12:00:36Z: **4863156_0..5%2**, EXTsequence0003 training, is active.
+All58 original receipt tasks including4859197 completed successfully at
+92/90/90/92/90/90;11:49:14Z validates550 contiguous/hash/finite states and initial
+scores/support. Training-lane dry-run passed11:52:00Z; guarded submit11:54:06Z
+targets100 per arm with at most10 updates, original frozen trainer unchanged.
+OneH100/task,two concurrent,24h/18h soft stop. Tasks0/1 verify reload92/90 and
+matching current-allocation manifests;2..5 pending normally, no new update claimed.
+Generator4861879 remains active:4/54 complete checkpoint banks (IPOordinary/
+reference0/10), step20 partial359/360, baseline800 complete;4719 total valid rows.
+Bank/journal/seed/hash/finite checks pass, zero empty, no logged errors.
+Generator peak allocated8.05GiB each. Full account4H100, potential4, no unrelated
+work; full queue/native-parent accounting pass. Same5h monitor; no WR yet.
+[Audit](records/interim_training_final_segment_startup_20261020T1200.json),
+exact [intent](records/interim_v2_0003_intent.json) and [receipt](records/interim_v2_0003_receipt.json).
+Never duplicate either active array or use BASE advance before interim handback.
+Earlier dated startup/status snapshots below are historical.
+
 LatestOctober20T06:44:36Z: baseline **4861201** COMPLETED0:0;800/800 canonical
 bank/journal/seed/hash/finite checks pass, zero empty responses,398 cap hits
 (49.75%), mean196.7925tokens, allocated peak7.85GiB. No quality or WR claim.

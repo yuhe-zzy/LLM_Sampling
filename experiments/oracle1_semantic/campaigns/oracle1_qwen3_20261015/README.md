@@ -19,6 +19,21 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
+LatestOctober20T06:44:36Z: baseline **4861201** COMPLETED0:0;800/800 canonical
+bank/journal/seed/hash/finite checks pass, zero empty responses,398 cap hits
+(49.75%), mean196.7925tokens, allocated peak7.85GiB. No quality or WR claim.
+Frozen dry-run passed06:41:03Z; guarded EXTsequence0002 submitted
+**4861879_0..5%2** at06:41:42Z, oneH100/task,24h/18h soft stop. Tasks0/1 RUNNING
+with17 valid step0 responses each, zero empty, four cap hits;2..5 normal pending.
+Both startup guards passed, no logged OOM/Traceback/nonfinite. Memory progress
+not yet emitted for these generators. Full account4H100, reserved potential4,
+no unrelated/releasing work. Training06:43:56Z:92/90/90/92/84/83,537 valid states.
+Same monitor restored5hours after actual baseline AND generator validation.
+No WR submitted. Never duplicate. [Audit](records/interim80_generation_startup_20261020T0644.json),
+exact [intent](records/interim_v2_0002_intent.json) and [receipt](records/interim_v2_0002_receipt.json).
+Both lanes remain active; wait for lane-specific successful receipts before advance.
+Earlier dated startup/status snapshots below are historical.
+
 NEW baseline **4861201**, EXTsequence0001, submittedOctober20T05:28:21Z after
 successful dry-run and fresh guarded checks. OneH100,24h/18h soft stop. At05:33:52Z,
 62/800 real responses pass canonical identity/seed/hash and finite checks; no

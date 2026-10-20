@@ -88,6 +88,25 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
+AtOctober20T06:44:36Z baseline **4861201** is COMPLETED0:0 with800/800 responses.
+Canonical complete-bank hash, full-plan identity, per-response seed/input/row
+hashes and bank/journal equality pass. Zero empty responses,398 cap hits
+(49.75%), mean196.7925tokens, mean unique ratio0.5932692, max dominant fraction1/3.
+Allocated peak8,427,731,968bytes (7.85GiB). These are diagnostics, not quality/WR.
+Dry-run passed06:41:03Z; guarded submission created **4861879_0..5%2** at06:41:42Z,
+EXTsequence0002, oneH100/task,24h/18h soft stop. Tasks0/1 started06:41:43Z.
+Each has17 valid step0 answers, zero empty, four cap hits, no logged errors.
+Memory progress is not emitted until50 rows, so no generator peak is claimed.
+Tasks2..5 normalPENDING(JobArrayTaskLimit). Full account4H100 and potential4,
+two trainers plus two generators, no unrelated/releasing work; full/native-parent
+accounting checks pass. Training06:43:56Z:92/90/90/92/84/83,537 valid states.
+SAME timer restored5hours after baseline AND first generator actual-response
+validation. No WR submitted or complete. Both lanes active; do not duplicate or
+call BASE advance. [Audit](records/interim80_generation_startup_20261020T0644.json),
+[intent](records/interim_v2_0002_intent.json), [receipt](records/interim_v2_0002_receipt.json).
+
+The following dated baseline startup and preparation snapshots are historical.
+
 Baseline **4861201** submittedOctober20T05:28:21Z, EXTsequence0001, after dry-run
 and fresh guarded submit. OneH100,24h allocation/18h soft stop, no duplicate.
 At05:33:52Z RUNNING:62/800 actual responses have valid full-plan identity, input

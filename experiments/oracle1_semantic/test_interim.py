@@ -11,7 +11,7 @@ from campaigns.oracle1_qwen3_20261015.build_plan import build
 from runtime import Journal, digest, save_new, sha256
 from generate import collect, completion_name, expected, selected_steps
 from interim import (STEPS, accounting, check_account, choice, control_ids,
-                     legacy_ready, receipts)
+                     freeze, legacy_ready, receipts, verify, worker)
 from measure import score_wr, wr_directory
 
 
@@ -40,6 +40,43 @@ HELPERS=SimpleNamespace(check_live_budget=budget)
 
 
 class InterimTests(unittest.TestCase):
+    def test_extension_binding_rejects_changed_source_ledger_and_checkpoint(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)/'extension'
+            base=Path(folder)/'base'
+            plan=build(base)
+            plan['output_root']=str(Path(folder)/'output')
+            save_new(base/'deployment.json',dict(source_commit='a'*40))
+            save_new(base/'submissions/0001_intent.json',dict(phase='train',indices=[0]))
+            save_new(base/'submissions/0001_receipt.json',dict(phase='train',indices=[0],job_id='10'))
+            save_new(root/'source/marker.json',dict(test=True))
+            for arm in plan['runs']:
+                for step in STEPS:
+                    save_new(Path(plan['output_root'])/'training'/arm['run_id']/f'step_{step:04d}/COMMIT.json',dict(step=step))
+            with patch('interim.contract',return_value=(plan,{},'identity')),patch('interim.checked'),patch('builtins.print'):
+                freeze(root,base,'b'*40)
+                self.assertEqual(verify(root)[2]['training_execution_source'],'a'*40)
+                with self.assertRaises(FileExistsError):
+                    freeze(root,base,'b'*40)
+                original=sha256
+                for name in ('marker.json','0001_receipt.json','COMMIT.json','deployment.json'):
+                    with patch('interim.sha256',side_effect=lambda p,n=name:'changed' if Path(p).name==n else original(p)):
+                        with self.assertRaises(ValueError):
+                            verify(root)
+
+    def test_training_worker_executes_original_frozen_trainer(self):
+        import os
+        plan=build(Path('/base'))
+        r=dict(receipt('20',indices=[0]),updates=10)
+        with patch('interim.verify',return_value=(Path('/base'),plan,{})), \
+             patch('interim.scheduler',return_value=SimpleNamespace(owned_snapshot=lambda:{})), \
+             patch('interim.ledgers',return_value=([],[r])),patch('interim.accounting',return_value={}), \
+             patch('interim.check_account'),patch('interim.legacy_ready'),patch('interim.os.execv') as execute, \
+             patch.dict(os.environ,SLURM_ARRAY_JOB_ID='20',SLURM_ARRAY_TASK_ID='0'),patch('builtins.print'):
+            worker(Path('/extension'))
+        self.assertEqual(Path(execute.call_args[0][1][1]),Path('/base/source/experiments/oracle1_semantic/train.py'))
+        self.assertEqual(execute.call_args[0][1][-4:],['--run-id','ipo_ordinary','--max-updates','10'])
+
     def test_exact_subset_and_full_completion_separate(self):
         plan=build(Path('/base'))
         self.assertEqual(selected_steps(plan,STEPS),STEPS)

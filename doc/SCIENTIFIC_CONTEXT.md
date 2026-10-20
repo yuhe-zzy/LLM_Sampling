@@ -19,7 +19,48 @@ an old training mode or make them sequence-sum results.
 - Generated-response WR requires an external comparison rule. The synthetic
   cyclic fixed-panel tournament is not an unrestricted-generation judge.
 
-## Approved Oracle2 question and settings
+## Current Oracle1 rationale and scope
+
+Discussion clarified2026-10-19 against the owner's October13/15 endpoint
+correction: ask whether actual generated responses change back and forth along
+shared interpretable directions during iterative preference training, and how
+history interventions change these trajectories and Oracle1 WR. Fixed-candidate
+probabilities and static preference cycles alone do not answer that question.
+See the [active protocol](../experiments/oracle1_semantic/README.md).
+
+The current design measures new responses on the same200 held-out prompts with
+the same decoder and frozen five-trait rater. Equal-prompt feature summaries
+estimate generated behavior under this evaluation distribution, not all language
+behavior. Use distributions and prompt-level evidence alongside means; opposing
+prompt changes can cancel. Frozen discovery-only PCA avoids choosing axes to
+make observed trajectories look rotational. WR against the new initial4B model
+is a separate single-judge quality endpoint, not a stability measurement.
+
+History changes the iteration itself. With alpha=.9 and nu=.45, reference uses
+.1*s0+.45*st+.45*s(t-1). Its two-round average cancels a purely alternating
+input perturbation, but this algebra does not prove stability or faster settling
+of the coupled neural training process. Feedback instead extrapolates the
+update: delta_t+.5*(delta_t-delta_(t-1)). It can change tracking or overshoot;
+it is not an averaging rule or a guaranteed damping intervention.
+
+The active single-BT Oracle1 ground truth has zero exact logit cyclic residual.
+It supports a transitive control and descriptive generated-behavior comparisons,
+not a test that intrinsic cyclic preferences caused any observed oscillation.
+DPO's exact delta is centered reward/beta and constant across sampling weights;
+its feedback correction is zero. Retain this requested null control. IPO's
+delta can depend on the changing sampler. Qwen3-4B is a new policy choice, not
+evidence that model size causes or reveals cycles; its template/post-training
+also differ from the old policy.
+
+Lower motion together with preserved/improved WR would support useful empirical
+stabilization within the measured scope. Lower motion alone can also reflect
+stalled learning or collapsed outputs. Distinguish excursion, adjacent changes,
+drift and repeated reversals. Ten-step generation can miss faster motion; one
+training seed and five operational traits do not establish universal convergence
+or robust seed-level effects. This explanation changes no settings, thresholds,
+analysis authorization or job state, and claims no new empirical result.
+
+## Historical Oracle2 question and settings
 
 Empirical stability trends, not a demand to eliminate oscillations or prove
 convergence. Oracle1 is Nemotron's scalar reward judge. Oracle2 mixes .6 of

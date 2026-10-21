@@ -10,6 +10,7 @@ def pack(repo, output):
         'experiments/oracle2','experiments/cyclic_history'],cwd=repo,text=True).splitlines()
     paths = {p for p in tracked if Path(p).suffix in ('.py','.sh')}
     paths.add('experiments/oracle2/campaigns/oracle2_real_20261009/plan_two_gpu.json')
+    paths.add('experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/retain_ipo_ordinary_20261021.json')
     changed = subprocess.check_output(['git','diff','HEAD','--name-only','--',*sorted(paths)],cwd=repo,text=True)
     if changed.strip():
         raise ValueError('Commit reviewed source before packaging')

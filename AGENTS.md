@@ -54,9 +54,10 @@ Do not auto-advance either old six-arm launcher or retry canceled-scope arms.
 Preserve all existing outputs/checkpoints/receipts; cancellation of future work
 does not relabel earlier COMPLETED/FAILED tasks as CANCELLED. Inspect current
 queue before scoped cancellation; never cancel the parent array or unrelated work.
-See current handoff/campaign for verified status. First-arm-only continuation
-requires a tested immutable route and explicit approval before a new submission;
-do not bypass failed-accounting guards. Same5h monitor now follows index0 only.
+See current handoff/campaign for verified status. Owner subsequently explicitly
+approves finishing first-arm evaluation and WR, through100. Use the tested
+immutable retained.py route, not old failed-accounting guards; no retraining.
+Same5h monitor follows index0 only. Annotation review remains required.
 
 Historical owner override2026-10-19: interim six-arm Oracle1 WR curves0,10,...80
 may use TWO extra H100s concurrently with training, full account at most FOUR.

@@ -7,8 +7,9 @@ canceling further work on the other five arms. Preserve all existing outputs.
 The six-arm operator commands below are historical and MUST NOT be advanced
 under this narrowed scope. Never retry failed tasks1..5, relabel failed receipts
 as successful, remove locks/guards, or edit frozen sources. Same5h monitor now
-checks index0 only; no new first-arm-only continuation/WR/annotation submission
-without explicit approval and a tested immutable compatible route.
+checks index0 only. Subsequent October21 request explicitly approves retained
+evaluation and WR completion: see [single-arm0..100 route](IPO_ONLY_EVALUATION.md).
+Annotation pilot human-review requirement is unchanged.
 
 Owner authorization October19, 2026: evaluate saved checkpoints at0,10,...80
 for all six arms. TWO additional H100s may operate alongside the two training

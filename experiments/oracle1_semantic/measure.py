@@ -67,21 +67,34 @@ def wr_metrics(current, baseline):
                 oracle1_majority_win_rate=float(((p>.5)+.5*(p==.5)).mean()))
 
 
-def wr_directory(plan, steps):
+def selected_arms(plan, arms=None):
+    full = [r['run_id'] for r in plan['runs']]
+    result = full if arms is None else list(arms)
+    if not result or result != [a for a in full if a in result]:
+        raise ValueError('Expected unique arms in frozen plan order')
+    return result
+
+
+def wr_directory(plan, steps, arms=None):
     target = Path(plan['output_root'])/'wr'
+    arms = selected_arms(plan, arms)
+    if arms != selected_arms(plan):
+        return target/('selection_'+digest(dict(arms=arms, steps=steps)))
     return target if steps == plan['evaluation']['steps'] else target/('subset_'+digest(steps))
 
 
-def score_wr(root, wall_seconds=64800, steps=None):
+def score_wr(root, wall_seconds=64800, steps=None, arms=None):
     import torch
     from transformers import AutoTokenizer, AutoModelForCausalLM
     plan, lock, identity = contract(root)
     require_gpu(2)
     steps = selected_steps(plan, steps)
-    records = collect(root, steps=steps)
+    arms = selected_arms(plan, arms)
+    records = (collect(root, steps=steps) if arms == selected_arms(plan)
+               else collect(root, steps=steps, arms=['baseline']+arms))
     stop = boundary_stop()
     target = Path(plan['output_root'])/'wr'
-    result_dir = wr_directory(plan, steps)
+    result_dir = wr_directory(plan, steps, arms)
     with exclusive(target):
         result_dir.mkdir(parents=True, exist_ok=True)
         journal = Journal(target/'scores', digest(dict(identity=identity, oracle=plan['oracle'])))
@@ -131,6 +144,8 @@ def score_wr(root, wall_seconds=64800, steps=None):
                     **wr_metrics(values, grouped[('baseline',0,key)])))
         summary = []
         for arm in plan['runs']:
+            if arm['run_id'] not in arms:
+                continue
             for step in steps:
                 subset = [r for r in per_prompt if r['run_id']==arm['run_id'] and r['step']==step]
                 if len(subset) != plan['dataset']['splits']['evaluation']:
@@ -143,8 +158,9 @@ def score_wr(root, wall_seconds=64800, steps=None):
                 summary.append(item)
         table(result_dir/'wr_per_prompt.csv', per_prompt)
         table(result_dir/'wr_summary.csv', summary)
-        write_json(result_dir/'COMPLETE.json', dict(identity=identity, count=len(records), steps=steps,
-            scope='full' if steps == plan['evaluation']['steps'] else 'interim',
+        write_json(result_dir/'COMPLETE.json', dict(identity=identity, count=len(records), steps=steps, arms=arms,
+            scope=('selected_arms' if arms != selected_arms(plan) else
+                   'full' if steps == plan['evaluation']['steps'] else 'interim'),
             files={name:sha256(result_dir/name) for name in ('wr_per_prompt.csv','wr_summary.csv')}))
 
 

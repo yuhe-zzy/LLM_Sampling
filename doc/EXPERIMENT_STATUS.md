@@ -6,7 +6,9 @@ Owner reports VPN reconnected and explicitly confirms retaining IPO ordinary,
 array index0, training/generation plus shared baseline, while canceling further
 work on the other five arms. Existing outputs/checkpoints are preserved.
 Same5h monitor now follows index0 only; six-arm automatic advancement/retries
-are withdrawn. No first-arm-only continuation, WR or annotation job submitted.
+are withdrawn. Subsequent user request explicitly approves finishing retained
+evaluation and WR. New [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md)
+is being validated; no new job at preparation checkpoint. Annotation remains gated.
 Do not bypass frozen failed-receipt guards or restart excluded arms.
 
 SSH is restored. Live full-owner queue is empty. Native parent sacct reports

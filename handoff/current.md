@@ -10,9 +10,10 @@ and shared new-Qwen3 baseline; cancel further work on the other five arms.
 This supersedes six-arm automatic advancement and the old no-cancellation rule
 for indices1..5 only. Preserve all results/checkpoints/receipts; no oldOracle2
 or unrelated-job actions. Same5h monitor now follows index0 only.
-Do not call BASE or EXT six-arm --advance/--submit. No new first-arm-only
-continuation/WR/annotation submission has been made or separately approved.
-A continuation needs a tested immutable compatible route, not a guard bypass.
+Owner now explicitly approves finishing first-arm evaluation and win rate.
+Use [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md).
+No retraining/other-arm restoration; no new job at preparation checkpoint.
+Do not call BASE or EXT six-arm --advance/--submit or bypass annotation review.
 
 ## Verified execution
 

@@ -5,6 +5,7 @@ Start with [current handoff](../handoff/current.md), then the newest
 [daily note](../daily-notes/). Do not infer live job status from dated files.
 
 - [Current experiment status and decisions](EXPERIMENT_STATUS.md)
+- [IPO ordinary0..100 evaluation/WR continuation](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md): explicitly approved October21; immutable single-arm route, no retraining or other-arm restart.
 - [Active Oracle1/Qwen3 campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md): October21 retain IPO ordinary/index0 only; other five arms withdrawn, preserve outputs, FOUR-GPU account cap.
 - [Interim0..80 WR execution](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md): prior six-arm automatic advancement withdrawn; first-arm-only continuation must not bypass failed receipts or mutate frozen sources.
 - [Definitions and interpretation limits](SCIENTIFIC_CONTEXT.md)

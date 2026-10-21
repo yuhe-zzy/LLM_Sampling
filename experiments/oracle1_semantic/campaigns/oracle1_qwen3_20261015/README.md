@@ -12,9 +12,10 @@ and explicitly confirms retaining IPO ordinary/index0 training and generation
 while canceling remaining arms. This supersedes the historical six-arm plan.
 All existing results/checkpoints and shared new-Qwen3 baseline remain preserved.
 Same5h monitor now follows index0 only, with no six-arm advance or automatic
-retry. Do not restart indices1..5, oldOracle2 or unrelated tasks. A new single-arm
-continuation needs a tested immutable route and explicit submission approval;
-the original failed-receipt guards must not be bypassed.
+retry. Do not restart indices1..5, oldOracle2 or unrelated tasks. The owner has
+now explicitly authorized finishing the retained arm's evaluation and win rate.
+Use the [single-arm immutable route](IPO_ONLY_EVALUATION.md) for0..100, not the
+old six-arm failed-receipt guards. No new job at the preparation checkpoint.
 
 ## Requested interim WR
 

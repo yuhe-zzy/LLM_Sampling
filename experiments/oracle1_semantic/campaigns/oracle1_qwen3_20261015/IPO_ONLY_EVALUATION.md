@@ -7,6 +7,7 @@ restoring the other five arms. Shared Qwen3 baseline800 remains valid.
 At09:01Z the retained arm had6649 responses:0..70 complete,80 at249/800;
 2151 responses remain for its full8800-response checkpoint evaluation.
 Final scoring covers9600 answers including the800 shared baseline.
+The remaining2151 responses are now complete; see the October21 afternoon update below.
 
 ## Independent immutable route
 
@@ -83,3 +84,31 @@ receipts and empty account, through true WR and rendered figure delivery.
 Private read-only `oracle1_qwen3_launch_20261015/inspect_ipo_only_readonly.py`
 can inspect active work without removing writer locks; full --verify/--advance
 bank checks intentionally refuse an active generation writer. Never duplicate4878947.
+
+## Generation complete and WR submitted
+
+October21T17:31:53Z audit:4878947 COMPLETED0:0. All11 checkpoint banks0..100
+and baseline have800 valid responses each,9600 total, zero empty. Canonical
+seeds/input/row hashes, bank/journal equality, finite diagnostics, source and11
+checkpoint hashes pass. Historical71 outcomes unchanged;8 withdrawn failures
+remain failures. No OOM/Traceback/nonfinite. Generator peak8,645,992,448bytes.
+Cap counts at80/90/100 are398/411/397 of800; preserve settings and diagnostics.
+
+Full account empty, no pending/releasing jobs. Frozen dry-run17:32:39Z selects
+only retained_wrscore. Guarded submit17:33:19Z creates sequence0002 **4889849**,
+non-array2H100,24h allocation/18h soft boundary. Intent/receipt downloaded.
+At17:37:55Z sole owned RUNNING job, allocated/potential2, startup guard passed.
+124 score rows pass identity/input/row hashes and finite reward checks; the
+subsequent journal count is146 because the live reads are not atomic. Maximum
+validated input1351tokens; rewards range-30.25 to-1.359375 at this early stage.
+At100 progress, peaks71,133,833,216 and71,111,680,000bytes, about66.3GiB/GPU,
+11.75GiB free each. No logged OOM/Traceback/nonfinite. Real GPU inference is
+verified, not complete scoring, long-run memory sufficiency or a WR trend.
+No training/other-arm restart, source/science change, lock deletion or old advance.
+
+[Generation audit](records/ipo_only_generation_complete_20261021.json), exact
+[intent](records/ipo_only_0002_intent.json) and [receipt](records/ipo_only_0002_receipt.json).
+[Actual-score startup](records/ipo_only_wr_startup_20261021.json) records the live check.
+Private read-only helper now also validates score journal identity/input/row hashes,
+finite rewards and token counts without exposing private text or changing locks.
+Same5h monitor remains active through actual WR and inspected figure delivery.

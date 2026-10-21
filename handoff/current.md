@@ -12,21 +12,22 @@ for indices1..5 only. Preserve all results/checkpoints/receipts; no oldOracle2
 or unrelated-job actions. Same5h monitor now follows index0 only.
 Owner now explicitly approves finishing first-arm evaluation and win rate.
 Use [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md).
-No retraining/other-arm restoration. New generation4878947 is running.
+No retraining/other-arm restoration. Generation4878947 completed; WR4889849 started.
 Do not call BASE or EXT six-arm --advance/--submit or bypass annotation review.
 
 ## Verified execution
 
-LatestOctober21T09:24:12Z: retained generation4878947 RUNNING, sole owned job,
-1H100 allocated/potential. Source621b7d7;54 server tests pass without skips.
-Step80 advances249 to252 valid answers, no errors/empty; peak8,365,950,976bytes
-at250. New ROOT `ipo/diagnostics/oracle1_qwen3_ipo_only_20261021_v1` under same
-remote work home. Only its frozen retained.py --advance is authorized: dry-run
-then submit once after all NEW receipts succeed and full account is empty.
-WR and90/100 still pending. Same5h monitor handles retained generation/WR/plots.
+October21T17:31:53Z: generation4878947 COMPLETED0:0, all11 checkpoint banks800
+plus baseline800 valid, total9600; no empty responses/errors. Peak8,645,992,448bytes.
+Source621b7d7; ROOT `ipo/diagnostics/oracle1_qwen3_ipo_only_20261021_v1` unchanged.
+Empty-account dry-run passed17:32:39Z; sequence0002 WR4889849 submitted17:33:19Z.
+At17:37:55Z RUNNING, sole owned job, allocated/potential2H100, startup guard passed.
+124 scores hash/finite validated; later count146, non-atomic. No errors; WR incomplete.
+Only frozen retained.py --advance after all NEW receipts succeed and idle account.
+Same5h monitor follows WR/plots; never duplicate4878947 or4889849.
 Private `oracle1_qwen3_launch_20261015/inspect_ipo_only_readonly.py` audits live
 work; frozen --verify/--advance refuse active generation writer locks by design.
-[Startup evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_startup_20261021.json).
+[WR startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_wr_startup_20261021.json).
 
 Historical09:01Z: all old jobs terminal, no scancel needed. Training4863156 and
 generation4861879 indices0/1 COMPLETED0:0,2..5 FAILED1:0; preserve these outcomes.
@@ -43,8 +44,7 @@ OUTPUT `/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1`.
 Frozen train source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2, unchanged.
 EXT `/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`;
 sourcecaf5ac2b68d0e4d3778260428eedbeb3441a6658, unchanged.
-Never duplicate baseline4861201, generation4861879 or training4863156.
-v1 remains unused. Preserve canonical journals, all partial banks and locks.
+Never duplicate old jobs; v1 unused. Preserve canonical journals/partial banks/locks.
 No administrator GPU hard cap exists; maximum FOUR account GPUs, with full
 squeue -a -r, scontrol and native-parent accounting before any resource action.
 

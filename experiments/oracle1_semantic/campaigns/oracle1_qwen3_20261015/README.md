@@ -15,7 +15,7 @@ Same5h monitor now follows index0 only, with no six-arm advance or automatic
 retry. Do not restart indices1..5, oldOracle2 or unrelated tasks. The owner has
 now explicitly authorized finishing the retained arm's evaluation and win rate.
 Use the [single-arm immutable route](IPO_ONLY_EVALUATION.md) for0..100, not the
-old six-arm failed-receipt guards. Single-arm generation4878947 is now submitted.
+old six-arm failed-receipt guards. Generation4878947 completed; WR4889849 submitted.
 
 ## Requested interim WR
 
@@ -30,6 +30,21 @@ cancel/requeue/source edits. New immutable extension uses separate bounded
 training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
+
+October21T17:31:53Z: generation **4878947 COMPLETED0:0**; all11 checkpoint banks
+plus baseline800 each validate,9600 responses, zero empty/errors. Source621b7d7
+and11 checkpoint hashes unchanged. Missing2151 responses finished; peak allocation
+8,645,992,448bytes. Full account empty. Frozen dry-run passes17:32:39Z, then
+sequence0002 **WR4889849** submitted17:33:19Z, non-array2H100,24h/18h boundary.
+At17:37:55Z sole owned RUNNING job, allocated/potential2; startup guard passes.
+124 finite/hash-valid scores checked; later journal count146, non-atomic reads.
+At100 progress, peaks about66.3GiB/GPU,11.75GiB free each; no logged errors.
+No full WR result yet. No retraining/other-arm restart/science change.
+[Generation audit](records/ipo_only_generation_complete_20261021.json),
+exact [intent](records/ipo_only_0002_intent.json), [receipt](records/ipo_only_0002_receipt.json)
+and [actual-score startup](records/ipo_only_wr_startup_20261021.json).
+Never duplicate; same5h monitor continues through actual WR and figure delivery.
+The following dated snapshots are historical.
 
 October21T09:24:12Z: retained generation **4878947** RUNNING, sole owned job,
 1H100 allocated/potential. Source621b7d7;54 server CPU tests pass without skips.

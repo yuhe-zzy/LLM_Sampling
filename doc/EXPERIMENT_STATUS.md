@@ -8,10 +8,17 @@ work on the other five arms. Existing outputs/checkpoints are preserved.
 Same5h monitor now follows index0 only; six-arm automatic advancement/retries
 are withdrawn. Subsequent user request explicitly approves finishing retained
 evaluation and WR. New [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md)
-is being validated; no new job at preparation checkpoint. Annotation remains gated.
+is deployed and running. Annotation remains gated.
 Do not bypass frozen failed-receipt guards or restart excluded arms.
 
-SSH is restored. Live full-owner queue is empty. Native parent sacct reports
+CurrentOctober21T09:24:12Z: retained generation4878947 RUNNING, sole owned job,
+1H100 allocated/potential. Source621b7d7;54 server tests pass without skips.
+Step80 valid responses advance249 to252, peak allocation at250 rows8,365,950,976
+bytes; no OOM/Traceback/nonfinite, zero empty. Baseline800 and0..70 complete
+banks reused;90/100 and WR remain incomplete. Same5h heartbeat advances only
+the new retained route after successful receipts and empty account. [Evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_startup_20261021.json).
+
+Historical09:01Z: SSH restored; full-owner queue empty. Native parent sacct reports
 training4863156_0/1 COMPLETED0:0,2..5 FAILED1:0; generation4861879_0/1
 COMPLETED0:0,2..5 FAILED1:0. There was no live job requiring scancel, so no
 scheduler cancellation occurred. These terminal outcomes are not user-CANCELLED.

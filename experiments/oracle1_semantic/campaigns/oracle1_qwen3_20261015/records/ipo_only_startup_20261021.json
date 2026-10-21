@@ -1,0 +1,529 @@
+{
+  "schema": "oracle1_retained_ipo_evaluation_startup_v1",
+  "checked_at_utc": "2026-10-21T09:24:12.186748+00:00",
+  "authorization": {
+    "date": "2026-10-21",
+    "retained_arm": "ipo_ordinary",
+    "withdrawn_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "evaluation_and_wr_approved": true,
+    "steps": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ],
+    "retrain": false,
+    "annotation_not_started": true
+  },
+  "source": {
+    "execution_commit": "621b7d706c5c0f43f01250c0c9ca366157a43cd2",
+    "binding_sha256": "0154a2449ed39ace600f798542fae7cd888b5b52fe0593b96e6277de6212e4d6",
+    "training_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+    "historical_extension_commit": "caf5ac2b68d0e4d3778260428eedbeb3441a6658",
+    "historical_sources_unchanged": true
+  },
+  "tests": {
+    "local": {
+      "tests": 54,
+      "skipped": 7,
+      "success": true
+    },
+    "server": {
+      "tests": 54,
+      "skipped": 0,
+      "success": true,
+      "elapsed_seconds": 30.493
+    },
+    "shell_syntax": true,
+    "synthetic_plot_pixel_test": true,
+    "real_wr_plot_exists": false
+  },
+  "freeze_completed_utc": "2026-10-21T09:21:06.427001+00:00",
+  "dry_run_passed_utc": "2026-10-21T09:21:18.523262+00:00",
+  "submitted_utc": "2026-10-21T09:22:50.230200+00:00",
+  "receipts": [
+    {
+      "sequence": 1,
+      "job_id": "4878947",
+      "phase": "retained_generate"
+    }
+  ],
+  "accounting": {
+    "4878947": [
+      "RUNNING",
+      "0:0"
+    ]
+  },
+  "queue": {
+    "checked_at_utc": "2026-10-21T09:24:03.244868+00:00",
+    "owned_queue": [
+      "4878947|yuhe32|448057|RUNNING|gres/gpu:1|g15070408"
+    ],
+    "allocated_gpus": 1,
+    "potential_gpus": 1,
+    "full_squeue_scontrol_checked": true,
+    "hard_account_cap_installed": false
+  },
+  "historical_disposition": {
+    "4861201": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811149_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811149_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811197_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811197_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811252_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811252_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811252_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811252_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811252_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4811252_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4814410_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4814410_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4814410_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4814410_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4814410_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4814410_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4819533_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4819533_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4819533_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4819533_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4819533_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4819533_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4836621_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4836621_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4836621_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4836621_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4836621_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4836621_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4839924_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4839924_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4839924_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4839924_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4839924_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4839924_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4846960_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4846960_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4846960_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4846960_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4846960_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4846960_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4849728_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4849728_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4849728_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4849728_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4849728_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4849728_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4852338_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4852338_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4852338_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4852338_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4852338_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4852338_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4859197_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4859197_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4859197_2": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4859197_3": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4859197_4": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4859197_5": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4861879_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4861879_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4861879_2": [
+      "FAILED",
+      "1:0"
+    ],
+    "4861879_3": [
+      "FAILED",
+      "1:0"
+    ],
+    "4861879_4": [
+      "FAILED",
+      "1:0"
+    ],
+    "4861879_5": [
+      "FAILED",
+      "1:0"
+    ],
+    "4863156_0": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4863156_1": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4863156_2": [
+      "FAILED",
+      "1:0"
+    ],
+    "4863156_3": [
+      "FAILED",
+      "1:0"
+    ],
+    "4863156_4": [
+      "FAILED",
+      "1:0"
+    ],
+    "4863156_5": [
+      "FAILED",
+      "1:0"
+    ]
+  },
+  "banks": {
+    "baseline:0": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 398,
+      "empty": 0,
+      "mean_tokens": 196.7925,
+      "mean_unique_ratio": 0.5932691976991289,
+      "max_dominant_fraction": 0.3333333333333333
+    },
+    "ipo_ordinary:0": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 403,
+      "empty": 0,
+      "mean_tokens": 197.71375,
+      "mean_unique_ratio": 0.5938400559138687,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:10": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 404,
+      "empty": 0,
+      "mean_tokens": 195.9275,
+      "mean_unique_ratio": 0.5938589576156597,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:20": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 407,
+      "empty": 0,
+      "mean_tokens": 195.5225,
+      "mean_unique_ratio": 0.5915604079790768,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:30": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 397,
+      "empty": 0,
+      "mean_tokens": 194.53625,
+      "mean_unique_ratio": 0.5925928068921802,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:40": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 400,
+      "empty": 0,
+      "mean_tokens": 194.13625,
+      "mean_unique_ratio": 0.5935260848119802,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:50": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 397,
+      "empty": 0,
+      "mean_tokens": 195.13375,
+      "mean_unique_ratio": 0.5935248690016912,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:60": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 404,
+      "empty": 0,
+      "mean_tokens": 195.365,
+      "mean_unique_ratio": 0.5930370810002088,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:70": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 398,
+      "empty": 0,
+      "mean_tokens": 195.6175,
+      "mean_unique_ratio": 0.5918004391952865,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:80": {
+      "rows": 252,
+      "expected": 800,
+      "complete": false,
+      "cap_count": 107,
+      "empty": 0,
+      "mean_tokens": 191.88095238095238,
+      "mean_unique_ratio": 0.5927375628454696,
+      "max_dominant_fraction": 0.2857142857142857
+    },
+    "ipo_ordinary:90": {
+      "rows": 0,
+      "expected": 800,
+      "complete": false,
+      "cap_count": 0,
+      "empty": 0,
+      "mean_tokens": null,
+      "mean_unique_ratio": null,
+      "max_dominant_fraction": null
+    },
+    "ipo_ordinary:100": {
+      "rows": 0,
+      "expected": 800,
+      "complete": false,
+      "cap_count": 0,
+      "empty": 0,
+      "mean_tokens": null,
+      "mean_unique_ratio": null,
+      "max_dominant_fraction": null
+    }
+  },
+  "progress": {
+    "generations/ipo_ordinary": {
+      "arm": "ipo_ordinary",
+      "step": 80,
+      "rows": 250,
+      "expected": 800,
+      "cuda_peak_allocated_bytes": 8365950976
+    }
+  },
+  "startup_verified_logs": [
+    "0001-4878947.out"
+  ],
+  "errors": [],
+  "retained_step80_rows_before": 249,
+  "retained_step80_rows_after": 252,
+  "training_complete_step": 100,
+  "expected_checkpoint_responses": 8800,
+  "expected_baseline_responses": 800,
+  "expected_wr_score_records": 9600,
+  "score_journal_rows": 0,
+  "selected_wr_directory": "/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1/wr/selection_60e18d6565bcad02e1a45cd1f0b49bd18869c9023a30e6e59ea1c960346e513d",
+  "selected_wr_complete": false,
+  "full_six_wr_complete": false,
+  "monitor": {
+    "id": "oracle1-qwen3-training-and-resume-checks",
+    "hours": 5,
+    "scope": "IPO ordinary evaluation and WR only",
+    "new_timer": false
+  },
+  "private_evidence": [
+    "ipo_only_server_tests_20261021.json",
+    "ipo_only_freeze_dryrun_20261021.json",
+    "ipo_only_submit_20261021.json",
+    "ipo_only_startup_20261021.json"
+  ],
+  "caveats": [
+    "Live rows are non-atomic sequential reads.",
+    "Generation startup is not completed evaluation or WR.",
+    "Prompt SE is not training-seed uncertainty.",
+    "Existing failed withdrawn-arm tasks remain failed, not relabelled or retried."
+  ]
+}

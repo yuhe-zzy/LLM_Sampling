@@ -12,27 +12,29 @@ for indices1..5 only. Preserve all results/checkpoints/receipts; no oldOracle2
 or unrelated-job actions. Same5h monitor now follows index0 only.
 Owner now explicitly approves finishing first-arm evaluation and win rate.
 Use [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md).
-No retraining/other-arm restoration; no new job at preparation checkpoint.
+No retraining/other-arm restoration. New generation4878947 is running.
 Do not call BASE or EXT six-arm --advance/--submit or bypass annotation review.
 
 ## Verified execution
 
-SSH works again. October21T09:01:33Z full owner/UID queue is empty, zero GPUs. Native parent
-sacct --array reports training4863156_0/1 COMPLETED0:0, indices2..5 FAILED1:0;
-generation4861879_0/1 COMPLETED0:0, indices2..5 FAILED1:0. No scancel was needed:
-these were already terminal, not newly canceled scheduler tasks.
-Task0 training manifest is COMPLETE at100, actual job4863157. Generation is
-incomplete despite successful18h segment exit: complete0..70,80 has249/800,
-551 still missing for interim0..80. WR never submitted. At08:59:59Z all568 saved
-states pass hashes/continuity/finite/initial-score/support checks; task0 has101.
-All14,100 existing responses validate, zero empty. [Audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/retain_ipo_ordinary_20261021.json).
-Training task2 failed at startup with Ambiguous accounting record; generation
-task2 was blocked by the prior training failure. Do not silently retry them.
-Frozen EXT --inspect correctly stops on failed receipts; read-only diagnostic
-validation does not alter the frozen execution/submission guards.
-Private helper `oracle1_qwen3_launch_20261015/validate_interim_generation_readonly.py`
-supports `--diagnose-terminal-failures` only with empty queue/scontrol and terminal
-accounting. Do not repeat full hashes on unchanged terminal outputs every check.
+LatestOctober21T09:24:12Z: retained generation4878947 RUNNING, sole owned job,
+1H100 allocated/potential. Source621b7d7;54 server tests pass without skips.
+Step80 advances249 to252 valid answers, no errors/empty; peak8,365,950,976bytes
+at250. New ROOT `ipo/diagnostics/oracle1_qwen3_ipo_only_20261021_v1` under same
+remote work home. Only its frozen retained.py --advance is authorized: dry-run
+then submit once after all NEW receipts succeed and full account is empty.
+WR and90/100 still pending. Same5h monitor handles retained generation/WR/plots.
+Private `oracle1_qwen3_launch_20261015/inspect_ipo_only_readonly.py` audits live
+work; frozen --verify/--advance refuse active generation writer locks by design.
+[Startup evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_startup_20261021.json).
+
+Historical09:01Z: all old jobs terminal, no scancel needed. Training4863156 and
+generation4861879 indices0/1 COMPLETED0:0,2..5 FAILED1:0; preserve these outcomes.
+Task0 training100 complete,101 valid states. At08:59Z all568 states and14,100
+existing responses passed continuity/hash/finite/initial-support/seed checks.
+[Audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/retain_ipo_ordinary_20261021.json).
+Withdrawn tasks failed on ambiguous accounting or prior-failure guards; no retry.
+Old EXT inspect correctly blocks. Never repeat full568-state hashes needlessly.
 
 [Campaign/status](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md),
 [interim guide](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md).

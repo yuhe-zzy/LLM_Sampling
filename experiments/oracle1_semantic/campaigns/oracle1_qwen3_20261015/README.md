@@ -15,7 +15,7 @@ Same5h monitor now follows index0 only, with no six-arm advance or automatic
 retry. Do not restart indices1..5, oldOracle2 or unrelated tasks. The owner has
 now explicitly authorized finishing the retained arm's evaluation and win rate.
 Use the [single-arm immutable route](IPO_ONLY_EVALUATION.md) for0..100, not the
-old six-arm failed-receipt guards. No new job at the preparation checkpoint.
+old six-arm failed-receipt guards. Single-arm generation4878947 is now submitted.
 
 ## Requested interim WR
 
@@ -30,6 +30,15 @@ cancel/requeue/source edits. New immutable extension uses separate bounded
 training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
+
+October21T09:24:12Z: retained generation **4878947** RUNNING, sole owned job,
+1H100 allocated/potential. Source621b7d7;54 server CPU tests pass without skips.
+Frozen11-checkpoint/source/journal/history guard passes. Step80 valid responses
+increase249 to252, zero empty, no OOM/Traceback/nonfinite; peak allocation at250
+rows8,365,950,976bytes. Complete0..70/baseline reused.90/100 and WR still pending.
+Same5h monitor now has explicit authority to finish ONLY this retained evaluation
+and WR, using [new route](IPO_ONLY_EVALUATION.md). No retraining or other-arm restart.
+[Exact startup evidence](records/ipo_only_startup_20261021.json). Older status follows.
 
 October21 connectivity recovered on the owner's request. Full owner/UID queue
 is empty. Native parent accounting finds training4863156_0/1 COMPLETED0:0,

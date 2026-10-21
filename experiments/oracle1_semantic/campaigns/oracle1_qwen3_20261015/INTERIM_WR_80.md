@@ -101,6 +101,12 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
+SupersedingOctober21T09:24:12Z: only retained IPOordinary generation4878947 is
+RUNNING via source621b7d7 and the [new0..100 route](IPO_ONLY_EVALUATION.md).
+Step80 advances249 to252 valid responses,1H100 account-wide, no logged errors.
+No old six-arm advancement or retraining. WR follows completed retained banks
+and successful receipts, using isolated selected-arm tables. Older status follows.
+
 October21 SSH restored; owner retains only IPO ordinary/index0. Full account
 queue empty. Training4863156_0/1 COMPLETED0:0,2..5 FAILED1:0; generation4861879_0/1
 COMPLETED0:0,2..5 FAILED1:0. No live task needed scheduler cancellation. Task0

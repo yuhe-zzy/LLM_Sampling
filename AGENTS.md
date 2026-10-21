@@ -47,7 +47,18 @@ update was used in an earlier run. Publishing code does not authorize GPU jobs.
 
 ## GPU and campaign safety
 
-Latest owner override2026-10-19: interim six-arm Oracle1 WR curves0,10,...80
+Latest owner override2026-10-21: retain ONLY NEW Oracle1/Qwen3 IPO ordinary,
+array index0, including its training/generation and shared initial baseline.
+Owner explicitly confirms index0 and cancels further work on indices1..5.
+Do not auto-advance either old six-arm launcher or retry canceled-scope arms.
+Preserve all existing outputs/checkpoints/receipts; cancellation of future work
+does not relabel earlier COMPLETED/FAILED tasks as CANCELLED. Inspect current
+queue before scoped cancellation; never cancel the parent array or unrelated work.
+See current handoff/campaign for verified status. First-arm-only continuation
+requires a tested immutable route and explicit approval before a new submission;
+do not bypass failed-accounting guards. Same5h monitor now follows index0 only.
+
+Historical owner override2026-10-19: interim six-arm Oracle1 WR curves0,10,...80
 may use TWO extra H100s concurrently with training, full account at most FOUR.
 See Oracle1 campaign INTERIM_WR_80.md for the bound new operational extension.
 Preserve immutable base source0e7793f, checkpoints, settings and receipts.

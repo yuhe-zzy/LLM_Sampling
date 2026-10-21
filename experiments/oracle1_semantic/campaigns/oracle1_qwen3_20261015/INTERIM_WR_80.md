@@ -1,5 +1,15 @@
 # Interim Oracle1 win-rate curves, states0..80
 
+## Scope override, October21
+
+Owner explicitly retains only IPO ordinary/index0 and its shared baseline,
+canceling further work on the other five arms. Preserve all existing outputs.
+The six-arm operator commands below are historical and MUST NOT be advanced
+under this narrowed scope. Never retry failed tasks1..5, relabel failed receipts
+as successful, remove locks/guards, or edit frozen sources. Same5h monitor now
+checks index0 only; no new first-arm-only continuation/WR/annotation submission
+without explicit approval and a tested immutable compatible route.
+
 Owner authorization October19, 2026: evaluate saved checkpoints at0,10,...80
 for all six arms. TWO additional H100s may operate alongside the two training
 GPUs; the entire account must never exceed FOUR. This supersedes the earlier
@@ -63,6 +73,8 @@ rendered PNG/PDF before publishing actual results; test fixtures are not results
 
 ## Operator commands
 
+Historical six-arm commands, NOT authorized for advancement after October21.
+Read-only verify/inspect remain usable; failed receipts intentionally stop inspect.
 Use the frozen server Python and extension source. For a known deployed `EXT`:
 
 ```text
@@ -88,7 +100,25 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
-October21T07:48:09Z: local VPN disconnection verified after another SSH TCP
+October21 SSH restored; owner retains only IPO ordinary/index0. Full account
+queue empty. Training4863156_0/1 COMPLETED0:0,2..5 FAILED1:0; generation4861879_0/1
+COMPLETED0:0,2..5 FAILED1:0. No live task needed scheduler cancellation. Task0
+training100 complete; generation remains partial at80 after successful18h
+segment exit, not complete evaluation or WR. Training task2 reports ambiguous
+accounting; generation task2 refuses that prior failed receipt. Frozen inspect
+correctly stops on failed accounting. No guard/source change, retry or new job.
+Same5h monitor follows index0 only and does not invoke six-arm advancement.
+
+ValidatedOctober21T08:59:59Z: retained training0..100 all101 states valid;
+568 states across preserved arms pass continuity/hashes/finite/initial support.
+All14,100 existing response rows validate, zero empty. Baseline800 complete;
+ordinary/reference each have complete0..70, partial80 rows249/251. Retained
+arm needs551 more responses for0..80 (6,649/7,200), not a completed subset.
+No WR submission or result. Fresh full owner/UID queue09:01:33Z empty, zero GPUs.
+No scheduler cancellation occurred because jobs were already terminal.
+[Terminal and artifact audit](records/retain_ipo_ordinary_20261021.json).
+
+HistoricalOctober21T07:48:09Z: local VPN disconnection verified after another SSH TCP
 timeout before remote commands. Cisco virtual adapter Disabled; read-only client
 state Disconnected. Owner must reconnect UNC VPN. This does not prove remote
 cluster health or the sole timeout cause. Both lanes/account/progress/errors/WR

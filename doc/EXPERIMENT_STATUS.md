@@ -1,8 +1,35 @@
 # Current experiment status
 
-## Active authorization: Oracle1 / Qwen3, 2026-10-15
+## Active scope: IPO ordinary only, 2026-10-21
 
-Latest connection diagnosis2026-10-21T07:48:09Z: SSH TCP timeout before
+Owner reports VPN reconnected and explicitly confirms retaining IPO ordinary,
+array index0, training/generation plus shared baseline, while canceling further
+work on the other five arms. Existing outputs/checkpoints are preserved.
+Same5h monitor now follows index0 only; six-arm automatic advancement/retries
+are withdrawn. No first-arm-only continuation, WR or annotation job submitted.
+Do not bypass frozen failed-receipt guards or restart excluded arms.
+
+SSH is restored. Live full-owner queue is empty. Native parent sacct reports
+training4863156_0/1 COMPLETED0:0,2..5 FAILED1:0; generation4861879_0/1
+COMPLETED0:0,2..5 FAILED1:0. There was no live job requiring scancel, so no
+scheduler cancellation occurred. These terminal outcomes are not user-CANCELLED.
+IPOordinary manifest is COMPLETE at100. Generation segment ended successfully
+with partial80 remaining; generated responses are not WR results. Training task2
+reports Ambiguous accounting record; generation task2 reports the previous
+training failure. Frozen EXT inspect stops at failed receipts as designed.
+Diagnostic reads do not modify guards or submit work. At08:59:59Z,568 saved
+states validate at100/100/90/92/90/90: continuous checkpoints, hashes, finite
+state arrays and matching initial scores/support. Task0 has101 valid states.
+All14,100 existing generated responses pass canonical identity/seed/hash/finite
+checks, zero empty; baseline800 and16 checkpoint banks complete. IPOordinary
+has6,649/7,200 interim responses, step80 at249/800,551 still missing. Reference
+has251 at80 and is withdrawn from further work. No WR submitted. Fresh full
+account09:01:33Z remains empty, zero GPUs. [Audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/retain_ipo_ordinary_20261021.json).
+Earlier snapshots below are historical.
+
+## Historical six-arm authorization and monitoring
+
+Historical connection diagnosis2026-10-21T07:48:09Z: SSH TCP timeout before
 authentication/remote commands. Read-only local checks confirm Cisco VPN adapter
 Disabled and Cisco Secure Client state Disconnected. Owner must reconnect UNC
 VPN; this does not independently establish cluster health or the sole cause.

@@ -5,9 +5,20 @@ submission and early5-minute checks, changing the same monitor to5-hour checks
 only after real IPO/DPO training AND checkpoint reload/continued training work.
 No new Oracle2 work. Full-account FOUR-GPU ceiling.
 
+## Current scope: retain IPO ordinary only
+
+October21 owner reports VPN reconnected, asks whether the first arm finished,
+and explicitly confirms retaining IPO ordinary/index0 training and generation
+while canceling remaining arms. This supersedes the historical six-arm plan.
+All existing results/checkpoints and shared new-Qwen3 baseline remain preserved.
+Same5h monitor now follows index0 only, with no six-arm advance or automatic
+retry. Do not restart indices1..5, oldOracle2 or unrelated tasks. A new single-arm
+continuation needs a tested immutable route and explicit submission approval;
+the original failed-receipt guards must not be bypassed.
+
 ## Requested interim WR
 
-Latest October19 authorization: curves for all six arms at0,10,...80 and TWO
+Historical October19 authorization: curves for all six arms at0,10,...80 and TWO
 additional H100s, with FOUR maximum across the entire account. This supersedes
 the earlier one-extra-card limit and permits training/evaluation overlap through
 explicit cooperative guards. Saved-checkpoint inference needs no retraining.
@@ -19,7 +30,27 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
-LatestOctober21T07:48:09Z: SSH still times out before remote commands. Read-only
+October21 connectivity recovered on the owner's request. Full owner/UID queue
+is empty. Native parent accounting finds training4863156_0/1 COMPLETED0:0,
+2..5 FAILED1:0; generation4861879_0/1 COMPLETED0:0,2..5 FAILED1:0. No active
+task required scancel; user withdrawal concerns future work, not relabeling the
+already terminal jobs. Task0 training manifest is COMPLETE at100. Generation
+is not complete despite successful segment exit:0..70 finished, partial80 remains.
+No WR result. Training task2 failed in startup on Ambiguous accounting record;
+generation task2 was blocked by the prior training failure. No source hot-fix,
+retry or new job. Same5h monitor narrowed to index0 only. Older snapshots follow.
+
+Artifact auditOctober21T08:59:59Z:568 states at100/100/90/92/90/90 pass checkpoint
+continuity/hashes, finite saved arrays and initial-score/support checks. Retained
+task0 has101 valid states. All14,100 existing responses validate with canonical
+seed/input/row hashes and finite diagnostics, zero empty; baseline800 plus16
+complete checkpoint banks, partial80 rows249/251 for ordinary/reference.
+Retained IPOordinary:6,649/7,200 interim responses,551 missing at80. Complete
+banks equal journals and retain original adapter hashes. Generator peak8.05GiB;
+cap/repetition diagnostics retained without retuning. No WR receipt/results.
+Fresh full account09:01:33Z empty, zero GPUs. [Scope and terminal audit](records/retain_ipo_ordinary_20261021.json).
+
+HistoricalOctober21T07:48:09Z: SSH still times out before remote commands. Read-only
 local checks confirm Cisco VPN adapter Disabled and client state Disconnected.
 Owner must reconnect UNC VPN. Remote queue/GPU/progress/errors/WR remain UNKNOWN;
 local evidence does not establish remote cluster health. No network/job/source/

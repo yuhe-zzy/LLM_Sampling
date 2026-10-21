@@ -1,0 +1,44 @@
+{
+  "recorded_at_utc": "2026-10-21T07:48:09.600044+00:00",
+  "heartbeat_at_utc": "2026-10-21T07:46:27.980+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "status": "MONITOR_CONNECTION_BLOCKED_LOCAL_VPN_DISCONNECTED",
+  "ssh_attempts_this_check": 1,
+  "ssh_failure": "socket.timeout in sock.connect before authentication or remote commands",
+  "remote_commands_executed": false,
+  "local_network_observations": {
+    "adapter_description": "Cisco AnyConnect Virtual Miniport Adapter for Windows x64",
+    "adapter_status": "Disabled",
+    "vpn_client": "Cisco Secure Client",
+    "vpn_client_version": "5.1.14.145",
+    "read_only_command": "vpncli.exe state",
+    "exit_code": 0,
+    "settled_state_translated_from_chinese": "Disconnected",
+    "initial_state_before_settled_status": "Unknown",
+    "output_decoding": "Windows code page936; repeated state-only query to decode the localized output"
+  },
+  "current_scheduler_state": "UNKNOWN",
+  "current_allocated_gpus": null,
+  "current_training_steps": null,
+  "current_generation_or_wr_state": "UNKNOWN",
+  "current_remote_errors": "UNKNOWN",
+  "last_successful_response_and_resume_check_utc": "2026-10-20T12:00:36.564628+00:00",
+  "known_training_array_do_not_duplicate": "4863156",
+  "known_generation_array_do_not_duplicate": "4861879",
+  "prior_connection_record": "connection_failure_20261020T1645.json",
+  "actions": {
+    "vpn_connected_or_configuration_changed": false,
+    "new_job_submitted_or_existing_job_changed": false,
+    "remote_files_or_scientific_source_changed": false,
+    "old_oracle2_touched": false,
+    "monitor_changed": false,
+    "stored_monitor_status": "ACTIVE",
+    "stored_monitor_interval_hours": 5
+  },
+  "limitations": [
+    "Local VPN disconnection is verified; it does not independently establish remote cluster health or the sole cause of TCP timeout.",
+    "No remote receipt, checkpoint, response or GPU allocation was inspected this check.",
+    "The prior successful experiment snapshot remains historical, not current status."
+  ],
+  "next_action": "Owner reconnects UNC VPN. After connectivity is restored, inspect frozen EXT plus latest BASE/EXT ledgers and full account before any lane advance. Preserve both existing arrays and the same monitor."
+}

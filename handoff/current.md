@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-20, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-21, America/Chicago. Read [context index](../doc/INDEX.md).
 Latest discussion: explain Fan's experimental SETUP and limitations, not results.
 Rechecked builder, actual trainer, population map and main/3B preregistrations
 at unchanged1ea6a64. Fixed panels, expected pair losses,40 full-data Adam updates
@@ -36,12 +36,14 @@ of the200-response annotation pilot gates full bulk labels, never fabricated.
 
 ## Current execution
 
-October20T16:45:10Z: TWO SSH TCP connection attempts timed out before
-authentication or remote commands. Current queue/GPU/progress/errors UNKNOWN.
-No job/source/science/timer change; SAME5h monitor remains ACTIVE. Owner should
-check UNC VPN/Sycamore reachability. Next check is read-only EXT inspect plus
-both ledgers; never duplicate4863156/4861879 or advance without fresh guards.
-[Connection record](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261020T1645.json).
+October21T07:48:09Z: SSH still times out before authentication/remote commands.
+NEW local evidence: Cisco VPN adapter Disabled and vpncli state Disconnected.
+Owner must reconnect UNC VPN; remote cluster health/cause remains unverified.
+Current queue/GPU/progress/errors UNKNOWN. No network/job/source/science/timer
+change; SAME5h monitor ACTIVE. Next check: frozen EXT inspect and both ledgers;
+never duplicate4863156/4861879 or advance without fresh full-account guards.
+[VPN evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/vpn_disconnected_20261021T0748.json),
+[earlier connection record](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/connection_failure_20261020T1645.json).
 The successful execution snapshots below are historical, not live state.
 
 [Protocol/code](../experiments/oracle1_semantic/README.md), [campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md).

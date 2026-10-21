@@ -88,6 +88,16 @@ receipts; future original-ledger changes intentionally invalidate extension
 
 ## Current status
 
+October21T07:48:09Z: local VPN disconnection verified after another SSH TCP
+timeout before remote commands. Cisco virtual adapter Disabled; read-only client
+state Disconnected. Owner must reconnect UNC VPN. This does not prove remote
+cluster health or the sole timeout cause. Both lanes/account/progress/errors/WR
+remain UNKNOWN. No network/job/source/science/timer changes; same5h monitor ACTIVE.
+After connectivity returns, inspect frozen EXT and both ledgers/full account;
+never duplicate4863156/4861879 or advance based on elapsed time.
+[VPN evidence](records/vpn_disconnected_20261021T0748.json).
+The following connection and successful snapshots are historical.
+
 October20T16:45:10Z: monitoring connection blocked. Two SSH TCP attempts timed
 out before authentication or any remote command. Current lane/account allocation,
 progress/errors and WR state UNKNOWN, not an established experiment failure.

@@ -2,6 +2,16 @@
 
 ## Active authorization: Oracle1 / Qwen3, 2026-10-15
 
+Latest connection diagnosis2026-10-21T07:48:09Z: SSH TCP timeout before
+authentication/remote commands. Read-only local checks confirm Cisco VPN adapter
+Disabled and Cisco Secure Client state Disconnected. Owner must reconnect UNC
+VPN; this does not independently establish cluster health or the sole cause.
+No network setting, job, remote/source/science or timer change. Same5h monitor
+verified ACTIVE. Current experiment/account state remains UNKNOWN. Next check
+must read frozen EXT, both ledgers and full account before any advancement.
+[VPN evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/vpn_disconnected_20261021T0748.json).
+The following dated connection and successful snapshots are historical.
+
 Monitoring blocked2026-10-20T16:45:10Z: two SSH TCP connection attempts timed
 out before authentication or remote commands. Current scheduler/GPU allocation,
 training steps, generation progress, logs and WR status UNKNOWN. No experiment

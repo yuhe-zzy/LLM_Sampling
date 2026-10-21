@@ -19,6 +19,14 @@ training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
 ## Submitted and running
 
+LatestOctober21T07:48:09Z: SSH still times out before remote commands. Read-only
+local checks confirm Cisco VPN adapter Disabled and client state Disconnected.
+Owner must reconnect UNC VPN. Remote queue/GPU/progress/errors/WR remain UNKNOWN;
+local evidence does not establish remote cluster health. No network/job/source/
+science/timer changes. Same5h monitor ACTIVE; next frozen EXT/ledger/full-account
+check remains mandatory, never duplicate4863156/4861879.
+[VPN evidence](records/vpn_disconnected_20261021T0748.json). Older snapshots follow.
+
 Monitoring blockedOctober20T16:45:10Z: two SSH TCP timeouts before authentication
 or any remote command. Current queue/GPU/progress/errors/WR state UNKNOWN.
 No new job, remote/source/science or timer action. SAME5h monitor stays ACTIVE.

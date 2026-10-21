@@ -1,0 +1,38 @@
+{
+  "checked_at_utc": "2026-10-13T23:00:08.356268+00:00",
+  "original_source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "recovery_source_commit": "2d6b5747c251abc44700799be24e3e1e05e9b984",
+  "recovery_contract_sha256": "89c1397acd414d3f7badddb8d6a885f74b8ae33a2b894c33d2166dc95e8309fd",
+  "completed_generators": {
+    "ipo_feedback": {
+      "job_id": "4794738_2", "state": "COMPLETED", "exit_code": "0:0",
+      "ended_at_utc": "2026-10-13T21:29:20", "elapsed": "15:14:04",
+      "verified_steps": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+      "rows_per_step": 800, "total_rows": 8800
+    },
+    "dpo_ordinary": {
+      "job_id": "4794738_3", "state": "COMPLETED", "exit_code": "0:0",
+      "ended_at_utc": "2026-10-13T21:35:00", "elapsed": "15:19:44",
+      "verified_steps": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+      "rows_per_step": 800, "total_rows": 8800
+    }
+  },
+  "running_generators": {
+    "dpo_reference": {"job_id": "4794738_4", "started_at_utc": "2026-10-13T21:29:21", "verified_steps": [0], "partial_step": 10, "partial_rows": 150},
+    "dpo_feedback": {"job_id": "4794738_5", "started_at_utc": "2026-10-13T21:35:01", "verified_steps": [0], "partial_step": 10, "partial_rows": 79}
+  },
+  "preserved_timeouts": {
+    "ipo_ordinary": {"job_id": "4794738_0", "state": "TIMEOUT", "verified_steps": [0, 10, 20, 30, 40, 50, 60, 70], "partial_step": 80, "partial_rows": 728},
+    "ipo_reference": {"job_id": "4794738_1", "state": "TIMEOUT", "verified_steps": [0, 10, 20, 30, 40, 50, 60, 70], "partial_step": 80, "partial_rows": 561}
+  },
+  "full_account": {"owner": "yuhe32", "uid": 448057, "allocated_gpus": 2, "owned_tasks": ["4794738_4", "4794738_5"], "pending_tasks": [], "unrelated_owned_work": false, "gpu_limit": 4, "hard_account_cap_installed": false},
+  "validation": {"all_completed_banks_count_hash_identity_finite_checked": true, "baseline_hash_count_verified": true, "baseline_rows": 800, "complete_training_arms": 6, "finite_training_snapshots": 606, "contiguous_metrics_and_matched_initial_scores": true, "frozen_sources_review_and_recovery_prefixes_unchanged": true, "logged_execution_errors": [], "remote_checks_exit_codes": [0, 0, 0, 0, 0]},
+  "memory_telemetry": "Frozen trainer/generator records no GPU memory peaks; earlier judge peaks are not generation telemetry.",
+  "recovery_output_exists": false,
+  "recovery_intent_or_receipt_exists": false,
+  "wrscore_intent_or_receipt_exists": false,
+  "wr_results_available": false,
+  "resource_actions_taken": [],
+  "next_action": "Wait for remaining original tasks4/5 successful with complete validated banks and full account idle; then recheck latest receipts and use frozen v5 queue recover once. WR waits for successful recovery, all66 banks and idle account.",
+  "private_evidence": "oracle2_real_launch_20261009/attempt5/heartbeat_20261013T2259.json"
+}

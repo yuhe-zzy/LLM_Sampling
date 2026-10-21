@@ -1,0 +1,149 @@
+{
+  "checked_at": "2026-10-21T22:33:17.363465+00:00",
+  "scope": "selected_arms",
+  "arms": [
+    "ipo_ordinary"
+  ],
+  "steps": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  "execution_source": "621b7d706c5c0f43f01250c0c9ca366157a43cd2",
+  "training_source": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "binding_sha256": "0154a2449ed39ace600f798542fae7cd888b5b52fe0593b96e6277de6212e4d6",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "jobs": {
+    "4878947": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4889849": [
+      "COMPLETED",
+      "0:0"
+    ]
+  },
+  "historical_jobs_checked": 71,
+  "withdrawn_failed_jobs_preserved": 8,
+  "account": {
+    "checked_at": "2026-10-21T22:33:04.411050+00:00",
+    "owned_jobs": 0,
+    "allocated_gpus": 0,
+    "potential_gpus": 0,
+    "ceiling": 4,
+    "hard_cap": false
+  },
+  "generation": {
+    "checkpoint_banks": 11,
+    "baseline_banks": 1,
+    "rows_per_bank": 800,
+    "total_rows": 9600,
+    "empty_responses": 0,
+    "seed_input_row_hashes_valid": true,
+    "bank_journal_equal": true,
+    "checkpoint_hashes_checked": 11,
+    "peak_allocated_bytes": 8645992448,
+    "cap_counts_by_step": [
+      403,
+      404,
+      407,
+      397,
+      400,
+      397,
+      404,
+      398,
+      398,
+      411,
+      397
+    ],
+    "baseline_cap_count": 398
+  },
+  "score_validation": {
+    "validated_rows": 9600,
+    "expected_rows": 9600,
+    "identity_input_and_row_hashes_valid": true,
+    "finite_rewards": true,
+    "min_reward": -30.5,
+    "max_reward": 0.984375,
+    "max_input_tokens": 1518
+  },
+  "scoring_final_progress": {
+    "scored": 9600,
+    "total": 9600,
+    "memory": [
+      {
+        "device": 0,
+        "name": "NVIDIA H100 80GB HBM3",
+        "free_bytes": 12011372544,
+        "total_bytes": 85019590656,
+        "allocated_bytes": 70587252736,
+        "reserved_bytes": 72169291776,
+        "peak_allocated_bytes": 71200515072,
+        "peak_reserved_bytes": 72169291776
+      },
+      {
+        "device": 1,
+        "name": "NVIDIA H100 80GB HBM3",
+        "free_bytes": 12013469696,
+        "total_bytes": 85019590656,
+        "allocated_bytes": 70587270144,
+        "reserved_bytes": 72169291776,
+        "peak_allocated_bytes": 71175622656,
+        "peak_reserved_bytes": 72169291776
+      }
+    ]
+  },
+  "wr": {
+    "score_count": 9600,
+    "per_prompt_rows": 2200,
+    "summary_rows": 11,
+    "recomputed_from_canonical_scores": true,
+    "max_recomputation_difference": 5.551115123125783e-17,
+    "completion_sha256": "b6250d2da31f0ca200cd83013533c495133e22add28554470c35100d3aa3e07e",
+    "table_source_sha256": {
+      "wr_per_prompt.csv": "13e44cbd89c0537a998304c4a119a22b1253dadeacb808d1fbef1a21084562ab",
+      "wr_summary.csv": "0ae65f77afe273eba2bdc4911210699e145909c4a68e1fc8779745dec8b8555b"
+    },
+    "first_expected_wr": 0.4756888859938884,
+    "last_expected_wr": 0.47535930863672676,
+    "min_expected_wr": 0.4636603266840145,
+    "max_expected_wr": 0.490088341279623,
+    "paired_step100_minus_step0": {
+      "mean": -0.00032957735716160954,
+      "prompt_se": 0.011629716379829158,
+      "interpretation": "Descriptive paired prompt difference; not training-seed uncertainty"
+    }
+  },
+  "checks": {
+    "source_and_bindings_valid": true,
+    "all_new_receipts_completed_zero": true,
+    "unpaired_intents": 0,
+    "writer_locks_absent": true,
+    "logged_errors": [],
+    "full_six_wr_complete": false
+  },
+  "plotting": {
+    "frozen_retained_command_exit": 0,
+    "remote_result_directory": "/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_ipo_wr_results_20261021_v1",
+    "downloaded_files": 4,
+    "download_hashes_match": true,
+    "pdf_pages": 1,
+    "png_and_rendered_pdf_visually_checked": true
+  },
+  "actions": {
+    "new_gpu_jobs": 0,
+    "retraining": false,
+    "other_arms_restarted": false,
+    "annotation_started": false,
+    "frozen_source_modified": false
+  },
+  "privacy": "Aggregate numerical evidence only; private text, model artifacts and raw scheduler transcripts excluded."
+}

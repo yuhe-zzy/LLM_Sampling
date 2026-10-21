@@ -1,0 +1,31 @@
+{
+  "recorded_at_utc": "2026-10-14T19:00:07Z",
+  "heartbeat_at_utc": "2026-10-14T18:58:03.570Z",
+  "inspection_state": "BLOCKED_SSH_CONNECT_TIMEOUT",
+  "connection_attempts": 2,
+  "transport": "tmp/oracle2_remote.py with interactive non-echoing authentication",
+  "error": "socket.timeout: timed out in paramiko client.connect / sock.connect",
+  "failed_before_remote_commands": true,
+  "remote_commands_executed": 0,
+  "raw_ssh_transcript_saved": false,
+  "transcript_note": "The helper connects before its transcript-writing try/finally, so no remote transcript files were produced.",
+  "current_allocated_gpus": null,
+  "current_run_states": null,
+  "current_errors": null,
+  "last_successful_check_at_utc": "2026-10-14T05:01:00.055428+00:00",
+  "last_successful_private_record": "oracle2_real_launch_20261009/attempt5/heartbeat_20261014T0500.json",
+  "last_successful_snapshot": {
+    "allocated_gpus": 2,
+    "running_tasks": ["4794738_4", "4794738_5"],
+    "validated_generation_steps_both": [0, 10, 20, 30, 40],
+    "partial_step": 50,
+    "partial_rows_reference_feedback": [548, 461],
+    "new_logged_errors": [],
+    "recovery_output_or_submission_present": false,
+    "wr_submission_present": false
+  },
+  "actions": "No remote commands, submission, cancellation, experiment retry, dependency, concurrency, frozen source, scientific-setting or timer changes.",
+  "requested_user_action": "Check UNC VPN and connectivity to Sycamore.",
+  "next_action": "Retry read-only inspection on the existing two-hour monitor; verify full-account state and all prerequisites before any recovery or WR submission.",
+  "interpretation": "Monitoring connectivity failure only. Current GPU allocation, progress and error status are unknown; the last successful snapshot is historical."
+}

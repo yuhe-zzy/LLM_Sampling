@@ -1,0 +1,621 @@
+{
+  "schema": "oracle1_owner_scope_terminal_audit_v1",
+  "artifact_checked_at_utc": "2026-10-21T08:59:59.3762970Z",
+  "final_queue_checked_at_utc": "2026-10-21T09:01:33.3946660Z",
+  "authorization": {
+    "date": "2026-10-21",
+    "retained_arm": "ipo_ordinary",
+    "retained_index": 0,
+    "withdrawn_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "shared_baseline_retained": true,
+    "owner_explicitly_confirmed_index0": true
+  },
+  "actions": {
+    "scheduler_cancellations": [],
+    "reason": "All submitted jobs already terminal; no active/pending owned work to cancel",
+    "new_submissions": [],
+    "retries": [],
+    "source_changed": false,
+    "checkpoints_or_outputs_deleted": false,
+    "old_oracle2_action": false
+  },
+  "source": {
+    "training_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+    "extension_commit": "caf5ac2b68d0e4d3778260428eedbeb3441a6658",
+    "binding_sha256": "e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74",
+    "frozen_source_binding_and_checkpoints_verified": true
+  },
+  "queue": {
+    "owner": "yuhe32",
+    "uid": 448057,
+    "owned_queue": [],
+    "owned_scontrol": [],
+    "allocated_gpus": 0,
+    "potential_gpus": 0
+  },
+  "accounting": {
+    "native_parent_array_query": true,
+    "registered_tasks": 71,
+    "original_successful_tasks": 58,
+    "extension": {
+      "4861201": [
+        "COMPLETED",
+        "0:0"
+      ],
+      "4861879_0": [
+        "COMPLETED",
+        "0:0"
+      ],
+      "4861879_1": [
+        "COMPLETED",
+        "0:0"
+      ],
+      "4861879_2": [
+        "FAILED",
+        "1:0"
+      ],
+      "4861879_3": [
+        "FAILED",
+        "1:0"
+      ],
+      "4861879_4": [
+        "FAILED",
+        "1:0"
+      ],
+      "4861879_5": [
+        "FAILED",
+        "1:0"
+      ],
+      "4863156_0": [
+        "COMPLETED",
+        "0:0"
+      ],
+      "4863156_1": [
+        "COMPLETED",
+        "0:0"
+      ],
+      "4863156_2": [
+        "FAILED",
+        "1:0"
+      ],
+      "4863156_3": [
+        "FAILED",
+        "1:0"
+      ],
+      "4863156_4": [
+        "FAILED",
+        "1:0"
+      ],
+      "4863156_5": [
+        "FAILED",
+        "1:0"
+      ]
+    },
+    "terminal_outcomes_not_relabelled_as_cancelled": true
+  },
+  "training": {
+    "steps": {
+      "ipo_ordinary": 100,
+      "ipo_reference": 100,
+      "ipo_feedback": 90,
+      "dpo_ordinary": 92,
+      "dpo_reference": 90,
+      "dpo_feedback": 90
+    },
+    "validated_states": 568,
+    "contiguous_checkpoint_hashes_finite_states_initial_scores_support": true,
+    "retained_arm_complete": true,
+    "retained_arm_states": 101
+  },
+  "generation": {
+    "all_validated_responses": 14100,
+    "retained_checkpoint_responses": 6649,
+    "retained_interim_expected": 7200,
+    "retained_step80_rows": 249,
+    "retained_interim_missing": 551,
+    "retained_complete_steps": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70
+    ],
+    "retained_progress": {
+      "state": "SEGMENT_COMPLETE",
+      "step": 80,
+      "rows": 249
+    },
+    "baseline_complete": true,
+    "generator_peak_allocated_bytes": 8642043904,
+    "banks": {
+      "baseline:0": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 398,
+        "mean_response_tokens": 196.7925,
+        "mean_unique_token_ratio": 0.5932691976991289,
+        "max_dominant_token_fraction": 0.3333333333333333,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "6fcdb5c80750c77429f69df10f9a6e66be2354ed9a749683d69cc944385f38e3",
+          "count": 800,
+          "sha256": "755292ac15e8824779d92b94ac5fd39a36b7694d6398626550614d0073136c81",
+          "adapter_commit_sha256": null
+        }
+      },
+      "ipo_ordinary:0": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 403,
+        "mean_response_tokens": 197.71375,
+        "mean_unique_token_ratio": 0.5938400559138687,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "753ae858ac57a3a5d8e4fdda3a161b38d2ef6e2e144c1a65f328f8f4018c6529",
+          "count": 800,
+          "sha256": "aff6ade20f05c14e4f52c624b6fa960efc2373862c706d9f74e67b521acb862a",
+          "adapter_commit_sha256": "40595ef1f8c9905e5284261dee03825f37ea3269f350224b8ec1f81b4589cd08"
+        }
+      },
+      "ipo_ordinary:10": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 404,
+        "mean_response_tokens": 195.9275,
+        "mean_unique_token_ratio": 0.5938589576156597,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "15e1edcaf978170894d9da7d2dfb03cf7d6ebe103a41695f21aaeb9f6b0091a0",
+          "count": 800,
+          "sha256": "fd83c834ec1ce071604adc327073faaf4bede87f014ea11375d5a36cbb2d6c32",
+          "adapter_commit_sha256": "ce0d6ff42c7deb08cd2c6f1418ecf48e05169dd80490e2b53310ef9969fbe3bc"
+        }
+      },
+      "ipo_ordinary:20": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 407,
+        "mean_response_tokens": 195.5225,
+        "mean_unique_token_ratio": 0.5915604079790768,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "469de5819959769b314d5930eaae9d6fe12a1cb337f1aef14c3a9b6b4935fded",
+          "count": 800,
+          "sha256": "927c9430bd8e9da8a4964dba649bf2fa54f7d35d519ff7e30e883dde9e5adaca",
+          "adapter_commit_sha256": "97c9adaa326a3f48483ee06a0b610a250b96c12a1202e57d72e90195ef7ecf6f"
+        }
+      },
+      "ipo_ordinary:30": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 397,
+        "mean_response_tokens": 194.53625,
+        "mean_unique_token_ratio": 0.5925928068921802,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "3529dad87132b7360336f1aea5f715e6c322977403222113bdcf018c49967605",
+          "count": 800,
+          "sha256": "6aa92a14134d72e1cfc037cd63cdd49ef61a0634b6024388b851f83a856ce97d",
+          "adapter_commit_sha256": "c16635ac6ceae5a8dfdd7e139e0c1ffedec921b0a157be3b1425be9000c30b6d"
+        }
+      },
+      "ipo_ordinary:40": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 400,
+        "mean_response_tokens": 194.13625,
+        "mean_unique_token_ratio": 0.5935260848119802,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "25695fa0aaae903a3239830b18e3df7241c543378e4d78b3e1029be5ba1c4939",
+          "count": 800,
+          "sha256": "6efe6c5500623cb86d741ac4d917c8f635dacc39ae1555913924405f6959631f",
+          "adapter_commit_sha256": "b265ef937b8c7ffa05d0098e80eab00c9dbeed1a69e0158a8272f9191b10057c"
+        }
+      },
+      "ipo_ordinary:50": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 397,
+        "mean_response_tokens": 195.13375,
+        "mean_unique_token_ratio": 0.5935248690016912,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "025be35652b4688f6d8dd03b20b44d06c840cd7e9356000a6c9455cc8bc0522b",
+          "count": 800,
+          "sha256": "1fd3443d2918b94da8d15d7b39e87569d3a69c223d9debd960360b29e8d095b9",
+          "adapter_commit_sha256": "3b1d66b5cf052f0271b91408c4209a2854d02b1e20a8863320465ee6183d99b5"
+        }
+      },
+      "ipo_ordinary:60": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 404,
+        "mean_response_tokens": 195.365,
+        "mean_unique_token_ratio": 0.5930370810002088,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "32879c5219ba8efcbb572949cd30b9ed946a7ba948cf49033dc49d2f3d07128b",
+          "count": 800,
+          "sha256": "9b795b39f448e94fd0ecf6bf4b0abfec4a56a07f166b16caff3e8fe4b91a97f8",
+          "adapter_commit_sha256": "83df070551e0411039891f26f005a0b3a118f75eaa656e3b2ee3b809dbc079b7"
+        }
+      },
+      "ipo_ordinary:70": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 398,
+        "mean_response_tokens": 195.6175,
+        "mean_unique_token_ratio": 0.5918004391952865,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "8aa91f514056dddbfaac92a5ae386d035076ecd71f7a8b2aedec288515fd2f39",
+          "count": 800,
+          "sha256": "d555790fb3ca784132fbe3350ff6cb0f878d5c22aaab87ff167de0193199c3e7",
+          "adapter_commit_sha256": "10c93c38079feb21618df4f11cf58cf1767f9b6ad9b0396cd82676e5a216de61"
+        }
+      },
+      "ipo_ordinary:80": {
+        "rows": 249,
+        "expected_rows": 800,
+        "complete_bank_validated": false,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 104,
+        "mean_response_tokens": 191.10843373493975,
+        "mean_unique_token_ratio": 0.594482392919913,
+        "max_dominant_token_fraction": 0.2857142857142857,
+        "manifest": null
+      },
+      "ipo_reference:0": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 403,
+        "mean_response_tokens": 197.71375,
+        "mean_unique_token_ratio": 0.5938400559138687,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "6996865073908752ad9a097935236e163f69d621bdb7306c97f91596bdb9670d",
+          "count": 800,
+          "sha256": "a02fc9261e89273296c83b6b0d2f49cef9f13ad5d9bc18a778f3816b38f5222e",
+          "adapter_commit_sha256": "d503fef88c70201d73714bfcc1d74758266e97332ce2aacc87a1707575bf4c52"
+        }
+      },
+      "ipo_reference:10": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 408,
+        "mean_response_tokens": 196.15375,
+        "mean_unique_token_ratio": 0.5937971172816531,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "77901bc7e19158784526cc9e9723856fa7e30866a2c15d0193170963fe5618f2",
+          "count": 800,
+          "sha256": "12169fd8cb613833d67b08bce1fecbf497744f1f90dc7c7e858b43e6a968ec2f",
+          "adapter_commit_sha256": "347187b897f5b53e5c2bdbc0d56038569aa3fc28ba332505a2a0d9045a203d69"
+        }
+      },
+      "ipo_reference:20": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 410,
+        "mean_response_tokens": 195.625,
+        "mean_unique_token_ratio": 0.5931186968384335,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "bc2f16808415a9b625dd9d70b8b08438f1ae282aa88ada6af0b29b89576d76fb",
+          "count": 800,
+          "sha256": "fbbf22448281f38ac23fb63771f914260b55ed0ddb4b3e772b41e1aef008ca46",
+          "adapter_commit_sha256": "da1dfcad5c5236932aac45dacacf93c020ad0e95cb9a3f324aa17bfd49e56ebf"
+        }
+      },
+      "ipo_reference:30": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 406,
+        "mean_response_tokens": 195.89625,
+        "mean_unique_token_ratio": 0.593291839423686,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "1a28273e5f6ee7ddfe14824acf010b1603a3773de195342428bc7be36c232fb4",
+          "count": 800,
+          "sha256": "3f021710c35b802f26068af4420d49860fa2c297254ad83092dc188e15042d3a",
+          "adapter_commit_sha256": "ca2289f2144cf355ecd23001ffe5e29122757a8422b83d45398a0695b2a7575c"
+        }
+      },
+      "ipo_reference:40": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 397,
+        "mean_response_tokens": 195.6675,
+        "mean_unique_token_ratio": 0.5911540255956496,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "c466e5f38431182e1c5cf3c31dd1cf6c0f759a1c316f4d3425a19222cebbf716",
+          "count": 800,
+          "sha256": "1d78722b2e8eea3c85717a0b1bc73c6181ce7857d6a5556031f8ce78f55a054e",
+          "adapter_commit_sha256": "678468db6e7efaaa8a4180cf43b56d293d47cf77fa0d84a6b4431b638f3d7bef"
+        }
+      },
+      "ipo_reference:50": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 411,
+        "mean_response_tokens": 195.73,
+        "mean_unique_token_ratio": 0.593186398556258,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "3b30095fa4377d1e2cdf5abbb9a47c8cc2f3afc7419119ee3ca850ac04ed72d0",
+          "count": 800,
+          "sha256": "9f7e18c8ee721027228e6c3ebacfb1535d2de87d75f0f2dc7dee8763b2f8eb3e",
+          "adapter_commit_sha256": "65756a843dbbd6e90b2b60c10c46b1c568ebfae3bb278aa222bbc40ebc54ca80"
+        }
+      },
+      "ipo_reference:60": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 406,
+        "mean_response_tokens": 194.7875,
+        "mean_unique_token_ratio": 0.5936132017287757,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "f43a2cec9de9161e27463848aecde060ae891dc4de1c667a68f3b0af3f632a93",
+          "count": 800,
+          "sha256": "801f7ea3395d036013e076edacea906a4cc61b5611184ea415ef29568b2141be",
+          "adapter_commit_sha256": "e9ed5b2e2460d4afb0b889f38420e144a1949bf67c05b1d47cdefbae4c1188e6"
+        }
+      },
+      "ipo_reference:70": {
+        "rows": 800,
+        "expected_rows": 800,
+        "complete_bank_validated": true,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 399,
+        "mean_response_tokens": 195.04125,
+        "mean_unique_token_ratio": 0.5950257968087669,
+        "max_dominant_token_fraction": 0.5,
+        "manifest": {
+          "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+          "input_identity": "b67965cf1a2ee207aa06953abe456b9e71e89e8b4f1dd93fed771bb8c9e7d6af",
+          "count": 800,
+          "sha256": "3100646909b2cca27b959f23942264c181d737e68af341d0620b92d1fb984a6b",
+          "adapter_commit_sha256": "e09602267f9473310537cd3e073f94f44f62c4d520b78744c25d537f3fae981f"
+        }
+      },
+      "ipo_reference:80": {
+        "rows": 251,
+        "expected_rows": 800,
+        "complete_bank_validated": false,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "empty_responses": 0,
+        "cap_hits": 110,
+        "mean_response_tokens": 190.49003984063745,
+        "mean_unique_token_ratio": 0.5953010294672144,
+        "max_dominant_token_fraction": 0.2857142857142857,
+        "manifest": null
+      }
+    }
+  },
+  "wr": {
+    "submitted": false,
+    "interim_complete": false,
+    "full_complete": false,
+    "actual_wr_results_available": false
+  },
+  "diagnosis": {
+    "frozen_inspect_blocked_on_failed_receipt": true,
+    "read_only_terminal_diagnostic": true,
+    "failure_messages": [
+      {
+        "file": "0002-4861879_2.err",
+        "messages": [
+          "RuntimeError: Unsuccessful/unknown job 4863156_2: FAILED 1:0; diagnose first"
+        ]
+      },
+      {
+        "file": "0002-4861879_3.err",
+        "messages": [
+          "ValueError: Ambiguous accounting record"
+        ]
+      },
+      {
+        "file": "0002-4861879_4.err",
+        "messages": [
+          "RuntimeError: Unsuccessful/unknown job 4861879_2: FAILED 1:0; diagnose first"
+        ]
+      },
+      {
+        "file": "0002-4861879_5.err",
+        "messages": [
+          "RuntimeError: Unsuccessful/unknown job 4861879_2: FAILED 1:0; diagnose first"
+        ]
+      },
+      {
+        "file": "0003-4863156_2.err",
+        "messages": [
+          "ValueError: Ambiguous accounting record"
+        ]
+      },
+      {
+        "file": "0003-4863156_3.err",
+        "messages": [
+          "RuntimeError: Unsuccessful/unknown job 4863156_2: FAILED 1:0; diagnose first"
+        ]
+      },
+      {
+        "file": "0003-4863156_4.err",
+        "messages": [
+          "ValueError: Ambiguous accounting record"
+        ]
+      },
+      {
+        "file": "0003-4863156_5.err",
+        "messages": [
+          "RuntimeError: Unsuccessful/unknown job 4863156_2: FAILED 1:0; diagnose first"
+        ]
+      }
+    ],
+    "worker_error_markers": [
+      {
+        "file": "0002-4861879_2.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0002-4861879_3.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0002-4861879_4.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0002-4861879_5.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0003-4863156_2.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0003-4863156_3.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0003-4863156_4.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      },
+      {
+        "file": "0003-4863156_5.err",
+        "markers": [
+          "Traceback (most recent call last)"
+        ]
+      }
+    ],
+    "live_allocation_manifest_false_for_terminal_jobs_is_expected": true,
+    "missing_raw_startup_accounting_prevents_finer_ambiguity_attribution": true
+  },
+  "monitor": {
+    "id": "oracle1-qwen3-training-and-resume-checks",
+    "status": "ACTIVE",
+    "interval_hours": 5,
+    "retained_index": 0,
+    "automatic_six_arm_advancement_disabled": true,
+    "new_timer_created": false,
+    "single_arm_continuation_not_submitted": true
+  },
+  "private_evidence": [
+    "retain_ipo0_inspect_20261021.json",
+    "retain_ipo0_queue_20261021.json",
+    "retain_ipo0_validation_20261021.json",
+    "retain_ipo0_log_diagnosis_20261021.json",
+    "retain_ipo0_segment_boundary_20261021.json",
+    "retain_ipo0_final_queue_20261021.json"
+  ],
+  "diagnostic_helper_sha256": "2c780c4e4e2092833f62685ed1dcb9f64c3410ca7b6b6f5fd4191ca8758c52c1"
+}

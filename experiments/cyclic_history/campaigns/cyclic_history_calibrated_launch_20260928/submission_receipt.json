@@ -1,0 +1,15 @@
+{
+  "job_id": "4603433",
+  "submitted_at_utc": "2026-09-28T05:44:14.836591+00:00",
+  "dependency": "afterok:4593149",
+  "array": "0-3%4",
+  "run_ids": [
+    "ipo_ordinary_calibrated_s0",
+    "ipo_stable_calibrated_s0",
+    "dpo_ordinary_calibrated_s0",
+    "dpo_stable_calibrated_s0"
+  ],
+  "gpu_per_task": 1,
+  "commit": "f0fe034cc0d8e3bef35b0f5e02806ee81340da76",
+  "scheduler_response": "4603433"
+}

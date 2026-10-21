@@ -1,0 +1,71 @@
+{
+  "phase": "train",
+  "indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "updates": 10,
+  "lane": "training",
+  "sequence": 3,
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "extension_sha256": "e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74",
+  "source_commit": "caf5ac2b68d0e4d3778260428eedbeb3441a6658",
+  "training_execution_source": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--partition=h100_all",
+    "--account=rc_fanyao_pi",
+    "--gres=gpu:1",
+    "--cpus-per-task=8",
+    "--mem=96G",
+    "--time=1-00:00:00",
+    "--signal=USR1@3600",
+    "--no-requeue",
+    "--job-name=o1i80_0003_train",
+    "--output=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0003-%A_%a.out",
+    "--error=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0003-%A_%a.err",
+    "--array=0,1,2,3,4,5%2",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/source/experiments/oracle1_semantic/run_interim.sh",
+    "/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2"
+  ],
+  "created": "2026-10-20T11:54:06.954183+00:00",
+  "preflight": {
+    "checked_at_utc": "2026-10-20T11:54:06.950331+00:00",
+    "full_queue_rows": 9726,
+    "owned_queue": [
+      "4861879_2|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_3|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_0|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+      "4861879_1|yuhe32|448057|RUNNING|gres/gpu:1|g15070306"
+    ],
+    "owned_scontrol": [
+      "JobId=4861880 ArrayJobId=4861879 ArrayTaskId=0 ArrayTaskThrottle=2 JobName=o1i80_0002_generate UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6672 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=05:12:23 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T02:41:42 EligibleTime=2026-10-20T02:41:43 AccrueTime=2026-10-20T02:41:43 StartTime=2026-10-20T02:41:43 EndTime=2026-10-21T02:41:43 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T02:41:43 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:2837073 ReqNodeList=(null) ExcNodeList=(null) NodeList=g15070306 BatchHost=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1 AllocTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1,gres/gpu:h100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=96G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/source/experiments/oracle1_semantic/run_interim.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0002-4861879_0.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0002-4861879_0.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8 ",
+      "JobId=4861881 ArrayJobId=4861879 ArrayTaskId=1 ArrayTaskThrottle=2 JobName=o1i80_0002_generate UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6672 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=05:12:23 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T02:41:42 EligibleTime=2026-10-20T02:41:43 AccrueTime=2026-10-20T02:41:43 StartTime=2026-10-20T02:41:43 EndTime=2026-10-21T02:41:43 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T02:41:43 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:2837073 ReqNodeList=(null) ExcNodeList=(null) NodeList=g15070306 BatchHost=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1 AllocTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1,gres/gpu:h100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=96G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/source/experiments/oracle1_semantic/run_interim.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0002-4861879_1.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0002-4861879_1.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8 ",
+      "JobId=4861879 ArrayJobId=4861879 ArrayTaskId=2-5%2 ArrayTaskThrottle=2 JobName=o1i80_0002_generate UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6679 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=JobArrayTaskLimit Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-10-20T02:41:42 EligibleTime=Unknown AccrueTime=2026-10-20T02:41:43 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-20T02:41:43 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:2837073 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=96G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=96G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/source/experiments/oracle1_semantic/run_interim.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0002-4861879_4294967294.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2/logs/0002-4861879_4294967294.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8 "
+    ],
+    "recent_terminal_scontrol": [],
+    "allocated_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "potential_account_gpus": 4,
+  "steps": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80
+  ],
+  "job_id": "4863156"
+}

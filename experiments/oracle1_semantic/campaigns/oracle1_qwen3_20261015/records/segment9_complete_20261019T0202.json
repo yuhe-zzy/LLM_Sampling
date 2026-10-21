@@ -1,0 +1,60 @@
+{
+  "checked_at_utc": "2026-10-19T02:02:34.152731+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "submission_sequence": "0009",
+  "array_job_id": "4849728",
+  "all_six_segment_tasks_completed_exit_zero": true,
+  "all_prior_receipt_tasks_completed_exit_zero": true,
+  "receipt_jobs_checked": 46,
+  "training_steps": {
+    "ipo_ordinary": 72,
+    "ipo_reference": 70,
+    "ipo_feedback": 70,
+    "dpo_ordinary": 72,
+    "dpo_reference": 70,
+    "dpo_feedback": 70
+  },
+  "task_elapsed": {
+    "4849728_0": "03:19:39",
+    "4849728_1": "03:17:32",
+    "4849728_2": "03:21:28",
+    "4849728_3": "03:22:56",
+    "4849728_4": "03:18:51",
+    "4849728_5": "03:22:19"
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 430,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "latest_loss_and_gradient_metrics_finite": true,
+    "logged_execution_errors": [],
+    "last_pair_resume_verified": {"dpo_reference": 60, "dpo_feedback": 60},
+    "last_pair_completed_updates_after_resume": 10,
+    "max_latest_round_cuda_peak_allocated_bytes": 12777611776,
+    "max_latest_round_cuda_peak_reserved_bytes": 38025560064,
+    "memory_scope": "Latest completed outer update per arm, not lifetime device-wide usage"
+  },
+  "fresh_empty_account_preflight": {
+    "checked_at_utc": "2026-10-19T02:03:16.180811+00:00",
+    "full_queue_rows": 15347,
+    "owned_queued_running_or_releasing_jobs": [],
+    "allocated_gpus": 0,
+    "terminal_scontrol_records_excluded_from_live_gpu_count": 1,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "dry_run_passed_at_utc": "2026-10-19T02:04:30.047901+00:00",
+  "submission_sequences_present_before_advance": ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009"],
+  "downstream_submitted": false,
+  "scope": "Completion of segment0009, not completion of100 outer updates or measurement stages",
+  "sequential_read_note": "The inspection queue sampled at02:01:19Z still showed the last task running. Later accounting confirmed its success; empty-account evidence comes from the subsequent frozen advance dry-run, not that older queue snapshot.",
+  "private_evidence": [
+    "oracle1_qwen3_launch_20261015/heartbeat_20261019T0151.json",
+    "oracle1_qwen3_launch_20261015/segment9_complete_20261019.json",
+    "oracle1_qwen3_launch_20261015/segment10_dry_run_20261019.json"
+  ]
+}

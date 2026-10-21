@@ -1,0 +1,53 @@
+{
+  "checked_at_utc": "2026-10-16T09:35:06.896573+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "submission_sequence": "0004",
+  "array_job_id": "4814410",
+  "all_six_segment_tasks_completed_exit_zero": true,
+  "all_prior_receipt_tasks_completed_exit_zero": true,
+  "training_steps": {
+    "ipo_ordinary": 22,
+    "ipo_reference": 20,
+    "ipo_feedback": 20,
+    "dpo_ordinary": 22,
+    "dpo_reference": 20,
+    "dpo_feedback": 20
+  },
+  "task_elapsed": {
+    "4814410_0": "03:18:54",
+    "4814410_1": "03:18:45",
+    "4814410_2": "03:19:11",
+    "4814410_3": "03:19:47",
+    "4814410_4": "03:19:46",
+    "4814410_5": "03:19:48"
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 130,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "latest_loss_and_gradient_metrics_finite": true,
+    "logged_execution_errors": [],
+    "last_pair_resume_verified": {"dpo_reference": 10, "dpo_feedback": 10},
+    "last_pair_completed_updates_after_resume": 10,
+    "max_latest_round_cuda_peak_allocated_bytes": 12777193472,
+    "max_latest_round_cuda_peak_reserved_bytes": 32621199360,
+    "memory_scope": "Latest completed outer update per arm, not lifetime device-wide usage"
+  },
+  "queue": {
+    "checked_at_utc": "2026-10-16T09:34:43.100671+00:00",
+    "full_queue_rows": 19333,
+    "owned_queued_running_or_releasing_jobs": [],
+    "allocated_gpus": 0,
+    "terminal_scontrol_records_excluded_from_live_gpu_count": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "submission_sequences_present": ["0001", "0002", "0003", "0004"],
+  "downstream_submitted": false,
+  "scope": "Completion of segment0004, not completion of100 outer updates or measurement stages",
+  "private_evidence": "oracle1_qwen3_launch_20261015/heartbeat_20261016T0933.json"
+}

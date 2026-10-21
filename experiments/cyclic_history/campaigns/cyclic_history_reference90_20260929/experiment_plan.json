@@ -1,0 +1,216 @@
+{
+  "status": "USER_APPROVED_TWO_FULL_REFRESH_REFERENCE90_ARMS",
+  "protocol": "cyclic_history_empirical_full_refresh_v1",
+  "common": {
+    "model_path": "/work/users/y/u/yuhe32/ipo/model/Qwen2.5-1.5B",
+    "eval_path": "/work/users/y/u/yuhe32/ipo/data/processed/eval_prompt_responses_cyclic_1000.jsonl",
+    "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_reference90_20260929",
+    "alpha": 1.0,
+    "lambda_current": 0.8,
+    "beta_train": 1.0,
+    "seed": 0,
+    "support_seed": 123,
+    "num_prompts": 6,
+    "keep_k": 4,
+    "iters": 100,
+    "pairs_per_prompt": 6,
+    "batch_size": 1,
+    "grad_accum": 4,
+    "epochs_per_iter": 10,
+    "lr": 1e-05,
+    "warmup_ratio": 0.03,
+    "max_length": 1537,
+    "score_batch_size": 4,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.0,
+    "checkpoint_every": 5,
+    "dtype": "bfloat16",
+    "coverage": "uniform_fixed_panel",
+    "pair_law": "mu_i_mu_j_conditioned_distinct",
+    "support_probability": "softmax_sequence_sum",
+    "optimizer_reset": "each_outer_iteration",
+    "panel_ids": [
+      54,
+      251,
+      612,
+      737,
+      867,
+      945
+    ],
+    "pair_mode": "all_unordered",
+    "cycle_probability": 0.8,
+    "calibration": {
+      "source_panel_sha256": "e2bcb4ea41948156d92c310434483ed7d14a264e4ee3de6f3773bc761dbf79ae",
+      "initial_sequence_scores": [
+        [
+          -11.455205917358398,
+          -10.970073699951172,
+          -14.766695022583008,
+          -14.865547180175781
+        ],
+        [
+          -14.002059936523438,
+          -16.629446029663086,
+          -15.295459747314453,
+          -16.367351531982422
+        ],
+        [
+          -22.023841857910156,
+          -17.873432159423828,
+          -19.021774291992188,
+          -21.256187438964844
+        ],
+        [
+          -21.474811553955078,
+          -20.594867706298828,
+          -18.133331298828125,
+          -22.519868850708008
+        ],
+        [
+          -13.859933853149414,
+          -15.345060348510742,
+          -14.96307373046875,
+          -11.62553596496582
+        ],
+        [
+          -22.115964889526367,
+          -20.7812557220459,
+          -22.71489906311035,
+          -21.088537216186523
+        ]
+      ],
+      "response_token_counts": [
+        [
+          4,
+          3,
+          2,
+          2
+        ],
+        [
+          4,
+          7,
+          3,
+          3
+        ],
+        [
+          14,
+          2,
+          9,
+          2
+        ],
+        [
+          39,
+          18,
+          18,
+          8
+        ],
+        [
+          4,
+          4,
+          3,
+          2
+        ],
+        [
+          3,
+          3,
+          3,
+          2
+        ]
+      ],
+      "response_roles": [
+        [
+          3,
+          2,
+          1,
+          0
+        ],
+        [
+          3,
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          1,
+          2,
+          0
+        ],
+        [
+          3,
+          1,
+          2,
+          0
+        ],
+        [
+          3,
+          2,
+          1,
+          0
+        ],
+        [
+          3,
+          2,
+          0,
+          1
+        ]
+      ],
+      "initial_centered_score_atol": 0.01,
+      "source_snapshot_sha256": "8cf0a3ef73adea72e14725c16da412782d6dd7f692f3339ee9ae060f54a15b89"
+    }
+  },
+  "runs": [
+    {
+      "run_id": "ipo_reference90_a1_b100_s0",
+      "method": "ipo",
+      "scheme": "lagged_reference",
+      "nu": 0.9,
+      "kappa": 0.0,
+      "beta_train": 0.2,
+      "orientations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "prediction_role": "empirical_unclassified",
+      "transformed_support_sha256": "661a692215c511baf704af439a771df37ab04d530e699c030877dda4566a8c71",
+      "calibration_contract_sha256": "19b73f3138832516d3f7a4ce85732f54ff4d31905dc6759b5d52d0c5311b6e7e"
+    },
+    {
+      "run_id": "dpo_reference90_a1_b100_s0",
+      "method": "dpo",
+      "scheme": "lagged_reference",
+      "nu": 0.9,
+      "kappa": 0.0,
+      "beta_train": 0.8,
+      "orientations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "prediction_role": "empirical_unclassified",
+      "transformed_support_sha256": "661a692215c511baf704af439a771df37ab04d530e699c030877dda4566a8c71",
+      "calibration_contract_sha256": "d9f771087a791b012ab856f7aeca191815b9fe29de1616e6b28244e709d92e4d"
+    }
+  ],
+  "launch_provenance": {
+    "source_plan_sha256": "6f4e734396a6d05fac68b3b3a77760ee2d65728c414f84bbb98bcee98df41bde",
+    "reference_weights": {
+      "initial": 0.0,
+      "current": 0.1,
+      "previous": 0.9
+    },
+    "initialization": "fresh initial model; previous=current=initial at outer step 0",
+    "scope": "Empirical relative trajectories; no fixed-point or spectral-stability gate",
+    "comparison_caveat": "Both alpha and nu differ from Stage B; not a nu-only causal contrast",
+    "preserved": "Same six aligned panels, beta, lambda_current, seed, tokenizer, inner solver and horizon",
+    "excluded": "No ordinary alpha=1 baseline, no mixed orientation, no additional seeds or sweeps"
+  }
+}

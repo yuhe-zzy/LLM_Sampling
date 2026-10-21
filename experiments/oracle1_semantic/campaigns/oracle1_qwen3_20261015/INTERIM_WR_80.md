@@ -1,0 +1,239 @@
+# Interim Oracle1 win-rate curves, states0..80
+
+## Scope override, October21
+
+Owner explicitly retains only IPO ordinary/index0 and its shared baseline,
+canceling further work on the other five arms. Preserve all existing outputs.
+The six-arm operator commands below are historical and MUST NOT be advanced
+under this narrowed scope. Never retry failed tasks1..5, relabel failed receipts
+as successful, remove locks/guards, or edit frozen sources. Same5h monitor now
+checks index0 only. Subsequent October21 request explicitly approves retained
+evaluation and WR completion: see [single-arm0..100 route](IPO_ONLY_EVALUATION.md).
+Annotation pilot human-review requirement is unchanged.
+
+Owner authorization October19, 2026: evaluate saved checkpoints at0,10,...80
+for all six arms. TWO additional H100s may operate alongside the two training
+GPUs; the entire account must never exceed FOUR. This supersedes the earlier
+one-extra-card limit and the blanket nonoverlap rule for this specific sidecar.
+It does not authorize a different judge, precision, scientific setting, extra
+seed, oldOracle2 work or cancellation of other jobs.
+
+## Immutable extension
+
+Frozen extension root:
+`/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2`.
+Execution source `caf5ac2b68d0e4d3778260428eedbeb3441a6658`, pushed and verified.
+The existing base root remains `oracle1_qwen3_20261015_v1`, frozen computational
+source0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2. `interim.py --freeze`
+binds the base deployment, identity, original submission ledger, all54 required
+checkpoint commits and the new source files. `verify` checks the actual adapter
+files too. No old source/plan/receipt/checkpoint is overwritten or reidentified.
+Subsequent training workers exec the ORIGINAL `train.py`, with its original
+resume/identity/RNG checks and at most10 updates, not a copied modified trainer.
+
+Two reserved lanes, each at most2 GPUs: training has at most two1GPU workers;
+evaluation has a1GPU baseline, up to two1GPU generators, then one2GPU BF16
+Nemotron job. Evaluation phases are sequential and require successful preceding
+receipts. Both lanes share an exclusive submission lock. Pending/releasing jobs,
+array throttles, requested GPUs, full owner/UID queue, generic AllocTRES and sacct
+are checked. Unregistered jobs, unknown or failed outcomes, unpaired intents,
+changed artifacts or stale locks block action. This is not an administrator cap
+against independent outside submissions.
+
+The already submitted legacy array4859197 has a startup guard rejecting all
+other jobs. Therefore NO sidecar can even be queued until all its pending tasks
+have started, passed reload and written this allocation's manifest, or finished
+successfully. This is a one-time compatibility wait, not a need for step100.
+Do not cancel/requeue/hold tasks, spoof a receipt or patch frozen source to avoid
+the wait. Later training segments use the extension's cooperative launcher and
+can coexist with the evaluator under the4GPU ceiling. Do not use original
+`queue_campaign.py --advance` while extension lanes remain active.
+
+## Measurement and reuse
+
+Generate800 new initial-Qwen3 baseline responses and54x800 checkpoint responses:
+44,000 total. Each bank retains the original full-plan input signature, response
+identity, per-response seed, original checkpoint hash and deterministic journal.
+Canonical generation directories are reused; partial results are never replaced.
+Subset generation writes a `SUBSET_<digest>.json`, NOT full-arm `COMPLETE.json`.
+Future90/100 generation can consume these same verified banks without rerunning
+them. The initial baseline is not oldOracle2's1.5B baseline.
+
+Score only after ALL requested banks validate. Same Nemotron BF16, temperature1
+BT probabilities, all4x4 response comparisons then equal prompt averaging.
+Canonical `wr/scores` journals are reused under the same exclusive WR lock.
+Subset tables/completion are isolated in `wr/subset_<steps-digest>/`; they never
+claim full0..100 WR completion. The later full scorer reuses these exact scores.
+No annotation is needed for the WR plot. Generate/score retain18h soft boundaries,
+24h allocations and missing-response-only continuation after successful segments.
+
+Plot actual validated54-point summary in IPO/DPO panels, three arms each.
+Bands are1.96 prompt SE, not uncertainty across training seeds. No fixed-panel
+probability proxy, invented zero, cyclic inference or annotation result. Inspect
+rendered PNG/PDF before publishing actual results; test fixtures are not results.
+
+## Operator commands
+
+Historical six-arm commands, NOT authorized for advancement after October21.
+Read-only verify/inspect remain usable; failed receipts intentionally stop inspect.
+Use the frozen server Python and extension source. For a known deployed `EXT`:
+
+```text
+python interim.py --root EXT --verify
+python interim.py --root EXT --inspect
+python interim.py --root EXT --advance --lane evaluation
+python interim.py --root EXT --advance --lane evaluation --submit
+python interim.py --root EXT --advance --lane training
+python interim.py --root EXT --advance --lane training --submit
+python interim.py --root EXT --plot --output NEW_RESULTS_DIRECTORY
+```
+
+Inspect both ledgers first, dry-run then submit exactly once. Immediately check
+scheduler, receipt and real startup/progress. Initial new-stage errors need prompt
+attention; use the SAME monitor, not a second timer. When legacy guards block,
+prepare and wait; do not report submission or inference. Once interim results are
+delivered, training reaches100 and BOTH extension lanes have successful terminal
+receipts with an empty full account, record handback to the original full pipeline.
+Only then may original `queue_campaign.py --advance` generate remaining90/100,
+finish full WR and proceed to the human-gated five-trait pilot. Preserve extension
+receipts; future original-ledger changes intentionally invalidate extension
+`verify`, so publish the interim analysis before handback.
+
+## Current status
+
+SupersedingOctober21T09:24:12Z: only retained IPOordinary generation4878947 is
+RUNNING via source621b7d7 and the [new0..100 route](IPO_ONLY_EVALUATION.md).
+Step80 advances249 to252 valid responses,1H100 account-wide, no logged errors.
+No old six-arm advancement or retraining. WR follows completed retained banks
+and successful receipts, using isolated selected-arm tables. Older status follows.
+
+October21 SSH restored; owner retains only IPO ordinary/index0. Full account
+queue empty. Training4863156_0/1 COMPLETED0:0,2..5 FAILED1:0; generation4861879_0/1
+COMPLETED0:0,2..5 FAILED1:0. No live task needed scheduler cancellation. Task0
+training100 complete; generation remains partial at80 after successful18h
+segment exit, not complete evaluation or WR. Training task2 reports ambiguous
+accounting; generation task2 refuses that prior failed receipt. Frozen inspect
+correctly stops on failed accounting. No guard/source change, retry or new job.
+Same5h monitor follows index0 only and does not invoke six-arm advancement.
+
+ValidatedOctober21T08:59:59Z: retained training0..100 all101 states valid;
+568 states across preserved arms pass continuity/hashes/finite/initial support.
+All14,100 existing response rows validate, zero empty. Baseline800 complete;
+ordinary/reference each have complete0..70, partial80 rows249/251. Retained
+arm needs551 more responses for0..80 (6,649/7,200), not a completed subset.
+No WR submission or result. Fresh full owner/UID queue09:01:33Z empty, zero GPUs.
+No scheduler cancellation occurred because jobs were already terminal.
+[Terminal and artifact audit](records/retain_ipo_ordinary_20261021.json).
+
+HistoricalOctober21T07:48:09Z: local VPN disconnection verified after another SSH TCP
+timeout before remote commands. Cisco virtual adapter Disabled; read-only client
+state Disconnected. Owner must reconnect UNC VPN. This does not prove remote
+cluster health or the sole timeout cause. Both lanes/account/progress/errors/WR
+remain UNKNOWN. No network/job/source/science/timer changes; same5h monitor ACTIVE.
+After connectivity returns, inspect frozen EXT and both ledgers/full account;
+never duplicate4863156/4861879 or advance based on elapsed time.
+[VPN evidence](records/vpn_disconnected_20261021T0748.json).
+The following connection and successful snapshots are historical.
+
+October20T16:45:10Z: monitoring connection blocked. Two SSH TCP attempts timed
+out before authentication or any remote command. Current lane/account allocation,
+progress/errors and WR state UNKNOWN, not an established experiment failure.
+No job/remote/source/science/timer changes; SAME5h monitor remains ACTIVE.
+Owner should check UNC VPN/Sycamore reachability. Next check is read-only frozen
+EXT inspection and both latest ledgers; no advancement without fresh successful
+lane receipts and complete account checks. Never duplicate4863156/4861879.
+[Connection record](records/connection_failure_20261020T1645.json).
+The following successful snapshots are historical, not live state.
+
+AtOctober20T12:00:36Z **4863156_0..5%2** is the active training continuation,
+EXTsequence0003. All58 original receipt tasks including4859197 are successful;
+11:49:14Z inspection passes550 states at92/90/90/92/90/90, hashes/finite values,
+initial scores/support and frozen bindings. Training-lane dry-run11:52:00Z and
+fresh guarded submit11:54:06Z target100 for all six, at most10 updates per arm,
+original train.py unchanged. OneH100/task,two concurrent,24h/18h soft stop.
+Tasks0/1 verify reload92/90, current manifests match4863157/4863158;2..5 pending.
+No new completed outer update claimed. Pending workers have not reloaded yet.
+
+Evaluation4861879 remains active,0/1 running and2..5 pending. Complete validated
+banks: baseline800 plus IPOordinary/reference states0/10,800 each (4/54 checkpoint
+banks). Step20 has359/360 valid answers;4719/44000 total. Full-plan identity,
+response seeds/input/row hashes, finite diagnostics, complete-bank equality and
+adapter hashes pass. Zero empty responses; cap/repetition values preserved in
+the audit, no settings changed. Both generator progress records showstep20 at350
+rows with allocated peak8,642,043,904bytes each (8.05GiB). No logged execution
+errors. Sequential live reads need not have identical counts.
+Full account4H100, potential4, no unrelated/releasing work; full squeue/scontrol
+and parent sacct --array pass. Same5h timer unchanged; no WR submission/results.
+[Audit](records/interim_training_final_segment_startup_20261020T1200.json),
+[intent](records/interim_v2_0003_intent.json), [receipt](records/interim_v2_0003_receipt.json).
+Both lanes active; never duplicate either array or invoke BASE advance.
+
+The following generation-startup snapshot is historical.
+
+AtOctober20T06:44:36Z baseline **4861201** is COMPLETED0:0 with800/800 responses.
+Canonical complete-bank hash, full-plan identity, per-response seed/input/row
+hashes and bank/journal equality pass. Zero empty responses,398 cap hits
+(49.75%), mean196.7925tokens, mean unique ratio0.5932692, max dominant fraction1/3.
+Allocated peak8,427,731,968bytes (7.85GiB). These are diagnostics, not quality/WR.
+Dry-run passed06:41:03Z; guarded submission created **4861879_0..5%2** at06:41:42Z,
+EXTsequence0002, oneH100/task,24h/18h soft stop. Tasks0/1 started06:41:43Z.
+Each has17 valid step0 answers, zero empty, four cap hits, no logged errors.
+Memory progress is not emitted until50 rows, so no generator peak is claimed.
+Tasks2..5 normalPENDING(JobArrayTaskLimit). Full account4H100 and potential4,
+two trainers plus two generators, no unrelated/releasing work; full/native-parent
+accounting checks pass. Training06:43:56Z:92/90/90/92/84/83,537 valid states.
+SAME timer restored5hours after baseline AND first generator actual-response
+validation. No WR submitted or complete. Both lanes active; do not duplicate or
+call BASE advance. [Audit](records/interim80_generation_startup_20261020T0644.json),
+[intent](records/interim_v2_0002_intent.json), [receipt](records/interim_v2_0002_receipt.json).
+
+The following dated baseline startup and preparation snapshots are historical.
+
+Baseline **4861201** submittedOctober20T05:28:21Z, EXTsequence0001, after dry-run
+and fresh guarded submit. OneH100,24h allocation/18h soft stop, no duplicate.
+At05:33:52Z RUNNING:62/800 actual responses have valid full-plan identity, input
+digests, seeds and row hashes; finite diagnostics, zero empty responses,20 cap
+hits. Mean length180.21 tokens; mean unique-token ratio0.6226, maximum dominant
+token fraction0.2857. These are partial-prefix diagnostics, not a quality verdict.
+Progress at50 rows reports8,320,785,408 bytes allocated peak (7.75GiB), not device-
+wide reserved/lifetime telemetry. No logged OOM/Traceback/nonfinite error.
+Full-account05:33:51Z:3H100, two trainers plus baseline, reserved potential4;
+no unrelated/pending/releasing work. [Startup audit](records/interim80_baseline_startup_20261020T0533.json),
+exact [intent](records/interim_v2_0001_intent.json) and [receipt](records/interim_v2_0001_receipt.json).
+No checkpoint generator or WR submitted. Wait for successful baseline receipt
+and complete bank validation before evaluation advance. Keep the SAME5min timer
+until baseline AND first checkpoint generator write healthy real responses.
+
+The05:17 [accounting overlap](records/accounting_overlap_20261020T0517.json) cleared after
+the final legacy task started05:23:18Z. Fresh raw parent accounting and unchanged
+v2 inspector passed05:26:56Z. No row filtering, code/guard or scheduler changes.
+Both active legacy jobs verified reload80 and matching RUNNING manifests before
+the dry-run passed05:27:41Z. Training05:30:41Z:530 valid states,92/90/90/92/80/80,
+0..3 segment-complete and4/5 running, no errors. All54 checkpoint bindings valid.
+Historical preparation follows; it does not describe current submission state.
+
+Prepared/deployed at2026-10-20T00:15:51Z, not yet submitted AT THAT TIME. Binding hash
+`e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74`.
+All43 server CPU tests passed without skips, shell syntax passed, including real
+tiny Qwen3/LoRA resume, cached generation/scoring reuse and synthetic plot render/
+pixel checks. This is not full-model sidecar GPU inference or an actual WR plot.
+Dry-run verified hashes,54 checkpoints, full-account budget and expanded sacct;
+then correctly blocked on the legacy pending-worker startup restriction, before
+any intent/sbatch/receipt. Same monitor temporarily5minutes until actual baseline
+and first checkpoint generation write valid responses without errors, then5hours.
+
+Preserved v1 (source4cc1506) was never submitted. Real dry-run exposed Slurm's
+lazy pending-array accounting: explicit child filters omitted tasks2..5. Adding
+`--array` alone still omits lazy tasks with child filters. The tested repair
+queries parent array IDs with `sacct -X --array`, validates each expanded child
+against receipts, and rejects unregistered children. All58 original receipt
+tasks are now visible:52 successful, twoRUNNING and fourPENDING at validation.
+No missing status is imputed as success; no GPU retry or scientific change.
+Both validation versions and the unused v1 launch remain intact.
+
+At2026-10-20T00:18:18Z the original six steps were86/84/80/82/80/80,
+0/1 RUNNING,2..5 PENDING(JobArrayTaskLimit), full account2H100, no logged errors.
+All498 committed states valid. No intent/receipt or stale lock in either extension;
+generation journals empty, WR absent. See [prepared status](records/interim80_prepared_20261020.json)
+and [exact binding](records/interim80_v2_extension.json). This is a dated snapshot,
+not permission to submit while legacy startup remains.

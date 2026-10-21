@@ -1,0 +1,78 @@
+{
+  "checked_at_utc": "2026-10-16T04:37:02.510937+00:00",
+  "checked_at_local": "2026-10-15T23:37:02.510937-05:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "submission_sequence": "0004",
+  "array_job_id": "4814410",
+  "training_steps": {
+    "ipo_ordinary": 22,
+    "ipo_reference": 20,
+    "ipo_feedback": 15,
+    "dpo_ordinary": 17,
+    "dpo_reference": 10,
+    "dpo_feedback": 10
+  },
+  "scheduler": {
+    "checked_at_utc": "2026-10-16T04:36:41.955227+00:00",
+    "full_queue_rows": 22451,
+    "completed_tasks": ["4814410_0", "4814410_1"],
+    "completed_exit_code": "0:0",
+    "completed_elapsed": {"4814410_0": "03:18:54", "4814410_1": "03:18:45"},
+    "running_tasks": ["4814410_2", "4814410_3"],
+    "pending_tasks": ["4814410_4", "4814410_5"],
+    "pending_reason": "JobArrayTaskLimit",
+    "allocated_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false,
+    "unrelated_owned_work": false,
+    "releasing_allocations": false,
+    "prior_sequences_0001_through_0003_all_completed_exit_zero": true,
+    "submission_sequences_present": ["0001", "0002", "0003", "0004"]
+  },
+  "validation": {
+    "frozen_contract_passed": true,
+    "committed_states_checked": 100,
+    "contiguous_checkpoint_hashes_valid": true,
+    "all_saved_state_arrays_finite": true,
+    "initial_scores_match_across_arms": true,
+    "token_support_matches_across_arms": true,
+    "latest_recorded_loss_and_gradient_metrics_finite": true,
+    "logged_execution_errors": [],
+    "new_resume_log_confirmations": {
+      "ipo_feedback": 10,
+      "dpo_ordinary": 12
+    },
+    "completed_updates_since_new_resume": {"ipo_feedback": 5, "dpo_ordinary": 5},
+    "gpu_memory_scope": "Latest completed outer update in each arm; not device-wide lifetime usage",
+    "max_latest_round_cuda_peak_allocated_bytes": 12777193472,
+    "max_latest_round_cuda_peak_reserved_bytes": 32621199360
+  },
+  "actions": {
+    "remote_checks_only": true,
+    "new_job_submitted": false,
+    "scheduler_changed": false,
+    "executable_source_changed": false,
+    "scientific_settings_changed": false,
+    "old_oracle2_touched": false,
+    "monitor_interval_hours": 5
+  },
+  "downstream": {
+    "baseline_submitted": false,
+    "checkpoint_generation_submitted": false,
+    "winning_rate_submitted": false,
+    "annotation_submitted": false
+  },
+  "next_action": "Continue monitoring sequence0004. Only after every prior receipt task is COMPLETED 0:0 and the full account is idle, use the frozen queue dry-run and guarded advance for a new segment. Do not duplicate0004.",
+  "limitations": [
+    "Two tasks finished this segment, not the complete100-update experiment.",
+    "DPO reference/feedback manifests describe the previous completed segment; their sequence0004 tasks are pending.",
+    "Scheduler and files were sampled sequentially, not atomically.",
+    "No generated-response WR or five-trait measurement result yet."
+  ],
+  "private_evidence": [
+    "oracle1_qwen3_launch_20261015/heartbeat_20261016T0433.json",
+    "oracle1_qwen3_launch_20261015/segment4_midpoint_resume_20261016.json"
+  ]
+}

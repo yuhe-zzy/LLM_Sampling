@@ -1,0 +1,20 @@
+{
+  "runs": 6,
+  "prompts_per_run": 6,
+  "states_per_run": 101,
+  "responses_per_prompt": 4,
+  "probability_points": 14544,
+  "all_finite_and_in_0_1": true,
+  "unit_sums_verified": true,
+  "softmax_reconstruction_passed": true,
+  "identical_support_and_initial_pi": true,
+  "hashes_verified": true,
+  "figures": [
+    "ipo_ordinary_pi_vs_iter",
+    "ipo_reference_pi_vs_iter",
+    "ipo_feedback_pi_vs_iter",
+    "dpo_ordinary_pi_vs_iter",
+    "dpo_reference_pi_vs_iter",
+    "dpo_feedback_pi_vs_iter"
+  ]
+}

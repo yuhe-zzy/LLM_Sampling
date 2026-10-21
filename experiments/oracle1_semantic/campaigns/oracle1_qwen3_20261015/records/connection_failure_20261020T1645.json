@@ -1,0 +1,51 @@
+{
+  "recorded_at_utc": "2026-10-20T16:45:10.709896+00:00",
+  "heartbeat_at_utc": "2026-10-20T16:43:15.434+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "status": "MONITOR_CONNECTION_BLOCKED",
+  "connection_attempts": 2,
+  "failure": "socket.timeout: timed out in sock.connect while establishing SSH TCP connection",
+  "remote_commands_executed": false,
+  "authentication_or_experiment_failure_established": false,
+  "current_scheduler_state": "UNKNOWN",
+  "current_allocated_gpus": null,
+  "current_training_steps": null,
+  "current_log_errors": "UNKNOWN",
+  "current_generation_or_wr_state": "UNKNOWN",
+  "last_successful_response_and_resume_check_utc": "2026-10-20T12:00:36.564628+00:00",
+  "last_successful_full_training_inspector_utc": "2026-10-20T11:56:23.965186+00:00",
+  "last_known_training_steps": {
+    "ipo_ordinary": 92,
+    "ipo_reference": 90,
+    "ipo_feedback": 90,
+    "dpo_ordinary": 92,
+    "dpo_reference": 90,
+    "dpo_feedback": 90
+  },
+  "last_known_extension_submissions": [
+    {"sequence": 1, "phase": "baseline", "job_id": "4861201", "state_at_last_check": "COMPLETED"},
+    {"sequence": 2, "phase": "generate", "job_id": "4861879", "state_at_last_check": "ACTIVE_ARRAY"},
+    {"sequence": 3, "phase": "train", "job_id": "4863156", "state_at_last_check": "ACTIVE_ARRAY"}
+  ],
+  "last_known_complete_checkpoint_banks": 4,
+  "last_known_valid_response_rows_including_baseline": 4719,
+  "training_execution_source": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "extension_source": "caf5ac2b68d0e4d3778260428eedbeb3441a6658",
+  "extension_sha256": "e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74",
+  "actions": {
+    "new_job_submitted": false,
+    "scheduler_or_remote_files_changed": false,
+    "source_or_scientific_settings_changed": false,
+    "old_oracle2_touched": false,
+    "monitor_changed": false,
+    "stored_monitor_active_verified": true,
+    "monitor_interval_hours": 5
+  },
+  "next_action": "Owner checks UNC VPN/Sycamore SSH reachability. Next check retries read-only frozen EXT inspection and both latest ledgers. Never duplicate4863156/4861879 or advance without fresh lane-success and full-account checks.",
+  "limitations": [
+    "The12:00 four-H100 snapshot is historical, not live allocation evidence.",
+    "No progress, completion or absence of errors can be inferred from elapsed time during this connection outage.",
+    "Both failures preceded the transport transcript-writing block; neither requested inspection log was created.",
+    "The underlying network cause is unknown; this is not an established authentication or experiment failure."
+  ]
+}

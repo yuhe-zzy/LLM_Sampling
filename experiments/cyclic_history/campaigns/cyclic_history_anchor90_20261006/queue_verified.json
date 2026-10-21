@@ -1,0 +1,16 @@
+{
+  "checked_at_utc": "2026-10-06T14:52:50.827309+00:00",
+  "allocated_gpus": 0,
+  "owned_jobs": [
+    {
+      "queue": "4728255_0|yuhe32|448057|PENDING|gres/gpu:1|(None)|hist_anchor_1006",
+      "allocated_gpus": 0,
+      "detail": "JobId=4728255 ArrayJobId=4728255 ArrayTaskId=0 ArrayTaskThrottle=2 JobName=hist_anchor_1006 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6484 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-06T10:52:50 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-06T10:52:50 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:201529 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_anchor90_20261006/run_anchor90.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_anchor90_20261006/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_anchor_1006-4728255_0.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_anchor_1006-4728255_0.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+    },
+    {
+      "queue": "4728255_1|yuhe32|448057|PENDING|gres/gpu:1|(None)|hist_anchor_1006",
+      "allocated_gpus": 0,
+      "detail": "JobId=4728255 ArrayJobId=4728255 ArrayTaskId=1 ArrayTaskThrottle=2 JobName=hist_anchor_1006 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6484 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-10-06T10:52:50 EligibleTime=2026-10-06T10:52:50 AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-06T10:52:50 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:201529 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_anchor90_20261006/run_anchor90.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_anchor90_20261006/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_anchor_1006-4728255_1.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_anchor_1006-4728255_1.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+    }
+  ]
+}

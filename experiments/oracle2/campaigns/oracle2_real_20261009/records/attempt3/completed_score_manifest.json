@@ -1,0 +1,78 @@
+{
+  "state": "COMPLETE",
+  "records_sha256": "92e1a0efdd52e53c6de91be565d6408b315401bdd45615029b650f36aa2c9f21",
+  "count": 3200,
+  "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+  "components": {
+    "nemotron": {
+      "count": 3200,
+      "min_reward": -32.0,
+      "max_reward": -2.328125,
+      "max_input_tokens": 1553,
+      "seconds": 901.5813748138025,
+      "sha256": "7592a4d4e3a5a6ac332eb3efdc027282e90a15252afc7c18ceae5528db05c8e8",
+      "max_allocated_bytes": [
+        71216286720,
+        71189944832
+      ],
+      "memory": [
+        {
+          "device": 0,
+          "name": "NVIDIA H100 80GB HBM3",
+          "free_bytes": 11677925376,
+          "total_bytes": 85019590656,
+          "allocated_bytes": 70587252736,
+          "reserved_bytes": 72500641792,
+          "peak_allocated_bytes": 71216286720,
+          "peak_reserved_bytes": 72500641792
+        },
+        {
+          "device": 1,
+          "name": "NVIDIA H100 80GB HBM3",
+          "free_bytes": 11659051008,
+          "total_bytes": 85019590656,
+          "allocated_bytes": 70587270144,
+          "reserved_bytes": 72521613312,
+          "peak_allocated_bytes": 71189944832,
+          "peak_reserved_bytes": 72521613312
+        }
+      ]
+    },
+    "skywork": {
+      "count": 3200,
+      "min_reward": -40.0,
+      "max_reward": 24.25,
+      "max_input_tokens": 1532,
+      "seconds": 160.68985211849213,
+      "sha256": "4024f6433021ddd527864f5cb85c116e6e81796e5637675dc7dbd536822a0cda",
+      "max_allocated_bytes": [
+        15226555392,
+        33554432
+      ],
+      "memory": [
+        {
+          "device": 0,
+          "name": "NVIDIA H100 80GB HBM3",
+          "free_bytes": 68288446464,
+          "total_bytes": 85019590656,
+          "allocated_bytes": 15043412992,
+          "reserved_bytes": 15778971648,
+          "peak_allocated_bytes": 15226555392,
+          "peak_reserved_bytes": 15778971648
+        },
+        {
+          "device": 1,
+          "name": "NVIDIA H100 80GB HBM3",
+          "free_bytes": 84147109888,
+          "total_bytes": 85019590656,
+          "allocated_bytes": 33554432,
+          "reserved_bytes": 33554432,
+          "peak_allocated_bytes": 33554432,
+          "peak_reserved_bytes": 33554432
+        }
+      ]
+    }
+  },
+  "templates": "own model chat template, tokenize=True, no duplicate BOS",
+  "truncation_allowed": false
+}

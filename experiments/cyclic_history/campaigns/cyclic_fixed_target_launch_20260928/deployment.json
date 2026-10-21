@@ -1,0 +1,59 @@
+{
+  "sha256": {
+    "source/calibrated_protocol.py": "3ea7461ceff9f2e79a89af0fd99a39b5d2251c6f78eddb09f414f2f86e723e9b",
+    "source/history_math.py": "12b4e8259692f411de4efdd80b7f332da004043967d1981f712b5702e5a6d9b9",
+    "source/population_calibration.py": "a80f1c5b4655453f46263ab6c9fb9c8dd32e371a74651d7e641da25ce4b095a7",
+    "source/prepare_calibrated_plan.py": "b8e2efd4717f0f4e44847283285dd6ee378e772ced19b607e952a4f84188b45a",
+    "source/replay_calibration.py": "5c86f3176611babb7cd3b04e80dce537ac9211b43b78347163c8dae10156e012",
+    "source/run_cyclic_history.py": "e13d3eed74a05ae1c3bf7dcf770194b912e0efa3225b1183ce1433d6ec5dd1fa",
+    "source/run_cyclic_lagged_reference.py": "81c61de227f59129be21eab08157ae4ca9c93230e9b183230b0824fb46632401",
+    "source/run_cyclic_lagged_sampling.py": "d86ef44a2c84cbdeb68d3581c30aeee5d6a47f6a43746186c009908210675a7f",
+    "source/run_fixed_target_probe.py": "822e6684169a70b2086d2e9427ac6b981527262d98f4b1d86d4b8c01e94a8534",
+    "source/run_oracle_feedback_extrapolation.py": "659ee2509907732390de7ba99ab34a0d88b5a61bbb1e23a7a789116878020187",
+    "source/test_fixed_target_probe.py": "f89ab8bdefc293733d0e280fc6d04c38b3a25b9654b9e6e307e2cadcb47ced51",
+    "source/test_history_math.py": "d887bd844d896b6599bd6a546f1946df4aa79c9cfe94e55826b57a22dee42b40",
+    "source/test_launcher_cpu.py": "f7366701650a875c799d440f35f5ce349c7455f52cd984e3eb86fbf443a0800f",
+    "source/test_population_calibration.py": "c97257c2df57bba479415edc3108789ec7058a75885cfc4a8d949772d24bc0cd",
+    "source/test_training_cpu.py": "2e07cd9a6f9f078afd32446af175e232ab49ff8f6248e3c2cb3ebb6a821912ad",
+    "run_probes.sh": "ee50ce6ba90c1345fbae25fe0d1cf4f4bb4295c885a799366430e79e20f69343",
+    "queue_probes.py": "6a2afb32fac50150680e23634d6b62a0c6f1c39d2afe2afb0269c8b95398f12a"
+  },
+  "source_archive_sha256": "fe7d28cedda787db86a4a83d2aac1ce274f5c1ad4801ce57c5ade83b5df79c2c",
+  "parent_runs": {
+    "ipo_ordinary_calibrated_s0": {
+      "source_job_id": "4603994",
+      "adapter_sha256": "73eb069250e5f9f706d2f9e388297930535b9a21ea8cd8aab328ec412c4d221b",
+      "manifest_sha256": "5c7754af81e298d9b916348b82aae1f10c8d85ca99fc13df81c8f1b6b506d4a8",
+      "step20_sha256": "a32dc4af5451ff21f921def4c62be7b506733524e8deae1931950037417cb49f"
+    },
+    "ipo_stable_calibrated_s0": {
+      "source_job_id": "4603995",
+      "adapter_sha256": "9e79dd6dac21a6cba7baee4f872080af5c8ad4cfb6f839044ac94844f4aa1b73",
+      "manifest_sha256": "348a47394abab526b4bfc38ea73cee93c66890377611d586f4fc50e4b0bd108b",
+      "step20_sha256": "7de4c34a494027fc1174fc45857812ebded8df6b790a3f495ce0c48d73806196"
+    },
+    "dpo_ordinary_calibrated_s0": {
+      "source_job_id": "4603998",
+      "adapter_sha256": "2a217422fd2ef0868d8a32ec54e156eb90699df74cb2e155992329d0ef459aab",
+      "manifest_sha256": "e1ef74bbabb4d825d9308033424d469db7cb148cdcaa59b918e73d3b1f35fc24",
+      "step20_sha256": "5b7a4650d19145812216c0906c50451268584c77e31d12efb8d276a0e49ee0e7"
+    },
+    "dpo_stable_calibrated_s0": {
+      "source_job_id": "4603433",
+      "adapter_sha256": "bac5532b5c4059c00d1a6896c92ca311a8038f1fcdbf18c7e4446b387567500a",
+      "manifest_sha256": "a5fda2e0212255021f8a36809c71bffa516cad546a9841dff42ead131a4c6475",
+      "step20_sha256": "aff4cffdda8d966c5b0973d965c0bcb7f3d7b5fbdfaa7135583a3884c1dacbda"
+    }
+  },
+  "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_fixed_target_20260928",
+  "run_ids": [
+    "ipo_ordinary_calibrated_s0",
+    "ipo_stable_calibrated_s0",
+    "dpo_ordinary_calibrated_s0",
+    "dpo_stable_calibrated_s0"
+  ],
+  "gpu_per_task": 1,
+  "throttle": 4,
+  "account_ceiling": 6,
+  "approved_scope": "Four fixed round-20 targets, 10/30/60 epochs; no Stage B/C"
+}

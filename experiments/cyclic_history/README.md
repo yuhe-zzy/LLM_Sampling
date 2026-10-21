@@ -1,7 +1,32 @@
 # Cyclic LLM history diagnostics
 
-Status: **prepared only, not approved to run**. One training seed (`0`).
-No experiment, scheduler submission, or GPU allocation is part of deployment.
+## September 29 execution update
+
+See [campaign status, results and reproduction](campaigns/README.md) for the
+completed Stage A, fixed-target and 100-round Stage B experiments, and the
+submitted Stage C controls. All six Stage B arms reached state 100. Public
+numeric results, all-prompt figures and portable plotting tools are included.
+The dated protocol below preserves the original calibration design; its
+"not submitted" statements describe September 28, not current status.
+
+## September 28 calibration update (historical)
+
+Start with [the calibrated protocol](CALIBRATED_PROTOCOL.md) and the
+[follow-up handoff for Fan and Yu He](../hodge_diagnostics/HANDOFF_TO_FAN_AND_YU_HE_2026-09-28.md).
+The new ten-arm, six-prompt mechanism micropilot is **CPU-calibrated but not
+approved or submitted for GPU training**. It keeps raw sequence sums, uses
+actual IPO/BT operators, and has support, score and local-spectrum gates.
+The original six v1 configurations below are retained as historical pilot
+definitions, not a validated stabilization design. Their server executions
+are separate immutable copies; this code update does not change them.
+
+`run_oracle_feedback_extrapolation.py` is the accurately named new entry point.
+The older `lagged_sampling` name is retained only for legacy reproducibility;
+neither version implements the manuscript's signed two-sampler loss.
+
+One training seed (`0`). No scheduler submission or GPU allocation is part of
+this deployment. New training requires `--approve-calibrated-micropilot` in
+addition to `--execute`; legacy training requires `--allow-uncalibrated-legacy`.
 
 ## Two experiment entry points
 
@@ -21,9 +46,9 @@ All current runners use sequence-sum scores; historical trainers have been
 removed. Download/build the dataset using the root README. All default paths
 are relative to the repository root.
 
-## Proposed first six runs
+## Historical six-run pilot
 
-These are explicit **pilot defaults for discussion**, not a confirmed final
+These are historical **pilot defaults**, not a confirmed final
 paper grid or a claim that the ordinary control will oscillate. Do not launch
 until the user has reviewed the protocol and parameters.
 
@@ -56,6 +81,27 @@ Common settings:
 - BF16 weights, FP32 log-sum-exp/loss reductions, gradient clipping at 1.
 - max_length=1537, scoring batch size 4, one visible allocated GPU required.
 - Every-round score snapshots; initial adapter and adapters every 10 rounds.
+
+### Attention backend and finite-gradient checks
+
+The runner explicitly uses SDPA with Flash, Efficient and Math backends allowed,
+excluding cuDNN SDPA. A real BF16 Qwen/H100 reproduction produced NaNs in
+`ScaledDotProductCudnnAttentionBackward0` for both IPO and DPO, despite finite
+forward scores and losses. Disabling gradient checkpointing did not resolve
+that reproduction; using eager attention did. This is a backend-specific
+training failure, not evidence of sequence-sum mode collapse.
+
+The scoped [PyTorch SDPA context](https://docs.pytorch.org/docs/stable/generated/torch.nn.attention.sdpa_kernel.html)
+encloses scoring and both training forward/backward. In particular, backward
+must stay inside the context because activation checkpointing recomputes the
+forward pass. Backend flags are restored on exit; no shared environment or
+other running process is changed. `manifest.json` records `attention_policy`.
+
+Sequence sums, loss definitions, BF16, references, sampling and hyperparameters
+are unchanged. Non-finite loss, gradient and parameter checks remain enabled.
+Do not replace NaNs with zero or disable `error_if_nonfinite` to keep a job alive.
+CPU tests check backend selection/restoration and its forward/backward scope;
+real pretrained-model GPU validation is still required for a new environment.
 
 `beta_train` is the coefficient in the actual training loss. IPO's pair target
 is `1/(2*beta_train)` and its population feedback scales as `1/beta_train`.
@@ -192,8 +238,8 @@ texts, responses, matrix and support hash are persisted in `support.json` and
 - `tv_mean`: one-round TV change of panel probabilities.
 - `panel_log_mass_mean`: log total model mass assigned to the four candidates.
 - `operator_residual_rms/max`: centered post-training scores minus this round's
-  actual population target; this is **inner-update error, not distance to a
-  solved fixed point**.
+  actual population target; combines sampling/optimization error and model
+  representation bias, not distance to a solved fixed point or pure noise.
 - Pair counts, optimizer steps, losses, unclipped gradient norms, wall-clock,
   and the DPO CPU solver residual.
 
@@ -226,9 +272,8 @@ package. The optional `slurm/cyclic_history.sh` template does not submit itself.
 Override paths using `--model-path`, `--eval-path`, and `--output-root`.
 
 Before any later user-approved submission, inspect the **full** running and
-pending queue and verify allocations. The [phased budget](../../docs/SCHEDULING.md)
-applies: finish preserved oracle work, then sampling at at most two
-one-GPU jobs / two allocated GPUs across all user programs, then serial
-three-GPU oracle work. Array throttles alone do not enforce the account total;
-do not launch independent arrays without accounting for existing dependencies.
+pending queue and verify allocations. Follow the active workspace `AGENTS.md`
+and [phased budget](../../docs/SCHEDULING.md); publishing this new protocol
+does not increase the budget. Array throttles alone do not enforce the total; do not launch
+independent arrays without accounting for existing work and dependencies.
 The one-GPU code guard is not an account-wide scheduler cap.

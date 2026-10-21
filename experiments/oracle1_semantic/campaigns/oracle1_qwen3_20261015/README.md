@@ -11,11 +11,24 @@ October21 owner reports VPN reconnected, asks whether the first arm finished,
 and explicitly confirms retaining IPO ordinary/index0 training and generation
 while canceling remaining arms. This supersedes the historical six-arm plan.
 All existing results/checkpoints and shared new-Qwen3 baseline remain preserved.
-Same5h monitor now follows index0 only, with no six-arm advance or automatic
-retry. Do not restart indices1..5, oldOracle2 or unrelated tasks. The owner has
-now explicitly authorized finishing the retained arm's evaluation and win rate.
+The same monitor is now PAUSED after completing and delivering index0 results;
+no six-arm advance or automatic retry. Do not restart indices1..5, oldOracle2
+or unrelated tasks. The owner explicitly authorized finishing the retained
+arm's evaluation and win rate, and that request is now complete.
 Use the [single-arm immutable route](IPO_ONLY_EVALUATION.md) for0..100, not the
-old six-arm failed-receipt guards. Generation4878947 completed; WR4889849 submitted.
+old six-arm failed-receipt guards. Generation4878947 and WR4889849 are complete.
+
+## Completed retained WR
+
+October21T22:33:17Z: both jobs COMPLETED0:0;9600 answers and9600 scores validated,
+all11 checkpoints,200 eval prompts each. Recomputed2200 prompt rows/11 summary
+rows agree to5.56e-17. Full account empty22:33:04Z. No logged errors or new jobs.
+[Result report, PNG/PDF and CSV](ipo_only_wr_results_20261021/README.md) and
+[completion evidence](records/ipo_only_wr_complete_20261021.json) are published.
+Expected WR47.569% at0 and47.536% at100, no clear improvement in this one-seed
+run; prompt SE is not seed uncertainty. Cap256 diagnostics remain material.
+Only selected_arms scope is complete. No full-six marker or annotation was made.
+Figures were rendered/inspected and delivered before pausing the SAME monitor.
 
 ## Requested interim WR
 
@@ -29,7 +42,7 @@ sidecar; wait until all have started and verified reload (or completed), without
 cancel/requeue/source edits. New immutable extension uses separate bounded
 training/evaluation lanes; never bypass guards or directly sbatch jobs.
 
-## Submitted and running
+## Historical submissions and progress
 
 October21T17:31:53Z: generation **4878947 COMPLETED0:0**; all11 checkpoint banks
 plus baseline800 each validate,9600 responses, zero empty/errors. Source621b7d7

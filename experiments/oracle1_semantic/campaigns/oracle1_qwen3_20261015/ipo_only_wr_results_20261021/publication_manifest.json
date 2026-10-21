@@ -1,0 +1,42 @@
+{
+  "scope": "ipo_ordinary_states_0_through_100",
+  "execution_source": "621b7d706c5c0f43f01250c0c9ca366157a43cd2",
+  "verified_at": "2026-10-21T22:33:17.363465+00:00",
+  "note": "Four frozen-plot exports downloaded with matching source SHA256. Repository text rules normalize CSV CRLF to LF without changing values; source and published hashes are distinguished.",
+  "files": [
+    {
+      "path": "oracle1_wr.png",
+      "source_bytes": 42046,
+      "published_bytes": 42046,
+      "source_sha256": "223243f087704b62ed2a566f88972c8fbe63435d049cd30488ddd19a344b9711",
+      "published_sha256": "223243f087704b62ed2a566f88972c8fbe63435d049cd30488ddd19a344b9711"
+    },
+    {
+      "path": "oracle1_wr.pdf",
+      "source_bytes": 13253,
+      "published_bytes": 13253,
+      "source_sha256": "43e81e5afa2092457e753a6738c0f9cf28893ac3fe925e5bbf89250205e06517",
+      "published_sha256": "43e81e5afa2092457e753a6738c0f9cf28893ac3fe925e5bbf89250205e06517"
+    },
+    {
+      "path": "wr_summary.csv",
+      "source_bytes": 1160,
+      "published_bytes": 1148,
+      "source_sha256": "0ae65f77afe273eba2bdc4911210699e145909c4a68e1fc8779745dec8b8555b",
+      "published_sha256": "37170ef14e9d35cc66017f23767bdfc79f338394ce06995a33254bf607d9bd43"
+    },
+    {
+      "path": "coverage.json",
+      "source_bytes": 363,
+      "published_bytes": 363,
+      "source_sha256": "f9982bf90af86082ef9ae89a93289dcf0fd57ee99ae61e607631ed0ede8d9b5d",
+      "published_sha256": "f9982bf90af86082ef9ae89a93289dcf0fd57ee99ae61e607631ed0ede8d9b5d"
+    }
+  ],
+  "excluded": [
+    "private prompts and responses",
+    "per-response reward journals",
+    "model weights and adapters",
+    "raw scheduler logs"
+  ]
+}

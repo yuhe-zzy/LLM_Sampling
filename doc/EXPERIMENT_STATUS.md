@@ -1,30 +1,31 @@
 # Current experiment status
 
-## Active scope: IPO ordinary only, 2026-10-21
+## Completed scope: IPO ordinary only, 2026-10-21
 
 Owner reports VPN reconnected and explicitly confirms retaining IPO ordinary,
 array index0, training/generation plus shared baseline, while canceling further
 work on the other five arms. Existing outputs/checkpoints are preserved.
-Same5h monitor now follows index0 only; six-arm automatic advancement/retries
-are withdrawn. Subsequent user request explicitly approves finishing retained
+Six-arm automatic advancement/retries are withdrawn. The subsequent user
+request explicitly approved finishing retained
 evaluation and WR. New [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md)
-is deployed and running. Annotation remains gated.
+has completed. Annotation remains gated. The SAME monitor is now PAUSED after
+inspected figure/numeric/report delivery; no additional experiment is authorized.
 Do not bypass frozen failed-receipt guards or restart excluded arms.
 
-October21T17:31:53Z: retained generation4878947 COMPLETED0:0. All11 checkpoint
-banks0..100 plus baseline are complete,800 each,9600 total. Canonical seed/input/
-row hashes, bank/journal equality, source and11 checkpoints pass; zero empty
-responses or logged errors. Generator allocated peak8,645,992,448bytes. Science
-and source621b7d7 unchanged; no training or withdrawn-arm work repeated.
-Empty-account dry-run passes17:32:39Z; guarded sequence0002 WR4889849 submitted
-17:33:19Z on2H100. At17:37:55Z sole owned RUNNING job, allocated/potential2,
-startup guard verified.124 scores hash/input/finite validated; later count146.
-These live reads are non-atomic. At100 progress, memory peaks71,133,833,216 and
-71,111,680,000bytes, about66.3GiB/GPU, each11.75GiB free. No execution errors.
-Actual inference started; full9600 scoring and WR tables/curves are not complete.
-Same5h monitor continues through actual scoring and figure delivery. [Generation evidence](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_generation_complete_20261021.json),
-[WR receipt](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_0002_receipt.json),
-[real-score startup](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_wr_startup_20261021.json).
+October21T22:33:17Z: generation4878947 and WR4889849 both COMPLETED0:0.
+All11 checkpoint banks0..100 plus baseline contain800 answers each,9600 total,
+and all9600 score rows pass identity/input/row hashes and finite-value checks.
+Canonical seeds, bank/journal equality, source and11 checkpoint hashes pass.
+Recomputed2200 prompt rows/11 summary rows agree to5.56e-17. No logged errors,
+unpaired intents or writer locks. Full account empty22:33:04Z,0 allocated/potential
+GPUs. No new job, source/science change or full568-state audit this check.
+[Results and inspected plots](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/ipo_only_wr_results_20261021/README.md),
+[completion audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_wr_complete_20261021.json).
+Expected WR47.569% at0 and47.536% at100; paired change-0.033percentage points,
+prompt SE1.163points. No clear gain in this run, not proof of equivalence or
+seed stability. Roughly half the answers reach cap256. Only selected_arms
+completion is recorded; no full-six marker, five-trait labels or PCA claim.
+Execution source621b7d7 and train source0e7793f remain immutable.
 
 Historical09:01Z: SSH restored; full-owner queue empty. Native parent sacct reports
 training4863156_0/1 COMPLETED0:0,2..5 FAILED1:0; generation4861879_0/1

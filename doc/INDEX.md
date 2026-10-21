@@ -5,8 +5,8 @@ Start with [current handoff](../handoff/current.md), then the newest
 [daily note](../daily-notes/). Do not infer live job status from dated files.
 
 - [Current experiment status and decisions](EXPERIMENT_STATUS.md)
-- [IPO ordinary0..100 evaluation/WR continuation](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md): generation complete9600 including baseline; WR4889849 submitted October21, no retraining or other-arm restart.
-- [Active Oracle1/Qwen3 campaign](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md): October21 retain IPO ordinary/index0 only; other five arms withdrawn, preserve outputs, FOUR-GPU account cap.
+- [IPO ordinary0..100 WR results](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/ipo_only_wr_results_20261021/README.md): October21 generation/9600 scores complete; inspected figures and summary delivered, monitor PAUSED. Expected WR47.569% to47.536%, no clear improvement; one seed, prompt SE only.
+- [Oracle1/Qwen3 campaign and provenance](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/README.md): retained index0 complete; other five arms withdrawn, outputs preserved, no automatic new work.
 - [Interim0..80 WR execution](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/INTERIM_WR_80.md): prior six-arm automatic advancement withdrawn; first-arm-only continuation must not bypass failed receipts or mutate frozen sources.
 - [Definitions and interpretation limits](SCIENTIFIC_CONTEXT.md)
 - [Results atlas](../docs/RESULTS_INDEX.md): batch reports, figures and tables

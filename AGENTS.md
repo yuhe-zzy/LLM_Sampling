@@ -57,7 +57,10 @@ queue before scoped cancellation; never cancel the parent array or unrelated wor
 See current handoff/campaign for verified status. Owner subsequently explicitly
 approves finishing first-arm evaluation and WR, through100. Use the tested
 immutable retained.py route, not old failed-accounting guards; no retraining.
-Same5h monitor follows index0 only. Annotation review remains required.
+October21 completion: retained generation and WR are verified complete, with
+inspected0..100 PNG/PDF/CSV delivered. The SAME monitor is now PAUSED; do not
+resume it or submit more work without a new owner request. Other five arms stay
+withdrawn. Annotation review remains required. See the retained result package.
 
 Historical owner override2026-10-19: interim six-arm Oracle1 WR curves0,10,...80
 may use TWO extra H100s concurrently with training, full account at most FOUR.

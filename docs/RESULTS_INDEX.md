@@ -1,6 +1,7 @@
 # Experiment results atlas
 
-Publication review: 2026-10-13. This is a navigation and provenance index,
+Publication review: 2026-10-13; retained Qwen3 WR added2026-10-21.
+This is a navigation and provenance index,
 not a live scheduler dashboard. Read each batch's own timestamp and metric
 definitions before comparing results. Current code does not retroactively
 become the code used by historical jobs.
@@ -10,6 +11,8 @@ Read [current project context](../doc/INDEX.md) and
 exclusions. The [artifact inventory](result_artifacts_20261013.json) lists
 public PNG/PDF/CSV paths, sizes and SHA256 hashes. Historical previews remain
 separate from preferred consolidated results.
+The October21 Qwen3 package has its own publication manifest; it is not part
+of the historical October13 inventory.
 
 ## Start by scientific question
 
@@ -25,6 +28,7 @@ separate from preferred consolidated results.
 | Ten reference and ten feedback settings per objective | [Trend sweep](../experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/README.md) | 50 logical runs = 44 new + 6 reused; five distinct matched ordinary bases |
 | Initial anchor: reference weights (.9,.1,0) | [Anchor90 launch record](../experiments/cyclic_history/campaigns/cyclic_history_anchor90_20261006/README.md) | October9 preflight recorded job completion; dedicated validated trajectory export is not yet published; launch-time pending label is historical |
 | Oracle1: sequence-sum entropy and generated-response WR | [September 11 snapshot](../experiments/oracle1/campaigns/sequencesum_snapshot_20260911/README.md) | 12 complete, 1 partial, 3 absent grid cells in that snapshot; not a final all-16 result |
+| NEW Oracle1/Qwen3-4B: IPO ordinary generated-response WR | [Completed0..100 report](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/ipo_only_wr_results_20261021/README.md) | One retained arm/seed,11 checkpoints,200 eval prompts,9600 scored answers including shared baseline;47.569% to47.536%, no clear gain; prompt SE only, cap256, other five arms withdrawn |
 | Oracle1: earlier intermediate exports | [Historical archive](../experiments/oracle1/campaigns/historical_local_snapshots/README.md) | Dated local previews, not new results or independent replications; entropy definitions kept separate |
 | Collaborator Hodge diagnostics | [Hodge entry point](../experiments/hodge_diagnostics/README.md) | Preserve collaborator definitions and distinction between plans and execution |
 | Oracle2: mixed reward-model judge | [Policy results](../experiments/oracle2/campaigns/oracle2_real_20261009/policy_results_20261013/README.md) | Six complete states0..100 arms, all500-prompt metrics; no generated-response WR yet. [Execution/recovery](../experiments/oracle2/campaigns/oracle2_real_20261009/README.md) and [earlier design review](ORACLE2_DESIGN_REVIEW_20261006.md) retained |
@@ -32,6 +36,7 @@ separate from preferred consolidated results.
 
 ## Useful figure collections
 
+- [NEW Oracle1/Qwen3 retained IPO ordinary WR PDF](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/ipo_only_wr_results_20261021/oracle1_wr.pdf) and [numeric summary](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/ipo_only_wr_results_20261021/wr_summary.csv).
 - [Stage B: six pi plots in one PDF](../experiments/cyclic_history/campaigns/cyclic_history_stage_b100_results_20260929/pi_curves/stage_b_all_pi_curves.pdf).
 - [Stage C: all comparisons](../experiments/cyclic_history/campaigns/cyclic_history_stage_c100_results_20260929/all_stage_c_figures.pdf).
 - [Trend sweep: IPO figure book](../experiments/cyclic_history/campaigns/cyclic_history_trend_sweep_20261003/results_20261004/ipo_complete_figures.pdf)

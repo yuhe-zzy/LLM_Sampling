@@ -7,7 +7,25 @@ restoring the other five arms. Shared Qwen3 baseline800 remains valid.
 At09:01Z the retained arm had6649 responses:0..70 complete,80 at249/800;
 2151 responses remain for its full8800-response checkpoint evaluation.
 Final scoring covers9600 answers including the800 shared baseline.
-The remaining2151 responses are now complete; see the October21 afternoon update below.
+The remaining2151 responses and all9600 scores are now complete. See the final
+[result package](ipo_only_wr_results_20261021/README.md). Same monitor PAUSED after
+inspected figure and summary delivery; earlier running snapshots below are history.
+
+## Verified completion and delivery
+
+October21T22:33:17Z:4878947 and4889849 both COMPLETED0:0, full account empty.
+All12 banks and9600 score rows pass canonical coverage/hash/finite checks;
+source and11 checkpoint bindings unchanged. Recomputed2200 prompt rows and11
+summary rows match to5.56e-17. No unpaired intent, writer lock or logged error.
+Frozen retained.py --plot completed in a NEW result directory. Four safe files
+were downloaded with matching hashes. PNG and rendered one-page PDF visually
+checked and delivered with CSV/report. No GPU submission or science change.
+[Completion audit](records/ipo_only_wr_complete_20261021.json) retains aggregates.
+Expected WR47.569% to47.536%; paired change-0.033percentage points with prompt
+SE1.163points. No clear improvement, not evidence of equivalence or seed stability.
+Scope remains selected_arms; withdrawn failures preserved, no six-arm COMPLETE.
+The SAME heartbeat was confirmed PAUSED after delivery. No further automatic
+advance or annotation is authorized; other five arms and oldOracle2 stay stopped.
 
 ## Independent immutable route
 

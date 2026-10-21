@@ -9,25 +9,25 @@ NEW Oracle1/Qwen3 IPO ordinary, array index0. Retain its training/generation
 and shared new-Qwen3 baseline; cancel further work on the other five arms.
 This supersedes six-arm automatic advancement and the old no-cancellation rule
 for indices1..5 only. Preserve all results/checkpoints/receipts; no oldOracle2
-or unrelated-job actions. Same5h monitor now follows index0 only.
+or unrelated-job actions. Same monitor is now PAUSED after completed delivery.
 Owner now explicitly approves finishing first-arm evaluation and win rate.
 Use [single-arm0..100 route](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/IPO_ONLY_EVALUATION.md).
-No retraining/other-arm restoration. Generation4878947 completed; WR4889849 started.
+No retraining/other-arm restoration. Generation4878947 and WR4889849 completed.
 Do not call BASE or EXT six-arm --advance/--submit or bypass annotation review.
 
 ## Verified execution
 
-October21T17:31:53Z: generation4878947 COMPLETED0:0, all11 checkpoint banks800
-plus baseline800 valid, total9600; no empty responses/errors. Peak8,645,992,448bytes.
+October21T22:33:17Z:4878947 and4889849 both COMPLETED0:0, all11 banks800 plus
+baseline800 and9600 scores hash/finite valid; no empty responses/logged errors.
 Source621b7d7; ROOT `ipo/diagnostics/oracle1_qwen3_ipo_only_20261021_v1` unchanged.
-Empty-account dry-run passed17:32:39Z; sequence0002 WR4889849 submitted17:33:19Z.
-At17:37:55Z RUNNING, sole owned job, allocated/potential2H100, startup guard passed.
-124 scores hash/finite validated; later count146, non-atomic. No errors; WR incomplete.
-Only frozen retained.py --advance after all NEW receipts succeed and idle account.
-Same5h monitor follows WR/plots; never duplicate4878947 or4889849.
-Private `oracle1_qwen3_launch_20261015/inspect_ipo_only_readonly.py` audits live
-work; frozen --verify/--advance refuse active generation writer locks by design.
-[WR startup audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_wr_startup_20261021.json).
+Recomputed2200 prompt rows/11 summaries agree to5.56e-17. No writer locks or
+unpaired intent; full account empty22:33:04Z,0 allocated/potential GPUs.
+Frozen plot exports downloaded/hash-checked; PNG and rendered PDF inspected.
+[WR figures/CSV/report](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/ipo_only_wr_results_20261021/README.md)
+delivered; SAME monitor confirmed PAUSED. No further automatic work is authorized.
+WR47.569% at0 to47.536% at100; paired change-0.033points, prompt SE1.163points.
+No clear gain, not proof of equivalence/stability; roughly half hit cap256.
+[Completion audit](../experiments/oracle1_semantic/campaigns/oracle1_qwen3_20261015/records/ipo_only_wr_complete_20261021.json).
 
 Historical09:01Z: all old jobs terminal, no scancel needed. Training4863156 and
 generation4861879 indices0/1 COMPLETED0:0,2..5 FAILED1:0; preserve these outcomes.

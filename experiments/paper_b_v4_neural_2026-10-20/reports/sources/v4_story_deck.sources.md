@@ -40,4 +40,17 @@
 | 31 | Uncertainty sorting | ours | inference |
 
 ## X15 (Fable 5.1, 2026-10-20)
-<!--X15-->
+Scored 2026-10-20 05:00 EDT with Fable's `experiments/2026-10-19-pooled-onset/analysis/evaluate_x15.py` against `prereg/predictions_x15.json` (frozen 2026-10-20 00:00 EDT). Runs fetched from the VM after the batch chain wrote ALLDONE (04:54 EDT); all 11 runs complete (120 rounds). Output: `reviews/2026-10-20-v4-story/x15_fetch/evaluation_x15.json`.
+
+| Claim | Value | Source | Status |
+|---|---|---|---|
+| Direction (criterion 1) | neural share 0 / 7.8 / 48.4 / 81.3% at c = 0 / 0.25 / 0.5 / 1; nondecreasing; ≤ 5% at c = 0; ≥ 50% at c = 1 | `evaluation_x15.json` criteria.1_direction | confirmed: PASS |
+| Level (criterion 2, with 7) | 8 of 11 arms within 0.15 of the population from their own initial scores; c = 1: 0.812 vs 0.938 (frozen 0.953); misses: random 0.906 vs 0, IPO 0.125 vs 0.938, K4 c = 1 0.75 vs 1.0 (4 panels) | `evaluation_x15.json` | confirmed: mixed |
+| Onset slopes (criterion 3, population) | −1.28 in c (c = 0.5 → 1), −0.98 in m̃ at c = 1 (−1.28 at c = 0.5) | `evaluation_x15.json` criteria.3_onset_slopes | confirmed: PASS |
+| Remedy (criterion 4) | c = 1 under α 0.9, β 1: 0.188 vs population 0.156; drop 0.625; median KL to target 0.0010 | `evaluation_x15.json` | confirmed: PASS |
+| Random assignment (criterion 5) | share 0.906 (≤ 0.10 required): FAIL; per-round step KL 0.234 vs 0.00075 at c = 0 (noisier: yes) | `evaluation_x15.json` | confirmed: FAIL |
+| Map (criterion 6) | DPO map one-step error below the logit map in 4 of 4 arms | `evaluation_x15.json` | confirmed: PASS |
+| Rotation vs jitter (post hoc) | net winding over the last 30 rounds on oscillating panels: c = 1 median 6.3 turns (92% ≥ 1 turn, sign consistency 0.93); random arm 0.05 turns (sign consistency 0.07) | `x15_fetch/diagnose_x15.py`, `diagnose_x15.json` | inference (post hoc) |
+| IPO prediction (post hoc) | the frozen IPO prediction and the evaluator used `logit_round` (logit link), while the PREREG text specifies the identity-link master recursion; recomputed with the identity link (`population.trajectory(P − ½, …)`): 12.5% predicted, 12.5% trained, 64 of 64 panels agree | `x15_fetch/ipo_identity_posthoc.json`; `predict_x15.py` line 159 | confirmed (recomputed); correction made after the result |
+| Round losses | reconstruction within 1e-7 of the logged first-step loss on the expected-label DPO arms (5.7e-7 IPO; sampled-label arm not reconstructible) | `x15_fetch/round_losses_x15.json` | confirmed |
+

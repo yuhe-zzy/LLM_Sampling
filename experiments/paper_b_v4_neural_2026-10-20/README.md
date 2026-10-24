@@ -8,11 +8,12 @@ been written into the manuscript beyond what v4 already contains.
 ## Start here
 
 1. [`reports/v4_story_deck.html`](reports/v4_story_deck.html): the v4 storyline and every experiment that supports it, in one
-   self-contained deck (setup, convergence evidence, results, scorecard). **Interim:** the X15 slide is a placeholder
-   until that run finishes.
-2. [`reports/x14_steering_and_3b.html`](reports/x14_steering_and_3b.html): the latest text report (X14 steering without P,
+   self-contained deck (setup, convergence evidence, a worked example of Thm 11, results with X15, scorecard).
+2. [`RUNNING.md`](RUNNING.md): how to run and extend these experiments (trainer, Sycamore templates, data, conventions,
+   pitfalls).
+3. [`reports/x14_steering_and_3b.html`](reports/x14_steering_and_3b.html): the latest text report (X14 steering without P,
    and the Qwen2.5-3B replication on Sycamore).
-3. The other text reports below, one per experiment family. Each report's fact sheet is in [`reports/sources/`](reports/sources/).
+4. The other text reports below, one per experiment family. Each report's fact sheet is in [`reports/sources/`](reports/sources/).
 
 ## The common protocol
 
@@ -38,7 +39,7 @@ been written into the manuscript beyond what v4 already contains.
 | (analysis only) | D1–D5: diagnostics that need no preference matrix | existing runs and datasets | Validated after the fact; thresholds set on these runs | [text](reports/practical_diagnostics_d1_d5.html) |
 | [`2026-10-19-x14-steer`](experiments/2026-10-19-x14-steer/) | X14: interventions chosen by the P-free tests avoid collapse, over-sharpening and rotation | 0.5B, Azure H100 | 7 of 9 arms pass; preregistered verdict "not fully supported" (S1-b at the optimizer noise floor; S3-c a slow spiral at B = 24) | [text](reports/x14_steering_and_3b.html) |
 | [`2026-10-19-sycamore-3b`](experiments/2026-10-19-sycamore-3b/) | Converge, polarize and oscillate at 3B with the 0.5B settings | Qwen2.5-3B-Instruct, UNC Sycamore, 5 × 1 H100, 6.3 GPU-hours | 5 of 5 criteria pass, plus the directional check | [text](reports/x14_steering_and_3b.html) |
-| [`2026-10-19-pooled-onset`](experiments/2026-10-19-pooled-onset/) | X15 (designed and run by Fable 5.1): routing comparisons by criterion makes a trained model rotate (cor:pooled-onset) | 0.5B, Azure H100 | **Running** at the time of this commit; preregistration and frozen predictions only | to follow |
+| [`2026-10-19-pooled-onset`](experiments/2026-10-19-pooled-onset/) | X15 (designed and run by Fable 5.1): routing comparisons by criterion makes a trained model rotate (cor:pooled-onset) | 0.5B, Azure H100 | Supported on the DPO loop: rotating share 0 / 8 / 48 / 81% at c = 0 / 0.25 / 0.5 / 1 (population 0 / 8 / 48 / 94%); slower refresh 19%; population onset slope −1.28 in c. Secondary arms: random assignment fails the amplitude rule (label-noise jitter, not rotation); IPO misses its frozen prediction, which used the logit link (identity link: 12.5% predicted and trained); K = 4 has 4 panels | [deck](reports/v4_story_deck.html), slides 13–16 |
 
 ## Layout of each experiment folder
 
@@ -48,6 +49,7 @@ been written into the manuscript beyond what v4 already contains.
 - `summaries/`: numeric evaluation outputs. In the local workspace and in the reports this directory is called `results/`;
   it is renamed here because this repository ignores `results/`.
 - `figs/` (v4 validation only): the figures and TikZ sources used in the manuscript.
+- `common/dpo_map.py`: the population DPO map (Prop. dpo-map), imported by the X1/X9, X11, X12 and X15 scripts.
 
 ## Not included
 
@@ -60,5 +62,6 @@ been written into the manuscript beyond what v4 already contains.
 
 ## Status
 
-As of 2026-10-20: everything above is final except X15. The deck and the scorecard will be updated on this branch when X15
-is scored against its preregistration. Results enter the manuscript only after Fan approves them.
+As of 2026-10-24 all runs are complete and scored. X15 was scored with its own `evaluate_x15.py` (`summaries/evaluation_x15.json`);
+the post hoc checks of 2026-10-20 (winding test, identity-link IPO prediction, round losses) are in its `analysis/*_posthoc.py`
+and `summaries/posthoc/`. Results enter the manuscript only after Fan approves them.

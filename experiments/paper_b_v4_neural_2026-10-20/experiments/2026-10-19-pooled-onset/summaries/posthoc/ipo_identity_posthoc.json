@@ -1,0 +1,8 @@
+{
+ "note": "post hoc identity-link population prediction for X15_c100_A_ipo (the preregistered prediction used the logit-link map)",
+ "share_pop_identity": 0.125,
+ "share_neural": 0.125,
+ "agreement": 1.0,
+ "median_amp_neural": 0.013319884742034696,
+ "median_amp_pop": 1.1083690466692398e-16
+}

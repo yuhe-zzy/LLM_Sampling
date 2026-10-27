@@ -113,6 +113,52 @@ between LoRA and full finetuning. No such new experiment is authorized or run
 by this discussion. The coauthor's fixed-panel mechanism tests complement,
 but do not replace, our open-generation trait/WR endpoint.
 
+### Theory-paper reviewer scope,2026-10-26
+
+Owner clarifies the intended role: Fan's neural experiments should corroborate
+the finite-response theory, not establish open-generation utility or a causal
+LoRA comparison. Reviewed the uploaded73-page submission15 PDF (SHA256
+08e7a60efdd582bdbee5873a0bffcbdfe345f2267dd9fb8efe471ee5731cc7db), especially
+Sections3-7,9-10, and visually checked pages23,27,28,30. This is a theory-to-
+experiment correspondence review, not a line-by-line proof certification.
+
+Assessment: fixed short panels, known/constructed preferences, expected pair
+losses and small full-finetuned models are legitimate controlled tests of the
+stated population mechanism. Held-out WR, open generation and a matched LoRA
+ablation are not prerequisites for that narrower claim. The actual neural
+trainer minimizes pair losses through shared model parameters rather than
+assigning the population recursion directly, so the comparison is not merely
+plotting the same recurrence twice. Same-B controls and actual-DPO versus
+logit-map comparisons are useful discriminating tests.
+
+Reviewer priorities: distinguish the exact map from finite inner-fit error;
+report per-run/tail residuals rather than only the pooled.092-nat median.
+Theorem14 is local and excludes equality; a late30-round amplitude label is
+not by itself a measurement of the exact stability boundary or proof of a
+limit cycle. Separate bounded nonconvergence, rotation and sampling noise.
+Page28 Section9.2 states an approach rate alpha although IPO soft-BT labels
+generally have nonzero identity-link C; the general local rate is
+sqrt(alpha^2+gamma_max^2), reducing to alpha in the additive/zero-gain case.
+Qualify the rate claim rather than treating the approximate match as exact.
+The PDF already discloses metric changes, failed sampled-label controls and
+tokenization mismatch. Below.05 still positive does not violate full support;
+the latter issue concerns consistent construction/prediction provenance.
+Early recomputed s0-based predictions must remain distinct from frozen
+pre-training predictions. Planted cycles do not themselves test Theorem11's
+pooling mechanism or natural prevalence; scope conclusions accordingly.
+
+Fresh fetch finds Fan at3542986717bb93b27effc80773897170dd6d6a25, not1ea6a64.
+common/dpo_map.py and RUNNING.md are now published: the older missing-solver
+finding below is superseded. X15 is complete in this newer bundle, not pending.
+RUNNING.md discloses that the X15 IPO prediction/evaluation incorrectly called
+the logit map; a post-hoc identity-map correction matches the reported12.5%
+oscillation share and contradicts the earlier optimization-failure diagnosis.
+This is a corrected analysis, not an original preregistered prediction success.
+X15's sampled-label arm also exposes amplitude/noise ambiguity; the uploaded
+PDF does not include X15 as a reported neural experiment. Exact numeric run/P
+archives remain absent, so no independent full-run reproduction is claimed.
+No experiment, GPU operation, timer action or branch merge is authorized or done.
+
 ### Published-code audit,2026-10-20
 
 Fetched and verified Fan's branch at

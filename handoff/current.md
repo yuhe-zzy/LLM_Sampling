@@ -1,6 +1,6 @@
 # Current handoff
 
-Updated2026-10-21, America/Chicago. Read [context index](../doc/INDEX.md).
+Updated2026-10-26, America/Chicago. Read [context index](../doc/INDEX.md).
 
 ## Latest request: retain IPO ordinary only
 
@@ -61,15 +61,15 @@ Fixed-discovery PCA is descriptive, not preference-cycle evidence.
 
 ## Separate collaborator discussion
 
-Latest discussion explains Fan's experimental SETUP and limitations, not results.
-Rechecked builder, actual trainer, population map and main/3B preregistrations
-at unchanged1ea6a64. Fixed panels, expected pair losses,40 full-data Adam updates
-and model-specific support selection form a mechanism test, not held-out
-open-generation validation or a matched LoRA/full-finetuning ablation.
-3B five-arm core is all IPO; gamma is derived, not independently swept.
-Distinguish intended restrictions from tokenization-floor mismatch, post-result
-metric revisions, conditional target recalculation and missing numeric/solver
-artifacts. See doc/SCIENTIFIC_CONTEXT.md. ASD-STE100-style Chinese replies apply.
+Owner asks whether Fan's design supports the uploaded theory, not utility/WR.
+Reviewed submission15 PDF, especially theory assumptions and Sections9-10;
+finite-panel controlled validation is appropriate, not a proof certification.
+Check inner-fit tails, local-boundary versus late amplitude, pre/post-hoc
+predictions, pooling-claim coverage, and Section9.2's alpha-only rate claim.
+Fan is now3542986: dpo_map.py published and X15 complete; old missing-solver/
+pending claims superseded. X15 IPO logit-map mistake corrected post hoc, not
+an original prediction success. See doc/SCIENTIFIC_CONTEXT.md. No experiments,
+jobs or timers changed; ASD-STE100-style Chinese replies continue.
 
 ## Existing results
 

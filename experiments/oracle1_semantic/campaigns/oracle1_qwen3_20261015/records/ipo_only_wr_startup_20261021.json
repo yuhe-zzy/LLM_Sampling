@@ -1,0 +1,98 @@
+{
+  "checked_at": "2026-10-21T17:37:55.427424+00:00",
+  "scope": "selected_arms: IPO ordinary only, states0..100",
+  "source_commit": "621b7d706c5c0f43f01250c0c9ca366157a43cd2",
+  "binding_sha256": "0154a2449ed39ace600f798542fae7cd888b5b52fe0593b96e6277de6212e4d6",
+  "receipts": [
+    {
+      "sequence": 1,
+      "job_id": "4878947",
+      "phase": "retained_generate"
+    },
+    {
+      "sequence": 2,
+      "job_id": "4889849",
+      "phase": "retained_wrscore"
+    }
+  ],
+  "accounting": {
+    "4878947": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "4889849": [
+      "RUNNING",
+      "0:0"
+    ]
+  },
+  "full_account": {
+    "checked_at_utc": "2026-10-21T17:37:32.924152+00:00",
+    "owned_jobs": [
+      {
+        "job_id": "4889849",
+        "state": "RUNNING",
+        "requested_gpus": 2,
+        "allocated_gpus": 2
+      }
+    ],
+    "owned_queue_count": 1,
+    "owned_scontrol_count": 1,
+    "unrelated_jobs": 0,
+    "allocated_gpus": 2,
+    "potential_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false,
+    "full_queue_and_control_crosscheck_passed": true
+  },
+  "potential_gpus": 2,
+  "complete_banks": 12,
+  "total_generation_responses": 9600,
+  "generation_audit": "ipo_only_generation_complete_20261021.json",
+  "score_validation": {
+    "validated_rows": 124,
+    "expected_rows": 9600,
+    "identity_input_and_row_hashes_valid": true,
+    "finite_rewards": true,
+    "min_reward": -30.25,
+    "max_reward": -1.359375,
+    "max_input_tokens": 1351
+  },
+  "score_journal_rows_after_validation": 146,
+  "score_progress_before_validation": {
+    "scored": 100,
+    "total": 9600,
+    "memory": [
+      {
+        "device": 0,
+        "name": "NVIDIA H100 80GB HBM3",
+        "free_bytes": 12617449472,
+        "total_bytes": 85019590656,
+        "allocated_bytes": 70587252736,
+        "reserved_bytes": 71665975296,
+        "peak_allocated_bytes": 71133833216,
+        "peak_reserved_bytes": 71665975296
+      },
+      {
+        "device": 1,
+        "name": "NVIDIA H100 80GB HBM3",
+        "free_bytes": 12617449472,
+        "total_bytes": 85019590656,
+        "allocated_bytes": 70587270144,
+        "reserved_bytes": 71665975296,
+        "peak_allocated_bytes": 71111680000,
+        "peak_reserved_bytes": 71665975296
+      }
+    ]
+  },
+  "non_atomic_live_snapshot": true,
+  "errors": [],
+  "startup_verified_logs": [
+    "0001-4878947.out",
+    "0002-4889849.out"
+  ],
+  "selected_wr_directory": "/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1/wr/selection_60e18d6565bcad02e1a45cd1f0b49bd18869c9023a30e6e59ea1c960346e513d",
+  "selected_wr_complete": false,
+  "full_six_wr_complete": false,
+  "inference_status": "Actual finite score writes verified; incomplete WR, no result curve yet",
+  "monitor": "same heartbeat ACTIVE every5hours"
+}

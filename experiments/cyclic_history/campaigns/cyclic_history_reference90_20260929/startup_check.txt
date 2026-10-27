@@ -1,0 +1,50 @@
+COMMAND /work/users/y/u/yuhe32/h100env312/bin/python /work/users/y/u/yuhe32/ipo/diagnostics/history_reference90_20260929/inspect_reference90.py
+{
+  "account": {
+    "checked_at_utc": "2026-09-29T14:53:17.149689+00:00",
+    "allocated_gpus": 0,
+    "owned_jobs": [
+      {
+        "queue": "4608669_0|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_ref90_0929",
+        "allocated_gpus": 0,
+        "detail": "JobId=4608669 ArrayJobId=4608669 ArrayTaskId=0 ArrayTaskThrottle=2 JobName=hist_ref90_0929 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6537 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-09-29T10:52:59 EligibleTime=2026-09-29T10:52:59 AccrueTime=2026-09-29T10:52:59 StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-29T10:53:00 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:1123290 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_reference90_20260929/run_reference90.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_reference90_20260929/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_ref90_0929-4608669_0.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_ref90_0929-4608669_0.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      },
+      {
+        "queue": "4608669_1|yuhe32|448057|PENDING|gres/gpu:1|(Resources)|hist_ref90_0929",
+        "allocated_gpus": 0,
+        "detail": "JobId=4608669 ArrayJobId=4608669 ArrayTaskId=1 ArrayTaskThrottle=2 JobName=hist_ref90_0929 UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6537 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Resources Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-09-29T10:52:59 EligibleTime=2026-09-29T10:52:59 AccrueTime=2026-09-29T10:52:59 StartTime=2026-09-30T10:51:46 EndTime=2026-09-30T16:51:46 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-29T10:53:16 Scheduler=Backfill:* Partition=h100_all AllocNode:Sid=sycamore-login2:1123290 ReqNodeList=(null) ExcNodeList=(null) NodeList= SchedNodeList=g15070306 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/history_reference90_20260929/run_reference90.sh WorkDir=/work/users/y/u/yuhe32/ipo/diagnostics/history_reference90_20260929/source StdErr=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_ref90_0929-4608669_1.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo_runs/slurm_logs/hist_ref90_0929-4608669_1.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+      }
+    ]
+  },
+  "receipt": {
+    "job_id": "4608669",
+    "submitted_at_utc": "2026-09-29T14:52:59.487190+00:00",
+    "run_ids": [
+      "ipo_reference90_a1_b100_s0",
+      "dpo_reference90_a1_b100_s0"
+    ],
+    "array": "0-1%2",
+    "gpu_per_task": 1,
+    "outer_updates": 100,
+    "scheduler_response": "4608669",
+    "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_history_reference90_20260929",
+    "source_git_commit": "2e73527d3508d0da85b90f86654d21d61ea40adc"
+  },
+  "sacct": "JobID|State|ExitCode|Elapsed|AllocTRES\n4608669_[0-1%2]|PENDING|0:0|00:00:00|",
+  "runs": [
+    {
+      "run_id": "ipo_reference90_a1_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    },
+    {
+      "run_id": "dpo_reference90_a1_b100_s0",
+      "snapshot_count": 0,
+      "nonfinite": [],
+      "error_matches": {}
+    }
+  ]
+}
+
+

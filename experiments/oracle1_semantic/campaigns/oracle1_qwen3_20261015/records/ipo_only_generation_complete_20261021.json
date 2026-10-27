@@ -1,0 +1,193 @@
+{
+  "checked_at": "2026-10-21T17:31:53.992022+00:00",
+  "scope": "IPO ordinary index0 only; states 0,10,...,100",
+  "source_commit": "621b7d706c5c0f43f01250c0c9ca366157a43cd2",
+  "binding_sha256": "0154a2449ed39ace600f798542fae7cd888b5b52fe0593b96e6277de6212e4d6",
+  "generation_job": {
+    "job_id": "4878947",
+    "state": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "checkpoint_responses": 8800,
+    "baseline_responses": 800,
+    "total_responses": 9600
+  },
+  "validation": {
+    "source_and_eleven_checkpoint_hashes": true,
+    "historical_71_dispositions_unchanged": true,
+    "canonical_seed_input_row_hashes": true,
+    "complete_banks_equal_journals": true,
+    "finite_diagnostics": true,
+    "empty_responses": 0
+  },
+  "banks": {
+    "baseline:0": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 398,
+      "empty": 0,
+      "mean_tokens": 196.7925,
+      "mean_unique_ratio": 0.5932691976991289,
+      "max_dominant_fraction": 0.3333333333333333
+    },
+    "ipo_ordinary:0": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 403,
+      "empty": 0,
+      "mean_tokens": 197.71375,
+      "mean_unique_ratio": 0.5938400559138687,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:10": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 404,
+      "empty": 0,
+      "mean_tokens": 195.9275,
+      "mean_unique_ratio": 0.5938589576156597,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:20": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 407,
+      "empty": 0,
+      "mean_tokens": 195.5225,
+      "mean_unique_ratio": 0.5915604079790768,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:30": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 397,
+      "empty": 0,
+      "mean_tokens": 194.53625,
+      "mean_unique_ratio": 0.5925928068921802,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:40": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 400,
+      "empty": 0,
+      "mean_tokens": 194.13625,
+      "mean_unique_ratio": 0.5935260848119802,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:50": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 397,
+      "empty": 0,
+      "mean_tokens": 195.13375,
+      "mean_unique_ratio": 0.5935248690016912,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:60": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 404,
+      "empty": 0,
+      "mean_tokens": 195.365,
+      "mean_unique_ratio": 0.5930370810002088,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:70": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 398,
+      "empty": 0,
+      "mean_tokens": 195.6175,
+      "mean_unique_ratio": 0.5918004391952865,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:80": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 398,
+      "empty": 0,
+      "mean_tokens": 195.9575,
+      "mean_unique_ratio": 0.5915583612341941,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:90": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 411,
+      "empty": 0,
+      "mean_tokens": 195.82,
+      "mean_unique_ratio": 0.5904186919392265,
+      "max_dominant_fraction": 0.5
+    },
+    "ipo_ordinary:100": {
+      "rows": 800,
+      "expected": 800,
+      "complete": true,
+      "cap_count": 397,
+      "empty": 0,
+      "mean_tokens": 194.83375,
+      "mean_unique_ratio": 0.5909949587549436,
+      "max_dominant_fraction": 0.5
+    }
+  },
+  "progress": {
+    "generations/ipo_ordinary": {
+      "arm": "ipo_ordinary",
+      "step": 100,
+      "rows": 800,
+      "expected": 800,
+      "cuda_peak_allocated_bytes": 8645992448
+    }
+  },
+  "pre_scoring_queue": {
+    "checked_at_utc": "2026-10-21T17:31:32.386590+00:00",
+    "full_queue_rows": 5602,
+    "owned_queue": [],
+    "owned_scontrol": [],
+    "recent_terminal_scontrol": [],
+    "allocated_gpus": 0,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "errors": [],
+  "wr_submission": {
+    "sequence": 2,
+    "job_id": "4889849",
+    "phase": "retained_wrscore",
+    "created": "2026-10-21T17:33:19.676264+00:00",
+    "preflight": {
+      "checked_at_utc": "2026-10-21T17:33:19.674630+00:00",
+      "full_queue_rows": 5575,
+      "owned_queue": [],
+      "owned_scontrol": [],
+      "recent_terminal_scontrol": [],
+      "allocated_gpus": 0,
+      "account_gpu_limit": 4,
+      "hard_account_cap_installed": false
+    },
+    "gpus": 2,
+    "execution_source_unchanged": true
+  },
+  "selected_wr_directory": "/work/users/y/u/yuhe32/ipo_runs/oracle1_qwen3_20261015_v1/wr/selection_60e18d6565bcad02e1a45cd1f0b49bd18869c9023a30e6e59ea1c960346e513d",
+  "wr_complete_at_generation_audit": false,
+  "full_six_wr_complete": false,
+  "actions": {
+    "retrained": false,
+    "restored_other_arms": false,
+    "changed_science": false,
+    "deleted_locks": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "annotation": "not_in_this_report",
+  "steps": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  "arms": [
+    "ipo_ordinary"
+  ],
+  "wr": "complete_for_requested_scope",
+  "uncertainty": "prompt_SE_not_training_seed_uncertainty"
+}

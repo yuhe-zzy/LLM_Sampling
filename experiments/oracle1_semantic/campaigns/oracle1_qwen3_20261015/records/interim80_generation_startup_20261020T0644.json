@@ -1,0 +1,183 @@
+{
+  "record_type": "reviewed_baseline_completion_and_checkpoint_generator_startup",
+  "checked_at": "2026-10-20T06:44:36.796274+00:00",
+  "extension_root": "/work/users/y/u/yuhe32/ipo/diagnostics/oracle1_qwen3_interim80_20261020_v2",
+  "source_commit": "caf5ac2b68d0e4d3778260428eedbeb3441a6658",
+  "training_execution_source": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "extension_sha256": "e56f796f20a6e648a298947ba97bf00a6bdb0f36a7982105bbaf35c0962e0b74",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "baseline": {
+    "job_id": "4861201",
+    "accounting": [
+      "COMPLETED",
+      "0:0"
+    ],
+    "scheduler_end_utc": "2026-10-20T06:39:48+00:00",
+    "validated_prefix_rows": 800,
+    "expected_rows": 800,
+    "identity_seed_hash_checks": true,
+    "finite_fields": true,
+    "complete_bank_validated": true,
+    "manifest": {
+      "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+      "input_identity": "6fcdb5c80750c77429f69df10f9a6e66be2354ed9a749683d69cc944385f38e3",
+      "count": 800,
+      "sha256": "755292ac15e8824779d92b94ac5fd39a36b7694d6398626550614d0073136c81",
+      "adapter_commit_sha256": null
+    },
+    "empty_responses": 0,
+    "cap_hits": 398,
+    "mean_response_tokens": 196.7925,
+    "mean_unique_token_ratio": 0.5932691976991289,
+    "max_dominant_token_fraction": 0.3333333333333333,
+    "progress": {
+      "arm": "baseline",
+      "step": 0,
+      "rows": 800,
+      "expected": 800,
+      "cuda_peak_allocated_bytes": 8427731968
+    }
+  },
+  "submission": {
+    "dry_run_passed_at": "2026-10-20T06:41:03.567025+00:00",
+    "created": "2026-10-20T06:41:42.435432+00:00",
+    "job_id": "4861879",
+    "sequence": 2,
+    "phase": "generate",
+    "lane": "evaluation",
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "gpus_per_task": 1,
+    "max_concurrent_tasks": 2,
+    "allocation_hours": 24,
+    "soft_stop_hours": 18,
+    "steps": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80
+    ],
+    "intent": "interim_v2_0002_intent.json",
+    "intent_sha256": "23f9b56826e73d7fe3e778e059b05834219d0516e72fce4befcbe7cf670c32e5",
+    "receipt": "interim_v2_0002_receipt.json",
+    "receipt_sha256": "4ed78de10d01c9a0ab48fcd126c062299ea5eadeaecaffbe540e5929b2e6f307",
+    "first_two_started_utc": "2026-10-20T06:41:43+00:00"
+  },
+  "checkpoint_generation": {
+    "validated_banks": {
+      "ipo_ordinary:0": {
+        "validated_prefix_rows": 17,
+        "expected_rows": 800,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "complete_bank_validated": false,
+        "manifest": null,
+        "empty_responses": 0,
+        "cap_hits": 4,
+        "mean_response_tokens": 165.7058823529412,
+        "mean_unique_token_ratio": 0.6613080386590222,
+        "max_dominant_token_fraction": 0.08256880733944955,
+        "progress": null
+      },
+      "ipo_reference:0": {
+        "validated_prefix_rows": 17,
+        "expected_rows": 800,
+        "identity_seed_hash_checks": true,
+        "finite_fields": true,
+        "complete_bank_validated": false,
+        "manifest": null,
+        "empty_responses": 0,
+        "cap_hits": 4,
+        "mean_response_tokens": 165.7058823529412,
+        "mean_unique_token_ratio": 0.6613080386590222,
+        "max_dominant_token_fraction": 0.08256880733944955,
+        "progress": null
+      }
+    },
+    "startup_verified_logs": [
+      "0002-4861879_0.out",
+      "0002-4861879_1.out"
+    ],
+    "worker_errors": [],
+    "completed_checkpoint_banks": 0
+  },
+  "training_audit": {
+    "checked_at": "2026-10-20T06:43:56.441184+00:00",
+    "steps": {
+      "ipo_ordinary": 92,
+      "ipo_reference": 90,
+      "ipo_feedback": 90,
+      "dpo_ordinary": 92,
+      "dpo_reference": 84,
+      "dpo_feedback": 83
+    },
+    "validated_committed_states": 537,
+    "contiguous_hash_finite_initial_score_support_checks": true,
+    "bound_checkpoints_validated": 54,
+    "errors": [],
+    "extension_errors": [],
+    "running": [
+      "4859197_4",
+      "4859197_5"
+    ],
+    "original_sequence": 11,
+    "original_segment_targets": [
+      92,
+      90,
+      90,
+      92,
+      90,
+      90
+    ]
+  },
+  "full_account": {
+    "checked_at": "2026-10-20T06:44:35.019278+00:00",
+    "owner": "yuhe32",
+    "uid": 448057,
+    "owned_queue": [
+      "4861879_2|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_3|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+      "4861879_0|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+      "4861879_1|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+      "4859197_5|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+      "4859197_4|yuhe32|448057|RUNNING|gres/gpu:1|g15070306"
+    ],
+    "allocated_gpus": 4,
+    "cooperative_reserved_potential_gpus": 4,
+    "ceiling": 4,
+    "unrelated_owned_jobs": [],
+    "releasing_jobs": [],
+    "receipt_accounting_counts": {
+      "COMPLETED_0:0": 57,
+      "RUNNING_0:0": 4,
+      "PENDING_0:0": 4
+    },
+    "hard_account_cap_installed": false,
+    "checks": "Full squeue -a -r and scontrol -a, native parent sacct --array; generic GPU TRES counted once, terminal historical records excluded."
+  },
+  "monitor": {
+    "id": "oracle1-qwen3-training-and-resume-checks",
+    "interval_hours": 5,
+    "status": "ACTIVE",
+    "same_automation": true,
+    "stored_schedule_verified": true,
+    "startup_gate": "Complete real baseline and valid first checkpoint generator responses, no worker errors, cooperative four-GPU budget passed."
+  },
+  "wr_submitted_or_complete": false,
+  "limitations": "Initial generator prefixes, not complete checkpoint banks or WR. No response-quality claim. Partial generator memory progress not yet emitted at 17 rows; no inferred peak. Baseline memory is worker allocated peak, not reserved or device lifetime telemetry. Reads are sequential.",
+  "next_action": "Inspect both ledgers and live account. Advance each lane only after its own predecessors succeed and lane is idle. Use frozen EXT, dry-run then submit once. No BASE advance until all extension work and interim delivery complete; no old Oracle2 work.",
+  "publication": "Reviewed aggregate evidence and exact submission metadata only; no private text, weights, adapters or credentials. Computational sources and science unchanged."
+}

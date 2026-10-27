@@ -1,0 +1,240 @@
+{
+  "checked_at_utc": "2026-10-09T17:56:07.847806+00:00",
+  "queue": {
+    "checked_at_utc": "2026-10-09T17:56:07.844240+00:00",
+    "full_queue_rows": 37972,
+    "owned_queue": [
+      "4773902_0|yuhe32|448057|PENDING|gres/gpu:1|(Dependency)",
+      "4773902_1|yuhe32|448057|PENDING|gres/gpu:1|(Dependency)",
+      "4773902_2|yuhe32|448057|PENDING|gres/gpu:1|(Dependency)",
+      "4773902_3|yuhe32|448057|PENDING|gres/gpu:1|(Dependency)",
+      "4773902_4|yuhe32|448057|PENDING|gres/gpu:1|(Dependency)",
+      "4773902_5|yuhe32|448057|PENDING|gres/gpu:1|(Dependency)",
+      "4773899|yuhe32|448057|RUNNING|gres/gpu:1|g15070304"
+    ],
+    "owned_scontrol": [
+      "JobId=4773899 JobName=oracle2_baseline UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6617 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:13 TimeLimit=03:00:00 TimeMin=N/A SubmitTime=2026-10-09T13:55:53 EligibleTime=2026-10-09T13:55:53 AccrueTime=2026-10-09T13:55:53 StartTime=2026-10-09T13:55:54 EndTime=2026-10-09T16:55:54 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-09T13:55:54 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:247470 ReqNodeList=(null) ExcNodeList=(null) NodeList=g15070304 BatchHost=g15070304 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1,gres/gpu:h100=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/baseline-4773899_4294967294.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/baseline-4773899_4294967294.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8 ",
+      "JobId=4773902 ArrayJobId=4773902 ArrayTaskId=0-5%2 ArrayTaskThrottle=2 JobName=oracle2_train UserId=yuhe32(448057) GroupId=users(100) MCS_label=N/A Priority=6617 Nice=0 Account=rc_fanyao_pi QOS=normal JobState=PENDING Reason=Dependency Dependency=afterok:4773899(unfulfilled) Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=5-00:00:00 TimeMin=N/A SubmitTime=2026-10-09T13:56:02 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-09T13:56:02 Scheduler=Main Partition=h100_all AllocNode:Sid=sycamore-login2:248371 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=1,gres/gpu=1 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/source/experiments/oracle2/campaigns/oracle2_real_20261009/run_phase.sh WorkDir=/nas/sycamore/home/yuhe32 StdErr=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/train-4773902_4294967294.err StdIn=/dev/null StdOut=/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical/logs/train-4773902_4294967294.out TresPerNode=gres/gpu:1 TresPerTask=cpu=8"
+    ],
+    "recent_terminal_scontrol": [],
+    "allocated_gpus": 1,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "jobs": {
+    "baseline": "4773899|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:00:13",
+    "train": "4773902_[0-5%2]|PENDING|0:0||00:00:00"
+  },
+  "phases": {
+    "candidate_scores": {
+      "state": "COMPLETE",
+      "records_sha256": "92e1a0efdd52e53c6de91be565d6408b315401bdd45615029b650f36aa2c9f21",
+      "count": 3200,
+      "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+      "components": {
+        "nemotron": {
+          "count": 3200,
+          "min_reward": -32.0,
+          "max_reward": -2.328125,
+          "max_input_tokens": 1553,
+          "seconds": 901.5813748138025,
+          "sha256": "7592a4d4e3a5a6ac332eb3efdc027282e90a15252afc7c18ceae5528db05c8e8",
+          "max_allocated_bytes": [
+            71216286720,
+            71189944832
+          ],
+          "memory": [
+            {
+              "device": 0,
+              "name": "NVIDIA H100 80GB HBM3",
+              "free_bytes": 11677925376,
+              "total_bytes": 85019590656,
+              "allocated_bytes": 70587252736,
+              "reserved_bytes": 72500641792,
+              "peak_allocated_bytes": 71216286720,
+              "peak_reserved_bytes": 72500641792
+            },
+            {
+              "device": 1,
+              "name": "NVIDIA H100 80GB HBM3",
+              "free_bytes": 11659051008,
+              "total_bytes": 85019590656,
+              "allocated_bytes": 70587270144,
+              "reserved_bytes": 72521613312,
+              "peak_allocated_bytes": 71189944832,
+              "peak_reserved_bytes": 72521613312
+            }
+          ]
+        },
+        "skywork": {
+          "count": 3200,
+          "min_reward": -40.0,
+          "max_reward": 24.25,
+          "max_input_tokens": 1532,
+          "seconds": 160.68985211849213,
+          "sha256": "4024f6433021ddd527864f5cb85c116e6e81796e5637675dc7dbd536822a0cda",
+          "max_allocated_bytes": [
+            15226555392,
+            33554432
+          ],
+          "memory": [
+            {
+              "device": 0,
+              "name": "NVIDIA H100 80GB HBM3",
+              "free_bytes": 68288446464,
+              "total_bytes": 85019590656,
+              "allocated_bytes": 15043412992,
+              "reserved_bytes": 15778971648,
+              "peak_allocated_bytes": 15226555392,
+              "peak_reserved_bytes": 15778971648
+            },
+            {
+              "device": 1,
+              "name": "NVIDIA H100 80GB HBM3",
+              "free_bytes": 84147109888,
+              "total_bytes": 85019590656,
+              "allocated_bytes": 33554432,
+              "reserved_bytes": 33554432,
+              "peak_allocated_bytes": 33554432,
+              "peak_reserved_bytes": 33554432
+            }
+          ]
+        }
+      },
+      "templates": "own model chat template, tokenize=True, no duplicate BOS",
+      "truncation_allowed": false,
+      "written_rows": {
+        "nemotron": 3200,
+        "skywork": 3200
+      },
+      "progress": {
+        "component": "skywork",
+        "scored": 3200,
+        "total": 3200,
+        "elapsed_seconds": 160.67954173777252,
+        "memory": [
+          {
+            "device": 0,
+            "name": "NVIDIA H100 80GB HBM3",
+            "free_bytes": 68288446464,
+            "total_bytes": 85019590656,
+            "allocated_bytes": 15043423232,
+            "reserved_bytes": 15778971648,
+            "peak_allocated_bytes": 15226555392,
+            "peak_reserved_bytes": 15778971648
+          },
+          {
+            "device": 1,
+            "name": "NVIDIA H100 80GB HBM3",
+            "free_bytes": 84147109888,
+            "total_bytes": 85019590656,
+            "allocated_bytes": 33554432,
+            "reserved_bytes": 33554432,
+            "peak_allocated_bytes": 33554432,
+            "peak_reserved_bytes": 33554432
+          }
+        ]
+      }
+    }
+  },
+  "errors": [],
+  "runs": {},
+  "reuse_candidate_audit": {
+    "audit_job_id": "4773843",
+    "audit_source_commit": "55e835ec5b9015404a7068c7ebf940af1feb020f",
+    "audit_launch_root": "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu",
+    "new_launch_root": "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v4_empirical",
+    "data_root": "/work/users/y/u/yuhe32/ipo/diagnostics/oracle2_real_20261009_v3_2gpu/private_data",
+    "output_root": "/work/users/y/u/yuhe32/ipo_runs/oracle2_real_20261009_v3_2gpu",
+    "audit_sha256": "c12650e55bf75bb581eb6fae36eed2d4b8a65bfec331ed76968676c9b90fb8a1",
+    "plan_sha256": "4b9f040f086b3a4dae0eb7588bac26a49190a57445563f68188cb0a012c0791c",
+    "score_manifest_sha256": "12fd91a04074f2751a6b63e707c852f0d93bdade456f2c8a0f22b2c05de22e6b",
+    "reuse_policy": "Reuse completed private candidate scores and audited splits in place; never rerun scoring or overwrite v3 source. The byte-identical plan retains the same unused downstream output paths. New source/review and submission receipts belong to v4."
+  },
+  "generations": {},
+  "candidate_audit": {
+    "plan_sha256": "4b9f040f086b3a4dae0eb7588bac26a49190a57445563f68188cb0a012c0791c",
+    "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+    "data_manifest_sha256": "47a063d40aeb0f9ea0a0cfd794ac98e584ef36bc6d297820fe288616b90a0ecb",
+    "score_manifest_sha256": "12fd91a04074f2751a6b63e707c852f0d93bdade456f2c8a0f22b2c05de22e6b",
+    "splits": {
+      "calibration": {
+        "count": 100,
+        "groups": {
+          "transitive": 81,
+          "ambiguous": 19
+        },
+        "diagnostic_only_weight_groups": {
+          "0.5": {
+            "transitive": 77,
+            "ambiguous": 23
+          },
+          "0.7": {
+            "transitive": 92,
+            "ambiguous": 8
+          }
+        },
+        "component_strict_disagreement_fraction": 0.23333333333333334,
+        "nemotron_saturated_pair_fraction": 0.37333333333333335,
+        "skywork_saturated_pair_fraction": 0.5016666666666667,
+        "median_mixed_pair_margin": 0.4199718673961058,
+        "bt_solver_failures": [],
+        "bt_solver_max_residual": 0.0
+      },
+      "train": {
+        "count": 500,
+        "groups": {
+          "ambiguous": 63,
+          "transitive": 436,
+          "cyclic": 1
+        },
+        "diagnostic_only_weight_groups": {
+          "0.5": {
+            "transitive": 393,
+            "ambiguous": 107
+          },
+          "0.7": {
+            "transitive": 446,
+            "ambiguous": 54
+          }
+        },
+        "component_strict_disagreement_fraction": 0.24466666666666667,
+        "nemotron_saturated_pair_fraction": 0.3476666666666667,
+        "skywork_saturated_pair_fraction": 0.49266666666666664,
+        "median_mixed_pair_margin": 0.4026287875897101,
+        "bt_solver_failures": [],
+        "bt_solver_max_residual": 9.973422994688844e-11
+      },
+      "evaluation": {
+        "count": 200,
+        "groups": {
+          "transitive": 160,
+          "ambiguous": 40
+        },
+        "diagnostic_only_weight_groups": {
+          "0.5": {
+            "transitive": 145,
+            "ambiguous": 55
+          },
+          "0.7": {
+            "transitive": 175,
+            "ambiguous": 25
+          }
+        },
+        "component_strict_disagreement_fraction": 0.29,
+        "nemotron_saturated_pair_fraction": 0.3333333333333333,
+        "skywork_saturated_pair_fraction": 0.46166666666666667,
+        "median_mixed_pair_margin": 0.3847125966638637,
+        "bt_solver_failures": [],
+        "bt_solver_max_residual": 0.0
+      }
+    },
+    "status": "AWAITING_REVIEW_NOT_TRAINING_AUTHORIZATION",
+    "interpretation": "Groups concern only the four pretraining real candidates",
+    "files_sha256": {
+      "calibration.jsonl": "b1e5fd6c8532a83f01085f080aa5b16bd38fde0beef5d8c7a4188000e302bfa4",
+      "evaluation.jsonl": "7659e3774415e40c548db7caf628e546e3b0a056612202b71fd0d14d7d3e3db7",
+      "train.jsonl": "c00526031b6390d3b2bee61cd6e853bafeff14b867e41a9d9f63cf76bc474618"
+    }
+  }
+}

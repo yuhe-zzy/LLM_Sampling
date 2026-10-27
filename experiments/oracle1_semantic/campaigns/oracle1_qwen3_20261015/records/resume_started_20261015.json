@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-10-15T09:53:56.236974+00:00",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "first_segment_jobs": {
+    "4811149_0": {"state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:22:30", "complete_step": 1},
+    "4811149_3": {"state": "COMPLETED", "exit_code": "0:0", "elapsed": "00:22:32", "complete_step": 1}
+  },
+  "checkpoint_validation": {"contiguous": true, "hashes_valid": true, "finite_state": true, "matching_initial_scores_and_token_support": true},
+  "first_round_metrics": {
+    "ipo_ordinary": {"train_loss": 7.993685745712873, "optimizer_steps": 750, "train_pairs": 3000, "cuda_peak_allocated_bytes": 12776358912, "cuda_peak_reserved_bytes": 30702305280},
+    "dpo_ordinary": {"train_loss": 0.651205186218457, "optimizer_steps": 750, "train_pairs": 3000, "cuda_peak_allocated_bytes": 12776358912, "cuda_peak_reserved_bytes": 30702305280}
+  },
+  "resume_submission": {"sequence": 2, "job_id": "4811197", "indices": [0, 3], "updates": 1, "target_step": 2, "max_concurrency": 2, "gpus_per_task": 1, "time_limit_hours": 24, "state_at_inspection": "RUNNING"},
+  "full_account_allocated_gpus": 2,
+  "unrelated_owned_work": false,
+  "logged_execution_errors": [],
+  "reload_verified": {"ipo_ordinary": "RESUME_VERIFIED ipo_ordinary outer=1", "dpo_ordinary": "RESUME_VERIFIED dpo_ordinary outer=1"},
+  "loaded_adapter_scores_and_token_support_match": true,
+  "latest_complete_step": {"ipo_ordinary": 1, "dpo_ordinary": 1},
+  "full_model_resume_and_update_passed": false,
+  "other_four_arms_submitted": false,
+  "monitor_interval_minutes": 5,
+  "next_gate": "Both resume tasks COMPLETED0:0, RESUME_VERIFIED, finite/hash-valid step2 and empty full account before all-six advance."
+}

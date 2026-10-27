@@ -1,0 +1,56 @@
+{
+  "checked_at_utc": "2026-10-19T22:32:35.709859+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "submission_sequence": "0010",
+  "array_job_id": "4852338",
+  "connection_recovered": true,
+  "all_six_segment_tasks_completed_exit_zero": true,
+  "all_prior_receipt_tasks_completed_exit_zero": true,
+  "receipt_jobs_checked": 52,
+  "training_steps": {
+    "ipo_ordinary": 82,
+    "ipo_reference": 80,
+    "ipo_feedback": 80,
+    "dpo_ordinary": 82,
+    "dpo_reference": 80,
+    "dpo_feedback": 80
+  },
+  "task_elapsed": {
+    "4852338_0": "03:21:28",
+    "4852338_1": "03:20:46",
+    "4852338_2": "03:21:42",
+    "4852338_3": "03:21:10",
+    "4852338_4": "03:23:14",
+    "4852338_5": "03:20:47"
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 490,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "latest_loss_and_gradient_metrics_finite": true,
+    "logged_execution_errors": [],
+    "last_pair_resume_verified": {"dpo_reference": 70, "dpo_feedback": 70},
+    "last_pair_completed_updates_after_resume": 10,
+    "max_latest_round_cuda_peak_allocated_bytes": 12777401344,
+    "max_latest_round_cuda_peak_reserved_bytes": 42257612800,
+    "memory_scope": "Latest completed outer update per arm, not lifetime device-wide usage"
+  },
+  "empty_account_snapshot": {
+    "checked_at_utc": "2026-10-19T22:29:58.979232+00:00",
+    "full_queue_rows": 12746,
+    "owned_queued_running_or_releasing_jobs": [],
+    "allocated_gpus": 0,
+    "terminal_scontrol_records_excluded_from_live_gpu_count": 0,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "submission_sequences_present_before_advance": ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010"],
+  "downstream_submitted": false,
+  "scope": "Completion of segment0010, not completion of100 outer updates or measurement stages",
+  "sequential_read_note": "Queue, checkpoints, accounting, submission files and logs were read sequentially, not atomically. A fresh guarded advance must recheck the account before submission.",
+  "private_evidence": ["oracle1_qwen3_launch_20261015/user_retry_20261019.json"]
+}

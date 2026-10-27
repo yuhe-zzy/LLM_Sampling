@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-10-18T15:53:17.745705+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "connection_recovered": true,
+  "submission_sequence": "0008",
+  "array_job_id": "4846960",
+  "all_six_segment_tasks_completed_exit_zero": true,
+  "all_prior_receipt_tasks_completed_exit_zero": true,
+  "receipt_jobs_checked": 40,
+  "training_steps": {
+    "ipo_ordinary": 62,
+    "ipo_reference": 60,
+    "ipo_feedback": 60,
+    "dpo_ordinary": 62,
+    "dpo_reference": 60,
+    "dpo_feedback": 60
+  },
+  "task_elapsed": {
+    "4846960_0": "03:19:11",
+    "4846960_1": "03:19:25",
+    "4846960_2": "03:18:50",
+    "4846960_3": "03:19:34",
+    "4846960_4": "03:19:28",
+    "4846960_5": "03:21:51"
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 370,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "latest_loss_and_gradient_metrics_finite": true,
+    "logged_execution_errors": [],
+    "last_pair_resume_verified": {"dpo_reference": 50, "dpo_feedback": 50},
+    "last_pair_completed_updates_after_resume": 10,
+    "max_latest_round_cuda_peak_allocated_bytes": 12777786368,
+    "max_latest_round_cuda_peak_reserved_bytes": 31702646784,
+    "memory_scope": "Latest completed outer update per arm, not lifetime device-wide usage"
+  },
+  "queue": {
+    "checked_at_utc": "2026-10-18T15:49:03.344422+00:00",
+    "full_queue_rows": 20683,
+    "owned_queued_running_or_releasing_jobs": [],
+    "allocated_gpus": 0,
+    "terminal_scontrol_records_excluded_from_live_gpu_count": 0,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false
+  },
+  "submission_sequences_present": ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008"],
+  "downstream_submitted": false,
+  "scope": "Completion of segment0008, not completion of100 outer updates or measurement stages",
+  "private_evidence": [
+    "oracle1_qwen3_launch_20261015/heartbeat_20261018T1546.json",
+    "oracle1_qwen3_launch_20261015/segment8_deployment_logs_20261018T1551.json"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "job_id": "4773843",
+  "phase": "audit",
+  "source_commit": "55e835ec5b9015404a7068c7ebf940af1feb020f",
+  "submitted_at_utc": "2026-10-09T17:17:54.043039+00:00",
+  "resources": {
+    "gpus": 2,
+    "tasks": 1,
+    "concurrency": 1,
+    "memory": "256G",
+    "time": "12:00:00"
+  }
+}

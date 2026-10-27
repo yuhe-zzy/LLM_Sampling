@@ -1,0 +1,15 @@
+{
+  "job_id": "4605171",
+  "submitted_at_utc": "2026-09-28T19:28:18.412341+00:00",
+  "run_ids": [
+    "ipo_ordinary_calibrated_s0",
+    "ipo_stable_calibrated_s0",
+    "dpo_ordinary_calibrated_s0",
+    "dpo_stable_calibrated_s0"
+  ],
+  "array": "0-3%4",
+  "gpu_per_task": 1,
+  "outer_updates": 0,
+  "scheduler_response": "4605171",
+  "output_root": "/work/users/y/u/yuhe32/ipo_runs/cyclic_fixed_target_20260928"
+}

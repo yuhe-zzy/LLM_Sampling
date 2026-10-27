@@ -1,0 +1,66 @@
+{
+  "checked_at_utc": "2026-10-19T07:22:24.369327+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "submission_sequence": "0010",
+  "array_job_id": "4852338",
+  "training_steps": {
+    "ipo_ordinary": 82,
+    "ipo_reference": 80,
+    "ipo_feedback": 75,
+    "dpo_ordinary": 77,
+    "dpo_reference": 70,
+    "dpo_feedback": 70
+  },
+  "segment_task_states": {
+    "4852338_0": "COMPLETED 0:0",
+    "4852338_1": "COMPLETED 0:0",
+    "4852338_2": "RUNNING",
+    "4852338_3": "RUNNING",
+    "4852338_4": "PENDING JobArrayTaskLimit",
+    "4852338_5": "PENDING JobArrayTaskLimit"
+  },
+  "completed_task_elapsed": {"4852338_0": "03:21:28", "4852338_1": "03:20:46"},
+  "queue": {
+    "checked_at_utc": "2026-10-19T07:16:55.538190+00:00",
+    "full_queue_rows": 14417,
+    "running_tasks": ["4852338_2", "4852338_3"],
+    "pending_tasks": ["4852338_4", "4852338_5"],
+    "allocated_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false,
+    "unrelated_owned_work": false,
+    "releasing_allocations": false,
+    "terminal_scontrol_records_excluded_from_live_gpu_count": 0
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 460,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "latest_loss_and_gradient_metrics_finite": true,
+    "successful_receipt_tasks_before_current_segment": 46,
+    "active_pair_resume_verified": {"ipo_feedback": 70, "dpo_ordinary": 72},
+    "active_pair_completed_updates_after_resume": {"ipo_feedback": 5, "dpo_ordinary": 5},
+    "logged_execution_errors": [],
+    "active_pair_max_latest_round_cuda_peak_allocated_bytes": 12777401344,
+    "active_pair_max_latest_round_cuda_peak_reserved_bytes": 42257612800,
+    "memory_scope": "Latest completed outer update of active arms, not lifetime device-wide usage"
+  },
+  "submission_sequences_present": ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010"],
+  "actions": {
+    "new_submission": false,
+    "source_or_scientific_settings_changed": false,
+    "old_oracle2_touched": false,
+    "downstream_phases_submitted": false,
+    "monitor_interval_hours": 5
+  },
+  "limitations": [
+    "Segment0010 remains in progress; neither it nor the100-round experiment is complete.",
+    "Pending tasks retain previous segment manifests; these are not completion claims for the current allocation.",
+    "Scheduler, checkpoints and logs were read sequentially."
+  ],
+  "private_evidence": ["oracle1_qwen3_launch_20261015/heartbeat_20261019T0715.json"]
+}

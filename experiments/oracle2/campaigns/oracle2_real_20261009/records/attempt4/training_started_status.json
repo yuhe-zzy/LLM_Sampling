@@ -1,0 +1,52 @@
+{
+  "checked_at_utc": "2026-10-09T19:55:56.288430+00:00",
+  "source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "baseline": {
+    "job_id": "4773899",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:37:33",
+    "response_count": 800,
+    "expected_count": 800,
+    "step_0000_sha256": "eff09145b4ecf63bfe8d383f0d4f4a099fce9b65748ddf79d1a0d4a241a55c54",
+    "count_and_hash_verified": true,
+    "hit_max_new_tokens_fraction": 0.39875,
+    "dominant_token_ge_0_95_fraction": 0.0,
+    "mean_unique_token_ratio": 0.4980990298540081
+  },
+  "training": {
+    "job_id": "4773902",
+    "active": {
+      "0": {"run_id": "ipo_ordinary", "state": "RUNNING", "last_complete_outer_step": 6},
+      "1": {"run_id": "ipo_reference", "state": "RUNNING", "last_complete_outer_step": 6}
+    },
+    "pending": {
+      "2": "ipo_feedback",
+      "3": "dpo_ordinary",
+      "4": "dpo_reference",
+      "5": "dpo_feedback"
+    },
+    "pending_reason": "JobArrayTaskLimit",
+    "array_throttle": 2,
+    "gpus_per_task": 1,
+    "outer_target": 100,
+    "continuous_metrics_per_active_arm": 7,
+    "validated_finite_snapshots": 14,
+    "snapshot_score_shape": [500, 4],
+    "matched_initial_scores": true,
+    "source_and_review_hashes_verified": true,
+    "truncated_prompt_tokens": 0,
+    "training_gpu_memory_telemetry": "Not recorded by frozen trainer; historical judge-scoring peaks are not current training peaks."
+  },
+  "account": {
+    "full_owner_uid_queue_checked": true,
+    "generic_allocated_gpus": 2,
+    "limit": 4,
+    "other_owned_work": false,
+    "hard_scheduler_cap_installed": false
+  },
+  "logged_oom_traceback_nonfinite": [],
+  "generated_checkpoint_wr_available": false,
+  "resource_actions": "none; no submission, cancellation, dependency or throttle change",
+  "monitor": "existing oracle2 heartbeat remains active every two hours"
+}

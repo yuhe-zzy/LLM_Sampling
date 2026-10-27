@@ -1,0 +1,352 @@
+[
+  {
+    "run_id": "ipo_center_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "reused_stage_b"
+  },
+  {
+    "run_id": "ipo_center_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "reused_stage_b"
+  },
+  {
+    "run_id": "ipo_center_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_center_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "reused_stage_b"
+  },
+  {
+    "run_id": "ipo_center_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_center_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "reused_stage_b"
+  },
+  {
+    "run_id": "dpo_center_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "reused_stage_b"
+  },
+  {
+    "run_id": "dpo_center_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_center_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "reused_stage_b"
+  },
+  {
+    "run_id": "dpo_center_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha08_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha08_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha08_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha08_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha08_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha08_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha08_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha08_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha08_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha08_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha099_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha099_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha099_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha099_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_alpha099_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha099_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha099_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha099_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha099_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_alpha099_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_coverage05_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_coverage05_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_coverage05_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_coverage05_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_coverage05_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_coverage05_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_coverage05_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_coverage05_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_coverage05_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_coverage05_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_beta15_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_beta15_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_beta15_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_beta15_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "ipo_beta15_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_beta15_ordinary_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_beta15_reference_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_beta15_reference_max_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_beta15_feedback_half_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  },
+  {
+    "run_id": "dpo_beta15_feedback_one_b100_s0",
+    "plotted": true,
+    "state": "COMPLETED",
+    "last_step": 100,
+    "source": "new"
+  }
+]

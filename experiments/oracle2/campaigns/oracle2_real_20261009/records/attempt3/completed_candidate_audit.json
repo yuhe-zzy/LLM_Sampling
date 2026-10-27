@@ -1,0 +1,85 @@
+{
+  "plan_sha256": "4b9f040f086b3a4dae0eb7588bac26a49190a57445563f68188cb0a012c0791c",
+  "model_lock_sha256": "9a1042ea2c48075d6a50d765696a9084d754cf0adcd2048759b683eb916df217",
+  "data_manifest_sha256": "47a063d40aeb0f9ea0a0cfd794ac98e584ef36bc6d297820fe288616b90a0ecb",
+  "score_manifest_sha256": "12fd91a04074f2751a6b63e707c852f0d93bdade456f2c8a0f22b2c05de22e6b",
+  "splits": {
+    "calibration": {
+      "count": 100,
+      "groups": {
+        "transitive": 81,
+        "ambiguous": 19
+      },
+      "diagnostic_only_weight_groups": {
+        "0.5": {
+          "transitive": 77,
+          "ambiguous": 23
+        },
+        "0.7": {
+          "transitive": 92,
+          "ambiguous": 8
+        }
+      },
+      "component_strict_disagreement_fraction": 0.23333333333333334,
+      "nemotron_saturated_pair_fraction": 0.37333333333333335,
+      "skywork_saturated_pair_fraction": 0.5016666666666667,
+      "median_mixed_pair_margin": 0.4199718673961058,
+      "bt_solver_failures": [],
+      "bt_solver_max_residual": 0.0
+    },
+    "train": {
+      "count": 500,
+      "groups": {
+        "ambiguous": 63,
+        "transitive": 436,
+        "cyclic": 1
+      },
+      "diagnostic_only_weight_groups": {
+        "0.5": {
+          "transitive": 393,
+          "ambiguous": 107
+        },
+        "0.7": {
+          "transitive": 446,
+          "ambiguous": 54
+        }
+      },
+      "component_strict_disagreement_fraction": 0.24466666666666667,
+      "nemotron_saturated_pair_fraction": 0.3476666666666667,
+      "skywork_saturated_pair_fraction": 0.49266666666666664,
+      "median_mixed_pair_margin": 0.4026287875897101,
+      "bt_solver_failures": [],
+      "bt_solver_max_residual": 9.973422994688844e-11
+    },
+    "evaluation": {
+      "count": 200,
+      "groups": {
+        "transitive": 160,
+        "ambiguous": 40
+      },
+      "diagnostic_only_weight_groups": {
+        "0.5": {
+          "transitive": 145,
+          "ambiguous": 55
+        },
+        "0.7": {
+          "transitive": 175,
+          "ambiguous": 25
+        }
+      },
+      "component_strict_disagreement_fraction": 0.29,
+      "nemotron_saturated_pair_fraction": 0.3333333333333333,
+      "skywork_saturated_pair_fraction": 0.46166666666666667,
+      "median_mixed_pair_margin": 0.3847125966638637,
+      "bt_solver_failures": [],
+      "bt_solver_max_residual": 0.0
+    }
+  },
+  "status": "AWAITING_REVIEW_NOT_TRAINING_AUTHORIZATION",
+  "interpretation": "Groups concern only the four pretraining real candidates",
+  "files_sha256": {
+    "calibration.jsonl": "b1e5fd6c8532a83f01085f080aa5b16bd38fde0beef5d8c7a4188000e302bfa4",
+    "evaluation.jsonl": "7659e3774415e40c548db7caf628e546e3b0a056612202b71fd0d14d7d3e3db7",
+    "train.jsonl": "c00526031b6390d3b2bee61cd6e853bafeff14b867e41a9d9f63cf76bc474618"
+  }
+}

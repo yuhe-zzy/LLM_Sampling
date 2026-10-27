@@ -1,0 +1,116 @@
+{
+  "checked_at_utc": "2026-10-13T06:15:34.981040+00:00",
+  "execution_source_commit": "23401de58b27ef2f7b1ea645551f37602a3c1bb8",
+  "allocated_gpus": 2,
+  "owned_queue": [
+    "4794738_4|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_5|yuhe32|448057|PENDING|gres/gpu:1|(JobArrayTaskLimit)",
+    "4794738_2|yuhe32|448057|RUNNING|gres/gpu:1|g15070306",
+    "4794738_3|yuhe32|448057|RUNNING|gres/gpu:1|g15070306"
+  ],
+  "sacct_utc": [
+    "4794738_0|TIMEOUT|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|12:00:26|12:00:00|2026-10-12T18:14:50|2026-10-13T06:15:16",
+    "4794738_1|TIMEOUT|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|12:00:26|12:00:00|2026-10-12T18:14:50|2026-10-13T06:15:16",
+    "4794738_2|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:00:20|1-00:00:00|2026-10-13T06:15:16|Unknown",
+    "4794738_3|RUNNING|0:0|billing=1,cpu=8,gres/gpu:h100=1,gres/gpu=1,mem=80G,node=1|00:00:20|1-00:00:00|2026-10-13T06:15:16|Unknown",
+    "4794738_[4-5%2]|PENDING|0:0||00:00:00|1-00:00:00|Unknown|Unknown"
+  ],
+  "inspector_error_matches": [],
+  "scheduler_failures": [
+    "4794738_0 TIMEOUT",
+    "4794738_1 TIMEOUT"
+  ],
+  "baseline_verified": true,
+  "all_generation_complete": false,
+  "generation_completed_steps": {
+    "ipo_ordinary": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70
+    ],
+    "ipo_reference": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70
+    ],
+    "ipo_feedback": [],
+    "dpo_ordinary": [],
+    "dpo_reference": [],
+    "dpo_feedback": []
+  },
+  "generation_written_rows": {
+    "baseline": {
+      "step_0000.jsonl": 800
+    },
+    "ipo_ordinary": {
+      "step_0000.jsonl": 800,
+      "step_0010.jsonl": 800,
+      "step_0020.jsonl": 800,
+      "step_0030.jsonl": 800,
+      "step_0040.jsonl": 800,
+      "step_0050.jsonl": 800,
+      "step_0060.jsonl": 800,
+      "step_0070.jsonl": 800,
+      "step_0080.jsonl": 728
+    },
+    "ipo_reference": {
+      "step_0000.jsonl": 800,
+      "step_0010.jsonl": 800,
+      "step_0020.jsonl": 800,
+      "step_0030.jsonl": 800,
+      "step_0040.jsonl": 800,
+      "step_0050.jsonl": 800,
+      "step_0060.jsonl": 800,
+      "step_0070.jsonl": 800,
+      "step_0080.jsonl": 561
+    }
+  },
+  "training_status": {
+    "ipo_ordinary": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "ipo_reference": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "ipo_feedback": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "dpo_ordinary": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "dpo_reference": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    },
+    "dpo_feedback": {
+      "state": "COMPLETED",
+      "last_complete_step": 100
+    }
+  },
+  "wr_submitted": false,
+  "wr_available": false,
+  "actions": {
+    "gpu_submissions": 0,
+    "cancellations": 0,
+    "requeues": 0,
+    "science_changes": false,
+    "existing_outputs_overwritten": false
+  },
+  "warning": "sacct TIMEOUT overrides stale RUNNING generation manifests; 0:0 alone is not success",
+  "recovery_status": "Not submitted; preserve complete banks and partial step80; no blind rerun",
+  "plotting_tests": "41 Oracle2 tests passed; all six numeric trajectories validated"
+}

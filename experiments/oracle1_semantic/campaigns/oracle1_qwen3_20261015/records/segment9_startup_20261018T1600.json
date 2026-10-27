@@ -1,0 +1,63 @@
+{
+  "checked_at_utc": "2026-10-18T16:00:12.892373+00:00",
+  "campaign": "oracle1_qwen3_20261015",
+  "source_commit": "0e7793f5fdd6afdf2fcf80c4ff40649e8926f5a2",
+  "identity": "8618a5d85b5a5d5c9d78e84175f02e9745211c488386bcba4757dffdf8ee21f8",
+  "dry_run_passed_at_utc": "2026-10-18T15:55:19.085956+00:00",
+  "submitted_at_utc": "2026-10-18T15:56:47.573654+00:00",
+  "submission_sequence": "0009",
+  "array_job_id": "4849728",
+  "indices": [0, 1, 2, 3, 4, 5],
+  "maximum_additional_updates_per_task": 10,
+  "segment_target_steps": [72, 70, 70, 72, 70, 70],
+  "training_steps": {
+    "ipo_ordinary": 62,
+    "ipo_reference": 60,
+    "ipo_feedback": 60,
+    "dpo_ordinary": 62,
+    "dpo_reference": 60,
+    "dpo_feedback": 60
+  },
+  "queue": {
+    "checked_at_utc": "2026-10-18T15:59:09.385276+00:00",
+    "full_queue_rows": 20657,
+    "running_tasks": ["4849728_0", "4849728_1"],
+    "pending_tasks": ["4849728_2", "4849728_3", "4849728_4", "4849728_5"],
+    "pending_reason": "JobArrayTaskLimit",
+    "allocated_gpus": 2,
+    "account_gpu_limit": 4,
+    "hard_account_cap_installed": false,
+    "unrelated_owned_work": false,
+    "releasing_allocations": false
+  },
+  "validation": {
+    "frozen_contract_valid": true,
+    "committed_states_checked": 370,
+    "checkpoint_hashes_and_continuity_valid": true,
+    "saved_state_arrays_finite": true,
+    "initial_scores_and_token_support_match": true,
+    "fresh_resume_verified": {"ipo_ordinary": 62, "ipo_reference": 60},
+    "new_process_manifests_running": true,
+    "logged_execution_errors": [],
+    "new_outer_updates_completed_in_this_segment_at_check": 0
+  },
+  "actions": {
+    "new_segment_submitted_once": true,
+    "source_or_scientific_settings_changed": false,
+    "old_oracle2_touched": false,
+    "downstream_phases_submitted": false,
+    "monitor_interval_hours": 5
+  },
+  "limitations": [
+    "Reload verification is not completion of a new outer update or the100-round experiment.",
+    "Pending tasks have not yet reloaded their checkpoints in this allocation; their manifests describe the preceding segment.",
+    "Existing memory metrics belong to the preceding completed outer updates; no new-round memory peak is claimed.",
+    "Scheduler, manifests and logs were read sequentially."
+  ],
+  "private_evidence": [
+    "oracle1_qwen3_launch_20261015/segment9_dry_run_20261018.json",
+    "oracle1_qwen3_launch_20261015/segment9_submitted_20261018.json",
+    "oracle1_qwen3_launch_20261015/segment9_startup_20261018.json",
+    "oracle1_qwen3_launch_20261015/segment9_startup_followup_20261018.json"
+  ]
+}

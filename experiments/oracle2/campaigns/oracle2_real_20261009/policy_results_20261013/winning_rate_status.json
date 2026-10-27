@@ -1,0 +1,5 @@
+{
+  "state": "NOT_AVAILABLE",
+  "plotted": false,
+  "reason": "Open-generation Oracle2 scoring has not produced wr_summary.csv; no surrogate or zero filled."
+}

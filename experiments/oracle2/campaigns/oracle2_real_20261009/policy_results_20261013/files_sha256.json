@@ -1,0 +1,25 @@
+{
+  "text_hash_rule": "UTF-8 text with CRLF normalized to LF; binary files unchanged",
+  "files": {
+    "all_prompt_change_heatmap.pdf": "f2c7d05d04c5c13d22fbec7037ae178a9f21ff3b5bd53b1b7527287c32870e60",
+    "all_prompt_change_heatmap.png": "0b1245f1a5adc1755659152423547f7832aad8dd611316225f137d41f8a2e19e",
+    "all_prompt_probabilities.npz": "42f364654c2bb8a0aaca26bd8e58c5c6a336d222fe27e59f44829ae3ffd70294",
+    "all_prompt_stability.pdf": "be59d3200aceb80ef8253c9ab392be9ebd9097239bae0767a14858fa11be0138",
+    "all_prompt_stability.png": "9f14a0b4915c1a5ab83b57c80b34fbafe9299f9c84550451f64b99c8af632d7b",
+    "dpo_policy_vs_step.pdf": "871aa487c9a15d5f179933a03a6c8fca858a9018afd59a836fd8a234f0717920",
+    "dpo_policy_vs_step.png": "528e63fa7e7a39996f99eafda52d4dc9aaaf0eb0d9d32d7078068020f96c8b7c",
+    "dpo_relative_weights.pdf": "efe48e174c8558e928f862e65edfaff181e92a34c6b603977831008ae06f3505",
+    "dpo_relative_weights.png": "9471e761da48e6f706f07b0f387d0e6ff70c7d0c88884fd885f6790d74b8a0f9",
+    "ipo_policy_vs_step.pdf": "3c258b31d1f66ffbfedcbca1281f1fa04448d843f3581c4b59b8ae3a87860cd3",
+    "ipo_policy_vs_step.png": "fe1d39671e968b0209d80a84281a088185bec1d2cde15f6e14e435a3484a150c",
+    "ipo_relative_weights.pdf": "eed1f5f74c60d565afaae01845460e26617ca5cec3ca440c0624439a70840aa1",
+    "ipo_relative_weights.png": "c8745de38afb9b2110f48289c42b88f00f149f5053b3f4d7e1327d2343e6ab62",
+    "per_prompt_summary.csv": "f076be2014bbeaed6e0a911c4f023b3907e657c25c529ac254be5b19a5d05077",
+    "prompt_metadata.json": "4806a9b05b7555cf00882d851d8f78cdba935c3ccd32c3f11b045b3a3bf01c65",
+    "README.md": "21bc0d819ed409a78d2d1a4cd685ef47cb994a07c6c5dac0783b8f7738caebbe",
+    "selected_trajectories.csv": "d7d9f587e86d91b3b872092a7f0d1dbab01298f75d096048b65f0305452857cc",
+    "stability_summary.csv": "1554db67ac48bd628da6517fb190a1f874daedcf1d532a9e2f98e521c15c38cb",
+    "validation.json": "9cd3daae77fa7671922b6161a6482ebb3bd27ea6e2ce757999616f20b4278d96",
+    "winning_rate_status.json": "766505504a058d2306e417f615bbc01ea5eb7275547ea3dd1e9bab3c37acfd9d"
+  }
+}
